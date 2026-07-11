@@ -1,0 +1,7 @@
+# 权重文件不入库（几百 MB），只保留 README + 下载脚本
+*.ckpt
+*.bin
+*.pth
+*.pt
+*.safetensors
+ReCogDrive-VLM-2B/
