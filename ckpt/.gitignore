@@ -5,3 +5,6 @@
 *.pt
 *.safetensors
 ReCogDrive-VLM-2B/
+
+# 例外：分析主用 ckpt 通过 Git LFS 入库
+!diffusiondrive_sim_navhard.ckpt

@@ -1,8 +1,9 @@
 # Checkpoints 下载与放置说明
 
 本目录对应运行时的 ckpt 根目录（本机 `/data/ruolin_a6k/ckpt/`，即分析脚本里的
-`CKPT_PATH` 所在目录）。**实际权重文件（.ckpt / .bin，几百 MB 起）不入 git**，此处只
-整理下载链接与放置路径；`download_ckpts.sh` 可一键拉取 SimScale 官方 ckpt。
+`CKPT_PATH` 所在目录）。其中 **`diffusiondrive_sim_navhard.ckpt`（分析主用，233M）已通过
+Git LFS 随仓库入库**，clone 后 `git lfs pull` 即可取到；其余权重（.ckpt / .bin，几百 MB
+起）不入 git，见下方链接，`download_ckpts.sh` 可一键拉取 SimScale 官方 ckpt。
 
 分析脚本默认用的是 **DiffusionDrive**（`diffusiondrive_sim_navhard.ckpt`）+ ResNet34
 backbone + `traj_final/kmeans_navsim_traj_20.npy` 轨迹先验。
@@ -38,7 +39,6 @@ backbone + `traj_final/kmeans_navsim_traj_20.npy` 轨迹先验。
 |---|---|---|
 | `ReCogDrive_Diffusion_Planner_2B_RL.ckpt` | 525M | ReCogDrive（小米，ICLR 2026）· HF [`owl10/ReCogDrive-2B-RL`](https://huggingface.co/owl10/ReCogDrive-2B-RL/tree/main) · 代码 [xiaomi-research/recogdrive](https://github.com/xiaomi-research/recogdrive) |
 | `ReCogDrive-VLM-2B/`（目录） | — | ReCogDrive VLM · HF [`owl10/ReCogDrive-VLM-2B`](https://huggingface.co/owl10/ReCogDrive-VLM-2B/tree/main) |
-| `ipad_navsim.ckpt` | 335M | iPad（arXiv [2505.15111](https://arxiv.org/abs/2505.15111)）· 无 SimScale 公开直链，来源为该论文/自训练 |
 
 ## 一键下载
 
