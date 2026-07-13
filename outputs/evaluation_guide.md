@@ -134,6 +134,12 @@ python navsim/planning/script/run_pdm_score.py \
 ### 步骤 A：核心环境与前置权重准备
 因为模型骨干网络有自己的固定依赖，首先需要确保当前环境已配置无误并下载模型所必须的 ResNet34 初始化权重至独立目录（避免干扰共享数据）。
 ```bash
+#仅执行一次的创建conda 
+#参考 https://github.com/OpenDriveLab/SimScale/blob/main/README.md#-getting-started
+conda env create --name simscale -f environment.yml
+conda activate simscale
+pip install -e .
+
 # 激活环境与目录
 cd /data/ruolin/SimScale
 conda activate simscale
