@@ -58,6 +58,9 @@ def main():
     m_alt = json.loads(m_alt_path.read_text()) if m_alt_path.exists() else None
     g0 = json.loads((res / "g0_smoke.json").read_text())
     g2 = json.loads((res / "g2_cache_report.json").read_text())
+    # 续跑时 cached=0、全部走 skipped_existing；完整率与耗时都要按"实际有缓存的事件数"算
+    g2_ok = g2["cached"] + g2["skipped_existing"]
+    g2_spe = (g2["elapsed_s"] / g2["cached"]) if g2["cached"] else None
     mine = json.loads((work / "mining" / "mining_stats.json").read_text())
     insp = json.loads((work / "mining" / "inspection_record.json").read_text())
     splits = json.loads((work / "mining" / "splits.json").read_text())
@@ -185,8 +188,9 @@ def main():
         f"| G1 挖掘 | 事件量（Tier-S 20–50）+ 抽检语义正确率 ≥80% | {mine['n_events']} 事件 "
         f"{mine['by_type']}；抽检 {insp['inspected']}/{insp['rendered']} 张，正确率 "
         f"{insp['summary']['accuracy_lower_bound']:.1%} | ✅ PASS |",
-        f"| G2 缓存 | 完整率 ≥99% | {g2['cached']}/{g2['n_events']}，完整率 {g2['completeness']:.1%}，"
-        f"耗时 {g2['elapsed_s']:.0f}s | ✅ PASS |",
+        f"| G2 缓存 | 完整率 ≥99% | {g2_ok}/{g2['n_events']}，完整率 {g2_ok/max(1,g2['n_events']):.1%}"
+        + (f"，耗时 {g2['elapsed_s']:.0f}s（{g2_spe:.2f}s/事件）" if g2_spe else "（本次为续跑，全部命中已有缓存）")
+        + " | ✅ PASS |",
         f"| G3 指标 | 全链路可算 | 两种池化口径（vision_mean / last_token）均跑通 | ✅ PASS |",
         f"| G4 验收 | V1–V5 逐条判定 | V1={verdict_mark(v['V1_500est_vs_10k_truth'])} "
         f"V2={verdict_mark(v['V2_stratified_trend'])} V3={verdict_mark(v['V3_probe_validity'])} "
@@ -281,7 +285,7 @@ def main():
         "2. **Tier-M 直接可跑**：trainval metadata + samples 已在本地"
         "（`/data/dataset/nuscenes/v1.0-trainval`，54G 已解压），只需把 config 的 `paths.nuscenes_*` 换掉；"
         "按 mini 的事件密度（5.6 事件/scene）外推，850 scene 可得 ~4700 事件，足以支撑 500/2k 划分。"
-        f"按本轮 {g2['elapsed_s']/g2['cached']:.2f}s/事件估算，G2 前向约 {4700*g2['elapsed_s']/g2['cached']/60:.0f} 分钟。",
+        + (f"按本轮 {g2_spe:.2f}s/事件估算，G2 前向约 {4700*g2_spe/60:.0f} 分钟。" if g2_spe else ""),
         "3. **补 CAN bus ego 速度**：本轮用 ego_pose 差分，Tier-M 应接 CAN bus 并交叉校验（手册 §2 要求）。",
         "4. **补 V5**：拿 SimLingo 官方训练数据抽 200 帧 CARLA 参考帧，把 D_L / 干涉角补齐。",
         "5. **峰层 token 级分析暂不值得**：两种池化口径选出的峰层不一致，说明当前层选择本身不可靠，"

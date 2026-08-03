@@ -15,7 +15,7 @@
 | VLM 底座 | InternVL2-1B（24 层 decoder，hidden 896） |
 | 数据 | nuScenes `v1.0-mini` @ `/data/dataset/nuscenes/v1.0-mini` |
 | 预处理配置哈希 | `eeb470cbc2ad`（resize_keep_aspect_then_crop） |
-| 本仓库 commit | `911ad01` |
+| 本仓库 commit | `d7c4385` |
 
 **与官方 repo 的偏离（必须记录）**
 
@@ -32,7 +32,7 @@
 |---|---|---|---|
 | G0 冒烟 | 输出合理 + 全层 hidden 可抓 + 双跑逐位一致 | waypoints 10×2 无 NaN；24 层 × 896 维，序列长 577；两次运行逐位一致 | ✅ PASS |
 | G1 挖掘 | 事件量（Tier-S 20–50）+ 抽检语义正确率 ≥80% | 56 事件 {'A': 16, 'B': 5, 'C': 6, 'D': 29}；抽检 12/30 张，正确率 91.7% | ✅ PASS |
-| G2 缓存 | 完整率 ≥99% | 56/56，完整率 100.0%，耗时 33s | ✅ PASS |
+| G2 缓存 | 完整率 ≥99% | 56/56，完整率 100.0%，耗时 32s（0.56s/事件） | ✅ PASS |
 | G3 指标 | 全链路可算 | 两种池化口径（vision_mean / last_token）均跑通 | ✅ PASS |
 | G4 验收 | V1–V5 逐条判定 | V1=✅ PASS V2=❌ FAIL V3=❌ FAIL V4=❌ FAIL V5=N/A | 见 §5 |
 
@@ -97,7 +97,7 @@
 ## 7. 下一步建议
 
 1. **先解决混淆，再放大规模**：当前 δ=h_ghost−h_clean 里混着 1.5s 的自车运动。两个低成本改法：(a) 用 D 类负例的 δ 做“时间基线”，从正例 δ 中回归掉；(b) 缩短 clean/ghost 间隔到 0.5s 并要求同一 scene 内配对。
-2. **Tier-M 直接可跑**：trainval metadata + samples 已在本地（`/data/dataset/nuscenes/v1.0-trainval`，54G 已解压），只需把 config 的 `paths.nuscenes_*` 换掉；按 mini 的事件密度（5.6 事件/scene）外推，850 scene 可得 ~4700 事件，足以支撑 500/2k 划分。按本轮 0.59s/事件估算，G2 前向约 46 分钟。
+2. **Tier-M 直接可跑**：trainval metadata + samples 已在本地（`/data/dataset/nuscenes/v1.0-trainval`，54G 已解压），只需把 config 的 `paths.nuscenes_*` 换掉；按 mini 的事件密度（5.6 事件/scene）外推，850 scene 可得 ~4700 事件，足以支撑 500/2k 划分。按本轮 0.56s/事件估算，G2 前向约 44 分钟。
 3. **补 CAN bus ego 速度**：本轮用 ego_pose 差分，Tier-M 应接 CAN bus 并交叉校验（手册 §2 要求）。
 4. **补 V5**：拿 SimLingo 官方训练数据抽 200 帧 CARLA 参考帧，把 D_L / 干涉角补齐。
 5. **峰层 token 级分析暂不值得**：两种池化口径选出的峰层不一致，说明当前层选择本身不可靠，在 S_sel 扩到几百事件之前不要投入 token 级分析。
