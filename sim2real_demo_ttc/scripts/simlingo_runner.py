@@ -292,9 +292,18 @@ class SimLingoRunner:
 
     # ---------------- 前向 ----------------
     @torch.no_grad()
-    def infer(self, img_rgb: np.ndarray, speed_mps: float, pool_modes=("vision_mean", "last_token")) -> InferResult:
+    def infer(self, img_rgb: np.ndarray, speed_mps: float, pool_modes=("vision_mean", "last_token"),
+              prompt_speed: Optional[float] = None) -> InferResult:
+        """prompt_speed 非 None 时，prompt 里写的速度与该帧真实 ego 速度解耦。
+
+        手册 §10.4 要求 clean/ghost 之间 prompt 完全一致。但 prompt 模板里含
+        `Current speed: X m/s`，两帧的真实自车速度本就不同——若各写各的，
+        条件间就多了一个语言差异，同时污染 δ 与行为量 b。
+        实测 d(指令速度)/d(prompt速度) = 0.725，而危险本身造成的 |b| 中位仅 0.52 m/s，
+        即这个污染项与待测信号同量级。
+        """
         torch.manual_seed(int(self.cfg["model"]["seed"]))
-        di, prompt = self.build_driving_input(img_rgb, speed_mps)
+        di, prompt = self.build_driving_input(img_rgb, speed_mps if prompt_speed is None else prompt_speed)
 
         if self.capture_hidden:
             self._layer_outputs = []

@@ -43,12 +43,12 @@ def mean_diff_speed(wp: np.ndarray, dt: float = 0.25) -> float:
     return float(np.mean(np.linalg.norm(np.diff(wp, axis=0), axis=1)) / dt)
 
 
-def run_condition(runner, root: Path, frames, pool_modes):
+def run_condition(runner, root: Path, frames, pool_modes, prompt_speed=None):
     out = {m: [] for m in pool_modes}
     wps, routes, pspd, mspd, espd, lang = [], [], [], [], [], []
     for fr in frames:
         img = np.array(Image.open(root / fr["filename"]).convert("RGB"))
-        r = runner.infer(img, fr["ego_speed_mps"], pool_modes=pool_modes)
+        r = runner.infer(img, fr["ego_speed_mps"], pool_modes=pool_modes, prompt_speed=prompt_speed)
         for m in pool_modes:
             out[m].append(r.hidden[m])
         wps.append(r.waypoints)
@@ -64,6 +64,8 @@ def run_condition(runner, root: Path, frames, pool_modes):
         "pred_speed": np.asarray(pspd, dtype=np.float32),
         "mean_diff_speed": np.asarray(mspd, dtype=np.float32),
         "ego_speed": np.asarray(espd, dtype=np.float32),
+        "prompt_speed": np.asarray([prompt_speed if prompt_speed is not None else e for e in espd],
+                                   dtype=np.float32),
         "language": lang,
     }
 
@@ -111,7 +113,14 @@ def main():
             except Exception:
                 pass
         try:
-            res = {c: run_condition(runner, root, ev[f"x_{c}_frames"], pool_modes) for c in ("clean", "ghost")}
+            # 手册 §10.4：clean/ghost 之间 prompt 必须完全一致。
+            # prompt_anchor=clean -> 两个条件都用 clean 帧的平均 ego 速度写进 prompt，
+            # 使条件间唯一的差异是图像本身。per_frame = 旧行为（各写各的，有污染）。
+            anchor = None
+            if cfg["model"].get("prompt_anchor", "clean") == "clean":
+                anchor = float(np.mean([f["ego_speed_mps"] for f in ev["x_clean_frames"]]))
+            res = {c: run_condition(runner, root, ev[f"x_{c}_frames"], pool_modes, prompt_speed=anchor)
+                   for c in ("clean", "ghost")}
             with h5py.File(path, "w") as f:
                 for cond, d in res.items():
                     g = f.create_group(cond)
@@ -127,6 +136,8 @@ def main():
                 f.attrs["ckpt_sha1"] = runner.ckpt_sha1
                 f.attrs["waypoint_dt_s"] = 0.25
                 f.attrs["pool_modes"] = json.dumps(pool_modes)
+                f.attrs["prompt_anchor"] = cfg["model"].get("prompt_anchor", "clean")
+                f.attrs["prompt_speed"] = -1.0 if anchor is None else anchor
             done += 1
         except Exception as exc:  # noqa: BLE001
             failed.append({"event_id": ev["event_id"], "error": f"{type(exc).__name__}: {exc}"})
@@ -142,6 +153,7 @@ def main():
         "failed": failed, "completeness": total / max(1, len(events)),
         "ckpt_sha1": runner.ckpt_sha1, "preprocess_hash": ph,
         "pool_modes": pool_modes, "waypoint_dt_s": 0.25,
+        "prompt_anchor": cfg["model"].get("prompt_anchor", "clean"),
         "elapsed_s": time.time() - t_start,
     }
     (work / "results" / f"g2_cache_report{args.report_tag}.json").write_text(json.dumps(report, indent=2, ensure_ascii=False))

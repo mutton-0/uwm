@@ -69,6 +69,11 @@ model:
   fixed_command: "Command: follow the road."   # 统一"直行"默认；严禁在 clean/ghost 间变 prompt
   target_point_m: [[20.0, 0.0], [40.0, 0.0]]   # 正前方直行目标点（ego 坐标系 x 前 y 左）
   use_cot: false
+  # 手册 §10.4：clean/ghost 之间 prompt 必须完全一致。
+  # prompt 模板含 `Current speed: X m/s`，两帧真实自车速度不同 -> 若各写各的会引入语言差异，
+  # 同时污染 δ 与行为量 b（实测 d(指令速度)/d(prompt速度)=0.725，与信号同量级）。
+  # clean = 两个条件都用 clean 帧的平均 ego 速度；per_frame = 旧行为（有污染，仅作对照）
+  prompt_anchor: clean
   # nuScenes → SimLingo 相机口径对齐（手册 §10.1/§10.2）
   preprocess:
     mode: resize_keep_aspect_then_crop   # 1600x900 -等比-> 1024x576 -裁上部-> 1024x359
