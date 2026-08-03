@@ -89,6 +89,10 @@ cache:
 
 # ---------------- G3 指标 ----------------
 metrics:
+  # 行为量校正：模型 prompt 里写着 Current speed，b 会跟着 Δego_speed 走
+  # （实测解释 12%~28% 方差）。ego_delta = 在估计集上拟合并扣掉这一项。
+  # 本轮主读数保持 none（预注册如此）；ego_delta 结果见 results/tier_m_summary.md §3.5
+  behavior_adjust: none          # none | ego_delta
   b_min_mps: [0.25, 0.5, 1.0]    # 响应达标阈值敏感性三档；主读数取 0.5
   b_min_primary: 0.5
   bootstrap_n: 1000

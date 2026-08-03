@@ -46,7 +46,9 @@ def load_cache(work: Path, pool_mode: str):
                 "h_ghost_frames": h_ghost,
                 "v_clean": float(c["pred_speed"][:].mean()),
                 "v_ghost": float(g["pred_speed"][:].mean()),
+                "b_raw": float(c["pred_speed"][:].mean() - g["pred_speed"][:].mean()),
                 "b": float(c["pred_speed"][:].mean() - g["pred_speed"][:].mean()),
+                "d_ego": float(c["ego_speed"][:].mean() - g["ego_speed"][:].mean()),
                 "ttc": TTC_CAP if ttc is None else float(min(ttc, TTC_CAP)),
                 "type": meta["event_type"],
                 "scene": meta["scene_name"],
@@ -58,6 +60,25 @@ def load_cache(work: Path, pool_mode: str):
 
 def subset(items, ids):
     return [items[i] for i in ids if i in items]
+
+
+def adjust_behavior_for_ego(items, fit_events):
+    """把 b 里跟着 Δego_speed 走的那部分回归掉。
+
+    模型 prompt 里明写 `Current speed: X m/s`，而 clean 与 ghost 两帧的自车速度本来就不同，
+    于是 b = v_plan(clean) − v_plan(ghost) 会系统性地跟着 Δego_speed 走
+    （实测解释了 12%（短间隔）~28%（长间隔）的方差）。
+    不扣掉这一项，"行为响应"量到的一大半是"自车这两帧之间快了还是慢了"。
+
+    回归系数**只在给定的 fit_events（估计集）上拟合**，再应用到全部事件，避免真值集泄漏。
+    """
+    d = np.array([e["d_ego"] for e in fit_events])
+    b = np.array([e["b_raw"] for e in fit_events])
+    A = np.vstack([d, np.ones_like(d)]).T
+    coef, *_ = np.linalg.lstsq(A, b, rcond=None)
+    for e in items.values():
+        e["b"] = float(e["b_raw"] - (coef[0] * e["d_ego"] + coef[1]))
+    return {"slope": float(coef[0]), "intercept": float(coef[1]), "n_fit": len(fit_events)}
 
 
 # --------------------------------------------------------------------------------------
@@ -252,6 +273,8 @@ def main():
     ap.add_argument("--deconfound", default=None, choices=[None, "none", "d_baseline"],
                     help="覆盖 config.metrics.deconfound；d_baseline = 用 D 类 δ 回归掉时间基线")
     ap.add_argument("--tag", default="", help="输出文件后缀，便于消融对比")
+    ap.add_argument("--behavior-adjust", default=None, choices=[None, "none", "ego_delta"],
+                    help="行为量 b 是否扣掉 Δego_speed 的贡献（在估计集上拟合）")
     ap.add_argument("--direction", default=None, choices=[None, "pca", "supervised"],
                     help="v_hazard 的提取方式：pca=正例 δ 的第一主成分（手册原法）；"
                          "supervised=正例 δ vs D 类 δ 的线性判别方向")
@@ -268,6 +291,15 @@ def main():
     est_ids = (work / "mining" / "split_estimate.txt").read_text().split()
     truth_ids = (work / "mining" / "split_truth.txt").read_text().split()
     est, truth = subset(items, est_ids), subset(items, truth_ids)
+
+    # 行为量的自车速度校正（config.metrics.behavior_adjust）
+    beh_adj = args.behavior_adjust or mcfg.get("behavior_adjust", "none")
+    ego_fit = None
+    if beh_adj == "ego_delta":
+        ego_fit = adjust_behavior_for_ego(items, est)
+        est, truth = subset(items, est_ids), subset(items, truth_ids)
+        print(f"[G3] behavior_adjust=ego_delta：b -= {ego_fit['slope']:.3f}·Δego + "
+              f"{ego_fit['intercept']:.3f}（在估计集 {ego_fit['n_fit']} 事件上拟合）")
 
     probe_scenes = splits["probe_split_scenes"]
     S = {k: [e for e in est if e["scene"] in probe_scenes[k]] for k in ("dir", "sel", "test")}
@@ -398,6 +430,7 @@ def main():
 
     out = {
         "tier": cfg["tier"], "pool_mode": args.pool_mode,
+        "behavior_adjust": beh_adj, "ego_adjust_fit": ego_fit,
         "direction_method": direction, "deconfound": deconf, "deconfound_k": int(mcfg.get("deconfound_k", 2)) if basis is not None else 0,
         "n_dir_negatives_for_baseline": n_dir_neg,
         "clean_window_s": cfg["mining"]["clean_window_s"], "ghost_window_s": cfg["mining"]["ghost_window_s"],

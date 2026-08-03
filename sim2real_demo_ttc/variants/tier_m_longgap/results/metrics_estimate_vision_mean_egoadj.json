@@ -1,0 +1,503 @@
+{
+  "tier": "M-longgap",
+  "pool_mode": "vision_mean",
+  "behavior_adjust": "ego_delta",
+  "ego_adjust_fit": {
+    "slope": 0.9243554873230416,
+    "intercept": -0.003474149884082948,
+    "n_fit": 501
+  },
+  "direction_method": "supervised",
+  "deconfound": "none",
+  "deconfound_k": 0,
+  "n_dir_negatives_for_baseline": 0,
+  "clean_window_s": [
+    -1.5,
+    -0.5
+  ],
+  "ghost_window_s": [
+    0.0,
+    1.0
+  ],
+  "disclaimer": "Tier-M-longgap：估计集 501 / 真值集 1673 事件，统计功效已可支撑趋势判断，但仍受限于 nuScenes 的日夜与场景构成。",
+  "n": {
+    "estimate": 501,
+    "truth": 1673,
+    "S_dir": 221,
+    "S_sel": 156,
+    "S_test": 124,
+    "S_test_positive": 40,
+    "S_test_negative": 84
+  },
+  "probe": {
+    "peak_layer": 4,
+    "n_layers": 24,
+    "hidden_dim": 896,
+    "evr1_or_trainauc_by_layer": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "rho_ttc_by_layer_S_sel": [
+      -0.02494085482420554,
+      -0.07430035889606769,
+      -0.14959923815214257,
+      -0.16388551677360869,
+      -0.18370084474192935,
+      -0.11333285208138928,
+      -0.16196443322836504,
+      -0.12080197426718016,
+      -0.11868466802044537,
+      -0.06464430305333548,
+      -0.040673484648598116,
+      -0.03325500057932108,
+      -0.005328079321940235,
+      0.049288294220514554,
+      0.07338570791653651,
+      -0.04488910784837501,
+      -0.08927658185503484,
+      -0.13116063397654187,
+      -0.1395032636721964,
+      -0.13016053117539356,
+      -0.042306563906169346,
+      -0.11211120752049299,
+      -0.07965217483512378,
+      -0.03584387428609096
+    ],
+    "rho_ttc_S_test": -0.18482982283041982,
+    "rho_ctrl_permuted": 0.0724765035120655,
+    "selectivity": 0.11235331931835432,
+    "p_permutation": 0.041,
+    "auc_ghost_vs_clean": 0.5027396592091571,
+    "p_ghost_vs_clean": 0.9161681937072832,
+    "auc_positive_vs_D": 0.6127976190476191,
+    "p_positive_vs_D": 0.04305521452346209
+  },
+  "readouts": {
+    "S_test": {
+      "set": "S_test(手册主读数)",
+      "n": 124,
+      "n_positive": 40,
+      "n_negative": 84,
+      "n_scenes": 48,
+      "rho_ttc": -0.18482982283041982,
+      "rho_ctrl_permuted": 0.0724765035120655,
+      "selectivity": 0.11235331931835432,
+      "p_permutation": 0.041,
+      "auc_ghost_vs_clean": 0.5027396592091571,
+      "p_ghost_vs_clean": 0.9161681937072832,
+      "auc_positive_vs_D": 0.6127976190476191,
+      "p_positive_vs_D": 0.04305521452346209,
+      "rho_projection_behavior": -0.23725719752760047,
+      "p_projection_behavior": 0.007972712487429215,
+      "ci95_scene_bootstrap": [
+        -0.4269497129579327,
+        -0.04167006172432696
+      ],
+      "bootstrap_unit": "scene",
+      "n_bootstrap": 1000
+    },
+    "truth_holdout": {
+      "set": "truth(次级：完全 held-out，未参与提方向/选层)",
+      "n": 1673,
+      "n_positive": 585,
+      "n_negative": 1088,
+      "n_scenes": 615,
+      "rho_ttc": -0.05966693442056914,
+      "rho_ctrl_permuted": 0.020939437233428636,
+      "selectivity": 0.038727497187140504,
+      "p_permutation": 0.014,
+      "auc_ghost_vs_clean": 0.5100319622255512,
+      "p_ghost_vs_clean": 0.15522542905622866,
+      "auc_positive_vs_D": 0.5585548642533936,
+      "p_positive_vs_D": 7.64881519488121e-05,
+      "rho_projection_behavior": 0.052709906785089675,
+      "p_projection_behavior": 0.031095776668963404,
+      "ci95_scene_bootstrap": [
+        -0.005358167803318439,
+        0.11160434035576704
+      ],
+      "bootstrap_unit": "scene",
+      "n_bootstrap": 1000
+    },
+    "pooled": {
+      "set": "S_test ∪ truth(合并，提高功效)",
+      "n": 1797,
+      "n_positive": 625,
+      "n_negative": 1172,
+      "n_scenes": 663,
+      "rho_ttc": -0.06895314027126721,
+      "rho_ctrl_permuted": 0.018232857852018922,
+      "selectivity": 0.050720282419248294,
+      "p_permutation": 0.004,
+      "auc_ghost_vs_clean": 0.5095138236639375,
+      "p_ghost_vs_clean": 0.16242190961270997,
+      "auc_positive_vs_D": 0.5619303754266212,
+      "p_positive_vs_D": 1.490375653094836e-05,
+      "rho_projection_behavior": 0.03240267403984972,
+      "p_projection_behavior": 0.16975617506667226,
+      "ci95_scene_bootstrap": [
+        -0.023384246493776763,
+        0.08604444314472531
+      ],
+      "bootstrap_unit": "scene",
+      "n_bootstrap": 1000
+    }
+  },
+  "projection_behavior": {
+    "rho": -0.23725719752760047,
+    "p": 0.007972712487429215,
+    "ci95_scene_bootstrap": [
+      -0.4269497129579327,
+      -0.04167006172432696
+    ],
+    "n_bootstrap": 1000
+  },
+  "behavior_scores": {
+    "0.25": {
+      "estimate_rate": 0.36726546906187624,
+      "estimate_ci95": [
+        0.3146650598729706,
+        0.41865327380952383
+      ],
+      "truth_rate": 0.3299462044231919,
+      "estimate_strata": {
+        "A|day|deep": {
+          "n": 53,
+          "rate": 0.5094339622641509
+        },
+        "A|night|deep": {
+          "n": 14,
+          "rate": 0.6428571428571429
+        },
+        "B|day|deep": {
+          "n": 19,
+          "rate": 0.42105263157894735
+        },
+        "B|day|mid": {
+          "n": 3,
+          "rate": 0.6666666666666666
+        },
+        "C|day|deep": {
+          "n": 71,
+          "rate": 0.323943661971831
+        },
+        "C|night|deep": {
+          "n": 13,
+          "rate": 0.3076923076923077
+        },
+        "D|day|far": {
+          "n": 122,
+          "rate": 0.2786885245901639
+        },
+        "D|day|mid": {
+          "n": 176,
+          "rate": 0.36363636363636365
+        },
+        "D|night|far": {
+          "n": 13,
+          "rate": 0.38461538461538464
+        },
+        "D|night|mid": {
+          "n": 16,
+          "rate": 0.5
+        }
+      },
+      "truth_strata": {
+        "A|day|deep": {
+          "n": 199,
+          "rate": 0.4723618090452261
+        },
+        "A|night|deep": {
+          "n": 25,
+          "rate": 0.48
+        },
+        "B|day|deep": {
+          "n": 46,
+          "rate": 0.32608695652173914
+        },
+        "B|day|mid": {
+          "n": 15,
+          "rate": 0.2
+        },
+        "B|night|deep": {
+          "n": 17,
+          "rate": 0.058823529411764705
+        },
+        "B|night|mid": {
+          "n": 2,
+          "rate": 0.0
+        },
+        "C|day|deep": {
+          "n": 224,
+          "rate": 0.3125
+        },
+        "C|night|deep": {
+          "n": 57,
+          "rate": 0.3684210526315789
+        },
+        "D|day|far": {
+          "n": 443,
+          "rate": 0.25733634311512416
+        },
+        "D|day|mid": {
+          "n": 555,
+          "rate": 0.34234234234234234
+        },
+        "D|night|far": {
+          "n": 49,
+          "rate": 0.30612244897959184
+        },
+        "D|night|mid": {
+          "n": 41,
+          "rate": 0.4146341463414634
+        }
+      }
+    },
+    "0.5": {
+      "estimate_rate": 0.26147704590818366,
+      "estimate_ci95": [
+        0.21558473326626518,
+        0.3046047098402019
+      ],
+      "truth_rate": 0.24686192468619247,
+      "estimate_strata": {
+        "A|day|deep": {
+          "n": 53,
+          "rate": 0.37735849056603776
+        },
+        "A|night|deep": {
+          "n": 14,
+          "rate": 0.42857142857142855
+        },
+        "B|day|deep": {
+          "n": 19,
+          "rate": 0.3157894736842105
+        },
+        "B|day|mid": {
+          "n": 3,
+          "rate": 0.3333333333333333
+        },
+        "C|day|deep": {
+          "n": 71,
+          "rate": 0.23943661971830985
+        },
+        "C|night|deep": {
+          "n": 13,
+          "rate": 0.3076923076923077
+        },
+        "D|day|far": {
+          "n": 122,
+          "rate": 0.21311475409836064
+        },
+        "D|day|mid": {
+          "n": 176,
+          "rate": 0.23863636363636365
+        },
+        "D|night|far": {
+          "n": 13,
+          "rate": 0.3076923076923077
+        },
+        "D|night|mid": {
+          "n": 16,
+          "rate": 0.3125
+        }
+      },
+      "truth_strata": {
+        "A|day|deep": {
+          "n": 199,
+          "rate": 0.36683417085427134
+        },
+        "A|night|deep": {
+          "n": 25,
+          "rate": 0.28
+        },
+        "B|day|deep": {
+          "n": 46,
+          "rate": 0.2608695652173913
+        },
+        "B|day|mid": {
+          "n": 15,
+          "rate": 0.2
+        },
+        "B|night|deep": {
+          "n": 17,
+          "rate": 0.0
+        },
+        "B|night|mid": {
+          "n": 2,
+          "rate": 0.0
+        },
+        "C|day|deep": {
+          "n": 224,
+          "rate": 0.25
+        },
+        "C|night|deep": {
+          "n": 57,
+          "rate": 0.2807017543859649
+        },
+        "D|day|far": {
+          "n": 443,
+          "rate": 0.17832957110609482
+        },
+        "D|day|mid": {
+          "n": 555,
+          "rate": 0.25765765765765763
+        },
+        "D|night|far": {
+          "n": 49,
+          "rate": 0.2653061224489796
+        },
+        "D|night|mid": {
+          "n": 41,
+          "rate": 0.2682926829268293
+        }
+      }
+    },
+    "1.0": {
+      "estimate_rate": 0.16367265469061876,
+      "estimate_ci95": [
+        0.12549000681353623,
+        0.2016216002530044
+      ],
+      "truth_rate": 0.15540944411237298,
+      "estimate_strata": {
+        "A|day|deep": {
+          "n": 53,
+          "rate": 0.2641509433962264
+        },
+        "A|night|deep": {
+          "n": 14,
+          "rate": 0.2857142857142857
+        },
+        "B|day|deep": {
+          "n": 19,
+          "rate": 0.15789473684210525
+        },
+        "B|day|mid": {
+          "n": 3,
+          "rate": 0.3333333333333333
+        },
+        "C|day|deep": {
+          "n": 71,
+          "rate": 0.14084507042253522
+        },
+        "C|night|deep": {
+          "n": 13,
+          "rate": 0.23076923076923078
+        },
+        "D|day|far": {
+          "n": 122,
+          "rate": 0.1557377049180328
+        },
+        "D|day|mid": {
+          "n": 176,
+          "rate": 0.11931818181818182
+        },
+        "D|night|far": {
+          "n": 13,
+          "rate": 0.23076923076923078
+        },
+        "D|night|mid": {
+          "n": 16,
+          "rate": 0.25
+        }
+      },
+      "truth_strata": {
+        "A|day|deep": {
+          "n": 199,
+          "rate": 0.2562814070351759
+        },
+        "A|night|deep": {
+          "n": 25,
+          "rate": 0.2
+        },
+        "B|day|deep": {
+          "n": 46,
+          "rate": 0.21739130434782608
+        },
+        "B|day|mid": {
+          "n": 15,
+          "rate": 0.2
+        },
+        "B|night|deep": {
+          "n": 17,
+          "rate": 0.0
+        },
+        "B|night|mid": {
+          "n": 2,
+          "rate": 0.0
+        },
+        "C|day|deep": {
+          "n": 224,
+          "rate": 0.19642857142857142
+        },
+        "C|night|deep": {
+          "n": 57,
+          "rate": 0.2631578947368421
+        },
+        "D|day|far": {
+          "n": 443,
+          "rate": 0.09706546275395034
+        },
+        "D|day|mid": {
+          "n": 555,
+          "rate": 0.13153153153153152
+        },
+        "D|night|far": {
+          "n": 49,
+          "rate": 0.16326530612244897
+        },
+        "D|night|mid": {
+          "n": 41,
+          "rate": 0.1951219512195122
+        }
+      }
+    }
+  },
+  "b_min_primary": 0.5,
+  "v4_strong": {
+    "logistic_auc_on_truth": 0.5354010530765979,
+    "note": ""
+  },
+  "domain": {
+    "enabled": false,
+    "note": "Tier-S 按手册 §0.5 砍掉 CARLA 参考帧 → D_L / 干涉角 / V5 记 N/A"
+  },
+  "verdicts": {
+    "V1_500est_vs_10k_truth": true,
+    "V2_stratified_trend": false,
+    "V2_spearman": 0.5592731001856595,
+    "V2_n_strata": 10,
+    "V3_probe_validity": true,
+    "V4_readout_predicts_behavior": true,
+    "V4_strong_logistic_auc": false,
+    "V5_domain_signal": null
+  },
+  "verdicts_secondary_on_truth_holdout": {
+    "note": "S_test 只剩 1 个 scene / 1 个正例，统计上退化；truth 集从未参与提方向与选层，在其上重算 V3/V4 作为功效更高的次级判定（Tier-S 偏离记录）。",
+    "V3_probe_validity": true,
+    "V4_readout_predicts_behavior": true
+  }
+}
