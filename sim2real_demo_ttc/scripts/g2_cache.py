@@ -74,9 +74,13 @@ def main():
     ap.add_argument("--events", default=None, help="事件清单文件（默认全量 events_all.jsonl）")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--overwrite", action="store_true")
+    ap.add_argument("--device", default=None, help="覆盖 config.model.device，便于两卡并行")
+    ap.add_argument("--report-tag", default="", help="报告文件后缀，并行跑时避免互相覆盖")
     args = ap.parse_args()
 
     cfg = OmegaConf.to_container(OmegaConf.load(args.config), resolve=True)
+    if args.device:
+        cfg["model"]["device"] = args.device
     work = Path(cfg["paths"]["work_dir"])
     root = Path(cfg["paths"]["nuscenes_root"])
     cache_dir = work / "cache"
@@ -140,7 +144,7 @@ def main():
         "pool_modes": pool_modes, "waypoint_dt_s": 0.25,
         "elapsed_s": time.time() - t_start,
     }
-    (work / "results" / "g2_cache_report.json").write_text(json.dumps(report, indent=2, ensure_ascii=False))
+    (work / "results" / f"g2_cache_report{args.report_tag}.json").write_text(json.dumps(report, indent=2, ensure_ascii=False))
     print(f"[G2] completeness={report['completeness']:.3f}  "
           f"{'PASS' if report['completeness'] >= 0.99 else 'FAIL'} (门槛 0.99)")
 

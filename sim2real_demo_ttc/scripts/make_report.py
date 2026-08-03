@@ -294,9 +294,11 @@ def main():
         f"C(TTC 骤降) {mine['by_type'].get('C',0)}、D(无害出现，负例) {mine['by_type'].get('D',0)}",
         f"- 日/夜 = {mine['day']}/{mine['night']}",
         f"- min-TTC(1s 窗) 直方图（边界 {mine['ttc_hist_edges']}）：{mine['ttc_hist_counts']}",
-        "- **与手册预期相反**：手册预计 A 类稀少、以 B 类为主力；nuScenes mini 是密集城区场景，"
-        f"实际 A({mine['by_type'].get('A',0)}) 远多于 B({mine['by_type'].get('B',0)})。"
-        "B 类稀少的原因是 mini 中真正的邻道切入极少，且多数“车辆入走廊”其实是 ego 自己逼近静止车辆。",
+        "- **与手册预期相反**：手册预计 A 类稀少、以 B 类为主力；实测 "
+        f"A({mine['by_type'].get('A',0)}) 是 B({mine['by_type'].get('B',0)}) 的 "
+        f"{mine['by_type'].get('A',0)/max(1,mine['by_type'].get('B',0)):.1f} 倍。"
+        "nuScenes 是密集城区数据，真正的邻道切入很少，多数“车辆入走廊”其实是 ego 自己逼近前方慢车/静止车，"
+        "这类被 C 类（帧级 TTC 骤降）收走了。",
         "",
         f"**划分**（scene 级，杜绝泄漏）：估计集 {splits['estimate']['n']} 事件 / {len(splits['estimate']['scenes'])} scene，"
         f"真值集 {splits['truth']['n']} 事件 / {len(splits['truth']['scenes'])} scene。"
