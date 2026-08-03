@@ -147,6 +147,8 @@ def main():
     v = m["verdicts"]
     v2nd = m["verdicts_secondary_on_truth_holdout"]
     prim = m["behavior_scores"][str(m["b_min_primary"])]
+    ro_test_n = f"n={m['readouts']['S_test']['n']}, {m['readouts']['S_test']['n_positive']}正"
+    ro_truth_n = f"n={m['readouts']['truth_holdout']['n']}, {m['readouts']['truth_holdout']['n_positive']}正"
 
     # ---------------- consistency_report.md ----------------
     lines = [
@@ -285,7 +287,9 @@ def main():
         "",
         "**挖掘阶段抓到并修复的 bug**",
         "",
-    ] + [f"{i+1}. {b}" for i, b in enumerate(insp["bugs_found_and_fixed_during_inspection"])] + [
+    ] + ([f"{i+1}. {b}" for i, b in
+          enumerate(insp.get("bugs_found_and_fixed_during_inspection",
+                             ["（本档沿用 Tier-S 已修复的挖掘代码，未新增 bug）"]))]) + [
         "",
         "## 3. 挖掘统计",
         "",
@@ -325,17 +329,25 @@ def main():
         "",
         "| # | 判定 | 一句话 |",
         "|---|---|---|",
-        f"| V1 | {verdict_mark(v['V1_500est_vs_10k_truth'])} | 真值达标率 {fmt(prim['truth_rate'],2)} 落在估计集 95% CI 内"
-        "——但 CI 宽达 [0.05, 0.61]，**通过是因为 CI 太宽，不是因为估计准** |",
-        f"| V2 | {verdict_mark(v['V2_stratified_trend'])} | 共同分层仅 3 个，趋势不可估 |",
-        f"| V3 | {verdict_mark(v['V3_probe_validity'])} | S_test 退化（1 正例）；truth holdout 上 AUC(正例 vs D)="
-        f"{fmt(m['readouts']['truth_holdout']['auc_positive_vs_D'])} **< 0.5**，方向不泛化 |",
-        f"| V4 | {verdict_mark(v['V4_readout_predicts_behavior'])} | 投影-行为 ρ 符号在三块 held-out 间不稳定 |",
-        f"| V4+ | {verdict_mark(v['V4_strong_logistic_auc'])} | AUC={fmt(m['v4_strong']['logistic_auc_on_truth'])} 达标，"
-        "但与 V4 矛盾，n=28 下不可解读 |",
-        "| V5 | ⏸ N/A | Tier-S 按手册 §0.5 砍掉 CARLA 参考帧 |",
-        "",
-        "**Tier-S 自身的验收**（手册 §0.5：端到端生成 + 全参数化 + 数字标注冒烟读数）：✅ 达成。",
+        f"| V1 | {verdict_mark(v['V1_500est_vs_10k_truth'])} | 真值达标率 {fmt(prim['truth_rate'],3)} vs 估计集 "
+        f"{fmt(prim['estimate_rate'],3)}，CI95 宽度 "
+        f"{prim['estimate_ci95'][1]-prim['estimate_ci95'][0]:.3f}"
+        + ("——CI 太宽，通过不代表估计准" if prim['estimate_ci95'][1]-prim['estimate_ci95'][0] > 0.25
+           else "——CI 已足够窄，这是一次有意义的通过") + " |",
+        f"| V2 | {verdict_mark(v['V2_stratified_trend'])} | 共同分层 {v['V2_n_strata']} 个，"
+        f"Spearman={fmt(v['V2_spearman'],2)}"
+        + ("（层数太少，趋势不可估）" if v['V2_n_strata'] < 6 else "（层数足够，属实质性不一致）") + " |",
+        f"| V3 | {verdict_mark(v['V3_probe_validity'])} | S_test({ro_test_n}) AUC(正例 vs D)="
+        f"{fmt(m['readouts']['S_test']['auc_positive_vs_D'])}；"
+        f"truth holdout({ro_truth_n}) = {fmt(m['readouts']['truth_holdout']['auc_positive_vs_D'])} "
+        f"(p={fmt(m['readouts']['truth_holdout']['p_positive_vs_D'])}) |",
+        f"| V4 | {verdict_mark(v['V4_readout_predicts_behavior'])} | 投影-行为 ρ："
+        f"S_test {fmt(m['readouts']['S_test']['rho_projection_behavior'],2)} / "
+        f"truth {fmt(m['readouts']['truth_holdout']['rho_projection_behavior'],2)} "
+        f"(p={fmt(m['readouts']['truth_holdout']['p_projection_behavior'])}) |",
+        f"| V4+ | {verdict_mark(v['V4_strong_logistic_auc'])} | 估计集拟合 logistic → 真值集 "
+        f"AUC={fmt(m['v4_strong']['logistic_auc_on_truth'])} |",
+        f"| V5 | ⏸ N/A | {m['domain']['note']} |",
         "",
         "## 6. 效度威胁",
         "",

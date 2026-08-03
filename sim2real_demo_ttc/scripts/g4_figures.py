@@ -18,7 +18,8 @@ from omegaconf import OmegaConf
 
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from g3_metrics import hazard_directions, load_cache, project, select_peak_layer, subset  # noqa: E402
+from g3_metrics import (hazard_directions, hazard_directions_supervised, load_cache,  # noqa: E402
+                        project, select_peak_layer, subset, time_baseline_basis)
 
 
 def main():
@@ -39,8 +40,18 @@ def main():
     est = subset(items, (work / "mining" / "split_estimate.txt").read_text().split())
     truth = subset(items, (work / "mining" / "split_truth.txt").read_text().split())
     S = {k: [e for e in est if e["scene"] in splits["probe_split_scenes"][k]] for k in ("dir", "sel", "test")}
-    v_haz, evr, _ = hazard_directions(S["dir"])
-    peak, rho_layer = select_peak_layer(S["sel"], v_haz)
+    # 与 g3_metrics 保持同一套方向法/解混淆设定，否则图与表不是同一件事
+    mcfg = cfg["metrics"]
+    basis = None
+    if mcfg.get("deconfound", "none") == "d_baseline":
+        basis, _ = time_baseline_basis(S["dir"], k=int(mcfg.get("deconfound_k", 2)))
+    if mcfg.get("direction_method", "pca") == "supervised":
+        v_haz, evr, _ = hazard_directions_supervised(S["dir"], basis=basis)
+        evr_label = "S_dir 训练集 AUC"
+    else:
+        v_haz, evr, _ = hazard_directions(S["dir"], basis=basis)
+        evr_label = "PCA EVR1"
+    peak, rho_layer = select_peak_layer(S["sel"], v_haz, basis=basis)
 
     # ---- 图1：层剖面（探针精度 & EVR1；D_L 因 Tier-S 砍掉域方向而缺席）----
     fig, ax = plt.subplots(figsize=(8, 4))
@@ -49,16 +60,16 @@ def main():
     ax.axvline(peak, color="r", ls="--", label=f"peak layer L*={peak}")
     ax.axhline(0, color="gray", lw=0.8)
     ax.set_xlabel("decoder layer"); ax.set_ylabel(r"Spearman $\rho$(proj, TTC)")
-    ax2 = ax.twinx(); ax2.plot(range(L), evr, "-s", ms=3, color="tab:green", alpha=0.6, label="PCA EVR1")
-    ax2.set_ylabel("EVR1"); ax2.set_ylim(0, 1)
+    ax2 = ax.twinx(); ax2.plot(range(L), evr, "-s", ms=3, color="tab:green", alpha=0.6, label=evr_label)
+    ax2.set_ylabel(evr_label); ax2.set_ylim(0, 1)
     ax.legend(loc="upper left", fontsize=8); ax2.legend(loc="upper right", fontsize=8)
-    ax.set_title(f"层剖面 ({args.pool_mode})  |  D_L 曲线: Tier-S 未做域方向 (V5=N/A)", fontsize=10)
+    ax.set_title(f"层剖面 ({args.pool_mode}, {mcfg.get('direction_method','pca')})  |  D_L 曲线: Tier-S 未做域方向 (V5=N/A)", fontsize=10)
     fig.tight_layout(); fig.savefig(fig_dir / f"layer_profile_{args.pool_mode}.png", dpi=110); plt.close(fig)
 
     # ---- 图2：投影-行为散点（S_test / truth 两块 held-out）----
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.2))
     for ax, evs, tag in ((axes[0], S["test"], "S_test (主读数)"), (axes[1], truth, "truth (完全 held-out)")):
-        p = project(evs, v_haz, peak)
+        p = project(evs, v_haz, peak, basis=basis)
         b = np.array([e["b"] for e in evs])
         for t, col in (("A", "tab:red"), ("B", "tab:orange"), ("C", "tab:purple"), ("D", "tab:blue")):
             k = [i for i, e in enumerate(evs) if e["type"] == t]

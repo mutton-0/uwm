@@ -1,0 +1,17 @@
+{
+  "n_events": 2275,
+  "cached": 1649,
+  "skipped_existing": 626,
+  "failed": [],
+  "completeness": 1.0,
+  "ckpt_sha1": "3ff2eadbb919218d",
+  "preprocess_hash": "eeb470cbc2ad",
+  "pool_modes": [
+    "vision_mean",
+    "last_token"
+  ],
+  "waypoint_dt_s": 0.25,
+  "elapsed_s": 480.4262957572937,
+  "parallel_workers": 2,
+  "note": "2 个 GPU worker 并行；elapsed_s 为墙钟最大值，s/事件 = 墙钟/总事件数（两卡合计吞吐，非单卡）"
+}

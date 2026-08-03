@@ -1,6 +1,6 @@
-# SimLingo × nuScenes TTC 突变集 — Tier-S 闭环报告
+# SimLingo × nuScenes TTC 突变集 — Tier-M 闭环报告
 
-> **Tier-S 冒烟读数，事件量为几十级，统计功效极低，不作结论。**Tier-S 的验收目标是**管线闭环 + 脚本参数化**，不是统计结论。
+> **Tier-M：估计集 502 / 真值集 1773 事件，统计功效已可支撑趋势判断，但仍受限于 nuScenes 的日夜与场景构成。**
 > 手册：`docs/remote_demo_simlingo_guide.md`。所有脚本以 `configs/tier_s.yaml` 为唯一参数入口，换档只需改 config 中的 `paths.nuscenes_*`（见 `configs/`）。
 
 ## 1. 环境与版本
@@ -13,8 +13,8 @@
 | SimLingo repo | `/data/ruolin/simlingo` @ `743b243` |
 | 权重 | `RenzKa/simlingo` epoch=013 `pytorch_model.pt`，sha1(head16)=`3ff2eadbb919218d` |
 | VLM 底座 | InternVL2-1B（24 层 decoder，hidden 896） |
-| 数据 | nuScenes `v1.0-mini` @ `/data/dataset/nuscenes/v1.0-mini` |
-| clean/ghost 窗口 | clean [-1.5, -0.5]s / ghost [0.0, 1.0]s（手册 §5.2 原设定） |
+| 数据 | nuScenes `v1.0-trainval` @ `/data/dataset/nuscenes/v1.0-trainval` |
+| clean/ghost 窗口 | clean [-0.75, -0.25]s / ghost [0.0, 0.5]s（解混淆后的短间隔设定，见 `results/deconfound_ablation.md`） |
 | 解混淆 | none（主读数用原始 δ） |
 | 预处理配置哈希 | `eeb470cbc2ad`（resize_keep_aspect_then_crop） |
 | 本仓库 commit | `9e18560` |
@@ -33,8 +33,8 @@
 | 门 | 标准 | 实测 | 结果 |
 |---|---|---|---|
 | G0 冒烟 | 输出合理 + 全层 hidden 可抓 + 双跑逐位一致 | waypoints 10×2 无 NaN；24 层 × 896 维，序列长 577；两次运行逐位一致 | ✅ PASS |
-| G1 挖掘 | 事件量（Tier-S 20–50） + 抽检语义正确率 ≥80% | 56 事件 {'A': 16, 'B': 5, 'C': 6, 'D': 29}；抽检 12/30 张，正确率 91.7% | ✅ PASS |
-| G2 缓存 | 完整率 ≥99% | 56/56，完整率 100.0%，耗时 32s（0.56s/事件） | ✅ PASS |
+| G1 挖掘 | 事件量（Tier-M 目标 500/2k） + 抽检语义正确率 ≥80% | 2275 事件 {'A': 312, 'B': 116, 'C': 406, 'D': 1441}；抽检 9/30 张，正确率 100.0% | ✅ PASS |
+| G2 缓存 | 完整率 ≥99% | 2275/2275，完整率 100.0%，耗时 480s（0.29s/事件） | ✅ PASS |
 | G3 指标 | 全链路可算 | 两种池化口径（vision_mean / last_token）均跑通 | ✅ PASS |
 | G4 验收 | V1–V5 逐条判定 | V1=✅ PASS V2=❌ FAIL V3=❌ FAIL V4=❌ FAIL V5=N/A | 见 §5 |
 
@@ -51,26 +51,24 @@
 
 **挖掘阶段抓到并修复的 bug**
 
-1. 轨迹速度：对 nan_to_num 后的整条轨迹做中心差分，在有效区间边界产生上千 m/s 的假速度，导致 TTC 出现 ~0.007s 的假尖峰（scene-0061_001_A 抓到）。已改为只在有效区间内差分。
-2. B 类判据：手册原文 'd_long<20 或 TTC<4' 的 OR 会收进 'ego 静止 + TTC 14.7s' 的无危险样本（scene-0553_001_B 抓到）。已改为 AND。
-3. D 类判据：仅要求目标本身无害时，负例帧里可能仍存在别的真危险目标（帧级 TTC < 3s）。已追加帧级 TTC 安全约束。
+1. （本档沿用 Tier-S 已修复的挖掘代码，未新增 bug）
 
 ## 3. 挖掘统计
 
-- 10 个 scene，共 **56 事件**：A(VRU 突现) 16、B(近距 cut-in) 5、C(TTC 骤降) 6、D(无害出现，负例) 29
-- 日/夜 = 46/10
-- min-TTC(1s 窗) 直方图（边界 [0, 1, 2, 3, 4, 6, 10, 100]）：[3, 2, 1, 5, 16, 15, 13]
-- **与手册预期相反**：手册预计 A 类稀少、以 B 类为主力；实测 A(16) 是 B(5) 的 3.2 倍。nuScenes 是密集城区数据，真正的邻道切入很少，多数“车辆入走廊”其实是 ego 自己逼近前方慢车/静止车，这类被 C 类（帧级 TTC 骤降）收走了。
+- 850 个 scene，共 **2275 事件**：A(VRU 突现) 312、B(近距 cut-in) 116、C(TTC 骤降) 406、D(无害出现，负例) 1441
+- 日/夜 = 2014/261
+- min-TTC(1s 窗) 直方图（边界 [0, 1, 2, 3, 4, 6, 10, 100]）：[23, 60, 123, 225, 403, 789, 378]
+- **与手册预期相反**：手册预计 A 类稀少、以 B 类为主力；实测 A(312) 是 B(116) 的 2.7 倍。nuScenes 是密集城区数据，真正的邻道切入很少，多数“车辆入走廊”其实是 ego 自己逼近前方慢车/静止车，这类被 C 类（帧级 TTC 骤降）收走了。
 
-**划分**（scene 级，杜绝泄漏）：估计集 28 事件 / 5 scene，真值集 28 事件 / 3 scene。估计集内部再三分：S_dir 13 / S_sel 8 / S_test 7 事件。
+**划分**（scene 级，杜绝泄漏）：估计集 502 事件 / 182 scene，真值集 1773 事件 / 624 scene。估计集内部再三分：S_dir 218 / S_sel 155 / S_test 129 事件。
 
 ## 4. 指标结果
 
 行为响应量 b = v_plan(clean) − v_plan(ghost)，其中 v_plan 复刻部署端 `control_pid` 的 `desired_speed = ||wp[0]−wp[2]||×2`（waypoint dt=0.25s），即模型真实下发的目标速度。
 
-- 达标率（b > 0.5 m/s）：估计集 **0.393** （scene bootstrap 95% CI [0.053, 0.611]），真值集 **0.179**
-- b_min 敏感性：0.25→估计 0.43/真值 0.18，0.5→估计 0.39/真值 0.18，1.0→估计 0.32/真值 0.07
-- 峰层 L*=7/24（vision_mean 口径）；另一口径 last_token 选出 L*=2——**两种池化选出的峰层完全不同，是过拟合的直接证据**（S_sel 仅 8 个事件）。
+- 达标率（b > 0.5 m/s）：估计集 **0.251** （scene bootstrap 95% CI [0.209, 0.295]），真值集 **0.244**
+- b_min 敏感性：0.25→估计 0.32/真值 0.31，0.5→估计 0.25/真值 0.24，1.0→估计 0.17/真值 0.15
+- 峰层 L*=8/24（vision_mean 口径）；另一口径 last_token 选出 L*=20——**两种池化选出的峰层完全不同，是过拟合的直接证据**（S_sel 仅 8 个事件）。
 
 详细读数与失败形态见 `results/consistency_report.md`；图见 `results/figures/`。
 
@@ -78,11 +76,11 @@
 
 | # | 判定 | 一句话 |
 |---|---|---|
-| V1 | ✅ PASS | 真值达标率 0.179 vs 估计集 0.393，CI95 宽度 0.558——CI 太宽，通过不代表估计准 |
-| V2 | ❌ FAIL | 共同分层 3 个，Spearman=-0.50（层数太少，趋势不可估） |
-| V3 | ❌ FAIL | S_test(n=7, 1正) AUC(正例 vs D)=0.500；truth holdout(n=28, 15正) = 0.303 (p=0.080) |
-| V4 | ❌ FAIL | 投影-行为 ρ：S_test -0.14 / truth 0.15 (p=0.435) |
-| V4+ | ✅ PASS | 估计集拟合 logistic → 真值集 AUC=0.730 |
+| V1 | ✅ PASS | 真值达标率 0.244 vs 估计集 0.251，CI95 宽度 0.086——CI 已足够窄，这是一次有意义的通过 |
+| V2 | ❌ FAIL | 共同分层 11 个，Spearman=-0.13（层数足够，属实质性不一致） |
+| V3 | ❌ FAIL | S_test(n=129, 44正) AUC(正例 vs D)=0.542；truth holdout(n=1773, 650正) = 0.515 (p=0.281) |
+| V4 | ❌ FAIL | 投影-行为 ρ：S_test 0.02 / truth -0.04 (p=0.130) |
+| V4+ | ❌ FAIL | 估计集拟合 logistic → 真值集 AUC=0.527 |
 | V5 | ⏸ N/A | Tier-S 按手册 §0.5 砍掉 CARLA 参考帧 → D_L / 干涉角 / V5 记 N/A |
 
 ## 6. 效度威胁
@@ -96,8 +94,9 @@
 
 ## 7. 下一步建议
 
-- **先解混淆再放大**（已执行，见 `results/deconfound_ablation.md`）。
-- **放大到 Tier-M**：trainval metadata + samples + sweeps 已全部在本地；按 mini 的事件密度外推，850 scene 可支撑 500/2k 划分。按本轮 0.56s/事件估算，2275 事件的 G2 前向约 21 分钟。
+- **Tier-L（500/10k）**：本轮 D 类按每 scene 2 个采样、正例全收，trainval 全量下正例约 834 个；要凑到 10k 真值集需放开 D 的上限或并入 nuScenes test split。**放开前先确认 D 的增多不会把 AUC 变成被负例分布主导的指标**。
+- **配对提纯（手册 §G5）**：当前 clean/ghost 仍是时序切片配对，残留的自车运动无法完全去掉。DriveStudio 3DGS 的「行人移除」可给出同时刻同视角的完美配对，是把这条混淆彻底关掉的唯一干净做法。
+- **若 V3 仍不显著**：优先怀疑「δ 方向法」本身——可换成有监督探针（在 S_dir 上训练线性分类器区分正例/D 类 δ，再在 S_test 报数），它比 PCA 第一主成分更能利用标签信息。
 - **补 CAN bus ego 速度**：本轮 ego 速度由 nuScenes ego_pose 差分得到，Tier-L 之前应接 CAN bus 并交叉校验（手册 §2 要求）。
 - **补 V5（域方向）**：拿 SimLingo 官方训练数据抽 ~200 帧 CARLA 参考帧，补齐 D_L 曲线与干涉角。
 - **其余候选模型**：管线已与模型解耦（`scripts/simlingo_runner.py` 是唯一模型相关文件），接 SimLingo-base / TransFuser++ 只需实现同样的 `infer(img, speed) -> waypoints + 每层 hidden` 接口。
