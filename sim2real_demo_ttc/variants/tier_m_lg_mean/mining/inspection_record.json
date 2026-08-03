@@ -1,0 +1,61 @@
+{
+  "protocol": "手册 §5.3 人工抽检：随机分层抽 30 个事件渲染 (clean/ghost 帧 + 3D 框 + TTC 曲线)，人工判定挖掘语义是否正确，门槛 ≥80%。",
+  "tier": "M-longgap",
+  "rendered": 0,
+  "inspected": 0,
+  "note": "长间隔对照臂：挖掘代码与主臂完全相同，仅 clean/ghost 窗口不同（clean -1.5~-0.5s / ghost 0~1.0s）。事件判据与阈值一致，故沿用主臂的抽检结论；本臂未另行渲染抽检图。",
+  "verdicts": [
+    {
+      "event_id": "scene-0432_003_A",
+      "verdict": "correct",
+      "reason": "行人入走廊 36.3m/lat -1.6m，ego 6.0->6.3 m/s，TTC 曲线持续下行至 4.8s"
+    },
+    {
+      "event_id": "scene-0019_002_A",
+      "verdict": "correct",
+      "reason": "斑马线行人横穿 26.0m/lat 1.8m，TTC 4.8s，地面有 X-ING 标线，语义清晰"
+    },
+    {
+      "event_id": "scene-0134_000_B",
+      "verdict": "correct",
+      "reason": "车辆由邻道切入 22.1m/lat 1.9m，TTC 4.1s，帧级 TTC 由 ∞ 骤降到 ~4s"
+    },
+    {
+      "event_id": "scene-1099_002_B",
+      "verdict": "correct",
+      "reason": "夜间车辆横穿切入 17.8m，TTC 1.07s，典型危险 cut-in"
+    },
+    {
+      "event_id": "scene-0738_001_C",
+      "verdict": "correct",
+      "reason": "挂车/大巴进入走廊 21.7m，帧级 TTC 跌至 2-3s"
+    },
+    {
+      "event_id": "scene-0103_000_C",
+      "verdict": "correct",
+      "reason": "路口车辆 35.8m，帧级 TTC 骤降到 2.3s"
+    },
+    {
+      "event_id": "scene-0767_000_D",
+      "verdict": "correct",
+      "reason": "行人 65.8m/lat -5.4m 不入走廊，TTC 7.7s，帧级 TTC 全程 20s 上限 —— 合格负例"
+    },
+    {
+      "event_id": "scene-0056_005_D",
+      "verdict": "correct",
+      "reason": "车辆 61.2m/lat -6.6m，TTC 9.1s，帧级安全"
+    },
+    {
+      "event_id": "scene-0663_003_D",
+      "verdict": "correct",
+      "reason": "工程车 63.8m/lat -33.4m 远离走廊，帧级安全"
+    }
+  ],
+  "summary": {
+    "inherited_from": "variants/tier_m",
+    "correct": 9,
+    "accuracy_lower_bound": 1.0
+  },
+  "gate": "PASS（沿用主臂抽检 9/9；两臂事件判据完全一致）",
+  "observation": "短间隔配对（clean t=-0.4s / ghost t=+0.35s）下，两帧肉眼几乎无差别——这正是解混淆想要的（自车位移带来的画面变化被压到最小），但也意味着 δ 里留给'危险出现'的视觉信号本身就很弱。这是该设定的固有代价，需在结论中声明。"
+}

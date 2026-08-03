@@ -116,9 +116,17 @@ def main():
             # 手册 §10.4：clean/ghost 之间 prompt 必须完全一致。
             # prompt_anchor=clean -> 两个条件都用 clean 帧的平均 ego 速度写进 prompt，
             # 使条件间唯一的差异是图像本身。per_frame = 旧行为（各写各的，有污染）。
+            pa = cfg["model"].get("prompt_anchor", "clean")
             anchor = None
-            if cfg["model"].get("prompt_anchor", "clean") == "clean":
+            if pa == "clean":
                 anchor = float(np.mean([f["ego_speed_mps"] for f in ev["x_clean_frames"]]))
+            elif pa == "ghost":
+                anchor = float(np.mean([f["ego_speed_mps"] for f in ev["x_ghost_frames"]]))
+            elif pa == "mean":
+                anchor = float(np.mean([f["ego_speed_mps"]
+                                        for k in ("x_clean_frames", "x_ghost_frames") for f in ev[k]]))
+            elif pa != "per_frame":
+                raise ValueError(f"unknown prompt_anchor: {pa}")
             res = {c: run_condition(runner, root, ev[f"x_{c}_frames"], pool_modes, prompt_speed=anchor)
                    for c in ("clean", "ghost")}
             with h5py.File(path, "w") as f:
