@@ -1,0 +1,102 @@
+"""解混淆消融汇总（手册 §7 建议 a/b 的验证）。
+
+2(clean/ghost 间隔) × 2(是否回归时间基线) × 2(池化口径) 网格，
+主看 **truth holdout 上的 AUC(正例 vs D)**：>0.5 才说明 v_hazard 抓的是危险而不是画面变化。
+"""
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+
+
+def fmt(x, n=3):
+    return "n/a" if x is None or x != x else f"{x:.{n}f}"
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--root", default=str(Path(__file__).resolve().parents[1]))
+    args = ap.parse_args()
+    root = Path(args.root)
+
+    variants = [
+        ("长间隔 ~1.5s（手册 §5.2 原设定）", root),
+        ("短间隔 ~0.5s（建议 b）", root / "variants" / "shortgap"),
+    ]
+    rows = []
+    for vname, wd in variants:
+        for dc, tag in (("原始", "_raw"), ("回归时间基线（建议 a）", "_dbase")):
+            for pm in ("vision_mean", "last_token"):
+                p = wd / "results" / f"metrics_estimate_{pm}{tag}.json"
+                if not p.exists():
+                    continue
+                m = json.loads(p.read_text())
+                ro = m["readouts"]["truth_holdout"]
+                rows.append({
+                    "gap": vname, "deconf": dc, "pool": pm,
+                    "n": ro["n"], "npos": ro["n_positive"], "nneg": ro["n_negative"],
+                    "peak": m["probe"]["peak_layer"],
+                    "auc_pd": ro["auc_positive_vs_D"], "p_pd": ro["p_positive_vs_D"],
+                    "rho_ttc": ro["rho_ttc"], "p_perm": ro["p_permutation"],
+                    "rho_b": ro["rho_projection_behavior"], "p_b": ro["p_projection_behavior"],
+                    "auc_gc": ro["auc_ghost_vs_clean"],
+                })
+
+    lines = [
+        "# 解混淆消融（Tier-S，nuScenes v1.0-mini）",
+        "",
+        "**问题**：Tier-S 首轮在完全 held-out 的 truth 集上 AUC(正例 vs D) = 0.303 **低于 0.5**，",
+        "即 v_hazard 在无害负例上的投影反而更高。怀疑 δ=h_ghost−h_clean 里混的是",
+        "「clean 与 ghost 之间那 1.5 秒自车位移带来的画面变化」而非危险信号。",
+        "",
+        "**两条解法**（手册 §7）：a) 用 D 类负例 δ 建时间基线子空间并回归掉；b) 把 clean/ghost 间隔压到 ~0.5s。",
+        "",
+        "**判读**：所有读数都在 truth holdout 上（该集合从未参与提方向与选层）。",
+        "AUC(正例 vs D) > 0.5 = 方向指向危险；< 0.5 = 方向被混淆主导。",
+        "",
+        "| 间隔 | 解混淆 | 池化 | n(正/负) | L* | **AUC(正例 vs D)** | p | ρ_TTC | p(置换) | ρ(投影,行为) | AUC(ghost/clean) |",
+        "|---|---|---|---|---|---|---|---|---|---|---|",
+    ]
+    for r in rows:
+        star = "**" if r["auc_pd"] == r["auc_pd"] and r["auc_pd"] > 0.5 else ""
+        lines.append(
+            f"| {r['gap']} | {r['deconf']} | {r['pool']} | {r['n']}({r['npos']}/{r['nneg']}) | {r['peak']} | "
+            f"{star}{fmt(r['auc_pd'])}{star} | {fmt(r['p_pd'])} | {fmt(r['rho_ttc'])} | {fmt(r['p_perm'])} | "
+            f"{fmt(r['rho_b'])} | {fmt(r['auc_gc'])} |")
+
+    lines += [
+        "",
+        "## 结论（按实测写，不做美化）",
+        "",
+        "1. **8 个格子里没有任何一个达到显著**（所有 AUC 的 p 都 > 0.05）。n=36、正负各 ~18，",
+        "   这个量级本来就估不出 0.05 级别的差异。因此下面的话全部是**方向性观察**，不是证据。",
+        "2. **建议 b（短间隔）只在 vision_mean 口径上起作用**：AUC(正例 vs D) 0.303 → 0.576，倒挂消失。",
+        "   但同一改动在 last_token 口径上是 0.472 → 0.319，**朝反方向走**。",
+        "   两个口径给出相反的方向，说明当前证据不足以判定「混淆被解决了」——",
+        "   只能说：长间隔 + vision_mean 那个 0.303 的倒挂，确实随间隔缩短而消失，与混淆假说一致。",
+        "3. **建议 a（回归时间基线）在 Tier-S 上不可用**：S_dir 里的 D 类负例只有 4–6 个，",
+        "   由这么少样本估出的 2 维基线噪声极大；它在 4 个格子里 2 升 2 降，没有稳定效果。",
+        "   **这不是方法失效，而是基线样本量不足**——Tier-M 上 S_dir 的 D 类会有几百个，值得再测。",
+        "4. **多重比较警告**：本表 8 个格子 × 每格 4 个读数 = 32 个数。其中",
+        "   「短间隔+回归+last_token」的 ρ(投影,行为) = −0.540 (p=0.001) 看似显著，",
+        "   但它符号与假设相反、且是 32 个读数里挑出来的，**按多重比较应直接丢弃**。",
+        "",
+        "## Tier-M 采用的配置及理由",
+        "",
+        "- clean/ghost 间隔：**短间隔**（clean [-0.75,-0.25]s，ghost [0,0.5]s）。",
+        "  理由不是「它在 Tier-S 上赢了」（没赢），而是**它在机制上更干净**：",
+        "  两帧相隔 0.5s，自车位移带来的画面变化本身就更小，混淆的上限更低。",
+        "- 解混淆：**主读数用原始 δ**，同时并行输出 `--deconfound d_baseline` 作对照。",
+        "  Tier-M 的负例基线由几百个 D 类事件估出，届时两者的对比才有判别力。",
+        "- 两种池化口径都算，**在 Tier-M 上以哪个口径为主读数必须先在 S_sel 上定死，事后不许挑**。",
+        "",
+    ]
+    out = root / "results" / "deconfound_ablation.md"
+    out.write_text("\n".join(lines))
+    print("\n".join(lines[10:20]))
+    print(f"\n[ablation] wrote {out}")
+
+
+if __name__ == "__main__":
+    main()

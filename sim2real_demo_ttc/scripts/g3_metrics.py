@@ -63,8 +63,42 @@ def subset(items, ids):
 # --------------------------------------------------------------------------------------
 # 7.1 危险方向与探针
 # --------------------------------------------------------------------------------------
-def hazard_directions(events):
-    """S_dir 上逐层 PCA 提 v_hazard(L) 与 EVR1。只用正例的 δ = h_ghost - h_clean。"""
+def time_baseline_basis(events, k=2):
+    """从 S_dir 的 **D 类负例** δ 里提每层"时间基线"子空间。
+
+    clean/ghost 之间隔了 ~1s，δ 里必然混着自车位移带来的全局视角变化。
+    D 类（无害出现）的 δ 里**只有**这份时间漂移，没有危险信号，
+    因此它张成的子空间就是要从正例 δ 里回归掉的混淆方向（手册 §7 建议 a）。
+
+    返回 [L, k, C]（未取到 k 个成分时行数会少），或 None（D 类样本不足）。
+    """
+    neg = [e for e in events if not e["is_positive"]]
+    if len(neg) < 2:
+        return None, len(neg)
+    D = np.stack([e["h_ghost"] - e["h_clean"] for e in neg])       # [N, L, C]
+    n, L, C = D.shape
+    kk = min(k, n)
+    U = np.zeros((L, kk, C), dtype=np.float32)
+    for l in range(L):
+        # 不去均值：全局漂移的**均值方向**本身就是最主要的混淆成分
+        _, _, Vt = np.linalg.svd(D[:, l, :], full_matrices=False)
+        U[l] = Vt[:kk]
+    return U, len(neg)
+
+
+def residualize(delta_l, U_l):
+    """从 δ（[..., C]）里投影掉基线子空间 U_l（[k, C]，行已正交）。"""
+    if U_l is None:
+        return delta_l
+    coef = delta_l @ U_l.T                    # [..., k]
+    return delta_l - coef @ U_l
+
+
+def hazard_directions(events, basis=None):
+    """S_dir 上逐层 PCA 提 v_hazard(L) 与 EVR1。只用正例的 δ = h_ghost - h_clean。
+
+    basis 非空时先把时间基线子空间从 δ 里回归掉，v_hazard 因而与基线正交。
+    """
     pos = [e for e in events if e["is_positive"]]
     assert len(pos) >= 2, f"S_dir 正例不足（{len(pos)}）无法提方向"
     delta = np.stack([e["h_ghost"] - e["h_clean"] for e in pos])   # [N, L, C]
@@ -72,7 +106,7 @@ def hazard_directions(events):
     v = np.zeros((L, C), dtype=np.float32)
     evr = np.zeros(L, dtype=np.float32)
     for l in range(L):
-        X = delta[:, l, :]
+        X = residualize(delta[:, l, :], None if basis is None else basis[l])
         Xc = X - X.mean(0, keepdims=True)
         # 经济 SVD：N << C
         U, S, Vt = np.linalg.svd(Xc, full_matrices=False)
@@ -84,14 +118,20 @@ def hazard_directions(events):
     return v, evr, len(pos)
 
 
-def project(events, v, layer, mode="delta"):
+def project(events, v, layer, mode="delta", basis=None):
+    """把事件投影到 v_hazard(layer)；basis 非空时先回归掉时间基线。"""
+    b = None if basis is None else basis[layer]
     if mode == "delta":
-        return np.array([float((e["h_ghost"][layer] - e["h_clean"][layer]) @ v[layer]) for e in events])
-    if mode == "ghost":
-        return np.array([float(e["h_ghost"][layer] @ v[layer]) for e in events])
-    if mode == "clean":
-        return np.array([float(e["h_clean"][layer] @ v[layer]) for e in events])
-    raise ValueError(mode)
+        X = np.stack([e["h_ghost"][layer] - e["h_clean"][layer] for e in events]) if events else np.zeros((0, v.shape[1]))
+    elif mode == "ghost":
+        X = np.stack([e["h_ghost"][layer] for e in events]) if events else np.zeros((0, v.shape[1]))
+    elif mode == "clean":
+        X = np.stack([e["h_clean"][layer] for e in events]) if events else np.zeros((0, v.shape[1]))
+    else:
+        raise ValueError(mode)
+    if mode == "delta":
+        X = residualize(X, b)
+    return X @ v[layer]
 
 
 def spearman(x, y):
@@ -101,12 +141,12 @@ def spearman(x, y):
     return float(r.statistic), float(r.pvalue)
 
 
-def select_peak_layer(events, v):
+def select_peak_layer(events, v, basis=None):
     """S_sel：逐层算 ρ_TTC（投影 vs GT TTC，危险越近 TTC 越小 → 期望负相关），取 |ρ| 最大层。"""
     ttc = np.array([e["ttc"] for e in events])
     rhos = []
     for l in range(v.shape[0]):
-        p = project(events, v, l)
+        p = project(events, v, l, basis=basis)
         r, _ = spearman(p, ttc)
         rhos.append(r)
     rhos = np.array(rhos)
@@ -178,6 +218,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default=str(Path(__file__).resolve().parents[1] / "configs" / "tier_s.yaml"))
     ap.add_argument("--pool-mode", default="vision_mean")
+    ap.add_argument("--deconfound", default=None, choices=[None, "none", "d_baseline"],
+                    help="覆盖 config.metrics.deconfound；d_baseline = 用 D 类 δ 回归掉时间基线")
+    ap.add_argument("--tag", default="", help="输出文件后缀，便于消融对比")
     args = ap.parse_args()
 
     cfg = OmegaConf.to_container(OmegaConf.load(args.config), resolve=True)
@@ -198,24 +241,33 @@ def main():
           f"S_dir={len(S['dir'])} S_sel={len(S['sel'])} S_test={len(S['test'])}")
 
     # ---------------- 7.1 ----------------
-    v_haz, evr, n_dir_pos = hazard_directions(S["dir"])
-    peak, rho_by_layer = select_peak_layer(S["sel"], v_haz)
+    deconf = args.deconfound or mcfg.get("deconfound", "none")
+    basis, n_dir_neg = (None, 0)
+    if deconf == "d_baseline":
+        basis, n_dir_neg = time_baseline_basis(S["dir"], k=int(mcfg.get("deconfound_k", 2)))
+        assert basis is not None, "S_dir 的 D 类负例不足，无法建时间基线"
+    v_haz, evr, n_dir_pos = hazard_directions(S["dir"], basis=basis)
+    peak, rho_by_layer = select_peak_layer(S["sel"], v_haz, basis=basis)
+    print(f"[G3] deconfound={deconf}" + (f"（时间基线由 S_dir 的 {n_dir_neg} 个 D 类负例建，"
+          f"k={basis.shape[1]}）" if basis is not None else ""))
     print(f"[G3] v_hazard 由 S_dir 的 {n_dir_pos} 个正例提出；峰层 L*={peak} "
           f"(S_sel ρ_TTC={rho_by_layer[peak]:+.3f}, EVR1={evr[peak]:.3f})")
 
+    b_peak = None if basis is None else basis[peak]
+
     def probe_readout(events, tag):
         """在给定 held-out 集合上出 §7.1 + §7.2 的全部读数。"""
-        proj = project(events, v_haz, peak)
+        proj = project(events, v_haz, peak, basis=basis)
         ttc = np.array([e["ttc"] for e in events])
         rho, rho_c, sel, p_perm_ = perm_test_corr(proj, ttc, mcfg["permutation_n"])
 
-        g_sc = np.concatenate([(e["h_ghost_frames"][:, peak, :] @ v_haz[peak]) for e in events])
-        c_sc = np.concatenate([(e["h_clean_frames"][:, peak, :] @ v_haz[peak]) for e in events])
+        g_sc = np.concatenate([residualize(e["h_ghost_frames"][:, peak, :], b_peak) @ v_haz[peak] for e in events])
+        c_sc = np.concatenate([residualize(e["h_clean_frames"][:, peak, :], b_peak) @ v_haz[peak] for e in events])
         a_gc, p_gc_ = auc(g_sc, c_sc)
 
         pos = [e for e in events if e["is_positive"]]
         neg = [e for e in events if not e["is_positive"]]
-        a_gd, p_gd_ = auc(project(pos, v_haz, peak), project(neg, v_haz, peak)) \
+        a_gd, p_gd_ = auc(project(pos, v_haz, peak, basis=basis), project(neg, v_haz, peak, basis=basis)) \
             if pos and neg else (float("nan"), float("nan"))
 
         b = np.array([e["b"] for e in events])
@@ -260,7 +312,7 @@ def main():
     neg_test = [e for e in test if not e["is_positive"]]
     rho_b, p_b = ro_test["rho_projection_behavior"], ro_test["p_projection_behavior"]
     rho_b_ci, boot = ro_test["ci95_scene_bootstrap"], range(ro_test["n_bootstrap"])
-    proj_test = project(test, v_haz, peak)
+    proj_test = project(test, v_haz, peak, basis=basis)
 
     # ---------------- 7.4 行为分数 ----------------
     b_primary = mcfg["b_min_primary"]
@@ -275,9 +327,9 @@ def main():
         }
 
     # ---------------- V4 加强版：估计集拟合 logistic，真值集测 AUC ----------------
-    proj_est = project(est, v_haz, peak)
+    proj_est = project(est, v_haz, peak, basis=basis)
     y_est = np.array([e["b"] > b_primary for e in est]).astype(int)
-    proj_truth = project(truth, v_haz, peak)
+    proj_truth = project(truth, v_haz, peak, basis=basis)
     y_truth = np.array([e["b"] > b_primary for e in truth]).astype(int)
     logit_auc, logit_note = float("nan"), ""
     if len(set(y_est)) == 2 and len(set(y_truth)) == 2:
@@ -306,7 +358,13 @@ def main():
 
     out = {
         "tier": cfg["tier"], "pool_mode": args.pool_mode,
-        "disclaimer": "Tier-S 冒烟读数，事件量为几十级，统计功效极低，不作结论。",
+        "deconfound": deconf, "deconfound_k": int(mcfg.get("deconfound_k", 2)) if basis is not None else 0,
+        "n_dir_negatives_for_baseline": n_dir_neg,
+        "clean_window_s": cfg["mining"]["clean_window_s"], "ghost_window_s": cfg["mining"]["ghost_window_s"],
+        "disclaimer": ("Tier-S 冒烟读数，事件量为几十级，统计功效极低，不作结论。"
+                       if str(cfg["tier"]).startswith("S") else
+                       f"Tier-{cfg['tier']}：估计集 {len(est)} / 真值集 {len(truth)} 事件，"
+                       "统计功效已可支撑趋势判断，但仍受限于 nuScenes 的日夜与场景构成。"),
         "n": {"estimate": len(est), "truth": len(truth),
               "S_dir": len(S["dir"]), "S_sel": len(S["sel"]), "S_test": len(S["test"]),
               "S_test_positive": len(pos_test), "S_test_negative": len(neg_test)},
@@ -344,8 +402,8 @@ def main():
                                                  and ro_truth["p_projection_behavior"] < 0.05),
         },
     }
-    (res_dir / f"metrics_estimate_{args.pool_mode}.json").write_text(json.dumps(out, indent=2, ensure_ascii=False))
-    np.save(res_dir / f"v_hazard_{args.pool_mode}.npy", v_haz)
+    (res_dir / f"metrics_estimate_{args.pool_mode}{args.tag}.json").write_text(json.dumps(out, indent=2, ensure_ascii=False))
+    np.save(res_dir / f"v_hazard_{args.pool_mode}{args.tag}.npy", v_haz)
 
     truth_out = {
         "n": len(truth), "b_min_grid": mcfg["b_min_mps"],
@@ -366,7 +424,7 @@ def main():
     print(f"[G3] 达标率 b>{b_primary}: 估计={prim['estimate_rate']:.3f} CI95={prim['estimate_ci95']} "
           f"真值={prim['truth_rate']:.3f}")
     print(f"[G4] V1={v1} V2={v2}(ρ={r_v2:.2f}, {len(common)} 层) V3={v3} V4={v4} V4+={v4plus} V5=N/A")
-    print(f"[G3] wrote {res_dir}/metrics_estimate_{args.pool_mode}.json, truth.json")
+    print(f"[G3] wrote {res_dir}/metrics_estimate_{args.pool_mode}{args.tag}.json, truth.json")
 
 
 if __name__ == "__main__":

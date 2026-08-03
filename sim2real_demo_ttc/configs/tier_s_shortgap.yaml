@@ -1,0 +1,97 @@
+# Tier-S 配置：nuScenes v1.0-mini 上的管线闭环冒烟
+# 手册：docs/remote_demo_simlingo_guide.md §0.5
+# 所有路径/阈值/split 均为参数，换 Tier-M/L 数据零改动复跑。
+
+tier: S-shortgap
+
+paths:
+  nuscenes_root: /data/dataset/nuscenes/v1.0-mini
+  nuscenes_version: v1.0-mini
+  can_bus_root: /data/dataset/nuscenes/v1.0-mini/can_bus
+  work_dir: /data/ruolin/uwm/sim2real_demo_ttc/variants/shortgap
+  simlingo_repo: /data/ruolin/simlingo
+  simlingo_ckpt: /data/ruolin/simlingo_ckpt/simlingo/checkpoints/epoch=013.ckpt/pytorch_model.pt
+  simlingo_hydra_cfg: /data/ruolin/simlingo_ckpt/simlingo/.hydra/config.yaml
+
+# ---------------- G1 挖掘 ----------------
+mining:
+  camera: CAM_FRONT
+  # 走廊定义（手册 §5.1）
+  corridor_half_width_m: 2.0     # |y| < 2.0
+  corridor_x_min_m: 0.0
+  corridor_x_max_m: 50.0
+  min_closing_speed_mps: 0.5     # v_c > 0.5 才算 TTC
+  # 事件阈值（手册 §5.2，Tier-S 放最宽）
+  event_A:                       # VRU 突现
+    enabled: true
+    window_s: 1.0
+    ttc_max_s: 5.0               # 回调记录#1：手册建议 3.0，mini 上仅 5 例；按分布放宽至 5.0（p25=4.3）
+  event_B:                       # 近距 cut-in（主力类）
+    enabled: true
+    d_long_max_m: 25.0           # 回调记录#2：20.0 -> 25.0
+    ttc_max_s: 6.0               # 回调记录#2：4.0 -> 6.0（p50=5.95）
+    min_lateral_speed_mps: 0.1   # 回调记录#2：0.2 -> 0.1；横向速度指向 ego 车道
+  event_C:                       # 通用 TTC 骤降（兜底）
+    enabled: true
+    drop_window_s: 1.0
+    min_drop_s: 1.5              # 回调记录#3：2.0 -> 1.5
+    ttc_after_max_s: 5.0         # 回调记录#3：3.0 -> 5.0
+  event_D:                       # 无害出现（负例，必挖）
+    enabled: true
+    ttc_min_s: 6.0               # 严格判据：不入走廊 且 自身 TTC 全程 > 6s
+    max_per_scene: 6             # 回调记录#4：12 -> 6，使 D 与 A+B+C 量级相当（手册 §5.2 D 条）
+  # 帧选取（手册 §5.2）
+  # 解混淆 B（手册 §7 建议 b）：clean/ghost 间隔由 ~1.5s 压到 ~0.5s，
+  # 削掉两帧之间自车位移带来的全局视角变化。代价是危险出现的视觉对比也被削弱。
+  clean_window_s: [-0.75, -0.25] # 相对 t_emergence
+  ghost_window_s: [0.0, 0.5]
+  frames_per_condition: 2
+  min_lead_time_s: 0.85          # t_emergence 前必须有足够历史
+  min_tail_time_s: 0.6
+
+# ---------------- split ----------------
+split:
+  unit: scene                    # scene | event。scene = 无泄漏（推荐）
+  estimate_frac: 0.5             # Tier-S：事件对半分，小份当"500 估计集"
+  stratify_by: [event_type, is_night]
+  seed: 42
+  # §7.1 估计集内部再按 scene 三分
+  probe_split: {dir: 0.5, sel: 0.25, test: 0.25}
+
+# ---------------- G0/G2 模型推理 ----------------
+model:
+  name: simlingo
+  device: cuda:0
+  dtype: bfloat16
+  seed: 42
+  # 输入缺口的统一默认值（手册 §4 要求写进 config 并在报告声明）
+  prompt_mode: target_point_command   # 与 ckpt 训练口径一致（.hydra/config.yaml: route_as）
+  fixed_command: "Command: follow the road."   # 统一"直行"默认；严禁在 clean/ghost 间变 prompt
+  target_point_m: [[20.0, 0.0], [40.0, 0.0]]   # 正前方直行目标点（ego 坐标系 x 前 y 左）
+  use_cot: false
+  # nuScenes → SimLingo 相机口径对齐（手册 §10.1/§10.2）
+  preprocess:
+    mode: resize_keep_aspect_then_crop   # 1600x900 -等比-> 1024x576 -裁上部-> 1024x359
+    target_width: 1024                   # CARLA 采集分辨率
+    carla_camera_height: 512
+    carla_bottom_crop_ratio: 0.3         # SimLingo 自己的 4.8/16 裁剪
+    jpeg_artifact: false                 # nuScenes 原生即 jpg，无需再压
+    input_size: 448
+    max_num_patches: 2
+    use_global_img: false                # 与 .hydra/config.yaml 一致
+  fov_deg: 110                           # 送给模型的内参 fov，沿用 SimLingo 训练口径（不做 nuScenes 纠正，见 §10.2）
+
+# ---------------- G2 缓存 ----------------
+cache:
+  layer_stride: 1                # 每层都存；层数多时可设 2
+  pool_modes: [vision_mean, last_token]
+  dtype: float16
+
+# ---------------- G3 指标 ----------------
+metrics:
+  b_min_mps: [0.25, 0.5, 1.0]    # 响应达标阈值敏感性三档；主读数取 0.5
+  b_min_primary: 0.5
+  bootstrap_n: 1000
+  bootstrap_unit: scene
+  permutation_n: 1000
+  domain_direction: false        # Tier-S 砍掉 CARLA 参考帧 → V5 记 N/A

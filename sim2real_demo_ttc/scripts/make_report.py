@@ -11,6 +11,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import numpy as np
 from omegaconf import OmegaConf
 
 
@@ -40,6 +41,85 @@ def readout_table(ro):
             f"{fmt(ro['rho_ttc'])} | {fmt(ro['selectivity'])} | {fmt(ro['p_permutation'])} | "
             f"{fmt(ro['auc_ghost_vs_clean'])} | {fmt(ro['auc_positive_vs_D'])} ({fmt(ro['p_positive_vs_D'])}) | "
             f"{fmt(ro['rho_projection_behavior'])} ({fmt(ro['p_projection_behavior'])}) |")
+
+
+def failure_modes(m, v):
+    """按实测数据生成失败形态描述（不写死某一档的数字，Tier-S/M/L 通用）。"""
+    out = []
+    ro_t, ro_h, ro_p = (m["readouts"][k] for k in ("S_test", "truth_holdout", "pooled"))
+
+    if not v["V2_stratified_trend"]:
+        n_str = v["V2_n_strata"]
+        if n_str < 6:
+            out.append(f"- **V2 失败形态**：估计集与真值集的共同分层只有 {n_str} 个，"
+                       f"Spearman 在这么少的点上只能取到少数几个离散值（实测 ρ={fmt(v['V2_spearman'], 2)}）。"
+                       "这不是“趋势相反”的证据，而是**分层数不足以估计趋势**。")
+        else:
+            out.append(f"- **V2 失败形态**：共同分层 {n_str} 个，Spearman={fmt(v['V2_spearman'], 2)} 未达 0.8。"
+                       "分层数足够，因此这是一个**实质性的不一致**：估计集与真值集在分层层面的达标率排序确实不同，"
+                       "需要逐层看 `behavior_scores` 里哪几层反号。")
+
+    if not v["V3_probe_validity"]:
+        bits = [f"- **V3 失败形态**：主读数 S_test 上 AUC(正例 vs D)={fmt(ro_t['auc_positive_vs_D'])} "
+                f"(p={fmt(ro_t['p_positive_vs_D'])})，置换 p={fmt(ro_t['p_permutation'])}。"]
+        if ro_t["n_positive"] < 5 or ro_t["n_scenes"] < 2:
+            bits.append(f"该集合只有 {ro_t['n_positive']} 个正例 / {ro_t['n_scenes']} 个 scene，**统计上退化**，")
+        bits.append(f"功效更高的 truth holdout（{ro_h['n_positive']} 正/{ro_h['n_negative']} 负）上 "
+                    f"AUC(正例 vs D)={fmt(ro_h['auc_positive_vs_D'])}(p={fmt(ro_h['p_positive_vs_D'])})、"
+                    f"ρ_TTC={fmt(ro_h['rho_ttc'])}。")
+        if ro_h["auc_positive_vs_D"] == ro_h["auc_positive_vs_D"] and ro_h["auc_positive_vs_D"] < 0.5:
+            bits.append("**AUC 低于 0.5**——v_hazard 在无害负例上的投影反而更高，"
+                        "指向「方向编码的是画面变化幅度而非危险」这一混淆（见 `results/deconfound_ablation.md`）。")
+        else:
+            bits.append("AUC 在 0.5 以上但未达显著，属于**功效不足**而非方向错误。")
+        out.append("".join(bits))
+
+    if not v["V4_readout_predicts_behavior"]:
+        out.append(f"- **V4 失败形态**：投影-行为相关在三块 held-out 上分别为 "
+                   f"{fmt(ro_t['rho_projection_behavior'])} / {fmt(ro_h['rho_projection_behavior'])} / "
+                   f"{fmt(ro_p['rho_projection_behavior'])}"
+                   + ("，符号不一致" if len({np.sign(x) for x in
+                       (ro_t['rho_projection_behavior'], ro_h['rho_projection_behavior'],
+                        ro_p['rho_projection_behavior']) if x == x}) > 1 else "，符号一致但幅度过小")
+                   + f"。V4+ 的 logistic AUC={fmt(m['v4_strong']['logistic_auc_on_truth'])}"
+                   + ("（达标，但与 V4 的 ρ 不一致，不应单独解读为“无标注预测器成立”）。"
+                      if v["V4_strong_logistic_auc"] else "（同样未达标）。"))
+
+    if not v["V1_500est_vs_10k_truth"]:
+        prim = m["behavior_scores"][str(m["b_min_primary"])]
+        out.append(f"- **V1 失败形态**：真值达标率 {fmt(prim['truth_rate'])} 落在估计集 95% CI "
+                   f"[{fmt(prim['estimate_ci95'][0])}, {fmt(prim['estimate_ci95'][1])}] **之外**，"
+                   "说明小集估计对大集有系统性偏差，而不只是方差问题——需要检查两集的场景构成差异。")
+
+    return out or ["- （本轮 V1–V4 均通过，无失败形态）"]
+
+
+def next_steps(m, cfg, g2_spe, mine):
+    tier = str(m["tier"])
+    common = [
+        "- **补 CAN bus ego 速度**：本轮 ego 速度由 nuScenes ego_pose 差分得到，"
+        "Tier-L 之前应接 CAN bus 并交叉校验（手册 §2 要求）。",
+        "- **补 V5（域方向）**：拿 SimLingo 官方训练数据抽 ~200 帧 CARLA 参考帧，补齐 D_L 曲线与干涉角。",
+        "- **其余候选模型**：管线已与模型解耦（`scripts/simlingo_runner.py` 是唯一模型相关文件），"
+        "接 SimLingo-base / TransFuser++ 只需实现同样的 `infer(img, speed) -> waypoints + 每层 hidden` 接口。",
+    ]
+    if tier.startswith("S"):
+        est = (f"按本轮 {g2_spe:.2f}s/事件估算，2275 事件的 G2 前向约 {2275 * g2_spe / 60:.0f} 分钟。"
+               if g2_spe else "")
+        return [
+            "- **先解混淆再放大**（已执行，见 `results/deconfound_ablation.md`）。",
+            "- **放大到 Tier-M**：trainval metadata + samples + sweeps 已全部在本地；"
+            f"按 mini 的事件密度外推，850 scene 可支撑 500/2k 划分。{est}",
+        ] + common
+    return [
+        "- **Tier-L（500/10k）**：本轮 D 类按每 scene 2 个采样、正例全收，trainval 全量下正例约 "
+        f"{sum(mine['by_type'].get(t, 0) for t in 'ABC')} 个；要凑到 10k 真值集需放开 D 的上限或并入 "
+        "nuScenes test split。**放开前先确认 D 的增多不会把 AUC 变成被负例分布主导的指标**。",
+        "- **配对提纯（手册 §G5）**：当前 clean/ghost 仍是时序切片配对，残留的自车运动无法完全去掉。"
+        "DriveStudio 3DGS 的「行人移除」可给出同时刻同视角的完美配对，是把这条混淆彻底关掉的唯一干净做法。",
+        "- **若 V3 仍不显著**：优先怀疑「δ 方向法」本身——可换成有监督探针"
+        "（在 S_dir 上训练线性分类器区分正例/D 类 δ，再在 S_test 报数），它比 PCA 第一主成分更能利用标签信息。",
+    ] + common
 
 
 def main():
@@ -110,21 +190,7 @@ def main():
         "",
         "## 失败形态（手册 §8：任一不过须报失败形态，不许只报“不显著”）",
         "",
-        "- **V2 失败形态**：共同分层只有 3 个（估计集与真值集的分层键重叠极少——scene 级划分把 B 类全部推到真值集、"
-        "把 `D|day|far` 全部留在估计集），Spearman 在 3 个点上取值只能是 {−1, −0.5, +0.5, +1} 的离散集合，"
-        f"实测 ρ={fmt(v['V2_spearman'],2)}。这不是“趋势相反”的证据，而是**分层数不足以估计趋势**。",
-        "- **V3 失败形态**：主读数 S_test 只剩 1 个 scene、1 个正例，AUC(正例 vs D) 退化为 "
-        f"{fmt(m['probe']['auc_positive_vs_D'])}（p={fmt(m['probe']['p_positive_vs_D'])}）。"
-        "换到功效更高的 truth holdout（15 正/13 负）后，AUC(正例 vs D)="
-        f"{fmt(m['readouts']['truth_holdout']['auc_positive_vs_D'])}，**低于 0.5**——即 v_hazard 在负例上的投影"
-        "反而更高，且 ρ_TTC 的符号相对 S_test 翻转。这指向一个具体机制：从 13 个 S_dir 事件里 PCA 提出的方向"
-        "很可能编码的是“1.5 秒内画面变化幅度”而非“危险”，而 D 类多发生在路口/停车场等画面变动更剧烈的场合。",
-        "- **V4 失败形态**：投影-行为相关在三块 held-out 上分别为 "
-        f"{fmt(m['readouts']['S_test']['rho_projection_behavior'])} / "
-        f"{fmt(m['readouts']['truth_holdout']['rho_projection_behavior'])} / "
-        f"{fmt(m['readouts']['pooled']['rho_projection_behavior'])}，符号不稳定、置信区间跨零。"
-        f"V4+ 的 logistic AUC={fmt(m['v4_strong']['logistic_auc_on_truth'])} 达标，但它与 V4 的 ρ 不一致，"
-        "在 n=28 上属于偶然可及的读数，**不应单独解读为“无标注预测器成立”**。",
+    ] + failure_modes(m, v) + [
         "",
         "## 图",
         "",
@@ -145,9 +211,10 @@ def main():
     r = [
         f"# SimLingo × nuScenes TTC 突变集 — Tier-{m['tier']} 闭环报告",
         "",
-        f"> **{m['disclaimer']}** Tier-S 的验收目标是**管线闭环 + 脚本参数化**，不是统计结论。",
+        f"> **{m['disclaimer']}**"
+        + ("Tier-S 的验收目标是**管线闭环 + 脚本参数化**，不是统计结论。" if str(m['tier']).startswith('S') else ""),
         f"> 手册：`docs/remote_demo_simlingo_guide.md`。所有脚本以 `configs/tier_s.yaml` 为唯一参数入口，"
-        f"换 Tier-M/L 数据只需改 config 中的 `paths.nuscenes_*`。",
+        f"换档只需改 config 中的 `paths.nuscenes_*`（见 `configs/`）。",
         "",
         "## 1. 环境与版本",
         "",
@@ -160,6 +227,12 @@ def main():
         f"| 权重 | `RenzKa/simlingo` epoch=013 `pytorch_model.pt`，sha1(head16)=`{g0['ckpt_sha1_head16']}` |",
         f"| VLM 底座 | InternVL2-1B（24 层 decoder，hidden 896） |",
         f"| 数据 | nuScenes `{cfg['paths']['nuscenes_version']}` @ `{cfg['paths']['nuscenes_root']}` |",
+        f"| clean/ghost 窗口 | clean {cfg['mining']['clean_window_s']}s / ghost {cfg['mining']['ghost_window_s']}s"
+        + ("（解混淆后的短间隔设定，见 `results/deconfound_ablation.md`）"
+           if cfg['mining']['clean_window_s'][0] > -1.0 else "（手册 §5.2 原设定）") + " |",
+        f"| 解混淆 | {m.get('deconfound', 'none')}"
+        + (f"（时间基线 k={m.get('deconfound_k')}，由 S_dir 的 {m.get('n_dir_negatives_for_baseline')} 个 D 类负例建）"
+           if m.get('deconfound') == 'd_baseline' else "（主读数用原始 δ）") + " |",
         f"| 预处理配置哈希 | `{g0['preprocess_hash']}`（{cfg['model']['preprocess']['mode']}） |",
         f"| 本仓库 commit | `{uwm_commit}` |",
         "",
@@ -185,7 +258,8 @@ def main():
         "|---|---|---|---|",
         f"| G0 冒烟 | 输出合理 + 全层 hidden 可抓 + 双跑逐位一致 | waypoints {len(g0['waypoints'])}×2 无 NaN；"
         f"{g0['n_layers']} 层 × {g0['hidden_dim']} 维，序列长 {g0['seq_len']}；两次运行逐位一致 | ✅ PASS |",
-        f"| G1 挖掘 | 事件量（Tier-S 20–50）+ 抽检语义正确率 ≥80% | {mine['n_events']} 事件 "
+        f"| G1 挖掘 | 事件量" + ("（Tier-S 20–50）" if str(m['tier']).startswith('S') else "（Tier-M 目标 500/2k）")
+        + f" + 抽检语义正确率 ≥80% | {mine['n_events']} 事件 "
         f"{mine['by_type']}；抽检 {insp['inspected']}/{insp['rendered']} 张，正确率 "
         f"{insp['summary']['accuracy_lower_bound']:.1%} | ✅ PASS |",
         f"| G2 缓存 | 完整率 ≥99% | {g2_ok}/{g2['n_events']}，完整率 {g2_ok/max(1,g2['n_events']):.1%}"
@@ -215,7 +289,7 @@ def main():
         "",
         "## 3. 挖掘统计",
         "",
-        f"- 10 个 scene（{mine['n_scenes']} 个纳入），共 **{mine['n_events']} 事件**："
+        f"- {mine['n_scenes']} 个 scene，共 **{mine['n_events']} 事件**："
         f"A(VRU 突现) {mine['by_type'].get('A',0)}、B(近距 cut-in) {mine['by_type'].get('B',0)}、"
         f"C(TTC 骤降) {mine['by_type'].get('C',0)}、D(无害出现，负例) {mine['by_type'].get('D',0)}",
         f"- 日/夜 = {mine['day']}/{mine['night']}",
@@ -279,19 +353,7 @@ def main():
         "",
         "## 7. 下一步建议",
         "",
-        "1. **先解决混淆，再放大规模**：当前 δ=h_ghost−h_clean 里混着 1.5s 的自车运动。"
-        "两个低成本改法：(a) 用 D 类负例的 δ 做“时间基线”，从正例 δ 中回归掉；"
-        "(b) 缩短 clean/ghost 间隔到 0.5s 并要求同一 scene 内配对。",
-        "2. **Tier-M 直接可跑**：trainval metadata + samples 已在本地"
-        "（`/data/dataset/nuscenes/v1.0-trainval`，54G 已解压），只需把 config 的 `paths.nuscenes_*` 换掉；"
-        "按 mini 的事件密度（5.6 事件/scene）外推，850 scene 可得 ~4700 事件，足以支撑 500/2k 划分。"
-        + (f"按本轮 {g2_spe:.2f}s/事件估算，G2 前向约 {4700*g2_spe/60:.0f} 分钟。" if g2_spe else ""),
-        "3. **补 CAN bus ego 速度**：本轮用 ego_pose 差分，Tier-M 应接 CAN bus 并交叉校验（手册 §2 要求）。",
-        "4. **补 V5**：拿 SimLingo 官方训练数据抽 200 帧 CARLA 参考帧，把 D_L / 干涉角补齐。",
-        "5. **峰层 token 级分析暂不值得**：两种池化口径选出的峰层不一致，说明当前层选择本身不可靠，"
-        "在 S_sel 扩到几百事件之前不要投入 token 级分析。",
-        "6. **其余候选模型**：管线已与模型解耦（`scripts/simlingo_runner.py` 是唯一模型相关文件），"
-        "接 SimLingo-base / TransFuser++ 只需实现同样的 `infer(img, speed) -> waypoints + 每层 hidden` 接口。",
+    ] + next_steps(m, cfg, g2_spe, mine) + [
         "",
         "## 8. 产出物清单",
         "",

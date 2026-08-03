@@ -1,0 +1,85 @@
+{
+  "unit": "scene",
+  "estimate": {
+    "n": 35,
+    "by_type": {
+      "D": 13,
+      "C": 5,
+      "A": 17
+    },
+    "night": 5,
+    "scenes": [
+      "scene-0553",
+      "scene-0916",
+      "scene-1077",
+      "scene-1094"
+    ]
+  },
+  "truth": {
+    "n": 36,
+    "by_type": {
+      "A": 9,
+      "D": 17,
+      "C": 4,
+      "B": 6
+    },
+    "night": 8,
+    "scenes": [
+      "scene-0061",
+      "scene-0103",
+      "scene-0655",
+      "scene-0757",
+      "scene-1100"
+    ]
+  },
+  "probe_split_scenes": {
+    "dir": [
+      "scene-0916"
+    ],
+    "sel": [
+      "scene-1094"
+    ],
+    "test": [
+      "scene-0553",
+      "scene-1077"
+    ]
+  },
+  "probe_split_events": {
+    "dir": {
+      "n": 25,
+      "by_type": {
+        "C": 3,
+        "A": 16,
+        "D": 6
+      },
+      "night": 0,
+      "scenes": [
+        "scene-0916"
+      ]
+    },
+    "sel": {
+      "n": 4,
+      "by_type": {
+        "D": 2,
+        "C": 1,
+        "A": 1
+      },
+      "night": 4,
+      "scenes": [
+        "scene-1094"
+      ]
+    },
+    "test": {
+      "n": 6,
+      "by_type": {
+        "D": 5,
+        "C": 1
+      },
+      "night": 1,
+      "scenes": [
+        "scene-0553",
+        "scene-1077"
+      ]
+    }
+  }
+}

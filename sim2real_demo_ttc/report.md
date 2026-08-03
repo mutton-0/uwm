@@ -1,7 +1,7 @@
 # SimLingo × nuScenes TTC 突变集 — Tier-S 闭环报告
 
-> **Tier-S 冒烟读数，事件量为几十级，统计功效极低，不作结论。** Tier-S 的验收目标是**管线闭环 + 脚本参数化**，不是统计结论。
-> 手册：`docs/remote_demo_simlingo_guide.md`。所有脚本以 `configs/tier_s.yaml` 为唯一参数入口，换 Tier-M/L 数据只需改 config 中的 `paths.nuscenes_*`。
+> **Tier-S 冒烟读数，事件量为几十级，统计功效极低，不作结论。**Tier-S 的验收目标是**管线闭环 + 脚本参数化**，不是统计结论。
+> 手册：`docs/remote_demo_simlingo_guide.md`。所有脚本以 `configs/tier_s.yaml` 为唯一参数入口，换档只需改 config 中的 `paths.nuscenes_*`（见 `configs/`）。
 
 ## 1. 环境与版本
 
@@ -14,8 +14,10 @@
 | 权重 | `RenzKa/simlingo` epoch=013 `pytorch_model.pt`，sha1(head16)=`3ff2eadbb919218d` |
 | VLM 底座 | InternVL2-1B（24 层 decoder，hidden 896） |
 | 数据 | nuScenes `v1.0-mini` @ `/data/dataset/nuscenes/v1.0-mini` |
+| clean/ghost 窗口 | clean [-1.5, -0.5]s / ghost [0.0, 1.0]s（手册 §5.2 原设定） |
+| 解混淆 | none（主读数用原始 δ） |
 | 预处理配置哈希 | `eeb470cbc2ad`（resize_keep_aspect_then_crop） |
-| 本仓库 commit | `d7c4385` |
+| 本仓库 commit | `a0cd21c` |
 
 **与官方 repo 的偏离（必须记录）**
 
@@ -31,7 +33,7 @@
 | 门 | 标准 | 实测 | 结果 |
 |---|---|---|---|
 | G0 冒烟 | 输出合理 + 全层 hidden 可抓 + 双跑逐位一致 | waypoints 10×2 无 NaN；24 层 × 896 维，序列长 577；两次运行逐位一致 | ✅ PASS |
-| G1 挖掘 | 事件量（Tier-S 20–50）+ 抽检语义正确率 ≥80% | 56 事件 {'A': 16, 'B': 5, 'C': 6, 'D': 29}；抽检 12/30 张，正确率 91.7% | ✅ PASS |
+| G1 挖掘 | 事件量（Tier-S 20–50） + 抽检语义正确率 ≥80% | 56 事件 {'A': 16, 'B': 5, 'C': 6, 'D': 29}；抽检 12/30 张，正确率 91.7% | ✅ PASS |
 | G2 缓存 | 完整率 ≥99% | 56/56，完整率 100.0%，耗时 32s（0.56s/事件） | ✅ PASS |
 | G3 指标 | 全链路可算 | 两种池化口径（vision_mean / last_token）均跑通 | ✅ PASS |
 | G4 验收 | V1–V5 逐条判定 | V1=✅ PASS V2=❌ FAIL V3=❌ FAIL V4=❌ FAIL V5=N/A | 见 §5 |
@@ -55,7 +57,7 @@
 
 ## 3. 挖掘统计
 
-- 10 个 scene（10 个纳入），共 **56 事件**：A(VRU 突现) 16、B(近距 cut-in) 5、C(TTC 骤降) 6、D(无害出现，负例) 29
+- 10 个 scene，共 **56 事件**：A(VRU 突现) 16、B(近距 cut-in) 5、C(TTC 骤降) 6、D(无害出现，负例) 29
 - 日/夜 = 46/10
 - min-TTC(1s 窗) 直方图（边界 [0, 1, 2, 3, 4, 6, 10, 100]）：[3, 2, 1, 5, 16, 15, 13]
 - **与手册预期相反**：手册预计 A 类稀少、以 B 类为主力；nuScenes mini 是密集城区场景，实际 A(16) 远多于 B(5)。B 类稀少的原因是 mini 中真正的邻道切入极少，且多数“车辆入走廊”其实是 ego 自己逼近静止车辆。
@@ -96,12 +98,11 @@
 
 ## 7. 下一步建议
 
-1. **先解决混淆，再放大规模**：当前 δ=h_ghost−h_clean 里混着 1.5s 的自车运动。两个低成本改法：(a) 用 D 类负例的 δ 做“时间基线”，从正例 δ 中回归掉；(b) 缩短 clean/ghost 间隔到 0.5s 并要求同一 scene 内配对。
-2. **Tier-M 直接可跑**：trainval metadata + samples 已在本地（`/data/dataset/nuscenes/v1.0-trainval`，54G 已解压），只需把 config 的 `paths.nuscenes_*` 换掉；按 mini 的事件密度（5.6 事件/scene）外推，850 scene 可得 ~4700 事件，足以支撑 500/2k 划分。按本轮 0.56s/事件估算，G2 前向约 44 分钟。
-3. **补 CAN bus ego 速度**：本轮用 ego_pose 差分，Tier-M 应接 CAN bus 并交叉校验（手册 §2 要求）。
-4. **补 V5**：拿 SimLingo 官方训练数据抽 200 帧 CARLA 参考帧，把 D_L / 干涉角补齐。
-5. **峰层 token 级分析暂不值得**：两种池化口径选出的峰层不一致，说明当前层选择本身不可靠，在 S_sel 扩到几百事件之前不要投入 token 级分析。
-6. **其余候选模型**：管线已与模型解耦（`scripts/simlingo_runner.py` 是唯一模型相关文件），接 SimLingo-base / TransFuser++ 只需实现同样的 `infer(img, speed) -> waypoints + 每层 hidden` 接口。
+- **先解混淆再放大**（已执行，见 `results/deconfound_ablation.md`）。
+- **放大到 Tier-M**：trainval metadata + samples + sweeps 已全部在本地；按 mini 的事件密度外推，850 scene 可支撑 500/2k 划分。按本轮 0.56s/事件估算，2275 事件的 G2 前向约 21 分钟。
+- **补 CAN bus ego 速度**：本轮 ego 速度由 nuScenes ego_pose 差分得到，Tier-L 之前应接 CAN bus 并交叉校验（手册 §2 要求）。
+- **补 V5（域方向）**：拿 SimLingo 官方训练数据抽 ~200 帧 CARLA 参考帧，补齐 D_L 曲线与干涉角。
+- **其余候选模型**：管线已与模型解耦（`scripts/simlingo_runner.py` 是唯一模型相关文件），接 SimLingo-base / TransFuser++ 只需实现同样的 `infer(img, speed) -> waypoints + 每层 hidden` 接口。
 
 ## 8. 产出物清单
 
