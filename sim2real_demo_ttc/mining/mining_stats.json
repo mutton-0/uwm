@@ -1,0 +1,72 @@
+{
+  "n_events": 56,
+  "n_scenes": 10,
+  "by_type": {
+    "A": 16,
+    "B": 5,
+    "C": 6,
+    "D": 29
+  },
+  "day": 46,
+  "night": 10,
+  "skipped_no_frames": 0,
+  "ttc_hist_edges": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    6,
+    10,
+    100
+  ],
+  "ttc_hist_counts": [
+    3,
+    2,
+    1,
+    5,
+    16,
+    15,
+    13
+  ],
+  "config_mining": {
+    "camera": "CAM_FRONT",
+    "corridor_half_width_m": 2.0,
+    "corridor_x_min_m": 0.0,
+    "corridor_x_max_m": 50.0,
+    "min_closing_speed_mps": 0.5,
+    "event_A": {
+      "enabled": true,
+      "window_s": 1.0,
+      "ttc_max_s": 5.0
+    },
+    "event_B": {
+      "enabled": true,
+      "d_long_max_m": 25.0,
+      "ttc_max_s": 6.0,
+      "min_lateral_speed_mps": 0.1
+    },
+    "event_C": {
+      "enabled": true,
+      "drop_window_s": 1.0,
+      "min_drop_s": 1.5,
+      "ttc_after_max_s": 5.0
+    },
+    "event_D": {
+      "enabled": true,
+      "ttc_min_s": 6.0,
+      "max_per_scene": 6
+    },
+    "clean_window_s": [
+      -1.5,
+      -0.5
+    ],
+    "ghost_window_s": [
+      0.0,
+      1.0
+    ],
+    "frames_per_condition": 2,
+    "min_lead_time_s": 1.6,
+    "min_tail_time_s": 1.1
+  }
+}

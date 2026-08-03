@@ -1,0 +1,317 @@
+{
+  "tier": "S",
+  "pool_mode": "last_token",
+  "disclaimer": "Tier-S 冒烟读数，事件量为几十级，统计功效极低，不作结论。",
+  "n": {
+    "estimate": 28,
+    "truth": 28,
+    "S_dir": 13,
+    "S_sel": 8,
+    "S_test": 7,
+    "S_test_positive": 1,
+    "S_test_negative": 6
+  },
+  "probe": {
+    "peak_layer": 2,
+    "n_layers": 24,
+    "hidden_dim": 896,
+    "evr1_by_layer": [
+      0.5427589416503906,
+      0.5222322344779968,
+      0.29909390211105347,
+      0.32121002674102783,
+      0.3528921604156494,
+      0.3044436275959015,
+      0.3051285445690155,
+      0.3082526922225952,
+      0.33550891280174255,
+      0.3484620451927185,
+      0.3868432939052582,
+      0.4428621828556061,
+      0.4793628454208374,
+      0.5014905333518982,
+      0.5269822478294373,
+      0.5296305418014526,
+      0.549232006072998,
+      0.5334311127662659,
+      0.5066468119621277,
+      0.49182307720184326,
+      0.4345327317714691,
+      0.3750888407230377,
+      0.33863604068756104,
+      0.50308758020401
+    ],
+    "rho_ttc_by_layer_S_sel": [
+      0.4523809523809524,
+      0.2380952380952381,
+      -0.9523809523809524,
+      -0.6904761904761906,
+      0.04761904761904763,
+      0.11904761904761905,
+      -0.3571428571428572,
+      -0.30952380952380953,
+      -0.3571428571428572,
+      -0.261904761904762,
+      0.07142857142857144,
+      0.11904761904761905,
+      -0.28571428571428575,
+      -0.19047619047619052,
+      -0.14285714285714288,
+      -0.14285714285714288,
+      0.0,
+      0.09523809523809526,
+      0.023809523809523815,
+      0.04761904761904763,
+      -0.04761904761904763,
+      -0.09523809523809526,
+      -0.261904761904762,
+      -0.523809523809524
+    ],
+    "rho_ttc_S_test": 0.14285714285714288,
+    "rho_ctrl_permuted": 0.34560714285714295,
+    "selectivity": -0.20275000000000007,
+    "p_permutation": 0.779,
+    "auc_ghost_vs_clean": 0.44387755102040816,
+    "p_ghost_vs_clean": 0.6294858543167832,
+    "auc_positive_vs_D": 0.8333333333333334,
+    "p_positive_vs_D": 0.5714285714285714
+  },
+  "readouts": {
+    "S_test": {
+      "set": "S_test(手册主读数)",
+      "n": 7,
+      "n_positive": 1,
+      "n_negative": 6,
+      "n_scenes": 1,
+      "rho_ttc": 0.14285714285714288,
+      "rho_ctrl_permuted": 0.34560714285714295,
+      "selectivity": -0.20275000000000007,
+      "p_permutation": 0.779,
+      "auc_ghost_vs_clean": 0.44387755102040816,
+      "p_ghost_vs_clean": 0.6294858543167832,
+      "auc_positive_vs_D": 0.8333333333333334,
+      "p_positive_vs_D": 0.5714285714285714,
+      "rho_projection_behavior": 0.5714285714285715,
+      "p_projection_behavior": 0.1802019889115274,
+      "ci95_scene_bootstrap": [
+        -0.42334905660377364,
+        1.0
+      ],
+      "bootstrap_unit": "event(降级)",
+      "n_bootstrap": 1000
+    },
+    "truth_holdout": {
+      "set": "truth(次级：完全 held-out，未参与提方向/选层)",
+      "n": 28,
+      "n_positive": 15,
+      "n_negative": 13,
+      "n_scenes": 3,
+      "rho_ttc": 0.0607802925998166,
+      "rho_ctrl_permuted": 0.15673266208759734,
+      "selectivity": -0.09595236948778074,
+      "p_permutation": 0.768,
+      "auc_ghost_vs_clean": 0.4728954081632653,
+      "p_ghost_vs_clean": 0.6229021637478351,
+      "auc_positive_vs_D": 0.4717948717948718,
+      "p_positive_vs_D": 0.8177643886253128,
+      "rho_projection_behavior": -0.1448918104628869,
+      "p_projection_behavior": 0.46195252872079395,
+      "ci95_scene_bootstrap": [
+        -0.3509933774834437,
+        0.2
+      ],
+      "bootstrap_unit": "scene",
+      "n_bootstrap": 1000
+    },
+    "pooled": {
+      "set": "S_test ∪ truth(合并，提高功效)",
+      "n": 35,
+      "n_positive": 16,
+      "n_negative": 19,
+      "n_scenes": 4,
+      "rho_ttc": -0.09819990410813553,
+      "rho_ctrl_permuted": 0.13483911483506666,
+      "selectivity": -0.03663921072693113,
+      "p_permutation": 0.573,
+      "auc_ghost_vs_clean": 0.4555102040816327,
+      "p_ghost_vs_clean": 0.36469000826249753,
+      "auc_positive_vs_D": 0.5657894736842105,
+      "p_positive_vs_D": 0.518379599167858,
+      "rho_projection_behavior": -0.027602634160011214,
+      "p_projection_behavior": 0.8749307199880157,
+      "ci95_scene_bootstrap": [
+        -0.2964889466840052,
+        0.3291034482758622
+      ],
+      "bootstrap_unit": "scene",
+      "n_bootstrap": 1000
+    }
+  },
+  "projection_behavior": {
+    "rho": 0.5714285714285715,
+    "p": 0.1802019889115274,
+    "ci95_scene_bootstrap": [
+      -0.42334905660377364,
+      1.0
+    ],
+    "n_bootstrap": 1000
+  },
+  "behavior_scores": {
+    "0.25": {
+      "estimate_rate": 0.42857142857142855,
+      "estimate_ci95": [
+        0.05263157894736842,
+        0.6216366366366366
+      ],
+      "truth_rate": 0.17857142857142858,
+      "estimate_strata": {
+        "A|day|deep": {
+          "n": 7,
+          "rate": 0.8571428571428571
+        },
+        "C|day|deep": {
+          "n": 2,
+          "rate": 0.0
+        },
+        "D|day|far": {
+          "n": 11,
+          "rate": 0.18181818181818182
+        },
+        "D|day|mid": {
+          "n": 4,
+          "rate": 0.75
+        }
+      },
+      "truth_strata": {
+        "A|day|deep": {
+          "n": 7,
+          "rate": 0.14285714285714285
+        },
+        "B|night|deep": {
+          "n": 4,
+          "rate": 0.0
+        },
+        "C|day|deep": {
+          "n": 2,
+          "rate": 1.0
+        },
+        "D|day|mid": {
+          "n": 11,
+          "rate": 0.09090909090909091
+        }
+      }
+    },
+    "0.5": {
+      "estimate_rate": 0.39285714285714285,
+      "estimate_ci95": [
+        0.05263157894736842,
+        0.6111111111111112
+      ],
+      "truth_rate": 0.17857142857142858,
+      "estimate_strata": {
+        "A|day|deep": {
+          "n": 7,
+          "rate": 0.8571428571428571
+        },
+        "C|day|deep": {
+          "n": 2,
+          "rate": 0.0
+        },
+        "D|day|far": {
+          "n": 11,
+          "rate": 0.18181818181818182
+        },
+        "D|day|mid": {
+          "n": 4,
+          "rate": 0.5
+        }
+      },
+      "truth_strata": {
+        "A|day|deep": {
+          "n": 7,
+          "rate": 0.14285714285714285
+        },
+        "B|night|deep": {
+          "n": 4,
+          "rate": 0.0
+        },
+        "C|day|deep": {
+          "n": 2,
+          "rate": 1.0
+        },
+        "D|day|mid": {
+          "n": 11,
+          "rate": 0.09090909090909091
+        }
+      }
+    },
+    "1.0": {
+      "estimate_rate": 0.32142857142857145,
+      "estimate_ci95": [
+        0.05263157894736842,
+        0.517435344827586
+      ],
+      "truth_rate": 0.07142857142857142,
+      "estimate_strata": {
+        "A|day|deep": {
+          "n": 7,
+          "rate": 0.8571428571428571
+        },
+        "C|day|deep": {
+          "n": 2,
+          "rate": 0.0
+        },
+        "D|day|far": {
+          "n": 11,
+          "rate": 0.18181818181818182
+        },
+        "D|day|mid": {
+          "n": 4,
+          "rate": 0.0
+        }
+      },
+      "truth_strata": {
+        "A|day|deep": {
+          "n": 7,
+          "rate": 0.0
+        },
+        "B|night|deep": {
+          "n": 4,
+          "rate": 0.0
+        },
+        "C|day|deep": {
+          "n": 2,
+          "rate": 1.0
+        },
+        "D|day|mid": {
+          "n": 11,
+          "rate": 0.0
+        }
+      }
+    }
+  },
+  "b_min_primary": 0.5,
+  "v4_strong": {
+    "logistic_auc_on_truth": 0.3304347826086957,
+    "note": ""
+  },
+  "domain": {
+    "enabled": false,
+    "note": "Tier-S 按手册 §0.5 砍掉 CARLA 参考帧 → D_L / 干涉角 / V5 记 N/A"
+  },
+  "verdicts": {
+    "V1_500est_vs_10k_truth": true,
+    "V2_stratified_trend": false,
+    "V2_spearman": -0.5,
+    "V2_n_strata": 3,
+    "V3_probe_validity": false,
+    "V4_readout_predicts_behavior": false,
+    "V4_strong_logistic_auc": false,
+    "V5_domain_signal": null
+  },
+  "verdicts_secondary_on_truth_holdout": {
+    "note": "S_test 只剩 1 个 scene / 1 个正例，统计上退化；truth 集从未参与提方向与选层，在其上重算 V3/V4 作为功效更高的次级判定（Tier-S 偏离记录）。",
+    "V3_probe_validity": false,
+    "V4_readout_predicts_behavior": false
+  }
+}

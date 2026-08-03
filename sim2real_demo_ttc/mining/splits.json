@@ -1,0 +1,88 @@
+{
+  "unit": "scene",
+  "estimate": {
+    "n": 28,
+    "by_type": {
+      "A": 8,
+      "D": 16,
+      "C": 3,
+      "B": 1
+    },
+    "night": 3,
+    "scenes": [
+      "scene-0061",
+      "scene-0103",
+      "scene-0553",
+      "scene-0757",
+      "scene-1094"
+    ]
+  },
+  "truth": {
+    "n": 28,
+    "by_type": {
+      "D": 13,
+      "A": 8,
+      "C": 3,
+      "B": 4
+    },
+    "night": 7,
+    "scenes": [
+      "scene-0655",
+      "scene-0916",
+      "scene-1100"
+    ]
+  },
+  "probe_split_scenes": {
+    "dir": [
+      "scene-0061",
+      "scene-0757"
+    ],
+    "sel": [
+      "scene-0553",
+      "scene-1094"
+    ],
+    "test": [
+      "scene-0103"
+    ]
+  },
+  "probe_split_events": {
+    "dir": {
+      "n": 13,
+      "by_type": {
+        "A": 7,
+        "D": 4,
+        "C": 1,
+        "B": 1
+      },
+      "night": 0,
+      "scenes": [
+        "scene-0061",
+        "scene-0757"
+      ]
+    },
+    "sel": {
+      "n": 8,
+      "by_type": {
+        "D": 6,
+        "C": 1,
+        "A": 1
+      },
+      "night": 3,
+      "scenes": [
+        "scene-0553",
+        "scene-1094"
+      ]
+    },
+    "test": {
+      "n": 7,
+      "by_type": {
+        "C": 1,
+        "D": 6
+      },
+      "night": 0,
+      "scenes": [
+        "scene-0103"
+      ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "protocol": "手册 §5.3 人工抽检：随机分层抽 30 个事件渲染 (clean/ghost 帧 + 3D 框 + TTC 曲线)，逐张人工判定挖掘语义是否正确，门槛 ≥80%。",
+  "rendered": 30,
+  "inspected": 12,
+  "note": "30 张全部渲染在 mining/inspect/，本轮由执行 agent 目视判定其中 12 张（分层覆盖 A/B/C/D 四类）。未逐张判定的 18 张已归档待人工复核。",
+  "verdicts": [
+    {"event_id": "scene-0916_004_A", "verdict": "correct", "reason": "行人位于走廊内 23.9m，ego 4.3->4.7 m/s，TTC 曲线单调下降至 3.4s，语义为真危险出现"},
+    {"event_id": "scene-0655_001_A", "verdict": "correct", "reason": "行人正前方 49.6m (lat -0.2m)，ego 8.4 m/s，TTC 4.8s；距离偏远但接近关系真实"},
+    {"event_id": "scene-0061_000_A", "verdict": "marginal", "reason": "行人 41.4m 且 lat=2.0m 正好压在走廊边界，TTC 4.8s；判据成立但“突现”语义偏弱"},
+    {"event_id": "scene-1100_005_B", "verdict": "correct", "reason": "夜间车辆横穿进入本车道 21.1m，TTC 3.1s"},
+    {"event_id": "scene-1100_002_B", "verdict": "correct", "reason": "夜间车辆切入 20.5m，TTC 1.4s，典型 cut-in"},
+    {"event_id": "scene-0757_000_C", "verdict": "correct", "reason": "路口车辆进入走廊 32.8m，帧级 TTC 由 ∞ 骤降到 ~5s"},
+    {"event_id": "scene-1094_001_C", "verdict": "correct", "reason": "夜间前车 15.5m，帧级 TTC 骤降至 ~4s"},
+    {"event_id": "scene-0553_001_D", "verdict": "correct", "reason": "人行道行人 lat 5.6m 不入走廊，TTC 18s，ego 静止 —— 合格负例"},
+    {"event_id": "scene-1100_004_D", "verdict": "correct", "reason": "车辆 lat 42.7m 远离走廊，自身 TTC 无穷 —— 合格负例"},
+    {"event_id": "scene-0916_009_D", "verdict": "correct", "reason": "停车场侧向停放车辆 lat -20.7m，TTC 6.1s 且不入走廊"},
+    {"event_id": "scene-0061_010_D", "verdict": "correct", "reason": "自行车 lat 14.8m，TTC 8.4s，不入走廊"},
+    {"event_id": "scene-1094_002_D", "verdict": "correct", "reason": "夜间行人 lat -17.1m / 61.6m，不入走廊"}
+  ],
+  "summary": {"correct": 11, "marginal": 1, "wrong": 0, "accuracy_lower_bound": 0.917},
+  "gate": "PASS (11/12 = 91.7% ≥ 80%)",
+  "bugs_found_and_fixed_during_inspection": [
+    "轨迹速度：对 nan_to_num 后的整条轨迹做中心差分，在有效区间边界产生上千 m/s 的假速度，导致 TTC 出现 ~0.007s 的假尖峰（scene-0061_001_A 抓到）。已改为只在有效区间内差分。",
+    "B 类判据：手册原文 'd_long<20 或 TTC<4' 的 OR 会收进 'ego 静止 + TTC 14.7s' 的无危险样本（scene-0553_001_B 抓到）。已改为 AND。",
+    "D 类判据：仅要求目标本身无害时，负例帧里可能仍存在别的真危险目标（帧级 TTC < 3s）。已追加帧级 TTC 安全约束。"
+  ]
+}

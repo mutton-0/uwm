@@ -1,0 +1,154 @@
+{
+  "frame": "/data/dataset/nuscenes/v1.0-mini/samples/CAM_FRONT/n015-2018-10-02-10-50-40+0800__CAM_FRONT__1538448744412460.jpg",
+  "ego_speed_mps": 5.0,
+  "ckpt_sha1_head16": "3ff2eadbb919218d",
+  "preprocess_hash": "eeb470cbc2ad",
+  "preprocess": {
+    "mode": "resize_keep_aspect_then_crop",
+    "target_width": 1024,
+    "carla_camera_height": 512,
+    "carla_bottom_crop_ratio": 0.3,
+    "jpeg_artifact": false,
+    "input_size": 448,
+    "max_num_patches": 2,
+    "use_global_img": false
+  },
+  "prompt": "Current speed: 5.0 m/s. Target waypoint: <TARGET_POINT><TARGET_POINT>. Predict the waypoints.",
+  "n_layers": 24,
+  "hidden_dim": 896,
+  "seq_len": 577,
+  "generated_language": "Waypoints:",
+  "waypoints": [
+    [
+      1.359375,
+      -0.40625
+    ],
+    [
+      3.1875,
+      -0.216796875
+    ],
+    [
+      5.46875,
+      0.076171875
+    ],
+    [
+      8.0,
+      0.30859375
+    ],
+    [
+      10.5625,
+      0.5234375
+    ],
+    [
+      12.8125,
+      0.71875
+    ],
+    [
+      15.0,
+      0.90625
+    ],
+    [
+      17.25,
+      1.0703125
+    ],
+    [
+      19.5,
+      1.203125
+    ],
+    [
+      21.625,
+      1.3046875
+    ]
+  ],
+  "route": [
+    [
+      0.0026092529296875,
+      -0.0036468505859375
+    ],
+    [
+      0.92578125,
+      -0.10107421875
+    ],
+    [
+      1.8828125,
+      -0.21875
+    ],
+    [
+      2.84375,
+      -0.1904296875
+    ],
+    [
+      3.8125,
+      -0.041015625
+    ],
+    [
+      4.78125,
+      0.1044921875
+    ],
+    [
+      5.75,
+      0.236328125
+    ],
+    [
+      6.75,
+      0.359375
+    ],
+    [
+      7.75,
+      0.47265625
+    ],
+    [
+      8.75,
+      0.55859375
+    ],
+    [
+      9.75,
+      0.63671875
+    ],
+    [
+      10.75,
+      0.65234375
+    ],
+    [
+      11.75,
+      0.67578125
+    ],
+    [
+      12.75,
+      0.703125
+    ],
+    [
+      13.75,
+      0.7265625
+    ],
+    [
+      14.75,
+      0.74609375
+    ],
+    [
+      15.75,
+      0.76953125
+    ],
+    [
+      16.75,
+      0.78515625
+    ],
+    [
+      17.75,
+      0.828125
+    ],
+    [
+      18.75,
+      0.92578125
+    ]
+  ],
+  "checks": {
+    "waypoints_not_nan": true,
+    "waypoints_magnitude_ok": true,
+    "hidden_all_layers": true,
+    "hidden_finite": true,
+    "deterministic_waypoints": true,
+    "deterministic_hidden": true
+  },
+  "passed": true
+}
