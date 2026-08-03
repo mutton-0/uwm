@@ -118,6 +118,37 @@ def hazard_directions(events, basis=None):
     return v, evr, len(pos)
 
 
+def hazard_directions_supervised(events, basis=None, C_reg=1.0, seed=0):
+    """有监督版 v_hazard：逐层训练线性判别器区分「正例 δ」与「D 类 δ」。
+
+    PCA 版的结构性弱点：第一主成分抓的是正例 δ 里方差最大的方向，
+    而 clean/ghost 之间的自车位移恰恰就是方差最大的成分——所以 PCA 天然容易选中混淆。
+    判别式方向直接以「正例 vs 无害负例」为目标，混淆成分在两类里都有、对判别无贡献，会被自动压低权重。
+
+    只用 S_dir，S_sel/S_test/truth 一律不参与训练。
+    """
+    from sklearn.linear_model import LogisticRegression
+
+    pos = [e for e in events if e["is_positive"]]
+    neg = [e for e in events if not e["is_positive"]]
+    assert len(pos) >= 2 and len(neg) >= 2, f"S_dir 正/负例不足（{len(pos)}/{len(neg)}）"
+    X_all = np.stack([e["h_ghost"] - e["h_clean"] for e in pos + neg])     # [N, L, C]
+    y = np.array([1] * len(pos) + [0] * len(neg))
+    n, L, C = X_all.shape
+    v = np.zeros((L, C), dtype=np.float32)
+    auc_train = np.zeros(L, dtype=np.float32)
+    for l in range(L):
+        X = residualize(X_all[:, l, :], None if basis is None else basis[l])
+        mu, sd = X.mean(0, keepdims=True), X.std(0, keepdims=True) + 1e-6
+        Xs = (X - mu) / sd
+        clf = LogisticRegression(max_iter=2000, C=C_reg, random_state=seed).fit(Xs, y)
+        w = (clf.coef_[0] / sd[0])                    # 折回原始尺度
+        v[l] = w / (np.linalg.norm(w) + 1e-8)
+        s = X @ v[l]
+        auc_train[l] = float(stats.mannwhitneyu(s[y == 1], s[y == 0]).statistic / (len(pos) * len(neg)))
+    return v, auc_train, len(pos)
+
+
 def project(events, v, layer, mode="delta", basis=None):
     """把事件投影到 v_hazard(layer)；basis 非空时先回归掉时间基线。"""
     b = None if basis is None else basis[layer]
@@ -221,6 +252,9 @@ def main():
     ap.add_argument("--deconfound", default=None, choices=[None, "none", "d_baseline"],
                     help="覆盖 config.metrics.deconfound；d_baseline = 用 D 类 δ 回归掉时间基线")
     ap.add_argument("--tag", default="", help="输出文件后缀，便于消融对比")
+    ap.add_argument("--direction", default=None, choices=[None, "pca", "supervised"],
+                    help="v_hazard 的提取方式：pca=正例 δ 的第一主成分（手册原法）；"
+                         "supervised=正例 δ vs D 类 δ 的线性判别方向")
     args = ap.parse_args()
 
     cfg = OmegaConf.to_container(OmegaConf.load(args.config), resolve=True)
@@ -246,12 +280,18 @@ def main():
     if deconf == "d_baseline":
         basis, n_dir_neg = time_baseline_basis(S["dir"], k=int(mcfg.get("deconfound_k", 2)))
         assert basis is not None, "S_dir 的 D 类负例不足，无法建时间基线"
-    v_haz, evr, n_dir_pos = hazard_directions(S["dir"], basis=basis)
+    direction = args.direction or mcfg.get("direction_method", "pca")
+    if direction == "supervised":
+        v_haz, evr, n_dir_pos = hazard_directions_supervised(S["dir"], basis=basis)
+    else:
+        v_haz, evr, n_dir_pos = hazard_directions(S["dir"], basis=basis)
     peak, rho_by_layer = select_peak_layer(S["sel"], v_haz, basis=basis)
     print(f"[G3] deconfound={deconf}" + (f"（时间基线由 S_dir 的 {n_dir_neg} 个 D 类负例建，"
           f"k={basis.shape[1]}）" if basis is not None else ""))
-    print(f"[G3] v_hazard 由 S_dir 的 {n_dir_pos} 个正例提出；峰层 L*={peak} "
-          f"(S_sel ρ_TTC={rho_by_layer[peak]:+.3f}, EVR1={evr[peak]:.3f})")
+    print(f"[G3] direction={direction}；v_hazard 由 S_dir 的 {n_dir_pos} 个正例"
+          f"{'（+D 类负例做判别目标）' if direction == 'supervised' else ''}提出；峰层 L*={peak} "
+          f"(S_sel ρ_TTC={rho_by_layer[peak]:+.3f}, "
+          f"{'训练集 AUC' if direction == 'supervised' else 'EVR1'}={evr[peak]:.3f})")
 
     b_peak = None if basis is None else basis[peak]
 
@@ -358,7 +398,7 @@ def main():
 
     out = {
         "tier": cfg["tier"], "pool_mode": args.pool_mode,
-        "deconfound": deconf, "deconfound_k": int(mcfg.get("deconfound_k", 2)) if basis is not None else 0,
+        "direction_method": direction, "deconfound": deconf, "deconfound_k": int(mcfg.get("deconfound_k", 2)) if basis is not None else 0,
         "n_dir_negatives_for_baseline": n_dir_neg,
         "clean_window_s": cfg["mining"]["clean_window_s"], "ghost_window_s": cfg["mining"]["ghost_window_s"],
         "disclaimer": ("Tier-S 冒烟读数，事件量为几十级，统计功效极低，不作结论。"
@@ -370,7 +410,7 @@ def main():
               "S_test_positive": len(pos_test), "S_test_negative": len(neg_test)},
         "probe": {
             "peak_layer": peak, "n_layers": int(v_haz.shape[0]), "hidden_dim": int(v_haz.shape[1]),
-            "evr1_by_layer": evr.tolist(), "rho_ttc_by_layer_S_sel": rho_by_layer.tolist(),
+            "evr1_or_trainauc_by_layer": evr.tolist(), "rho_ttc_by_layer_S_sel": rho_by_layer.tolist(),
             "rho_ttc_S_test": rho_obs, "rho_ctrl_permuted": rho_ctrl,
             "selectivity": selectivity, "p_permutation": p_perm,
             "auc_ghost_vs_clean": auc_gc, "p_ghost_vs_clean": p_gc,

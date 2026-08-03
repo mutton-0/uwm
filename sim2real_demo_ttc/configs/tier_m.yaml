@@ -101,5 +101,8 @@ metrics:
   bootstrap_unit: scene
   permutation_n: 1000
   domain_direction: false        # 仍未接 CARLA 参考帧 → V5 记 N/A
-  deconfound: none               # 主读数用原始 δ；对照跑 --deconfound d_baseline
+  # ---- Tier-M 主读数（在看到任何 Tier-M 结果之前冻结，见 results/tier_m_preregistration.md）----
+  direction_method: supervised   # 正例 δ vs D 类 δ 的线性判别方向（在 Tier-S 上择优）
+  deconfound: none               # 判别式方向本身已对混淆免疫，无需再回归时间基线
   deconfound_k: 2
+  primary_pool_mode: vision_mean # last_token 在 Tier-S 两种方向法下都更差
