@@ -1,17 +1,18 @@
 {
-  "n_events": 6358,
-  "n_scenes": 850,
+  "n_events": 123,
+  "n_scenes": 8,
   "by_type": {
-    "A": 291,
-    "B": 103,
-    "C": 554,
-    "D": 1430,
-    "D2a": 1005,
-    "D2b": 1883,
-    "D2c": 1092
+    "A": 10,
+    "C": 7,
+    "D": 10,
+    "D2a": 48,
+    "D2aP": 12,
+    "D2b": 21,
+    "D2c": 4,
+    "D2ctxP": 11
   },
-  "day": 5677,
-  "night": 681,
+  "day": 123,
+  "night": 0,
   "skipped_no_frames": 0,
   "ttc_hist_edges": [
     0,
@@ -24,13 +25,13 @@
     100
   ],
   "ttc_hist_counts": [
-    409,
-    517,
-    546,
-    580,
-    1043,
-    1399,
-    1067
+    8,
+    16,
+    15,
+    11,
+    36,
+    22,
+    13
   ],
   "config_mining": {
     "camera": "CAM_FRONT",
@@ -63,7 +64,8 @@
     "event_D2": {
       "enabled": true,
       "d2c_ttc_min_s": 8.0,
-      "d2b_max_per_scene": 3
+      "d2b_max_per_scene": 3,
+      "ctx_placebo_shift_s": 2.5
     },
     "clean_window_s": [
       -1.5,

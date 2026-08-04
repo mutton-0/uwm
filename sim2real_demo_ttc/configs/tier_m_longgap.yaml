@@ -100,7 +100,10 @@ model:
 # ---------------- G2 缓存 ----------------
 cache:
   layer_stride: 1                # 每层都存；层数多时可设 2
-  pool_modes: [vision_mean, last_token]
+  # M3 schema v2：五向量。region_* 只对 vision token 做（语言 token 在两条件间长度内容都会变，δ 无定义；
+  # 且 causal attention 下 vision token 看不见其后生成的语言，语言路径变异被结构性隔离）。
+  # v_hazard 从 region δ 提，v_domain 从 bg_mean 提 —— 危险信号与域风格信号不再共享 token。
+  pool_modes: [region_mean, region_max, bg_mean, vision_mean, last_token]
   dtype: float16
 
 # ---------------- G3 指标 ----------------

@@ -68,7 +68,7 @@ def scene_camera_frames(nusc, scene, camera: str):
 def scene_tracks(nusc, scene):
     """按 instance 聚合关键帧标注：{instance_token: dict(t[], xyz[], cat, size)}。"""
     tracks = defaultdict(lambda: {"t": [], "xyz": [], "cat": None, "size": None,
-                                  "ann_tokens": [], "visibility": []})
+                                  "ann_tokens": [], "visibility": [], "attrs": []})
     sample_token = scene["first_sample_token"]
     while sample_token:
         sample = nusc.get("sample", sample_token)
@@ -82,6 +82,8 @@ def scene_tracks(nusc, scene):
             tr["size"] = ann["size"]
             tr["ann_tokens"].append(ann_token)
             tr["visibility"].append(ann["visibility_token"])
+            tr["attrs"].append(tuple(nusc.get("attribute", a)["name"] for a in ann["attribute_tokens"]))
+            tr.setdefault("rot", []).append(ann["rotation"])
         sample_token = sample["next"]
     for tr in tracks.values():
         tr["t"] = np.asarray(tr["t"])
@@ -129,6 +131,18 @@ def track_velocity(xyz, valid, t):
 # --------------------------------------------------------------------------------------
 # 每帧几何量
 # --------------------------------------------------------------------------------------
+def box_corners_ego(center, size, yaw):
+    """ego 系下的 8 角点。size = (w, l, h)（nuScenes 约定）。"""
+    w, l, h = size
+    x = np.array([l, l, l, l, -l, -l, -l, -l]) / 2
+    y = np.array([w, -w, -w, w, w, -w, -w, w]) / 2
+    z = np.array([h, h, -h, -h, h, h, -h, -h]) / 2
+    c, s_ = np.cos(yaw), np.sin(yaw)
+    xr = c * x - s_ * y
+    yr = s_ * x + c * y
+    return np.stack([xr, yr, z], axis=1) + center
+
+
 def compute_scene_geometry(nusc, scene, cfg):
     """返回该 scene 每帧、每目标在 ego 系下的位置/速度/TTC/走廊标志/可见性。"""
     mcfg = cfg["mining"]
@@ -196,11 +210,18 @@ def compute_scene_geometry(nusc, scene, cfg):
         ecc = np.hypot((u - im_w / 2) / (im_w / 2), (v_img - im_h / 2) / (im_h / 2))
         ecc = np.where(visible, ecc, np.nan)
 
+        # 停驻/静止车辆：与行人同为"大而居中的目标"，但按状态无害 —— D2a_parked 的素材（§12.5）
+        flat = [a for tup in tr["attrs"] for a in tup]
+        n_park = sum(1 for a in flat if a in ("vehicle.parked", "vehicle.stopped"))
+        is_parked = bool(flat) and n_park / len(flat) > 0.8
+
         per_obj[inst] = {
-            "cat": tr["cat"], "cls": cls, "valid": valid, "p_ego": p_ego,
+            "cat": tr["cat"], "cls": cls, "is_parked": is_parked, "valid": valid, "p_ego": p_ego,
             "v_obj_ego": v_obj_ego, "in_corridor": in_corridor, "ttc": ttc,
             "visible": visible, "d_long": x, "lat": y,
             "area_px": area_px, "ecc": ecc,
+            "_size": tr["size"], "_rot": tr.get("rot", []), "_rot_t": tr["t"],
+            "_p_cam": p_cam,
         }
 
     frame_ttc = np.full(len(grid_t), np.inf)
@@ -208,7 +229,8 @@ def compute_scene_geometry(nusc, scene, cfg):
         frame_ttc = np.minimum(frame_ttc, np.where(o["in_corridor"], o["ttc"], np.inf))
 
     return dict(frames=frames, grid_t=grid_t, ego_speed=ego_speed, per_obj=per_obj,
-                frame_ttc=frame_ttc, ego_xyz=ego_xyz)
+                frame_ttc=frame_ttc, ego_xyz=ego_xyz,
+                K=K, R_ec=R_ec, t_ec=t_ec, im_w=im_w, im_h=im_h, R_we=R_we)
 
 
 # --------------------------------------------------------------------------------------
@@ -321,6 +343,11 @@ def detect_events(geo, scene, cfg):
             if o["cls"] == "static":
                 mask = o["in_corridor"] & o["visible"]
                 kind = "D2a"
+            elif o["cls"] == "vehicle" and o.get("is_parked"):
+                # §12.5 类别对比之二：停驻车辆 —— 与行人同为"大而居中的目标"，但按状态/类别无害。
+                # 与 D2a(静物) 一起，可把"行人 vs 非行人"与"运动 vs 静止"两个因素分开。
+                mask = o["in_corridor"] & o["visible"]
+                kind = "D2aP"
             else:
                 mask = None
             if mask is not None:
@@ -354,6 +381,29 @@ def detect_events(geo, scene, cfg):
                     events.append(dict(kind="D2c", t_emergence=float(t_e), idx=int(k), inst=inst,
                                        min_ttc_1s=float(np.min(o["ttc"][w])), obj_class=o["cat"]))
 
+    # ---- §12.5 上下文对比的**安慰剂对照** ----
+    # 同一目标进入走廊 = 上下文变化（这就是 A/B/C 的 δ 本身）。其对照不能是"另一个目标"，
+    # 而应是**同一目标、同样的 Δt、但两帧都在走廊外**的一对帧 —— 无上下文变化，预测无信号。
+    # 做法：把该事件的取帧窗口整体前移 shift 秒，使 clean/ghost 都落在入走廊之前。
+    if d2 and d2.get("enabled") and d2.get("ctx_placebo_shift_s"):
+        sh = float(d2["ctx_placebo_shift_s"])
+        for e in [x for x in events if x["kind"] in ("A", "B", "C")]:
+            t_p = e["t_emergence"] - sh
+            if t_p - t0 < mcfg["min_lead_time_s"]:
+                continue
+            o = per_obj.get(e["inst"])
+            if o is None:
+                continue
+            wp = np.nonzero((grid_t >= t_p + mcfg["clean_window_s"][0]) &
+                            (grid_t <= t_p + mcfg["ghost_window_s"][1]))[0]
+            # 整段必须可见、且全程在走廊外
+            if len(wp) < 3 or not o["visible"][wp].all() or o["in_corridor"][wp].any():
+                continue
+            k = int(wp[len(wp) // 2])
+            events.append(dict(kind="D2ctxP", t_emergence=float(t_p), idx=k, inst=e["inst"],
+                               min_ttc_1s=float(np.min(o["ttc"][wp])), obj_class=e["obj_class"],
+                               placebo_of=e["kind"]))
+
     # D2b 数量随 scene 线性膨胀（正例不会），按成像面积从大到小取前 N —— 优先保留几何上更像正例的
     if d2b_pool:
         d2b_pool.sort(key=lambda e: -(e["_area"] if np.isfinite(e["_area"]) else -1))
@@ -361,7 +411,7 @@ def detect_events(geo, scene, cfg):
             e.pop("_area"); events.append(e)
 
     # 去重：同目标 0.8s 内多次触发只留优先级最高的（A > B > C > D > D2*）
-    prio = {"A": 0, "B": 1, "C": 2, "D": 3, "D2a": 4, "D2b": 5, "D2c": 6}
+    prio = {"A": 0, "B": 1, "C": 2, "D": 3, "D2a": 4, "D2aP": 4, "D2b": 5, "D2c": 6, "D2ctxP": 7}
     events.sort(key=lambda e: (prio[e["kind"]], e["t_emergence"]))
     kept = []
     for e in events:
@@ -395,11 +445,39 @@ def pick_frames(geo, t_e, cfg):
     return clean, ghost
 
 
-def frame_record(geo, j):
+def frame_bbox(geo, o, j):
+    """目标在第 j 帧原图上的 2D 包围盒 (u0,v0,u1,v1)；朝向取最近关键帧。
+
+    M3 region 池化的前置：g2_cache 只消费这个字段，因此与数据集解耦
+    （换 CARLA/AV2 时只需在各自的挖掘端产出同样的字段）。
+    """
+    if o is None or not o.get("_rot") or o["_size"] is None:
+        return None
+    depth = float(o["_p_cam"][j, 2])
+    if not np.isfinite(depth) or depth <= 0.5:
+        return None
+    ti = int(np.argmin(np.abs(np.asarray(o["_rot_t"]) - geo["grid_t"][j])))
+    q = Quaternion(o["_rot"][ti])
+    yaw_world = q.yaw_pitch_roll[0]
+    yaw_ego = yaw_world - Quaternion(matrix=geo["R_we"][j]).yaw_pitch_roll[0]
+    corners = box_corners_ego(o["p_ego"][j], o["_size"], yaw_ego)      # [8,3] ego
+    cam = (corners - geo["t_ec"]) @ geo["R_ec"]                         # ego -> cam
+    if (cam[:, 2] <= 0.1).any():
+        return None
+    uv = (geo["K"] @ cam.T).T
+    u = uv[:, 0] / uv[:, 2]; v = uv[:, 1] / uv[:, 2]
+    return [float(u.min()), float(v.min()), float(u.max()), float(v.max())]
+
+
+def frame_record(geo, j, o=None):
     f = geo["frames"][j]
-    return {"idx": int(j), "t": float(geo["grid_t"][j]), "filename": f["filename"],
-            "sd_token": f["token"], "is_key_frame": bool(f["is_key_frame"]),
-            "ego_speed_mps": float(geo["ego_speed"][j])}
+    rec = {"idx": int(j), "t": float(geo["grid_t"][j]), "filename": f["filename"],
+           "sd_token": f["token"], "is_key_frame": bool(f["is_key_frame"]),
+           "ego_speed_mps": float(geo["ego_speed"][j])}
+    if o is not None:
+        rec["bbox_xyxy"] = frame_bbox(geo, o, j)
+        rec["im_wh"] = [int(geo["im_w"]), int(geo["im_h"])]
+    return rec
 
 
 # --------------------------------------------------------------------------------------
@@ -461,8 +539,8 @@ def main():
                 "is_night": bool(is_night),
                 "is_rain": bool(rain),
                 "ego_speed_mps": float(geo["ego_speed"][k]),
-                "x_clean_frames": [frame_record(geo, j) for j in clean],
-                "x_ghost_frames": [frame_record(geo, j) for j in ghost],
+                "x_clean_frames": [frame_record(geo, j, o) for j in clean],
+                "x_ghost_frames": [frame_record(geo, j, o) for j in ghost],
             }
             all_events.append(rec)
             stats[f"type_{e['kind']}"] += 1

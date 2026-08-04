@@ -43,12 +43,15 @@ def mean_diff_speed(wp: np.ndarray, dt: float = 0.25) -> float:
     return float(np.mean(np.linalg.norm(np.diff(wp, axis=0), axis=1)) / dt)
 
 
-def run_condition(runner, root: Path, frames, pool_modes, prompt_speed=None):
+def run_condition(runner, root: Path, frames, pool_modes, prompt_speed=None, region=None):
     out = {m: [] for m in pool_modes}
-    wps, routes, pspd, mspd, espd, lang = [], [], [], [], [], []
+    wps, routes, pspd, mspd, espd, lang, n_region = [], [], [], [], [], [], []
     for fr in frames:
         img = np.array(Image.open(root / fr["filename"]).convert("RGB"))
-        r = runner.infer(img, fr["ego_speed_mps"], pool_modes=pool_modes, prompt_speed=prompt_speed)
+        bb, wh = (region if region else (fr.get("bbox_xyxy"), fr.get("im_wh")))
+        r = runner.infer(img, fr["ego_speed_mps"], pool_modes=pool_modes, prompt_speed=prompt_speed,
+                         bbox_xyxy=bb, im_wh=wh)
+        n_region.append(r.n_region_tokens)
         for m in pool_modes:
             out[m].append(r.hidden[m])
         wps.append(r.waypoints)
@@ -66,6 +69,8 @@ def run_condition(runner, root: Path, frames, pool_modes, prompt_speed=None):
         "ego_speed": np.asarray(espd, dtype=np.float32),
         "prompt_speed": np.asarray([prompt_speed if prompt_speed is not None else e for e in espd],
                                    dtype=np.float32),
+        # M3：命中目标区域的 vision token 数；0 = 该帧无框（region_* 向量无效）
+        "n_region_tokens": np.asarray(n_region, dtype=np.int32),
         "language": lang,
     }
 
@@ -127,7 +132,15 @@ def main():
                                         for k in ("x_clean_frames", "x_ghost_frames") for f in ev[k]]))
             elif pa != "per_frame":
                 raise ValueError(f"unknown prompt_anchor: {pa}")
-            res = {c: run_condition(runner, root, ev[f"x_{c}_frames"], pool_modes, prompt_speed=anchor)
+            # M3：region token 集**两个条件共用 ghost 帧的框**。
+            # 理由：clean 帧里目标常常还不可见（bbox=None），各用各的框会让 δ 无定义；
+            # 而"同一批 token、不同图像内容"才是受控对比 —— 与 3DGS 删除配对同构。
+            region = None
+            for f_ in ev["x_ghost_frames"]:
+                if f_.get("bbox_xyxy"):
+                    region = (f_["bbox_xyxy"], f_["im_wh"]); break
+            res = {c: run_condition(runner, root, ev[f"x_{c}_frames"], pool_modes,
+                                    prompt_speed=anchor, region=region)
                    for c in ("clean", "ghost")}
             with h5py.File(path, "w") as f:
                 for cond, d in res.items():
@@ -146,6 +159,7 @@ def main():
                 f.attrs["pool_modes"] = json.dumps(pool_modes)
                 f.attrs["prompt_anchor"] = cfg["model"].get("prompt_anchor", "clean")
                 f.attrs["prompt_speed"] = -1.0 if anchor is None else anchor
+                f.attrs["region_bbox"] = json.dumps(region[0] if region else None)
             done += 1
         except Exception as exc:  # noqa: BLE001
             failed.append({"event_id": ev["event_id"], "error": f"{type(exc).__name__}: {exc}"})

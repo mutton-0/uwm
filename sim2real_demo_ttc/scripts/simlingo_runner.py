@@ -61,6 +61,51 @@ def preprocess_image(img_rgb: np.ndarray, pcfg: dict) -> Image.Image:
     return pil
 
 
+def image_to_token_grid(bbox_xyxy, im_wh, pcfg, n_patches, num_image_token):
+    """原图像素框 -> vision token 索引集合（M3 region 池化）。
+
+    链路（与 preprocess_image 严格同一套变换）：
+      原图 (W,H) --等比缩放到宽 tw--> (tw, H*tw/W) --裁上部 post_h 行--> (tw, post_h)
+      --dynamic_preprocess: 等比缩放到 (448*gw, 448*gh) 后切成 gw*gh 个 448 tile-->
+      每 tile: ViT patch14 -> 32x32 -> pixel_shuffle(0.5) -> 16x16 = 256 token
+    token 序号 = tile_idx * 256 + row * 16 + col（tile 按行主序，与 extract_feature 的拼接一致）。
+    """
+    W, H = im_wh
+    tw = int(pcfg["target_width"])
+    post_h = carla_post_crop_height(int(pcfg["carla_camera_height"]))
+    input_size = int(pcfg["input_size"])
+    side = int(np.sqrt(num_image_token))              # 每 tile 的 token 边长（16）
+
+    sc = tw / W                                      # 等比缩放
+    u0, v0, u1, v1 = [c * sc for c in bbox_xyxy]
+    v0, v1 = v0, v1                                  # 裁上部：原点不变，仅截断
+    if v0 >= post_h:
+        return set()
+    v1 = min(v1, post_h - 1)
+
+    # dynamic_preprocess 的网格：n_patches 个 tile 排成 (gw, gh)
+    gh = 1
+    gw = n_patches // gh
+    rw, rh = input_size * gw, input_size * gh        # 缩放后的画布
+    fx, fy = rw / tw, rh / post_h
+    U0, U1 = u0 * fx, u1 * fx
+    V0, V1 = v0 * fy, v1 * fy
+
+    cell = input_size / side                          # 每个 token 覆盖的像素边长（28）
+    toks = set()
+    for tile in range(n_patches):
+        tx = (tile % gw) * input_size
+        ty = (tile // gw) * input_size
+        c0 = int(np.floor((U0 - tx) / cell)); c1 = int(np.ceil((U1 - tx) / cell))
+        r0 = int(np.floor((V0 - ty) / cell)); r1 = int(np.ceil((V1 - ty) / cell))
+        c0 = max(0, c0 - 1); r0 = max(0, r0 - 1)      # 外扩 1 patch 容错（§12.2-M3）
+        c1 = min(side, c1 + 1); r1 = min(side, r1 + 1)
+        for r in range(max(0, r0), max(0, r1)):
+            for c in range(max(0, c0), max(0, c1)):
+                toks.add(tile * num_image_token + r * side + c)
+    return toks
+
+
 def preprocess_hash(pcfg: dict) -> str:
     return hashlib.sha1(json.dumps(pcfg, sort_keys=True).encode()).hexdigest()[:12]
 
@@ -76,6 +121,8 @@ class InferResult:
     n_layers: int = 0
     hidden_dim: int = 0
     seq_len: int = 0
+    n_region_tokens: int = 0
+    vision_tokens: Optional[np.ndarray] = None      # debug: [n_vis, C]
     prompt: str = ""
     language: str = ""            # 模型贪心生成的文本（部署路径的副产物）
 
@@ -214,6 +261,7 @@ class SimLingoRunner:
         )
         pv = torch.stack([transform(im) for im in images])           # [P, 3, 448, 448]
         p, c, h, w = pv.shape
+        self._n_patches = p
         return pv.view(1, 1, p, c, h, w)                              # [B=1, T=1, P, C, H, W]
 
     def build_prompt(self, speed_mps: float, n_patches: int):
@@ -293,7 +341,7 @@ class SimLingoRunner:
     # ---------------- 前向 ----------------
     @torch.no_grad()
     def infer(self, img_rgb: np.ndarray, speed_mps: float, pool_modes=("vision_mean", "last_token"),
-              prompt_speed: Optional[float] = None) -> InferResult:
+              prompt_speed: Optional[float] = None, bbox_xyxy=None, im_wh=None) -> InferResult:
         """prompt_speed 非 None 时，prompt 里写的速度与该帧真实 ego 速度解耦。
 
         手册 §10.4 要求 clean/ghost 之间 prompt 完全一致。但 prompt 模板里含
@@ -330,6 +378,19 @@ class SimLingoRunner:
         res.seq_len = hs[0].shape[1]
 
         vis_mask, last_idx, last_lang_idx = self._token_masks(hs[0].shape[1])
+
+        # M3：目标区域 token 掩码。vision token 在序列中按图像顺序排列，
+        # 取其位置排序后的第 k 个即第 k 个图像 token。
+        vis_pos = torch.nonzero(vis_mask).flatten()
+        region_local = None
+        if bbox_xyxy is not None and im_wh is not None:
+            toks = image_to_token_grid(bbox_xyxy, im_wh, self.pcfg,
+                                       self._n_patches, self.num_image_token)
+            toks = sorted(t for t in toks if 0 <= t < len(vis_pos))
+            if toks:
+                region_local = torch.as_tensor(toks, device=vis_pos.device)
+        res.n_region_tokens = 0 if region_local is None else len(region_local)
+
         pooled = {m: np.zeros((len(hs), hs[0].shape[-1]), dtype=np.float32) for m in pool_modes}
         for li, h in enumerate(hs):
             hf = h[0].float()
@@ -339,7 +400,20 @@ class SimLingoRunner:
                 pooled["last_token"][li] = hf[last_idx].cpu().numpy()
             if "last_lang_token" in pooled:
                 pooled["last_lang_token"][li] = hf[last_lang_idx].cpu().numpy()
+            if region_local is not None and {"region_mean", "region_max", "bg_mean"} & set(pooled):
+                vt = hf[vis_pos]                                   # [512, C] 按图像顺序
+                m = torch.zeros(len(vis_pos), dtype=torch.bool, device=vt.device)
+                m[region_local] = True
+                if "region_mean" in pooled:
+                    pooled["region_mean"][li] = vt[m].mean(0).cpu().numpy()
+                if "region_max" in pooled:
+                    pooled["region_max"][li] = vt[m].max(0).values.cpu().numpy()
+                if "bg_mean" in pooled:
+                    pooled["bg_mean"][li] = vt[~m].mean(0).cpu().numpy()
         res.hidden = pooled
+        if getattr(self, "_debug_return_vision_tokens", False):
+            li = self._debug_layer
+            res.vision_tokens = hs[li][0].float()[vis_pos].cpu().numpy()   # [512, C]
         return res
 
     def _token_masks(self, seq_len: int):
