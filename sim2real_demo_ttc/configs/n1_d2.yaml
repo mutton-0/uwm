@@ -2,13 +2,13 @@
 # 手册：docs/remote_demo_simlingo_guide.md §0.5
 # 所有路径/阈值/split 均为参数，换 Tier-M/L 数据零改动复跑。
 
-tier: M-longgap
+tier: M-N1-D2
 
 paths:
   nuscenes_root: /data/dataset/nuscenes/v1.0-trainval
   nuscenes_version: v1.0-trainval
   can_bus_root: /data/dataset/nuscenes/v1.0-trainval/can_bus
-  work_dir: /data/ruolin/uwm/sim2real_demo_ttc/variants/tier_m_longgap
+  work_dir: /data/ruolin/uwm/sim2real_demo_ttc/variants/n1_d2
   simlingo_repo: /data/ruolin/simlingo
   simlingo_ckpt: /data/ruolin/simlingo_ckpt/simlingo/checkpoints/epoch=013.ckpt/pytorch_model.pt
   simlingo_hydra_cfg: /data/ruolin/simlingo_ckpt/simlingo/.hydra/config.yaml
@@ -45,7 +45,8 @@ mining:
                                  # 与 500/2k 的目标总量匹配（Tier-S 用 6 是因为只有 10 个 scene）。
   event_D2:                      # N1：几何平衡负例（guide §12.4 + q_audit §Q6 修正版）
     enabled: true
-    d2c_ttc_min_s: 8.0           # D2c 证伪控制：入走廊但 TTC 全程 > 8s
+    d2c_ttc_min_s: 8.0
+    d2b_max_per_scene: 3         # D2b 随 scene 线性增长，按成像面积取前 3（偏向几何像正例的）           # D2c 证伪控制：入走廊但 TTC 全程 > 8s
   # 帧选取（手册 §5.2）
   # 解混淆 B（手册 §7 建议 b，经 results/deconfound_ablation.md 消融后采用）：
   # clean/ghost 间隔 ~0.5s，把自车位移带来的全局视角变化压到最小。

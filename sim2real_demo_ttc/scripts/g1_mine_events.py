@@ -22,6 +22,8 @@ from pyquaternion import Quaternion
 VRU_PREFIXES = ("human.pedestrian.", "vehicle.bicycle", "vehicle.motorcycle")
 VEHICLE_PREFIXES = ("vehicle.car", "vehicle.truck", "vehicle.bus", "vehicle.trailer",
                     "vehicle.construction", "vehicle.emergency")
+# 静态无害物：按**类别**就无害，且单帧可见 —— D2a 负例的素材（N1）
+STATIC_PREFIXES = ("movable_object.", "static_object.")
 
 
 def obj_class(name: str) -> str:
@@ -29,6 +31,8 @@ def obj_class(name: str) -> str:
         return "vru"
     if name.startswith(VEHICLE_PREFIXES):
         return "vehicle"
+    if name.startswith(STATIC_PREFIXES):
+        return "static"
     return "other"
 
 
@@ -182,10 +186,21 @@ def compute_scene_geometry(nusc, scene, cfg):
             v_img = uv[:, 1] / uv[:, 2]
         visible = valid & (p_cam[:, 2] > 0.1) & (u > 0) & (u < im_w) & (v_img > 0) & (v_img < im_h)
 
+        # 成像几何（N1 的几何匹配依据）：
+        #   表观面积 ≈ fx*fy*(w_m*h_m)/d²（针孔近似，捕捉 1/d² 与物理尺寸这两个主导因素）
+        #   离心率 = 中心点到画幅中心的归一化距离
+        w_m, l_m, h_m = (tr["size"] + [0, 0, 0])[:3] if tr["size"] else (1.0, 1.0, 1.0)
+        depth = np.clip(p_cam[:, 2], 0.5, None)
+        area_px = float(K[0, 0] * K[1, 1]) * (float(w_m) * float(h_m)) / depth ** 2
+        area_px = np.where(visible, area_px, np.nan)
+        ecc = np.hypot((u - im_w / 2) / (im_w / 2), (v_img - im_h / 2) / (im_h / 2))
+        ecc = np.where(visible, ecc, np.nan)
+
         per_obj[inst] = {
             "cat": tr["cat"], "cls": cls, "valid": valid, "p_ego": p_ego,
             "v_obj_ego": v_obj_ego, "in_corridor": in_corridor, "ttc": ttc,
             "visible": visible, "d_long": x, "lat": y,
+            "area_px": area_px, "ecc": ecc,
         }
 
     frame_ttc = np.full(len(grid_t), np.inf)
@@ -293,8 +308,60 @@ def detect_events(geo, scene, cfg):
             e.pop("_d_long")
             events.append(e)
 
-    # 去重：同目标 0.8s 内多次触发只留优先级最高的（A > B > C > D）
-    prio = {"A": 0, "B": 1, "C": 2, "D": 3}
+    # ---- N1：D2 几何平衡负例（三个子类，见 guide §12.4 + q_audit §Q6）----
+    #   D2a 类别对照：静态无害物（barrier/cone/...）出现在走廊内 —— 无害性来自**类别**，单帧可见
+    #   D2b 上下文对照：同类别(VRU/vehicle)但不入走廊 —— 无害性来自**位置**，单帧可见
+    #   D2c 证伪控制：同类别、入走廊、但 TTC 全程 > d2c_ttc_min —— 无害性只来自**相对速度**，
+    #                 单帧模型物理上看不见 => 预测 AUC≈0.5；若显著 >0.5 说明管线泄漏
+    d2 = mcfg.get("event_D2")
+    d2b_pool = []
+    if d2 and d2.get("enabled"):
+        for inst, o in per_obj.items():
+            trig = o["in_corridor"] if o["cls"] != "vru" or True else o["in_corridor"]
+            if o["cls"] == "static":
+                mask = o["in_corridor"] & o["visible"]
+                kind = "D2a"
+            else:
+                mask = None
+            if mask is not None:
+                for k in rising_edges(mask):
+                    t_e = grid_t[k]
+                    if not lead_tail_ok(t_e):
+                        continue
+                    events.append(dict(kind=kind, t_emergence=float(t_e), idx=int(k), inst=inst,
+                                       min_ttc_1s=float(np.min(o["ttc"][window_idx(t_e, 0.0, 1.0)]))
+                                       if len(window_idx(t_e, 0.0, 1.0)) else np.inf,
+                                       obj_class=o["cat"]))
+                continue
+            # D2b / D2c 只针对 VRU / vehicle
+            for k in rising_edges(o["visible"]):
+                t_e = grid_t[k]
+                if not lead_tail_ok(t_e):
+                    continue
+                w = window_idx(t_e, 0.0, 2.0)
+                if len(w) == 0:
+                    continue
+                if not o["in_corridor"][w].any():
+                    d2b_pool.append(dict(kind="D2b", t_emergence=float(t_e), idx=int(k), inst=inst,
+                                         min_ttc_1s=float(np.min(o["ttc"][w])), obj_class=o["cat"],
+                                         _area=float(np.nanmedian(o["area_px"][w]))))
+            for k in rising_edges(o["in_corridor"] & o["visible"]):
+                t_e = grid_t[k]
+                if not lead_tail_ok(t_e):
+                    continue
+                w = window_idx(t_e, 0.0, 2.0)
+                if len(w) and float(np.min(o["ttc"][w])) > d2["d2c_ttc_min_s"]:
+                    events.append(dict(kind="D2c", t_emergence=float(t_e), idx=int(k), inst=inst,
+                                       min_ttc_1s=float(np.min(o["ttc"][w])), obj_class=o["cat"]))
+
+    # D2b 数量随 scene 线性膨胀（正例不会），按成像面积从大到小取前 N —— 优先保留几何上更像正例的
+    if d2b_pool:
+        d2b_pool.sort(key=lambda e: -(e["_area"] if np.isfinite(e["_area"]) else -1))
+        for e in d2b_pool[: int(d2.get("d2b_max_per_scene", 3))]:
+            e.pop("_area"); events.append(e)
+
+    # 去重：同目标 0.8s 内多次触发只留优先级最高的（A > B > C > D > D2*）
+    prio = {"A": 0, "B": 1, "C": 2, "D": 3, "D2a": 4, "D2b": 5, "D2c": 6}
     events.sort(key=lambda e: (prio[e["kind"]], e["t_emergence"]))
     kept = []
     for e in events:
@@ -385,6 +452,11 @@ def main():
                 "ttc_at_emergence": float(min(geo["frame_ttc"][k], 99.0)),
                 "d_long_at_emergence": float(o["d_long"][k]) if o is not None else None,
                 "lat_at_emergence": float(o["lat"][k]) if o is not None else None,
+                # 成像几何：N1 的几何匹配依据（ghost 窗口内取中位，避开单帧噪声）
+                "area_px": (lambda a: None if not np.isfinite(a) else float(a))(
+                    np.nanmedian(o["area_px"][ghost]) if o is not None and len(ghost) else np.nan),
+                "ecc": (lambda a: None if not np.isfinite(a) else float(a))(
+                    np.nanmedian(o["ecc"][ghost]) if o is not None and len(ghost) else np.nan),
                 "ttc_curve": ttc_curve,
                 "is_night": bool(is_night),
                 "is_rain": bool(rain),

@@ -1,0 +1,90 @@
+{
+  "pos_types": [
+    "A"
+  ],
+  "n_pos_total": 287,
+  "caliper": {
+    "log_area": 0.15,
+    "ecc": 0.06
+  },
+  "negatives": {
+    "D": {
+      "n_neg_pool": 1382,
+      "n_pairs": 179,
+      "pre_match": {
+        "smd_log_area": 0.15931116404662515,
+        "smd_ecc": -1.7522483002413962
+      },
+      "post_match": {
+        "smd_log_area": 0.06924616155980884,
+        "smd_ecc": -0.10208818946729453
+      },
+      "usable": true
+    },
+    "D2a": {
+      "n_neg_pool": 988,
+      "n_pairs": 283,
+      "pre_match": {
+        "smd_log_area": -0.007105507497970296,
+        "smd_ecc": -0.47943040826943717
+      },
+      "post_match": {
+        "smd_log_area": 0.0029025776437415617,
+        "smd_ecc": -0.04458800058420701
+      },
+      "usable": true
+    },
+    "D2b": {
+      "n_neg_pool": 1704,
+      "n_pairs": 236,
+      "pre_match": {
+        "smd_log_area": -0.6279882448468369,
+        "smd_ecc": -2.1106106848724964
+      },
+      "post_match": {
+        "smd_log_area": 0.015053987996435076,
+        "smd_ecc": -0.10895199258244057
+      },
+      "usable": true
+    },
+    "D2bV": {
+      "n_neg_pool": 293,
+      "n_pairs": 49,
+      "pre_match": {
+        "smd_log_area": -0.21620312644902814,
+        "smd_ecc": -2.5015515810763547
+      },
+      "post_match": {
+        "smd_log_area": 0.01758545282561314,
+        "smd_ecc": -0.2428298889923927
+      },
+      "usable": true
+    },
+    "D2c": {
+      "n_neg_pool": 1086,
+      "n_pairs": 286,
+      "pre_match": {
+        "smd_log_area": -0.5157334760194286,
+        "smd_ecc": 0.03429938346725198
+      },
+      "post_match": {
+        "smd_log_area": -0.006596219075199906,
+        "smd_ecc": 0.014287675970572468
+      },
+      "usable": true
+    },
+    "D2cV": {
+      "n_neg_pool": 325,
+      "n_pairs": 212,
+      "pre_match": {
+        "smd_log_area": -0.08830207808354096,
+        "smd_ecc": -0.17070461209418497
+      },
+      "post_match": {
+        "smd_log_area": 0.00029696988415340425,
+        "smd_ecc": 0.012098200732550352
+      },
+      "usable": true
+    }
+  }
+}
