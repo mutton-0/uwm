@@ -41,7 +41,7 @@ def main():
     TYPES = ("D", "D2a", "D2b", "D2bV", "D2c", "D2cV")
     matched = {t: set((work / "mining" / f"matched_{t}.txt").read_text().split())
                for t in TYPES if (work / "mining" / f"matched_{t}.txt").exists()}
-    VRU = ("human.", "vehicle.bicycle", "vehicle.motorcycle")
+    VRU = ("human.", "vehicle.bicycle", "vehicle.motorcycle", "walker.")  # walker.* = CARLA
 
     by_type = defaultdict(list)
     for eid, e in items.items():

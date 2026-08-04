@@ -1,0 +1,128 @@
+# Tier-S 配置：nuScenes v1.0-mini 上的管线闭环冒烟
+# 手册：docs/remote_demo_simlingo_guide.md §0.5
+# 所有路径/阈值/split 均为参数，换 Tier-M/L 数据零改动复跑。
+
+tier: M1-CARLA-indomain
+
+paths:
+  nuscenes_root: /data/ruolin/simlingo_carla/data/simlingo/lb1_split/routes_training
+  nuscenes_version: carla-lb1
+  can_bus_root: /data/dataset/nuscenes/v1.0-trainval/can_bus
+  work_dir: /data/ruolin/uwm/sim2real_demo_ttc/variants/m1_carla
+  simlingo_repo: /data/ruolin/simlingo
+  simlingo_ckpt: /data/ruolin/simlingo_ckpt/simlingo/checkpoints/epoch=013.ckpt/pytorch_model.pt
+  simlingo_hydra_cfg: /data/ruolin/simlingo_ckpt/simlingo/.hydra/config.yaml
+
+# ---------------- G1 挖掘 ----------------
+mining:
+  camera: CAM_FRONT
+  carla_scenario_dir: DynamicObjectCrossing
+  # 走廊定义（手册 §5.1）
+  corridor_half_width_m: 2.0     # |y| < 2.0
+  corridor_x_min_m: 0.0
+  corridor_x_max_m: 50.0
+  min_closing_speed_mps: 0.5     # v_c > 0.5 才算 TTC
+  # 事件阈值。Tier-S 因 mini 只有 10 scene 而放宽过；Tier-M 数据量足够，
+  # 但为了让 Tier-S/M 的事件语义可比，这里**保持同一套阈值**（改阈值会让两档不可比）。
+  event_A:                       # VRU 突现
+    enabled: true
+    window_s: 1.0
+    ttc_max_s: 5.0               # 回调记录#1：手册建议 3.0，mini 上仅 5 例；按分布放宽至 5.0（p25=4.3）
+  event_B:                       # 近距 cut-in（主力类）
+    enabled: true
+    d_long_max_m: 25.0           # 回调记录#2：20.0 -> 25.0
+    ttc_max_s: 6.0               # 回调记录#2：4.0 -> 6.0（p50=5.95）
+    min_lateral_speed_mps: 0.1   # 回调记录#2：0.2 -> 0.1；横向速度指向 ego 车道
+  event_C:                       # 通用 TTC 骤降（兜底）
+    enabled: true
+    drop_window_s: 1.0
+    min_drop_s: 1.5              # 回调记录#3：2.0 -> 1.5
+    ttc_after_max_s: 5.0         # 回调记录#3：3.0 -> 5.0
+  event_D:                       # 无害出现（负例，必挖）
+    enabled: true
+    ttc_min_s: 6.0               # 严格判据：不入走廊 且 自身 TTC 全程 > 6s
+    max_per_scene: 2             # Tier-M 专属：D 的产出与 scene 数成正比、正例不是。
+                                 # 850 scene × 6 会得到 3413 个 D 压过 834 个正例；改 2 => ~1600，
+                                 # 与 500/2k 的目标总量匹配（Tier-S 用 6 是因为只有 10 个 scene）。
+  event_D2:                      # N1：几何平衡负例（guide §12.4 + q_audit §Q6 修正版）
+    enabled: true
+    d2c_ttc_min_s: 8.0
+    d2b_max_per_scene: 3
+    ctx_placebo_shift_s: 2.5     # 上下文安慰剂：窗口整体前移 2.5s，使两帧都在入走廊之前         # D2b 随 scene 线性增长，按成像面积取前 3（偏向几何像正例的）           # D2c 证伪控制：入走廊但 TTC 全程 > 8s
+  # 帧选取（手册 §5.2）
+  # 解混淆 B（手册 §7 建议 b，经 results/deconfound_ablation.md 消融后采用）：
+  # clean/ghost 间隔 ~0.5s，把自车位移带来的全局视角变化压到最小。
+  # 对照臂：手册 §5.2 的原始长间隔。用来判定 Tier-M 主臂上"行为端无响应"
+  # 究竟是模型本身没响应，还是短间隔把行为对比也一起削掉了。
+  clean_window_s: [-1.5, -0.5]   # 相对 t_emergence
+  ghost_window_s: [0.0, 1.0]
+  frames_per_condition: 2
+  min_lead_time_s: 1.6
+  min_tail_time_s: 1.1
+
+# ---------------- split ----------------
+split:
+  unit: scene                    # scene | event。scene = 无泄漏（推荐）
+  estimate_frac: 0.5             # 仅在未指定 estimate_n 时生效
+  estimate_n: 500                # Tier-M 主线：500 估计集
+  truth_n: 1900                  # Tier-M 主线：~2k 真值集（手册 §0.5 的 M 档）
+  search_trials: 4000            # scene 数多时用随机重启搜索代替穷举
+  stratify_by: [event_type, is_night]
+  seed: 42
+  # §7.1 估计集内部再按 scene 三分
+  probe_split: {dir: 0.5, sel: 0.25, test: 0.25}
+
+# ---------------- G0/G2 模型推理 ----------------
+model:
+  name: simlingo
+  device: cuda:0
+  dtype: bfloat16
+  seed: 42
+  # 输入缺口的统一默认值（手册 §4 要求写进 config 并在报告声明）
+  prompt_mode: target_point_command   # 与 ckpt 训练口径一致（.hydra/config.yaml: route_as）
+  fixed_command: "Command: follow the road."   # 统一"直行"默认；严禁在 clean/ghost 间变 prompt
+  target_point_m: [[20.0, 0.0], [40.0, 0.0]]   # 正前方直行目标点（ego 坐标系 x 前 y 左）
+  use_cot: false
+  # 手册 §10.4：clean/ghost 之间 prompt 必须完全一致。
+  # prompt 模板含 `Current speed: X m/s`，两帧真实自车速度不同 -> 若各写各的会引入语言差异，
+  # 同时污染 δ 与行为量 b（实测 d(指令速度)/d(prompt速度)=0.725，与信号同量级）。
+  # clean = 两个条件都用 clean 帧的平均 ego 速度；per_frame = 旧行为（有污染，仅作对照）
+  prompt_anchor: clean
+  # nuScenes → SimLingo 相机口径对齐（手册 §10.1/§10.2）
+  preprocess:
+    mode: carla_native   # 1600x900 -等比-> 1024x576 -裁上部-> 1024x359
+    target_width: 1024                   # CARLA 采集分辨率
+    carla_camera_height: 512
+    carla_bottom_crop_ratio: 0.3         # SimLingo 自己的 4.8/16 裁剪
+    jpeg_artifact: false                 # nuScenes 原生即 jpg，无需再压
+    input_size: 448
+    max_num_patches: 2
+    use_global_img: false                # 与 .hydra/config.yaml 一致
+  fov_deg: 110                           # 送给模型的内参 fov，沿用 SimLingo 训练口径（不做 nuScenes 纠正，见 §10.2）
+
+# ---------------- G2 缓存 ----------------
+cache:
+  layer_stride: 1                # 每层都存；层数多时可设 2
+  # M3 schema v2：五向量。region_* 只对 vision token 做（语言 token 在两条件间长度内容都会变，δ 无定义；
+  # 且 causal attention 下 vision token 看不见其后生成的语言，语言路径变异被结构性隔离）。
+  # v_hazard 从 region δ 提，v_domain 从 bg_mean 提 —— 危险信号与域风格信号不再共享 token。
+  pool_modes: [region_mean, region_max, bg_mean, vision_mean, last_token]
+  dtype: float16
+
+# ---------------- G3 指标 ----------------
+metrics:
+  # 行为量校正：模型 prompt 里写着 Current speed，b 会跟着 Δego_speed 走
+  # （实测解释 12%~28% 方差）。ego_delta = 在估计集上拟合并扣掉这一项。
+  # 本轮主读数保持 none（预注册如此）；ego_delta 结果见 results/tier_m_summary.md §3.5
+  behavior_adjust: none          # none | ego_delta
+  b_min_mps: [0.25, 0.5, 1.0]    # 响应达标阈值敏感性三档；主读数取 0.5
+  b_min_primary: 0.5
+  bootstrap_n: 1000
+  bootstrap_unit: scene
+  permutation_n: 1000
+  domain_direction: false        # 仍未接 CARLA 参考帧 → V5 记 N/A
+  # ---- Tier-M 主读数（在看到任何 Tier-M 结果之前冻结，见 results/tier_m_preregistration.md）----
+  direction_method: supervised   # 正例 δ vs D 类 δ 的线性判别方向（在 Tier-S 上择优）
+  deconfound: none               # 判别式方向本身已对混淆免疫，无需再回归时间基线
+  deconfound_k: 2
+  primary_pool_mode: vision_mean # last_token 在 Tier-S 两种方向法下都更差

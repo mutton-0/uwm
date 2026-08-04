@@ -1,0 +1,39 @@
+{
+  "pos_types": [
+    "Aexp",
+    "A"
+  ],
+  "n_pos_total": 55,
+  "caliper": {
+    "log_area": 0.3,
+    "ecc": 0.12
+  },
+  "negatives": {
+    "D2a": {
+      "n_neg_pool": 53,
+      "n_pairs": 24,
+      "pre_match": {
+        "smd_log_area": 1.609661894989945,
+        "smd_ecc": 1.7560281708391319
+      },
+      "post_match": {
+        "smd_log_area": 0.061104621381966776,
+        "smd_ecc": 0.8385625413618137
+      },
+      "usable": true
+    },
+    "D2cV": {
+      "n_neg_pool": 28,
+      "n_pairs": 22,
+      "pre_match": {
+        "smd_log_area": -1.4458005728557528,
+        "smd_ecc": -0.1414536147898806
+      },
+      "post_match": {
+        "smd_log_area": -0.7133491042063703,
+        "smd_ecc": 0.2525345409237097
+      },
+      "usable": true
+    }
+  }
+}

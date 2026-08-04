@@ -81,7 +81,7 @@ def main():
     for e in evs:
         by_type[e["event_type"]].append(e)
 
-    pos_types = list(args.pos_types)
+    pos_types = args.pos_types.split(",") if "," in args.pos_types else list(args.pos_types)
     pos = [e for t in pos_types for e in by_type[t]]
     print(f"[N1] 正例类型={pos_types}  n={len(pos)}   caliper: Δlog面积≤{args.caliper_la} dex, Δ离心率≤{args.caliper_ecc}")
 
@@ -89,14 +89,16 @@ def main():
               "caliper": {"log_area": args.caliper_la, "ecc": args.caliper_ecc}, "negatives": {}}
     keep_ids = set(e["event_id"] for e in pos)
 
-    VRU = ("human.", "vehicle.bicycle", "vehicle.motorcycle")
+    VRU = ("human.", "vehicle.bicycle", "vehicle.motorcycle", "walker.")  # walker.* = CARLA
     # D2cV / D2bV：把负类限制到与正例**同类别**(VRU)。
     # D2cV 是唯一纯净的证伪控制：与 A 同类别、同几何，唯一差异是相对速度（单帧不可见）=> 预测恰好 0.5。
     # D2c 混了 55% 车辆，类别差异本身单帧可见，会把地板抬高。
+    # 只在 dst 尚不存在、且 src 存在时派生（CARLA 挖掘直接产出 D2cV，不能被空列表覆盖）
     for src, dst in (("D2c", "D2cV"), ("D2b", "D2bV")):
-        by_type[dst] = [e for e in by_type.get(src, []) if e["object_class"].startswith(VRU)]
+        if by_type.get(src) and not by_type.get(dst):
+            by_type[dst] = [e for e in by_type[src] if e["object_class"].startswith(VRU)]
 
-    for neg_type in ("D", "D2a", "D2b", "D2bV", "D2c", "D2cV"):
+    for neg_type in [t for t in ("D", "D2a", "D2aP", "D2b", "D2bV", "D2c", "D2cV") if t in by_type]:
         neg = by_type.get(neg_type, [])
         if len(neg) < 20:
             print(f"[N1] {neg_type}: 样本不足({len(neg)})，跳过")

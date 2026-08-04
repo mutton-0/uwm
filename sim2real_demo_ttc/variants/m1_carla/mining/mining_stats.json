@@ -1,0 +1,72 @@
+{
+  "n_events": 139,
+  "n_scenes": 171,
+  "by_type": {
+    "Aexp": 51,
+    "A": 7,
+    "D2a": 53,
+    "D2cV": 28
+  },
+  "day": 139,
+  "night": 0,
+  "skipped_no_frames": 0,
+  "ttc_hist_edges": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    6,
+    10,
+    100
+  ],
+  "ttc_hist_counts": [],
+  "config_mining": {
+    "camera": "CAM_FRONT",
+    "carla_scenario_dir": "DynamicObjectCrossing",
+    "corridor_half_width_m": 2.0,
+    "corridor_x_min_m": 0.0,
+    "corridor_x_max_m": 50.0,
+    "min_closing_speed_mps": 0.5,
+    "event_A": {
+      "enabled": true,
+      "window_s": 1.0,
+      "ttc_max_s": 5.0
+    },
+    "event_B": {
+      "enabled": true,
+      "d_long_max_m": 25.0,
+      "ttc_max_s": 6.0,
+      "min_lateral_speed_mps": 0.1
+    },
+    "event_C": {
+      "enabled": true,
+      "drop_window_s": 1.0,
+      "min_drop_s": 1.5,
+      "ttc_after_max_s": 5.0
+    },
+    "event_D": {
+      "enabled": true,
+      "ttc_min_s": 6.0,
+      "max_per_scene": 2
+    },
+    "event_D2": {
+      "enabled": true,
+      "d2c_ttc_min_s": 8.0,
+      "d2b_max_per_scene": 3,
+      "ctx_placebo_shift_s": 2.5
+    },
+    "clean_window_s": [
+      -1.5,
+      -0.5
+    ],
+    "ghost_window_s": [
+      0.0,
+      1.0
+    ],
+    "frames_per_condition": 2,
+    "min_lead_time_s": 1.6,
+    "min_tail_time_s": 1.1
+  },
+  "frame_rate_hz": 4.0
+}
