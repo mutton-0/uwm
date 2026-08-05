@@ -81,7 +81,10 @@ def main():
     for e in evs:
         by_type[e["event_type"]].append(e)
 
-    pos_types = args.pos_types.split(",") if "," in args.pos_types else list(args.pos_types)
+    # 逗号分隔的多字符类型名；单字符类型仍可写成 "ABC" 表示三类
+    pos_types = ([t for t in args.pos_types.split(",") if t]
+                 if ("," in args.pos_types or len(args.pos_types) > 1 and args.pos_types not in ("ABC", "AB", "AC", "BC"))
+                 else list(args.pos_types))
     pos = [e for t in pos_types for e in by_type[t]]
     print(f"[N1] 正例类型={pos_types}  n={len(pos)}   caliper: Δlog面积≤{args.caliper_la} dex, Δ离心率≤{args.caliper_ecc}")
 
@@ -98,7 +101,8 @@ def main():
         if by_type.get(src) and not by_type.get(dst):
             by_type[dst] = [e for e in by_type[src] if e["object_class"].startswith(VRU)]
 
-    for neg_type in [t for t in ("D", "D2a", "D2aP", "D2b", "D2bV", "D2c", "D2cV") if t in by_type]:
+    for neg_type in [t for t in ("D", "D2a", "D2aP", "D2b", "D2bV", "D2c", "D2cV", "Ncar")
+                     if t in by_type and t not in pos_types]:
         neg = by_type.get(neg_type, [])
         if len(neg) < 20:
             print(f"[N1] {neg_type}: 样本不足({len(neg)})，跳过")

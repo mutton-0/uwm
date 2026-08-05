@@ -16,7 +16,7 @@ paths:
 # ---------------- G1 挖掘 ----------------
 mining:
   camera: CAM_FRONT
-  carla_scenario_dir: DynamicObjectCrossing
+  carla_scenario_dir: [DynamicObjectCrossing, noScenarios, VehicleTurningRoute]
   # 走廊定义（手册 §5.1）
   corridor_half_width_m: 2.0     # |y| < 2.0
   corridor_x_min_m: 0.0

@@ -1,37 +1,62 @@
 {
   "pos_types": [
-    "Aexp",
-    "A"
+    "Hcar"
   ],
-  "n_pos_total": 55,
+  "n_pos_total": 1922,
   "caliper": {
-    "log_area": 0.3,
-    "ecc": 0.12
+    "log_area": 0.1,
+    "ecc": 0.03
   },
   "negatives": {
     "D2a": {
       "n_neg_pool": 53,
-      "n_pairs": 24,
+      "n_pairs": 44,
       "pre_match": {
-        "smd_log_area": 1.609661894989945,
-        "smd_ecc": 1.7560281708391319
+        "smd_log_area": 2.4577461027887524,
+        "smd_ecc": 1.5416481136737454
       },
       "post_match": {
-        "smd_log_area": 0.061104621381966776,
-        "smd_ecc": 0.8385625413618137
+        "smd_log_area": 0.08711310864945103,
+        "smd_ecc": -0.26181462420332724
+      },
+      "usable": true
+    },
+    "D2aP": {
+      "n_neg_pool": 74,
+      "n_pairs": 23,
+      "pre_match": {
+        "smd_log_area": 3.3328841594045366,
+        "smd_ecc": 1.7888621486158403
+      },
+      "post_match": {
+        "smd_log_area": 0.047109547983981225,
+        "smd_ecc": -0.16016547509320117
       },
       "usable": true
     },
     "D2cV": {
       "n_neg_pool": 28,
-      "n_pairs": 22,
+      "n_pairs": 20,
       "pre_match": {
-        "smd_log_area": -1.4458005728557528,
-        "smd_ecc": -0.1414536147898806
+        "smd_log_area": 0.25880547910116,
+        "smd_ecc": -0.7228103216072937
       },
       "post_match": {
-        "smd_log_area": -0.7133491042063703,
-        "smd_ecc": 0.2525345409237097
+        "smd_log_area": 0.274047818621407,
+        "smd_ecc": -0.31354034616478976
+      },
+      "usable": true
+    },
+    "Ncar": {
+      "n_neg_pool": 6846,
+      "n_pairs": 1289,
+      "pre_match": {
+        "smd_log_area": 0.8204906676219669,
+        "smd_ecc": 0.8929009582859444
+      },
+      "post_match": {
+        "smd_log_area": -0.03900211962017022,
+        "smd_ecc": 0.09355225381101108
       },
       "usable": true
     }

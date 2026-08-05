@@ -149,8 +149,11 @@ def main():
     mc = cfg["mining"]
     work = Path(cfg["paths"]["work_dir"])
     root = Path(cfg["paths"]["nuscenes_root"])          # CARLA 数据根（复用同名字段）
-    scen = root / mc["carla_scenario_dir"]
-    routes = sorted(p for p in scen.glob("*") if p.is_dir())
+    # 支持多场景合并：carla_scenario_dir 可以是单个名字或列表
+    sd = mc["carla_scenario_dir"]
+    scen_dirs = [sd] if isinstance(sd, str) else list(sd)
+    routes = [p for d in scen_dirs for p in sorted((root / d).glob("*")) if p.is_dir()]
+    routes = sorted(routes)
     if args.limit_routes:
         routes = routes[: args.limit_routes]
     (work / "mining").mkdir(parents=True, exist_ok=True)
@@ -231,6 +234,18 @@ def main():
                     if (e := make(int(o["idx"][k]), et)):
                         events.append(e)
 
+            # ---- Hcar / Ncar：**同类别（车辆）内的 危险 vs 非危险** ----
+            # 专家逐帧标注了 speed_reduced_by_obj_id = 导致其减速的物体。
+            # Hcar = 走廊内且被专家归因的车；Ncar = 走廊内但未被归因的车。
+            # 同类别 + 车辆样本上万 => 几何可匹配且有功效，是 M1 真正能裁决的对照。
+            if o["kind"] == "vehicle":
+                for k in rising(o["in_cor"]):
+                    i_e = int(o["idx"][k])
+                    w = [i for i in range(i_e, min(n, i_e + 8))]
+                    is_h = any(exp_ids[i] == oid for i in w)
+                    if (e := make(i_e, "Hcar" if is_h else "Ncar")):
+                        events.append(e)
+
             # ---- Aexp：专家把减速归因于该 walker 的首帧（in-domain 金标准）----
             if o["kind"] == "vru":
                 hit = [i for i in range(n) if exp_ids[i] == oid]
@@ -243,7 +258,8 @@ def main():
 
     # 去重
     seen = set(); kept = []
-    for e in sorted(events, key=lambda x: {"Aexp": 0, "A": 1, "D2a": 2, "D2aP": 2, "D2cV": 3}[x["event_type"]]):
+    PRIO = {"Aexp": 0, "A": 1, "D2a": 2, "D2aP": 2, "D2cV": 3, "Hcar": 4, "Ncar": 5}
+    for e in sorted(events, key=lambda x: PRIO[x["event_type"]]):
         k = (e["scene_name"], e["object_token"], round(e["t_emergence"], 1))
         if k in seen:
             continue
@@ -255,7 +271,8 @@ def main():
             f.write(json.dumps(e, ensure_ascii=False) + "\n")
     from collections import Counter
     c = Counter(e["event_type"] for e in kept)
-    stats = {"n_events": len(kept), "n_scenes": len(routes), "by_type": dict(c),
+    stats = {"n_events": len(kept), "n_scenes": len(routes), "scenarios": scen_dirs,
+             "by_type": dict(c),
              "day": len(kept), "night": 0, "skipped_no_frames": 0,
              "ttc_hist_edges": [0, 1, 2, 3, 4, 6, 10, 100], "ttc_hist_counts": [],
              "config_mining": mc, "frame_rate_hz": 1 / DT}

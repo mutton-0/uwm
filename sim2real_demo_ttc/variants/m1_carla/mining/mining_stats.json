@@ -1,13 +1,21 @@
 {
-  "n_events": 139,
-  "n_scenes": 171,
+  "n_events": 8993,
+  "n_scenes": 1035,
+  "scenarios": [
+    "DynamicObjectCrossing",
+    "noScenarios",
+    "VehicleTurningRoute"
+  ],
   "by_type": {
     "Aexp": 51,
     "A": 7,
     "D2a": 53,
-    "D2cV": 28
+    "D2aP": 74,
+    "D2cV": 28,
+    "Hcar": 1934,
+    "Ncar": 6846
   },
-  "day": 139,
+  "day": 8993,
   "night": 0,
   "skipped_no_frames": 0,
   "ttc_hist_edges": [
@@ -23,7 +31,11 @@
   "ttc_hist_counts": [],
   "config_mining": {
     "camera": "CAM_FRONT",
-    "carla_scenario_dir": "DynamicObjectCrossing",
+    "carla_scenario_dir": [
+      "DynamicObjectCrossing",
+      "noScenarios",
+      "VehicleTurningRoute"
+    ],
     "corridor_half_width_m": 2.0,
     "corridor_x_min_m": 0.0,
     "corridor_x_max_m": 50.0,
