@@ -122,6 +122,7 @@ class InferResult:
     hidden_dim: int = 0
     seq_len: int = 0
     n_region_tokens: int = 0
+    n_query_tokens: int = 0        # driving query 段长度（T1-Q schema v3）
     vision_tokens: Optional[np.ndarray] = None      # debug: [n_vis, C]
     prompt: str = ""
     language: str = ""            # 模型贪心生成的文本（部署路径的副产物）
@@ -219,10 +220,91 @@ class SimLingoRunner:
         self.conv_module = conv_module
         self.img_context_token_id = self.tokenizer.convert_tokens_to_ids("<IMG_CONTEXT>")
 
+    # ---------------- T2 manipulation：表征注入 ----------------
+    def set_steering(self, layer=None, vec=None, alpha=0.0, mode="add", tokens="vision",
+                     region_local=None):
+        """在第 `layer` 层的输出上做 RepE 式操纵；layer=None 关闭。
+
+        mode:
+          add          Z' = Z + α·σ_L·v̂          （guide T2.1 剂量注入；α<0 即负向注入对照）
+          project_out  Z' = Z − (Zᵀv̂)v̂           （T2.4 termination：把该方向整体剔除）
+          recover      先剔除再按原投影量加回      （T2.4 recovery，应回到基线）
+        σ_L = 本次前向中被注入 token 的激活标准差 —— 逐帧自归一化，
+        使 α 在不同层/不同帧之间可比（guide "α 以该层激活标准差为单位"）。
+
+        tokens: vision(全部 vision token) / region(目标框内 token) / all(整条序列)。
+        默认 vision：方向是从 vision token 池化的 δ 上提的，注回同一批 token 才同构；
+        且 causal attention 下 vision token 在序列最前，改动必然传到下游 driving query。
+        """
+        if layer is None or vec is None:
+            self._steer = None
+            return
+        v = torch.as_tensor(np.asarray(vec, dtype=np.float32))
+        v = v / (v.norm() + 1e-8)
+        self._steer = {"layer": int(layer), "v": v.to(self.device), "alpha": float(alpha),
+                       "mode": mode, "tokens": tokens, "region_local": region_local}
+
+    def _steer_positions(self, seq_len: int):
+        """本次前向中要注入的 token 位置；返回 None 表示这次前向不注入。
+
+        贪心解码期间 hook 会被触发多次：prefill(整条 prompt) / 每个 decode step(seq_len=1) /
+        最后的整条前向。decode step 没有 vision token（且 KV 已含 prefill 的注入结果），跳过。
+        """
+        st = self._steer
+        if seq_len <= 1 or self._adaptor_dict is None:
+            return None
+        ids = self._adaptor_dict["language__ids"][0]
+        n_prompt = int(ids.shape[0])
+        if seq_len < n_prompt:
+            return None
+        if st["tokens"] == "all":
+            return torch.arange(seq_len, device=ids.device)
+        if st["tokens"] == "query":
+            # T1-L Step 2：轴在 query 位置定义，就注回 query 位置（同构）
+            n_drv = int(self._len_driving) if self._len_driving else 0
+            if not n_drv:
+                return None
+            return torch.arange(seq_len - n_drv, seq_len, device=ids.device)
+        vis = torch.nonzero(ids == self.img_context_token_id).flatten()
+        if st["tokens"] == "vision":
+            return vis
+        if st["tokens"] == "region":
+            loc = st["region_local"]
+            if loc is None or len(loc) == 0:
+                return None
+            return vis[torch.as_tensor(np.asarray(loc), device=vis.device)]
+        raise ValueError(st["tokens"])
+
+    def _apply_steer(self, h: torch.Tensor, st: dict) -> torch.Tensor:
+        idx = self._steer_positions(h.shape[1])
+        if idx is None or len(idx) == 0:
+            return h
+        v = st["v"]
+        sub = h[0, idx, :].float()
+        if st["mode"] == "add":
+            sigma = float(sub.std())
+            self._last_sigma = sigma
+            sub = sub + (st["alpha"] * sigma) * v
+        elif st["mode"] == "project_out":
+            sub = sub - torch.outer(sub @ v, v)
+        elif st["mode"] == "recover":
+            # 先剔除逐 token 的投影，再把**该帧的平均投影量**统一加回。
+            # 逐 token 原样加回是恒等式、什么也测不到；改成加回聚合量后，
+            # "剔除→行为变化，加回→行为复原" 才构成对方向本身的检验（guide T2.4 recovery）。
+            c = sub @ v
+            sub = sub - torch.outer(c, v) + c.mean() * v
+        else:
+            raise ValueError(st["mode"])
+        h = h.clone()
+        h[0, idx, :] = sub.to(h.dtype)
+        return h
+
     def _register_hooks(self):
-        """在 LLM 每个 decoder layer 上挂 forward hook 抓 hidden states。"""
+        """在 LLM 每个 decoder layer 上挂 forward hook 抓 hidden states（并按需注入）。"""
         self._layer_outputs: List[torch.Tensor] = []
         self._adaptor_dict = None
+        self._steer = None
+        self._last_sigma = float("nan")
         layers = []
         for name, mod in self.model.language_model.model.named_modules():
             if mod.__class__.__name__.endswith("DecoderLayer"):
@@ -234,6 +316,14 @@ class SimLingoRunner:
         def make_hook(idx):
             def hook(_m, _inp, out):
                 h = out[0] if isinstance(out, (tuple, list)) else out
+                st = self._steer
+                if st is not None and st["layer"] == idx:
+                    # T2 manipulation：改写该层输出后再往下传（forward hook 返回值即新输出）
+                    h2 = self._apply_steer(h, st)
+                    self._layer_outputs.append(h2.detach())
+                    if isinstance(out, (tuple, list)):
+                        return (h2,) + tuple(out[1:])
+                    return h2
                 self._layer_outputs.append(h.detach())
             return hook
 
@@ -264,7 +354,12 @@ class SimLingoRunner:
         self._n_patches = p
         return pv.view(1, 1, p, c, h, w)                              # [B=1, T=1, P, C, H, W]
 
-    def build_prompt(self, speed_mps: float, n_patches: int):
+    def build_prompt(self, speed_mps: float, n_patches: int, context: str = ""):
+        """context = 插在速度句之后的一句场景描述（T1-L 的语言配对刺激）。
+
+        评分回路里 context 必须为空(中性 prompt) —— 危险措辞只允许出现在
+        T1-L Step 1 的离线刺激集里，见 guide 附录 A"测量不污染红线"。
+        """
         mcfg = self.cfg["model"]
         speed = round(float(speed_mps), 1)
         tp = np.asarray(mcfg["target_point_m"], dtype=np.float32)     # [[x1,y1],[x2,y2]]
@@ -276,10 +371,11 @@ class SimLingoRunner:
         else:
             raise ValueError(mcfg["prompt_mode"])
 
+        ctx = f"{context.strip()} " if context and context.strip() else ""
         if mcfg["use_cot"]:
-            prompt = f"Current speed: {speed} m/s. {prompt_tp} What should the ego do next?"
+            prompt = f"Current speed: {speed} m/s. {ctx}{prompt_tp} What should the ego do next?"
         else:
-            prompt = f"Current speed: {speed} m/s. {prompt_tp} Predict the waypoints."
+            prompt = f"Current speed: {speed} m/s. {ctx}{prompt_tp} Predict the waypoints."
 
         conv = [
             {"role": "user", "content": prompt},
@@ -308,14 +404,14 @@ class SimLingoRunner:
         placeholder = {self.tokenizer.convert_tokens_to_ids("<TARGET_POINT>"): tp}
         return query, prompt, ids, valid, [placeholder], tp
 
-    def build_driving_input(self, img_rgb: np.ndarray, speed_mps: float):
+    def build_driving_input(self, img_rgb: np.ndarray, speed_mps: float, context: str = ""):
         from simlingo_training.utils.custom_types import DrivingInput, LanguageLabel
         from simlingo_training.utils.projection import get_camera_extrinsics, get_camera_intrinsics
 
         pv = self.build_pixel_values(img_rgb)
         n_patches = pv.shape[2]
         b, t, p, c, H, W = pv.shape
-        query, prompt, ids, valid, placeholder, tp = self.build_prompt(speed_mps, n_patches)
+        query, prompt, ids, valid, placeholder, tp = self.build_prompt(speed_mps, n_patches, context)
 
         ll = LanguageLabel(
             phrase_ids=ids.to(self.device),
@@ -341,7 +437,8 @@ class SimLingoRunner:
     # ---------------- 前向 ----------------
     @torch.no_grad()
     def infer(self, img_rgb: np.ndarray, speed_mps: float, pool_modes=("vision_mean", "last_token"),
-              prompt_speed: Optional[float] = None, bbox_xyxy=None, im_wh=None) -> InferResult:
+              prompt_speed: Optional[float] = None, bbox_xyxy=None, im_wh=None,
+              context: str = "") -> InferResult:
         """prompt_speed 非 None 时，prompt 里写的速度与该帧真实 ego 速度解耦。
 
         手册 §10.4 要求 clean/ghost 之间 prompt 完全一致。但 prompt 模板里含
@@ -351,7 +448,8 @@ class SimLingoRunner:
         即这个污染项与待测信号同量级。
         """
         torch.manual_seed(int(self.cfg["model"]["seed"]))
-        di, prompt = self.build_driving_input(img_rgb, speed_mps if prompt_speed is None else prompt_speed)
+        di, prompt = self.build_driving_input(
+            img_rgb, speed_mps if prompt_speed is None else prompt_speed, context)
 
         if self.capture_hidden:
             self._layer_outputs = []
@@ -378,6 +476,11 @@ class SimLingoRunner:
         res.seq_len = hs[0].shape[1]
 
         vis_mask, last_idx, last_lang_idx = self._token_masks(hs[0].shape[1])
+        # T1-Q schema v3：driving query token 段 = 序列末尾 n_driving 个位置。
+        # 动作由这些位置预测 => 行为中介态最可能住在这里，此前从未抓过。
+        n_drv = int(self._len_driving) if self._len_driving else 0
+        q_lo = hs[0].shape[1] - n_drv
+        res.n_query_tokens = n_drv
 
         # M3：目标区域 token 掩码。vision token 在序列中按图像顺序排列，
         # 取其位置排序后的第 k 个即第 k 个图像 token。
@@ -400,6 +503,12 @@ class SimLingoRunner:
                 pooled["last_token"][li] = hf[last_idx].cpu().numpy()
             if "last_lang_token" in pooled:
                 pooled["last_lang_token"][li] = hf[last_lang_idx].cpu().numpy()
+            if "query_mean" in pooled and n_drv:
+                pooled["query_mean"][li] = hf[q_lo:].mean(0).cpu().numpy()
+            if "query_first" in pooled and n_drv:
+                pooled["query_first"][li] = hf[q_lo].cpu().numpy()
+            if "seq_mean" in pooled:
+                pooled["seq_mean"][li] = hf.mean(0).cpu().numpy()
             if region_local is not None and {"region_mean", "region_max", "bg_mean"} & set(pooled):
                 vt = hf[vis_pos]                                   # [512, C] 按图像顺序
                 m = torch.zeros(len(vis_pos), dtype=torch.bool, device=vt.device)
