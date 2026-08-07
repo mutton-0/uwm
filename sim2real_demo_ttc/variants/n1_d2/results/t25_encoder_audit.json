@@ -1,0 +1,302 @@
+[
+  {
+    "event_id": "scene-0439_002_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to drive through the junction. Waypoints: Follow the route. Accelerate to drive through the junction. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0654_021_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate to follow the teal car that is to the front right. Waypoints: Follow the route. Accelerate to follow the silver SUV that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0017_012_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to reach the speed limit. Waypoints: Follow the route. Decelerate to stay behind the black car that is to the front right in 10.0 meters. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": true,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0676_008_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front right. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0133_004_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Decelerate to stay behind the black car that is to the front right in 10.0 meters. Waypoints: Follow the route. Decelerate to stay behind the black car that is to the front left in 6.6 meters. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": true,
+      "says_fast": false
+    }
+  },
+  {
+    "event_id": "scene-0865_001_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front left. Waypoints: Follow the route. Decelerate to stay behind the dark green car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": true,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0061_015_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate because the traffic light is green and the other vehicles are stopped at the junction and the vehicle in the junction is moving away. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": true,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0345_010_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate to follow the yellow car that is to the front right in 29.3 meters. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0067_001_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate to follow the gray car that is to the front right. Waypoints: Follow the route. Accelerate to follow the gray car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0211_002_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front right. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0979_004_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate to follow the silver car that is to the front. Waypoints: Follow the route. Accelerate to follow the silver car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0476_000_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front right. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-1110_008_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front right. Waypoints: Follow the route. Accelerate to drive through the junction. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0521_007_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front right. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0655_001_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front right. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0979_013_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front right. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-1088_000_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front right. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0900_004_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front right. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0355_013_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate to follow the silver SUV that is to the front right. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0371_000_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Maintain the reduced speed to drive through the junction. Waypoints: Follow the route. Maintain your current speed to drive through the junction. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0352_043_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to drive through the junction because the other vehicles are stopped at the junction and the junction is clear. Waypoints: Follow the route. Maintain the reduced speed to stay behind the black car that is to the front right in 38.0 meters. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": true,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0018_020_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front right. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-1086_005_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front in 32.4 meters. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0022_001_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to drive through the junction because the other vehicles are stopped at the junction and the junction is clear. Waypoints: Follow the route. Accelerate to drive through the junction. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": true,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-1084_007_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Maintain the reduced speed to stay behind the dark blue car that is to the front right. Waypoints: Follow the route. Maintain the reduced speed to stay behind the dark green car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": true,
+      "says_fast": false
+    }
+  },
+  {
+    "event_id": "scene-0061_011_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate because the traffic light is green and the other vehicles are stopped at the junction and the junction is clear. Waypoints: Follow the route. Accelerate because the traffic light is green and the other vehicles are stopped at the junction and the junction is clear. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": true,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0507_006_D2a",
+    "type": "D2a",
+    "ghost_text": "Follow the route. Accelerate to follow the orange car that is to the front right. Waypoints: Follow the route. Decelerate due to the pedestrian intersecting your path. Waypoints:",
+    "encoded": {
+      "mentions_vru": true,
+      "says_slow": true,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0500_004_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front right. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": false,
+      "says_slow": false,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0049_004_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Accelerate to follow the black car that is to the front right. Pay attention to the walker and brake if necessary. Waypoints: Follow the route. Accelerate to follow the black car that is to the front right. Waypoints:",
+    "encoded": {
+      "mentions_vru": true,
+      "says_slow": true,
+      "says_fast": true
+    }
+  },
+  {
+    "event_id": "scene-0025_006_A",
+    "type": "A",
+    "ghost_text": "Follow the route. Decelerate to stay behind the teal car that is to the front right. Waypoints: Follow the route. Decelerate due to the pedestrian intersecting your path. Waypoints:",
+    "encoded": {
+      "mentions_vru": true,
+      "says_slow": true,
+      "says_fast": false
+    }
+  }
+]
