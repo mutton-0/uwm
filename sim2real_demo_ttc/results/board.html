@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>危险响应评分榜 — nuScenes TTC 突变集</title>
+<style>
+:root{
+  --ground:#fafbfd; --card:#fff; --ink:#191d25; --muted:#5f6b7c; --rule:#e2e7ef; --rule2:#eef1f6;
+  --accent:#3558c4; --alt:#b8541a;
+  --ok:#0f6d46; --warn:#8f5406; --bad:#a32718;
+  --ok-bg:#e6f4ee; --warn-bg:#fbf0dd; --bad-bg:#fbe9e6; --mute-bg:#eef1f6;
+  --scale:#3558c4;
+  --shadow:0 1px 2px rgba(20,30,60,.05), 0 1px 8px rgba(20,30,60,.04);
+  --sans:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,"Cascadia Mono","Noto Sans Mono",monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --ground:#131519; --card:#1b1f26; --ink:#e6eaf1; --muted:#939eae; --rule:#2a3038; --rule2:#222731;
+    --accent:#7d9fff; --alt:#e8833a; --ok:#41c589; --warn:#e4ae52; --bad:#ff7f6f;
+    --ok-bg:#12281f; --warn-bg:#2b2213; --bad-bg:#2d1a17; --mute-bg:#222731; --scale:#7d9fff;
+    --shadow:0 1px 2px rgba(0,0,0,.4); }
+}
+:root[data-theme="dark"]{ --ground:#131519; --card:#1b1f26; --ink:#e6eaf1; --muted:#939eae; --rule:#2a3038; --rule2:#222731;
+  --accent:#7d9fff; --alt:#e8833a; --ok:#41c589; --warn:#e4ae52; --bad:#ff7f6f;
+  --ok-bg:#12281f; --warn-bg:#2b2213; --bad-bg:#2d1a17; --mute-bg:#222731; --scale:#7d9fff;
+  --shadow:0 1px 2px rgba(0,0,0,.4); }
+:root[data-theme="light"]{ --ground:#fafbfd; --card:#fff; --ink:#191d25; --muted:#5f6b7c; --rule:#e2e7ef; --rule2:#eef1f6;
+  --accent:#3558c4; --alt:#b8541a; --ok:#0f6d46; --warn:#8f5406; --bad:#a32718;
+  --ok-bg:#e6f4ee; --warn-bg:#fbf0dd; --bad-bg:#fbe9e6; --mute-bg:#eef1f6; --scale:#3558c4;
+  --shadow:0 1px 2px rgba(20,30,60,.05), 0 1px 8px rgba(20,30,60,.04); }
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+     font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:1240px;margin:0 auto;padding:34px 20px 64px;display:flex;flex-direction:column;gap:20px}
+h1{font-size:25px;margin:0;font-weight:650;letter-spacing:-.015em}
+.scope{color:var(--muted);font-size:13.5px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.note{color:var(--muted);font-size:12.5px;line-height:1.55}
+code{font-family:var(--mono);font-size:12px;background:var(--mute-bg);padding:1px 5px;border-radius:4px}
+
+/* —— 榜单 —— */
+.board{background:var(--card);border:1px solid var(--rule);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.scroll{overflow-x:auto}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13.5px;min-width:1080px}
+th,td{padding:8px 11px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--rule2)}
+th:first-child,td:first-child,th.txt,td.txt{text-align:left}
+thead tr.grp th{border-bottom:1px solid var(--rule);padding-bottom:6px;padding-top:12px}
+thead tr.grp th span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;font-weight:650}
+thead tr.grp th em{display:block;font-style:normal;font-size:11px;color:var(--muted);font-weight:400;letter-spacing:0}
+thead tr.grp th.g-behavior{color:var(--ok)} thead tr.grp th.g-understanding{color:var(--warn)} thead tr.grp th.g-failure{color:var(--bad)}
+thead tr.cols th{font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--muted);
+  font-weight:600;cursor:pointer;user-select:none;position:relative;padding-bottom:9px}
+thead tr.cols th:hover{color:var(--ink)}
+thead tr.cols th .ar{opacity:.35;font-size:9px;margin-left:3px}
+thead tr.cols th .lb{display:block;font-size:11.5px}
+thead tr.cols th em{display:block;font-style:normal;font-size:10px;opacity:.7;font-weight:400;margin-top:1px}
+thead tr.cols th.act .ar{opacity:1;color:var(--accent)}
+thead tr.cols th.act{color:var(--ink)}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+td.n .ci{display:block;font-size:10.5px;color:var(--muted);margin-top:1px}
+td.cell{position:relative}
+td.cell .sc{position:absolute;inset:3px 5px;border-radius:4px;background:var(--scale);z-index:0}
+td.cell .fg{position:relative;z-index:1}
+tbody tr:hover td{background:color-mix(in srgb,var(--accent) 4%,transparent)}
+tbody tr.row{cursor:pointer}
+tbody tr.row td:first-child{font-weight:600}
+.tw{display:inline-block;width:13px;color:var(--muted);font-size:10px;transition:transform .15s ease}
+tr.open .tw{transform:rotate(90deg);color:var(--accent)}
+@media(prefers-reduced-motion:reduce){.tw{transition:none}}
+.gate{display:inline-flex;align-items:center;gap:5px;padding:1px 8px;border-radius:99px;font-size:11px;
+  font-family:var(--mono);font-weight:640;border:1px dashed var(--warn);color:var(--warn);cursor:help;position:relative}
+.gate.mute{border-color:var(--muted);color:var(--muted)}
+.gate .tip{position:absolute;bottom:calc(100% + 7px);right:0;width:min(300px,74vw);background:var(--card);
+  border:1px solid var(--rule);border-radius:9px;padding:9px 11px;box-shadow:var(--shadow);text-align:left;
+  font-family:var(--sans);font-weight:400;font-size:12px;line-height:1.5;color:var(--ink);white-space:normal;
+  opacity:0;visibility:hidden;transition:opacity .14s;z-index:20}
+.gate:hover .tip,.gate:focus .tip{opacity:1;visibility:visible}
+.gate .tip b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:3px}
+
+/* 展开的诊断卡 */
+tr.detail>td{padding:0;border-bottom:1px solid var(--rule)}
+.dwrap{padding:18px 16px 22px;background:var(--ground);display:flex;flex-direction:column;gap:18px}
+.dsec h3{margin:0 0 9px;font-size:14px;font-weight:640}
+.chain{width:100%;min-width:0;font-size:12.5px}
+.chain td,.chain th{border-bottom:1px solid var(--rule2);white-space:normal;text-align:left;padding:7px 9px}
+.chain td.kn{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.chain tr.brk td:first-child{box-shadow:inset 3px 0 0 var(--bad)}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:1px 8px;border-radius:99px;
+  font-size:11px;font-weight:640;font-family:var(--mono);white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.p-通,.p-PASS,.p-通过{background:var(--ok-bg);color:var(--ok)}
+.p-弱{background:var(--warn-bg);color:var(--warn)}
+.p-断,.p-FAIL{background:var(--bad-bg);color:var(--bad)}
+.p-未测,.p-not_run,.p-不可估,.p-not_established,.p-豁免,.p-未测{background:transparent;color:var(--muted);border:1px dashed var(--muted)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+.mini{border:1px solid var(--rule);border-radius:10px;background:var(--card);padding:13px 15px}
+.mini table{min-width:0;font-size:12.5px}
+.mini td,.mini th{white-space:normal;border-bottom:1px solid var(--rule2);padding:6px 8px;text-align:left}
+.mini td.n{text-align:right;white-space:nowrap}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.three .c{border:1px solid var(--rule);border-radius:9px;padding:11px 13px;background:var(--card)}
+.three .c b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:4px}
+.three .c .s{font-family:var(--mono);font-size:12px;line-height:1.4}
+.three .c .r{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+.flags{display:flex;flex-wrap:wrap;gap:8px}
+.flag{border:1px solid var(--rule);border-radius:9px;padding:8px 11px;background:var(--card);min-width:120px}
+.flag.openq{border-style:dashed}
+.flag .lb{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.flag .ev{font-size:11.5px;color:var(--muted);margin-top:5px;max-width:330px;line-height:1.45}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.foot{border-top:1px solid var(--rule);padding-top:14px;color:var(--muted);font-size:12px;line-height:1.6}
+.err{color:var(--bad)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--rule);margin-bottom:-8px}
+.tabs button{background:none;border:none;border-bottom:2px solid transparent;padding:9px 16px;
+  font:inherit;font-size:13.5px;color:var(--muted);cursor:pointer;font-weight:560}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabs button:hover{color:var(--ink)}
+.axcard{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;gap:13px}
+.axhead{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;justify-content:space-between}
+.axhead h3{margin:0;font-size:17px;font-weight:650}
+.axmeta{display:grid;grid-template-columns:88px 1fr;gap:5px 12px;font-size:12.5px}
+.axmeta dt{color:var(--muted);font-family:var(--mono);font-size:11px}
+.axmeta dd{margin:0;line-height:1.5}
+.v-认证（条件通过）{background:var(--ok-bg);color:var(--ok)}
+.v-解耦{background:var(--warn-bg);color:var(--warn)}
+.v-未获效度{background:var(--bad-bg);color:var(--bad)}
+.verd{padding:3px 11px;border-radius:99px;font-size:12px;font-weight:650;font-family:var(--mono)}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{position:relative;display:inline-flex;align-items:center;gap:5px;padding:2px 10px;border-radius:99px;
+  font-size:11.5px;font-family:var(--mono);font-weight:620;cursor:help}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.chip.c-过{background:var(--ok-bg);color:var(--ok)}
+.chip.c-未过{background:var(--bad-bg);color:var(--bad)}
+.chip.c-豁免{background:transparent;color:var(--muted);border:1px dashed var(--muted)}
+.chip .tip{position:absolute;bottom:calc(100% + 7px);left:0;width:min(330px,80vw);background:var(--card);
+  border:1px solid var(--rule);border-radius:9px;padding:9px 12px;box-shadow:var(--shadow);
+  font-family:var(--sans);font-weight:400;font-size:12px;line-height:1.5;color:var(--ink);
+  white-space:normal;text-align:left;opacity:0;visibility:hidden;transition:opacity .14s;z-index:30}
+.chip:hover .tip,.chip:focus .tip{opacity:1;visibility:visible}
+.axgrid{display:grid;grid-template-columns:minmax(300px,1.15fr) minmax(260px,1fr);gap:16px}
+@media(max-width:840px){.axgrid{grid-template-columns:1fr}}
+.axgrid h4{margin:0 0 7px;font-size:12px;font-family:var(--mono);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);font-weight:640}
+.readbar{position:relative;height:34px;background:var(--mute-bg);border-radius:6px;margin:9px 0 4px}
+.readbar .fillb{position:absolute;top:0;bottom:0;left:0;background:var(--accent);opacity:.55;border-radius:6px}
+.readbar .flr{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--bad)}
+.readbar .flr i{position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-size:9.5px;
+  font-family:var(--mono);color:var(--bad);white-space:nowrap}
+.readbar .lbl{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-family:var(--mono);
+  font-size:13px;font-weight:650;font-variant-numeric:tabular-nums}
+.pvcard{border:1px solid var(--rule);border-radius:10px;background:var(--card);padding:14px 16px}
+.pvrow{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:baseline;
+  padding:9px 0;border-bottom:1px solid var(--rule2)}
+.pvrow:last-of-type{border-bottom:none}
+.pvrow .pid{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:640}
+.pvrow .pv-v{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap}
+.st-命中{background:var(--ok-bg);color:var(--ok)} .st-未中{background:var(--bad-bg);color:var(--bad)}
+.st-不可估{background:transparent;color:var(--muted);border:1px dashed var(--muted)}
+.stp{padding:1px 9px;border-radius:99px;font-size:11px;font-family:var(--mono);font-weight:640;white-space:nowrap}
+.fix{border-left:3px solid var(--warn);background:color-mix(in srgb,var(--warn) 7%,transparent);
+  border-radius:0 8px 8px 0;padding:11px 14px;margin-top:13px}
+.fix h5{margin:0 0 6px;font-size:12.5px;font-weight:650;color:var(--warn)}
+.fix ul{margin:6px 0 0;padding-left:18px}
+.fix li{font-size:12px;color:var(--muted);line-height:1.5;margin:3px 0}
+.fix del{color:var(--muted)}
+.axnote{font-size:12.5px;color:var(--muted);line-height:1.55;border-left:2px solid var(--rule);padding-left:11px}
+.statusline{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;
+  background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:11px 16px;box-shadow:var(--shadow)}
+.statusline .sl-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.headline{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--bad);
+  border-radius:10px;padding:14px 18px;display:flex;flex-direction:column;gap:4px;box-shadow:var(--shadow)}
+.headline .hl-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--bad)}
+.headline .hl-v{font-size:16px;font-weight:620}
+.headline .hl-s{font-size:12.5px;color:var(--muted);line-height:1.55}
+.gloss{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:10px 16px}
+.gloss summary{cursor:pointer;font-size:13px;color:var(--muted);font-family:var(--mono)}
+.gloss summary:hover{color:var(--ink)}
+.glosst{min-width:0;font-size:12.5px;margin-top:10px}
+.glosst td{white-space:normal;text-align:left;padding:6px 9px;border-bottom:1px solid var(--rule2);vertical-align:top}
+.glosst td:first-child{white-space:nowrap;width:60px}
+.safe table{min-width:0}
+.safe td.n{text-align:right}
+.finds{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:12px}
+.find{background:var(--card);border:1px solid var(--rule);border-radius:11px;padding:14px 16px;
+  display:flex;flex-direction:column;gap:7px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.find::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+.find.s-已决::before{background:var(--ok)}
+.find.s-条件通过::before{background:var(--accent)}
+.find.s-待确证::before{background:var(--warn)}
+.find .fid{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted)}
+.find .claim{font-size:14.5px;font-weight:620;line-height:1.45;text-wrap:balance}
+.find .ev{font-size:12.5px;color:var(--muted);line-height:1.55}
+.find .cav{font-size:11.5px;color:var(--warn);line-height:1.5;
+  border-top:1px dashed var(--rule);padding-top:7px;margin-top:2px}
+.find .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:2px}
+.src{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:10.5px;
+  color:var(--muted);border:1px solid var(--rule);border-radius:5px;padding:1px 6px;text-decoration:none}
+a.src:hover{color:var(--accent);border-color:var(--accent)}
+.src::before{content:"↗";font-size:9px;opacity:.7}
+span.src::before{content:"§";font-size:10px}
+.p-疑断{background:transparent;color:var(--bad);border:1px dashed var(--bad)}
+.p-相关档,.p-干预档,.p-已决,.p-条件通过,.p-待确证{background:var(--mute-bg);color:var(--muted);
+  font-size:10.5px;padding:1px 7px}
+</style>
+</head>
+<body>
+<div class="page" id="page">载入 board.json …</div>
+<script>
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const f=(x,n=3)=>(x===null||x===undefined||Number.isNaN(x))?'—':Number(x).toFixed(n);
+const pill=v=>`<span class="pill p-${esc(v)}">${esc(v)}</span>`;
+/* 溯源芯片：仓库内以 http 提供时给真链接；发布版（无本地 md）退化成纯文本，避免死链 */
+const INLINE = (typeof window!=='undefined' && window.__ARTIFACT__===true);
+const src=o=>{ if(!o) return '';
+  const txt=`${o.file} ${o.sec}`;
+  return INLINE ? `<span class="src" title="仓库内路径 results/${esc(o.file)}">${esc(txt)}</span>`
+                : `<a class="src" href="${esc(o.file)}" title="打开 ${esc(o.file)}">${esc(txt)}</a>`;};
+
+function render(B){
+  const COLS=B.columns, GROUPS=B.groups, MODELS=B.models;
+  let sort={...B.sort_default}, openRows=new Set(), tab='board';
+
+  const val=(m,k)=>{const c=m.metrics[k]; if(c!==undefined) return c.value;
+    return m[k]!==undefined?m[k]:null;};
+
+  /* 列内配色阶：同列跨模型归一化。单模型时不着色（无对比意义） */
+  function scaleFor(col){
+    if(!['pct','pct_ci','num','p'].includes(col.kind)) return null;
+    const vs=MODELS.map(m=>val(m,col.key)).filter(v=>typeof v==='number'&&isFinite(v));
+    if(vs.length<2) return null;
+    const lo=Math.min(...vs), hi=Math.max(...vs);
+    if(hi===lo) return null;
+    return v=>{const t=(v-lo)/(hi-lo); return col.better==='low'?1-t:t;};
+  }
+  const scales=Object.fromEntries(COLS.map(c=>[c.key,scaleFor(c)]));
+
+  function cell(m,col){
+    const c=m.metrics[col.key];
+    if(col.kind==='text') return `<td class="txt">${esc(m[col.key]??'—')}</td>`;
+    if(col.kind==='gated'){
+      const st=c.state;
+      return `<td><span class="gate ${st==='not_run'?'mute':''}" tabindex="0">—　${esc(st)}
+        <span class="tip"><b>解锁条件</b>${esc(c.unlock||'')}</span></span></td>`;
+    }
+    const v=c?c.value:null;
+    if(v===null||v===undefined) return `<td class="n">—</td>`;
+    const s=scales[col.key], t=s?s(v):null;
+    const bg=t===null?'':`<span class="sc" style="opacity:${(0.06+t*0.30).toFixed(3)}"></span>`;
+    const main=col.kind==='p'?f(v,col.digits):f(v,col.digits);
+    const ci=(col.kind==='pct_ci'&&c.ci)?`<span class="ci">[${f(c.ci[0],3)}, ${f(c.ci[1],3)}]</span>`:'';
+    return `<td class="n cell">${bg}<span class="fg">${main}${ci}</span></td>`;
+  }
+
+  function sortedModels(){
+    const col=COLS.find(c=>c.key===sort.key)||COLS[0];
+    return [...MODELS].sort((a,b)=>{
+      let x=val(a,sort.key), y=val(b,sort.key);
+      if(col.kind==='text'){x=String(x||'');y=String(y||'');return sort.dir==='asc'?x.localeCompare(y):y.localeCompare(x);}
+      if(x===null||x===undefined)return 1; if(y===null||y===undefined)return -1;
+      return sort.dir==='asc'?x-y:y-x;
+    });
+  }
+
+  const chainTbl=m=>`<table class="chain"><thead><tr>
+      <th>环节</th><th>状态</th><th>关键数字</th><th>证据</th><th>档位</th></tr></thead><tbody>
+    ${m.chain_portrait.map(l=>`<tr class="${l.state==='断'?'brk':''}">
+      <td><b>${esc(l.name)}</b>${l.sub?`<br><span class="note">${esc(l.sub)}</span>`:''}</td>
+      <td>${pill(l.state)}</td><td class="kn">${esc(l.key_number)}</td>
+      <td class="note">${esc(l.evidence)}</td>
+      <td class="note">${esc(l.tier)}${l.source?'<br>'+src(l.source):''}</td></tr>`).join('')}
+    </tbody></table>`;
+
+  const instTbl=m=>{const I=m.instrument_status;return `
+    <p class="note" style="margin:0 0 10px">${esc(I.verdict_note)}</p>
+    <table class="chain"><tbody>${I.checks.map(c=>`<tr>
+      <td style="width:210px"><b>${esc(c.name)}</b></td>
+      <td style="width:104px">${pill(c.result.replace(/（.*/,''))}</td>
+      <td class="note">${esc(c.detail)}</td></tr>`).join('')}</tbody></table>
+    <p class="note" style="margin:11px 0 10px"><b style="color:var(--ink)">语言轴提取</b>　r =
+      ${f(I.lang_axis_extraction.consistency_r)} vs 置换零分布
+      ${f(I.lang_axis_extraction.perm_null_range[0])}–${f(I.lang_axis_extraction.perm_null_range[1])}；
+      held-out 正比例 ${f(I.lang_axis_extraction.heldout_frac_positive)}（L${I.lang_axis_extraction.layer}）。
+      ${esc(I.lang_axis_extraction.caveat)}</p>
+    <div class="three">${I.decoupling_three_lines.map(t=>`<div class="c"><b>解耦证据 · ${esc(t.line)}</b>
+      <div class="s">${esc(t.stat)}</div><div class="r">${esc(t.ref)}</div></div>`).join('')}</div>`;};
+
+  const validityBlk=m=>{const V=m.validity;return `
+    <div class="flags">${Object.entries(V.flags).map(([k,v])=>{
+      const open=V.resolution[k]==='未决';
+      return `<div class="flag ${open?'openq':''}"><div class="lb">${esc(k)} · ${esc(V.resolution[k])}</div>
+        ${pill(v)}<div class="ev">${esc(V.evidence[k])}</div></div>`;}).join('')}</div>
+    <table class="chain" style="margin-top:12px"><thead><tr><th>悬案</th><th>状态</th><th>解锁条件</th></tr></thead>
+    <tbody>${V.open_items.map(o=>`<tr><td><b>${esc(o.label)}</b></td><td>${pill(o.state)}</td>
+      <td class="note">${esc(o.unlock)}</td></tr>`).join('')}</tbody></table>
+    <p class="note" style="margin-top:10px">${V.open_root_note.replace(/\*\*(.+?)\*\*/g,'<b style="color:var(--ink)">$1</b>')}</p>`;};
+
+  /* 剂量-响应折线：v_brake 的单调反对称阶梯 vs 其他轴的平坦线 */
+  const doseChart=(dc,color)=>{
+    if(!dc||!dc.alphas||!dc.alphas.length) return '<p class="note">无剂量数据</p>';
+    const A=[...dc.alphas], DV=[...dc.dv], CI=[...dc.ci];
+    // 插入 α=0 锚点（逐位一致 ⇒ Δv=0，无误差）
+    let k=A.findIndex(a=>a>0); if(k<0)k=A.length;
+    A.splice(k,0,0); DV.splice(k,0,0); CI.splice(k,0,[0,0]);
+    const W=430,H=240,P={l:52,r:16,t:16,b:34};
+    const ax=Math.max(...A.map(Math.abs));
+    const lo=Math.min(...CI.map(c=>c[0])), hi=Math.max(...CI.map(c=>c[1]));
+    const pad=(hi-lo)*.12||.01;
+    const X=v=>P.l+(v+ax)/(2*ax)*(W-P.l-P.r);
+    const Y=v=>P.t+((hi+pad)-v)/((hi+pad)-(lo-pad))*(H-P.t-P.b);
+    const pts=A.map((a,i)=>`${X(a)},${Y(DV[i])}`).join(' ');
+    const bars=A.map((a,i)=>a===0?'':
+      `<line x1="${X(a)}" y1="${Y(CI[i][0])}" x2="${X(a)}" y2="${Y(CI[i][1])}"
+         stroke="${color}" stroke-width="1.4" opacity=".55"/>`).join('');
+    const dots=A.map((a,i)=>`<circle cx="${X(a)}" cy="${Y(DV[i])}" r="${a===0?4.5:3.6}"
+       fill="${a===0?'var(--card)':color}" stroke="${color}" stroke-width="${a===0?2:1.4}">
+       <title>α=${a} → Δv_plan=${DV[i].toFixed(4)} m/s</title></circle>`).join('');
+    return `<svg viewBox="0 0 ${W} ${H}" role="img"
+      aria-label="剂量-响应曲线：横轴注入强度 α 从 −4 到 +4，纵轴规划速度变化，带 95% 置信区间">
+      <line x1="${P.l}" y1="${Y(0)}" x2="${W-P.r}" y2="${Y(0)}" stroke="currentColor" opacity=".2" stroke-dasharray="3 4"/>
+      <line x1="${X(0)}" y1="${P.t}" x2="${X(0)}" y2="${H-P.b}" stroke="currentColor" opacity=".2" stroke-dasharray="3 4"/>
+      ${bars}<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"/>${dots}
+      <text x="${X(0)}" y="${P.t+10}" text-anchor="middle" font-size="9.5" fill="var(--muted)">α=0 逐位一致</text>
+      <text x="${P.l}" y="${P.t-3}" font-size="10" fill="var(--muted)">Δv_plan [m/s]</text>
+      ${[-ax,-ax/2,0,ax/2,ax].map(t=>`<text x="${X(t)}" y="${H-9}" text-anchor="middle"
+         font-size="10" fill="var(--muted)">${t}</text>`).join('')}
+      <text x="${W-P.r}" y="${H-9}" text-anchor="end" font-size="10" fill="var(--muted)">α (×σ)</text>
+    </svg>`;};
+
+  /* 读取端横条：主读数 AUC 与各地板线同图 */
+  const readBar=r=>{
+    if(r.auc===null||r.auc===undefined) return '<p class="note">无逐样本读数</p>';
+    const X=v=>Math.max(0,Math.min(100,(v-0.4)/0.3*100));   // 0.40–0.70 视窗
+    const flr=(r.floors||[]).map(fo=>fo.value===null?'':
+      `<span class="flr" style="left:${X(fo.value)}%"><i>${esc(fo.name)} ${f(fo.value)}</i></span>`).join('');
+    return `<div class="readbar"><div class="fillb" style="width:${X(r.auc)}%"></div>${flr}
+      <span class="lbl">${f(r.auc)}</span></div>
+      <p class="note">主读数 AUC(A vs D2a)${r.ci95?` [${f(r.ci95[0])}, ${f(r.ci95[1])}]`:''}
+        ${r.p!==null&&r.p!==undefined?`　p=${f(r.p,3)}`:''}　n=${r.n?r.n.join('/'):'—'}　
+        <span style="color:var(--muted)">视窗 0.40–0.70；红线 = 地板</span></p>`;};
+
+  /* 轴效度 tab */
+  const axesTab=m=>`<div style="display:flex;flex-direction:column;gap:16px">
+    <p class="note">每根轴三段看：<b>提取质量</b>（方向是不是真的存在）→ <b>读取端</b>（能不能逐样本判别）
+      → <b>操纵端</b>（推得动行为吗）。三段都过才叫认证。</p>
+    ${(m.axes_validity||[]).map((a,i)=>{
+      const color=['var(--ok)','var(--accent)','var(--bad)'][i]||'var(--accent)';
+      const q=a.quality;
+      return `<div class="axcard">
+        <div class="axhead"><h3>${esc(a.display)}</h3>
+          <span class="verd v-${esc(a.verdict)}">${esc(a.verdict)}</span></div>
+        <dl class="axmeta">
+          <dt>提取</dt><dd>${esc(a.extraction)}</dd>
+          <dt>配对来源</dt><dd>${esc(a.pairing)}</dd>
+          <dt>提取质量</dt><dd>${q.value===null?'—':`${esc(q.metric)} = <b>${f(q.value)}</b>`}
+            ${q.null?`　vs 置换零分布 ${f(q.null[0])}–${f(q.null[1])}`:''}
+            ${q.evr1?`　EVR₁ ${f(q.evr1)}`:''}<br><span class="note">${esc(q.note)}</span></dd>
+          ${a.layer!==null&&a.layer!==undefined?`<dt>层</dt><dd>L${a.layer}</dd>`:''}
+        </dl>
+        <div class="axgrid">
+          <div><h4>操纵端 · 剂量-响应</h4>${doseChart(a.dose_curve,color)}
+            ${a.dose_curve.slope!==null&&a.dose_curve.slope!==undefined?
+              `<p class="note">全阶梯斜率 ${f(a.dose_curve.slope,4)}
+               [${f(a.dose_curve.slope_ci[0],4)}, ${f(a.dose_curve.slope_ci[1],4)}]</p>`:''}</div>
+          <div><h4>读取端 · 逐样本判别力</h4>${readBar(a.readout)}
+            ${a.readout.projdiff!==undefined?`<p class="note">投影差（组均值）
+              ${f(a.readout.projdiff,4)} [${f(a.readout.projdiff_ci[0],4)}, ${f(a.readout.projdiff_ci[1],4)}]</p>`:''}
+            ${(a.readout.floors||[]).filter(x=>x.caveat).map(x=>
+              `<p class="note">⚠ ${esc(x.caveat)}</p>`).join('')}
+            <h4 style="margin-top:14px">对照四件套</h4>
+            <div class="chips">${a.controls.map(c=>`<span class="chip c-${esc(c.state)}" tabindex="0">
+              ${esc(c.name)}·${esc(c.state)}<span class="tip">${esc(c.detail)}</span></span>`).join('')}</div>
+          </div>
+        </div>
+        <p class="axnote">${esc(a.verdict_note)}　${src(a.source)}</p>
+      </div>`;}).join('')}
+    <p class="axnote"><b>W1 + W3 的配对解读</b>：外力（注入）能把规划速度推得动 ⇒ <b>执行机构完好</b>；
+      而真实视觉危险推不动同一条轴（读取端 AUC 0.517，低于随机方向地板 0.554）⇒ <b>输入端断</b>。
+      这正是"执行机构完好、视觉信号缺失"的可视化主证：
+      <code>v_brake</code> 的单调反对称阶梯 vs 视觉判别式轴的平坦线。</p>
+  </div>`;
+
+  /* 预测-验证（预注册） */
+  const pvBlk=m=>{const P=m.prediction_validation; if(!P) return '';
+    const A=P.alignment_correction, pct=x=>x===null?'—':(x*100).toFixed(1)+'%';
+    return `<div class="pvcard"><h3 style="margin:0 0 3px;font-size:13px">预测-验证
+      <span class="note">（预注册于 ${esc(P.registered_in)}）</span></h3>
+      <p class="note" style="margin:0 0 10px">验证集：
+        ${P.sets.map(x=>`<b>${esc(x.id)}</b> ${esc(x.desc)} n=${x.n}（b ${esc(x.b)} / 语言 ${esc(x.lang)}）`).join('　·　')}</p>
+      ${P.predictions.map(q=>`<div class="pvrow">
+        <span class="pid">${esc(q.id)}</span>
+        <div><b>${esc(q.claim)}</b><div class="note">阈值 ${esc(q.threshold)}　${esc(q.note)}</div></div>
+        <div style="text-align:right">
+          ${q.value!==null?`<span class="pv-v">${f(q.value,4)}${q.ci?` <span class="note">[${f(q.ci[0],3)}, ${f(q.ci[1],3)}]</span>`:''}</span><br>`:''}
+          <span class="stp st-${esc(q.state)}">${esc(q.state)}</span></div></div>`).join('')}
+      <div class="fix"><h5>⚠ ${esc(A.title)}</h5>
+        <p class="note" style="margin:0">${esc(A.problem)}。<b>根因</b>：V-BC 的目标构成里
+          ${A.composition.map(c=>`${esc(c.cls.split('.').slice(0,2).join('.'))} ${c.n}`).join('、')}，
+          <b style="color:var(--ink)">VRU 目标仅占 ${pct(A.vru_share)}</b>；
+          而小集 / V-A 是 100% VRU 突现事件。VRU 词表在 V-BC 上量到的主要不是"有没有看到行人"。</p>
+        <p class="note" style="margin:8px 0 0"><b style="color:var(--ink)">口径对齐后三集一致</b>：
+          ${A.aligned.map(x=>`${esc(x.set)} ${f(x.rate,3)}`).join('　→　')}
+          （V-BC 仅 VRU 子集 n=${A.vru_only.n}，太小不做检验，仅作口径核对）</p>
+        <ul>${A.retracted.map(x=>`<li><del>作废</del> ${esc(x)}</li>`).join('')}</ul>
+        <p class="note" style="margin:8px 0 0">${esc(A.restated)}</p></div>
+      <p class="note" style="margin-top:11px">${esc(P.verdict)}　${src(P.source)}</p></div>`;};
+
+  /* 交通安全学分层 */
+  const safeBlk=m=>{const S=m.detail.safety; if(!S) return '';
+    const pct=x=>x===null||x===undefined?'—':(x*100).toFixed(1)+'%';
+    const ci=a=>a?`<span class="ci">[${pct(a[0])}, ${pct(a[1])}]</span>`:'';
+    const C=S.continuous;
+    return `<div class="mini safe"><h3 style="margin:0 0 8px;font-size:13px">交通安全学分层
+      <span class="note">（${esc(S.variant)} 正例 n=${S.n_positive} / ${S.n_scenes} 场景）</span></h3>
+
+      <table><thead><tr><th>碰撞紧迫度 TTC</th><th class="n">n</th><th class="n">刹车达标率</th><th class="n">反向率</th><th class="n">b 中位</th></tr></thead>
+      <tbody>${S.ttc_strata.map(t=>`<tr><td>${esc(t.bin)}</td><td class="n">${t.n}</td>
+        <td class="n">${pct(t.pass_rate)} ${ci(t.ci)}</td><td class="n">${pct(t.reverse_rate)}</td>
+        <td class="n">${f(t.b_median,4)}</td></tr>`).join('')}</tbody></table>
+      <p class="note" style="margin:7px 0 12px">Kruskal–Wallis p=${f(S.ttc_trend.p,3)} ——
+        趋势不显著，但<b style="color:var(--ink)">方向是反的</b>：最紧迫那一箱刹得最少。</p>
+
+      <table><thead><tr><th>危险物距离</th><th class="n">n</th><th class="n">刹车达标率</th></tr></thead>
+      <tbody>${S.distance_strata.map(t=>`<tr><td>${esc(t.bin)}</td><td class="n">${t.n}</td>
+        <td class="n">${pct(t.pass_rate)} ${ci(t.ci)}</td></tr>`).join('')}</tbody></table>
+
+      <table style="margin-top:12px"><thead><tr><th>连续安全学量</th><th class="n">中位</th>
+        <th class="n">ρ(量, b)</th><th class="n">p</th><th>四分位达标率 Q1→Q4</th></tr></thead>
+      <tbody>${Object.entries(C).filter(([,v])=>v.strata).map(([k,v])=>`<tr>
+        <td><b>${esc(v.label)}</b><br><span class="note">${esc(v.expect)}</span></td>
+        <td class="n">${f(v.median,3)} ${esc(v.unit)}</td>
+        <td class="n">${f(v.spearman_b.rho,3)}</td><td class="n">${f(v.spearman_b.p,3)}</td>
+        <td class="n">${v.strata.map(x=>pct(x.pass_rate)).join(' → ')}</td></tr>`).join('')}</tbody></table>
+
+      <p class="note" style="margin-top:10px"><b style="color:var(--bad)">与 S1 曲线冲突（已记录）</b>：
+        本表在真正的危险事件上 ρ(d_long, b)=${f(S.s1_crosscheck.rho_dlong_b,4)}
+        (p=${f(S.s1_crosscheck.p,3)}) ⇒ <b>${esc(S.s1_crosscheck.direction)}</b>；
+        而 S1 在 ${esc(S.s1_crosscheck.s1_reference.population)} 上是 ${esc(S.s1_crosscheck.s1_reference.direction)}。
+        ${esc(S.s1_crosscheck.note)}</p>
+
+      <p class="note" style="margin-top:10px"><b style="color:var(--ink)">未实现（不填数）</b>：
+        ${S.not_implemented.map(x=>`<br>· <b>${esc(x.metric)}</b> —— ${esc(x.why)}`).join('')}</p>
+    </div>`;};
+
+  /* T2.5 语言通道（VLA 专属，相关档） */
+  const langBlk=m=>{const L=m.detail.language_channel; if(!L) return '';
+    const rr=L.response_rate, c=L.consistency_2x2, d=L.deep, g=d.mention_vs_geometry;
+    const pct=x=>x===null||x===undefined?'—':(x*100).toFixed(1)+'%';
+    return `<div class="mini"><h3 style="margin:0 0 4px;font-size:13px">T2.5 语言通道
+      <span class="pill p-不可估" style="margin-left:6px">${esc(L.evidence_tier.split('（')[0])}</span></h3>
+      <p class="note" style="margin:0 0 10px">${esc(L.scope)}。编码器 = ${esc(L.encoder.type)}；
+        人工核对 <b>${L.encoder.human_verified?'已完成':'待做'}</b>（抽检样本见
+        <code>${esc(L.encoder.audit_file)}</code>）。</p>
+      <table><thead><tr><th>语言读数</th><th class="n">A 类</th><th class="n">D2a（几何匹配）</th><th class="n">Fisher p</th></tr></thead>
+      <tbody>
+        <tr><td>提到 VRU <span class="note">感知侧</span></td>
+          <td class="n">${pct(rr.mentions_vru.A)} <span class="ci">[${pct(rr.mentions_vru.A_ci[0])}, ${pct(rr.mentions_vru.A_ci[1])}]</span></td>
+          <td class="n">${pct(rr.mentions_vru.D2a)}</td><td class="n">${rr.mentions_vru.p.toExponential(1)}</td></tr>
+        <tr><td>说要减速 <span class="note">决策侧</span></td>
+          <td class="n">${pct(rr.says_slow.A)} <span class="ci">[${pct(rr.says_slow.A_ci[0])}, ${pct(rr.says_slow.A_ci[1])}]</span></td>
+          <td class="n">${pct(rr.says_slow.D2a)}</td><td class="n">${rr.says_slow.p.toExponential(1)}</td></tr>
+        <tr><td>说要加速</td><td class="n">${pct(rr.says_fast.A)}</td>
+          <td class="n">${pct(rr.says_fast.D2a)}</td><td class="n">${f(rr.says_fast.p,2)}</td></tr>
+      </tbody></table>
+
+      <h3 style="margin:14px 0 6px;font-size:12.5px">语言 × 行为 2×2（A 类）</h3>
+      <table><thead><tr><th></th><th class="n">刹了 (b≥${f(m.detail.language_channel.consistency_2x2.n?0.5:0.5,1)})</th><th class="n">没刹</th></tr></thead>
+      <tbody><tr><td>说要减速</td><td class="n">${c.cells.said_did}</td><td class="n">${c.cells.said_not}</td></tr>
+        <tr><td>没说</td><td class="n">${c.cells.not_did}</td><td class="n">${c.cells.not_not}</td></tr></tbody></table>
+      <p class="note" style="margin-top:7px">一致率 ${f(c.agreement)} [${f(c.agreement_ci[0])}, ${f(c.agreement_ci[1])}]，
+        Cohen κ=${f(c.cohen_kappa)}，Fisher p=${f(c.fisher_p,4)}。
+        <b style="color:var(--ink)">说了没刹 ${pct(c.said_not_did)}</b>（概念→动作断的语言侧证据）；
+        没说却刹了 ${pct(c.not_said_did)}（语言未反映真实行动依据）。</p>
+
+      <h3 style="margin:14px 0 6px;font-size:12.5px">深挖</h3>
+      <table><tbody>
+        <tr><td style="width:150px"><b>提及 × 刹车</b></td><td class="note">
+          提及子集 n=${d.mention_x_brake.n_mentioned} 刹车率 ${pct(d.mention_x_brake.rate_mentioned)}
+          vs 未提及 ${pct(d.mention_x_brake.rate_not)}（Fisher p=${f(d.mention_x_brake.fisher_p,2)}，
+          差值 ${d.mention_x_brake.delta>=0?'+':''}${pct(d.mention_x_brake.delta)}）—— ${esc(d.mention_x_brake.verdict)}</td></tr>
+        <tr><td><b>条件化重提轴</b></td><td class="note">
+          提及子集 AUC ${f(d.conditional_axis.A_men.auc)}
+          [${f(d.conditional_axis.A_men.ci95[0])}, ${f(d.conditional_axis.A_men.ci95[1])}] (n=${d.conditional_axis.A_men.n})
+          vs 未提及 ${f(d.conditional_axis.A_not.auc)} (n=${d.conditional_axis.A_not.n})
+          —— 提及子集**并不更强**，「信号被没看见的事件稀释」的翻案假设不成立</td></tr>
+        <tr><td><b>提及 vs 几何</b></td><td class="note">
+          成像面积 r=${f(g.area.pointbiserial_r)} (p=${f(g.area.p,3)})，中位 ${g.area.median_mentioned.toFixed(0)} vs ${g.area.median_not.toFixed(0)} px；
+          纵向距离 r=${f(g.d.pointbiserial_r)} (p=${g.d.p.toExponential(1)})，中位 ${g.d.median_mentioned.toFixed(1)} vs ${g.d.median_not.toFixed(1)} m；
+          离心率 r=${f(g.ecc.pointbiserial_r)} (p=${f(g.ecc.p,3)})
+          —— 只「看见」<b style="color:var(--ink)">大而近</b>的行人；离心率方向与「居中」假设相反</td></tr>
+      </tbody></table>
+      <p class="note" style="margin-top:9px">⚠️ <b style="color:var(--ink)">没提及 ≠ 没感知</b>：语言头有自身输出偏好。
+        定罪需遗留① 内部物体存在性探针配对验证 —— 语言不提 + 探针也读不出 ⇒ 感知丢失铁案；
+        探针读得出但语言不提 ⇒ 信息在但未进入语言/决策通路。</p></div>`;};
+
+  const detailBlk=m=>{const D=m.detail;return `
+    <div class="grid2">
+      <div class="mini"><h3 style="margin:0 0 8px;font-size:13px">三条轴</h3><table>
+        <thead><tr><th>轴</th><th>层</th><th class="n">steering 斜率</th><th class="n">AUC vs D2a</th></tr></thead>
+        <tbody>${Object.entries(D.axes).filter(([k])=>k!=='cos_matrix').map(([k,a])=>`<tr>
+          <td><code>${esc(k)}</code><br><span class="note">${esc(a.source)}</span></td>
+          <td class="n">${a.layer===null?'—':'L'+a.layer}</td>
+          <td class="n">${a.steering_slope===null?'—':f(a.steering_slope,4)}</td>
+          <td class="n">${f(a.auc_vs_D2a)}</td></tr>`).join('')}</tbody></table>
+        <p class="note" style="margin-top:8px">轴间 cos（随机基线 0.033）：
+          ${Object.entries(D.axes.cos_matrix).map(([k,v])=>`${esc(k.replace('|',' · '))} ${f(v)}`).join('；')}</p></div>
+      <div class="mini"><h3 style="margin:0 0 8px;font-size:13px">自然激活 → 等效注入剂量</h3><table>
+        <thead><tr><th>轴</th><th class="n">σ</th><th class="n">自然投影差</th><th class="n">等效 α</th><th class="n">外推 Δv</th></tr></thead>
+        <tbody>${D.equivalent_alpha.rows.map(r=>`<tr><td><code>${esc(r.axis)}</code> L${r.layer}</td>
+          <td class="n">${f(r.sigma,3)}</td><td class="n">+${f(r.natural_projdiff,4)}</td>
+          <td class="n"><b>${f(r.equiv_alpha,4)}</b></td><td class="n">${f(r.extrapolated_dv,5)}</td></tr>`).join('')}</tbody></table>
+        <p class="note" style="margin-top:8px">实测 b 中位 +${f(D.equivalent_alpha.observed_b_median,4)}、均值
+          +${f(D.equivalent_alpha.observed_b_mean,4)} m/s —— 比外推值大
+          <b>${D.equivalent_alpha.gap_factor[0]}–${D.equivalent_alpha.gap_factor[1]} 倍</b>。</p></div>
+    </div>
+    ${safeBlk(m)}
+    ${langBlk(m)}
+    <div class="mini"><h3 style="margin:0 0 8px;font-size:13px">工单判定</h3><table>
+      <tbody>${Object.entries(D.verdicts).map(([k,v])=>`<tr><td style="width:190px"><b>${esc(k)}</b></td>
+        <td class="note">${esc(v)}</td></tr>`).join('')}</tbody></table></div>`;};
+
+  function draw(){
+    const rows=sortedModels();
+    const grpCount=Object.fromEntries(GROUPS.map(g=>[g.id,COLS.filter(c=>c.group===g.id).length]));
+    document.getElementById('page').innerHTML=`
+      <header style="display:flex;flex-direction:column;gap:6px">
+        <div class="eyebrow">RepE 式评价指标 · 效度验证 demo</div>
+        <h1>危险响应评分榜</h1>
+        <p class="scope">${esc(B.scope_note)}</p>
+      </header>
+      <div class="statusline"><span class="sl-k">状态</span><span>${esc(B.status_line)}</span></div>
+      <section>
+        <div class="eyebrow">关键发现 · 每条可溯源到已落盘报告</div>
+        <div class="finds">${(rows[0].findings||[]).map(fd=>`
+          <div class="find s-${esc(fd.status)}">
+            <span class="fid">${esc(fd.id)}</span>
+            <div class="claim">${esc(fd.claim)}</div>
+            <div class="ev">${esc(fd.evidence)}</div>
+            ${fd.caveat?`<div class="cav">⚠ ${esc(fd.caveat)}</div>`:''}
+            <div class="meta">${pill(fd.tier)}${pill(fd.status)}${src(fd.source)}</div>
+          </div>`).join('')}</div>
+      </section>
+      <div class="headline">
+        <span class="hl-k">最刺眼的一行</span>
+        <span class="hl-v">${(rows[0].metrics.reverse_rate.value*100).toFixed(1)}% 的危险事件里，模型规划得<b>反而更快</b></span>
+        <span class="hl-s">无响应率 ${(rows[0].metrics.no_response.value*100).toFixed(1)}%　·　
+          最紧迫（TTC&lt;2s）时刹车率仅 ${(rows[0].metrics.pass_ttc2.value*100).toFixed(1)}%，
+          比 2–5s 档还低 —— <b>越紧迫越不刹</b></span>
+      </div>
+      <details class="gloss"><summary>指标含义（点开）</summary>
+        <table class="glosst"><tbody>${B.glossary.map(g=>`<tr>
+          <td><code>${esc(g.sym)}</code></td><td><b>${esc(g.full)}</b></td>
+          <td class="note">${esc(g.def)}</td></tr>`).join('')}</tbody></table></details>
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="${tab==='board'}" data-tab="board">排行榜</button>
+        <button role="tab" aria-selected="${tab==='axes'}" data-tab="axes">轴效度分析</button>
+      </div>
+      ${tab==='axes' ? axesTab(rows[0]) : `
+      <div class="board"><div class="scroll"><table>
+        <thead>
+          <tr class="grp">${GROUPS.filter(g=>grpCount[g.id]).map(g=>
+            `<th colspan="${grpCount[g.id]}" class="g-${esc(g.id)}" ${g.id==='id'?'':''}>
+              ${g.label?`<span>${esc(g.label)}</span><em>${esc(g.note)}</em>`:'&nbsp;'}</th>`).join('')}</tr>
+          <tr class="cols">${COLS.map(c=>{
+            const act=sort.key===c.key;
+            return `<th data-k="${esc(c.key)}" class="${act?'act':''} ${c.kind==='text'?'txt':''}"
+              title="${esc(c.tip||'')}" tabindex="0" role="button" aria-label="按 ${esc(c.label)} 排序">
+              <span class="lb">${esc(c.label)}<span class="ar">${act?(sort.dir==='desc'?'▼':'▲'):'▽'}</span></span>
+              ${c.unit?`<em>${esc(c.unit)}</em>`:''}</th>`;}).join('')}</tr>
+        </thead>
+        <tbody>${rows.map(m=>`
+          <tr class="row ${openRows.has(m.id)?'open':''}" data-id="${esc(m.id)}" tabindex="0"
+              role="button" aria-expanded="${openRows.has(m.id)}">
+            ${COLS.map((c,i)=>{
+              const inner=cell(m,c);
+              return i===0?inner.replace('<td class="txt">',`<td class="txt"><span class="tw">▶</span> `):inner;
+            }).join('')}</tr>
+          ${openRows.has(m.id)?`<tr class="detail"><td colspan="${COLS.length}"><div class="dwrap">
+            <div class="dsec"><h3>链路画像</h3>${chainTbl(m)}</div>
+            <div class="dsec"><h3>预测-验证</h3>${pvBlk(m)}</div>
+            <div class="dsec"><h3>仪器认证 · ${esc(m.instrument_status.verdict)}</h3>${instTbl(m)}</div>
+            <div class="dsec"><h3>E 系判定</h3>${validityBlk(m)}</div>
+            <div class="dsec"><h3>诊断明细</h3>${detailBlk(m)}</div>
+            <p class="note">数据来源　行为层：${esc(m.provenance.behavior)}　·　理解层：${esc(m.provenance.understanding)}</p>
+          </div></td></tr>`:''}`).join('')}
+        </tbody>
+      </table></div></div>`}
+      ${tab==='axes'?'':`<p class="note">点击任意行展开该模型的诊断详情（链路画像 / 仪器认证 / E 系判定）。点击列头排序。
+        理解层两列带虚线徽章，hover 或聚焦可看解锁条件。</p>`}
+      <div class="foot">
+        本页只渲染 <code>results/board.json</code>（schema ${esc(B.schema)}），数字不手填；
+        接入新模型只需向 <code>models[]</code> 追加一个对象，页面无需改动。<br>
+        行为层来源：${esc(rows[0].provenance.behavior)}　行为量校正：<code>${esc(rows[0].provenance.behavior_adjust)}</code><br>
+        完整方法、修正案与遗留清单见 <code>results/final_report.md</code>。
+      </div>`;
+
+    document.querySelectorAll('.tabs button').forEach(bt=>{
+      bt.onclick=()=>{tab=bt.dataset.tab; draw();};});
+    document.querySelectorAll('thead tr.cols th').forEach(th=>{
+      const go=()=>{const k=th.dataset.k;
+        if(sort.key===k) sort.dir=sort.dir==='desc'?'asc':'desc';
+        else sort={key:k,dir:(COLS.find(c=>c.key===k)||{}).kind==='text'?'asc':'desc'};
+        draw();};
+      th.onclick=go; th.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}};
+    });
+    document.querySelectorAll('tbody tr.row').forEach(tr=>{
+      const go=()=>{const id=tr.dataset.id;
+        openRows.has(id)?openRows.delete(id):openRows.add(id); draw();};
+      tr.onclick=e=>{if(!e.target.closest('.gate')) go();};
+      tr.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}};
+    });
+  }
+  draw();
+}
+
+fetch('board.json').then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+ .then(render)
+ .catch(e=>{document.getElementById('page').innerHTML=
+   `<p class="err">无法载入 board.json（${esc(e.message)}）。需与 board.json 同目录并经 http 提供
+    —— 在 <code>results/</code> 下运行 <code>python -m http.server</code> 后访问。</p>`;});
+</script>
+</body>
+</html>
