@@ -28,11 +28,24 @@ POSITIVE_TYPES = ("A", "B", "C")
 # --------------------------------------------------------------------------------------
 # 数据加载
 # --------------------------------------------------------------------------------------
-def load_cache(work: Path, pool_mode: str):
-    """读取全部事件缓存 -> 每事件一条记录（帧维度已平均）。"""
+def load_cache(work: Path, pool_mode: str, keep=None, verbose: bool = True):
+    """读取全部事件缓存 -> 每事件一条记录（帧维度已平均）。
+
+    cache/ 目录会跨多轮挖掘累积：早期轮次的 h5 只有 v1 两向量 schema（无 region_*），
+    事件 id 也可能已不在当前 events_all.jsonl 里。两者都要跳过而不是让调用方炸掉：
+      - 缺 pool_mode  -> 该文件是旧 schema，跳过（数量会打印出来，不静默）；
+      - keep 给定时   -> 只保留当前账本里的事件 id。
+    """
     items = {}
+    n_schema, n_ledger = 0, 0
     for p in sorted((work / "cache").glob("*.h5")):
+        if keep is not None and p.stem not in keep:
+            n_ledger += 1
+            continue
         with h5py.File(p, "r") as f:
+            if pool_mode not in f["clean"] or pool_mode not in f["ghost"]:
+                n_schema += 1
+                continue
             meta = json.loads(f.attrs["meta"])
             c, g = f["clean"], f["ghost"]
             h_clean = c[pool_mode][:].astype(np.float32)      # [n_frames, L, C]
@@ -55,6 +68,9 @@ def load_cache(work: Path, pool_mode: str):
                 "is_night": bool(meta["is_night"]),
                 "is_positive": meta["event_type"] in POSITIVE_TYPES,
             }
+    if verbose and (n_schema or n_ledger):
+        print(f"[cache] 载入 {len(items)} 事件（跳过：旧 schema 无 {pool_mode} {n_schema} 个，"
+              f"不在当前账本 {n_ledger} 个）")
     return items
 
 

@@ -21,7 +21,8 @@ from scipy import stats
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from g3_metrics import load_cache  # noqa: E402
-from n1_readout import auc, proj, supervised_direction  # noqa: E402
+from n1_readout import (auc, pca_direction, permuted_direction, proj,  # noqa: E402
+                        supervised_direction)
 
 
 def main():
@@ -30,14 +31,17 @@ def main():
     ap.add_argument("--pool-mode", default="vision_mean")
     ap.add_argument("--folds", type=int, default=4)
     ap.add_argument("--seed", type=int, default=0)
-    ap.add_argument("--direction", default="supervised", choices=["supervised", "random"],
-                    help="random = 随机单位方向走同一套 CV+选层流程，量化选层带来的乐观偏差")
+    ap.add_argument("--direction", default="supervised",
+                    choices=["supervised", "random", "pca", "permuted"],
+                    help="supervised=判别式(程序化标签的 logistic 法向量) / pca=主成分式对照臂 / "
+                         "random=随机单位方向(量化选层的乐观偏差) / "
+                         "permuted=标签置换零分布(回答'主读数是不是纯噪声')")
     args = ap.parse_args()
 
     cfg = OmegaConf.to_container(OmegaConf.load(args.config), resolve=True)
     work = Path(cfg["paths"]["work_dir"])
-    items = load_cache(work, args.pool_mode)
     evmap = {json.loads(l)["event_id"]: json.loads(l) for l in open(work / "mining" / "events_all.jsonl")}
+    items = load_cache(work, args.pool_mode, keep=set(evmap))
     TYPES = ("D", "D2a", "D2b", "D2bV", "D2c", "D2cV")
     matched = {t: set((work / "mining" / f"matched_{t}.txt").read_text().split())
                for t in TYPES if (work / "mining" / f"matched_{t}.txt").exists()}
@@ -82,6 +86,12 @@ def main():
             L, C = fit_p[0]["h_ghost"].shape
             v = rs.normal(size=(L, C)).astype(np.float32)
             v /= np.linalg.norm(v, axis=1, keepdims=True)
+        elif args.direction == "pca":
+            v = pca_direction(fit_p, fit_n, seed=args.seed)
+        elif args.direction == "permuted":
+            # 标签只在**提方向的拟合集**里打乱；选层与报数仍用真标签，
+            # 这样零分布量的正是"方向不含信息时，这条管线能造出多大的 AUC"
+            v = permuted_direction(fit_p, fit_n, seed=1000 * args.seed + f)
         else:
             v = supervised_direction(fit_p, fit_n, seed=args.seed)
         a_by_l = np.array([auc(proj(sel_p, v, l), proj(sel_n, v, l))[0] for l in range(v.shape[0])])
@@ -125,10 +135,10 @@ def main():
         d = out["D2a"]["auc"] - out[floor_key]["auc"]
         print(f"\n[N1-CV] 主读数 − 证伪地板({floor_key}) = {d:+.3f}"
               f"  -> {'D2a 高于噪声地板' if d > 0.05 else '**D2a 与噪声地板无法区分**'}")
-    (work / "results" / f"n1_cv_{args.pool_mode}_{args.direction}.json").write_text(json.dumps(
+    (work / "results" / f"n1_cv_{args.pool_mode}_{args.direction}_s{args.seed}.json").write_text(json.dumps(
         {"folds": args.folds, "peaks": peaks, "pool_mode": args.pool_mode, "readouts": out},
         indent=2, ensure_ascii=False))
-    print(f"[N1-CV] wrote results/n1_cv_{args.pool_mode}.json")
+    print(f"[N1-CV] wrote results/n1_cv_{args.pool_mode}_{args.direction}_s{args.seed}.json")
 
 
 if __name__ == "__main__":

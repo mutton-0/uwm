@@ -45,6 +45,40 @@ def supervised_direction(pos, neg, seed=0):
     return v
 
 
+def pca_direction(pos, neg, seed=0):
+    """主成分式方向(RepE LAT 的 PCA 变体):逐层对 δ 取 PC1，符号按"正例投影更大"定。
+
+    与判别式方向共用同一配对设计——若配对足够干净，两法应收敛；
+    两法分歧则说明信号被非主成分方向携带（或根本没有信号）。
+    """
+    X = np.stack([e["h_ghost"] - e["h_clean"] for e in pos + neg])
+    npos = len(pos)
+    n, L, C = X.shape
+    v = np.zeros((L, C), dtype=np.float32)
+    for l in range(L):
+        Z = X[:, l, :]
+        Z = Z - Z.mean(0, keepdims=True)
+        _, _, Vt = np.linalg.svd(Z, full_matrices=False)
+        w = Vt[0]
+        if (Z[:npos] @ w).mean() < (Z[npos:] @ w).mean():
+            w = -w
+        v[l] = w / (np.linalg.norm(w) + 1e-8)
+    return v
+
+
+def permuted_direction(pos, neg, seed=0):
+    """标签置换方向:把 pos/neg 标签打乱后走同一套判别式提取。
+
+    用来回答"主读数那个数是不是纯噪声"——置换零分布的上分位就是这条管线
+    (含逐层拟合 + 后续选层)在无真实信号时能造出的 AUC 上限。
+    """
+    rng = np.random.default_rng(seed)
+    allev = pos + neg
+    idx = rng.permutation(len(allev))
+    k = len(pos)
+    return supervised_direction([allev[i] for i in idx[:k]], [allev[i] for i in idx[k:]], seed=seed)
+
+
 def proj(events, v, layer):
     if not events:
         return np.zeros(0)
@@ -68,8 +102,8 @@ def main():
 
     cfg = OmegaConf.to_container(OmegaConf.load(args.config), resolve=True)
     work = Path(cfg["paths"]["work_dir"])
-    items = load_cache(work, args.pool_mode)
     evmap = {json.loads(l)["event_id"]: json.loads(l) for l in open(work / "mining" / "events_all.jsonl")}
+    items = load_cache(work, args.pool_mode, keep=set(evmap))
 
     # 只保留匹配子集里的事件，并按类型归组
     matched = {}

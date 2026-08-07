@@ -34,42 +34,55 @@
       },
       "usable": true
     },
-    "D2b": {
-      "n_neg_pool": 1704,
-      "n_pairs": 236,
+    "D2aP": {
+      "n_neg_pool": 823,
+      "n_pairs": 225,
       "pre_match": {
-        "smd_log_area": -0.6279882448468369,
-        "smd_ecc": -2.1106106848724964
+        "smd_log_area": -0.5923084224714205,
+        "smd_ecc": 0.07248819840066129
       },
       "post_match": {
-        "smd_log_area": 0.015053987996435076,
-        "smd_ecc": -0.10895199258244057
+        "smd_log_area": -0.04183479965826719,
+        "smd_ecc": -0.001060776824740023
+      },
+      "usable": true
+    },
+    "D2b": {
+      "n_neg_pool": 1553,
+      "n_pairs": 266,
+      "pre_match": {
+        "smd_log_area": -0.04448114481648625,
+        "smd_ecc": -1.5867631309838262
+      },
+      "post_match": {
+        "smd_log_area": 0.0234167392584407,
+        "smd_ecc": -0.0358800060656351
       },
       "usable": true
     },
     "D2bV": {
-      "n_neg_pool": 293,
-      "n_pairs": 49,
+      "n_neg_pool": 646,
+      "n_pairs": 78,
       "pre_match": {
-        "smd_log_area": -0.21620312644902814,
-        "smd_ecc": -2.5015515810763547
+        "smd_log_area": 0.26912565225817237,
+        "smd_ecc": -2.1285167166812156
       },
       "post_match": {
-        "smd_log_area": 0.01758545282561314,
-        "smd_ecc": -0.2428298889923927
+        "smd_log_area": 0.09080102313288434,
+        "smd_ecc": -0.19381861977856324
       },
       "usable": true
     },
     "D2c": {
-      "n_neg_pool": 1086,
-      "n_pairs": 286,
+      "n_neg_pool": 906,
+      "n_pairs": 272,
       "pre_match": {
-        "smd_log_area": -0.5157334760194286,
-        "smd_ecc": 0.03429938346725198
+        "smd_log_area": -0.5518979652603363,
+        "smd_ecc": -0.02461764156140002
       },
       "post_match": {
-        "smd_log_area": -0.006596219075199906,
-        "smd_ecc": 0.014287675970572468
+        "smd_log_area": -0.006392085831744149,
+        "smd_ecc": 0.028800130610549535
       },
       "usable": true
     },
