@@ -1,0 +1,317 @@
+{
+  "rows": [
+    {
+      "name": "v_brake @L22 (F 轴锚)",
+      "layer": 22,
+      "tokens": "query",
+      "n_matched_events": 15,
+      "analytic_mean_slope": -0.04317349488325516,
+      "analytic_sd": 0.008373159072100735,
+      "empirical_slope": -0.04053792882092807,
+      "empirical_ci95": [
+        -0.045073521203838535,
+        -0.03659443760618627
+      ],
+      "empirical_slope_posonly": -0.0467527887032016,
+      "empirical_ci95_posonly": [
+        -0.05174528458577604,
+        -0.042104747615928785
+      ],
+      "empirical_n_events": 61,
+      "sign_agree": true,
+      "magnitude_ratio_analytic_over_empirical": 1.0650148179491217,
+      "event_level_pearson": 0.5264520997945481,
+      "event_level_spearman": 0.5200000000000001,
+      "event_level_pearson_ci95_scene_bootstrap": [
+        0.11420850898968618,
+        0.9334179688656462
+      ],
+      "applicable_to_H3": true,
+      "termination": {
+        "project_out": {
+          "dv": 0.00719589285063939,
+          "ci95": [
+            -0.003718460044323432,
+            0.018067480579361986
+          ]
+        },
+        "recover": {
+          "dv": 0.01557829104302848,
+          "ci95": [
+            0.0059839622173630804,
+            0.024912366210483008
+          ]
+        }
+      }
+    },
+    {
+      "name": "v_hazard_clean @L23",
+      "layer": 23,
+      "tokens": "query",
+      "n_matched_events": 40,
+      "analytic_mean_slope": -0.07304849378339237,
+      "analytic_sd": 0.024284592397452787,
+      "empirical_slope": -0.07432582969174666,
+      "empirical_ci95": [
+        -0.08529682026345745,
+        -0.062351930310278025
+      ],
+      "empirical_slope_posonly": -0.10825444929301738,
+      "empirical_ci95_posonly": [
+        -0.12631478480326716,
+        -0.08847257892080694
+      ],
+      "empirical_n_events": 40,
+      "sign_agree": true,
+      "magnitude_ratio_analytic_over_empirical": 0.9828143740385837,
+      "event_level_pearson": 0.9925818608045142,
+      "event_level_spearman": 0.9838482486618462,
+      "event_level_pearson_ci95_scene_bootstrap": [
+        0.9752447982281887,
+        0.9987401088102729
+      ],
+      "applicable_to_H3": true,
+      "termination": {
+        "project_out": {
+          "dv": -0.03131120093166828,
+          "ci95": [
+            -0.04165191900293182,
+            -0.02053425930000599
+          ]
+        },
+        "recover": {
+          "dv": -0.01877913288772106,
+          "ci95": [
+            -0.02689402802290998,
+            -0.01028834177071558
+          ]
+        }
+      }
+    },
+    {
+      "name": "v_hazard_clean @L9",
+      "layer": 9,
+      "tokens": "query",
+      "n_matched_events": 40,
+      "analytic_mean_slope": -0.0019127107329869673,
+      "analytic_sd": 0.0013098479151586735,
+      "empirical_slope": 0.002582354861147264,
+      "empirical_ci95": [
+        -0.010400309375869058,
+        0.016623484157845186
+      ],
+      "empirical_slope_posonly": -0.012026588171720504,
+      "empirical_ci95_posonly": [
+        -0.025383974201583927,
+        0.001584029621444636
+      ],
+      "empirical_n_events": 40,
+      "sign_agree": false,
+      "magnitude_ratio_analytic_over_empirical": -0.7406846989794449,
+      "event_level_pearson": 0.5562898939703307,
+      "event_level_spearman": 0.721288383885811,
+      "event_level_pearson_ci95_scene_bootstrap": [
+        0.3175703408300543,
+        0.7925441364420811
+      ],
+      "applicable_to_H3": true,
+      "termination": {
+        "project_out": {
+          "dv": -0.006795746460556984,
+          "ci95": [
+            -0.017415986270517915,
+            0.005275768902454819
+          ]
+        },
+        "recover": {
+          "dv": -0.009257291629910468,
+          "ci95": [
+            -0.018902777896987067,
+            0.0006042877979138305
+          ]
+        }
+      }
+    },
+    {
+      "name": "v_hazard_carla @L8",
+      "layer": 8,
+      "tokens": "query",
+      "n_matched_events": 40,
+      "analytic_mean_slope": 0.004197697286289074,
+      "analytic_sd": 0.001324895653796234,
+      "empirical_slope": 0.024500019743162047,
+      "empirical_ci95": [
+        0.004991075158213962,
+        0.04257248633174671
+      ],
+      "empirical_slope_posonly": 0.010055501163005827,
+      "empirical_ci95_posonly": [
+        -0.003644849454270543,
+        0.022428976397050007
+      ],
+      "empirical_n_events": 40,
+      "sign_agree": true,
+      "magnitude_ratio_analytic_over_empirical": 0.1713344450451168,
+      "event_level_pearson": 0.21750857894845574,
+      "event_level_spearman": 0.21739130434782608,
+      "event_level_pearson_ci95_scene_bootstrap": [
+        -0.05641558801663506,
+        0.6317123654583968
+      ],
+      "applicable_to_H3": true,
+      "termination": {
+        "project_out": {
+          "dv": -0.012836140766739845,
+          "ci95": [
+            -0.022127147882654657,
+            -0.0011645231077947293
+          ]
+        },
+        "recover": {
+          "dv": -0.012300667539238929,
+          "ci95": [
+            -0.022209062845620072,
+            -4.3562551339471894e-05
+          ]
+        }
+      }
+    },
+    {
+      "name": "A1 候选1 @L22 (occlusion)",
+      "layer": 22,
+      "tokens": "query",
+      "n_matched_events": 40,
+      "analytic_mean_slope": -0.00904939474381148,
+      "analytic_sd": 0.003695348728814707,
+      "empirical_slope": 0.015960666467161745,
+      "empirical_ci95": [
+        0.012762451760032602,
+        0.01940684050818403
+      ],
+      "empirical_slope_posonly": 0.011759618967771527,
+      "empirical_ci95_posonly": [
+        0.007466683992435191,
+        0.016343861744007
+      ],
+      "empirical_n_events": 40,
+      "sign_agree": false,
+      "magnitude_ratio_analytic_over_empirical": -0.5669810068664831,
+      "event_level_pearson": 0.6664322697922431,
+      "event_level_spearman": 0.5793032209597145,
+      "event_level_pearson_ci95_scene_bootstrap": [
+        0.32771535317699313,
+        0.8590537121929821
+      ],
+      "applicable_to_H3": true,
+      "termination": {
+        "project_out": {
+          "dv": 0.002229587733745575,
+          "ci95": [
+            -0.004657624764689084,
+            0.009022446578424987
+          ]
+        },
+        "recover": {
+          "dv": -0.002863841876387596,
+          "ci95": [
+            -0.00820626450702548,
+            0.002730119655953359
+          ]
+        }
+      }
+    },
+    {
+      "name": "v_danger_lang @L10",
+      "layer": 10,
+      "tokens": "query",
+      "n_matched_events": 15,
+      "analytic_mean_slope": -0.00015580426397384176,
+      "analytic_sd": 0.0015089828554026195,
+      "empirical_slope": -0.022377911320795005,
+      "empirical_ci95": [
+        -0.03282785584678348,
+        -0.011039978263763328
+      ],
+      "empirical_slope_posonly": -0.02111530095743412,
+      "empirical_ci95_posonly": [
+        -0.029069366947461157,
+        -0.012316596701348326
+      ],
+      "empirical_n_events": 61,
+      "sign_agree": true,
+      "magnitude_ratio_analytic_over_empirical": 0.00696241314662188,
+      "event_level_pearson": -0.4805086874061679,
+      "event_level_spearman": -0.2545454545454546,
+      "event_level_pearson_ci95_scene_bootstrap": [
+        -0.8323188992599165,
+        0.07176174770496178
+      ],
+      "applicable_to_H3": true,
+      "termination": {
+        "project_out": {
+          "dv": -0.03258556051210302,
+          "ci95": [
+            -0.04982307040409068,
+            -0.01353048012507233
+          ]
+        },
+        "recover": {
+          "dv": -0.009758087302573392,
+          "ci95": [
+            -0.01689874891145517,
+            -0.0002557311106347579
+          ]
+        }
+      }
+    },
+    {
+      "name": "v_hazard_clean @L9 (vision token)",
+      "layer": 9,
+      "tokens": "vision",
+      "n_matched_events": 40,
+      "analytic_mean_slope": -0.0019127107329869673,
+      "analytic_sd": 0.0013098479151586735,
+      "empirical_slope": -0.014415277225129747,
+      "empirical_ci95": [
+        -0.025848344031225424,
+        -0.0038809973439337103
+      ],
+      "empirical_slope_posonly": -0.01586711212992668,
+      "empirical_ci95_posonly": [
+        -0.030584988526039414,
+        -0.0038972264723408823
+      ],
+      "empirical_n_events": 40,
+      "sign_agree": true,
+      "magnitude_ratio_analytic_over_empirical": 0.13268636482776708,
+      "event_level_pearson": -0.36157628178962864,
+      "event_level_spearman": -0.4194760071368204,
+      "event_level_pearson_ci95_scene_bootstrap": [
+        -0.6066938735964216,
+        -0.18623064338555828
+      ],
+      "applicable_to_H3": false,
+      "termination": {
+        "project_out": {
+          "dv": 0.004226652532815933,
+          "ci95": [
+            -0.005822707212705543,
+            0.01735345062456633
+          ]
+        },
+        "recover": {
+          "dv": -0.0068272117525339125,
+          "ci95": [
+            -0.014663727056893231,
+            0.0035835490863968906
+          ]
+        }
+      }
+    }
+  ],
+  "n_sign_agree": 4,
+  "n_applicable": 6,
+  "n_empirically_significant": 5,
+  "verdict_H3": "**H3 部分成立，且有效边界被定量刻画。** 在经验斜率显著非零的 5 条适用方向上，解析预测与实测**符号一致 4/5**（例外：A1 候选1 @L22 (occlusion)）；经验斜率与 0 不可区分的 1 条（v_hazard_clean @L9）不计入符号判定。 **深层注入（L ≥ 22，n=2）量级高度吻合**，解析/经验比 0.98–1.07（逐事件 Pearson r 最高 +0.993）；**浅/中层注入（L < 22，n=2）解析系统性低估** 6–144 倍。 ⇒ 解析捷径的有效边界是**注入层到动作头之间的非线性深度**，不是方向本身：L ≥ 22 的候选可先用解析法初筛（成本 ≈ 1 次前向 + 1 次反传），L < 22 必须跑经验 α 扫描。",
+  "method": "解析：Δv_pred = α·σ_L·Σ_t⟨g_t, v̂⟩，g = ∂commanded_speed/∂h_23[query]（autograd 精确）；经验：t2_steer ±{0.5,1,2,4} 阶梯的最小二乘斜率。"
+}

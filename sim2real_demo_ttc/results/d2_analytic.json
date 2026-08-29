@@ -1,0 +1,1765 @@
+{
+  "n_events": 40,
+  "pool_mode": "region_mean",
+  "seed": 0,
+  "specs": [
+    {
+      "name": "v_hazard_clean_L9_query",
+      "layer": 9,
+      "tokens": "query"
+    },
+    {
+      "name": "v_hazard_clean_L23_query",
+      "layer": 23,
+      "tokens": "query"
+    },
+    {
+      "name": "v_brake_L22_query",
+      "layer": 22,
+      "tokens": "query"
+    },
+    {
+      "name": "v_hazard_carla_L8_query",
+      "layer": 8,
+      "tokens": "query"
+    },
+    {
+      "name": "v_cand1_L22_query",
+      "layer": 22,
+      "tokens": "query"
+    },
+    {
+      "name": "v_hazard_clean_L9_vision",
+      "layer": 9,
+      "tokens": "vision"
+    }
+  ],
+  "per_event": [
+    {
+      "event_id": "scene-0002_011_A",
+      "scene": "scene-0002",
+      "v_cmd_base": 5.915802955627441,
+      "grad_norm": 0.1671541929244995,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.47592324018478394,
+        "analytic_slope_dv_dalpha": -0.0018532705113725179,
+        "analytic_slope_identity_path": -0.0018532705113725179,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.9308013916015625,
+        "analytic_slope_dv_dalpha": -0.06276635753278015,
+        "analytic_slope_identity_path": -0.06276635753278015,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.4070454835891724,
+        "analytic_slope_dv_dalpha": -0.039285523147980506,
+        "analytic_slope_identity_path": -0.039285523147980506,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.45601972937583923,
+        "analytic_slope_dv_dalpha": 0.0057132327989387055,
+        "analytic_slope_identity_path": 0.0057132327989387055,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.4070454835891724,
+        "analytic_slope_dv_dalpha": -0.007376738197375138,
+        "analytic_slope_identity_path": -0.007376738197375138,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.47592324018478394,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0018532705113725179,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0004_024_A",
+      "scene": "scene-0004",
+      "v_cmd_base": 9.887110233306885,
+      "grad_norm": 0.19890819489955902,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4645770788192749,
+        "analytic_slope_dv_dalpha": -0.0038131673677693767,
+        "analytic_slope_identity_path": -0.0038131673677693767,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.228482961654663,
+        "analytic_slope_dv_dalpha": -0.09104898840411435,
+        "analytic_slope_identity_path": -0.09104898840411435,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.4867957830429077,
+        "analytic_slope_dv_dalpha": -0.04950161317749946,
+        "analytic_slope_identity_path": -0.04950161317749946,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.453631654381752,
+        "analytic_slope_dv_dalpha": 0.002849515852468079,
+        "analytic_slope_identity_path": 0.002849515852468079,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.4867957830429077,
+        "analytic_slope_dv_dalpha": -0.007969337351006744,
+        "analytic_slope_identity_path": -0.007969337351006744,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4645770788192749,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0038131673677693767,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0008_005_A",
+      "scene": "scene-0008",
+      "v_cmd_base": 8.478816032409668,
+      "grad_norm": 0.2371789515018463,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.464422807097435,
+        "analytic_slope_dv_dalpha": -0.001980264187779815,
+        "analytic_slope_identity_path": -0.001980264187779815,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.049108266830444,
+        "analytic_slope_dv_dalpha": -0.08291956601480277,
+        "analytic_slope_identity_path": -0.08291956601480277,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.4298479557037354,
+        "analytic_slope_dv_dalpha": -0.051747327695629064,
+        "analytic_slope_identity_path": -0.051747327695629064,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.44642971456050873,
+        "analytic_slope_dv_dalpha": 0.005280711057160478,
+        "analytic_slope_identity_path": 0.005280711057160478,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.4298479557037354,
+        "analytic_slope_dv_dalpha": -0.0061658865559721665,
+        "analytic_slope_identity_path": -0.0061658865559721665,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.464422807097435,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.001980264187779815,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0019_003_A",
+      "scene": "scene-0019",
+      "v_cmd_base": 5.374735593795776,
+      "grad_norm": 0.199087455868721,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4737628698348999,
+        "analytic_slope_dv_dalpha": -0.00022265711785543485,
+        "analytic_slope_identity_path": -0.00022265711785543485,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.941596746444702,
+        "analytic_slope_dv_dalpha": -0.02684825776754951,
+        "analytic_slope_identity_path": -0.02684825776754951,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.421181082725525,
+        "analytic_slope_dv_dalpha": -0.04081253281378294,
+        "analytic_slope_identity_path": -0.04081253281378294,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4497874975204468,
+        "analytic_slope_dv_dalpha": 0.003643416222716911,
+        "analytic_slope_identity_path": 0.003643416222716911,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.421181082725525,
+        "analytic_slope_dv_dalpha": -0.009417734412859535,
+        "analytic_slope_identity_path": -0.009417734412859535,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4737628698348999,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.00022265711785543485,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0019_006_A",
+      "scene": "scene-0019",
+      "v_cmd_base": 7.047281742095947,
+      "grad_norm": 0.18626712262630463,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.47056305408477783,
+        "analytic_slope_dv_dalpha": -0.0010291271538530045,
+        "analytic_slope_identity_path": -0.0010291271538530045,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.913392066955566,
+        "analytic_slope_dv_dalpha": -0.07633658565983836,
+        "analytic_slope_identity_path": -0.07633658565983836,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.4354645013809204,
+        "analytic_slope_dv_dalpha": -0.04022008077309436,
+        "analytic_slope_identity_path": -0.04022008077309436,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.45118044316768646,
+        "analytic_slope_dv_dalpha": 0.005864124796886111,
+        "analytic_slope_identity_path": 0.005864124796886111,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.4354645013809204,
+        "analytic_slope_dv_dalpha": -0.009775941621665618,
+        "analytic_slope_identity_path": -0.009775941621665618,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.47056305408477783,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0010291271538530045,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0019_008_A",
+      "scene": "scene-0019",
+      "v_cmd_base": 7.253034353256226,
+      "grad_norm": 0.18896721303462982,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.47098948061466217,
+        "analytic_slope_dv_dalpha": -0.0011944026683973832,
+        "analytic_slope_identity_path": -0.0011944026683973832,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.783390760421753,
+        "analytic_slope_dv_dalpha": -0.07320454776143137,
+        "analytic_slope_identity_path": -0.07320454776143137,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.410391688346863,
+        "analytic_slope_dv_dalpha": -0.04263881234836564,
+        "analytic_slope_identity_path": -0.04263881234836564,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4507252275943756,
+        "analytic_slope_dv_dalpha": 0.0060837878984436045,
+        "analytic_slope_identity_path": 0.0060837878984436045,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.410391688346863,
+        "analytic_slope_dv_dalpha": -0.00700976086639421,
+        "analytic_slope_identity_path": -0.00700976086639421,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.47098948061466217,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0011944026683973832,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0025_003_A",
+      "scene": "scene-0025",
+      "v_cmd_base": 3.1533398628234863,
+      "grad_norm": 0.1525496393442154,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4721502661705017,
+        "analytic_slope_dv_dalpha": 0.001148165621421171,
+        "analytic_slope_identity_path": 0.001148165621421171,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.658278226852417,
+        "analytic_slope_dv_dalpha": -0.026132869812018455,
+        "analytic_slope_identity_path": -0.026132869812018455,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.346840023994446,
+        "analytic_slope_dv_dalpha": -0.0273677267825283,
+        "analytic_slope_identity_path": -0.0273677267825283,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.45234307646751404,
+        "analytic_slope_dv_dalpha": 0.0037214648322118904,
+        "analytic_slope_identity_path": 0.0037214648322118904,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.346840023994446,
+        "analytic_slope_dv_dalpha": -0.004516001818116858,
+        "analytic_slope_identity_path": -0.004516001818116858,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4721502661705017,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": 0.001148165621421171,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0025_004_A",
+      "scene": "scene-0025",
+      "v_cmd_base": 2.91148442029953,
+      "grad_norm": 0.14176657795906067,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4722241312265396,
+        "analytic_slope_dv_dalpha": 0.00020258052730419418,
+        "analytic_slope_identity_path": 0.00020258052730419418,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.678393840789795,
+        "analytic_slope_dv_dalpha": -0.034441776425206294,
+        "analytic_slope_identity_path": -0.034441776425206294,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.3334407806396484,
+        "analytic_slope_dv_dalpha": -0.028820272169127747,
+        "analytic_slope_identity_path": -0.028820272169127747,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4520150125026703,
+        "analytic_slope_dv_dalpha": 0.00394730761560913,
+        "analytic_slope_identity_path": 0.00394730761560913,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.3334407806396484,
+        "analytic_slope_dv_dalpha": -0.004213493503432142,
+        "analytic_slope_identity_path": -0.004213493503432142,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4722241312265396,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": 0.00020258052730419418,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0025_005_A",
+      "scene": "scene-0025",
+      "v_cmd_base": 2.91148442029953,
+      "grad_norm": 0.14176657795906067,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4722241312265396,
+        "analytic_slope_dv_dalpha": 0.00020258052730419418,
+        "analytic_slope_identity_path": 0.00020258052730419418,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.678393840789795,
+        "analytic_slope_dv_dalpha": -0.034441776425206294,
+        "analytic_slope_identity_path": -0.034441776425206294,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.3334407806396484,
+        "analytic_slope_dv_dalpha": -0.028820272169127747,
+        "analytic_slope_identity_path": -0.028820272169127747,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4520150125026703,
+        "analytic_slope_dv_dalpha": 0.00394730761560913,
+        "analytic_slope_identity_path": 0.00394730761560913,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.3334407806396484,
+        "analytic_slope_dv_dalpha": -0.004213493503432142,
+        "analytic_slope_identity_path": -0.004213493503432142,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4722241312265396,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": 0.00020258052730419418,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0025_006_A",
+      "scene": "scene-0025",
+      "v_cmd_base": 2.91148442029953,
+      "grad_norm": 0.14176657795906067,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4722241312265396,
+        "analytic_slope_dv_dalpha": 0.00020258052730419418,
+        "analytic_slope_identity_path": 0.00020258052730419418,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.678393840789795,
+        "analytic_slope_dv_dalpha": -0.034441776425206294,
+        "analytic_slope_identity_path": -0.034441776425206294,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.3334407806396484,
+        "analytic_slope_dv_dalpha": -0.028820272169127747,
+        "analytic_slope_identity_path": -0.028820272169127747,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4520150125026703,
+        "analytic_slope_dv_dalpha": 0.00394730761560913,
+        "analytic_slope_identity_path": 0.00394730761560913,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.3334407806396484,
+        "analytic_slope_dv_dalpha": -0.004213493503432142,
+        "analytic_slope_identity_path": -0.004213493503432142,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4722241312265396,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": 0.00020258052730419418,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0025_007_A",
+      "scene": "scene-0025",
+      "v_cmd_base": 2.91148442029953,
+      "grad_norm": 0.14176657795906067,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4722241312265396,
+        "analytic_slope_dv_dalpha": 0.00020258052730419418,
+        "analytic_slope_identity_path": 0.00020258052730419418,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.678393840789795,
+        "analytic_slope_dv_dalpha": -0.034441776425206294,
+        "analytic_slope_identity_path": -0.034441776425206294,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.3334407806396484,
+        "analytic_slope_dv_dalpha": -0.028820272169127747,
+        "analytic_slope_identity_path": -0.028820272169127747,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4520150125026703,
+        "analytic_slope_dv_dalpha": 0.00394730761560913,
+        "analytic_slope_identity_path": 0.00394730761560913,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.3334407806396484,
+        "analytic_slope_dv_dalpha": -0.004213493503432142,
+        "analytic_slope_identity_path": -0.004213493503432142,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4722241312265396,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": 0.00020258052730419418,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0027_000_A",
+      "scene": "scene-0027",
+      "v_cmd_base": 6.9427478313446045,
+      "grad_norm": 0.2064695507287979,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46910132467746735,
+        "analytic_slope_dv_dalpha": -0.0012042539796485938,
+        "analytic_slope_identity_path": -0.0012042539796485938,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.756202459335327,
+        "analytic_slope_dv_dalpha": -0.07111280181738433,
+        "analytic_slope_identity_path": -0.07111280181738433,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.3728443384170532,
+        "analytic_slope_dv_dalpha": -0.045606081759071326,
+        "analytic_slope_identity_path": -0.045606081759071326,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4499024599790573,
+        "analytic_slope_dv_dalpha": 0.005331260092452106,
+        "analytic_slope_identity_path": 0.005331260092452106,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.3728443384170532,
+        "analytic_slope_dv_dalpha": -0.00910297089068629,
+        "analytic_slope_identity_path": -0.00910297089068629,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46910132467746735,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0012042539796485938,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0035_004_A",
+      "scene": "scene-0035",
+      "v_cmd_base": 8.842057228088379,
+      "grad_norm": 0.2040656954050064,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46222779154777527,
+        "analytic_slope_dv_dalpha": -0.002609632497066222,
+        "analytic_slope_identity_path": -0.002609632497066222,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.100958347320557,
+        "analytic_slope_dv_dalpha": -0.08573961122063078,
+        "analytic_slope_identity_path": -0.08573961122063078,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.481987714767456,
+        "analytic_slope_dv_dalpha": -0.043141669169441066,
+        "analytic_slope_identity_path": -0.043141669169441066,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.442578062415123,
+        "analytic_slope_dv_dalpha": 0.004671228047035958,
+        "analytic_slope_identity_path": 0.004671228047035958,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.481987714767456,
+        "analytic_slope_dv_dalpha": -0.005210057230478515,
+        "analytic_slope_identity_path": -0.005210057230478515,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46222779154777527,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.002609632497066222,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0035_006_A",
+      "scene": "scene-0035",
+      "v_cmd_base": 9.725214958190918,
+      "grad_norm": 0.19290241599082947,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4599689841270447,
+        "analytic_slope_dv_dalpha": -0.0032506871420570627,
+        "analytic_slope_identity_path": -0.0032506871420570627,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.323119163513184,
+        "analytic_slope_dv_dalpha": -0.07263040661668096,
+        "analytic_slope_identity_path": -0.07263040661668096,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.552509903907776,
+        "analytic_slope_dv_dalpha": -0.04955042459672265,
+        "analytic_slope_identity_path": -0.04955042459672265,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4428526610136032,
+        "analytic_slope_dv_dalpha": 0.0027178026290554103,
+        "analytic_slope_identity_path": 0.0027178026290554103,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.552509903907776,
+        "analytic_slope_dv_dalpha": -0.010536215909172086,
+        "analytic_slope_identity_path": -0.010536215909172086,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4599689841270447,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0032506871420570627,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0035_007_A",
+      "scene": "scene-0035",
+      "v_cmd_base": 9.621548652648926,
+      "grad_norm": 0.18537956476211548,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4600607305765152,
+        "analytic_slope_dv_dalpha": -0.00318526238087366,
+        "analytic_slope_identity_path": -0.00318526238087366,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.328149080276489,
+        "analytic_slope_dv_dalpha": -0.06981537622268275,
+        "analytic_slope_identity_path": -0.06981537622268275,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.544858455657959,
+        "analytic_slope_dv_dalpha": -0.04824130384246228,
+        "analytic_slope_identity_path": -0.04824130384246228,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.44228434562683105,
+        "analytic_slope_dv_dalpha": 0.002751770190428937,
+        "analytic_slope_identity_path": 0.002751770190428937,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.544858455657959,
+        "analytic_slope_dv_dalpha": -0.012036498319825117,
+        "analytic_slope_identity_path": -0.012036498319825117,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4600607305765152,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.00318526238087366,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0057_002_A",
+      "scene": "scene-0057",
+      "v_cmd_base": 9.620774745941162,
+      "grad_norm": 0.1945401281118393,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.45860473811626434,
+        "analytic_slope_dv_dalpha": -0.0038856214955346885,
+        "analytic_slope_identity_path": -0.0038856214955346885,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.012996673583984,
+        "analytic_slope_dv_dalpha": -0.07891170810381709,
+        "analytic_slope_identity_path": -0.07891170810381709,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.359754204750061,
+        "analytic_slope_dv_dalpha": -0.04216817823104346,
+        "analytic_slope_identity_path": -0.04216817823104346,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.44465069472789764,
+        "analytic_slope_dv_dalpha": 0.0045476672558983355,
+        "analytic_slope_identity_path": 0.0045476672558983355,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.359754204750061,
+        "analytic_slope_dv_dalpha": -0.013562587003538462,
+        "analytic_slope_identity_path": -0.013562587003538462,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.45860473811626434,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0038856214955346885,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0061_001_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 9.134111404418945,
+      "grad_norm": 0.2086273580789566,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46329230070114136,
+        "analytic_slope_dv_dalpha": -0.0036713731762499924,
+        "analytic_slope_identity_path": -0.0036713731762499924,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.370730876922607,
+        "analytic_slope_dv_dalpha": -0.0771261509979344,
+        "analytic_slope_identity_path": -0.0771261509979344,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.4668095111846924,
+        "analytic_slope_dv_dalpha": -0.05013326585499378,
+        "analytic_slope_identity_path": -0.05013326585499378,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4479106366634369,
+        "analytic_slope_dv_dalpha": 0.002585312534433018,
+        "analytic_slope_identity_path": 0.002585312534433018,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.4668095111846924,
+        "analytic_slope_dv_dalpha": -0.009317405173300597,
+        "analytic_slope_identity_path": -0.009317405173300597,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46329230070114136,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0036713731762499924,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0061_008_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 8.705291748046875,
+      "grad_norm": 0.23415134847164154,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46008308231830597,
+        "analytic_slope_dv_dalpha": -0.0027326685819864457,
+        "analytic_slope_identity_path": -0.0027326685819864457,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.013946771621704,
+        "analytic_slope_dv_dalpha": -0.07286702546568935,
+        "analytic_slope_identity_path": -0.07286702546568935,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.441228151321411,
+        "analytic_slope_dv_dalpha": -0.05063532473244603,
+        "analytic_slope_identity_path": -0.05063532473244603,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4443070590496063,
+        "analytic_slope_dv_dalpha": 0.0038393516002266648,
+        "analytic_slope_identity_path": 0.0038393516002266648,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.441228151321411,
+        "analytic_slope_dv_dalpha": -0.00804072671435807,
+        "analytic_slope_identity_path": -0.00804072671435807,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46008308231830597,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0027326685819864457,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0061_012_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 9.49634838104248,
+      "grad_norm": 0.22916868329048157,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46793800592422485,
+        "analytic_slope_dv_dalpha": -0.002036926225693625,
+        "analytic_slope_identity_path": -0.002036926225693625,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.921889543533325,
+        "analytic_slope_dv_dalpha": -0.0783245533962269,
+        "analytic_slope_identity_path": -0.0783245533962269,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.4584017992019653,
+        "analytic_slope_dv_dalpha": -0.04982163245303717,
+        "analytic_slope_identity_path": -0.04982163245303717,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.44982412457466125,
+        "analytic_slope_dv_dalpha": 0.0025957892070296307,
+        "analytic_slope_identity_path": 0.0025957892070296307,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.4584017992019653,
+        "analytic_slope_dv_dalpha": -0.011929143563138844,
+        "analytic_slope_identity_path": -0.011929143563138844,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46793800592422485,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.002036926225693625,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0061_013_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 9.49634838104248,
+      "grad_norm": 0.22916868329048157,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46793800592422485,
+        "analytic_slope_dv_dalpha": -0.002036926225693625,
+        "analytic_slope_identity_path": -0.002036926225693625,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.921889543533325,
+        "analytic_slope_dv_dalpha": -0.0783245533962269,
+        "analytic_slope_identity_path": -0.0783245533962269,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.4584017992019653,
+        "analytic_slope_dv_dalpha": -0.04982163245303717,
+        "analytic_slope_identity_path": -0.04982163245303717,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.44982412457466125,
+        "analytic_slope_dv_dalpha": 0.0025957892070296307,
+        "analytic_slope_identity_path": 0.0025957892070296307,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.4584017992019653,
+        "analytic_slope_dv_dalpha": -0.011929143563138844,
+        "analytic_slope_identity_path": -0.011929143563138844,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46793800592422485,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.002036926225693625,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0061_014_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 9.282834529876709,
+      "grad_norm": 0.22830811142921448,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46625855565071106,
+        "analytic_slope_dv_dalpha": -0.002302543189241557,
+        "analytic_slope_identity_path": -0.002302543189241557,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.0312769412994385,
+        "analytic_slope_dv_dalpha": -0.07476352309225165,
+        "analytic_slope_identity_path": -0.07476352309225165,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.451256513595581,
+        "analytic_slope_dv_dalpha": -0.05256167719035254,
+        "analytic_slope_identity_path": -0.05256167719035254,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4478248208761215,
+        "analytic_slope_dv_dalpha": 0.002500380892428433,
+        "analytic_slope_identity_path": 0.002500380892428433,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.451256513595581,
+        "analytic_slope_dv_dalpha": -0.012657895338354375,
+        "analytic_slope_identity_path": -0.012657895338354375,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46625855565071106,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.002302543189241557,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0061_025_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 8.7668776512146,
+      "grad_norm": 0.23582901060581207,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4657984972000122,
+        "analytic_slope_dv_dalpha": -0.002118207844816311,
+        "analytic_slope_identity_path": -0.002118207844816311,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.825835466384888,
+        "analytic_slope_dv_dalpha": -0.08911489592091026,
+        "analytic_slope_identity_path": -0.08911489592091026,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.4046536684036255,
+        "analytic_slope_dv_dalpha": -0.0565475563251856,
+        "analytic_slope_identity_path": -0.0565475563251856,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4460948556661606,
+        "analytic_slope_dv_dalpha": 0.004620696293087145,
+        "analytic_slope_identity_path": 0.004620696293087145,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.4046536684036255,
+        "analytic_slope_dv_dalpha": -0.010758763335070087,
+        "analytic_slope_identity_path": -0.010758763335070087,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4657984972000122,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.002118207844816311,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0061_027_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 8.773432731628418,
+      "grad_norm": 0.2263498306274414,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.466655969619751,
+        "analytic_slope_dv_dalpha": -0.002529956738618222,
+        "analytic_slope_identity_path": -0.002529956738618222,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.794727802276611,
+        "analytic_slope_dv_dalpha": -0.08555893374806489,
+        "analytic_slope_identity_path": -0.08555893374806489,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.3941105604171753,
+        "analytic_slope_dv_dalpha": -0.05520269899951469,
+        "analytic_slope_identity_path": -0.05520269899951469,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.44624581933021545,
+        "analytic_slope_dv_dalpha": 0.004231428380048474,
+        "analytic_slope_identity_path": 0.004231428380048474,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.3941105604171753,
+        "analytic_slope_dv_dalpha": -0.012522385006431547,
+        "analytic_slope_identity_path": -0.012522385006431547,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.466655969619751,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.002529956738618222,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0071_007_A",
+      "scene": "scene-0071",
+      "v_cmd_base": 8.56072187423706,
+      "grad_norm": 0.18737433850765228,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46788185834884644,
+        "analytic_slope_dv_dalpha": -0.0019459913508738935,
+        "analytic_slope_identity_path": -0.0019459913508738935,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.262794494628906,
+        "analytic_slope_dv_dalpha": -0.07238261964489112,
+        "analytic_slope_identity_path": -0.07238261964489112,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.49014151096344,
+        "analytic_slope_dv_dalpha": -0.048405073913691865,
+        "analytic_slope_identity_path": -0.048405073913691865,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.43952830135822296,
+        "analytic_slope_dv_dalpha": 0.0016300301849217491,
+        "analytic_slope_identity_path": 0.0016300301849217491,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.49014151096344,
+        "analytic_slope_dv_dalpha": -0.021390032024029004,
+        "analytic_slope_identity_path": -0.021390032024029004,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46788185834884644,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0019459913508738935,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0071_017_A",
+      "scene": "scene-0071",
+      "v_cmd_base": 4.085708022117615,
+      "grad_norm": 0.14529794454574585,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.47375062108039856,
+        "analytic_slope_dv_dalpha": 2.085208003073727e-05,
+        "analytic_slope_identity_path": 2.085208003073727e-05,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.0708701610565186,
+        "analytic_slope_dv_dalpha": -0.03982636125073591,
+        "analytic_slope_identity_path": -0.03982636125073591,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.3905972242355347,
+        "analytic_slope_dv_dalpha": -0.030477117281540567,
+        "analytic_slope_identity_path": -0.030477117281540567,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.45373398065567017,
+        "analytic_slope_dv_dalpha": 0.0040435520968308825,
+        "analytic_slope_identity_path": 0.0040435520968308825,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.3905972242355347,
+        "analytic_slope_dv_dalpha": -0.006078599201062823,
+        "analytic_slope_identity_path": -0.006078599201062823,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.47375062108039856,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": 2.085208003073727e-05,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0073_006_A",
+      "scene": "scene-0073",
+      "v_cmd_base": 5.234700441360474,
+      "grad_norm": 0.16387614607810974,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4729115962982178,
+        "analytic_slope_dv_dalpha": -0.001717933987519793,
+        "analytic_slope_identity_path": -0.001717933987519793,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.640258073806763,
+        "analytic_slope_dv_dalpha": -0.051491655668726044,
+        "analytic_slope_identity_path": -0.051491655668726044,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.3514686822891235,
+        "analytic_slope_dv_dalpha": -0.028241171053272174,
+        "analytic_slope_identity_path": -0.028241171053272174,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4455668032169342,
+        "analytic_slope_dv_dalpha": 0.004312722789209911,
+        "analytic_slope_identity_path": 0.004312722789209911,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.3514686822891235,
+        "analytic_slope_dv_dalpha": -0.007833968532711788,
+        "analytic_slope_identity_path": -0.007833968532711788,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4729115962982178,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.001717933987519793,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0165_001_A",
+      "scene": "scene-0165",
+      "v_cmd_base": 10.214216232299805,
+      "grad_norm": 0.21440985798835754,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4497970789670944,
+        "analytic_slope_dv_dalpha": -0.004403757015057547,
+        "analytic_slope_identity_path": -0.004403757015057547,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.707370758056641,
+        "analytic_slope_dv_dalpha": -0.09333108088185327,
+        "analytic_slope_identity_path": -0.09333108088185327,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.390246629714966,
+        "analytic_slope_dv_dalpha": -0.04762203146618882,
+        "analytic_slope_identity_path": -0.04762203146618882,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.43662717938423157,
+        "analytic_slope_dv_dalpha": 0.0042177038720927484,
+        "analytic_slope_identity_path": 0.0042177038720927484,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.390246629714966,
+        "analytic_slope_dv_dalpha": -0.009295662011599981,
+        "analytic_slope_identity_path": -0.009295662011599981,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4497970789670944,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.004403757015057547,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0178_005_A",
+      "scene": "scene-0178",
+      "v_cmd_base": 8.722169876098633,
+      "grad_norm": 0.21621955931186676,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4641028195619583,
+        "analytic_slope_dv_dalpha": -0.0033829702990388483,
+        "analytic_slope_identity_path": -0.0033829702990388483,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.68815279006958,
+        "analytic_slope_dv_dalpha": -0.11040497394235516,
+        "analytic_slope_identity_path": -0.11040497394235516,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.38790500164032,
+        "analytic_slope_dv_dalpha": -0.0356893984212856,
+        "analytic_slope_identity_path": -0.0356893984212856,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.447826623916626,
+        "analytic_slope_dv_dalpha": 0.006594571786037617,
+        "analytic_slope_identity_path": 0.006594571786037617,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.38790500164032,
+        "analytic_slope_dv_dalpha": -0.006503583015505632,
+        "analytic_slope_identity_path": -0.006503583015505632,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4641028195619583,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0033829702990388483,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0203_000_A",
+      "scene": "scene-0203",
+      "v_cmd_base": 8.682414054870605,
+      "grad_norm": 0.23420578241348267,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46321138739585876,
+        "analytic_slope_dv_dalpha": -0.0016930626995836223,
+        "analytic_slope_identity_path": -0.0016930626995836223,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.9073805809021,
+        "analytic_slope_dv_dalpha": -0.1055506931807515,
+        "analytic_slope_identity_path": -0.1055506931807515,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.415324091911316,
+        "analytic_slope_dv_dalpha": -0.04642813948553082,
+        "analytic_slope_identity_path": -0.04642813948553082,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.44566215574741364,
+        "analytic_slope_dv_dalpha": 0.005897374441158482,
+        "analytic_slope_identity_path": 0.005897374441158482,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.415324091911316,
+        "analytic_slope_dv_dalpha": -0.004206236548852993,
+        "analytic_slope_identity_path": -0.004206236548852993,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46321138739585876,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0016930626995836223,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0203_001_A",
+      "scene": "scene-0203",
+      "v_cmd_base": 8.2716224193573,
+      "grad_norm": 0.23322714865207672,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46347862482070923,
+        "analytic_slope_dv_dalpha": -0.0016239211456210018,
+        "analytic_slope_identity_path": -0.0016239211456210018,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.86085844039917,
+        "analytic_slope_dv_dalpha": -0.08981452522022249,
+        "analytic_slope_identity_path": -0.08981452522022249,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.3889180421829224,
+        "analytic_slope_dv_dalpha": -0.043433114484762836,
+        "analytic_slope_identity_path": -0.043433114484762836,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4478770047426224,
+        "analytic_slope_dv_dalpha": 0.00628803664018851,
+        "analytic_slope_identity_path": 0.00628803664018851,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.3889180421829224,
+        "analytic_slope_dv_dalpha": -0.005867293576610838,
+        "analytic_slope_identity_path": -0.005867293576610838,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46347862482070923,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0016239211456210018,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0353_001_A",
+      "scene": "scene-0353",
+      "v_cmd_base": 9.566149234771729,
+      "grad_norm": 0.18973113596439362,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4644160568714142,
+        "analytic_slope_dv_dalpha": -0.0035212209212099055,
+        "analytic_slope_identity_path": -0.0035212209212099055,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.425614595413208,
+        "analytic_slope_dv_dalpha": -0.0625830860848986,
+        "analytic_slope_identity_path": -0.0625830860848986,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.5638073682785034,
+        "analytic_slope_dv_dalpha": -0.054763184788070296,
+        "analytic_slope_identity_path": -0.054763184788070296,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4504960775375366,
+        "analytic_slope_dv_dalpha": 0.0016768911188980162,
+        "analytic_slope_identity_path": 0.0016768911188980162,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.5638073682785034,
+        "analytic_slope_dv_dalpha": -0.017167112656524264,
+        "analytic_slope_identity_path": -0.017167112656524264,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4644160568714142,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0035212209212099055,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0371_000_A",
+      "scene": "scene-0371",
+      "v_cmd_base": 10.023121356964111,
+      "grad_norm": 0.2167283147573471,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4635467231273651,
+        "analytic_slope_dv_dalpha": -0.0023691605519939735,
+        "analytic_slope_identity_path": -0.0023691605519939735,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.961259365081787,
+        "analytic_slope_dv_dalpha": -0.0948677212077591,
+        "analytic_slope_identity_path": -0.0948677212077591,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.5280133485794067,
+        "analytic_slope_dv_dalpha": -0.052416603415572194,
+        "analytic_slope_identity_path": -0.052416603415572194,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4457632154226303,
+        "analytic_slope_dv_dalpha": 0.0027049753054104175,
+        "analytic_slope_identity_path": 0.0027049753054104175,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.5280133485794067,
+        "analytic_slope_dv_dalpha": -0.01272425730337412,
+        "analytic_slope_identity_path": -0.01272425730337412,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4635467231273651,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0023691605519939735,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0376_003_A",
+      "scene": "scene-0376",
+      "v_cmd_base": 9.250509262084961,
+      "grad_norm": 0.22588425874710083,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4560025781393051,
+        "analytic_slope_dv_dalpha": -0.0017277288888842973,
+        "analytic_slope_identity_path": -0.0017277288888842973,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.823791742324829,
+        "analytic_slope_dv_dalpha": -0.08337902572530176,
+        "analytic_slope_identity_path": -0.08337902572530176,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.4503517150878906,
+        "analytic_slope_dv_dalpha": -0.04838134953072171,
+        "analytic_slope_identity_path": -0.04838134953072171,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.44190584123134613,
+        "analytic_slope_dv_dalpha": 0.00387663086519012,
+        "analytic_slope_identity_path": 0.00387663086519012,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.4503517150878906,
+        "analytic_slope_dv_dalpha": -0.007961794192854477,
+        "analytic_slope_identity_path": -0.007961794192854477,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4560025781393051,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0017277288888842973,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0376_004_A",
+      "scene": "scene-0376",
+      "v_cmd_base": 9.438730239868164,
+      "grad_norm": 0.22569586336612701,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4563656747341156,
+        "analytic_slope_dv_dalpha": -0.002068991351991789,
+        "analytic_slope_identity_path": -0.002068991351991789,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.8985676765441895,
+        "analytic_slope_dv_dalpha": -0.0782939071725619,
+        "analytic_slope_identity_path": -0.0782939071725619,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.4555211067199707,
+        "analytic_slope_dv_dalpha": -0.04965758962875988,
+        "analytic_slope_identity_path": -0.04965758962875988,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.44218483567237854,
+        "analytic_slope_dv_dalpha": 0.0033775152377335804,
+        "analytic_slope_identity_path": 0.0033775152377335804,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.4555211067199707,
+        "analytic_slope_dv_dalpha": -0.007817869874836014,
+        "analytic_slope_identity_path": -0.007817869874836014,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4563656747341156,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.002068991351991789,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0419_003_A",
+      "scene": "scene-0419",
+      "v_cmd_base": 8.314690589904785,
+      "grad_norm": 0.23529599606990814,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46509213745594025,
+        "analytic_slope_dv_dalpha": -0.003049642653858882,
+        "analytic_slope_identity_path": -0.003049642653858882,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.625628709793091,
+        "analytic_slope_dv_dalpha": -0.1365004556786582,
+        "analytic_slope_identity_path": -0.1365004556786582,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.408796191215515,
+        "analytic_slope_dv_dalpha": -0.03645068178370359,
+        "analytic_slope_identity_path": -0.03645068178370359,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4484546631574631,
+        "analytic_slope_dv_dalpha": 0.004525341494054952,
+        "analytic_slope_identity_path": 0.004525341494054952,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.408796191215515,
+        "analytic_slope_dv_dalpha": -0.012886673184318631,
+        "analytic_slope_identity_path": -0.012886673184318631,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46509213745594025,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.003049642653858882,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0432_000_A",
+      "scene": "scene-0432",
+      "v_cmd_base": 6.747817754745483,
+      "grad_norm": 0.23103095591068268,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4655595123767853,
+        "analytic_slope_dv_dalpha": -0.001598013488462828,
+        "analytic_slope_identity_path": -0.001598013488462828,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.33836555480957,
+        "analytic_slope_dv_dalpha": -0.08613585318453332,
+        "analytic_slope_identity_path": -0.08613585318453332,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.322171926498413,
+        "analytic_slope_dv_dalpha": -0.03788851908855362,
+        "analytic_slope_identity_path": -0.03788851908855362,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.44300200045108795,
+        "analytic_slope_dv_dalpha": 0.00518809400156732,
+        "analytic_slope_identity_path": 0.00518809400156732,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.322171926498413,
+        "analytic_slope_dv_dalpha": -0.008058864099854679,
+        "analytic_slope_identity_path": -0.008058864099854679,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4655595123767853,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.001598013488462828,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0432_001_A",
+      "scene": "scene-0432",
+      "v_cmd_base": 8.00602412223816,
+      "grad_norm": 0.20982009172439575,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46495847404003143,
+        "analytic_slope_dv_dalpha": -0.002440009147624926,
+        "analytic_slope_identity_path": -0.002440009147624926,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.6782472133636475,
+        "analytic_slope_dv_dalpha": -0.09275662486603187,
+        "analytic_slope_identity_path": -0.09275662486603187,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.3778198957443237,
+        "analytic_slope_dv_dalpha": -0.04520323300256335,
+        "analytic_slope_identity_path": -0.04520323300256335,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4415869265794754,
+        "analytic_slope_dv_dalpha": 0.00664860971242115,
+        "analytic_slope_identity_path": 0.00664860971242115,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.3778198957443237,
+        "analytic_slope_dv_dalpha": -0.00816953276274951,
+        "analytic_slope_identity_path": -0.00816953276274951,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46495847404003143,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.002440009147624926,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0432_003_A",
+      "scene": "scene-0432",
+      "v_cmd_base": 6.5931079387664795,
+      "grad_norm": 0.17258618772029877,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4728611558675766,
+        "analytic_slope_dv_dalpha": -0.0008098588988654509,
+        "analytic_slope_identity_path": -0.0008098588988654509,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.152348756790161,
+        "analytic_slope_dv_dalpha": -0.05949801638277519,
+        "analytic_slope_identity_path": -0.05949801638277519,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.438511610031128,
+        "analytic_slope_dv_dalpha": -0.03671386084319517,
+        "analytic_slope_identity_path": -0.03671386084319517,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.44937892258167267,
+        "analytic_slope_dv_dalpha": 0.005968215212995037,
+        "analytic_slope_identity_path": 0.005968215212995037,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.438511610031128,
+        "analytic_slope_dv_dalpha": -0.006577972343616123,
+        "analytic_slope_identity_path": -0.006577972343616123,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4728611558675766,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0008098588988654509,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0433_000_A",
+      "scene": "scene-0433",
+      "v_cmd_base": 8.738250255584717,
+      "grad_norm": 0.22850565612316132,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.46140289306640625,
+        "analytic_slope_dv_dalpha": -0.0034006894028983936,
+        "analytic_slope_identity_path": -0.0034006894028983936,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 6.549870729446411,
+        "analytic_slope_dv_dalpha": -0.1070890272003453,
+        "analytic_slope_identity_path": -0.1070890272003453,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.307974696159363,
+        "analytic_slope_dv_dalpha": -0.04126034591123151,
+        "analytic_slope_identity_path": -0.04126034591123151,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.44631360471248627,
+        "analytic_slope_dv_dalpha": 0.005393343298685904,
+        "analytic_slope_identity_path": 0.005393343298685904,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.307974696159363,
+        "analytic_slope_dv_dalpha": -0.012937112935396955,
+        "analytic_slope_identity_path": -0.012937112935396955,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.46140289306640625,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.0034006894028983936,
+        "applicable": false
+      }
+    },
+    {
+      "event_id": "scene-0500_004_A",
+      "scene": "scene-0500",
+      "v_cmd_base": 7.152397632598877,
+      "grad_norm": 0.17152301967144012,
+      "v_hazard_clean_L9_query": {
+        "sigma_L": 0.4791133254766464,
+        "analytic_slope_dv_dalpha": -0.001077868842154689,
+        "analytic_slope_identity_path": -0.001077868842154689,
+        "applicable": true
+      },
+      "v_hazard_clean_L23_query": {
+        "sigma_L": 7.389094591140747,
+        "analytic_slope_dv_dalpha": -0.04672030539143379,
+        "analytic_slope_identity_path": -0.04672030539143379,
+        "applicable": true
+      },
+      "v_brake_L22_query": {
+        "sigma_L": 2.496337652206421,
+        "analytic_slope_dv_dalpha": -0.04362223020886358,
+        "analytic_slope_identity_path": -0.04362223020886358,
+        "applicable": true
+      },
+      "v_hazard_carla_L8_query": {
+        "sigma_L": 0.4546692818403244,
+        "analytic_slope_dv_dalpha": 0.00363032314375053,
+        "analytic_slope_identity_path": 0.00363032314375053,
+        "applicable": true
+      },
+      "v_cand1_L22_query": {
+        "sigma_L": 2.496337652206421,
+        "analytic_slope_dv_dalpha": -0.009810058603949678,
+        "analytic_slope_identity_path": -0.009810058603949678,
+        "applicable": true
+      },
+      "v_hazard_clean_L9_vision": {
+        "sigma_L": 0.4791133254766464,
+        "analytic_slope_dv_dalpha": 0.0,
+        "analytic_slope_identity_path": -0.001077868842154689,
+        "applicable": false
+      }
+    }
+  ],
+  "method": "g = ∂commanded_speed/∂h_23[query]（autograd 精确）；Δv_pred = α·σ_L·Σ_t⟨g_t, v̂⟩（残差流恒等路径）",
+  "caveat": "tokens=vision 的注入不经恒等路径到达 query 位置，解析预测记 0（applicable=false）。",
+  "summary": {
+    "v_hazard_clean_L9_query": {
+      "mean_analytic_slope": -0.0019127107329869673,
+      "sd": 0.0013098479151586735,
+      "frac_negative": 0.85,
+      "layer": 9,
+      "tokens": "query"
+    },
+    "v_hazard_clean_L23_query": {
+      "mean_analytic_slope": -0.07304849378339237,
+      "sd": 0.024284592397452787,
+      "frac_negative": 1.0,
+      "layer": 23,
+      "tokens": "query"
+    },
+    "v_brake_L22_query": {
+      "mean_analytic_slope": -0.04317349488325516,
+      "sd": 0.008373159072100735,
+      "frac_negative": 1.0,
+      "layer": 22,
+      "tokens": "query"
+    },
+    "v_hazard_carla_L8_query": {
+      "mean_analytic_slope": 0.004197697286289074,
+      "sd": 0.001324895653796234,
+      "frac_negative": 0.0,
+      "layer": 8,
+      "tokens": "query"
+    },
+    "v_cand1_L22_query": {
+      "mean_analytic_slope": -0.00904939474381148,
+      "sd": 0.003695348728814707,
+      "frac_negative": 1.0,
+      "layer": 22,
+      "tokens": "query"
+    },
+    "v_hazard_clean_L9_vision": {
+      "mean_analytic_slope": -0.0019127107329869673,
+      "sd": 0.0013098479151586735,
+      "frac_negative": 0.85,
+      "layer": 9,
+      "tokens": "vision"
+    }
+  }
+}

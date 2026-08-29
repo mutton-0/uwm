@@ -1,0 +1,505 @@
+{
+  "n_events": 40,
+  "pool_mode": "region_mean",
+  "seed": 0,
+  "specs": [
+    {
+      "name": "v_danger_lang_L10_query",
+      "layer": 10,
+      "tokens": "query"
+    }
+  ],
+  "per_event": [
+    {
+      "event_id": "scene-0002_011_A",
+      "scene": "scene-0002",
+      "v_cmd_base": 5.915802955627441,
+      "grad_norm": 0.1671541929244995,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4950219392776489,
+        "analytic_slope_dv_dalpha": 0.0011367003918484608,
+        "analytic_slope_identity_path": 0.0011367003918484608,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0004_024_A",
+      "scene": "scene-0004",
+      "v_cmd_base": 9.887110233306885,
+      "grad_norm": 0.19890819489955902,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.47778715193271637,
+        "analytic_slope_dv_dalpha": -0.001816017715499628,
+        "analytic_slope_identity_path": -0.001816017715499628,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0008_005_A",
+      "scene": "scene-0008",
+      "v_cmd_base": 8.478816032409668,
+      "grad_norm": 0.2371789515018463,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4833027273416519,
+        "analytic_slope_dv_dalpha": -0.0010493429439144483,
+        "analytic_slope_identity_path": -0.0010493429439144483,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0019_003_A",
+      "scene": "scene-0019",
+      "v_cmd_base": 5.374735593795776,
+      "grad_norm": 0.199087455868721,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.49418382346630096,
+        "analytic_slope_dv_dalpha": 0.0009866462641964016,
+        "analytic_slope_identity_path": 0.0009866462641964016,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0019_006_A",
+      "scene": "scene-0019",
+      "v_cmd_base": 7.047281742095947,
+      "grad_norm": 0.18626712262630463,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.49165433645248413,
+        "analytic_slope_dv_dalpha": 0.0005130799489491134,
+        "analytic_slope_identity_path": 0.0005130799489491134,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0019_008_A",
+      "scene": "scene-0019",
+      "v_cmd_base": 7.253034353256226,
+      "grad_norm": 0.18896721303462982,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.489524781703949,
+        "analytic_slope_dv_dalpha": 0.00034415244707571013,
+        "analytic_slope_identity_path": 0.00034415244707571013,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0025_003_A",
+      "scene": "scene-0025",
+      "v_cmd_base": 3.1533398628234863,
+      "grad_norm": 0.1525496393442154,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.49606645107269287,
+        "analytic_slope_dv_dalpha": 0.001982639203987391,
+        "analytic_slope_identity_path": 0.001982639203987391,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0025_004_A",
+      "scene": "scene-0025",
+      "v_cmd_base": 2.91148442029953,
+      "grad_norm": 0.14176657795906067,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4945646673440933,
+        "analytic_slope_dv_dalpha": 0.002038071489655874,
+        "analytic_slope_identity_path": 0.002038071489655874,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0025_005_A",
+      "scene": "scene-0025",
+      "v_cmd_base": 2.91148442029953,
+      "grad_norm": 0.14176657795906067,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4945646673440933,
+        "analytic_slope_dv_dalpha": 0.002038071489655874,
+        "analytic_slope_identity_path": 0.002038071489655874,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0025_006_A",
+      "scene": "scene-0025",
+      "v_cmd_base": 2.91148442029953,
+      "grad_norm": 0.14176657795906067,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4945646673440933,
+        "analytic_slope_dv_dalpha": 0.002038071489655874,
+        "analytic_slope_identity_path": 0.002038071489655874,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0025_007_A",
+      "scene": "scene-0025",
+      "v_cmd_base": 2.91148442029953,
+      "grad_norm": 0.14176657795906067,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4945646673440933,
+        "analytic_slope_dv_dalpha": 0.002038071489655874,
+        "analytic_slope_identity_path": 0.002038071489655874,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0027_000_A",
+      "scene": "scene-0027",
+      "v_cmd_base": 6.9427478313446045,
+      "grad_norm": 0.2064695507287979,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.48987405002117157,
+        "analytic_slope_dv_dalpha": 0.001091045983019616,
+        "analytic_slope_identity_path": 0.001091045983019616,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0035_004_A",
+      "scene": "scene-0035",
+      "v_cmd_base": 8.842057228088379,
+      "grad_norm": 0.2040656954050064,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4792725145816803,
+        "analytic_slope_dv_dalpha": 0.0018319317579818875,
+        "analytic_slope_identity_path": 0.0018319317579818875,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0035_006_A",
+      "scene": "scene-0035",
+      "v_cmd_base": 9.725214958190918,
+      "grad_norm": 0.19290241599082947,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4791030138731003,
+        "analytic_slope_dv_dalpha": -0.000755888644309588,
+        "analytic_slope_identity_path": -0.000755888644309588,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0035_007_A",
+      "scene": "scene-0035",
+      "v_cmd_base": 9.621548652648926,
+      "grad_norm": 0.18537956476211548,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4795866161584854,
+        "analytic_slope_dv_dalpha": -0.00038712950747694236,
+        "analytic_slope_identity_path": -0.00038712950747694236,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0057_002_A",
+      "scene": "scene-0057",
+      "v_cmd_base": 9.620774745941162,
+      "grad_norm": 0.1945401281118393,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4785829335451126,
+        "analytic_slope_dv_dalpha": 0.0006669183631984668,
+        "analytic_slope_identity_path": 0.0006669183631984668,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0061_001_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 9.134111404418945,
+      "grad_norm": 0.2086273580789566,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4813579022884369,
+        "analytic_slope_dv_dalpha": -0.0018007094054348222,
+        "analytic_slope_identity_path": -0.0018007094054348222,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0061_008_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 8.705291748046875,
+      "grad_norm": 0.23415134847164154,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4739353656768799,
+        "analytic_slope_dv_dalpha": -0.0017375737167336647,
+        "analytic_slope_identity_path": -0.0017375737167336647,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0061_012_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 9.49634838104248,
+      "grad_norm": 0.22916868329048157,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.48251043260097504,
+        "analytic_slope_dv_dalpha": -0.0021169977826395597,
+        "analytic_slope_identity_path": -0.0021169977826395597,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0061_013_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 9.49634838104248,
+      "grad_norm": 0.22916868329048157,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.48251043260097504,
+        "analytic_slope_dv_dalpha": -0.0021169977826395597,
+        "analytic_slope_identity_path": -0.0021169977826395597,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0061_014_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 9.282834529876709,
+      "grad_norm": 0.22830811142921448,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.48209773004055023,
+        "analytic_slope_dv_dalpha": -0.002166541920019305,
+        "analytic_slope_identity_path": -0.002166541920019305,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0061_025_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 8.7668776512146,
+      "grad_norm": 0.23582901060581207,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4784906506538391,
+        "analytic_slope_dv_dalpha": -0.0016811375080690583,
+        "analytic_slope_identity_path": -0.0016811375080690583,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0061_027_A",
+      "scene": "scene-0061",
+      "v_cmd_base": 8.773432731628418,
+      "grad_norm": 0.2263498306274414,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.48019929230213165,
+        "analytic_slope_dv_dalpha": -0.0018483119949362914,
+        "analytic_slope_identity_path": -0.0018483119949362914,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0071_007_A",
+      "scene": "scene-0071",
+      "v_cmd_base": 8.56072187423706,
+      "grad_norm": 0.18737433850765228,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4821237474679947,
+        "analytic_slope_dv_dalpha": -0.0013616780248734209,
+        "analytic_slope_identity_path": -0.0013616780248734209,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0071_017_A",
+      "scene": "scene-0071",
+      "v_cmd_base": 4.085708022117615,
+      "grad_norm": 0.14529794454574585,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4968945384025574,
+        "analytic_slope_dv_dalpha": 0.002005225253521148,
+        "analytic_slope_identity_path": 0.002005225253521148,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0073_006_A",
+      "scene": "scene-0073",
+      "v_cmd_base": 5.234700441360474,
+      "grad_norm": 0.16387614607810974,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4910895526409149,
+        "analytic_slope_dv_dalpha": 0.0015565322520612879,
+        "analytic_slope_identity_path": 0.0015565322520612879,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0165_001_A",
+      "scene": "scene-0165",
+      "v_cmd_base": 10.214216232299805,
+      "grad_norm": 0.21440985798835754,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4588481932878494,
+        "analytic_slope_dv_dalpha": -0.002153090657806639,
+        "analytic_slope_identity_path": -0.002153090657806639,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0178_005_A",
+      "scene": "scene-0178",
+      "v_cmd_base": 8.722169876098633,
+      "grad_norm": 0.21621955931186676,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4825056344270706,
+        "analytic_slope_dv_dalpha": -7.83136761186437e-07,
+        "analytic_slope_identity_path": -7.83136761186437e-07,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0203_000_A",
+      "scene": "scene-0203",
+      "v_cmd_base": 8.682414054870605,
+      "grad_norm": 0.23420578241348267,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.48269279301166534,
+        "analytic_slope_dv_dalpha": -0.0012186270800306626,
+        "analytic_slope_identity_path": -0.0012186270800306626,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0203_001_A",
+      "scene": "scene-0203",
+      "v_cmd_base": 8.2716224193573,
+      "grad_norm": 0.23322714865207672,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4853975921869278,
+        "analytic_slope_dv_dalpha": 0.0004331727877212588,
+        "analytic_slope_identity_path": 0.0004331727877212588,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0353_001_A",
+      "scene": "scene-0353",
+      "v_cmd_base": 9.566149234771729,
+      "grad_norm": 0.18973113596439362,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.48711471259593964,
+        "analytic_slope_dv_dalpha": -0.0008691084087346021,
+        "analytic_slope_identity_path": -0.0008691084087346021,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0371_000_A",
+      "scene": "scene-0371",
+      "v_cmd_base": 10.023121356964111,
+      "grad_norm": 0.2167283147573471,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.48410189151763916,
+        "analytic_slope_dv_dalpha": -0.0009826572265393962,
+        "analytic_slope_identity_path": -0.0009826572265393962,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0376_003_A",
+      "scene": "scene-0376",
+      "v_cmd_base": 9.250509262084961,
+      "grad_norm": 0.22588425874710083,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4765179306268692,
+        "analytic_slope_dv_dalpha": -0.0020176914685912234,
+        "analytic_slope_identity_path": -0.0020176914685912234,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0376_004_A",
+      "scene": "scene-0376",
+      "v_cmd_base": 9.438730239868164,
+      "grad_norm": 0.22569586336612701,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.47677716612815857,
+        "analytic_slope_dv_dalpha": -0.0023564505115260953,
+        "analytic_slope_identity_path": -0.0023564505115260953,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0419_003_A",
+      "scene": "scene-0419",
+      "v_cmd_base": 8.314690589904785,
+      "grad_norm": 0.23529599606990814,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4861086457967758,
+        "analytic_slope_dv_dalpha": -0.001393240996045396,
+        "analytic_slope_identity_path": -0.001393240996045396,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0432_000_A",
+      "scene": "scene-0432",
+      "v_cmd_base": 6.747817754745483,
+      "grad_norm": 0.23103095591068268,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.48419319093227386,
+        "analytic_slope_dv_dalpha": 0.0017677008884628247,
+        "analytic_slope_identity_path": 0.0017677008884628247,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0432_001_A",
+      "scene": "scene-0432",
+      "v_cmd_base": 8.00602412223816,
+      "grad_norm": 0.20982009172439575,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.48214052617549896,
+        "analytic_slope_dv_dalpha": 0.0006468922522796378,
+        "analytic_slope_identity_path": 0.0006468922522796378,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0432_003_A",
+      "scene": "scene-0432",
+      "v_cmd_base": 6.5931079387664795,
+      "grad_norm": 0.17258618772029877,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4962500035762787,
+        "analytic_slope_dv_dalpha": 0.0010001252622939688,
+        "analytic_slope_identity_path": 0.0010001252622939688,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0433_000_A",
+      "scene": "scene-0433",
+      "v_cmd_base": 8.738250255584717,
+      "grad_norm": 0.22850565612316132,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4762166291475296,
+        "analytic_slope_dv_dalpha": -0.00016755413294364252,
+        "analytic_slope_identity_path": -0.00016755413294364252,
+        "applicable": true
+      }
+    },
+    {
+      "event_id": "scene-0500_004_A",
+      "scene": "scene-0500",
+      "v_cmd_base": 7.152397632598877,
+      "grad_norm": 0.17152301967144012,
+      "v_danger_lang_L10_query": {
+        "sigma_L": 0.4977443814277649,
+        "analytic_slope_dv_dalpha": -0.0003496890086492066,
+        "analytic_slope_identity_path": -0.0003496890086492066,
+        "applicable": true
+      }
+    }
+  ],
+  "method": "g = ∂commanded_speed/∂h_23[query]（autograd 精确）；Δv_pred = α·σ_L·Σ_t⟨g_t, v̂⟩（残差流恒等路径）",
+  "caveat": "tokens=vision 的注入不经恒等路径到达 query 位置，解析预测记 0（applicable=false）。",
+  "summary": {
+    "v_danger_lang_L10_query": {
+      "mean_analytic_slope": -0.00015580426397384176,
+      "sd": 0.0015089828554026195,
+      "frac_negative": 0.55,
+      "layer": 10,
+      "tokens": "query"
+    }
+  }
+}

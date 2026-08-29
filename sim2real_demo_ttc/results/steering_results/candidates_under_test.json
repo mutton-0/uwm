@@ -1,0 +1,44 @@
+[
+  {
+    "name": "v_cand1_L22u2768_occlusion",
+    "layer": 22,
+    "unit": 2768,
+    "group": "occlusion",
+    "top_tokens": [
+      "Ġblock",
+      "Ġblocks",
+      "block",
+      "ĠBLOCK",
+      "ĠBlock"
+    ],
+    "priority_score": 0.7345823742506085
+  },
+  {
+    "name": "v_cand2_L18u1442_brake",
+    "layer": 18,
+    "unit": 1442,
+    "group": "brake",
+    "top_tokens": [
+      "Ġguarded",
+      "Ġfiltering",
+      "å®Īä½ı",
+      "éĻĲåĪ¶",
+      "åĪ¶çº¦"
+    ],
+    "priority_score": 0.7231815231712511
+  },
+  {
+    "name": "v_cand3_L18u789_brake",
+    "layer": 18,
+    "unit": 789,
+    "group": "brake",
+    "top_tokens": [
+      "æĹ¶éĻĲ",
+      "æ®µæĹ¶éĹ´",
+      "æľīæķĪæľŁ",
+      "å¾ħ",
+      "çŁŃæļĤ"
+    ],
+    "priority_score": 0.6806721402660602
+  }
+]

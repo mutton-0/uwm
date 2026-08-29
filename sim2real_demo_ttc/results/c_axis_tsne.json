@@ -1,0 +1,20 @@
+{
+  "L0": {
+    "silhouette_sim_vs_real_fullspace": 0.09038278679601569,
+    "n": 432
+  },
+  "L5": {
+    "silhouette_sim_vs_real_fullspace": 0.11161394165828273,
+    "n": 432
+  },
+  "L6": {
+    "silhouette_sim_vs_real_fullspace": 0.07311179850692316,
+    "n": 432
+  },
+  "L7": {
+    "silhouette_sim_vs_real_fullspace": 0.03257991715346455,
+    "n": 432
+  },
+  "note": "t-SNE 与 silhouette 均为相关性/可分性证据；散度大的层不等于因果责任层（本项目招牌结论：JS/CKA 峰在 L7，因果峰在 L6）。",
+  "pool": "vision_mean"
+}

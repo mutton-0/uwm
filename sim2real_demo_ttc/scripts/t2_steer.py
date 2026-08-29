@@ -275,16 +275,25 @@ def main():
         print(f"  seed {s}: Δv@α={args.random_alpha:g} = {m:+.4f}   全阶梯斜率 = {msr:+.5f}")
     out["random"] = rnd
     rs_arr = np.array(rnd_slopes)
-    z = (mf - rs_arr.mean()) / (rs_arr.std(ddof=1) + 1e-12)
-    n_ge = int((np.abs(rs_arr) >= abs(mf)).sum())
-    spec = bool(n_ge == 0 and abs(z) > 2)
-    print(f"  随机方向全阶梯斜率: 均值 {rs_arr.mean():+.5f}  sd {rs_arr.std(ddof=1):.5f}  "
-          f"范围 [{rs_arr.min():+.5f}, {rs_arr.max():+.5f}]")
-    print(f"  危险轴 {mf:+.5f}  ->  z={z:+.2f}，随机中 |斜率|≥危险轴的有 {n_ge}/{len(rs_arr)}  "
-          f"-> {'✅ 方向特异' if spec else '❌ 与随机方向不可区分'}")
-    out["random_slope_null"] = {"mean": float(rs_arr.mean()), "sd": float(rs_arr.std(ddof=1)),
-                                "z": float(z), "n_ge": n_ge}
-    hz = dose[f"{args.random_alpha:+g}"]["dv"]
+    if len(rs_arr) == 0:
+        # --random-seeds 0：随机对照单独跑（--random-only，>=20 seed 的逐层零分布），
+        # 这里只跑主方向的剂量/特异性/termination，不在本次输出里凑一个空对照。
+        out["random_slope_null"] = None
+        print("  （本次未跑随机对照：--random-seeds 0；零分布见同层 --random-only 的独立运行）")
+        spec = None
+        z = float("nan"); n_ge = -1
+        hz = dose[f"{args.random_alpha:+g}"]["dv"]
+    else:
+      z = (mf - rs_arr.mean()) / (rs_arr.std(ddof=1) + 1e-12)
+      n_ge = int((np.abs(rs_arr) >= abs(mf)).sum())
+      spec = bool(n_ge == 0 and abs(z) > 2)
+      print(f"  随机方向全阶梯斜率: 均值 {rs_arr.mean():+.5f}  sd {rs_arr.std(ddof=1):.5f}  "
+            f"范围 [{rs_arr.min():+.5f}, {rs_arr.max():+.5f}]")
+      print(f"  危险轴 {mf:+.5f}  ->  z={z:+.2f}，随机中 |斜率|≥危险轴的有 {n_ge}/{len(rs_arr)}  "
+            f"-> {'✅ 方向特异' if spec else '❌ 与随机方向不可区分'}")
+      out["random_slope_null"] = {"mean": float(rs_arr.mean()), "sd": float(rs_arr.std(ddof=1)),
+                                  "z": float(z), "n_ge": n_ge}
+      hz = dose[f"{args.random_alpha:+g}"]["dv"]
 
     print("\n=== 对照 ② termination / recovery（ghost 帧）===")
     dt = [r["term_ghost"][0] - r["base_ghost"][0] for r in rec]
@@ -298,9 +307,13 @@ def main():
     # ---------- 5. E2 判定 ----------
     mono = ms < 0 and cis[1] < 0                       # 剂量单调且方向正确（注入危险 => 减速）
     term = mt > 0 and cit[0] > 0
-    e2 = "PASS" if (mono and spec and term) else ("FAIL" if len(rec) >= 30 else "不可估")
+    if spec is None:
+        # 随机对照在本次运行中未跑（改由同层 --random-only 独立零分布给出，见修正案 A3）
+        e2 = "待合并" 
+    else:
+        e2 = "PASS" if (mono and spec and term) else ("FAIL" if len(rec) >= 30 else "不可估")
     out["E2"] = {"verdict": e2, "dose_monotonic": bool(mono),
-                 "random_null": bool(spec), "termination_ok": bool(term)}
+                 "random_null": (None if spec is None else bool(spec)), "termination_ok": bool(term)}
     print(f"\n[E2 判定] 剂量单调={mono}  随机零效应={spec}  termination={term}  => **{e2}**")
 
     (work / "results" / f"t2_steer_{args.pool_mode}{args.tag}.json").write_text(
