@@ -244,6 +244,28 @@ class SimLingoRunner:
         self._steer = {"layer": int(layer), "v": v.to(self.device), "alpha": float(alpha),
                        "mode": mode, "tokens": tokens, "region_local": region_local}
 
+    def set_patch(self, layers=None):
+        """layers: {layer_idx: [n_vision_tokens, C] 参考侧激活}；None 关闭。
+
+        只替换 **vision token 段**：语言段在两个条件之间长度与内容都会变，
+        对应关系无定义（与 g2_cache schema v2 的同一条纪律）。
+        """
+        self._patch = None if not layers else {int(k): np.asarray(v, np.float32) for k, v in layers.items()}
+
+    def _apply_patch(self, h: torch.Tensor, values) -> Optional[torch.Tensor]:
+        """把 h 的 vision token 位置整体替换为 values；token 数不匹配时跳过（返回 None）。"""
+        if h.shape[1] <= 1 or self._adaptor_dict is None:
+            return None
+        ids = self._adaptor_dict["language__ids"][0]
+        if h.shape[1] < int(ids.shape[0]):
+            return None
+        vis = torch.nonzero(ids == self.img_context_token_id).flatten()
+        if len(vis) == 0 or len(vis) != len(values):
+            return None
+        h = h.clone()
+        h[0, vis, :] = torch.as_tensor(values, device=h.device).to(h.dtype)
+        return h
+
     def _steer_positions(self, seq_len: int):
         """本次前向中要注入的 token 位置；返回 None 表示这次前向不注入。
 
@@ -304,6 +326,7 @@ class SimLingoRunner:
         self._layer_outputs: List[torch.Tensor] = []
         self._adaptor_dict = None
         self._steer = None
+        self._patch = None
         self._last_sigma = float("nan")
         layers = []
         for name, mod in self.model.language_model.model.named_modules():
@@ -316,6 +339,16 @@ class SimLingoRunner:
         def make_hook(idx):
             def hook(_m, _inp, out):
                 h = out[0] if isinstance(out, (tuple, list)) else out
+                # C 轴 activation patching：把该层的 vision token 段整体换成参考侧（sim）的激活。
+                # 与 DiffusionDrive 侧 patching 的 corruption 口径同构（配对真实输入互换，禁用噪声破坏）。
+                pt = getattr(self, "_patch", None)
+                if pt and idx in pt:
+                    h2 = self._apply_patch(h, pt[idx])
+                    if h2 is not None:
+                        self._layer_outputs.append(h2.detach())
+                        if isinstance(out, (tuple, list)):
+                            return (h2,) + tuple(out[1:])
+                        return h2
                 st = self._steer
                 if st is not None and st["layer"] == idx:
                     # T2 manipulation：改写该层输出后再往下传（forward hook 返回值即新输出）

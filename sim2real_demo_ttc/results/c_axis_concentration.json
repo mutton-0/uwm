@@ -183,5 +183,25 @@
     }
   },
   "verdict": "PASS：C 显著高于弥散基线，失效集中在少数层，支持低成本定向修复(LoRA)",
-  "verdict_rule": "primary_clipped 的 scene 级 bootstrap 95% CI 与弥散基线 2/L 的位置关系"
+  "verdict_rule": "primary_clipped 的 scene 级 bootstrap 95% CI 与弥散基线 2/L 的位置关系",
+  "shape_diagnostics": {
+    "n_layers": 8,
+    "spearman_layer_vs_recovery": 0.880952380952381,
+    "p": 0.0038503204637324014,
+    "layers_for_80pct_mass": 3,
+    "layers_for_80pct_frac": 0.375,
+    "argmax_normalized_entropy": 0.6848617231125999,
+    "argmax_layer_mode": 6,
+    "recovery_at_first_layer": 0.0010833333333333335,
+    "recovery_at_last_layer": 0.34475000000000006,
+    "profile_shape": "内部峰（localized）：存在内部责任层，top-2 占比可读作集中度",
+    "top2_share_formula_applicable": true,
+    "C_m_top2_share": 0.858459684278634,
+    "C_m_ci95": [
+      0.7705548440969452,
+      0.9394149809295711
+    ],
+    "diffuse_baseline": 0.25,
+    "patch_all_recovery": null
+  }
 }

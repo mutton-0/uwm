@@ -15,3 +15,5 @@ variants/*/dd_cache/
 variants/*/acts_*.npz
 # tier_m_v3 的 mining 是指向 tier_m/mining 的绝对路径软链（重建见 configs/tier_m_v3.yaml 头注）
 variants/tier_m_v3/mining
+# pilot post-train 的特征缓存（可由 scripts/p1_cache_query_states.py 一遍前向重建）
+variants/*/pilot_query_states.npz

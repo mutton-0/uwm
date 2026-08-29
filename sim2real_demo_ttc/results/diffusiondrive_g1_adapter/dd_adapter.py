@@ -88,13 +88,67 @@ class DDRunner:
                     if isinstance(m, SelfAttention)]
         assert len(self.sas) == 8, f"期望 8 个 SelfAttention，实得 {len(self.sas)}"
         self._buf = [None] * len(self.sas)
+        self._steer = None
+        self._last_sigma = float("nan")
         for i, m in enumerate(self.sas):
             m.register_forward_hook(self._mk(i))
 
     def _mk(self, i):
         def _h(mod, inp, out):
+            st = self._steer
+            if st is not None and st["layer"] == i:
+                out = self._apply_steer(out, st)
             self._buf[i] = out.detach().float()[0]      # [320, C_l]
+            return out
         return _h
+
+    # ---------------- RepE 式操纵（与 SimLingo 侧 simlingo_runner.set_steering 同构） ----------------
+    def set_steering(self, layer=None, vec=None, alpha=0.0, mode="add", tokens="image"):
+        """在第 layer 个 encoder SelfAttention 的输出上操纵；layer=None 关闭。
+
+        mode: add / project_out / recover —— 与 SimLingo 侧逐条同义。
+        sigma = 本次前向中被注入 token 的激活标准差（逐帧自归一化，使 α 在不同层间可比）。
+        tokens: image(前 256 个图像 token) / lidar(后 64 个 BEV latent) / all(全部 320)。
+        默认 image：方向是从图像 token 池化的 δ 上提的，注回同一批 token 才同构。
+        """
+        if layer is None or vec is None:
+            self._steer = None
+            return
+        v = torch.as_tensor(np.asarray(vec, dtype=np.float32))
+        v = v / (v.norm() + 1e-8)
+        self._steer = {"layer": int(layer), "v": v.to(self.device), "alpha": float(alpha),
+                       "mode": mode, "tokens": tokens}
+
+    def _apply_steer(self, out, st):
+        n = out.shape[1]
+        idx = {"image": slice(0, N_IMG_TOK), "lidar": slice(N_IMG_TOK, n),
+               "all": slice(0, n)}[st["tokens"]]
+        sub = out[0, idx, :].float()
+        v = st["v"].to(sub.dtype)
+        if st["mode"] == "add":
+            sigma = float(sub.std()); self._last_sigma = sigma
+            sub = sub + (st["alpha"] * sigma) * v
+        elif st["mode"] == "project_out":
+            sub = sub - torch.outer(sub @ v, v)
+        elif st["mode"] == "recover":
+            c = sub @ v
+            sub = sub - torch.outer(c, v) + c.mean() * v
+        else:
+            raise ValueError(st["mode"])
+        out = out.clone()
+        out[0, idx, :] = sub.to(out.dtype)
+        return out
+
+    @staticmethod
+    def lateral_offset(traj):
+        """规划轨迹的横向偏移量（米）——特异性检查用，与 SimLingo 侧 lateral_offset 同义。"""
+        return float(np.abs(traj[:, 1]).max())
+
+    @staticmethod
+    def comfort(traj):
+        """纵向加加速度代理：二阶差分的均方根，越大越不舒适。"""
+        d = np.diff(traj[:, 0], n=2) if len(traj) > 2 else np.zeros(1)
+        return float(np.sqrt((d ** 2).mean()))
 
     @torch.no_grad()
     def run(self, img_rgb, speed_mps, region_tokens=None, seed=0):

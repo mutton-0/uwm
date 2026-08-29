@@ -1,0 +1,119 @@
+{
+  "config": {
+    "cache": "/data/ruolin/uwm/sim2real_demo_ttc/variants/n1_d2/pilot_query_states.npz",
+    "device": "cuda:0",
+    "epochs": 200,
+    "lr": 0.0001,
+    "beta": 1.0,
+    "lam": 1.0,
+    "margin": 0.05,
+    "seed": 0,
+    "out": "/data/ruolin/uwm/sim2real_demo_ttc/results/p2_pilot_posttrain.json"
+  },
+  "n_samples": 2296,
+  "n_scenes": 234,
+  "n_train_scenes": 117,
+  "sigma": 7.035262107849121,
+  "coupling_direction_heldout_rho_vs_abrake": 0.05318776504170282,
+  "coupling_direction_heldout_p": 0.1831335862727338,
+  "coupling_direction_ridge_alpha": 100.0,
+  "coupling_direction_train_cv_r": 0.00773512651829647,
+  "coupling_direction_fit_condition": "ghost only（危险只出现在 ghost 帧，与 T-F 预注册条件一致）",
+  "coupling_direction_instrument_ok": false,
+  "arms": {
+    "A0_baseline": {
+      "arm": "A0_baseline",
+      "b_auc_A_vs_D2a_heldout": 0.5437979929305652,
+      "b_auc_p": 0.18007748887264463,
+      "b_auc_ci95": [
+        0.4614237962540707,
+        0.6205645963318119
+      ],
+      "n_pos": 151,
+      "n_neg": 163,
+      "delta_at_1sigma_heldout_mean": 0.0906013697385788,
+      "delta_at_1sigma_heldout_ci95": [
+        -0.028132855892181396,
+        0.1807495355606079
+      ],
+      "cos_g_vhazard_heldout_mean": 0.04546967148780823,
+      "cos_g_vhazard_heldout_sd": 0.03232816234230995,
+      "v_cmd_mae_vs_human_all": 2.0058646202087402,
+      "rho_b_vs_human_abrake_heldout_A": 0.16754635802302523,
+      "rho_b_vs_human_abrake_p": 0.03975414387791651,
+      "n_A_events_heldout": 151
+    },
+    "A1_task_only": {
+      "arm": "A1_task_only",
+      "b_auc_A_vs_D2a_heldout": 0.5919839109413725,
+      "b_auc_p": 0.004862298922971072,
+      "b_auc_ci95": [
+        0.4961365208570323,
+        0.679583107714452
+      ],
+      "n_pos": 151,
+      "n_neg": 163,
+      "delta_at_1sigma_heldout_mean": -0.07563026994466782,
+      "delta_at_1sigma_heldout_ci95": [
+        -0.1879580020904541,
+        0.03668004274368286
+      ],
+      "cos_g_vhazard_heldout_mean": -0.015720564872026443,
+      "cos_g_vhazard_heldout_sd": 0.014155401848256588,
+      "v_cmd_mae_vs_human_all": 0.6709333062171936,
+      "rho_b_vs_human_abrake_heldout_A": 0.16024157112428558,
+      "rho_b_vs_human_abrake_p": 0.049363529535914635,
+      "n_A_events_heldout": 151
+    },
+    "A2_task_plus_coupling": {
+      "arm": "A2_task_plus_coupling",
+      "b_auc_A_vs_D2a_heldout": 0.5931621500832893,
+      "b_auc_p": 0.004343190571593234,
+      "b_auc_ci95": [
+        0.4989234815867998,
+        0.678816567241848
+      ],
+      "n_pos": 151,
+      "n_neg": 163,
+      "delta_at_1sigma_heldout_mean": -0.3010352551937103,
+      "delta_at_1sigma_heldout_ci95": [
+        -0.47360607981681824,
+        -0.04623684287071228
+      ],
+      "cos_g_vhazard_heldout_mean": -0.06773276627063751,
+      "cos_g_vhazard_heldout_sd": 0.01721632294356823,
+      "v_cmd_mae_vs_human_all": 0.6729962825775146,
+      "rho_b_vs_human_abrake_heldout_A": 0.16230748340949003,
+      "rho_b_vs_human_abrake_p": 0.04646803505444623,
+      "n_A_events_heldout": 151
+    }
+  },
+  "contrasts": {
+    "b_auc_A2_minus_A0": {
+      "mean": 0.051077533612009555,
+      "ci95": [
+        -0.05518103838968624,
+        0.14810162041540156
+      ]
+    },
+    "b_auc_A2_minus_A1": {
+      "mean": 0.0010700102983007712,
+      "ci95": [
+        -0.004315955761609485,
+        0.006597878968319578
+      ]
+    },
+    "b_auc_A1_minus_A0": {
+      "mean": 0.05000752331370878,
+      "ci95": [
+        -0.05579582218854128,
+        0.14859299452535712
+      ]
+    },
+    "coupling_delta_A2_minus_A0": -0.3916366249322891,
+    "coupling_cos_A2_minus_A0": -0.11320243775844574,
+    "coupling_cos_A1_minus_A0": -0.06119023635983467
+  },
+  "verdict": "部分成立：**耦合量确实被改变**，但行为分相对纯任务微调对照的增量不显著 ⇒ 修好了通路却没换来可测的行为收益（不得据行为分反推诊断成立或不成立）",
+  "verdict_rule": "① 耦合量改变判据：|Δcos| > 0.05 或 |ΔΔ@1σ| > 0.02 m/s；② 行为分归因判据：A2 − A1 的 scene 级 bootstrap 95% CI 下界 > 0"
+}

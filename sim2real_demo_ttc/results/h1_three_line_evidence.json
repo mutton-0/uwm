@@ -1,0 +1,239 @@
+{
+  "line1_public_leaderboard": {
+    "SimLingo": {
+      "benchmark": "CARLA Leaderboard 2.0",
+      "metric": "Driving Score",
+      "value": 6.87,
+      "range": "0–100",
+      "protocol": "闭环仿真（CARLA）",
+      "native_domain": "CARLA (sim)"
+    },
+    "DiffusionDrive": {
+      "benchmark": "NAVSIM navtest",
+      "metric": "PDMS",
+      "value": 88.1,
+      "range": "0–100",
+      "protocol": "伪闭环（真实数据重放，non-reactive）",
+      "native_domain": "NAVSIM / OpenScene (real)†"
+    }
+  },
+  "line2_four_axis": {
+    "G": {
+      "readout": "CV-AUC(A vs 几何平衡负例 D2a) 减去自身 D2cV 证伪地板（vision_mean，scene 级 4 折 CV）",
+      "comparable": true,
+      "comparability_note": "同一刺激集、同一负例体系、同一选层与报数规则",
+      "SimLingo": {
+        "main_auc": 0.5145637023949745,
+        "minus_floor": 0.03503671078071874,
+        "minus_floor_ci95": [
+          -0.025609482251504428,
+          0.09711372318805245
+        ],
+        "stability_10seed": 0.002312555790756415,
+        "verdict": "不可估"
+      },
+      "DiffusionDrive": {
+        "main_auc": 0.5589596007431423,
+        "minus_floor": 0.008661344891492173,
+        "minus_floor_ci95": [
+          -0.047235286629013676,
+          0.06518832646543138
+        ],
+        "stability_10seed": 0.01203905575377417,
+        "verdict": "不可估"
+      },
+      "verdict": "两模型均不可估；且两种池化口径给出相反排序 ⇒ 本轮 G 不支持跨模型排序"
+    },
+    "F": {
+      "readout": "① 行动层反事实测试 b-AUC(A vs D2a)（架构中立，协议 §3.5 指定的 F 主验证）；② steering 通路利用率（架构相关，见可比性说明）",
+      "comparable": false,
+      "comparability_note": "① 可比（读出对象是动作，不依赖动作头形式）；② **不可比**：SimLingo 是连续回归头，±α 注入可产生可测的纵向响应；DiffusionDrive 是 anchored 扩散头，即便注入它自己的行为定义轴 v_brake_dd（held-out AUC 0.656）也推不动纵向输出 ⇒ steering 效应量在两模型间不同量纲，不得同表排序。",
+      "SimLingo": {
+        "action_counterfactual_b_auc": 0.5342314487632509,
+        "action_counterfactual_ci95": [
+          0.46911803612632774,
+          0.5921717748137559
+        ],
+        "b_mean_A": 0.3065783074513699,
+        "steering_slope_v_brake": -0.04054,
+        "steering_measurable": true,
+        "cos_obs_vs_injection": 0.013733592815683458,
+        "cos_ci95": [
+          -0.04865244971583388,
+          0.06440223567181341
+        ],
+        "verdict": "不可估（双方法互证未建立；共线上界 |cos| ≤ 0.064）"
+      },
+      "DiffusionDrive": {
+        "action_counterfactual_b_auc": 0.5534224618410987,
+        "action_counterfactual_ci95": [
+          0.48618378118154193,
+          0.6227289625451241
+        ],
+        "b_mean_A": 0.009501028127481848,
+        "steering_slope_v_hazard": -2.7252646053538593e-06,
+        "steering_slope_v_brake_dd_positive_control": 1.765808638404397e-05,
+        "steering_measurable": false,
+        "verdict": "不可估（仪器侧：站内上界方向亦推不动纵向输出）"
+      },
+      "verdict": "两模型的行动层反事实读数均不可估；steering 口径在两模型间不可比"
+    },
+    "I": {
+      "readout": "I_m = 1 − D_{L*}（表征端）与 行为端域敏感度 E|Δv_cmd|/mean（同一域配对）",
+      "comparable": true,
+      "comparability_note": "两者都是模型内归一化的比值（协议 §4 规则 1）；但剖面形态差异大，排序为条件结论",
+      "SimLingo": {
+        "I_m": 0.605586955936212,
+        "D_at_peak": 0.39441304406378797,
+        "D_ci95": [
+          0.3741003883416178,
+          0.41901134857218025
+        ],
+        "behavioural_domain_sensitivity": 0.34566658863820043
+      },
+      "DiffusionDrive": {
+        "I_m": 0.20289784977915581,
+        "D_at_peak": 0.7971021502208442,
+        "D_ci95": [
+          0.756351489632356,
+          0.8403521413949353
+        ],
+        "behavioural_domain_sensitivity": 0.11487624550581906
+      },
+      "verdict": "表征端 SimLingo > DiffusionDrive；行为端 **相反**；两组 CI 均不重叠 ⇒ 单一标量无法承载"
+    },
+    "C": {
+      "readout": "C_m = top-2 层 recovery 占比（协议 §3⑤），并附恢复剖面形状诊断",
+      "comparable": false,
+      "comparability_note": "**不可比**：C_m 的弥散基线随层数变化（8 层 0.250 vs 24 层 0.083），且 top-2 占比公式的前提是剖面存在内部峰。SimLingo 的剖面自 L0 单调递减（Spearman −0.997）⇒ 公式前提不成立，其 C_m 不可读作集中度。可跨模型比较的是**形状量**（见下）。",
+      "SimLingo": {
+        "C_m": 0.1756192752264729,
+        "diffuse_baseline": 0.08333333333333333,
+        "profile_shape": "级联（cascade）：剖面自最前层单调递减，失效在输入接口即已进入，无内部责任层",
+        "spearman_layer_vs_recovery": -0.997391304347826,
+        "layers_for_80pct_frac": 0.5416666666666666,
+        "argmax_layer_mode": 0,
+        "argmax_entropy": 0.27932008807475606,
+        "patch_all_recovery": 1.0040960331600497,
+        "verdict": "不可估（公式前提不成立）；实质结论：失效在视觉输入接口即已进入并向下游级联"
+      },
+      "DiffusionDrive": {
+        "C_m": 0.858459684278634,
+        "diffuse_baseline": 0.25,
+        "profile_shape": "内部峰（localized）：存在内部责任层，top-2 占比可读作集中度",
+        "spearman_layer_vs_recovery": 0.880952380952381,
+        "layers_for_80pct_frac": 0.375,
+        "argmax_layer_mode": 6,
+        "argmax_entropy": 0.6848617231125999,
+        "patch_all_recovery": null,
+        "verdict": "PASS（内部峰在 L6，top-2 占比 0.858 显著高于弥散基线 0.250）"
+      },
+      "verdict": "两模型的失效**进入位置不同**：SimLingo 在视觉输入接口（级联），DiffusionDrive 在深层融合段（内部峰）"
+    }
+  },
+  "line3_pilot_posttrain": {
+    "target_model": "SimLingo",
+    "budget": "只训 speed_wps_head（229k 参数），其余全部冻结",
+    "diagnosis_used": "F 轴：驱动动作的方向与编码危险的方向近乎正交",
+    "intervention": "耦合辅助损失 λ·ReLU(Δ@1σ + margin)，Δ 与 steering 的 α=+1 剂量响应同量",
+    "arms": {
+      "A0_baseline": {
+        "arm": "A0_baseline",
+        "b_auc_A_vs_D2a_heldout": 0.5437979929305652,
+        "b_auc_p": 0.18007748887264463,
+        "b_auc_ci95": [
+          0.4614237962540707,
+          0.6205645963318119
+        ],
+        "n_pos": 151,
+        "n_neg": 163,
+        "delta_at_1sigma_heldout_mean": 0.0906013697385788,
+        "delta_at_1sigma_heldout_ci95": [
+          -0.028132855892181396,
+          0.1807495355606079
+        ],
+        "cos_g_vhazard_heldout_mean": 0.04546967148780823,
+        "cos_g_vhazard_heldout_sd": 0.03232816234230995,
+        "v_cmd_mae_vs_human_all": 2.0058646202087402,
+        "rho_b_vs_human_abrake_heldout_A": 0.16754635802302523,
+        "rho_b_vs_human_abrake_p": 0.03975414387791651,
+        "n_A_events_heldout": 151
+      },
+      "A1_task_only": {
+        "arm": "A1_task_only",
+        "b_auc_A_vs_D2a_heldout": 0.5919839109413725,
+        "b_auc_p": 0.004862298922971072,
+        "b_auc_ci95": [
+          0.4961365208570323,
+          0.679583107714452
+        ],
+        "n_pos": 151,
+        "n_neg": 163,
+        "delta_at_1sigma_heldout_mean": -0.07563026994466782,
+        "delta_at_1sigma_heldout_ci95": [
+          -0.1879580020904541,
+          0.03668004274368286
+        ],
+        "cos_g_vhazard_heldout_mean": -0.015720564872026443,
+        "cos_g_vhazard_heldout_sd": 0.014155401848256588,
+        "v_cmd_mae_vs_human_all": 0.6709333062171936,
+        "rho_b_vs_human_abrake_heldout_A": 0.16024157112428558,
+        "rho_b_vs_human_abrake_p": 0.049363529535914635,
+        "n_A_events_heldout": 151
+      },
+      "A2_task_plus_coupling": {
+        "arm": "A2_task_plus_coupling",
+        "b_auc_A_vs_D2a_heldout": 0.5931621500832893,
+        "b_auc_p": 0.004343190571593234,
+        "b_auc_ci95": [
+          0.4989234815867998,
+          0.678816567241848
+        ],
+        "n_pos": 151,
+        "n_neg": 163,
+        "delta_at_1sigma_heldout_mean": -0.3010352551937103,
+        "delta_at_1sigma_heldout_ci95": [
+          -0.47360607981681824,
+          -0.04623684287071228
+        ],
+        "cos_g_vhazard_heldout_mean": -0.06773276627063751,
+        "cos_g_vhazard_heldout_sd": 0.01721632294356823,
+        "v_cmd_mae_vs_human_all": 0.6729962825775146,
+        "rho_b_vs_human_abrake_heldout_A": 0.16230748340949003,
+        "rho_b_vs_human_abrake_p": 0.04646803505444623,
+        "n_A_events_heldout": 151
+      }
+    },
+    "contrasts": {
+      "b_auc_A2_minus_A0": {
+        "mean": 0.051077533612009555,
+        "ci95": [
+          -0.05518103838968624,
+          0.14810162041540156
+        ]
+      },
+      "b_auc_A2_minus_A1": {
+        "mean": 0.0010700102983007712,
+        "ci95": [
+          -0.004315955761609485,
+          0.006597878968319578
+        ]
+      },
+      "b_auc_A1_minus_A0": {
+        "mean": 0.05000752331370878,
+        "ci95": [
+          -0.05579582218854128,
+          0.14859299452535712
+        ]
+      },
+      "coupling_delta_A2_minus_A0": -0.3916366249322891,
+      "coupling_cos_A2_minus_A0": -0.11320243775844574,
+      "coupling_cos_A1_minus_A0": -0.06119023635983467
+    },
+    "verdict": "部分成立：**耦合量确实被改变**，但行为分相对纯任务微调对照的增量不显著 ⇒ 修好了通路却没换来可测的行为收益（不得据行为分反推诊断成立或不成立）",
+    "verdict_rule": "① 耦合量改变判据：|Δcos| > 0.05 或 |ΔΔ@1σ| > 0.02 m/s；② 行为分归因判据：A2 − A1 的 scene 级 bootstrap 95% CI 下界 > 0",
+    "coupling_direction_heldout_rho": 0.05318776504170282
+  },
+  "composite_score": null,
+  "no_composite_rationale": "工单明文要求不做任意加权的单一复合分。四轴各自的单位、判定状态与可比性都不同：G 与 C 是模型内归一化读数，F 在两个模型上因动作头架构不同而不可同量纲比较，I 的表征端与行为端给出相反排序。任何权重都会把这些结构性差异抹平成一个无法追责的数。"
+}
