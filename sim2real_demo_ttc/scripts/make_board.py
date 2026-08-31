@@ -632,13 +632,125 @@ def build_simlingo():
     }
 
 
+def build_alpamayo():
+    """阳性对照候选 Alpamayo 1 —— P1 资格赛未过，仅有外部读数（P2 被闸门挡住）。"""
+    R = Path(OmegaConf.load(ROOT / "configs" / "n1_d2.yaml").paths.work_dir) / "results"
+    p1 = jload(R / "p1_alpamayo_clean.json")
+    p1pf = jload(R / "p1_alpamayo_per_frame.json")
+    raw = jload(R / "p1_alpamayo_raw_clean.json") or {}
+    rows = [v for v in raw.values() if "b" in v and v["type"] == "A"]
+    b = np.array([x["b"] for x in rows], dtype=float)
+    sc = [x["scene"] for x in rows]
+
+    def rate(thr):
+        v = [float(x >= thr) for x in b]
+        return {"value": float(np.mean(v)), "ci": scene_boot(v, sc), "n": len(v)}
+    neg = [float(x < 0) for x in b]
+
+    return {
+        "id": "alpamayo1", "model": "Alpamayo 1 (R1-10B)", "temporal_input": "多帧（4 相机 × 4 时刻）",
+        "ckpt_sha1": "nvidia/Alpamayo-R1-10B",
+        "role": "阳性对照候选 · 资格赛未过",
+        "provenance": {
+            "behavior": f"variants/n1_d2 · A 类 {len(b)} 事件 / {len(set(sc))} 场景"
+                        f"（覆盖预筛后 {p1['coverage']['A']['usable']}/{p1['coverage']['A']['total']}）",
+            "understanding": "P2 未执行 —— 资格赛是其前置闸门",
+            "behavior_adjust": "none",
+        },
+        "metrics": {
+            "pass_050": rate(0.5), "pass_025": rate(0.25), "pass_100": rate(1.0),
+            "b_mean": {"value": float(b.mean()), "n": len(b)},
+            "pass_A": rate(0.5), "pass_C": {"value": None},
+            "no_response": {"value": float(np.mean([x < 0.25 for x in b])),
+                            "ci": scene_boot([float(x < 0.25) for x in b], sc)},
+            "reverse_rate": {"value": float(np.mean(neg)), "ci": scene_boot(neg, sc)},
+            "pass_ttc2": {"value": None}, "pass_near": {"value": None},
+            "s_slope": {"value": None}, "s_mono_p": {"value": None},
+            "mention_rate": {"value": p1["language"]["vru"]["A"], "ci": p1["language"]["vru"]["A_ci"]},
+            "lang_behavior_agree": {"value": None},
+            "understanding": {"value": None, "state": "not_established",
+                              "unlock": "E3 未解锁 —— 本模型资格赛未过，不能充当阳性对照"},
+            "language_rate": {"value": p1["language"]["slow"]["A"], "ci": p1["language"]["slow"]["A_ci"],
+                              "state": "相关档",
+                              "unlock": "CoC 文本，词表与 T2.5 字面同一份；VLA 专属，不进跨模型公共口径"},
+        },
+        "qualification": {
+            "behavior": {"auc": p1["behavior"]["auc"], "ci95": p1["behavior"]["ci95"],
+                         "p": p1["behavior"]["p"], "hit": p1["behavior"]["hit"],
+                         "sensitivity_per_frame": {"auc": p1pf["behavior"]["auc"],
+                                                   "p": p1pf["behavior"]["p"]} if p1pf else None},
+            "language": {"vru": p1["language"]["vru"], "slow": p1["language"]["slow"],
+                         "hit": p1["language_hit"]},
+            "qualified": p1["qualified"], "verdict": p1["verdict"],
+            "deviations": p1["deviations"],
+        },
+        "validity": {
+            "flags": {"E1": "not_run", "E2": "not_run", "E3": "未解锁", "E4": "not_run"},
+            "resolution": {"E1": "未决", "E2": "未决", "E3": "未决", "E4": "未决"},
+            "evidence": {k: "P2 未执行 —— P1 资格赛是其前置闸门（guide 附录 D）"
+                         for k in ("E1", "E2", "E3", "E4")},
+            "open_items": [{"id": "P2", "label": "内部流程", "state": "未执行",
+                            "unlock": "资格赛通过（换事件集或换候选）", "root": "行为端有货的模型"}],
+            "open_root_note": "本模型**语言端有货、行为端没有**，因此内部读数会二义，跑了也解释不了。",
+        },
+        "chain_portrait": [
+            {"id": "perception", "name": "视觉感知", "sub": "物体在不在", "state": "通",
+             "tier": "相关（语言代理）",
+             "key_number": f"VRU 提及率 {p1['language']['vru']['A']:.3f} vs 静物 {p1['language']['vru']['D2a']:.3f}",
+             "evidence": f"CoC 文本显著分辨 VRU（Fisher p={p1['language']['vru']['fisher_p']:.1e}），"
+                         "提及率是 SimLingo 的 1.6 倍；实例「Stop to yield to the pedestrian crossing ahead.」",
+             "source": {"file": "positive_control_report.md", "sec": "§1.3"}},
+            {"id": "output", "name": "动作输出", "sub": "行为梯度", "state": "断",
+             "tier": "相关",
+             "key_number": f"b-AUC {p1['behavior']['auc']:.3f} "
+                           f"[{p1['behavior']['ci95'][0]:.3f}, {p1['behavior']['ci95'][1]:.3f}]  "
+                           f"p={p1['behavior']['p']:.3f}",
+             "evidence": f"低于 0.5 且不显著；达标率 {rate(0.5)['value']:.3f}、"
+                         f"反向率 {np.mean(neg):.3f} —— 真正的 VRU 突现事件上并不比几何匹配静物刹得多",
+             "source": {"file": "positive_control_report.md", "sec": "§1.3"}},
+        ],
+        "instrument_status": None,
+        "detail": {"axes": {}, "sources": ["p1_alpamayo_clean.json", "p1_alpamayo_per_frame.json"]},
+    }
+
+
 def main():
+    simlingo = build_simlingo()
+    alpa = build_alpamayo()
+    calib = jload(Path(OmegaConf.load(ROOT / "configs" / "n1_d2.yaml").paths.work_dir)
+                  / "results" / "p3_sample_size.json") or []
+    global_findings = list(simlingo.pop("findings", [])) + [
+        {"id": "F5",
+         "claim": "仪器认证未解锁：两条阳性对照路线都走死，SimLingo 的零结果既未定罪也未撤销",
+         "evidence": "候选① VAD/SparseDrive —— mmcv 1.x 不支持 sm_120 且 HF 无权重；"
+                     f"候选② Alpamayo 1 —— P1 资格赛行为端 AUC "
+                     f"{alpa['qualification']['behavior']['auc']:.3f} "
+                     f"[{alpa['qualification']['behavior']['ci95'][0]:.3f}, "
+                     f"{alpa['qualification']['behavior']['ci95'][1]:.3f}] 未达标",
+         "tier": "—", "status": "未解锁",
+         "caveat": "E3 PASS 才能把 SimLingo 的零结果定罪为「模型属性」；"
+                   "在「确认有货」的模型上读不出才算干净证伪。两者都没发生",
+         "source": {"file": "positive_control_report.md", "sec": "§0 / §3"}},
+        {"id": "F6",
+         "claim": "语言-行为解离跨模型复现：两个架构与训练域都不同的 VLA，都是「说得对、行为不跟」",
+         "evidence": f"SimLingo VRU 提及 0.205 vs 0.092（p=1.5e-4）但 b-AUC 0.534（p=0.157）；"
+                     f"Alpamayo VRU 提及 {alpa['qualification']['language']['vru']['A']:.3f} vs "
+                     f"{alpa['qualification']['language']['vru']['D2a']:.3f}"
+                     f"（p={alpa['qualification']['language']['vru']['fisher_p']:.1e}）"
+                     f"但 b-AUC {alpa['qualification']['behavior']['auc']:.3f}。"
+                     "训练数据（CARLA 仿真 vs NVIDIA 真实路采）、架构、时序输入全不同",
+         "tier": "相关档", "status": "已决",
+         "caveat": "两模型的行为端都不达标 ⇒ 无法排除「是这套 b 读数量不出东西」这一解释",
+         "source": {"file": "positive_control_report.md", "sec": "§3"}},
+    ]
+
     board = {
-        "schema": "board/v3",
+        "schema": "board/v2",
         "generated_by": "scripts/make_board.py",
         "guide": "docs/demo_guide_v3_repe_mainline.md",
         "scope_note": "评分 = 目标域 nuScenes TTC 突变集，500 量级小样本口径（V1 认证）",
-        "status_line": "诊断结论：感知上游丢失（待内部探针确证）· 语言/动作通路完好 · 评分层门控中",
+        "status_line": "仪器认证：E3 未解锁（两条阳性对照路线均不可行）· "
+                       "诊断结论：语言-行为解离跨模型复现 · 评分层门控中",
         "report_files": ["final_report.md", "t25_report.md", "t1l_t1q_report.md",
                          "t1_t2_s1_report.md", "cleanup_log.md"],
         "groups": GROUPS,
@@ -655,7 +767,23 @@ def main():
             {"sym": "A / B / C", "full": "正例事件类型", "def": "A=VRU 突现　B=横向切入　C=TTC 突降"}
         ],
         "sort_default": {"key": "pass_050", "dir": "desc"},
-        "models": [build_simlingo()],
+        "models": [simlingo, alpa],
+        "findings": global_findings,
+        "instrument_status": {
+            "E3_verdict": "未解锁",
+            "certified_by": None,
+            "why": "P0 候选① VAD/SparseDrive 在 sm_120 上不可行且 HF 无权重；"
+                   "候选② Alpamayo 1 的 P1 资格赛行为端未达标，按 guide 附录 D 不能充当阳性对照",
+            "consequence": "SimLingo 的零结果**既未定罪为模型属性、也未构成对读数式方法的干净证伪**；"
+                           "理解分维持 not_established，不进产品",
+            "sample_size_calibration": calib,
+            "calibration_note": "达到「AUC 的 95% CI 下界 >0.5」所需的正负例等量事件数"
+                                "（Hanley–McNeil 标准误）。实测两模型样本量都远超检出 AUC=0.60 所需"
+                                "却仍不显著 ⇒ 真实效应就在 0.5 附近，不是采少了",
+            "recommendation": "麦迪逊评估以行为分 + S 曲线为主；语言通道作 VLA 专属补充列（相关档）；"
+                              "理解分维持门控直到拿到认证过的阳性对照",
+            "source": {"file": "positive_control_report.md", "sec": "§3 / §4 / §6.2"},
+        },
     }
     out = ROOT / "results" / "board.json"
     out.write_text(json.dumps(board, indent=2, ensure_ascii=False))

@@ -31,7 +31,7 @@ def ego_speed(scene_dir, fi):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", required=True, choices=["dd", "simlingo"])
+    ap.add_argument("--model", required=True, choices=["dd", "simlingo", "ltf"])
     ap.add_argument("--frames", default="/data/ruolin/uwm/sim2real_demo_ttc/variants/i_domain/frames")
     ap.add_argument("--out", default="/data/ruolin/uwm/sim2real_demo_ttc/variants/i_domain")
     ap.add_argument("--device", default="cuda:0")
@@ -50,10 +50,16 @@ def main():
     print(f"[T-I/{args.model}] {len(recs)} 帧, {len(set(r['scene'] for r in recs))} 场景")
 
     store, meta = {}, []
-    if args.model == "dd":
+    if args.model in ("dd", "ltf"):
         sys.path.insert(0, "/data/ruolin/uwm/sim2real_demo_ttc/results/diffusiondrive_g1_adapter")
-        from dd_adapter import DDRunner
-        runner = DDRunner(device=args.device)
+        if args.model == "dd":
+            from dd_adapter import DDRunner
+            runner = DDRunner(device=args.device)
+        else:
+            # LTF 是 latent=True，不吃 lidar，故域配对渲染帧可直接送入（DDv2 则不行，见 §CE/A33）
+            sys.path.insert(0, "/data/ruolin/uwm/sim2real_demo_ttc/results/ltf_g1_adapter")
+            from ltf_adapter import LTFRunner
+            runner = LTFRunner(device=args.device)
         for i, r in enumerate(recs):
             img = cv2.cvtColor(cv2.imread(r["path"]), cv2.COLOR_BGR2RGB)
             v = ego_speed(f"{DATA_ROOT}/renders/{r['scene']}", int(round(r["sec"] * FPS)))
@@ -65,7 +71,7 @@ def main():
             meta.append({**r, "ego_speed": v, "commanded_speed": out["commanded_speed"],
                          "trajectory": out["trajectory"].tolist()})
             if (i + 1) % 100 == 0:
-                print(f"[T-I/dd] {i+1}/{len(recs)}")
+                print(f"[T-I/{args.model}] {i+1}/{len(recs)}")
     else:
         from omegaconf import OmegaConf
         sys.path.insert(0, "/data/ruolin/uwm/sim2real_demo_ttc/scripts")

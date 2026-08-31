@@ -173,6 +173,18 @@ tr.detail>td{padding:0;border-bottom:1px solid var(--rule)}
 .statusline{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;
   background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:11px 16px;box-shadow:var(--shadow)}
 .statusline .sl-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.instp{display:grid;grid-template-columns:minmax(210px,.85fr) 1.6fr;gap:0;background:var(--card);
+  border:1px solid var(--rule);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+@media(max-width:800px){.instp{grid-template-columns:1fr}}
+.instp .ip-l{padding:16px 20px;border-right:1px solid var(--rule);border-left:3px solid var(--bad);
+  display:flex;flex-direction:column;gap:5px}
+@media(max-width:800px){.instp .ip-l{border-right:none;border-bottom:1px solid var(--rule)}}
+.instp .ip-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.instp .ip-v{font-size:24px;font-weight:680;color:var(--bad);line-height:1.2}
+.instp .ip-r{padding:15px 20px}
+.calib{min-width:0;font-size:12.5px}
+.calib th,.calib td{padding:5px 9px;border-bottom:1px solid var(--rule2);text-align:left;white-space:nowrap}
+.calib td.n,.calib th.n{text-align:right}
 .headline{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--bad);
   border-radius:10px;padding:14px 18px;display:flex;flex-direction:column;gap:4px;box-shadow:var(--shadow)}
 .headline .hl-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--bad)}
@@ -345,9 +357,10 @@ function render(B){
         <span style="color:var(--muted)">视窗 0.40–0.70；红线 = 地板</span></p>`;};
 
   /* 轴效度 tab */
-  const axesTab=m=>`<div style="display:flex;flex-direction:column;gap:16px">
+  const axesTabOne=m=>`<div style="display:flex;flex-direction:column;gap:16px">
     <p class="note">每根轴三段看：<b>提取质量</b>（方向是不是真的存在）→ <b>读取端</b>（能不能逐样本判别）
       → <b>操纵端</b>（推得动行为吗）。三段都过才叫认证。</p>
+    ${(m.axes_validity||[]).length?'':`<div class="axcard"><p class="note"><b style="color:var(--ink)">${esc(m.model)}</b> 无轴效度数据 —— P2 内部流程被 P1 资格赛闸门挡住（资格赛未过则内部读数二义）。</p></div>`}
     ${(m.axes_validity||[]).map((a,i)=>{
       const color=['var(--ok)','var(--accent)','var(--bad)'][i]||'var(--accent)';
       const q=a.quality;
@@ -384,6 +397,8 @@ function render(B){
       这正是"执行机构完好、视觉信号缺失"的可视化主证：
       <code>v_brake</code> 的单调反对称阶梯 vs 视觉判别式轴的平坦线。</p>
   </div>`;
+  const axesTab=()=>MODELS.map(m=>`<h2 style="margin:6px 0 0;font-size:17px">${esc(m.model)}
+    <span class="note">${esc(m.temporal_input)}</span></h2>${axesTabOne(m)}`).join('');
 
   /* 预测-验证（预注册） */
   const pvBlk=m=>{const P=m.prediction_validation; if(!P) return '';
@@ -536,7 +551,7 @@ function render(B){
       <div class="statusline"><span class="sl-k">状态</span><span>${esc(B.status_line)}</span></div>
       <section>
         <div class="eyebrow">关键发现 · 每条可溯源到已落盘报告</div>
-        <div class="finds">${(rows[0].findings||[]).map(fd=>`
+        <div class="finds">${(B.findings||[]).map(fd=>`
           <div class="find s-${esc(fd.status)}">
             <span class="fid">${esc(fd.id)}</span>
             <div class="claim">${esc(fd.claim)}</div>
@@ -547,20 +562,34 @@ function render(B){
       </section>
       <div class="headline">
         <span class="hl-k">最刺眼的一行</span>
-        <span class="hl-v">${(rows[0].metrics.reverse_rate.value*100).toFixed(1)}% 的危险事件里，模型规划得<b>反而更快</b></span>
-        <span class="hl-s">无响应率 ${(rows[0].metrics.no_response.value*100).toFixed(1)}%　·　
-          最紧迫（TTC&lt;2s）时刹车率仅 ${(rows[0].metrics.pass_ttc2.value*100).toFixed(1)}%，
+        <span class="hl-v">${((MODELS.find(m=>m.id==='simlingo')||rows[0]).metrics.reverse_rate.value*100).toFixed(1)}% 的危险事件里，模型规划得<b>反而更快</b></span>
+        <span class="hl-s">无响应率 ${((MODELS.find(m=>m.id==='simlingo')||rows[0]).metrics.no_response.value*100).toFixed(1)}%　·　
+          最紧迫（TTC&lt;2s）时刹车率仅 ${((MODELS.find(m=>m.id==='simlingo')||rows[0]).metrics.pass_ttc2.value*100).toFixed(1)}%，
           比 2–5s 档还低 —— <b>越紧迫越不刹</b></span>
       </div>
       <details class="gloss"><summary>指标含义（点开）</summary>
         <table class="glosst"><tbody>${B.glossary.map(g=>`<tr>
           <td><code>${esc(g.sym)}</code></td><td><b>${esc(g.full)}</b></td>
           <td class="note">${esc(g.def)}</td></tr>`).join('')}</tbody></table></details>
+      <div class="instp">
+        <div class="ip-l"><span class="ip-k">仪器认证 E3</span>
+          <span class="ip-v">${esc(B.instrument_status.E3_verdict)}</span>
+          <span class="note">${esc(B.instrument_status.why)}</span></div>
+        <div class="ip-r">
+          <div class="note" style="margin-bottom:7px"><b style="color:var(--ink)">后果</b>　${esc(B.instrument_status.consequence)}</div>
+          <table class="calib"><thead><tr><th>目标 AUC</th><th class="n">每组 n</th><th class="n">总事件</th><th class="n">CI 半宽</th></tr></thead>
+          <tbody>${B.instrument_status.sample_size_calibration.map(c=>`<tr><td>${f(c.auc,2)}</td>
+            <td class="n">${c.n_per_group}</td><td class="n"><b>${c.n_total}</b></td>
+            <td class="n">±${f(c.ci_half,3)}</td></tr>`).join('')}</tbody></table>
+          <div class="note" style="margin-top:6px">${esc(B.instrument_status.calibration_note)}</div>
+          <div class="note" style="margin-top:8px"><b style="color:var(--ink)">建议</b>　${esc(B.instrument_status.recommendation)}　${src(B.instrument_status.source)}</div>
+        </div>
+      </div>
       <div class="tabs" role="tablist">
         <button role="tab" aria-selected="${tab==='board'}" data-tab="board">排行榜</button>
         <button role="tab" aria-selected="${tab==='axes'}" data-tab="axes">轴效度分析</button>
       </div>
-      ${tab==='axes' ? axesTab(rows[0]) : `
+      ${tab==='axes' ? axesTab() : `
       <div class="board"><div class="scroll"><table>
         <thead>
           <tr class="grp">${GROUPS.filter(g=>grpCount[g.id]).map(g=>
@@ -595,7 +624,7 @@ function render(B){
       <div class="foot">
         本页只渲染 <code>results/board.json</code>（schema ${esc(B.schema)}），数字不手填；
         接入新模型只需向 <code>models[]</code> 追加一个对象，页面无需改动。<br>
-        行为层来源：${esc(rows[0].provenance.behavior)}　行为量校正：<code>${esc(rows[0].provenance.behavior_adjust)}</code><br>
+        行为层来源：${MODELS.map(m=>esc(m.model)+' ← '+esc(m.provenance.behavior)).join('<br>')}<br>
         完整方法、修正案与遗留清单见 <code>results/final_report.md</code>。
       </div>`;
 

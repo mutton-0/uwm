@@ -84,16 +84,49 @@ def load_simlingo():
     return out, evmap
 
 
-def load_dd():
+def load_npz(cache_dir, kind="navsim"):
+    """通用 npz 缓存读取。
+
+    kind=navsim   : commanded_speed_{clean,ghost}（DiffusionDrive / LTF）
+    kind=alpamayo : {clean,ghost}/v_plan（Alpamayo-R1，同口径的规划目标速度）
+    """
     evmap = {json.loads(l)["event_id"]: json.loads(l) for l in open(W / "mining" / "events_all.jsonl")}
     out = defaultdict(list)
-    for p in sorted((W / "dd_cache").glob("*.npz")):
+    for p in sorted(Path(cache_dir).glob("*.npz")):
         d = np.load(p, allow_pickle=True)
         m = json.loads(str(d["meta"]))
-        b = float(d["commanded_speed_clean"].mean() - d["commanded_speed_ghost"].mean())
+        try:
+            if kind == "navsim":
+                b = float(d["commanded_speed_clean"].mean() - d["commanded_speed_ghost"].mean())
+            else:
+                b = float(d["clean/v_plan"][0] - d["ghost/v_plan"][0])
+        except KeyError:
+            continue
+        if not np.isfinite(b):
+            continue
         out[m["event_type"]].append({"b": b, "scene": m["scene_name"], "eid": m["event_id"],
                                      "cls": m.get("object_class", "")})
     return out, evmap
+
+
+def load_dd():
+    return load_npz(W / "dd_cache", "navsim")
+
+
+def load_ltf():
+    return load_npz(W / "ltf_cache", "navsim")
+
+
+def load_ddv2():
+    return load_npz(W / "ddv2_cache", "navsim")
+
+
+def load_alpa():
+    return load_npz(W / "alpa_cache", "alpamayo")
+
+
+def load_autovla():
+    return load_npz(W / "autovla_cache", "alpamayo")
 
 
 def main():
@@ -109,8 +142,17 @@ def main():
            "b_definition": "b = v_plan(clean) − v_plan(ghost)，正 = 目标出现后减速",
            "models": {}}
 
-    for name, loader in (("SimLingo", load_simlingo), ("DiffusionDrive", load_dd)):
-        by, evmap = loader()
+    MODELS = [("SimLingo", load_simlingo), ("DiffusionDrive", load_dd),
+              ("LTF", load_ltf), ("DiffusionDriveV2", load_ddv2), ("Alpamayo-R1", load_alpa),
+              ("AutoVLA", load_autovla)]
+    for name, loader in MODELS:
+        try:
+            _probe = loader()
+        except Exception as _e:                                        # noqa: BLE001
+            print(f"\n===== {name} =====  缓存不可用，跳过（{_e}）"); continue
+        if not any(len(v) >= 20 for v in _probe[0].values()):
+            print(f"\n===== {name} =====  缓存为空或样本不足，跳过"); continue
+        by, evmap = _probe
         # D2cV 子集（同类别 VRU、同几何，只差速度）——最硬的对照
         d2cv = [e for e in by.get("D2c", []) if e["eid"] in matched.get("D2cV", set())
                 and str(e["cls"]).startswith(VRU)]

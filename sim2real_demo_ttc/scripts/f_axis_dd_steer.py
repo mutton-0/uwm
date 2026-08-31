@@ -42,6 +42,7 @@ def boot_ci(vals, scenes, n=2000, seed=0):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--model", default="dd", choices=["dd", "ltf", "ddv2"])
     ap.add_argument("--layer", type=int, default=-1, help="默认取 T-G 冻结的概念峰层")
     ap.add_argument("--tokens", default="image")
     ap.add_argument("--max-events", type=int, default=40)
@@ -76,29 +77,42 @@ def main():
     print(f"[F-dd] S_test A 类事件 n={len(evs)}（{len(set(e['scene_name'] for e in evs))} scene）")
 
     sys.path.insert(0, str(RES / "diffusiondrive_g1_adapter"))
-    from dd_adapter import DDRunner
-    runner = DDRunner(device=args.device)
+    sys.path.insert(0, str(RES / "ltf_g1_adapter"))
+    sys.path.insert(0, str(RES / "ddv2_g1_adapter"))
+    if args.model == "dd":
+        from dd_adapter import DDRunner as Runner
+    elif args.model == "ltf":
+        from ltf_adapter import LTFRunner as Runner
+    else:
+        from ddv2_adapter import DDV2Runner as Runner
+    runner = Runner(device=args.device)
+    # DiffusionDriveV2 的发布权重要求真实 lidar；不喂 lidar 的注入读数不可与其余候选并列
+    lidar = None
+    if args.model == "ddv2":
+        from ddv2_adapter import NuScenesLidar
+        lidar = NuScenesLidar(args.nuscenes_root)
 
     rs = [np.random.default_rng(10_000 + s).normal(size=vhat.shape).astype(np.float32) for s in range(args.random_seeds)]
     rs = [r / np.linalg.norm(r) for r in rs]
 
-    def read(img, spd):
-        r = runner.run(img, spd)
-        return (r["commanded_speed"], DDRunner.lateral_offset(r["trajectory"]),
-                DDRunner.comfort(r["trajectory"]))
+    def read(img, spd, sd_token=None):
+        kw = {} if lidar is None else {"lidar_xyz": lidar.ego_points(sd_token)}
+        r = runner.run(img, spd, **kw)
+        return (r["commanded_speed"], Runner.lateral_offset(r["trajectory"]),
+                Runner.comfort(r["trajectory"]))
 
     rec, t0 = [], time.time()
     for i, ev in enumerate(evs):
         frames = ev["x_clean_frames"]
         anchor = float(np.mean([f["ego_speed_mps"] for f in frames]))
-        imgs = [cv2.cvtColor(cv2.imread(str(Path(args.nuscenes_root) / f["filename"])), cv2.COLOR_BGR2RGB)
-                for f in frames]
-        gh = [cv2.cvtColor(cv2.imread(str(Path(args.nuscenes_root) / f["filename"])), cv2.COLOR_BGR2RGB)
-              for f in ev["x_ghost_frames"]]
+        imgs = [(cv2.cvtColor(cv2.imread(str(Path(args.nuscenes_root) / f["filename"])), cv2.COLOR_BGR2RGB),
+                 f.get("sd_token")) for f in frames]
+        gh = [(cv2.cvtColor(cv2.imread(str(Path(args.nuscenes_root) / f["filename"])), cv2.COLOR_BGR2RGB),
+               f.get("sd_token")) for f in ev["x_ghost_frames"]]
         row = {"event_id": ev["event_id"], "scene": ev["scene_name"]}
 
         def avg(images, spd):
-            o = np.array([read(im, spd) for im in images], float)
+            o = np.array([read(im, spd, tok) for im, tok in images], float)
             return o.mean(0).tolist()
 
         runner.set_steering(None)
@@ -128,10 +142,13 @@ def main():
         y = [r["base_clean"][0] if a == 0 else r[f"{pre}a{a:+g}"][0] for a in A_full]
         return float(np.polyfit(A_full, np.array(y) - r["base_clean"][0], 1)[0])
 
-    out = {"model": "DiffusionDrive", "direction_file": Path(args.vec_npz).name,
+    out = {"model": {"dd": "DiffusionDrive", "ltf": "LTF", "ddv2": "DiffusionDriveV2"}[args.model],
+           "direction_file": Path(args.vec_npz).name,
            "layer": L, "tokens": args.tokens, "n_events": len(rec),
            "n_scenes": len(set(sc)), "alphas": ALPHAS,
-           "architecture_note": "扩散动作头 ⇒ 按计划 Stage D 只跑经验 steering，不做解析投影",
+           "architecture_note": ("扩散动作头 ⇒ 按计划 Stage D 只跑经验 steering，不做解析投影"
+                                 if args.model == "dd" else
+                                 "连续回归头（TrajectoryHead，单 query 过 MLP），与 DiffusionDrive 共用同一编码器"),
            "dose": {}}
     print("\n=== 剂量响应 ===")
     for a in ALPHAS + [-a for a in ALPHAS]:

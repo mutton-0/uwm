@@ -23,10 +23,16 @@ import numpy as np
 from scipy import stats
 from sklearn.linear_model import LogisticRegression
 
-N_LAYERS = 8
+N_LAYERS = 8          # 由 load_dd_cache 按缓存实际层数改写（navsim 系 8，Alpamayo 36）
 
 
 def load_dd_cache(cache_dir, pool, types=None):
+    """兼容两种缓存 schema：
+      navsim 系   `{cond}/{pool}/L{l}` -> [n_frames, C]，逐帧平均
+      Alpamayo    `{cond}/{pool}`      -> [n_layers, C]（前向阶段已池化）
+    行为量同理：commanded_speed_{cond} 或 {cond}/v_plan。
+    """
+    global N_LAYERS
     items = {}
     for p in sorted(Path(cache_dir).glob("*.npz")):
         d = np.load(p, allow_pickle=True)
@@ -34,14 +40,22 @@ def load_dd_cache(cache_dir, pool, types=None):
         if types and meta["event_type"] not in types:
             continue
         try:
-            hc = [d[f"clean/{pool}/L{l}"].mean(0) for l in range(N_LAYERS)]
-            hg = [d[f"ghost/{pool}/L{l}"].mean(0) for l in range(N_LAYERS)]
+            if f"clean/{pool}" in d.files:                      # Alpamayo schema
+                A, B = d[f"clean/{pool}"], d[f"ghost/{pool}"]
+                N_LAYERS = int(A.shape[0])
+                hc = [A[l] for l in range(N_LAYERS)]
+                hg = [B[l] for l in range(N_LAYERS)]
+            else:                                               # navsim schema
+                hc = [d[f"clean/{pool}/L{l}"].mean(0) for l in range(N_LAYERS)]
+                hg = [d[f"ghost/{pool}/L{l}"].mean(0) for l in range(N_LAYERS)]
         except KeyError:
             continue
         items[meta["event_id"]] = {
             "meta": meta, "scene": meta["scene_name"], "etype": meta["event_type"],
             "delta": [g - c for c, g in zip(hc, hg)],
-            "b": float(d["commanded_speed_clean"].mean() - d["commanded_speed_ghost"].mean()),
+            "b": (float(d["commanded_speed_clean"].mean() - d["commanded_speed_ghost"].mean())
+                  if "commanded_speed_clean" in d.files
+                  else float(d["clean/v_plan"][0] - d["ghost/v_plan"][0])),
             "area_px": meta.get("area_px"), "ecc": meta.get("ecc"),
             "object_class": meta.get("object_class", ""),
         }
@@ -174,7 +188,12 @@ def main():
     ap.add_argument("--cache", default="/data/ruolin/uwm/sim2real_demo_ttc/variants/n1_d2/dd_cache")
     ap.add_argument("--work", default="/data/ruolin/uwm/sim2real_demo_ttc/variants/n1_d2")
     ap.add_argument("--pools", nargs="+", default=["region_mean", "vision_mean"])
+    ap.add_argument("--primary-pool", default="vision_mean")
     ap.add_argument("--n-null-seeds", type=int, default=5)
+    ap.add_argument("--label", default="DiffusionDrive (diffusiondrive_sim_navhard.ckpt)")
+    ap.add_argument("--dir-tag", default="v_hazard_dd")
+    ap.add_argument("--native-domain", default="NAVSIM (real)")
+    ap.add_argument("--readable-layers", default="8 x TransFuser encoder SelfAttention (320 token = 256 image + 64 BEV latent)")
     ap.add_argument("--out", default="/data/ruolin/uwm/sim2real_demo_ttc/results/g_positive_calibration_diffusiondrive.json")
     args = ap.parse_args()
 
@@ -182,9 +201,9 @@ def main():
     matched = {t: set((work / "mining" / f"matched_{t}.txt").read_text().split())
                for t in ("D2bV", "D2cV") if (work / "mining" / f"matched_{t}.txt").exists()}
     VRU = ("human.", "vehicle.bicycle", "vehicle.motorcycle", "walker.")
-    OUT = {"model": "DiffusionDrive (diffusiondrive_sim_navhard.ckpt)",
-           "native_domain": "NAVSIM (real)", "stimuli": "nuScenes G1 语料 + N1 D2a/D2b/D2c/D2cV 负例（与 SimLingo 同一份）",
-           "readable_layers": "8 x TransFuser encoder SelfAttention (320 token = 256 image + 64 BEV latent)",
+    OUT = {"model": args.label,
+           "native_domain": args.native_domain, "stimuli": "nuScenes G1 语料 + N1 D2a/D2b/D2c/D2cV 负例（与 SimLingo 同一份）",
+           "readable_layers": args.readable_layers,
            "arms": {}}
 
     for pool in args.pools:
@@ -196,7 +215,7 @@ def main():
                 if t == src and vt in matched and eid in matched[vt] and str(e["object_class"]).startswith(VRU):
                     by[vt].append(e)
             by[t].append(e)
-        print(f"\n===== DiffusionDrive pool={pool} =====")
+        print(f"\n===== {args.label} pool={pool} =====")
         print("组规模: " + "  ".join(f"{t}={len(by[t])}" for t in sorted(by)))
         arm = {"group_sizes": {t: len(by[t]) for t in sorted(by)}}
         REPORT = [t_ for t_ in ("D2cV", "D2c", "D2b", "D2bV") if len(by.get(t_, [])) >= 20]
@@ -260,18 +279,18 @@ def main():
         ALLP = by["A"]; ALLN = by["D2a"]
         v_full = sup_dir(ALLP, ALLN, seed=0)
         pk = int(main_r["peak_layer_profile_argmax"])
-        np.savez(Path(args.out).parent / f"v_hazard_dd_{pool}.npz",
+        np.savez(Path(args.out).parent / f"{args.dir_tag}_{pool}.npz",
                  **{f"L{l}": v_full[l] for l in range(N_LAYERS)}, peak_layer=np.array([pk]))
-        arm["frozen_direction"] = {"file": f"v_hazard_dd_{pool}.npz", "peak_layer_prereg": pk,
+        arm["frozen_direction"] = {"file": f"{args.dir_tag}_{pool}.npz", "peak_layer_prereg": pk,
                                    "n_pos_fit": len(ALLP), "n_neg_fit": len(ALLN)}
-        print(f"  冻结 v_hazard_dd_{pool}.npz, 预注册峰层 L*={pk}")
+        print(f"  冻结 {args.dir_tag}_{pool}.npz, 预注册峰层 L*={pk}")
         OUT["arms"][pool] = arm
 
     # H1 判定(g_axis 文档 §2 决判规则)
     # 主口径 = vision_mean —— g_axis 文档 §3 表格明文:"至少跑 vision_mean(与 SimLingo 主读数
     # 口径一致,便于直接对比),其余口径按预算酌情补齐"。SimLingo 侧 n1_report 的主读数
     # (D2a 0.568 / D2cV 0.574) 也正是 vision_mean。region_mean 作为敏感性分析并列报告。
-    PRIMARY_POOL = "vision_mean"
+    PRIMARY_POOL = args.primary_pool
     OUT["primary_pool"] = PRIMARY_POOL
     OUT["primary_pool_rationale"] = ("g_axis_positive_calibration_diffusiondrive.md §3 指定 vision_mean "
                                      "为与 SimLingo 主读数可直接对比的口径；region_mean 为敏感性分析。")
@@ -279,9 +298,10 @@ def main():
     d = pri.get("main_minus_floor"); ci = pri.get("main_minus_floor_bootstrap", {}).get("ci95", [None, None])
     if d is not None and ci[0] is not None:
         if ci[0] > 0:
-            v = "H1 成立：G 轴读出口径有效，DiffusionDrive 的 D2a 显著高于自身 D2cV 证伪地板；SimLingo 的 FAIL 是标本属性"
+            v = (f"H1 成立：G 轴读出口径有效 —— {args.label} 的 D2a 显著高于自身 D2cV 证伪地板，"
+                 f"说明该口径能读出「有」；SimLingo 的 FAIL 因此可归为标本属性")
         elif ci[1] < 0:
-            v = "异常：DiffusionDrive 的 D2a 显著低于自身证伪地板，需查管线"
+            v = f"异常：{args.label} 的 D2a 显著低于自身证伪地板，需查管线"
         else:
             v = "不可估：CI 跨 0，本样本量无法区分 H1 与 H-artifact（不得据此宣称方法有效或无效）"
         OUT["verdict_H1"] = v

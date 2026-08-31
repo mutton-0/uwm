@@ -1,0 +1,8 @@
+{
+  "n_events": 116,
+  "cached": 116,
+  "failed": [],
+  "n_failed": 0,
+  "elapsed_s": 34.931055784225464,
+  "lidar_note": "nuScenes LIDAR_TOP（32 线）→ ego 系 → TransFuser BEV 直方图；与 NAVSIM 多雷达合并点云的密度不同，属分布外输入，随结果声明"
+}

@@ -89,18 +89,42 @@ class DDRunner:
         assert len(self.sas) == 8, f"期望 8 个 SelfAttention，实得 {len(self.sas)}"
         self._buf = [None] * len(self.sas)
         self._steer = None
+        self._patch = None
         self._last_sigma = float("nan")
         for i, m in enumerate(self.sas):
             m.register_forward_hook(self._mk(i))
 
     def _mk(self, i):
         def _h(mod, inp, out):
+            pt = getattr(self, "_patch", None)
+            if pt and i in pt:
+                out = self._apply_patch(out, pt[i])
             st = self._steer
             if st is not None and st["layer"] == i:
                 out = self._apply_steer(out, st)
             self._buf[i] = out.detach().float()[0]      # [320, C_l]
             return out
         return _h
+
+    # ---------------- activation patching（C 轴；与 SimLingo 侧 set_patch 同构） ----------------
+    def set_patch(self, layers=None, tokens="image"):
+        """layers: {layer_idx: [n_tokens, C] 参考侧激活}；None 关闭。
+
+        corruption 口径为**配对真实输入互换**（禁用噪声破坏），与两侧既有 C 轴实现一致。
+        tokens=image 时只替换前 256 个图像 token —— BEV latent 段与输入图像无关，替换它无意义。
+        """
+        self._patch = None if not layers else {int(k): np.asarray(v, np.float32) for k, v in layers.items()}
+        self._patch_tokens = tokens
+
+    def _apply_patch(self, out, values):
+        n = out.shape[1]
+        idx = {"image": slice(0, N_IMG_TOK), "all": slice(0, n)}[getattr(self, "_patch_tokens", "image")]
+        sub = out[0, idx, :]
+        if sub.shape[0] != len(values):
+            return out
+        out = out.clone()
+        out[0, idx, :] = torch.as_tensor(values, device=out.device).to(out.dtype)
+        return out
 
     # ---------------- RepE 式操纵（与 SimLingo 侧 simlingo_runner.set_steering 同构） ----------------
     def set_steering(self, layer=None, vec=None, alpha=0.0, mode="add", tokens="image"):

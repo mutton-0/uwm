@@ -1,9 +1,9 @@
 {
-  "schema": "board/v3",
+  "schema": "board/v2",
   "generated_by": "scripts/make_board.py",
   "guide": "docs/demo_guide_v3_repe_mainline.md",
   "scope_note": "评分 = 目标域 nuScenes TTC 突变集，500 量级小样本口径（V1 认证）",
-  "status_line": "诊断结论：感知上游丢失（待内部探针确证）· 语言/动作通路完好 · 评分层门控中",
+  "status_line": "仪器认证：E3 未解锁（两条阳性对照路线均不可行）· 诊断结论：语言-行为解离跨模型复现 · 评分层门控中",
   "report_files": [
     "final_report.md",
     "t25_report.md",
@@ -931,67 +931,6 @@
           "source": {
             "file": "t1_t2_s1_report.md",
             "sec": "§2 / §2.1"
-          }
-        }
-      ],
-      "findings": [
-        {
-          "id": "F1",
-          "claim": "断点在上游感知：约 8 成 A 类事件的生成语言完全不提行人，只说加速跟车/过路口",
-          "evidence": "VRU 提及率 0.205 [0.142, 0.267]；逐帧 80.9% 说加速。**但显著高于几何匹配静物基线 0.092**（Fisher p=1.5e-04）—— 不是完全看不见，是大多数时候不提",
-          "tier": "相关档",
-          "status": "大集已复现",
-          "replication": {
-            "set": "V-A（tier_m 独立挖掘轮 A 类 n=312，CoT 盲测）",
-            "value": 0.20512820512820512,
-            "ci": [
-              0.1258183199221439,
-              0.2964102551993804
-            ],
-            "small_set": 0.205,
-            "hit": true,
-            "note": "预注册阈值 <0.30；小集 0.205 vs 独立集 0.2051，重合到小数点后三位"
-          },
-          "caveat": "语言代理证据。没提及 ≠ 没感知；**最终确证仍需遗留① 内部物体存在性探针**。P3（提及是否门控刹车）在大集上仍**不可估**（提及子集 n=64/68，CI 半宽超阈）",
-          "source": {
-            "file": "t25_report.md",
-            "sec": "§1 / §2b / §3①"
-          }
-        },
-        {
-          "id": "F2",
-          "claim": "语言通道忠实：说做一致，但一起错 —— 输出端无病",
-          "evidence": "四分后有序趋势 JT z=3.94，p=8.1e-05；b̄ 只说减速 +1.489 / 都说 +0.563 / 只说加速 −0.064 m/s。二值一致率 0.597（κ=0.162，偏弱系二值化稀释）",
-          "tier": "相关档",
-          "status": "已决",
-          "caveat": "unfaithful CoT 风险仍在：语言忠实于**动作意图**，不等于忠实于内部依据",
-          "source": {
-            "file": "t25_report.md",
-            "sec": "§2b"
-          }
-        },
-        {
-          "id": "F3",
-          "claim": "概念-动作解耦：词汇轴与行为轴正交，且其激活与刹车反号",
-          "evidence": "cos(v_danger_lang, v_brake) = +0.022@L10 / +0.065@L22，896 维随机基线 0.033；ρ(投影, b) = -0.161（p=0.006，扛住 Simpson 与全部复杂度控制）；自然激活等效 α=0.097，外推减速量比实测 b 小 19–141 倍",
-          "tier": "干预 + 相关档",
-          "status": "已决",
-          "caveat": "steering 能推动行为，但随机方向同样能 —— 该检验无分辨力（修正案 A3）",
-          "source": {
-            "file": "final_report.md",
-            "sec": "§2④ / §1"
-          }
-        },
-        {
-          "id": "F4",
-          "claim": "仪器条件认证：注入机制被行为轴标定通过，随机对照因无功效豁免",
-          "evidence": "α=0 与不注入逐位一致（差 0.000e+00）；v_brake 剂量严格单调反对称，斜率 -0.0468 [-0.0517, -0.0421]；横向/速度斜率比 0.111（三轴最优）",
-          "tier": "干预档",
-          "status": "条件通过",
-          "caveat": "随机方向对照豁免：按构造必然为真的 v_brake 亦仅得置换 p=0.190，零分布 sd 0.013–0.025 与效应同量级 ⇒ 检验无分辨力，不构成「仪器未认证」",
-          "source": {
-            "file": "final_report.md",
-            "sec": "§1 W1"
           }
         }
       ],
@@ -1969,6 +1908,344 @@
           "t25_deep.json"
         ]
       }
+    },
+    {
+      "id": "alpamayo1",
+      "model": "Alpamayo 1 (R1-10B)",
+      "temporal_input": "多帧（4 相机 × 4 时刻）",
+      "ckpt_sha1": "nvidia/Alpamayo-R1-10B",
+      "role": "阳性对照候选 · 资格赛未过",
+      "provenance": {
+        "behavior": "variants/n1_d2 · A 类 188 事件 / 103 场景（覆盖预筛后 188/291）",
+        "understanding": "P2 未执行 —— 资格赛是其前置闸门",
+        "behavior_adjust": "none"
+      },
+      "metrics": {
+        "pass_050": {
+          "value": 0.14893617021276595,
+          "ci": [
+            0.09936693741041566,
+            0.2076556456069257
+          ],
+          "n": 188
+        },
+        "pass_025": {
+          "value": 0.24468085106382978,
+          "ci": [
+            0.18235212869678258,
+            0.31088082901554404
+          ],
+          "n": 188
+        },
+        "pass_100": {
+          "value": 0.047872340425531915,
+          "ci": [
+            0.016126875970329482,
+            0.0880503144654088
+          ],
+          "n": 188
+        },
+        "b_mean": {
+          "value": -0.07958828130776578,
+          "n": 188
+        },
+        "pass_A": {
+          "value": 0.14893617021276595,
+          "ci": [
+            0.09936693741041566,
+            0.2076556456069257
+          ],
+          "n": 188
+        },
+        "pass_C": {
+          "value": null
+        },
+        "no_response": {
+          "value": 0.7553191489361702,
+          "ci": [
+            0.689119170984456,
+            0.8176478713032174
+          ]
+        },
+        "reverse_rate": {
+          "value": 0.5531914893617021,
+          "ci": [
+            0.47058823529411764,
+            0.6341528979805926
+          ]
+        },
+        "pass_ttc2": {
+          "value": null
+        },
+        "pass_near": {
+          "value": null
+        },
+        "s_slope": {
+          "value": null
+        },
+        "s_mono_p": {
+          "value": null
+        },
+        "mention_rate": {
+          "value": 0.32978723404255317,
+          "ci": [
+            0.2134110218471853,
+            0.44776119402985076
+          ]
+        },
+        "lang_behavior_agree": {
+          "value": null
+        },
+        "understanding": {
+          "value": null,
+          "state": "not_established",
+          "unlock": "E3 未解锁 —— 本模型资格赛未过，不能充当阳性对照"
+        },
+        "language_rate": {
+          "value": 0.5106382978723404,
+          "ci": [
+            0.4083716208996688,
+            0.6132596685082873
+          ],
+          "state": "相关档",
+          "unlock": "CoC 文本，词表与 T2.5 字面同一份；VLA 专属，不进跨模型公共口径"
+        }
+      },
+      "qualification": {
+        "behavior": {
+          "auc": 0.445588833175227,
+          "ci95": [
+            0.384574438812223,
+            0.5066032275382311
+          ],
+          "p": 0.08179853185537604,
+          "hit": false,
+          "sensitivity_per_frame": {
+            "auc": 0.4387112074806884,
+            "p": 0.049949713507886045
+          }
+        },
+        "language": {
+          "vru": {
+            "A": 0.32978723404255317,
+            "A_ci": [
+              0.2134110218471853,
+              0.44776119402985076
+            ],
+            "D2a": 0.1592356687898089,
+            "D2a_ci": [
+              0.08387096774193549,
+              0.2484076433121019
+            ],
+            "fisher_p": 0.00029130779231008254
+          },
+          "slow": {
+            "A": 0.5106382978723404,
+            "A_ci": [
+              0.4083716208996688,
+              0.6132596685082873
+            ],
+            "D2a": 0.37579617834394907,
+            "D2a_ci": [
+              0.27325581395348836,
+              0.49264972293265136
+            ],
+            "fisher_p": 0.012754693126576892
+          },
+          "hit": true
+        },
+        "qualified": false,
+        "verdict": "资格赛未过 —— 不能作阳性对照，结果入档并回 P0",
+        "deviations": [
+          "Alpamayo 训练于 NVIDIA PhysicalAI-AV，对 nuScenes 同样是 OOD —— 非「按构造保证有货」",
+          "相机 FOV 失配：Alpamayo 期待 120°广角+30°长焦，nuScenes 均为 70°，只能近似映射",
+          "覆盖预筛：adapter 需 t0 前 1.6s/后 6.4s 的 ego_pose，A 可用 188/291、D2a 157/283",
+          "轨迹采样随机（扩散+VLM rollout），clean/ghost 复用同一 seed 以免采样噪声进入 b"
+        ]
+      },
+      "validity": {
+        "flags": {
+          "E1": "not_run",
+          "E2": "not_run",
+          "E3": "未解锁",
+          "E4": "not_run"
+        },
+        "resolution": {
+          "E1": "未决",
+          "E2": "未决",
+          "E3": "未决",
+          "E4": "未决"
+        },
+        "evidence": {
+          "E1": "P2 未执行 —— P1 资格赛是其前置闸门（guide 附录 D）",
+          "E2": "P2 未执行 —— P1 资格赛是其前置闸门（guide 附录 D）",
+          "E3": "P2 未执行 —— P1 资格赛是其前置闸门（guide 附录 D）",
+          "E4": "P2 未执行 —— P1 资格赛是其前置闸门（guide 附录 D）"
+        },
+        "open_items": [
+          {
+            "id": "P2",
+            "label": "内部流程",
+            "state": "未执行",
+            "unlock": "资格赛通过（换事件集或换候选）",
+            "root": "行为端有货的模型"
+          }
+        ],
+        "open_root_note": "本模型**语言端有货、行为端没有**，因此内部读数会二义，跑了也解释不了。"
+      },
+      "chain_portrait": [
+        {
+          "id": "perception",
+          "name": "视觉感知",
+          "sub": "物体在不在",
+          "state": "通",
+          "tier": "相关（语言代理）",
+          "key_number": "VRU 提及率 0.330 vs 静物 0.159",
+          "evidence": "CoC 文本显著分辨 VRU（Fisher p=2.9e-04），提及率是 SimLingo 的 1.6 倍；实例「Stop to yield to the pedestrian crossing ahead.」",
+          "source": {
+            "file": "positive_control_report.md",
+            "sec": "§1.3"
+          }
+        },
+        {
+          "id": "output",
+          "name": "动作输出",
+          "sub": "行为梯度",
+          "state": "断",
+          "tier": "相关",
+          "key_number": "b-AUC 0.446 [0.385, 0.507]  p=0.082",
+          "evidence": "低于 0.5 且不显著；达标率 0.149、反向率 0.553 —— 真正的 VRU 突现事件上并不比几何匹配静物刹得多",
+          "source": {
+            "file": "positive_control_report.md",
+            "sec": "§1.3"
+          }
+        }
+      ],
+      "instrument_status": null,
+      "detail": {
+        "axes": {},
+        "sources": [
+          "p1_alpamayo_clean.json",
+          "p1_alpamayo_per_frame.json"
+        ]
+      }
     }
-  ]
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "claim": "断点在上游感知：约 8 成 A 类事件的生成语言完全不提行人，只说加速跟车/过路口",
+      "evidence": "VRU 提及率 0.205 [0.142, 0.267]；逐帧 80.9% 说加速。**但显著高于几何匹配静物基线 0.092**（Fisher p=1.5e-04）—— 不是完全看不见，是大多数时候不提",
+      "tier": "相关档",
+      "status": "大集已复现",
+      "replication": {
+        "set": "V-A（tier_m 独立挖掘轮 A 类 n=312，CoT 盲测）",
+        "value": 0.20512820512820512,
+        "ci": [
+          0.1258183199221439,
+          0.2964102551993804
+        ],
+        "small_set": 0.205,
+        "hit": true,
+        "note": "预注册阈值 <0.30；小集 0.205 vs 独立集 0.2051，重合到小数点后三位"
+      },
+      "caveat": "语言代理证据。没提及 ≠ 没感知；**最终确证仍需遗留① 内部物体存在性探针**。P3（提及是否门控刹车）在大集上仍**不可估**（提及子集 n=64/68，CI 半宽超阈）",
+      "source": {
+        "file": "t25_report.md",
+        "sec": "§1 / §2b / §3①"
+      }
+    },
+    {
+      "id": "F2",
+      "claim": "语言通道忠实：说做一致，但一起错 —— 输出端无病",
+      "evidence": "四分后有序趋势 JT z=3.94，p=8.1e-05；b̄ 只说减速 +1.489 / 都说 +0.563 / 只说加速 −0.064 m/s。二值一致率 0.597（κ=0.162，偏弱系二值化稀释）",
+      "tier": "相关档",
+      "status": "已决",
+      "caveat": "unfaithful CoT 风险仍在：语言忠实于**动作意图**，不等于忠实于内部依据",
+      "source": {
+        "file": "t25_report.md",
+        "sec": "§2b"
+      }
+    },
+    {
+      "id": "F3",
+      "claim": "概念-动作解耦：词汇轴与行为轴正交，且其激活与刹车反号",
+      "evidence": "cos(v_danger_lang, v_brake) = +0.022@L10 / +0.065@L22，896 维随机基线 0.033；ρ(投影, b) = -0.161（p=0.006，扛住 Simpson 与全部复杂度控制）；自然激活等效 α=0.097，外推减速量比实测 b 小 19–141 倍",
+      "tier": "干预 + 相关档",
+      "status": "已决",
+      "caveat": "steering 能推动行为，但随机方向同样能 —— 该检验无分辨力（修正案 A3）",
+      "source": {
+        "file": "final_report.md",
+        "sec": "§2④ / §1"
+      }
+    },
+    {
+      "id": "F4",
+      "claim": "仪器条件认证：注入机制被行为轴标定通过，随机对照因无功效豁免",
+      "evidence": "α=0 与不注入逐位一致（差 0.000e+00）；v_brake 剂量严格单调反对称，斜率 -0.0468 [-0.0517, -0.0421]；横向/速度斜率比 0.111（三轴最优）",
+      "tier": "干预档",
+      "status": "条件通过",
+      "caveat": "随机方向对照豁免：按构造必然为真的 v_brake 亦仅得置换 p=0.190，零分布 sd 0.013–0.025 与效应同量级 ⇒ 检验无分辨力，不构成「仪器未认证」",
+      "source": {
+        "file": "final_report.md",
+        "sec": "§1 W1"
+      }
+    },
+    {
+      "id": "F5",
+      "claim": "仪器认证未解锁：两条阳性对照路线都走死，SimLingo 的零结果既未定罪也未撤销",
+      "evidence": "候选① VAD/SparseDrive —— mmcv 1.x 不支持 sm_120 且 HF 无权重；候选② Alpamayo 1 —— P1 资格赛行为端 AUC 0.446 [0.385, 0.507] 未达标",
+      "tier": "—",
+      "status": "未解锁",
+      "caveat": "E3 PASS 才能把 SimLingo 的零结果定罪为「模型属性」；在「确认有货」的模型上读不出才算干净证伪。两者都没发生",
+      "source": {
+        "file": "positive_control_report.md",
+        "sec": "§0 / §3"
+      }
+    },
+    {
+      "id": "F6",
+      "claim": "语言-行为解离跨模型复现：两个架构与训练域都不同的 VLA，都是「说得对、行为不跟」",
+      "evidence": "SimLingo VRU 提及 0.205 vs 0.092（p=1.5e-4）但 b-AUC 0.534（p=0.157）；Alpamayo VRU 提及 0.330 vs 0.159（p=2.9e-04）但 b-AUC 0.446。训练数据（CARLA 仿真 vs NVIDIA 真实路采）、架构、时序输入全不同",
+      "tier": "相关档",
+      "status": "已决",
+      "caveat": "两模型的行为端都不达标 ⇒ 无法排除「是这套 b 读数量不出东西」这一解释",
+      "source": {
+        "file": "positive_control_report.md",
+        "sec": "§3"
+      }
+    }
+  ],
+  "instrument_status": {
+    "E3_verdict": "未解锁",
+    "certified_by": null,
+    "why": "P0 候选① VAD/SparseDrive 在 sm_120 上不可行且 HF 无权重；候选② Alpamayo 1 的 P1 资格赛行为端未达标，按 guide 附录 D 不能充当阳性对照",
+    "consequence": "SimLingo 的零结果**既未定罪为模型属性、也未构成对读数式方法的干净证伪**；理解分维持 not_established，不进产品",
+    "sample_size_calibration": [
+      {
+        "auc": 0.6,
+        "n_per_group": 70,
+        "n_total": 140,
+        "ci_half": 0.09362820087986312
+      },
+      {
+        "auc": 0.65,
+        "n_per_group": 30,
+        "n_total": 60,
+        "ci_half": 0.13916119799466423
+      },
+      {
+        "auc": 0.7,
+        "n_per_group": 20,
+        "n_total": 40,
+        "ci_half": 0.16321370883333064
+      }
+    ],
+    "calibration_note": "达到「AUC 的 95% CI 下界 >0.5」所需的正负例等量事件数（Hanley–McNeil 标准误）。实测两模型样本量都远超检出 AUC=0.60 所需却仍不显著 ⇒ 真实效应就在 0.5 附近，不是采少了",
+    "recommendation": "麦迪逊评估以行为分 + S 曲线为主；语言通道作 VLA 专属补充列（相关档）；理解分维持门控直到拿到认证过的阳性对照",
+    "source": {
+      "file": "positive_control_report.md",
+      "sec": "§3 / §4 / §6.2"
+    }
+  }
 }

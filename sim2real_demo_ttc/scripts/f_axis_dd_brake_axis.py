@@ -28,12 +28,16 @@ N_LAYERS = 8
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pool", default="vision_mean")
-    ap.add_argument("--out", default=str(RES / "v_brake_dd.npz"))
+    ap.add_argument("--model", default="dd", choices=["dd", "ltf", "ddv2"])
+    ap.add_argument("--out", default="")
     args = ap.parse_args()
 
+    cache = W / {"dd": "dd_cache", "ltf": "ltf_cache", "ddv2": "ddv2_cache"}[args.model]
+    if not args.out:
+        args.out = str(RES / f"v_brake_{args.model}.npz")
     X = {l: [] for l in range(N_LAYERS)}
     v_cmd, ego, scenes = [], [], []
-    for p in sorted((W / "dd_cache").glob("*.npz")):
+    for p in sorted(cache.glob("*.npz")):
         d = np.load(p, allow_pickle=True)
         m = json.loads(str(d["meta"]))
         for cond in ("clean", "ghost"):
@@ -82,8 +86,8 @@ def main():
         store[f"L{l}"] = (w / (np.linalg.norm(w) + 1e-8)).astype(np.float32)
     store["peak_layer"] = np.array([L])
     np.savez(args.out, **store)
-    (RES / "v_brake_dd.json").write_text(json.dumps(
-        {"pool": args.pool, "n_samples": int(len(y)), "n_scenes": len(ks),
+    Path(args.out).with_suffix(".json").write_text(json.dumps(
+        {"model": args.model, "pool": args.pool, "n_samples": int(len(y)), "n_scenes": len(ks),
          "ego_speed_beta": float(co[0]), "cv_auc_by_layer": auc_by_l, "peak_layer": L,
          "construction": "标签 = 模型自身 commanded_speed 对 ego 速度回归后的残差二分；"
                          "与 SimLingo 的 v_brake 同构，用作站内上界标定"},

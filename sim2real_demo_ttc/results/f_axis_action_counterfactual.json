@@ -117,6 +117,238 @@
       },
       "verdict_action_counterfactual": "不可估：b-AUC 的 scene 级 CI 跨 0.5",
       "confound_response_significant": false
+    },
+    "LTF": {
+      "group_sizes": {
+        "A": 291,
+        "D2a": 283,
+        "D2cV": 212
+      },
+      "b_mean_A": {
+        "mean": 0.020339225270046096,
+        "ci95": [
+          0.006368339598521817,
+          0.03297960772962716
+        ],
+        "n": 291,
+        "significant": true
+      },
+      "b_mean_D2a": {
+        "mean": -0.015570909173191648,
+        "ci95": [
+          -0.03972869234869052,
+          0.003928102823137899
+        ],
+        "n": 283,
+        "significant": false
+      },
+      "b_mean_D2cV": {
+        "mean": 0.011107970253160258,
+        "ci95": [
+          -0.0007673554542927525,
+          0.024470191985505492
+        ],
+        "n": 212,
+        "significant": false
+      },
+      "b_auc_A_vs_D2a": {
+        "auc": 0.5829417264701954,
+        "p_mwu": 0.0005854747501699607,
+        "ci95_scene_bootstrap": [
+          0.5189942216164083,
+          0.6390217310571216
+        ],
+        "p_boot_le_0.5": 0.0055,
+        "n_pos": 291,
+        "n_neg": 283
+      },
+      "b_auc_A_vs_D2cV": {
+        "auc": 0.5550638656551903,
+        "p_mwu": 0.03485393504419491,
+        "ci95_scene_bootstrap": [
+          0.4869473521340596,
+          0.6136403939754664
+        ],
+        "p_boot_le_0.5": 0.0505,
+        "n_pos": 291,
+        "n_neg": 212
+      },
+      "verdict_action_counterfactual": "PASS：动作对真危险的响应显著强于对几何匹配无害物的响应",
+      "confound_response_significant": false
+    },
+    "DiffusionDriveV2": {
+      "group_sizes": {
+        "A": 291,
+        "D2a": 283,
+        "D2cV": 212
+      },
+      "b_mean_A": {
+        "mean": 0.20065236265716685,
+        "ci95": [
+          0.051940424179015426,
+          0.3427729548557322
+        ],
+        "n": 291,
+        "significant": true
+      },
+      "b_mean_D2a": {
+        "mean": 0.02340004025784061,
+        "ci95": [
+          -0.11697719503592052,
+          0.18294100231431418
+        ],
+        "n": 283,
+        "significant": false
+      },
+      "b_mean_D2cV": {
+        "mean": -0.02035490938304168,
+        "ci95": [
+          -0.09723810625234353,
+          0.05783743402894105
+        ],
+        "n": 212,
+        "significant": false
+      },
+      "b_auc_A_vs_D2a": {
+        "auc": 0.555960317171202,
+        "p_mwu": 0.020357659834746848,
+        "ci95_scene_bootstrap": [
+          0.5005247303919953,
+          0.6133303358349176
+        ],
+        "p_boot_le_0.5": 0.0225,
+        "n_pos": 291,
+        "n_neg": 283
+      },
+      "b_auc_A_vs_D2cV": {
+        "auc": 0.5733644556830707,
+        "p_mwu": 0.0049321131560627765,
+        "ci95_scene_bootstrap": [
+          0.5114716564091176,
+          0.6325855980281269
+        ],
+        "p_boot_le_0.5": 0.0075,
+        "n_pos": 291,
+        "n_neg": 212
+      },
+      "verdict_action_counterfactual": "PASS：动作对真危险的响应显著强于对几何匹配无害物的响应",
+      "confound_response_significant": false
+    },
+    "Alpamayo-R1": {
+      "group_sizes": {
+        "A": 188,
+        "D2a": 157,
+        "D2cV": 126
+      },
+      "b_mean_A": {
+        "mean": -0.07958828138702727,
+        "ci95": [
+          -0.1782150271267905,
+          0.017302073103359166
+        ],
+        "n": 188,
+        "significant": false
+      },
+      "b_mean_D2a": {
+        "mean": 0.025153730883245254,
+        "ci95": [
+          -0.10396080867097292,
+          0.15979207050439373
+        ],
+        "n": 157,
+        "significant": false
+      },
+      "b_mean_D2cV": {
+        "mean": 0.022844402340336866,
+        "ci95": [
+          -0.044610514286137916,
+          0.08647711992587427
+        ],
+        "n": 126,
+        "significant": false
+      },
+      "b_auc_A_vs_D2a": {
+        "auc": 0.445588833175227,
+        "p_mwu": 0.08179853185537604,
+        "ci95_scene_bootstrap": [
+          0.3735458578645619,
+          0.5193356656898951
+        ],
+        "p_boot_le_0.5": 0.929,
+        "n_pos": 188,
+        "n_neg": 157
+      },
+      "b_auc_A_vs_D2cV": {
+        "auc": 0.43524147247551503,
+        "p_mwu": 0.05180923444582942,
+        "ci95_scene_bootstrap": [
+          0.37014004806752376,
+          0.5084899419778129
+        ],
+        "p_boot_le_0.5": 0.96,
+        "n_pos": 188,
+        "n_neg": 126
+      },
+      "verdict_action_counterfactual": "不可估：b-AUC 的 scene 级 CI 跨 0.5",
+      "confound_response_significant": false
+    },
+    "AutoVLA": {
+      "group_sizes": {
+        "A": 291,
+        "D2a": 283,
+        "D2cV": 141
+      },
+      "b_mean_A": {
+        "mean": 0.036759346313902604,
+        "ci95": [
+          -0.0348556530892961,
+          0.11917127317957987
+        ],
+        "n": 291,
+        "significant": false
+      },
+      "b_mean_D2a": {
+        "mean": -0.09398917780116253,
+        "ci95": [
+          -0.22946317242487105,
+          0.009363008712903667
+        ],
+        "n": 283,
+        "significant": false
+      },
+      "b_mean_D2cV": {
+        "mean": 0.008237709390356186,
+        "ci95": [
+          -0.009320652783448779,
+          0.028346444360083985
+        ],
+        "n": 141,
+        "significant": false
+      },
+      "b_auc_A_vs_D2a": {
+        "auc": 0.5074617803844426,
+        "p_mwu": 0.7493168069359306,
+        "ci95_scene_bootstrap": [
+          0.45064844227862816,
+          0.5625351003824489
+        ],
+        "p_boot_le_0.5": 0.398,
+        "n_pos": 291,
+        "n_neg": 283
+      },
+      "b_auc_A_vs_D2cV": {
+        "auc": 0.4984402037483854,
+        "p_mwu": 0.9563916112574595,
+        "ci95_scene_bootstrap": [
+          0.44015161303823425,
+          0.5588875692696371
+        ],
+        "p_boot_le_0.5": 0.5225,
+        "n_pos": 291,
+        "n_neg": 141
+      },
+      "verdict_action_counterfactual": "不可估：b-AUC 的 scene 级 CI 跨 0.5",
+      "confound_response_significant": false
     }
   }
 }

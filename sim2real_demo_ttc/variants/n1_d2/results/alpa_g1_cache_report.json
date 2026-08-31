@@ -1,0 +1,13 @@
+{
+  "n_candidate": 941,
+  "n_usable": 570,
+  "cached": 366,
+  "failed": [],
+  "n_layers": 36,
+  "pools": [
+    "vision_mean",
+    "last_token",
+    "seq_mean"
+  ],
+  "coverage_note": "覆盖预筛：需 t0 前 1.6 s 与后 6.4 s 都在 ego_pose 覆盖内"
+}

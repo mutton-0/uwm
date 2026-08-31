@@ -25,6 +25,7 @@ import numpy as np
 MODELS = {
     "simlingo":  {"pools": ["vision_mean", "query_mean", "last_token"], "n_layers": 24, "primary": "vision_mean"},
     "dd":        {"pools": ["vision_mean", "all_mean"],                 "n_layers": 8,  "primary": "vision_mean"},
+    "ltf":       {"pools": ["vision_mean", "all_mean"],                 "n_layers": 8,  "primary": "vision_mean"},
 }
 
 
@@ -127,12 +128,15 @@ def main():
                     np.save(RES / "v_domain.npy", np.stack(vdom).astype(np.float32))
                     M["v_domain_file"] = "v_domain.npy（Stage B6 产出物，I 轴计算的直接输入）"
             else:
-                p = RES / "v_hazard_dd_vision_mean.npz"
+                # 每个候选用**自己**的 v_hazard 求干涉角（此前 LTF 误用了 dd 的方向）
+                p = RES / f"v_hazard_{mkey}_vision_mean.npz"
                 if p.exists():
                     z = np.load(p)
-                    ang["v_hazard_dd"] = [float(abs(np.dot(vdom[l], z[f"L{l}"]))) for l in range(spec["n_layers"])]
+                    ang[f"v_hazard_{mkey}"] = [float(abs(np.dot(vdom[l], z[f"L{l}"])))
+                                               for l in range(spec["n_layers"])]
                     if pool == spec["primary"]:
-                        np.savez(RES / "v_domain_dd.npz", **{f"L{l}": vdom[l] for l in range(spec["n_layers"])})
+                        np.savez(RES / f"v_domain_{mkey}.npz",
+                                 **{f"L{l}": vdom[l] for l in range(spec["n_layers"])})
             M["pools"][pool]["interference_abs_cos"] = ang
             for nm, a in ang.items():
                 print(f"    |θ_L| vs {nm}: " + " ".join(f"{x:.3f}" for x in a))
@@ -159,7 +163,8 @@ def main():
     # I_m 汇总(在各自概念峰层上)
     peaks = {}
     for nm, fn, key in (("simlingo", "b1_v_hazard_clean.json", "frozen_direction"),
-                        ("dd", "g_positive_calibration_diffusiondrive.json", None)):
+                        ("dd", "g_positive_calibration_diffusiondrive.json", None),
+                        ("ltf", "g_axis_ltf.json", None)):
         p = RES / fn
         if not p.exists():
             continue
@@ -183,15 +188,21 @@ def main():
                          "behavioral_domain_sensitivity": M.get("behavioral_domain_sensitivity", {}).get("mean")}
         print(f"[T-I] {mkey}: L*={Ls}  D_L*={D:.3f}  I_m={1-D:.3f}  |θ|={th}")
     OUT["summary_I_m"] = summary
-    if len(summary) == 2:
-        a, b = sorted(summary, key=lambda k: -summary[k]["I_m"])
-        ci_a = summary[a]["D_ci95"]; ci_b = summary[b]["D_ci95"]
-        overlap = not (ci_a[1] < ci_b[0] or ci_b[1] < ci_a[0])
-        OUT["ranking"] = {"order_by_I_m": [a, b], "D_ci_overlap": overlap,
-                          "verdict": ("不可估：两模型 D_L* 的 scene 级 bootstrap CI 重叠，排序不稳健"
-                                      if overlap else
-                                      f"PASS：{a} 的域不变性显著优于 {b}（D_L* CI 不重叠）")}
-        print(f"[T-I] 排序 {a} > {b}；CI 重叠={overlap} -> {OUT['ranking']['verdict']}")
+    if len(summary) >= 2:
+        order = sorted(summary, key=lambda k: -summary[k]["I_m"])
+        pw = []
+        for i in range(len(order)):
+            for j in range(i + 1, len(order)):
+                a, b = order[i], order[j]
+                ci_a, ci_b = summary[a]["D_ci95"], summary[b]["D_ci95"]
+                overlap = not (ci_a[1] < ci_b[0] or ci_b[1] < ci_a[0])
+                pw.append({"pair": [a, b], "D_ci_overlap": overlap,
+                           "verdict": (f"不可估：{a} 与 {b} 的 D_L* scene 级 bootstrap CI 重叠，该对排序不稳健"
+                                       if overlap else
+                                       f"PASS：{a} 的域不变性显著优于 {b}（D_L* CI 不重叠）")})
+                print(f"[T-I] {a} vs {b}：CI 重叠={overlap} -> {pw[-1]['verdict']}")
+        OUT["ranking"] = {"order_by_I_m": order, "pairwise": pw,
+                          "note": "多于两个模型时逐对判定；只有 CI 不重叠的相邻对才构成可宣称的排序边"}
     Path(args.out).write_text(json.dumps(OUT, indent=2, ensure_ascii=False))
     print(f"[T-I] wrote {args.out}")
 

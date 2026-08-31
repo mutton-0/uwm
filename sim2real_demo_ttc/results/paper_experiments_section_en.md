@@ -13,24 +13,50 @@
 
 ### 4.1.1 Policies under test
 
-All experiments are run on two end-to-end driving policies that differ in both **architecture
-family** and **native training domain**. This is deliberate: the paper argues about the
-**portability** of a diagnostic protocol and its boundaries, and portability failures would remain
-invisible if both specimens belonged to the same family.
+All experiments are run on **six** end-to-end driving policies that together form a controlled
+matrix over **encoder family**, **action-head family** and **native training domain**. This is
+deliberate: the paper argues about the **portability** of a diagnostic protocol and its boundaries.
+Portability failures remain invisible if every specimen belongs to the same family; but if one only
+ever compares across families, one cannot separate "the difference comes from the encoder" from
+"the difference comes from the action head". The candidate pool therefore supplies both a
+**cross-family** contrast (SimLingo vs. the TransFuser family vs. two VLAs) and a
+**same-encoder / different-head** contrast (LTF vs. DiffusionDrive vs. DiffusionDriveV2, which share
+one `TransfuserBackbone` under a continuous regression head, an anchored diffusion head and an
+improved diffusion head respectively). The latter directly refutes a corollary of the previous
+version in §4.4.2.
 
-| Policy | Trunk | Action head | Native domain | Readable positions |
-| --- | --- | --- | --- | --- |
-| SimLingo | InternVL2-1B (Qwen2-0.5B, 24 decoder layers, hidden 896) | continuous regression head: `Linear(896→256) → SiLU → Linear(256→2)`, predictions `cumsum`-ed | CARLA (sim) | 24 decoder layers |
-| DiffusionDrive | TransFuser two-branch encoder (ResNet-34 × 2 + GPT-style fusion) | anchored diffusion head (20 k-means trajectory anchors) | NAVSIM / OpenScene (real)† | 8 encoder self-attention modules |
+| Policy | Trunk (encoder) | Action head | Input temporality | Native domain | Readable positions |
+| --- | --- | --- | --- | --- | --- |
+| SimLingo | InternVL2-1B (Qwen2-0.5B, 24 decoder layers, hidden 896) | continuous regression head: `Linear(896→256) → SiLU → Linear(256→2)`, predictions `cumsum`-ed | single-frame | CARLA (sim) | 24 decoder layers |
+| DiffusionDrive | TransFuser two-branch encoder (ResNet-34 × 2 + GPT-style fusion) | anchored diffusion head (20 k-means trajectory anchors) | single-frame | NAVSIM / OpenScene (real)† | 8 encoder self-attention modules |
+| LTF (Latent TransFuser) | **same as above** (`TransfuserConfig(latent=True)`; no lidar input, the BEV branch runs on a learned latent) | continuous regression head (native TransFuser trajectory regression) | single-frame | NAVSIM (real)† | 8 encoder self-attention modules |
+| TransFuser | **same as above** | **same as above** | single-frame | NAVSIM (real)† | — under this repository it is the *same* candidate as LTF, see §CE/A28 |
+| DiffusionDriveV2 | **same as above** (fed a real lidar BEV histogram) | improved anchored diffusion head + PDM-score trajectory selection | single-frame | NAVSIM (real)† | 8 encoder self-attention modules |
+| Alpamayo-R1 (10B) | Cosmos-Reason1 (Qwen2.5-VL-7B family, 36 decoder layers, hidden 4096) | autoregressive action-token decoding | **multi-frame** (history frame sequence) | NVIDIA PhysicalAI-AV (real)† | 36 decoder layers |
+| AutoVLA | Qwen2.5-VL-3B (36 decoder layers, hidden 2048), LoRA merged | autoregressive action-token decoding | **multi-frame** (3 cameras × 4 timesteps) | NAVSIM (real)† | 36 decoder layers |
 
-† The checkpoint's training domain comes from its name and the operator's account and was not
+† These checkpoints' training domains come from their names and the operators' accounts and were not
 independently verified by us; every interpretation depending on "which side is in-domain" is a
 conditional conclusion.
+
+**TransFuser is not listed as a seventh candidate.** In this repository (SimScale),
+`transfuser_agent.yaml` and `LTF/ltf_sim_navtest.ckpt` are one configuration and one set of weights;
+three independent checks (config diff, state_dict key-set comparison, and per-event output
+comparison on the shared stimulus set) confirm the two are indistinguishable under this paper's
+stimuli and readouts. Following our standing discipline we do not manufacture a spurious independent
+data point, and instead record the finding itself as a result (§CE/A28).
+
+**Input temporality is a new column this round because it decides whether the D2cV falsification
+floor holds at all.** D2cV is constructed so that "the only difference is a relative velocity a
+single-frame model is *physically unable* to observe". For multi-frame candidates (Alpamayo-R1,
+AutoVLA) relative velocity *is* observable, and D2cV degenerates into an ordinary hard negative
+rather than a falsification floor. The G column of Table 1 must therefore be read in two groups,
+whose main readouts are defined differently (§CE/A34).
 
 ### 4.1.2 A single shared stimulus set
 
 All representation-side and action-side readouts are produced on **one and the same stimulus set**,
-shared by both models:
+shared by all six candidates:
 
 * **Ghost-probe event corpus**: 7003 events mined from nuScenes trainval, with three independent
   positive trigger criteria — A (VRU emergence, n = 291), B (close cut-in, n = 103) and C (generic
@@ -40,16 +66,34 @@ shared by both models:
   and D2c / **D2cV** (same VRU class, same geometry, **differing only in a relative velocity that a
   single-frame model is physically unable to observe**, n = 212). D2cV is this paper's
   **falsification floor**: any claimed "hazard discriminability" that cannot be separated from it is
-  not evidence of a hazard concept;
+  not evidence of a hazard concept. **D2cV constitutes a falsification floor only for single-frame
+  candidates**; see §4.1.1 and §4.4.1;
 * **Domain pairing**: two renderings of the same scene (CARLA engine rendering ↔ world-model
   photorealistic re-rendering) with geometry, actors and ego ground truth all locked and rendering
   style the only variable, constituting $do(\text{appearance})$. 72 scene-variants × 3 timestamps =
   216 pairs.
 
-**Cross-model input alignment**: to feed the same nuScenes corpus into DiffusionDrive we implemented
-an input adapter that makes the ego-state anchoring (both conditions share the clean-frame speed),
-the region-token definition and the behavioural quantity item-by-item isomorphic across the two
-sides.
+**Cross-model input alignment**: to feed the same nuScenes corpus into every candidate we
+implemented one input adapter per candidate, each making the ego-state anchoring (both conditions
+share the clean-frame speed), the region-token definition and the behavioural quantity
+item-by-item isomorphic across candidates. The adapters were the **dominant cost** of expanding the
+pool this round, and this is deliberate:
+**direction discovery and measurement are both performed on the nuScenes G1 corpus with the N1
+negative system, never in each candidate's own training or simulation domain.** Had we instead
+discovered directions natively and transferred them to nuScenes for validation, what we measured
+would be each candidate's sim2real gap rather than the paper's actual claim — that under one shared
+set of real stimuli, public leaderboard ranking and four-axis diagnosis lead to different selection
+decisions. The one axis that genuinely requires a real↔sim domain pairing is **I**, because
+invariance is defined over two domains; this is a requirement of that axis's definition, not a
+general strategy.
+
+How the five adapters relate: LTF and DiffusionDriveV2 directly import and reuse the **entire
+front end** of the DiffusionDrive adapter (image, state, token and pooling conventions field for
+field), replacing only the agent construction — this is the precondition for the same-encoder
+controlled comparison to be valid at all, since any front-end difference would contaminate it.
+Alpamayo-R1 and AutoVLA are VLA architectures with their own front ends, but their readout position
+(prefill pooling over the language tower's decoder layers) and behavioural quantity ($v_{plan}$)
+remain isomorphic to the rest.
 
 ### 4.1.3 Operationalizing the four axes
 
@@ -67,10 +111,17 @@ sides.
   $D_L = \mathbb{E}\lVert Z_L(x_{real}) - Z_L(x_{sim})\rVert / \mathbb{E}\lVert Z_L(x)\rVert$ and
   $I_m = 1 - D_{L^*}$, reported alongside the **behavioural** domain sensitivity
   $\mathbb{E}|\Delta v_{cmd}| / \overline{v_{cmd}}$.
-* **C (Concentration)**: domain-paired activation patching in which corruption is always **paired
+* **C (Concentration)**: paired activation patching in which corruption is always **paired
   real-input swapping** (noise corruption prohibited) and the metric is always **continuous**
   (binarization prohibited); $C_m$ = top-2 layer share of recovery, accompanied by a shape diagnostic
-  of the recovery profile (§4.4.4).
+  of the recovery profile (§4.4.4). The same method is applied to **two pairing sources**, reported
+  in separate columns and not comparable to each other: **C-domain** (sim↔real rendering pairs,
+  asking at which layer the rendering-domain failure enters) and **C-hazard** (G1 clean↔ghost pairs,
+  asking at which layer the hazard-induced behavioural change enters, §CE/A27). Every C readout must
+  first pass the **patch-ALL sufficient-cut-set self-check**: swapping all patchable tokens at once
+  must yield a recovery near 1; if it falls outside $[0.7, 1.3]$ the patched tokens are not a
+  sufficient cut set under that pairing, the per-layer shares are uninterpretable, and the verdict is
+  indeterminate.
 
 ### 4.1.4 Statistical and reporting discipline
 
@@ -79,8 +130,8 @@ pre-registered primary readout per experiment with everything else marked as sen
 three-state adjudication (PASS / FAIL / **indeterminate**), with insufficient power always recorded
 as indeterminate rather than forced into a binary; random-direction controls carry **their own
 per-layer null distribution**; all cross-model comparisons use **within-model normalized** quantities
-only. An amendment ledger is maintained throughout; the experiments reported here registered **26**
-amendments, five of which converted an already-obtained positive result back into a negative or
+only. An amendment ledger is maintained throughout; the experiments reported here registered **38**
+amendments, seven of which converted an already-obtained positive result back into a negative or
 indeterminate one (§4.4).
 
 > Sources: `n1_report.md`, `axis_naming_alignment.md`, `amendments.md`,
@@ -103,29 +154,58 @@ multiplied by an infraction-penalty product; PDMS is a weighted combination of s
 them side by side yields exactly one piece of information: **within the public score system,
 "ranking" is undefined.**
 
-This is not a limitation but the paper's point of departure. If two candidates cannot be ranked at
+Expanding the candidate pool **does not improve this situation; it only changes its shape.** Of the
+six candidates: SimLingo has only a CARLA Driving Score; LTF, DiffusionDrive, DiffusionDriveV2 and
+AutoVLA nominally share NAVSIM PDMS but come from different splits, different versions of the metric
+cache and different self-reported author pipelines (AutoVLA's PDMS exists only as the checkpoint
+filename `AutoVLA_PDMS_89.ckpt`, which we did not re-run); and Alpamayo-R1 appears on neither
+benchmark. In other words, after growing the pool from 2 to 6, **"comparable public scores" still
+cover only a subset of the pool, and comparability even within that subset is nominal only.** We
+therefore cite no public score we did not re-run ourselves as evidence in the main text.
+
+This is not a limitation but the paper's point of departure. If candidates cannot be ranked at
 all, the first half of the phrase "public leaderboard ranking is disconnected from deployment
 ranking" is empty, and model selection must rest on other evidence. The four-axis matrix of the next
-section is measured for both models on **one stimulus set under one statistical protocol** and
+section is measured for all six models on **one stimulus set under one statistical protocol** and
 therefore aligns cell by cell — the first and most basic increment this framework offers over public
 scores.
 
 ### 4.2.2 The four-axis matrix under a common protocol
 
-**Table 1. G/F/I/C readouts for two policies, measured on one and the same stimulus set under one and the same statistical protocol. The "comparable" column is part of the result, not a caveat.**
+**Table 1. G/F/I/C readouts for six policies, measured on one and the same stimulus set under one and the same statistical protocol. Every cell is either a number with a scene-level CI, "n.m." (not measured, budget) or "n/a" (the operationalization does not apply — the reason is given in the notes). "n/a" is part of the result, not a caveat.**
 
-| Axis | Readout | SimLingo | DiffusionDrive | Comparable | Verdict |
-| --- | --- | --- | --- | --- | --- |
-| G | primary − own D2cV falsification floor | +0.035 [−0.026, +0.097] | +0.009 [−0.047, +0.065] | yes | both indeterminate |
-| F① | action-level counterfactual b-AUC(A vs D2a) | 0.534 [0.469, 0.592] | 0.553 [0.486, 0.623] | yes | both indeterminate |
-| F① | action change induced by hazard frames, b(A) [m/s] | +0.307 [+0.112, +0.500] | +0.010 [−0.030, +0.045] | within-model | reacts non-specifically vs does not react |
-| F② | injection ±α full-ladder slope [m/s per σ] | −0.0405 | −0.00000 | **no** | instrument without resolving power on DiffusionDrive |
-| I | $I_m = 1 - D_{L^*}$ (representation side) | 0.606 | 0.203 | yes | SimLingo > DD |
-| I | behavioural domain sensitivity | 0.346 | 0.115 | yes | **DD > SimLingo (reversed)** |
-| C | recovery-profile Spearman(layer, recovery) | −0.997 (cascade) | +0.881 (interior peak) | yes | failures enter at different places |
-| C | responsible-layer mode / normalized entropy | L0 / 0.279 | L6 / 0.685 | yes | vision interface vs deep fusion |
+**(a) Single-frame candidates — the D2cV falsification floor holds**
 
-The matrix yields three findings, developed in §4.2.3–§4.2.5.
+| Policy | G: primary − own D2cV floor | sd over 10 fold-seeds | F①: b-AUC(A vs D2a) | F①: b(A) [m/s] | F②: injection slope [m/s per σ] | I: $I_m$ (representation) | I: behavioural domain sensitivity | C-domain: profile shape / responsible layer | C-hazard: $C_m$ / responsible layer |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| SimLingo | +0.035 [−0.026, +0.097] | 0.024 | 0.534 [0.469, 0.592] | **+0.307** [+0.112, +0.500] | **−0.0405** (measurable) | **0.606** (L9) | 0.346 [0.249, 0.454] | cascade ρ=−0.997 / L0, entropy 0.279 | n.m. |
+| DiffusionDrive | +0.009 [−0.047, +0.065] | 0.032 | 0.553 [0.486, 0.623] | +0.010 [−0.030, +0.045] | −0.00000 (not measurable) | 0.203 (L5) | 0.115 [0.080, 0.153] | interior peak ρ=+0.881 / L6, entropy 0.685 | **0.801** [0.710, 0.884] / L6, entropy 0.297 |
+| **LTF** | **+0.070 [+0.017, +0.126]** | 0.028 | **0.583 [0.519, 0.639]** | +0.020 [+0.006, +0.033] | +0.00040 [−0.00065, +0.00143] (not measurable) | 0.583 (L6) | 0.160 [0.099, 0.235] | n.m. | **0.789** [0.725, 0.857] / L6, entropy 0.576 |
+| DiffusionDriveV2 | +0.025 [−0.044, +0.097] | 0.026 | **0.556 [0.501, 0.613]** | **+0.201** [+0.052, +0.343] | not measurable | **n/a**¹ | n/a¹ | n.m. | **indeterminate**² |
+
+**(b) Multi-frame candidates — D2cV is not a falsification floor (§CE/A34); the G column uses the permutation null instead**
+
+| Policy | G: CV-AUC(A vs D2a) | permutation floor | random-direction floor | direction geometry purity ρ(proj, log area) | F①: b-AUC(A vs D2a) | F①: b(A) [m/s] | F② | I | C |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Alpamayo-R1 | 0.562 [0.502, 0.623] | 0.504 ± 0.012 | 0.508 ± 0.029 | +0.019 (p=0.73) | 0.446 [0.374, 0.519] | −0.080 [−0.178, +0.017] | n.m. | **n/a**³ | n.m. |
+| **AutoVLA** | **0.608 [0.562, 0.654]** | 0.504 ± 0.020 | 0.522 ± 0.020 | +0.045 (p=0.28)⁴ | 0.508 [0.451, 0.563] | +0.037 [−0.035, +0.119] | n.m. | **n/a**³ | n.m. |
+
+> ¹ DiffusionDriveV2 must be fed a real lidar BEV histogram, and the domain-paired corpus is purely
+>   rendered with no point clouds; an all-zero histogram would fold "missing lidar" into the domain
+>   divergence. The gap is on the stimulus side, not the model side (§CE/A36).
+> ² The patch-ALL sufficient-cut-set self-check fails (median +0.552, far from 1) ⇒ the per-layer
+>   shares are uninterpretable under this pairing and the verdict is indeterminate (§4.4.4).
+> ³ The domain-paired corpus has one frame per timestep; both multi-frame candidates need 4 (§CE/A36).
+> ⁴ AutoVLA's pooled ρ is not significant, but **within positives** ρ=+0.132 (p=0.025) and
+>   ρ(proj, ecc) pooled = +0.098 (p=0.019): the direction is not fully orthogonal to imaging
+>   geometry. D2a is caliper-matched on log area and ecc, so the **between-group** confound is
+>   controlled; the residual within-group correlation is weaker than in the first version of this
+>   readout, which used only the A+D2a cache and was fold-assignment noise (§CE/A38).
+> C-domain and C-hazard are the **same patching method applied to two pairing sources** (sim↔real
+> rendering pairs vs G1 clean↔ghost), not two metrics; the two columns are not comparable to
+> each other.
+
+The matrix yields five findings, developed in §4.2.3–§4.2.7.
 
 ### 4.2.3 The C axis: one diagnostic, two different repair prescriptions
 
@@ -142,11 +222,27 @@ $+0.881$.
 Patch-ALL recovery is +1.004 and +1.000 respectively, establishing that each model's readable layers
 form a **sufficient cut set**, so neither profile is an artefact of a particular layer.
 
-**This is the only cell in this round that yields a substantive cross-model distinction, and what it
-yields is exactly what public scores cannot:** 6.87 and 88.1 both report how much performance was
-lost, never where the loss enters or what fixing it costs. Under this diagnostic, SimLingo's repair
-site is the **visual front end** and DiffusionDrive's is the **deep fusion stage** — two entirely
-different prescriptions.
+**What this cell yields is exactly what public scores cannot:** 6.87 and 88.1 both report how much
+performance was lost, never where the loss enters or what fixing it costs. Under this diagnostic,
+SimLingo's repair site is the **visual front end** and DiffusionDrive's is the **deep fusion
+stage** — two entirely different prescriptions.
+
+**Changing the pairing source lets the same method answer a different question (C-hazard,
+§CE/A27).** Replacing the "sim↔real rendering" pairing with "G1 clean↔ghost" changes the question
+from "where does the rendering-domain failure enter" to "where does the hazard-induced behavioural
+change enter". Under that pairing, DiffusionDrive and LTF — **two candidates sharing one encoder
+architecture** — both localize the responsible layer at **L6** ($C_m$ 0.801 [0.710, 0.884] and 0.789
+[0.725, 0.857] respectively, against a diffuse baseline of 0.250, with patch-ALL = +1.000 for both).
+This is the only place in the paper where two candidates give a **concordant** diagnosis, and it
+falls precisely on the pair that shares an encoder — a convergent-validity check on the readout.
+
+**DiffusionDriveV2 is indeterminate under the same pairing, and that cell deserves its own note.**
+Its patch-ALL recovery median is only **+0.552**, far from 1 — swapping all 320 fused tokens at once
+returns behaviour only halfway. Under the discipline of §4.1.3 this means the patched tokens are not
+a sufficient cut set under this pairing and the per-layer shares are uninterpretable. **Its nominal
+$C_m$ is 0.845 (median 0.990), the highest in the table, and we adjudicate it indeterminate rather
+than best.** This cell is a direct expression of the paper's reporting discipline: when the
+self-check fails, the best-looking number is exactly the one that must not be reported.
 
 ### 4.2.4 The F axis: the information is in the representation but does not drive the action
 
@@ -165,6 +261,23 @@ unrelated.** This is the representation-level signature of causal confusion, and
 open-loop score structurally cannot see: an open-loop score checks whether the action is close to a
 reference trajectory, never **what drives** the action.
 
+**With the expanded pool, this conclusion acquires a version that does not depend on anything
+peculiar to SimLingo.** The architecture-neutral action-level counterfactual (F①) yields three
+sharply different shapes across the six candidates:
+
+| Shape | Candidates | Signature |
+| --- | --- | --- |
+| **Strong but non-specific reaction** | SimLingo, DiffusionDriveV2 | $b(A)$ significantly non-zero (+0.307 / +0.201) but $b$(D2a) of the same order or CI-covered |
+| **Weak but specific reaction** | LTF | $b(A)$ is only +0.020, yet it is the only single-frame candidate whose b-AUC CI lies entirely above 0.5 (0.583) |
+| **No reaction at all** | AutoVLA, Alpamayo-R1 | $b(A)$ **and** $b$(D2a) both indistinguishable from 0 |
+
+The three shapes call for three different repairs: raise selectivity, raise gain, or connect the
+pathway at all. And AutoVLA's raw G readout (0.608) is indistinguishable from the table's highest,
+LTF's 0.623, so
+**"the information is in the representation but does not drive the action" is cleaner on AutoVLA
+than on SimLingo** (§4.2.7) — SimLingo at least reacts, merely non-specifically; AutoVLA has the
+most clearly readable representation and a completely unmoved action.
+
 (Restriction: a single-frame model is structurally blind to object motion and TTC contains a
 velocity term, so a substantial part of $r$ = +0.320 should be attributed to the correlation between
 TTC and **distance**. The argument is unaffected: whether the direction carries TTC or distance, it
@@ -176,11 +289,84 @@ On the same rendering-domain pairing, the representational $D_{L^*}$ favours Sim
 (0.394 vs 0.797; $I_m$ 0.606 vs 0.203) while the behavioural domain sensitivity favours
 DiffusionDrive (0.115 vs 0.346), and **both pairs of scene-level bootstrap CIs are
 non-overlapping**. Any procedure that compresses "domain robustness" into one number must pick one
-of these orderings and discard the other. For both models $v_{domain}$ is close to orthogonal to
-their own $v_{hazard}$ (all $|\theta|$ below the $1/\sqrt{d}$ reference for their dimension), so the
-observed domain sensitivity does **not** operate by contaminating the hazard direction.
+of these orderings and discard the other. For all three measured candidates $v_{domain}$ is close to
+orthogonal to their own $v_{hazard}$ (all $|\theta|$ below the $1/\sqrt{d}$ reference for their
+dimension), so the observed domain sensitivity does **not** operate by contaminating the hazard
+direction.
 
-### 4.2.6 Intervening on the diagnosed link
+**Adding LTF strengthens this into a sharper claim.** LTF and DiffusionDrive share one
+`TransfuserBackbone` **architecture** (different weights, different action heads), yet their $I_m$
+differ by 0.38 (0.583 vs 0.203, non-overlapping CIs) and their behavioural domain sensitivities by
+nearly 40% (0.160 vs 0.115). **The I-axis readout is therefore a property of the weights, not of the
+architecture**: after two separate training runs, the same encoder code already distributes its
+domain sensitivity differently along depth.
+
+This claim only stands with a self-check attached. The peak layers differ (DD at L5, LTF at L6), so
+the ordering could be an artefact of layer selection. Layer-matched comparison (per-layer $D_L$,
+vision_mean):
+
+| L | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| DiffusionDrive | 0.033 | 0.001 | 0.667 | 0.056 | 0.633 | **0.797** | 0.730 | 0.956 |
+| LTF | 0.156 | 0.004 | 0.777 | 0.362 | 0.679 | 0.672 | **0.417** | 0.588 |
+
+Only L5–L7 favour LTF; L0–L4 all reverse. **"LTF is more domain-invariant than DiffusionDrive" is
+therefore a conclusion conditional on "at each model's own concept peak layer"**, and must not be
+read as "the whole encoder is more invariant" (§CE/A37). We put this qualification in the body
+rather than a footnote, because it is precisely what distinguishes this framework from "reporting a
+robustness score".
+
+### 4.2.6 The first G-axis positive: the falsification floor is not uncrossable
+
+The G-axis primary readouts of the first two candidates were both indeterminate (§4.4.1), which
+leaves a genuine ambiguity: is it that "the model has no hazard concept", or that "our D2cV floor is
+set so high that no model could cross it"? **LTF supplies evidence against the second reading**:
+primary − own D2cV floor = **+0.070 [+0.017, +0.126]** (vision_mean), with a region_mean sensitivity
+analysis of +0.085 [+0.031, +0.140] and $+0.056 \pm 0.028$ across 10 CV fold-assignment seeds — the
+first time the sd is **smaller** than the effect. It is the first G-axis readout in this line of work
+whose CI excludes 0.
+
+Its value is not "LTF is better" but that it **calibrates the whole table with a positive**: under
+the same D2cV floor, the same stimulus set and the same statistical protocol, some candidate does
+cross the floor, so the other candidates' indeterminacy **cannot** be attributed to the floor being
+uncrossable in principle. Before this, the conclusion of §4.4.1 could only read "indeterminate at
+this sample size"; it can now read "indeterminate at a sample size at which another candidate
+crossed".
+
+Notably, LTF is also the only one of the four single-frame candidates that simultaneously satisfies
+"b(A) significantly non-zero" and "b-AUC(A vs D2a) CI excluding 0.5" (0.583 [0.519, 0.639]) — it is
+the candidate whose G and F point the **same** way. It contrasts directly with the next section.
+
+### 4.2.7 The G/F dissociation is cleanest on AutoVLA
+
+AutoVLA's raw G-axis readout (CV-AUC of A vs D2a) is 0.608 [0.562, 0.654], 2.9 sd above the
+permutation floor mean, $p = 7.7 \times 10^{-6}$, with both pooling conventions agreeing on L20 and
+giving near-identical readouts. On the raw-AUC scale — the one scale comparable across the two
+groups — it is second only to LTF's 0.623 [0.577, 0.668], and the two CIs overlap heavily, so
+**AutoVLA's and LTF's representational readout strengths are indistinguishable**;
+and the F① closest to 0.5 in the pool (0.508 [0.451, 0.563]), with $b(A)$ **and** $b$(D2a) both
+indistinguishable from 0 — its planned speed shows no detectable response at all to an object
+appearing, not merely a non-specific one.
+
+**This is the cleanest instance of the paper's central claim**: hazard-relevant information is in
+the representation, more linearly readable than in any other candidate, and it does not reach the
+action. The shape differs from SimLingo's: SimLingo has $b(A) = +0.307$, significantly non-zero,
+with an equally large $b$(D2a) (**a strong but non-specific reaction**); AutoVLA does not react at
+all. The two failure modes call for opposite repairs — raise the selectivity of the action in one
+case, connect the pathway at all in the other — and any single composite score collapses them into
+the same number.
+
+The conclusion carries one qualification: AutoVLA's discriminative direction is not fully orthogonal
+to imaging geometry (within positives $\rho(\log\text{area}) = +0.132$, $p = 0.025$; pooled
+$\rho(ecc) = +0.098$, $p = 0.019$), so "high G" should be read as "**a large amount of linearly
+readable, hazard-related information that is partly entangled with imaging geometry**", not as
+"AutoVLA understands hazard better". For contrast, the same diagnostic on Alpamayo gives
+$\rho = +0.019$ (n.s.), but its G is also much lower (0.562). **Semantic purity and readout strength
+run in opposite directions across this candidate pool**, which is an observation worth testing
+further rather than an established regularity — the more so because this very diagnostic moved
+between the first (A+D2a-only) and final versions of the readout (§CE/A38).
+
+### 4.2.8 Intervening on the diagnosed link
 
 We designed a fixed-budget post-training run from the diagnosis of §4.2.4: **only `speed_wps_head`
 is trained** (229k parameters; everything else frozen), with loss
@@ -220,20 +406,42 @@ chain), **and at this budget repairing it does not automatically improve deploym
 
 The four axes differ in units, adjudication state and comparability: G and I are within-model
 normalized readouts that align across models; F's injection protocol is **dimensionally different**
-between the two models; C's top-2-share formula has its **premise violated** on SimLingo. Weighting
+across encoder families; C's top-2-share formula has its **premise violated** on SimLingo. Weighting
 these four cells into a scalar amounts to treating "non-comparable" and "indeterminate" as either
 zero or as the median, and either treatment makes the provenance of the final ranking untraceable:
 as soon as someone asks "why is A ahead of B?", the answer lands on the weights rather than on the
 evidence. We therefore deliver a matrix **with blanks and explicit "not comparable" labels** rather
 than a scalar that looks clean but cannot be audited.
 
+**Growing the pool from 2 to 6 turns this argument from "it should be so in principle" into
+something countable.** Of the 54 cells in Table 1, **14 carry no usable number**: 4 are n/a (the
+operationalization does not apply), 7 are n.m. (not measured within budget), and 3 read "instrument
+without resolving power" (F② injection across all three TransFuser-family members). A further
+**11 cells carry a number but adjudicate as indeterminate**: three single-frame candidates' G, four
+candidates' F①, and DiffusionDriveV2's C-hazard — that last one's nominal value being the highest in
+the table. Synthesizing a scalar would require an imputation decision for each of those 25 cells.
+And their reasons fall into **five distinct kinds**: stimulus-side gaps (DiffusionDriveV2's I axis
+lacks lidar; the multi-frame candidates lack temporal frames), violated operationalization premises
+(the D2cV floor for multi-frame candidates), instruments without resolving power (F② injection on
+diffusion heads and on the TransFuser encoder), insufficient statistical power (most G and F①
+cells), and a failed self-check (DiffusionDriveV2's C-hazard). **Filling all five kinds of absence
+with one imputed value collapses five different statements of "we do not know" into one statement of
+"we know".**
+
+More concretely: **no candidate in this table dominates on every measurable axis.** LTF is the best
+single-frame candidate on G and F① but its I-axis ordering holds only at the peak layer; AutoVLA ties LTF for
+the highest raw G yet has the F① closest to 0.5 (0.508); DiffusionDriveV2 has the second-largest $b(A)$ after
+SimLingo but its C-hazard is indeterminate on a failed self-check; SimLingo is best on the
+representational side of I and worst on the behavioural side. **Any choice of weights would decide
+who ranks first, and no set of weights can be justified from the data itself.**
+
 ---
 
 ## 4.4 Ablation-like Analyses: why these numbers can be believed
 
 Every item in this section is a **negative check**: its purpose is not to make numbers look better
-but to exclude the case in which numbers look good while meaning nothing. This work registered 26
-amendments during execution, five of which converted an already-obtained positive result back into a
+but to exclude the case in which numbers look good while meaning nothing. This work registered 38
+amendments during execution, seven of which converted an already-obtained positive result back into a
 negative or indeterminate one; the five most consequential are given below.
 
 ### 4.4.1 The falsification floor: the primary readout must separate from "any VRU is present"
@@ -241,11 +449,30 @@ negative or indeterminate one; the five most consequential are given below.
 If the G-axis primary readout were compared only against random or permutation nulls, "one more
 person in the frame" would be mistaken for "hazard was read out". We therefore require separation
 from **D2cV** (same VRU class, same geometry, differing only in a relative velocity unobservable to
-a single-frame model). The two models' differences are $+0.035$ [$-0.026$, $+0.097$] and $+0.009$
-[$-0.047$, $+0.065$], and across 10 CV fold-assignment seeds $+0.002 \pm 0.024$ and
-$+0.012 \pm 0.032$ — **an sd of the same order as, or larger than, the effect**. The G axis is
-therefore indeterminate at this sample size, with the bottleneck localized to the D2cV sample size
-(212), not to pooling or model choice.
+a single-frame model). The four single-frame candidates' differences are
+SimLingo $+0.035$ [$-0.026$, $+0.097$], DiffusionDrive $+0.009$ [$-0.047$, $+0.065$],
+DiffusionDriveV2 $+0.025$ [$-0.044$, $+0.097$] and **LTF $+0.070$ [$+0.017$, $+0.126$]**; across 10
+CV fold-assignment seeds, $+0.002 \pm 0.024$, $+0.012 \pm 0.032$, $+0.004 \pm 0.026$ and
+$+0.056 \pm 0.028$ respectively. For **the first three, the sd is of the same order as, or larger
+than, the effect**, so the G axis is indeterminate at this sample size, with the bottleneck
+localized to the D2cV sample size (212), not to pooling or model choice.
+
+**LTF is the sole exception, and it changes how this whole paragraph reads** (see §4.2.6): its
+effect exceeds twice the fold-assignment sd for the first time, and its CI excludes 0. Before this,
+"three candidates are all indeterminate" and "the floor is set so high that nobody could cross it"
+were indistinguishable explanations; LTF's positive rules out the latter. **Under the same floor,
+the same stimulus set and the same statistical protocol, a candidate did cross, so the remaining
+candidates' indeterminacy is a conclusion about those candidates, not about the floor.**
+
+**The two multi-frame candidates (Alpamayo-R1, AutoVLA) do not enter this table.** D2cV is
+constructed so that "the only difference is a relative velocity a **single-frame** model is
+*physically unable* to observe". For a multi-frame model relative velocity *is* observable, D2cV
+degenerates into a legitimate hard negative and **ceases to be a falsification floor**; "A vs D2cV
+is significant" is not a leakage alarm for them. Their G axis is therefore reported against the
+label-permutation null and the random-direction floor, and grouped separately in Table 1
+(§CE/A34). This is not a relaxed standard for them but **the correct application of the same
+discipline under a different input temporality** — forcing a floor whose premise does not hold
+yields a "pass" or "fail" that means nothing either way.
 
 **A correction that must be recorded**: the first version refitted a separate direction for each
 negative class, inflating DiffusionDrive's difference to $+0.093$ [$0.004$, $0.174$] with a CI
@@ -265,9 +492,19 @@ $\pm 32\sigma$ still yields a longitudinal change of only $-0.0020$ m/s. **The i
 the model** — the lateral offset varies monotonically and symmetrically with α, reaching 0.02–0.09 m
 at ±32σ. DiffusionDrive's F② null is therefore an **instrument-side** conclusion: its longitudinal
 plan is dominated by the anchored diffusion head, and representation perturbations within the tested
-dose do not change the anchor selection. **Corollary**: operationalized as an injection effect size,
-the F axis is **not comparable across action-head families**; cross-model alignment must use the
+dose do not change the anchor selection. **Corollary (corrected 2026-08-31, see §CE/A31)**: operationalized as an injection effect size,
+the F axis is **not comparable across encoder families**; cross-model alignment must use the
 architecture-neutral action-level counterfactual test.
+**The original corollary said "across action-head families" and has been refuted by this round's
+same-encoder controlled comparison**: LTF shares the identical `TransfuserBackbone(latent=True)`
+encoder with DiffusionDrive and has a continuous regression head rather than a diffusion head, so by
+the original corollary it should be measurable — **it measurably is not**
+($v_{hazard}^{ltf}$ slope +0.00040 [−0.00065, +0.00143]; the by-construction-effective
+$v_{brake}^{ltf}$ only −0.00004; neither exceeds its same-layer null). DiffusionDriveV2, a third
+member of the same encoder family, gives the same result. Measurability is therefore determined by
+the **encoder / injection site**: SimLingo (ViT + LLM residual stream) is measurable and reproducible
+by an analytic Jacobian, while all three TransFuser-family members (under two different action heads)
+are not.
 
 ### 4.4.3 Independent corroboration by the analytic Jacobian
 
@@ -316,7 +553,7 @@ empirical 99.9th percentile of that null is 0.100–0.154 whereas the Gaussian-t
 read off as an empirical quantile) reduced the number of "doubly corroborated" candidates from
 **11 to 0**.
 
-> Sources: `amendments.md` (all 26 amendments), `analytic_vs_empirical.md`,
+> Sources: `amendments.md` (all 38 amendments), `analytic_vs_empirical.md`,
 > `c_axis_shape_diagnostics.json`, `cosine_matrix.json`, `generalizable_tips.md`.
 
 ---
@@ -330,24 +567,47 @@ post-training budget". The paper therefore establishes that the four axes are me
 non-redundant, and that the link they localize can be intervened upon — **not** that four-axis scores
 predict post-training gains. The latter requires a larger budget or a closed-loop consequence metric.
 
-**2. The G axis can currently report only "readable / not readable", not "grounded / not
-grounded".** Both models' primary-minus-floor readouts are indeterminate, bottlenecked by the D2cV
-sample size (212). The limitation persists when the trigger criterion is changed (three independent
-criteria A / B / C give differences of $+0.003$ / $-0.022$ / $+0.023$, all with CIs crossing zero),
-so it is not a peculiarity of one scenario type.
+**2. For three of the four single-frame candidates the G axis can currently report only "readable /
+not readable", not "grounded / not grounded".** SimLingo's, DiffusionDrive's and DiffusionDriveV2's
+primary-minus-floor readouts are indeterminate, bottlenecked by the D2cV sample size (212). The
+limitation persists when the trigger criterion is changed (three independent criteria A / B / C give
+differences of $+0.003$ / $-0.022$ / $+0.023$, all with CIs crossing zero), so it is not a
+peculiarity of one scenario type. **LTF is the one candidate that crosses the floor**, which narrows
+this from "a limitation of the method" to "a limitation of those three candidates at this sample
+size".
 
-**3. Parts of the F and C operationalizations are not portable.** F's injection protocol is
-unmeasurable on an anchored diffusion head; C's top-2-share formula has its premise violated on a
-cascade profile. Neither is a statement that the model is poor on that axis; both are statements
-that the operationalization does not apply to that architecture or profile shape. We therefore
-decline to fold them into a single score.
+**3. The falsification floor does not hold for multi-frame candidates, and no ready substitute
+exists.** D2cV rests on relative velocity being structurally unobservable to a single-frame model,
+which is false for Alpamayo-R1 and AutoVLA. For these two we fall back to the permutation null and
+the random-direction floor, which can only exclude "pure chance" and **cannot exclude "what was read
+out is the presence of any VRU"** — precisely what D2cV exists to guard against. **The G columns of
+Table 1(b) and Table 1(a) are therefore readouts of different constructs and must not be compared
+across the two groups.** Filling this gap requires constructing a further negative class that is
+"same class, same geometry, **same relative velocity**, differing only in the label", which on
+nuScenes means re-mining the corpus and was out of scope this round.
 
-**4. The domain pairing is not a 3DGS reconstruction.** We use a same-geometry dual-rendering pair
+**4. Parts of the F and C operationalizations are not portable.** F's injection protocol is
+unmeasurable across the entire TransFuser encoder family (three members under two different action
+heads, all unmeasurable, §4.4.2); C's top-2-share formula has its premise violated on a cascade
+profile, and on DiffusionDriveV2 the patch-ALL sufficient-cut-set check fails, forcing an
+indeterminate verdict. None of these is a statement that the model is poor on that axis; all are
+statements that the operationalization does not apply to that encoder, profile shape or pairing. We
+therefore decline to fold them into a single score.
+
+**5. The I axis covers only half the pool, and every gap is on the stimulus side.**
+DiffusionDriveV2 needs real lidar and both multi-frame candidates need 4 timesteps, while the
+domain-paired corpus is single-frame and purely rendered. These three cells are marked n/a because
+the *stimuli* are missing, not because the models are unmeasurable; padding with zeros or duplicated
+frames would fold variables unrelated to rendering style into the domain divergence (§CE/A36).
+**Moreover, the I-axis ordering we did measure holds only at each model's own peak layer**: LTF's
+and DiffusionDrive's per-layer $D_L$ reverse sign on L0–L4 (§CE/A37).
+
+**6. The domain pairing is not a 3DGS reconstruction.** We use a same-geometry dual-rendering pair
 (CARLA engine rendering ↔ world-model photorealistic re-rendering), whose causal structure matches
 $do(\text{appearance})$, but the scope of the conclusion should be stated as that pairing rather than
 as sim ↔ real in general.
 
-**5. The random-direction control for injection experiments has no resolving power at this sample
+**7. The random-direction control for injection experiments has no resolving power at this sample
 size.** Across 7 per-layer null distributions, none of 11 directions exceeds its own same-layer null —
 **including** $v_{brake}$, which is effective by construction and independently confirmed by the
 analytic method. The null sd varies by a factor of 50 across layers (0.0012 to 0.0642), of the same
@@ -355,13 +615,13 @@ order as or larger than the effects under test. All steering causal verdicts in 
 therefore recorded as indeterminate with the attribution explicitly on the instrument side, and
 **must not be read as "these directions have no causal effect"**.
 
-**6. The pilot's coupling target passes only a weak instrument-side check.** $\hat v_{hazard}$@L23
+**8. The pilot's coupling target passes only a weak instrument-side check.** $\hat v_{hazard}$@L23
 correlates with the residualized real $a_{brake}$ on held-out data at $\rho$ = $+0.053$
 ($p$ = 0.183) — correct sign, not significant. The accurate statement is "coupling the action to a
 direction that reads hazard only in a weak-signal sense", not "connecting the action to the hazard
 readout does not help".
 
-**7. DiffusionDrive's native training domain is not independently verified**, so every interpretation
+**9. The native training domains of all five NAVSIM-family candidates are not independently verified**, so every interpretation
 depending on "which side is in-domain" is conditional.
 
 ---

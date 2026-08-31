@@ -9,8 +9,12 @@ mining/inspect/*.png
 variants/*/mining/inspect/*.png
 # 运行日志
 logs/
-# DiffusionDrive 侧的 G1 表征缓存（可由 results/diffusiondrive_g1_adapter/run_g1_cache.py 重建）
+# 各候选侧的 G1 表征缓存（均可由 results/<model>_g1_adapter/run_g1_cache*.py 重建）
 variants/*/dd_cache/
+variants/*/ltf_cache/
+variants/*/ddv2_cache/
+variants/*/alpa_cache/
+variants/*/autovla_cache/
 # T-I 域配对的逐层激活（可由 scripts/i_axis_extract.py 从 variants/i_domain/frames 重建）
 variants/*/acts_*.npz
 # tier_m_v3 的 mining 是指向 tier_m/mining 的绝对路径软链（重建见 configs/tier_m_v3.yaml 头注）

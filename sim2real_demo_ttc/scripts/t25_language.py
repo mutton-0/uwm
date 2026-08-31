@@ -38,19 +38,8 @@ from scipy import stats
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from g3_metrics import load_cache  # noqa: E402
 
-# ---- 封闭词表（英文：SimLingo 的输出语言）----
-VRU_RE = re.compile(r"\b(pedestrian|pedestrians|person|people|walker|cyclist|bicycle|bike|"
-                    r"motorcycle|scooter|rider|crossing|cross(?:es|ing)?\s+the\s+road|jaywalk\w*)\b", re.I)
-SLOW_RE = re.compile(r"\b(decelerat\w*|brak\w*|slow\w*|stop\w*|halt\w*|yield\w*|"
-                     r"stay\s+behind|wait\w*|careful\w*|caution\w*)\b", re.I)
-FAST_RE = re.compile(r"\b(accelerat\w*|speed\s+up|keep\s+driving|drive\s+through)\b", re.I)
-
-
-def encode(text: str):
-    t = text or ""
-    return {"mentions_vru": bool(VRU_RE.search(t)),
-            "says_slow": bool(SLOW_RE.search(t)),
-            "says_fast": bool(FAST_RE.search(t))}
+# ---- 封闭词表：单一真源在 lang_vocab.py（P1/P2 的阳性对照跑在另一环境，共用同一份）----
+from lang_vocab import VRU_RE, SLOW_RE, FAST_RE, encode  # noqa: E402,F401
 
 
 def scene_boot(vals, scenes, n_boot=2000, seed=0):

@@ -494,3 +494,267 @@ b-AUC(A vs D2a)（held-out scene）、MAE(v_cmd, 人类速度)、ρ(b, 人类真
 （Δcos = −0.061，占 A2 全部改动 −0.113 的 54%）——即"照着人类真实减速去拟合动作头"
 会自动带来部分通路连接。耦合项把它再推远一倍（−0.113），**却没有换来任何额外行为收益**。
 ⇒ **耦合强度与行为分是可解离的**：在本预算下，F 轴耦合不是该行为指标的约束瓶颈。
+
+---
+
+# 第四轮：候选池扩展（CE）
+
+> 工单：`docs/candidate_pool_expansion_workorder.md`（本轮**已确认落地**：
+> `cp /tmp/... docs/ && ls -la` 返回 3960 字节文件，不再是上一轮那种"口述规格"的情形）。
+
+## CE/A27 C 轴在新候选上的配对来源：G1 clean↔ghost（C-hazard），与既有 C-domain 分列
+
+**问题**：工单 §0 要求新候选"一律用现有 G1 语料 + N1 负例体系发现并测量 **G/F/C**，
+只有 I 轴才需要真实↔仿真域配对"。但既有两个模型的 C 轴读数用的是 ghosthead 的 **sim↔real 域配对**。
+若新候选改用 G1，同一列里就混了两种构造。
+
+**决策**：C 轴的 patching **方法**不变（配对真实输入互换、连续量指标、top-2 占比 + 形状诊断），
+只更换**配对来源**，并把两种构造在报告与矩阵中**分列、分别命名**：
+
+| 名称 | 配对来源 | 回答的问题 |
+| --- | --- | --- |
+| **C-domain** | ghosthead sim↔real 双渲染 | 域迁移引起的退化从哪一层进入 |
+| **C-hazard** | G1 同事件的 clean↔ghost 帧 | **危险引起的行为变化**从哪一层进入 |
+
+G1 的 clean/ghost 本身就是一组**配对真实输入**（同事件、同场景、相隔 ~1.5 s，唯一差异是危险目标是否出现），
+因此 C-hazard 完全落在工单指定的刺激集内，不引入任何新数据。
+recovery(L) = (v_cmd(patch) − v_cmd(ghost)) / (v_cmd(clean) − v_cmd(ghost))。
+
+**为保证列内可比**：C-hazard 对**已有的 DiffusionDrive 也补测一遍**，
+使该列的所有候选是同一构造；C-domain 那一列保持原样，新候选若无法做（缺域配对适配器）标 not applicable。
+
+## CE/A28 TransFuser 与 LTF 的关系：本仓库条件下**同一候选**，不单列
+
+工单 §1 要求"先确认 TransFuser 是否与 LTF 共用 `transfuser_agent.yaml`"。核查结论：**是，且更强**——
+
+1. `navsim/planning/script/config/common/agent/transfuser_agent.yaml` 里写死 **`latent: True`**，
+   即 Latent TransFuser（用可学习 BEV latent 顶替真实 lidar 分支）。仓库只提供这一个 TransFuser 系配置。
+2. SimScale 官方 ckpt 清单（`ckpt/download_ckpts.sh`）里 TransFuser 系只有 **`LTF/ltf_sim_navtest.ckpt`** 一个，
+   没有带 lidar 的 TransFuser 权重。
+3. 更关键的是**刺激集约束**：本工作线的 G1 语料是 nuScenes **单目相机**（经 4:1 裁剪适配），
+   **没有 lidar**。带 lidar 的 TransFuser 即便拿到权重，也无法在本刺激集上按其训练口径推理；
+   强行喂零 lidar 等于换了一个模型。
+
+**决策**：TransFuser **不作为独立候选单列**，本轮以 LTF 覆盖 TransFuser 系。
+这不是"跳过"，而是"本仓库 + 本刺激集条件下二者是同一个可执行对象"，在候选报告与 DONE 文件中如实写明。
+
+**顺带得到一个受控实验（本轮最有价值的发现之一）**：
+LTF 与 DiffusionDrive **共用同一个 `TransfuserBackbone(latent=True)` 编码器**，
+只在动作头上不同（LTF = 单 query 过 MLP 的**连续回归头**；DiffusionDrive = **anchored 扩散头**）。
+因此"F② 注入法的可测性是**动作头**的属性、不是编码器的属性"这一命题
+（上一轮 §HL/A25 的推论）在本轮可以被**同编码器对照**直接检验，而不只是跨模型推断。
+
+## CE/A29 DiffusionDriveV2 需要真实 lidar：现场构造 nuScenes BEV 直方图（适配偏离声明）
+
+**事实**：DiffusionDriveV2 的两份官方配置（`diffusiondrivev2_{sel,rl}_agent.yaml`）都写 **`latent: False`**；
+其发布权重 `diffusiondrivev2_sel.ckpt`（972 个张量）里含 **232 个 `lidar_encoder.*`、0 个 `latent`**。
+即它与 DiffusionDrive/LTF 不同：**不用可学习 latent 顶替 lidar 分支，要求真实 lidar BEV 输入**。
+
+**处理**：按"每个候选走自己的原生输入格式"这一适配器哲学（SimLingo 走它的裁剪+patch 化，
+DiffusionDrive/LTF 走 4:1 裁剪的单目），给 DiffusionDriveV2 补上它原生需要的那一路：
+从 nuScenes **LIDAR_TOP** 现场构造 TransFuser 式 BEV 直方图，逐步复刻其 `_get_lidar_feature`
+（256×256 网格、x/y ∈ [−32, 32]、4 px/m、只取 z > 0.2 m 的点、每像素上限 5 后归一化、
+`use_ground_plane=False` 故单通道），点云由 `calibrated_sensor` 变换到 ego 系。
+**刺激集本身没变**：同一批 G1 事件、同一批帧，只是多读了同 sample 的 LIDAR_TOP。
+
+**适配偏离（必须随结果一起报，与 Alpamayo 的 FOV 失配同性质）**：
+nuScenes 是 **32 线单雷达**，NAVSIM/nuPlan 是**多雷达合并点云**，点密度与覆盖不同 ⇒
+该直方图对 DiffusionDriveV2 属**分布外输入**。因此其读数应读作
+"在本刺激集 + 本 lidar 近似下"的结果，不能直接与它在 NAVSIM 上的表现相提并论。
+
+## CE/A30 DiffusionDriveV2 推理路径对 nuPlan PDM metric cache 的硬依赖：启用作者自己注释掉的官方评测出口
+
+**问题**：`sel` 变体的推理路径 `TrajectoryHead.forward_test_rl` 在算完 coarse + fine 精化、
+选出候选轨迹 `traj_to_score` 之后，**无条件**调用 `get_pdm_score_para(...)` 用官方 PDM 打分器排序，
+该打分器需要逐 token 的 **nuPlan metric cache**（地图 + agent 轨迹）——nuScenes 语料没有、也不该有。
+更关键的是：该函数**根本不返回轨迹**，只返回 `{'reward_dict': ...}`。
+
+**作者自己在那一行正上方留了注释掉的官方评测出口**：
+```
+# for official eval
+# return {"trajectory": traj_to_score[:,-1]}
+```
+
+**处理**：**不改动外部仓库的任何一行代码**。在适配器里把 `get_pdm_score_para` 运行时替换为
+抛出载体异常，把已经算好的 `traj_to_score` 带出来，取 `[:, -1]`（最后一次 fine 精化）。
+这与上面那行注释掉的官方出口**逐字等价**，且发生在**所有网络计算完成之后**，不改变任何前向逻辑。
+替换动作与被替换的类名随结果落盘（`patched_class`），可复核。
+
+另注：加载权重时报 `Unexpected keys: ['_transfuser_model._trajectory_head.vocab']` ——
+该张量是 RL 训练用的轨迹词表，推理路径不使用，属正常。
+
+## CE/A31 **对上一轮 §HL/A25 推论的更正**：注入法不可测是**编码器**属性，不是动作头属性
+
+**上一轮的推论（现予更正）**：§HL/A25 观察到 DiffusionDrive 的 F② 注入法在 ±32σ 内推不动纵向输出，
+并把原因归到它的 **anchored 扩散头**（20 个 k-means 轨迹锚），
+进而在论文正文 §4.4.2 写下推论"F 轴以注入效应量操作化时**不可跨动作头族比较**"。
+
+**本轮的受控证据**：LTF 与 DiffusionDrive **共用同一个 `TransfuserBackbone(latent=True)` 编码器**，
+只在动作头上不同（LTF = 单 trajectory query 过 MLP 的**连续回归头**）。
+若上述归因成立，LTF 应当可测。**实测不可测**：
+
+| 注入方向 | 注入层 | ±α 全阶梯斜率 [m/s per σ] | 95% CI | 同层随机零分布 | z | 超出？ |
+| --- | --- | --- | --- | --- | --- | --- |
+| $v_{hazard}^{ltf}$ | L6 | +0.00040 | [−0.00065, +0.00143] | +0.00019 ± 0.00088 (20 seed) | +0.24 | 否 |
+| **$v_{brake}^{ltf}$（站内上界，held-out AUC 0.684@L5）** | L5 | **−0.00004** | [−0.00011, +0.00001] | −0.00000 ± 0.00005 (5 seed) | −0.76 | **否** |
+
+**更正后的归因**：注入法的可测性由**编码器/注入位点**决定，不由动作头决定。
+SimLingo（ViT + LLM 残差流，注入 driving query 位置）可测且可被解析 Jacobian 独立复现；
+**TransFuser 系编码器（DiffusionDrive 与 LTF 两种动作头都一样）不可测**。
+一个合理但**本轮未验证**的机制假说：TransFuser 的融合 token 经
+`_bev_downscale` + BEV 上采样 + transformer decoder 的 cross-attention 之后，
+σ 尺度的 token 级扰动被稀释；真正的瓶颈在注入位点与动作之间的通路，而非动作头形式。
+
+**影响**：`paper_experiments_section_{zh,en}.md` §4.4.2 的推论句必须改写为
+"不可跨**编码器**族比较"，并把 LTF 这一受控对照作为证据补进去。三线表中 F② 行的
+"不可比"标注不变，但理由从"动作头不同"改为"编码器不同"。
+
+## CE/A32 C-hazard 的 patch 范围修正（充分割集自检当场抓出来的仪器 bug）
+
+**问题**：C-hazard 首版把 patch 范围设为**仅前 256 个图像 token**。
+充分割集自检立刻不通过：patch 全部 8 层后的 recovery 只有
+**DiffusionDrive +0.520 / LTF −0.030**（应当 ≈ +1.0）。
+原因：TransFuser 的融合 token 共 320 个（256 图像 + 64 BEV latent），
+只换图像段时，BEV/latent 段仍携带 ghost 侧信息 ⇒ 图像段**不是**该配对下的充分割集，
+此时逐层 recovery 的占比无从解释。
+
+**修正**：把 patch 范围改为**全部 320 个融合 token**，与既有 C-domain 实现（`run_patching_ghosthead.py`
+整体替换 `encoder_selfatt` 输出）一致。修正后 patch-ALL recovery = **+1.000（两个模型都是）**，
+充分割集自检通过，C_m 的分母才有意义。
+
+**这条记录的意义**：patch-ALL 自检不是走过场——它在本轮**当场抓出了一个会让整列 C 读数无效的 bug**。
+首版给出的 DD C_m = 0.980 [0.958, 0.996]、LTF C_m = 0.989 [0.975, 0.999] 是**无效数字**，
+不得引用；修正后为 DD 0.793 [0.697, 0.878]、LTF 0.793 [0.731, 0.857]。
+
+## CE/A33 DiffusionDriveV2 的注入/patching 必须喂真实 lidar（首版漏喂，已作废重跑）
+
+**问题**：`f_axis_dd_steer.py` 与 `c_axis_hazard_patch.py` 是为 DiffusionDrive/LTF 写的，
+调用 `runner.run(img, spd)` 不传 lidar。对这两个模型无妨（它们用可学习 latent 顶替 lidar 分支），
+但 DDV2 会因此收到**全零 lidar 直方图** —— 把一个要求真实 lidar 的模型置于极端分布外，
+其注入斜率与 patching recovery 都不可与其余候选并列。
+
+**修正**：把 `NuScenesLidar` 读取器提到 `ddv2_adapter` 里，并在两个脚本中按 `--model ddv2`
+逐帧提供真实 lidar（用事件账本里的 `sd_token` 定位同 sample 的 LIDAR_TOP）。
+首版在无 lidar 条件下跑出的 DDV2 C-hazard（C_m = 0.932）**作废**，已按真实 lidar 重跑。
+DDV2 的 **G 轴不受影响**——G 轴用的是 `ddv2_cache`，该缓存从一开始就带真实 lidar。
+
+## CE/A34 **D2cV 证伪地板对多帧候选不成立** —— 这一列必须按输入时序性分组读
+
+**发现**：D2cV 的设计理由是——它与正例**同类别（VRU）、同成像几何，唯一差异是相对速度**，
+而**单帧模型对目标运动结构性全盲**（q_audit §Q6），因此任何"A 优于 D2cV"的判别力都不可能来自危险本身，
+只能来自泄漏。这条推理**只对单帧模型成立**。
+
+本轮扩池后，候选里出现了**多帧输入**的模型：
+
+| 候选 | 输入时序性 | D2cV 是否仍是证伪地板 |
+| --- | --- | --- |
+| SimLingo / DiffusionDrive / LTF / DiffusionDriveV2 | **单帧** | ✅ 是 |
+| Alpamayo-R1 | 多帧（1.6 s ego 运动史 + 多时刻图像） | ❌ **否** |
+| AutoVLA | 多帧（每相机 4 帧时序窗口） | ❌ **否** |
+
+对多帧模型而言，D2cV 与 A 的差异（相对速度）**是物理可观测的**，
+"A vs D2cV 显著" 因此是一个**正当的判别任务**，不是泄漏警报。
+
+**处理**：
+1. 矩阵中 G 轴"主读数 − D2cV 地板"这一行，**只对单帧候选可读作证伪检验**；
+   多帧候选的同一格改标注为 **"D2cV 不适用为地板（多帧可观测速度）"**，并改用
+   **标签置换零分布 + 随机方向地板**作为其可用的地板，同时报 A vs D2a 的主读数本身。
+2. 这不影响本轮任何已得结论：LTF（单帧）的 G 轴阳性仍以 D2cV 为地板得出；
+   Alpamayo 的 G 轴按新规则改报。
+3. 该分组纪律写进论文正文的 Setup 与 Limitations。
+
+**为什么现在才发现**：前三轮的候选恰好全是单帧模型，这条前提一直成立且从未被触发。
+扩池把它暴露出来——这正是扩候选池在方法学上的价值之一，不只是多几行数字。
+
+## CE/A35 AutoVLA 的环境解法（transformers 版本 × torchvision 算子注册的双重约束）
+
+AutoVLA 接入卡在一个**双重约束**上，两条单独看都无解，合起来才有解，记录如下以便复现：
+
+1. **权重按 `transformers==4.49.0` 的模块布局保存**（`vlm.visual.*`）。
+   本机唯一自带 Qwen2.5-VL 支持的环境是 Alpamayo 的 venv（**4.57.1**），
+   而 4.57 把视觉塔挪到了 `vlm.model.visual.*` ⇒ 直接加载得到
+   **824 missing / 824 unexpected**，即**一个权重都没加载上**（模型能跑，但输出无意义）。
+2. **把 4.49.0 装进隔离 target 目录并置于 sys.path 最前**后，导入立刻失败：
+   `operator torchvision::nms does not exist` ——
+   4.49 的 `qwen2_5_vl` 模块在导入期触发 torchvision C++ 算子查找，
+   而此时 torchvision 尚未由那份匹配的 0.23.0+cu128 完成注册。
+
+**解法（写进 `autovla_adapter._bootstrap()`，顺序不可换）**：
+venv 上 path → **先 `import torchvision, torchvision.ops`**（用匹配的那份注册算子）
+→ 再把隔离的 transformers 4.49 插到 sys.path 最前 → 最后插仓库根。
+按此顺序加载后 **0 missing / 0 unexpected**。
+
+**另两处绕开（均不改动外部仓库代码）**：
+* `models/autovla.py` 顶层 import `models.utils.score`，后者拖进 navsim + nuplan 全家桶，
+  只为 GRPO 训练包装器用的 `PDM_Reward`。推理只需 `AutoVLA` 类，故 import 前注入**桩模块**
+  （与 DiffusionDriveV2 的 §CE/A30 同一手法）。
+* 推理入口是 `AutoVLA.predict(input_features)`，不是 `forward`（后者吃已 tokenize 的训练 batch，
+  会 `pop('gt_trajectory')`）。另需补 `driving_command`（取 "go straight"，与其余候选的直行默认一致）、
+  把 `max_length` 从官方 eval 的 1024 放宽到 2048（3 相机 × 4 帧的 prompt 本身已 1085 token）、
+  `temperature` 取 1e-4 配 `top_k=1`（transformers 拒绝 0.0，此组合等价贪心解码）。
+
+**记录这条的意义**：工单把 AutoVLA 标为"中高风险、1 天时间盒"。它确实是本轮最曲折的一个，
+但**卡点全部是环境/入口层面的，不是方法层面的**；逐条解开后模型完整可用（0 missing / 0 unexpected，
+2.3 s/事件）。若不记录这个导入顺序，下次复现会在同一处卡住。
+
+## CE/A36 LTF 的 I 轴补测：域配对语料对 latent 型骨干免费，对喂 lidar 的骨干不可用
+
+**触发**：本轮把 I 轴从 2 个候选扩到 3 个。
+
+**做了什么**：`scripts/i_axis_extract.py` 增加 `--model ltf`。LTF 是 `latent=True`，
+**不消费 lidar**，因此 CARLA↔世界模型的域配对渲染帧（432 帧 / 72 场景 × 3 时刻 × 2 域）
+可以原样送入，与 DiffusionDrive 走同一条前端。产出 `variants/i_domain/acts_ltf.npz`。
+
+**为什么 DiffusionDriveV2 不能同样补测**：DDv2 必须喂真实 lidar BEV 直方图（§CE/A29、§CE/A33），
+而域配对语料是纯渲染的、没有点云。若用全零直方图，等于给 DDv2 喂一个它训练时从未见过的输入，
+测出的域散度将混入「缺 lidar」这个与渲染风格无关的变量。故 **DDv2 的 I 轴记 not applicable
+（语料侧缺失，非模型侧不可测）**，不用零填充凑一个数。Alpamayo-R1 / AutoVLA 同理：
+它们要多帧输入，而域配对语料每个时刻只有单帧，记 not applicable。
+
+**顺带修正的一处错标**：原脚本对所有非 SimLingo 候选一律用 `v_hazard_dd_vision_mean.npz` 求干涉角，
+LTF 因此借用了 DiffusionDrive 的方向。已改为按候选取 `v_hazard_{model}_vision_mean.npz`。
+干涉角本身是次要量（改前 0.040、改后 0.002，均远小于任何阈值），结论不变，但标注必须正确。
+
+## CE/A37 「LTF 域不变性优于 DiffusionDrive」是峰层条件结论，不是层不变结论
+
+**读数**：$I_m$（各自概念峰层）LTF 0.583（L6）vs DiffusionDrive 0.203（L5），
+scene 级 bootstrap CI 不重叠 → PASS。二者共用同一 `TransfuserBackbone` 架构（权重不同）。
+
+**自检**：因为 $L^*$ 不同，必须做同层对照，否则无法排除「排序只是选层造成的」。
+逐层 $D_L$（vision_mean）：
+
+| L | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| DiffusionDrive | 0.033 | 0.001 | 0.667 | 0.056 | 0.633 | **0.797** | 0.730 | 0.956 |
+| LTF | 0.156 | 0.004 | 0.777 | 0.362 | 0.679 | 0.672 | **0.417** | 0.588 |
+
+**结论**：只有 L5–L7 是 LTF 更低，L0–L4 全部反号。故该排序**只在各自峰层上成立**，
+不能读作「整条编码器都更不变」。已写入 `results/i_axis_domain.json`
+的 `same_encoder_layer_matched_check` 字段，并在论文 §4.2.5 标注为条件结论。
+
+**这条本身是结果**：同一编码器**架构**的两套权重，域敏感性沿深度的**分布形状**都不同，
+说明 I 轴读数不是架构属性而是权重属性——这正好回答了「换个 ckpt 还算不算同一个候选」
+这个在 §CE/A28（TransFuser≡LTF）里以另一个方向出现过的问题。
+
+## CE/A38 AutoVLA 的 G 读数随语料规模移动 —— 折分配噪声，不是新证据
+
+**发生了什么**：AutoVLA 的 G 轴先在只缓存了 A + D2a（574 事件）时跑过一遍，
+得主读数 **0.629** [0.584, 0.675]、$\rho(\text{投影}, \log\text{area}) = +0.121$（$p$ = 0.004）。
+补齐 D2b / D2c / D2cV（再 538 个事件）后重跑，得 **0.608** [0.562, 0.654]、
+$\rho = +0.045$（$p$ = 0.28）。
+
+**为什么会动**：主读数只用 A vs D2a 拟合方向（共享方向地板约定），A 与 D2a 的样本一个没变，
+但 **scene 级 CV 的折分配是按语料里出现的 scene 集合生成的**，语料变大 ⇒ 折边界变 ⇒
+折内拟合的方向与选出的峰层随之微动。
+
+**如何判定**：两个值都落在 10 seed 折分配稳定性检验的范围内
+（主读数 0.588 ± 0.022，范围 [0.55, 0.63]）。**故这是折分配噪声，不是新证据。**
+以全量语料的一次为终稿，并在报告里并列写出首版数字与差异原因。
+
+**这条为什么值得单独登记**：如果只跑第一版，我们会在论文里写下
+"AutoVLA 的判别方向与成像面积显著相关（$p$ = 0.004），语义纯度低"——
+这是一句**会被后续读者当作发现**的话，而它实际上是折分配噪声。
+10 seed 折分配稳定性检验不是走过场的稳健性附录，它在这里直接决定了一句结论能不能写。
+
+**教训（已推广到本轮所有候选）**：**任何 CV 读数都必须在最终语料上重跑**，
+不能用"部分缓存先跑一遍看看"的结果进正文。部分缓存的读数只能用于判断流程是否跑通。

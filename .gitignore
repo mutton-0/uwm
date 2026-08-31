@@ -39,3 +39,5 @@ dataset
 scripts_dev/*
 
 .DS_Store
+# 第三方仓库与权重（clone/下载得到，不入库）
+external/
