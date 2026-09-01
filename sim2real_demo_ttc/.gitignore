@@ -29,3 +29,6 @@ variants/navsim_corpus/cache/
 variants/navsim_corpus/dd_cache/
 variants/navsim_corpus/ltf_cache/
 variants/navsim_corpus/ddv2_cache/
+# G-VS 的 SAM 伪 GT 与 token 特征（均可由 gvs1/gvs3 重建）
+variants/*/sam_gt/
+variants/*/gvs/

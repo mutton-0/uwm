@@ -126,6 +126,29 @@ class AlpaPatchRunner:
         return self.r.covers(scene, t)
 
     @torch.no_grad()
+    def run_from_data(self, data, seed=None):
+        """在**已构造好的 data**（可能已被遮挡过）上做一次前向 —— F-3 用。
+
+        与 `run()` 共用同一条前向路径与同一个 seed 复位纪律，
+        差别只是图像来自调用方而不是 `self.r.load()`。
+        """
+        messages = self.r.helper.create_message(data["image_frames"].flatten(0, 1))
+        inputs = self.r.processor.apply_chat_template(
+            messages, tokenize=True, add_generation_prompt=False,
+            continue_final_message=True, return_dict=True, return_tensors="pt")
+        mi = self.r.helper.to_device({"tokenized_data": inputs,
+                                      "ego_history_xyz": data["ego_history_xyz"],
+                                      "ego_history_rot": data["ego_history_rot"]}, self.device)
+        self.cap.reset()
+        sd = self.r.seed if seed is None else seed
+        torch.manual_seed(sd); torch.cuda.manual_seed_all(sd)
+        with torch.autocast("cuda", dtype=torch.bfloat16):
+            pred_xyz, _r, _extra = self.r.model.sample_trajectories_from_data_with_vlm_rollout(
+                data=mi, top_p=0.98, temperature=0.6, num_traj_samples=1,
+                max_generation_length=256, return_extra=True)
+        return plan_speed(pred_xyz.float().cpu().numpy()[0, 0, 0])
+
+    @torch.no_grad()
     def run(self, scene_name, t_sec, ego_anchor_t=None, seed=None):
         data = self.r.load(scene_name, t_sec)
         if ego_anchor_t is not None:

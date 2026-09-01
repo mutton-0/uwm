@@ -139,7 +139,7 @@ pre-registered primary readout per experiment with everything else marked as sen
 three-state adjudication (PASS / FAIL / **indeterminate**), with insufficient power always recorded
 as indeterminate rather than forced into a binary; random-direction controls carry **their own
 per-layer null distribution**; all cross-model comparisons use **within-model normalized** quantities
-only. An amendment ledger is maintained throughout; the experiments reported here registered **48**
+only. An amendment ledger is maintained throughout; the experiments reported here registered **52**
 amendments, seven of which converted an already-obtained positive result back into a negative or
 indeterminate one (§4.4).
 
@@ -227,6 +227,46 @@ scores.
 > C-domain and C-hazard are the **same patching method applied to two pairing sources** (sim↔real
 > rendering pairs vs G1 clean↔ghost), not two metrics; the two columns are not comparable to
 > each other.
+
+**Table 1(v1). G-VS / F-3 — this paper's v1 primary readouts (six candidates, no grouping).**
+**Neither axis distinguishes single- from multi-frame, or language from no language**, and neither
+depends on any human criterion for "what counts as dangerous": G-VS uses SAM segmentation pseudo-GT
+(objective GT), F-3 uses input-level occlusion (a causal intervention). The complex G/F of
+Tables 1(a)–(c) below are all retained, recast as secondary evidence (§4.2.9).
+
+| Policy | **G-VS**: selectivity = mIoU(trained) − mIoU(rand) | G-VS verdict | **F-3**: necessity ratio $R$ | F-3 verdict |
+| --- | --- | --- | --- | --- |
+| SimLingo | **+0.0273 [+0.0128, +0.0424]** | **PASS** | **+0.461 [+0.166, +0.789]** | indeterminate (CI spans 0.5) |
+| DiffusionDrive | **+0.0381 [+0.0211, +0.0551]** | **PASS** | no baseline response | indeterminate¹ |
+| LTF | +0.0191 [−0.0006, +0.0385] | indeterminate | **+0.113 [+0.044, +0.191]** | **FAIL**² |
+| DiffusionDriveV2 | +0.0159 [−0.0029, +0.0353] | indeterminate | no baseline response | indeterminate¹ |
+| Alpamayo-R1 | n.m.³ | — | no baseline response | indeterminate¹ |
+| AutoVLA | n.m.³ | — | no baseline response | indeterminate¹ |
+
+> **G-VS's two required floors**: `random_init` (same architecture, randomly initialized — Hewitt &
+> Liang 2019's control task) and `position_only` (token coordinates alone). All four candidates' trained
+> mIoU lies in 0.35–0.40 while the position_only floor already reaches 0.333 ⇒ **most of the absolute
+> mIoU comes from the spatial prior, and the representation's net contribution is only 0.02–0.04**.
+> Selectivity is a paired difference and remains credible, but the smallness of the net contribution
+> must be reported alongside.
+> **F-3's required control arm**: $R_{ctrl}$ (an equal-area grey patch elsewhere) falls within
+> [−0.09, +0.16] with CIs spanning 0 for all six candidates, i.e. "adding a grey patch" does not by
+> itself return the action to baseline — the precondition for LTF's FAIL verdict to stand.
+> ¹ The baseline response $b_{ghost}$ is itself indistinguishable from 0 ⇒ **untestable, not a failed
+> test** (§GF/A52).
+> ² Occluding the key entity removes only 11% of the response ⇒ a **blind action** signature
+> (Embodied Interpretability).
+> ³ n.m. = not measured (not "not applicable"): the two VLAs' video-token layouts, see §GF/A50.
+> Details in `g_vs_f3_unified_matrix_report_{zh,en}.md`.
+
+**The most informative cell in this table is DiffusionDrive**: the highest G-VS selectivity in the
+table (+0.038 — its representation does carry object-ness information), yet an F-3 baseline response
+indistinguishable from 0 (its action does not react to hazard frames at all). **"Seeing" and "acting
+on it" are two independent things** — the same conclusion the complex G/F of Table 1(a) produced
+repeatedly, **except that this time it rests on an objective-GT perceptual test plus an input-level
+causal intervention rather than on any semantic construct.**
+
+---
 
 **Table 1(c). Cross-data-source replication (NAVSIM/OpenScene, independently collected; criteria field-identical to (a), only the data source changed).**
 **This is not a separate table but a re-measurement of the same readouts from (a) on a second data source**; the G1 columns are the (a) columns.
@@ -474,6 +514,32 @@ run in opposite directions across this candidate pool**, which is an observation
 further rather than an established regularity — the more so because this very diagnostic moved
 between the first (A+D2a-only) and final versions of the readout (§CE/A38).
 
+### 4.2.9 Why the complex G / F were demoted to secondary evidence: an empirical record of the difficulty of quantifying semantic axes
+
+**Not a single number from Tables 1(a)–(c) above is deleted.** They no longer serve as v1 primary
+readouts; they serve as the **empirical evidence base for the claim that axes built around a semantic
+construct are hard to quantify**. The demotion is itself a result of three generality rounds, not a
+design preference:
+
+| Evidence | Content |
+| --- | --- |
+| **Unstable across scenarios** | On the lead-braking corpus, G replicated 0/3 and F① 0/3 (while C replicated 6/6) |
+| **Unstable across data sources** | On the independent NAVSIM corpus, G replicated 0/4 — including LTF, G1's only positive, **at comparable power** — and F① 1/4 |
+| **The floor can overtake the primary readout** | On lead braking, SimLingo's falsification floor (0.645) exceeded its primary readout (0.600); on NAVSIM, LTF's floor rose from 0.553 to 0.620 |
+| **The operationalizations are not comparable across architecture families** | F② cuts along the encoder family (§4.4.2); $C_m$ cuts along "is it a pure transformer stack" (§4.4.4) |
+| **The criteria are themselves human-made** | The A/B/C positive triggers and the construction of D2a/D2cV all rest on human thresholds and callbacks for "what counts as dangerous" (§CE/A34, §LB/A44) |
+
+**Together these five say not "these models have no hazard concept" but "this set of readouts cannot
+find out".** Retaining them in the body is necessary: presenting only the v1 G-VS/F-3 would leave a
+reader unable to judge *why* a new set of definitions was needed — which is this paper's main
+methodological lesson.
+
+**The two generations of readouts agree in their conclusion, which strengthens rather than weakens
+both**: the complex F① repeatedly yielded "the information is in the representation but does not
+drive the action", and v1's G-VS/F-3 yield the same conclusion on DiffusionDrive (the highest G-VS
+selectivity in the table alongside an F-3 baseline response indistinguishable from 0) — **without
+depending on any "hazard" criterion**. One conclusion, two independent evidence chains.
+
 ### 4.2.8 Intervening on the diagnosed link
 
 We designed a fixed-budget post-training run from the diagnosis of §4.2.4: **only `speed_wps_head`
@@ -549,7 +615,7 @@ who ranks first, and no set of weights can be justified from the data itself.**
 ## 4.4 Ablation-like Analyses: why these numbers can be believed
 
 Every item in this section is a **negative check**: its purpose is not to make numbers look better
-but to exclude the case in which numbers look good while meaning nothing. This work registered 48
+but to exclude the case in which numbers look good while meaning nothing. This work registered 52
 amendments during execution, seven of which converted an already-obtained positive result back into a
 negative or indeterminate one; the five most consequential are given below.
 
@@ -716,7 +782,7 @@ empirical 99.9th percentile of that null is 0.100–0.154 whereas the Gaussian-t
 read off as an empirical quantile) reduced the number of "doubly corroborated" candidates from
 **11 to 0**.
 
-> Sources: `amendments.md` (all 48 amendments), `analytic_vs_empirical.md`,
+> Sources: `amendments.md` (all 52 amendments), `analytic_vs_empirical.md`,
 > `c_axis_shape_diagnostics.json`, `cosine_matrix.json`, `generalizable_tips.md`.
 
 ---
@@ -801,6 +867,49 @@ readout does not help".
 
 **9. The native training domains of all five NAVSIM-family candidates are not independently verified**, so every interpretation
 depending on "which side is in-domain" is conditional.
+
+---
+
+## 4.6 Future Work
+
+This paper's v1 primary readouts cover only the **blind action** branch of Embodied
+Interpretability's (arXiv 2605.00321) trichotomy — the branch F-3's necessity test corresponds to.
+The other two branches, and the semanticization of the G axis, are left for follow-up work:
+
+### G-VL: semantic segmentation consistency (semanticizing G-VS)
+
+This round's G-VS is **binary object-ness** segmentation: it asks *where* the objects are, not *what*
+they are. G-VL would replace the label space {background, object} with real semantic classes
+(pedestrian / vehicle / static obstacle / drivable area) and test whether **category**, not merely
+**location**, is linearly readable from the representation. This requires class-labelled segmentation
+GT: the TransFuser family's built-in BEV semantic head (7 classes, see `g_vs_feasibility_report_*`) is
+a ready anchor, but it lives in BEV space and covers only 3/6 candidates, so G-VL needs another
+image-space semantic GT (SAM plus class labels, or an open-vocabulary segmentation model). **It would
+also settle a question this round leaves open**: whether the low net contribution of 0.02–0.04
+reflects sparse information in the representation or merely the coarseness of a binary task.
+
+### F-1: CoC post-hoc rationalization test
+
+For the candidates with language output (SimLingo, Alpamayo-R1, AutoVLA), test whether their
+Chain-of-Causation / CoT text is consistent with **the evidence that actually drives the action**: if
+occluding an entity leaves the action unchanged (an F-3 FAIL) while the language still asserts "I slow
+down because there is a pedestrian ahead", that is **post-hoc rationalization** — the language is an
+explanatory narrative about the action, not its cause. This round's F-3 already produced a blind-action
+signature for LTF, but LTF has no language output; the three VLAs do, yet all of them stall at "the
+baseline response itself does not exist". F-1 therefore only becomes meaningful once F-3 obtains a
+non-zero baseline response on some language-producing candidate.
+
+### F-2: spurious correlation / attention analysis
+
+F-3 answers only "this entity is **not** what drives the action", not "what **is**". F-2 would localize
+the actual driver, with two priors from the causal-inversion framework of Causal Imitative Model
+(Samsami et al. 2021, arXiv:2112.03908): **inertia** (the action follows the ego's own speed history
+rather than the scene) and **collision** (the action follows global scene statistics). A workable
+operationalization: permute or freeze the ego speed history and compare the magnitude of the resulting
+action change against F-3's $b_{ghost}$; and run the same necessity test at the token-attention level
+(occluding high-attention regions vs occluding the hazard entity). **LTF is the candidate to run F-2
+on first** — it is the only FAIL this round, i.e. the only known specimen with "a response wired to
+the wrong evidence".
 
 ---
 
