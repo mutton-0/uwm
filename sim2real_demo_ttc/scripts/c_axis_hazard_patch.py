@@ -51,7 +51,7 @@ def boot(v, n=5000, seed=0):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", required=True, choices=["dd", "ltf", "ddv2", "alpa", "autovla"])
+    ap.add_argument("--model", required=True, choices=["dd", "ltf", "ddv2", "alpa", "autovla", "simlingo"])
     ap.add_argument("--k", type=int, default=12, help="按 |v_clean − v_ghost| 取前 K 个事件")
     ap.add_argument("--min-gap", type=float, default=0.02)
     ap.add_argument("--nuscenes-root", default="/data/dataset/nuscenes/v1.0-trainval")
@@ -64,16 +64,36 @@ def main():
     ap.add_argument("--out", default="")
     args = ap.parse_args()
     label = {"dd": "DiffusionDrive", "ltf": "LTF", "ddv2": "DiffusionDriveV2",
-             "alpa": "Alpamayo-R1", "autovla": "AutoVLA"}[args.model]
+             "alpa": "Alpamayo-R1", "autovla": "AutoVLA", "simlingo": "SimLingo"}[args.model]
     cache = W / {"dd": "dd_cache", "ltf": "ltf_cache", "ddv2": "ddv2_cache",
-                 "alpa": "alpa_cache", "autovla": "autovla_cache"}[args.model]
+                 "alpa": "alpa_cache", "autovla": "autovla_cache", "simlingo": "cache"}[args.model]
     IS_VLA = args.model in ("alpa", "autovla")
+    IS_SL = args.model == "simlingo"
     if not args.out:
         args.out = str(RES / f"c_axis_hazard_{args.model}.json")
 
     # 零 GPU 选样：从既有缓存里按 |v_clean − v_ghost| 取退化最狠的 A 类事件
     rows = []
-    for p in sorted(cache.glob("*.npz")):
+    if IS_SL:
+        import h5py
+        _ev = {json.loads(l)["event_id"]: json.loads(l) for l in open(W / "mining" / "events_all.jsonl")}
+        for p in sorted(cache.glob("*.h5")):
+            m = _ev.get(p.stem)
+            if m is None or m["event_type"] != "A":
+                continue
+            try:
+                with h5py.File(p, "r") as f:
+                    if "pred_speed" not in f["clean"]:
+                        continue
+                    vc = float(f["clean"]["pred_speed"][:].mean())
+                    vg = float(f["ghost"]["pred_speed"][:].mean())
+            except Exception:                                   # noqa: BLE001
+                continue
+            if not (np.isfinite(vc) and np.isfinite(vg)):
+                continue
+            rows.append({"eid": m["event_id"], "scene": m["scene_name"], "gap": vc - vg,
+                         "absgap": abs(vc - vg)})
+    for p in ([] if IS_SL else sorted(cache.glob("*.npz"))):
         d = np.load(p, allow_pickle=True); m = json.loads(str(d["meta"]))
         if m["event_type"] != "A":
             continue
@@ -90,7 +110,32 @@ def main():
     print(f"[C-haz/{label}] A 类 {len(rows)} 个，选中 {len(sel)}（|gap| ≥ {args.min_gap}，"
           f"范围 {sel[-1]['absgap']:.3f} ~ {sel[0]['absgap']:.3f}）")
 
-    if IS_VLA:
+    if IS_SL:
+        # SimLingo 侧：复用它在 C-domain 上已有的 patching 实现（`set_patch` 换 vision token 段）。
+        # **patch 范围沿用 SimLingo 自己的 C-domain 约定（仅 vision token 段）**，
+        # 这样同一个模型的 C-hazard 与 C-domain 是逐条可比的；而按 §CE/A39 的 AutoVLA 对照，
+        # 换成整条 prompt 也不改变剖面形态，故这个选择不影响本次预测检验的结论。
+        from omegaconf import OmegaConf
+        sys.path.insert(0, "/data/ruolin/uwm/sim2real_demo_ttc/scripts")
+        cfg = OmegaConf.to_container(OmegaConf.load(
+            "/data/ruolin/uwm/sim2real_demo_ttc/configs/n1_d2.yaml"), resolve=True)
+        cfg["model"]["device"] = args.device
+        from simlingo_runner import SimLingoRunner
+        from g2_cache import commanded_speed
+        runner = SimLingoRunner(cfg, capture_hidden=True)
+        nL = runner.n_layers
+        import torch as _torch
+
+        def sl_run(img, spd):
+            r = runner.infer(img, spd, pool_modes=("vision_mean",))
+            return float(commanded_speed(r.waypoints))
+
+        def sl_vis_states():
+            hs = runner._layer_outputs[-runner.n_layers:]
+            ids = runner._adaptor_dict["language__ids"][0]
+            vis = _torch.nonzero(ids == runner.img_context_token_id).flatten()
+            return [h[0, vis, :].float().cpu().numpy() for h in hs]
+    elif IS_VLA:
         # VLA 侧：读出对象是语言塔 decoder layer 的 prefill 隐状态；
         # 参考侧激活由 clean 那一次前向**当场抓全序列**（不能用缓存，缓存只存了池化结果）。
         if args.model == "alpa":
@@ -165,7 +210,15 @@ def main():
     for i, r in enumerate(sel):
         ev = evmap[r["eid"]]
         runner.set_patch(None)
-        if IS_VLA:
+        if IS_SL:
+            # ego 速度锚到 clean（与 SimLingo 的 prompt_anchor 纪律一致：两条件唯一差异是图像）
+            anchor = float(np.mean([f["ego_speed_mps"] for f in ev["x_clean_frames"]]))
+            ic = read(ev["x_clean_frames"][0]["filename"])
+            ig = read(ev["x_ghost_frames"][0]["filename"])
+            runner.set_steering(None)
+            vc = sl_run(ic, anchor); V = sl_vis_states()
+            vg = sl_run(ig, anchor)
+        elif IS_VLA:
             runner.set_capture_full(True)
             oc = vla_run(ev, "clean"); vc = oc["commanded_speed"]
             V = [np.asarray(x, np.float32) for x in oc["full"]]
@@ -198,12 +251,18 @@ def main():
             print(f"[C-haz/{label}] skip {r['eid']}：运行时 gap={den:+.4f} < {args.min_gap}", flush=True)
             continue
         rec = {"eid": r["eid"], "scene": r["scene"], "v_clean": vc, "v_ghost": vg, "gap": den}
-        ghost_again = (lambda: vla_run(ev, "ghost")["commanded_speed"]) if IS_VLA \
-            else (lambda: _run(ig, anchor, tg)["commanded_speed"])
+        if IS_SL:
+            ghost_again = lambda: sl_run(ig, anchor)                      # noqa: E731
+        elif IS_VLA:
+            ghost_again = lambda: vla_run(ev, "ghost")["commanded_speed"]  # noqa: E731
+        else:
+            ghost_again = lambda: _run(ig, anchor, tg)["commanded_speed"]  # noqa: E731
+        setp = (lambda d: runner.set_patch(d)) if IS_SL else \
+            (lambda d: runner.set_patch(d, tokens=args.tokens))            # noqa: E731
         for l in range(nL):
-            runner.set_patch({l: V[l]}, tokens=args.tokens)
+            setp({l: V[l]})
             rec[f"L{l}"] = (ghost_again() - vg) / den if abs(den) > 1e-9 else float("nan")
-        runner.set_patch({l: V[l] for l in range(nL)}, tokens=args.tokens)
+        setp({l: V[l] for l in range(nL)})
         rec["ALL"] = (ghost_again() - vg) / den if abs(den) > 1e-9 else float("nan")
         runner.set_patch(None)
         recs.append(rec)
@@ -242,7 +301,7 @@ def main():
     applicable = bool(rho > -0.7)
     cm = boot(top2)
     out = {"model": label, "pairing": "G1 clean↔ghost（配对真实输入互换）",
-           "patch_tokens": args.tokens,
+           "patch_tokens": ("vision（沿用 SimLingo C-domain 约定）" if IS_SL else args.tokens),
            "construct": "C-hazard：危险引起的行为变化从哪一层进入",
            "metric": "recovery(L) = (v_patch − v_ghost)/(v_clean − v_ghost)，v = commanded_speed",
            "n_events": len(recs), "n_dropped_small_gap": len(dropped), "dropped": dropped,

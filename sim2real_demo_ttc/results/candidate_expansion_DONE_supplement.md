@@ -3,6 +3,7 @@
 > 承接 [`candidate_expansion_DONE.md`](candidate_expansion_DONE.md) §4「未完成项」里的
 > **「Alpamayo-R1 / AutoVLA 的 C-hazard｜未测｜预算」** 一行。本轮把这两格补上。
 > 完成日期：2026-09-01。修正案：[`amendments.md`](amendments.md) §CE/A39。
+> **后续**：§5 里那条可证伪预测已于同日检验完毕，见 [`c_hazard_prediction_check.md`](c_hazard_prediction_check.md) 与 §CE/A40。
 > 本轮**不引入新候选、不改变任何既有轴的口径**。
 
 ---
@@ -92,6 +93,6 @@ AutoVLA 的剖面仍在 L0–L21 饱和于 1.0（Spearman −0.876）。故这�
 | 项 | 状态 | 理由 |
 | --- | --- | --- |
 | Alpamayo-R1 / AutoVLA 的 F② | 未测 | 预算。**不是"不可测"的结论**——两者注入位点（LLM 残差流）与 SimLingo 同构，先验上应当可测。 |
-| SimLingo 的 C-hazard | 未测 | 预算。SimLingo 只测了 C-domain。**注意按 §CE/A39，SimLingo 也是纯 transformer 栈，其 C-hazard 剖面先验上应当同样是阶跃** —— 这构成一条可证伪的预测，测它比测出一个数更有价值。 |
+| ~~SimLingo 的 C-hazard~~ | **已补测（2026-09-01），预测证实** | 见 `c_hazard_prediction_check.md` 与 §CE/A40：Spearman −0.997，级联，承诺层 L3/24；六个候选按架构族完全分离（3/3 vs 3/3）。预测中"早段必然饱和于 1.0"那半句被证伪并已更正。 |
 | LTF 的 C-domain | 未测 | 预算。 |
 | 五个候选的 C-hazard 事件数 | 均为 12 | 承诺层的定位精度受此限制；Alpamayo 另受采样噪声限制（见 §1）。 |

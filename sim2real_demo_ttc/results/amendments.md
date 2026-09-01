@@ -152,7 +152,7 @@ B = 横向切入，C = TTC 突降。两集都需新前向；V-BC 还需补 G2 �
 |---|---|---|
 | **T-G** | DiffusionDrive 在**同一刺激集**上的 CV-AUC(A vs D2a) **减去自身 D2cV 证伪地板** | 显著 >0 ⇒ H1（方法有效，SimLingo 的 FAIL 是标本属性）；落地板 ⇒ H-artifact；CI 含 0 ⇒ 不可估 |
 | **T-F** | $\cos(v_{brake}^{obs}, v_{brake})$ 对比 ≥20 个随机方向的余弦零分布 | 显著高于零分布 ⇒ PASS；不显著但同号 ⇒ 不可估；反号或落在零分布内 ⇒ FAIL |
-| **T-I** | 两模型的 $I_m = 1 - D_{L^*}$ 排序 + 干涉角 $|\theta_{L^*}|=|\cos(v_{domain},v_{hazard})|$ | 单模型可行时降级为探索性读数，不做跨模型排序 |
+| **T-I** | 两模型的 $I_m = 1 - D_{L^*}$ 排序 + 干涉角 $\lvert\theta_{L^*}\rvert=\lvert\cos(v_{domain},v_{hazard})\rvert$ | 单模型可行时降级为探索性读数，不做跨模型排序 |
 | **T-C** | $C_m$ = top-2 层 recovery 占比 / 全层 recovery 之和（逐场景算再汇总） | 报点估计 + scene 级 bootstrap CI；t-SNE 明确标注为相关性证据 |
 
 ## FA.1 设计偏离登记（执行前已知，不静默处理）
@@ -768,7 +768,7 @@ $\rho = +0.045$（$p$ = 0.28）。
 
 | 候选 | 可读层 | 剖面（mean recovery） | Spearman | patch-ALL | 承诺层 |
 | --- | --- | --- | --- | --- | --- |
-| DiffusionDrive | 8 | 0.00 … 峰 0.70 @L6 … 0.45 | **+0.881** 递增 | +1.000 | 无（任何单层都 < 0.9） |
+| DiffusionDrive | 8 | 0.00 … 峰 0.70 @L6 … 0.45 | **+0.929** 递增 | +1.000 | 无（任何单层都 < 0.9） |
 | LTF | 8 | 0.00 … 峰 0.47 @L6 … 0.45 | **+0.929** 递增 | +1.000 | 无 |
 | DiffusionDriveV2 | 8 | 0.01 … 峰 0.30 @L6 … 0.05 | +0.810 递增 | +0.552 ✗ | 无 |
 | **Alpamayo-R1** | 36 | 0.58, 0.81, **≈1.0 (L2–L16)**, 0.58 … 0.49 | **−0.873** 级联 | +1.001 | **L16**（深度 0.47） |
@@ -808,3 +808,78 @@ C-hazard json（TransFuser 系为 −1，即任何单层都不足以恢复，这
 patch 第 L 层输出时，**该层自己的 KV 仍是 ghost 侧的**（注意力发生在被 patch 的输出之前）。
 AutoVLA 的早期层自身 KV 贡献可忽略（L0 即 1.000），Alpamayo 的不可忽略。
 本轮样本量（12 事件）与上述采样噪声不足以把这条坐实，记为观察而非结论。
+
+## CE/A40 §CE/A39 那条可证伪预测的留出检验：**证实**（含一处措辞更正）
+
+**预测（上一轮登记在 `candidate_expansion_DONE_supplement.md` §5）**：
+剖面形状由"残差流是不是唯一通路"决定 ⇒ **任何纯 transformer 栈的 C-hazard 剖面都应当是级联**。
+登记时手上只有两个纯 transformer 候选（Alpamayo-R1、AutoVLA），
+**SimLingo 的 C-hazard 尚未测**，构成一次真正的留出检验：
+它是 InternVL2-1B（Qwen2-0.5B decoder）的纯 transformer 栈，
+且此前它在**另一条配对源**（C-domain）上的剖面已知是级联，但 C-hazard 从未测过。
+
+**检验结果：预测被证实。** SimLingo 的 C-hazard（12 事件 / 11 场景，24 层，
+patch 范围沿用它自己 C-domain 的约定即 vision token 段）：
+
+| 量 | 值 | 判据 | 结论 |
+| --- | --- | --- | --- |
+| patch-ALL（充分割集自检） | 均值 +0.997，中位数 **+1.009** | 须落在 [0.7, 1.3] | **通过** |
+| Spearman(层号, recovery) | **−0.997** | $\rho < -0.7$ ⇒ 级联 | **级联，与预测一致** |
+| 剖面 | 0.997 → 0.980 → 0.898 → … → 0.000 | —— | 单调递减 |
+| $C_m$（名义值） | 0.187 [0.135, 0.279]（24 层基线 0.083） | 公式前提不成立 | **not applicable** |
+| 承诺层 | **L3 / 24（深度 0.17）** | 级联下的替代读数 | 决策在很浅处即被定死 |
+| **判定** | **不可估（公式前提不成立）** | | |
+
+**六个候选按架构族完全分离，无一例外**：
+
+| 架构族 | 候选 | 层数 | Spearman | 承诺层 |
+| --- | --- | --- | --- | --- |
+| TransFuser 系 | DiffusionDrive / LTF / DiffusionDriveV2 | 8 | **+0.929 / +0.929 / +0.810** | 全部**不存在** |
+| 纯 transformer | **SimLingo** / Alpamayo-R1 / AutoVLA | 24 / 36 / 36 | **−0.997 / −0.873 / −0.859** | L3 / L16 / L20 |
+
+3/3 递增 vs 3/3 级联，**符号之间没有任何重叠**。
+
+**一处必须写出来的措辞更正**：§CE/A39 原文说纯 transformer 栈"早段必然饱和于 1.0"。
+**这一半说过头了。** SimLingo 的剖面是**渐进递减**（0.997 → 0.980 → 0.898 → …），
+不是 AutoVLA 那种平台式阶跃（L0–L20 恒为 1.0），因此它的承诺层只有 L3 / 24（深度 0.17）。
+准确表述应为：**纯 transformer 栈的剖面必然单调递减（级联），但"平台有多宽"不是架构决定的**——
+三个成员的承诺层深度分别是 0.17 / 0.47 / 0.58。
+这一更正**加强而非削弱**了承诺层的价值：它是一个真正有区分度的读数，
+而不是一个恒等于"很深"的常数。定性预测成立，定量外推不成立，两者都已改进正文。
+
+**一条独立的收敛证据（预测之外的意外收获）**：
+SimLingo 的 C-hazard 剖面与它自己的 **C-domain** 剖面
+（配对源毫不相干：G1 clean↔ghost vs CARLA↔世界模型渲染）
+Pearson $r$ = **0.968**（$p$ = 9.4e-15）、Spearman $r$ = **0.996**，两者的承诺层**同为 L3**。
+同一个模型、两种毫不相干的配对来源、同一条剖面 ⇒
+直接支持 §CE/A39 的核心论断：**剖面形状是模型的路由属性，不是配对来源的属性。**
+
+**顺带更正一处数字串号**：§CE/A39 的对照表把 DiffusionDrive 的 C-hazard Spearman 写成 **+0.881**，
+那实际上是它的 **C-domain** Spearman；C-hazard 是 **+0.929**（`c_axis_hazard_dd.json`）。
+已在本文件与 `paper_experiments_section_{zh,en}.md` §4.4.4 更正。
+结论不受影响（两者都是正号、都是内部峰），但两条不同配对源的数字不能串用。
+
+**产出物**：`results/c_axis_hazard_simlingo.json`、`results/c_hazard_prediction_check.md`；
+`scripts/c_axis_hazard_patch.py` 增加 `--model simlingo`（复用它已有的 `set_patch`，不新写 patching 实现）。
+
+---
+
+# 本轮到此为止，等待外部复核
+
+**截至 §CE/A40，本工作线暂停自主扩展。**
+
+从"候选池扩展"工单开始，本线连续跑了三轮：
+① 候选池 2 → 6（§CE/A27–A38）；
+② Alpamayo-R1 / AutoVLA 的 C-hazard 补测（§CE/A39）；
+③ SimLingo 的 C-hazard 留出检验（§CE/A40）。
+其间共登记 14 条修正案，其中 3 条把已得阳性改回阴性或不可估
+（A33 DDv2 的 C-hazard、A34 Alpamayo 的 D2cV 判据降级、A38 AutoVLA 的 G 折分配噪声），
+2 条更正了上一轮已写进正文的推论（A31 动作头 → 编码器、A40 对 A39 措辞的收紧）。
+
+**当前状态**：`paper_experiments_section_{zh,en}.md` 的 Table 1 为 6 候选 × 9 列 = 54 格，
+其中 11 格无可用数字、11 格有数字但判不可估，理由分五类且逐格给出；
+修正案账本 40 条；每候选中英双语报告齐备。
+
+**不再自主开新方向。** 已知的未完成项（Alpamayo / AutoVLA 的 F②、LTF 的 C-domain 等）
+如实列在 `candidate_expansion_DONE_supplement.md` §5 与 `candidate_expansion_DONE.md` §4，
+**等待外部复核后再决定下一步扩到哪里**。

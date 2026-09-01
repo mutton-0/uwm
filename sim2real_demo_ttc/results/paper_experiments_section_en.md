@@ -46,6 +46,15 @@ comparison on the shared stimulus set) confirm the two are indistinguishable und
 stimuli and readouts. Following our standing discipline we do not manufacture a spurious independent
 data point, and instead record the finding itself as a result (§CE/A28).
 
+**This table groups by encoder family / action head / native domain, but that is not the only useful
+grouping.** §4.4.4 uses an orthogonal one — **whether the residual stream is the only pathway**.
+Along that line SimLingo joins the two VLAs as a **pure transformer stack** (three in total), while
+the three TransFuser-family members form their own group because each fusion block re-injects
+features from the CNN branches. That boundary determines whether the C-axis $C_m$ formula applies at
+all, and it separates all six candidates perfectly (§CE/A39, §CE/A40). The two groupings each
+explain one non-comparability boundary: the encoder family explains F②, the residual-stream topology
+explains $C_m$.
+
 **Input temporality is a new column this round because it decides whether the D2cV falsification
 floor holds at all.** D2cV is constructed so that "the only difference is a relative velocity a
 single-frame model is *physically unable* to observe". For multi-frame candidates (Alpamayo-R1,
@@ -130,7 +139,7 @@ pre-registered primary readout per experiment with everything else marked as sen
 three-state adjudication (PASS / FAIL / **indeterminate**), with insufficient power always recorded
 as indeterminate rather than forced into a binary; random-direction controls carry **their own
 per-layer null distribution**; all cross-model comparisons use **within-model normalized** quantities
-only. An amendment ledger is maintained throughout; the experiments reported here registered **39**
+only. An amendment ledger is maintained throughout; the experiments reported here registered **40**
 amendments, seven of which converted an already-obtained positive result back into a negative or
 indeterminate one (§4.4).
 
@@ -178,7 +187,7 @@ scores.
 
 | Policy | G: primary − own D2cV floor | sd over 10 fold-seeds | F①: b-AUC(A vs D2a) | F①: b(A) [m/s] | F②: injection slope [m/s per σ] | I: $I_m$ (representation) | I: behavioural domain sensitivity | C-domain: profile shape / responsible layer | C-hazard: $C_m$ / responsible layer |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| SimLingo | +0.035 [−0.026, +0.097] | 0.024 | 0.534 [0.469, 0.592] | **+0.307** [+0.112, +0.500] | **−0.0405** (measurable) | **0.606** (L9) | 0.346 [0.249, 0.454] | cascade ρ=−0.997 / L0, entropy 0.279 | n.m. |
+| SimLingo | +0.035 [−0.026, +0.097] | 0.024 | 0.534 [0.469, 0.592] | **+0.307** [+0.112, +0.500] | **−0.0405** (measurable) | **0.606** (L9) | 0.346 [0.249, 0.454] | cascade ρ=−0.997 / L0, entropy 0.279; commitment L3/24 | cascade ρ=−0.997 / commitment **L3/24** (depth 0.17); $C_m$ **n/a**⁵ |
 | DiffusionDrive | +0.009 [−0.047, +0.065] | 0.032 | 0.553 [0.486, 0.623] | +0.010 [−0.030, +0.045] | −0.00000 (not measurable) | 0.203 (L5) | 0.115 [0.080, 0.153] | interior peak ρ=+0.881 / L6, entropy 0.685 | **0.801** [0.710, 0.884] / L6, entropy 0.297 |
 | **LTF** | **+0.070 [+0.017, +0.126]** | 0.028 | **0.583 [0.519, 0.639]** | +0.020 [+0.006, +0.033] | +0.00040 [−0.00065, +0.00143] (not measurable) | 0.583 (L6) | 0.160 [0.099, 0.235] | n.m. | **0.789** [0.725, 0.857] / L6, entropy 0.576 |
 | DiffusionDriveV2 | +0.025 [−0.044, +0.097] | 0.026 | **0.556 [0.501, 0.613]** | **+0.201** [+0.052, +0.343] | not measurable | **n/a**¹ | n/a¹ | n.m. | **indeterminate**² |
@@ -201,13 +210,17 @@ scores.
 >   geometry. D2a is caliper-matched on log area and ecc, so the **between-group** confound is
 >   controlled; the residual within-group correlation is weaker than in the first version of this
 >   readout, which used only the A+D2a cache and was fold-assignment noise (§CE/A38).
-> ⁵ Both VLA candidates' recovery profiles are **step/cascade shaped** ($\rho < -0.7$), so under the
->   pre-existing applicability criterion of §4.4.4 the top-2-share formula's premise is violated and
->   $C_m$ adjudicates as indeterminate. This is **structural**: in a pure transformer stack the
->   residual stream is the only pathway, so patching any early layer leaves every deeper layer
->   clean-derived and recovery saturates at 1.0 early. The TransFuser family escapes this only
+> ⁵ **All three pure transformer stacks** (SimLingo / Alpamayo-R1 / AutoVLA) give **cascade**
+>   profiles ($\rho$ = −0.997 / −0.873 / −0.859), so under the pre-existing applicability criterion
+>   of §4.4.4 the top-2-share formula's premise is violated and $C_m$ adjudicates as indeterminate
+>   throughout. This is **structural**: in a pure transformer stack the residual stream is the only
+>   pathway, so patching any early layer leaves every deeper layer clean-derived and recovery decays
+>   monotonically. The boundary was confirmed by a **held-out test** on SimLingo (§CE/A40); all six
+>   candidates separate by architecture family with non-overlapping signs. The TransFuser family escapes this only
 >   because each fusion block re-injects un-patched CNN features (§CE/A39). **$C_m$ is therefore not
->   comparable between the TransFuser family and VLA stacks**; the substitute readout shared by both
+>   comparable between the TransFuser family and pure transformer stacks** (a boundary that
+>   separates all six candidates perfectly, including one held-out test, see §4.4.4); the
+>   substitute readout shared by both
 >   groups is the **commitment layer** (deepest layer with mean recovery ≥ 0.9, i.e. "how deep before
 >   the decision is fixed") — all three TransFuser-family members have **no** commitment layer (no
 >   single layer reaches 0.9), which is another way of stating "interior peak".
@@ -273,7 +286,7 @@ either: patching only the image-token segment still leaves AutoVLA's profile sat
 L0–L21 (Spearman $-0.876$).
 
 This conclusion has consequences in both directions, and both must be written down.
-**Forward**: $C_m$ is **not comparable between the TransFuser family and VLA stacks**, and both VLAs'
+**Forward**: $C_m$ is **not comparable between the TransFuser family and pure transformer stacks**, and both VLAs'
 $C_m$ adjudicate as indeterminate under the pre-existing criterion of §4.4.4 — the same treatment
 SimLingo's C-domain cascade received, not a new standard invented for them.
 **Backward**: DiffusionDrive's and LTF's interior peak at L6 is a **property of TransFuser's
@@ -284,8 +297,11 @@ with each other too (both step-shaped, commitment layers L16 and L20), for the s
 stack structure. **Concordance appearing along architecture-family lines is itself evidence that
 what is being measured is the architecture, not only the model.**
 
-One shape quantity remains well defined under a step profile and comparable between the two VLAs:
-the **commitment layer** (the deepest layer with mean recovery ≥ 0.9, i.e. "how deep before the
+(SimLingo's C-hazard was still unmeasured when this section was written; it later served as a
+**held-out test** confirming this architecture-level conclusion — see §4.4.4 and §CE/A40.)
+
+One shape quantity remains well defined under a cascade profile and comparable across the three
+pure-transformer candidates: the **commitment layer** (the deepest layer with mean recovery ≥ 0.9, i.e. "how deep before the
 decision is fixed"). AutoVLA's is L20 / 36 (depth 0.58), Alpamayo's is L16 / 36 (depth 0.47). All
 three TransFuser-family members have **no** commitment layer (no single layer reaches 0.9), which is
 another way of stating "interior peak".
@@ -469,16 +485,16 @@ evidence. We therefore deliver a matrix **with blanks and explicit "not comparab
 than a scalar that looks clean but cannot be audited.
 
 **Growing the pool from 2 to 6 turns this argument from "it should be so in principle" into
-something countable.** Of the 54 cells in Table 1, **12 carry no usable number**: 4 are n/a (the
-operationalization does not apply), 5 are n.m. (not measured within budget), and 3 read "instrument
+something countable.** Of the 54 cells in Table 1, **11 carry no usable number**: 4 are n/a (the
+operationalization does not apply), 4 are n.m. (not measured within budget), and 3 read "instrument
 without resolving power" (F② injection across all three TransFuser-family members). A further
-**10 cells carry a number but adjudicate as indeterminate**: three single-frame candidates' G, four
+**11 cells carry a number but adjudicate as indeterminate**: three single-frame candidates' G, four
 candidates' F①, DiffusionDriveV2's C-hazard (whose nominal value is the highest of the three
-TransFuser-family members), and both VLAs' $C_m$ (step-shaped profile, so the formula's premise is
-structurally violated). Synthesizing a scalar would require an imputation decision for each of those
-22 cells. And their reasons fall into **five distinct kinds**: stimulus-side gaps
+TransFuser-family members), and all three pure-transformer stacks' $C_m$ (cascade-shaped profile, so
+the formula's premise is structurally violated). Synthesizing a scalar would require an imputation
+decision for each of those 22 cells. And their reasons fall into **five distinct kinds**: stimulus-side gaps
 (DiffusionDriveV2's I axis lacks lidar; the multi-frame candidates lack temporal frames), violated
-operationalization premises (the D2cV floor for multi-frame candidates; $C_m$ on a VLA stack),
+operationalization premises (the D2cV floor for multi-frame candidates; $C_m$ on a pure transformer stack),
 instruments without resolving power (F② injection on diffusion heads and on the TransFuser encoder),
 insufficient statistical power (most G and F① cells), and a failed self-check (DiffusionDriveV2's
 C-hazard). **Filling all five kinds of absence with one imputed value collapses five different
@@ -496,7 +512,7 @@ who ranks first, and no set of weights can be justified from the data itself.**
 ## 4.4 Ablation-like Analyses: why these numbers can be believed
 
 Every item in this section is a **negative check**: its purpose is not to make numbers look better
-but to exclude the case in which numbers look good while meaning nothing. This work registered 39
+but to exclude the case in which numbers look good while meaning nothing. This work registered 40
 amendments during execution, seven of which converted an already-obtained positive result back into a
 negative or indeterminate one; the five most consequential are given below.
 
@@ -587,22 +603,52 @@ fraction of layers needed to reach 80% of recovery mass, and the normalized entr
 responsible-layer argmax. $C_m$'s diffuse baseline varies with depth (0.250 at 8 layers vs 0.083 and
 0.056 at 24 and 36), so **its value is not comparable across models**.
 
-**With the expanded pool, this criterion is upgraded from "one model happens to be a cascade" to
-"one class of architecture must be a cascade".** The five candidates' C-hazard profiles separate
-cleanly **by architecture family**: all three TransFuser-family members are **increasing** profiles
-(Spearman $+0.881$ / $+0.929$ / $+0.810$, interior peak at L6), and both VLAs are **step** profiles
-($-0.859$ / $-0.873$, saturating at 1.0 from around L0). The reason is in §4.2.3: in a pure
-transformer stack, patching layer $L$ leaves every deeper layer clean-derived, so early saturation is
-forced; the TransFuser family escapes only because each fusion block re-injects un-patched CNN
-features. The applicability criterion is therefore not a just-in-case robustness appendix: **it cuts
-the candidate pool exactly along the architecture-family boundary.** Read literally, $C_m$ would
-place the two VLAs' 0.079 / 0.091 (against a 36-layer baseline of 0.056) in one ordering with the
-three TransFuser members' 0.789–0.845 (against an 8-layer baseline of 0.250), producing a ranking
-determined entirely by depth and architecture and unrelated to whether failure is concentrated.
+**With the expanded pool, this criterion is upgraded from "one model happens to be a cascade" to an
+architecture-level regularity that has survived a prospective test.**
 
-Under a step profile we report the **commitment layer** instead (the deepest layer with mean recovery
-≥ 0.9): the one informative quantity in that regime, and comparable between the two VLAs (AutoVLA
-L20/36, Alpamayo L16/36). None of the three TransFuser-family members has a commitment layer (no
+The previous version of this section stated it as a **falsifiable prediction**: if profile shape is
+determined by whether the residual stream is the only pathway, then **any pure transformer stack's
+C-hazard profile should be a cascade**. At that point we had only two pure-transformer candidates
+(Alpamayo-R1, AutoVLA), and SimLingo's C-hazard was unmeasured — an InternVL2-1B (Qwen2-0.5B
+decoder) pure transformer stack, and therefore a **held-out test**. We have now measured it, and
+**the prediction is confirmed**:
+
+| Family | Candidate | Layers | Spearman(layer, recovery) | Profile | patch-ALL | Commitment layer |
+| --- | --- | --- | --- | --- | --- | --- |
+| TransFuser | DiffusionDrive | 8 | **+0.929** | interior peak @L6 | +1.000 | **none** |
+| TransFuser | LTF | 8 | **+0.929** | interior peak @L6 | +1.000 | **none** |
+| TransFuser | DiffusionDriveV2 | 8 | **+0.810** | interior peak @L4 | +0.552 ✗ | **none** |
+| pure transformer | **SimLingo** (held-out test) | 24 | **−0.997** | cascade | +1.009 | L3 (depth 0.17) |
+| pure transformer | Alpamayo-R1 | 36 | **−0.873** | cascade | +1.001 | L16 (depth 0.47) |
+| pure transformer | AutoVLA | 36 | **−0.859** | cascade | +1.000 | L20 (depth 0.58) |
+
+**All six candidates separate by architecture family with no exception** (3/3 increasing vs 3/3
+cascade; the signs do not overlap). The reason is in §4.2.3: in a pure transformer stack, patching
+layer $L$ leaves every deeper layer clean-derived; the TransFuser family escapes only because each
+fusion block re-injects un-patched CNN features. The applicability criterion is therefore not a
+just-in-case robustness appendix: **it cuts the candidate pool exactly along the architecture-family
+boundary.** Read literally, $C_m$ would place the three pure-transformer stacks' 0.079–0.187 in one
+ordering with the three TransFuser members' 0.789–0.845, producing a ranking determined entirely by
+depth and architecture and unrelated to whether failure is concentrated.
+
+**The held-out test also corrected one phrase in the prediction (§CE/A40).** The original wording
+said pure transformer stacks "must saturate at 1.0 early". SimLingo's profile decays **gradually**
+(0.997 → 0.980 → 0.898 → … → 0.000) rather than forming AutoVLA's flat plateau (a constant 1.0
+across L0–L20), so its commitment layer is only L3 / 24 (depth 0.17). **The qualitative conclusion
+"cascade" holds and has now been verified across three candidates; the "plateau width" is not
+architecture-determined**, with commitment depths of 0.17 / 0.47 / 0.58 — which shows the commitment
+layer is a **genuinely discriminating readout** rather than a constant meaning "deep".
+
+**An independent piece of convergent evidence**: SimLingo's C-hazard profile and its own C-domain
+profile — from two entirely unrelated pairing sources (G1 clean↔ghost vs CARLA↔world-model
+rendering) — correlate at Pearson $r$ = **0.968** and Spearman $r$ = **0.996**, and give the **same**
+commitment layer, L3. **One model, two unrelated pairings, one profile** — direct support for
+§CE/A39's central claim that profile shape is a routing property of the model, not a property of the
+pairing source.
+
+Under a cascade profile we report the **commitment layer** instead (the deepest layer with mean
+recovery ≥ 0.9): the one informative quantity in that regime, and comparable across the three
+pure-transformer candidates. None of the three TransFuser-family members has a commitment layer (no
 single layer reaches 0.9 recovery) — **the same quantity degenerating to opposite ends on the two
 families is precisely what shows it is a shape statistic and not a score.**
 
@@ -628,7 +674,7 @@ empirical 99.9th percentile of that null is 0.100–0.154 whereas the Gaussian-t
 read off as an empirical quantile) reduced the number of "doubly corroborated" candidates from
 **11 to 0**.
 
-> Sources: `amendments.md` (all 39 amendments), `analytic_vs_empirical.md`,
+> Sources: `amendments.md` (all 40 amendments), `analytic_vs_empirical.md`,
 > `c_axis_shape_diagnostics.json`, `cosine_matrix.json`, `generalizable_tips.md`.
 
 ---
@@ -664,11 +710,13 @@ nuScenes means re-mining the corpus and was out of scope this round.
 **4. Parts of the F and C operationalizations are not portable, and both non-portability boundaries
 fall along architecture families.** F's injection protocol is unmeasurable across the entire
 TransFuser encoder family (three members under two different action heads, all unmeasurable,
-§4.4.2); C's top-2-share formula has its premise **structurally** violated across the entire VLA
-stack (both members give step profiles, §4.4.4, §CE/A39), and on DiffusionDriveV2 the patch-ALL
+§4.4.2); C's top-2-share formula has its premise **structurally** violated across every pure
+transformer stack (SimLingo, Alpamayo-R1 and AutoVLA all give cascade profiles, SimLingo as a
+held-out test; §4.4.4, §CE/A39, §CE/A40), and on DiffusionDriveV2 the patch-ALL
 sufficient-cut-set check additionally fails, forcing an indeterminate verdict. **Neither boundary is
 randomly placed: F② cuts along the encoder family and $C_m$ cuts along "is it a pure transformer
-stack".** None of these is a statement that the model is poor on that axis; all are statements that
+stack" — the latter separating all six candidates perfectly (3/3 vs 3/3, non-overlapping signs) and
+having survived a held-out test.** None of these is a statement that the model is poor on that axis; all are statements that
 the operationalization does not apply to that encoder, profile shape or pairing. We therefore
 decline to fold them into a single score.
 
