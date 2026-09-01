@@ -181,7 +181,7 @@ def boot_auc_diff(rec_main, rec_floor, n=2000, seed=0):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--arm", default="nuscenes", choices=["nuscenes", "carla"])
+    ap.add_argument("--arm", default="nuscenes", choices=["nuscenes", "carla", "leadbrake"])
     ap.add_argument("--pool", default="region_mean")
     ap.add_argument("--folds", type=int, default=4)
     ap.add_argument("--n-null-seeds", type=int, default=5)
@@ -196,6 +196,11 @@ def main():
     if args.arm == "nuscenes":
         cfgp = "/data/ruolin/uwm/sim2real_demo_ttc/configs/n1_d2.yaml"
         POS, NEG, FLOOR, name = ["A"], "D2a", "D2cV", "v_hazard_clean" + args.tag
+    elif args.arm == "leadbrake":
+        # 第二场景类型（前车急刹）：LB / LBn / LBv 与 A / D2a / D2cV 同构但不同名。
+        # 其余口径（折数、方向拟合、地板约定、零分布）一律不动 —— 这正是"四轴定义可迁移"的执行形式。
+        cfgp = "/data/ruolin/uwm/sim2real_demo_ttc/configs/lead_brake_simlingo.yaml"
+        POS, NEG, FLOOR, name = ["LB"], "LBn", "LBv", "v_leadbrake_simlingo" + args.tag
     else:
         cfgp = "/data/ruolin/uwm/sim2real_demo_ttc/configs/m1_carla.yaml"
         POS, NEG, FLOOR, name = ["Hcar"], "Ncar", None, "v_hazard_carla" + args.tag
@@ -210,7 +215,8 @@ def main():
     res = {"arm": args.arm, "pool": args.pool, "folds": args.folds,
            "pos_types": POS, "neg_type": NEG, "floor_type": FLOOR}
 
-    REPORT_NEGS = [t for t in ([FLOOR, "D2c", "D2b", "D2bV", "D"] if FLOOR else []) if t and by.get(t)]
+    EXTRA = ["D2c", "D2b", "D2bV", "D"] if args.arm == "nuscenes" else []
+    REPORT_NEGS = [t for t in ([FLOOR] + EXTRA if FLOOR else []) if t and by.get(t)]
     main_r = cv_records(by, POS, NEG, args.folds, 0, "supervised", report_negs=REPORT_NEGS)
     assert main_r, "主读数样本不足"
     res["main"] = {k: v for k, v in main_r.items() if k not in ("records", "other_negatives")}

@@ -194,6 +194,13 @@ def main():
     ap.add_argument("--dir-tag", default="v_hazard_dd")
     ap.add_argument("--native-domain", default="NAVSIM (real)")
     ap.add_argument("--readable-layers", default="8 x TransFuser encoder SelfAttention (320 token = 256 image + 64 BEV latent)")
+    # 事件族名参数化：第二场景类型（前车急刹）用 LB / LBn / LBv，与 G1 的 A / D2a / D2cV
+    # **同构但不同名**。参数化而不是复制脚本，正是"四轴定义可迁移"这一命题的执行形式。
+    ap.add_argument("--pos", default="A", help="正例类名")
+    ap.add_argument("--neg", default="D2a", help="几何匹配负例类名（主读数的对照）")
+    ap.add_argument("--floor", default="D2cV", help="证伪地板类名")
+    ap.add_argument("--report-negs", nargs="*", default=["D2cV", "D2c", "D2b", "D2bV"])
+    ap.add_argument("--stimuli", default="nuScenes G1 语料 + N1 D2a/D2b/D2c/D2cV 负例（与 SimLingo 同一份）")
     ap.add_argument("--out", default="/data/ruolin/uwm/sim2real_demo_ttc/results/g_positive_calibration_diffusiondrive.json")
     args = ap.parse_args()
 
@@ -202,7 +209,8 @@ def main():
                for t in ("D2bV", "D2cV") if (work / "mining" / f"matched_{t}.txt").exists()}
     VRU = ("human.", "vehicle.bicycle", "vehicle.motorcycle", "walker.")
     OUT = {"model": args.label,
-           "native_domain": args.native_domain, "stimuli": "nuScenes G1 语料 + N1 D2a/D2b/D2c/D2cV 负例（与 SimLingo 同一份）",
+           "native_domain": args.native_domain, "stimuli": args.stimuli,
+           "classes": {"positive": args.pos, "matched_negative": args.neg, "floor": args.floor},
            "readable_layers": args.readable_layers,
            "arms": {}}
 
@@ -218,29 +226,32 @@ def main():
         print(f"\n===== {args.label} pool={pool} =====")
         print("组规模: " + "  ".join(f"{t}={len(by[t])}" for t in sorted(by)))
         arm = {"group_sizes": {t: len(by[t]) for t in sorted(by)}}
-        REPORT = [t_ for t_ in ("D2cV", "D2c", "D2b", "D2bV") if len(by.get(t_, [])) >= 20]
-        main_r = cv(by, ["A"], "D2a", report_negs=REPORT)
+        REPORT = [t_ for t_ in args.report_negs if len(by.get(t_, [])) >= 20]
+        main_r = cv(by, [args.pos], args.neg, report_negs=REPORT)
         if main_r is None:
             print("样本不足"); continue
         arm["main_D2a"] = {k: v for k, v in main_r.items() if k not in ("records", "other_negatives")}
-        print(f"  主读数 CV-AUC(A vs D2a) = {main_r['auc']:.3f} "
+        print(f"  主读数 CV-AUC({args.pos} vs {args.neg}) = {main_r['auc']:.3f} "
               f"[{main_r['ci95'][0]:.3f},{main_r['ci95'][1]:.3f}] p={main_r['p']:.3g} 峰层={main_r['peaks']}")
-        for neg, key in (("D2cV", "floor_D2cV"), ("D2c", "floor_D2c"), ("D2b", "context_D2b"), ("D2bV", "context_D2bV")):
+        pairs = [(args.floor, "floor_" + args.floor)] + \
+            [(n_, ("floor_" if n_ == args.floor else "context_") + n_)
+             for n_ in args.report_negs if n_ != args.floor]
+        for neg, key in pairs:
             r = main_r.get("other_negatives", {}).get(neg)
             if r:
                 arm[key] = {k: v for k, v in r.items() if k != "records"}
                 print(f"  vs {neg:5s} CV-AUC = {r['auc']:.3f} [{r['ci95'][0]:.3f},{r['ci95'][1]:.3f}] p={r['p']:.3g}")
-                if neg == "D2cV":
+                if neg == args.floor:
                     arm["main_minus_floor"] = main_r["auc"] - r["auc"]
                     arm["main_minus_floor_bootstrap"] = boot_diff(main_r, r)
-                    print(f"  ** 主读数 − D2cV 证伪地板 = {arm['main_minus_floor']:+.3f}, "
+                    print(f"  ** 主读数 − {args.floor} 证伪地板 = {arm['main_minus_floor']:+.3f}, "
                           f"scene 级 bootstrap 95% CI {np.round(arm['main_minus_floor_bootstrap']['ci95'],3).tolist()}")
         # 折分配稳定性
         ms, fs, ds = [], [], []
         for sd in range(10):
-            r = cv(by, ["A"], "D2a", seed=sd, report_negs=["D2cV"])
-            if r and "D2cV" in r.get("other_negatives", {}):
-                ms.append(r["auc"]); fs.append(r["other_negatives"]["D2cV"]["auc"])
+            r = cv(by, [args.pos], args.neg, seed=sd, report_negs=[args.floor])
+            if r and args.floor in r.get("other_negatives", {}):
+                ms.append(r["auc"]); fs.append(r["other_negatives"][args.floor]["auc"])
                 ds.append(ms[-1] - fs[-1])
         if ds:
             arm["stability_across_cv_seeds"] = {
@@ -253,7 +264,7 @@ def main():
                   f"范围 [{min(ds):+.3f},{max(ds):+.3f}]")
 
         for kind in ("random", "permuted"):
-            a = [cv(by, ["A"], "D2a", seed=s, kind=kind) for s in range(args.n_null_seeds)]
+            a = [cv(by, [args.pos], args.neg, seed=s, kind=kind) for s in range(args.n_null_seeds)]
             a = [r["auc"] for r in a if r]
             if a:
                 arm[f"{kind}_floor"] = {"aucs": a, "mean": float(np.mean(a)), "sd": float(np.std(a))}
@@ -276,7 +287,7 @@ def main():
         for k, v in geo.items():
             print(f"  几何稳健性 ρ(投影,{k}) 合并={v['all']['rho']:+.3f} (p={v['all']['p']:.3g})")
         # 冻结全量方向,供 T-I 干涉角使用
-        ALLP = by["A"]; ALLN = by["D2a"]
+        ALLP = by[args.pos]; ALLN = by[args.neg]
         v_full = sup_dir(ALLP, ALLN, seed=0)
         pk = int(main_r["peak_layer_profile_argmax"])
         np.savez(Path(args.out).parent / f"{args.dir_tag}_{pool}.npz",

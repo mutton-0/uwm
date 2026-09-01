@@ -130,13 +130,23 @@ def load_autovla():
 
 
 def main():
+    global W
     ap = argparse.ArgumentParser()
+    # 第二场景类型（前车急刹）复用本脚本：只换工作目录与事件族名，公式/统计/判定一律不动。
+    ap.add_argument("--work", default=str(W))
+    ap.add_argument("--pos", default="A")
+    ap.add_argument("--neg", default="D2a")
+    ap.add_argument("--floor", default="D2cV")
+    ap.add_argument("--models", nargs="*", default=None,
+                    help="限定候选（第二场景第一批只有 SimLingo / DiffusionDrive / LTF）")
     ap.add_argument("--out", default=str(RES / "f_axis_action_counterfactual.json"))
     args = ap.parse_args()
+    W = Path(args.work)
 
     matched = {t: set((W / "mining" / f"matched_{t}.txt").read_text().split())
                for t in ("D2a", "D2b", "D2c", "D2cV")
                if (W / "mining" / f"matched_{t}.txt").exists()}
+    POS, NEG, FLOOR = args.pos, args.neg, args.floor
     OUT = {"design": "行动层反事实测试（协议 §3.5）：① 危险有无 = A 的 ghost−clean；"
                      "② 几何混淆 = D2a 的 ghost−clean。读出对象为最终规划动作，不是表征。",
            "b_definition": "b = v_plan(clean) − v_plan(ghost)，正 = 目标出现后减速",
@@ -145,6 +155,8 @@ def main():
     MODELS = [("SimLingo", load_simlingo), ("DiffusionDrive", load_dd),
               ("LTF", load_ltf), ("DiffusionDriveV2", load_ddv2), ("Alpamayo-R1", load_alpa),
               ("AutoVLA", load_autovla)]
+    if args.models:
+        MODELS = [m for m in MODELS if m[0] in set(args.models)]
     for name, loader in MODELS:
         try:
             _probe = loader()
@@ -154,11 +166,16 @@ def main():
             print(f"\n===== {name} =====  缓存为空或样本不足，跳过"); continue
         by, evmap = _probe
         # D2cV 子集（同类别 VRU、同几何，只差速度）——最硬的对照
-        d2cv = [e for e in by.get("D2c", []) if e["eid"] in matched.get("D2cV", set())
-                and str(e["cls"]).startswith(VRU)]
-        grp = {"A": by.get("A", []),
-               "D2a": [e for e in by.get("D2a", []) if e["eid"] in matched.get("D2a", set())] or by.get("D2a", []),
-               "D2cV": d2cv}
+        if FLOOR == "D2cV":
+            # G1 口径：D2cV 是 D2c 的一个 VRU 子集，需按 matched 清单筛
+            floor_items = [e for e in by.get("D2c", []) if e["eid"] in matched.get("D2cV", set())
+                           and str(e["cls"]).startswith(VRU)]
+        else:
+            # 第二场景：LBv 本身就是一个独立事件族，直接取
+            floor_items = by.get(FLOOR, [])
+        grp = {POS: by.get(POS, []),
+               NEG: [e for e in by.get(NEG, []) if e["eid"] in matched.get(NEG, set())] or by.get(NEG, []),
+               FLOOR: floor_items}
         M = {"group_sizes": {k: len(v) for k, v in grp.items()}}
         print(f"\n===== {name} =====  " + "  ".join(f"{k}={len(v)}" for k, v in grp.items()))
 
@@ -171,20 +188,20 @@ def main():
             print(f"  b({k:4s}) = {m:+.4f} m/s  95% CI [{ci[0]:+.4f}, {ci[1]:+.4f}]  n={len(v)}  "
                   f"{'显著≠0' if (ci[0] > 0 or ci[1] < 0) else '与 0 不可区分'}")
 
-        for neg in ("D2a", "D2cV"):
-            if len(grp[neg]) < 20 or len(grp["A"]) < 20:
+        for neg in (NEG, FLOOR):
+            if len(grp[neg]) < 20 or len(grp[POS]) < 20:
                 continue
-            pa = [e["b"] for e in grp["A"]]; sa = [e["scene"] for e in grp["A"]]
+            pa = [e["b"] for e in grp[POS]]; sa = [e["scene"] for e in grp[POS]]
             pb = [e["b"] for e in grp[neg]]; sb = [e["scene"] for e in grp[neg]]
             a, p = auc(np.array(pa), np.array(pb))
             ci, p_le = boot_auc(pa, sa, pb, sb)
-            M[f"b_auc_A_vs_{neg}"] = {"auc": a, "p_mwu": p, "ci95_scene_bootstrap": ci,
-                                      "p_boot_le_0.5": p_le, "n_pos": len(pa), "n_neg": len(pb)}
-            print(f"  **b-AUC(A vs {neg:4s}) = {a:.4f}**  95% CI [{ci[0]:.4f}, {ci[1]:.4f}]  "
+            M[f"b_auc_{POS}_vs_{neg}"] = {"auc": a, "p_mwu": p, "ci95_scene_bootstrap": ci,
+                                          "p_boot_le_0.5": p_le, "n_pos": len(pa), "n_neg": len(pb)}
+            print(f"  **b-AUC({POS} vs {neg:4s}) = {a:.4f}**  95% CI [{ci[0]:.4f}, {ci[1]:.4f}]  "
                   f"MWU p={p:.3g}  bootstrap P(AUC≤0.5)={p_le:.3f}")
 
-        r = M.get("b_auc_A_vs_D2a")
-        conf = M.get("b_mean_D2a", {})
+        r = M.get(f"b_auc_{POS}_vs_{NEG}")
+        conf = M.get(f"b_mean_{NEG}", {})
         if r:
             if r["ci95_scene_bootstrap"][0] > 0.5:
                 v = "PASS：动作对真危险的响应显著强于对几何匹配无害物的响应"

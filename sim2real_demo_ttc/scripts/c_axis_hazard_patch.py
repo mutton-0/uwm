@@ -50,9 +50,14 @@ def boot(v, n=5000, seed=0):
 
 
 def main():
+    global W
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True, choices=["dd", "ltf", "ddv2", "alpa", "autovla", "simlingo"])
     ap.add_argument("--k", type=int, default=12, help="按 |v_clean − v_ghost| 取前 K 个事件")
+    # 第二场景类型（前车急刹）：换工作目录与正例类名，patching 方法与判定一律不动。
+    ap.add_argument("--work", default=str(W))
+    ap.add_argument("--pos", default="A", help="正例类名（G1 用 A，前车急刹用 LB）")
+    ap.add_argument("--sl-config", default="/data/ruolin/uwm/sim2real_demo_ttc/configs/n1_d2.yaml")
     ap.add_argument("--min-gap", type=float, default=0.02)
     ap.add_argument("--nuscenes-root", default="/data/dataset/nuscenes/v1.0-trainval")
     ap.add_argument("--device", default="cuda:0")
@@ -63,6 +68,7 @@ def main():
                     help="Alpamayo 专用：同输入换 N 个 seed 跑 clean/ghost，量化采样噪声地板")
     ap.add_argument("--out", default="")
     args = ap.parse_args()
+    W = Path(args.work)
     label = {"dd": "DiffusionDrive", "ltf": "LTF", "ddv2": "DiffusionDriveV2",
              "alpa": "Alpamayo-R1", "autovla": "AutoVLA", "simlingo": "SimLingo"}[args.model]
     cache = W / {"dd": "dd_cache", "ltf": "ltf_cache", "ddv2": "ddv2_cache",
@@ -79,7 +85,7 @@ def main():
         _ev = {json.loads(l)["event_id"]: json.loads(l) for l in open(W / "mining" / "events_all.jsonl")}
         for p in sorted(cache.glob("*.h5")):
             m = _ev.get(p.stem)
-            if m is None or m["event_type"] != "A":
+            if m is None or m["event_type"] != args.pos:
                 continue
             try:
                 with h5py.File(p, "r") as f:
@@ -95,7 +101,7 @@ def main():
                          "absgap": abs(vc - vg)})
     for p in ([] if IS_SL else sorted(cache.glob("*.npz"))):
         d = np.load(p, allow_pickle=True); m = json.loads(str(d["meta"]))
-        if m["event_type"] != "A":
+        if m["event_type"] != args.pos:
             continue
         if "commanded_speed_clean" in d.files:
             vc = float(d["commanded_speed_clean"].mean()); vg = float(d["commanded_speed_ghost"].mean())
@@ -107,7 +113,7 @@ def main():
                      "absgap": abs(vc - vg)})
     rows.sort(key=lambda r: -r["absgap"])
     sel = [r for r in rows if r["absgap"] >= args.min_gap][: args.k]
-    print(f"[C-haz/{label}] A 类 {len(rows)} 个，选中 {len(sel)}（|gap| ≥ {args.min_gap}，"
+    print(f"[C-haz/{label}] {args.pos} 类 {len(rows)} 个，选中 {len(sel)}（|gap| ≥ {args.min_gap}，"
           f"范围 {sel[-1]['absgap']:.3f} ~ {sel[0]['absgap']:.3f}）")
 
     if IS_SL:
@@ -117,8 +123,7 @@ def main():
         # 换成整条 prompt 也不改变剖面形态，故这个选择不影响本次预测检验的结论。
         from omegaconf import OmegaConf
         sys.path.insert(0, "/data/ruolin/uwm/sim2real_demo_ttc/scripts")
-        cfg = OmegaConf.to_container(OmegaConf.load(
-            "/data/ruolin/uwm/sim2real_demo_ttc/configs/n1_d2.yaml"), resolve=True)
+        cfg = OmegaConf.to_container(OmegaConf.load(args.sl_config), resolve=True)
         cfg["model"]["device"] = args.device
         from simlingo_runner import SimLingoRunner
         from g2_cache import commanded_speed

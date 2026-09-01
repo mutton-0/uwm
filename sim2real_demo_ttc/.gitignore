@@ -21,3 +21,6 @@ variants/*/acts_*.npz
 variants/tier_m_v3/mining
 # pilot post-train 的特征缓存（可由 scripts/p1_cache_query_states.py 一遍前向重建）
 variants/*/pilot_query_states.npz
+# 第二场景（前车急刹）的表征缓存与候选池（均可由 lb1/lb2 + 各适配器重建）
+variants/lead_brake/cache/
+variants/lead_brake/mining/_lb_pool.npy

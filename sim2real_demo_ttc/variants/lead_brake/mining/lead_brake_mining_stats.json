@@ -1,0 +1,49 @@
+{
+  "thresholds": {
+    "a_brake_max": -3.0,
+    "a_brake_floor": -10.0,
+    "a_mild": [
+      -1.5,
+      -0.3
+    ],
+    "a_steady_min": -0.2,
+    "caliper_d_long": 0.3,
+    "caliper_speed": 0.3,
+    "caliper_ego_speed": 0.3
+  },
+  "n_pool": 302,
+  "dropped_implausible_a": 32,
+  "n_after_threshold": {
+    "LB": 103,
+    "LBv": 37,
+    "LBn": 80
+  },
+  "match_rate": {
+    "LBn": "48/103",
+    "LBv": "31/103"
+  },
+  "n_events_written": {
+    "LB": 103,
+    "LBv": 31,
+    "LBn": 48
+  },
+  "skipped": {},
+  "n_scenes": 154,
+  "match_qc_smd": {
+    "LBn": {
+      "d_long_at_emergence": -0.15216889129350736,
+      "lead_speed_mps": 0.025859970123372038,
+      "ego_speed_mps": 0.23860556008594666,
+      "area_px": 0.21609572872271615,
+      "a_min_window": -4.000208049346373
+    },
+    "LBv": {
+      "d_long_at_emergence": -0.3283963238135364,
+      "lead_speed_mps": -0.29145453300633695,
+      "ego_speed_mps": -0.20465274203539333,
+      "area_px": 0.25319020414095916,
+      "a_min_window": -3.3190374143471795
+    }
+  },
+  "smd_note": "|SMD| < 0.1 视为匹配良好；a_min_window 的 SMD **应当大**（那正是唯一差异）"
+}

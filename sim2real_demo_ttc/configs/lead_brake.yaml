@@ -1,0 +1,46 @@
+# 第二场景类型：前车急刹（LB）。
+# 工单：docs/severity_gradient_and_second_scenario_workorder.md 任务二。
+#
+# **复用纪律**：`mining:` 段与 configs/n1_d2.yaml **逐字段相同**（走廊、相机、帧窗口），
+# 因为 lb1 直接调用 g1_mine_events.compute_scene_geometry / pick_frames。
+# 改动只在新增的 `lead_brake:` 段，即本场景独有的判据。
+tier: LB-S
+
+paths:
+  nuscenes_root: /data/dataset/nuscenes/v1.0-trainval
+  nuscenes_version: v1.0-trainval
+  work_dir: /data/ruolin/uwm/sim2real_demo_ttc/variants/lead_brake
+
+mining:
+  camera: CAM_FRONT
+  corridor_half_width_m: 2.0
+  corridor_x_min_m: 0.0
+  corridor_x_max_m: 50.0
+  min_closing_speed_mps: 0.5
+  event_A: {enabled: false, window_s: 1.0, ttc_max_s: 5.0}
+  event_B: {enabled: false, d_long_max_m: 25.0, ttc_max_s: 6.0, min_lateral_speed_mps: 0.1}
+  event_C: {enabled: false, drop_window_s: 1.0, min_drop_s: 1.5, ttc_after_max_s: 5.0}
+  event_D: {enabled: false, ttc_min_s: 6.0, max_per_scene: 2}
+  event_D2: {enabled: false, d2c_ttc_min_s: 8.0, d2b_max_per_scene: 3, ctx_placebo_shift_s: 2.5}
+  # 帧选取与 G1 完全一致：clean = 刹车起始前，ghost = 刹车已发生
+  clean_window_s: [-1.5, -0.5]
+  ghost_window_s: [0.0, 1.0]
+  frames_per_condition: 2
+  min_lead_time_s: 1.6
+  min_tail_time_s: 1.1
+
+lead_brake:
+  window_s: 1.0            # 刹车起始后的观测窗口
+  pre_window_s: 1.0        # 刹车起始前的平稳跟车窗口（clean 侧要求全程都是走廊内前车）
+  min_lead_frames: 6       # 该目标至少这么多帧是"走廊内可见前车"
+  min_lead_time_s: 1.6     # 与 mining 段一致，供 lb1 直接读取
+  min_tail_time_s: 1.1
+  # 阈值留空 —— 按 lb1 --survey 的全局分位数确定后回填，并记入挖掘报告的"阈值回调记录"。
+  # 这一步刻意不预填数字：G1 当年 A/B/C 的阈值也是按分布回调的（见 configs/n1_d2.yaml 回调记录 #1~#3）。
+  a_brake_max: null        # 正例：a_min_window <= 此值（更负 = 更急）
+  a_mild_lo: null          # LBv 证伪地板：mild_lo <= a_min_window <= mild_hi（在减速但幅度小）
+  a_mild_hi: null
+  a_steady_min: null       # LBn 平稳跟车：a_min_window >= 此值（基本没减速）
+  caliper_d_long: 0.30     # 负例匹配容差（log 距离），沿用 N1 的 caliper 口径
+  caliper_speed: 0.30      # 负例匹配容差（log 车速）
+  caliper_ego_speed: 0.30   # §LB/A42：首版漏匹配，实测 LB vs LBn 的 ego 速度 SMD = +0.600

@@ -1,0 +1,180 @@
+{
+  "design": "行动层反事实测试（协议 §3.5）：① 危险有无 = A 的 ghost−clean；② 几何混淆 = D2a 的 ghost−clean。读出对象为最终规划动作，不是表征。",
+  "b_definition": "b = v_plan(clean) − v_plan(ghost)，正 = 目标出现后减速",
+  "models": {
+    "SimLingo": {
+      "group_sizes": {
+        "LB": 103,
+        "LBn": 48,
+        "LBv": 31
+      },
+      "b_mean_LB": {
+        "mean": -0.05904976097704137,
+        "ci95": [
+          -0.329519549210775,
+          0.21063749121608663
+        ],
+        "n": 103,
+        "significant": false
+      },
+      "b_mean_LBn": {
+        "mean": 0.09545989346224815,
+        "ci95": [
+          -0.28223164728163586,
+          0.5068221290912874
+        ],
+        "n": 48,
+        "significant": false
+      },
+      "b_mean_LBv": {
+        "mean": -0.0171822709662299,
+        "ci95": [
+          -0.41217006897673975,
+          0.3984525684510628
+        ],
+        "n": 31,
+        "significant": false
+      },
+      "b_auc_LB_vs_LBn": {
+        "auc": 0.4906957928802589,
+        "p_mwu": 0.8557242048468483,
+        "ci95_scene_bootstrap": [
+          0.383346252163546,
+          0.5893305496597264
+        ],
+        "p_boot_le_0.5": 0.571,
+        "n_pos": 103,
+        "n_neg": 48
+      },
+      "b_auc_LB_vs_LBv": {
+        "auc": 0.499217037269026,
+        "p_mwu": 0.9915805004784994,
+        "ci95_scene_bootstrap": [
+          0.3852936160412796,
+          0.6155985294117646
+        ],
+        "p_boot_le_0.5": 0.518,
+        "n_pos": 103,
+        "n_neg": 31
+      },
+      "verdict_action_counterfactual": "不可估：b-AUC 的 scene 级 CI 跨 0.5",
+      "confound_response_significant": false
+    },
+    "DiffusionDrive": {
+      "group_sizes": {
+        "LB": 103,
+        "LBn": 48,
+        "LBv": 31
+      },
+      "b_mean_LB": {
+        "mean": -0.0007713748485717959,
+        "ci95": [
+          -0.07399844123050571,
+          0.06419169730783521
+        ],
+        "n": 103,
+        "significant": false
+      },
+      "b_mean_LBn": {
+        "mean": -0.006739357486367226,
+        "ci95": [
+          -0.028406818051004885,
+          0.014041716635227198
+        ],
+        "n": 48,
+        "significant": false
+      },
+      "b_mean_LBv": {
+        "mean": 0.006450010643851372,
+        "ci95": [
+          -0.049642021805348414,
+          0.055883177778413215
+        ],
+        "n": 31,
+        "significant": false
+      },
+      "b_auc_LB_vs_LBn": {
+        "auc": 0.5020226537216829,
+        "p_mwu": 0.9697176927510361,
+        "ci95_scene_bootstrap": [
+          0.4107989804964539,
+          0.5963443484457112
+        ],
+        "p_boot_le_0.5": 0.4765,
+        "n_pos": 103,
+        "n_neg": 48
+      },
+      "b_auc_LB_vs_LBv": {
+        "auc": 0.4353272784215471,
+        "p_mwu": 0.27707889232424376,
+        "ci95_scene_bootstrap": [
+          0.31399734133790735,
+          0.5567153233364573
+        ],
+        "p_boot_le_0.5": 0.8405,
+        "n_pos": 103,
+        "n_neg": 31
+      },
+      "verdict_action_counterfactual": "不可估：b-AUC 的 scene 级 CI 跨 0.5",
+      "confound_response_significant": false
+    },
+    "LTF": {
+      "group_sizes": {
+        "LB": 103,
+        "LBn": 48,
+        "LBv": 31
+      },
+      "b_mean_LB": {
+        "mean": 0.004223039771601992,
+        "ci95": [
+          -0.01275736586225421,
+          0.02153817970271503
+        ],
+        "n": 103,
+        "significant": false
+      },
+      "b_mean_LBn": {
+        "mean": -0.009298322722315788,
+        "ci95": [
+          -0.023106550603629428,
+          0.004283927141393948
+        ],
+        "n": 48,
+        "significant": false
+      },
+      "b_mean_LBv": {
+        "mean": -0.015864455531681736,
+        "ci95": [
+          -0.030968562100503232,
+          -0.0009568077350606125
+        ],
+        "n": 31,
+        "significant": true
+      },
+      "b_auc_LB_vs_LBn": {
+        "auc": 0.559668284789644,
+        "p_mwu": 0.23926210446756424,
+        "ci95_scene_bootstrap": [
+          0.4713785853821231,
+          0.650955893832943
+        ],
+        "p_boot_le_0.5": 0.088,
+        "n_pos": 103,
+        "n_neg": 48
+      },
+      "b_auc_LB_vs_LBv": {
+        "auc": 0.5941121202630755,
+        "p_mwu": 0.11345085997107061,
+        "ci95_scene_bootstrap": [
+          0.4897942636514065,
+          0.7017672771537653
+        ],
+        "p_boot_le_0.5": 0.0385,
+        "n_pos": 103,
+        "n_neg": 31
+      },
+      "verdict_action_counterfactual": "不可估：b-AUC 的 scene 级 CI 跨 0.5",
+      "confound_response_significant": false
+    }
+  }
+}

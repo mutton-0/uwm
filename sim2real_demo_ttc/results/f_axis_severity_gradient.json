@@ -1,0 +1,1037 @@
+{
+  "design": "A 类事件**内部**的剂量-响应：b 是否随危险严重程度分级",
+  "b_definition": "b = v_plan(clean) − v_plan(ghost)，正 = 目标出现后减速",
+  "reuses": "b 来自 f_axis_action_counterfactual 的同一批缓存；本脚本零前向",
+  "preregistered_hypothesis": "「反应但不特异」的候选预期 b 不随接近速度显著分级；LTF 预期分级更强",
+  "design_tension_SG_A41": "工单指定主读数为接近速度，但本轮三个主对比候选全是单帧模型，而相对速度对单帧模型结构性不可观测（D2cV 地板赖以成立的同一前提，§CE/A34）。故必须并读 d_long（单帧可观测剂量）对照，才能区分「看不见剂量」与「看得见但不分级」。",
+  "models": {
+    "SimLingo": {
+      "role": "主对比：b(A) 显著非零、反应不特异",
+      "n_A_cached": 288,
+      "doses": {
+        "v_close": {
+          "n_events": 288,
+          "n_scenes": 149,
+          "dose": "v_close",
+          "dose_label": "接近速度 v_close [m/s]",
+          "role": "主读数（工单指定）",
+          "expected_sign": "+",
+          "observable_to_single_frame": false,
+          "winsor_quantile": 0.99,
+          "n_winsorized": 6,
+          "dose_quantiles": [
+            0.059,
+            4.709,
+            6.487,
+            8.678,
+            229.185
+          ],
+          "b_mean": 0.3065783074513699,
+          "slope": -0.08018609457921567,
+          "slope_ci95_scene_boot": [
+            -0.14320367393540737,
+            -0.014747836704318985
+          ],
+          "spearman_rho": -0.18610678841592904,
+          "spearman_p": 0.001512046473401487,
+          "isotonic_r2": 0.002243511036848389,
+          "jt_trend": {
+            "JT_z": -3.168168741001082,
+            "p_two_sided": 0.00153402455652496,
+            "n_bins": 4,
+            "bin_sizes": [
+              72,
+              72,
+              72,
+              72
+            ],
+            "bin_means": [
+              0.6526472369829813,
+              0.3027930077579286,
+              0.36204344696468777,
+              -0.09117046190011832
+            ]
+          },
+          "verdict": "**方向与预期相反**（CI 不含 0）——如实报告，不作有利解读"
+        },
+        "d_long": {
+          "n_events": 288,
+          "n_scenes": 149,
+          "dose": "d_long",
+          "dose_label": "纵向距离 d_long [m]",
+          "role": "必需对照（单帧可观测剂量）",
+          "expected_sign": "-",
+          "observable_to_single_frame": true,
+          "winsor_quantile": 0.99,
+          "n_winsorized": 6,
+          "dose_quantiles": [
+            0.3,
+            20.492,
+            26.876,
+            38.63,
+            49.951
+          ],
+          "b_mean": 0.3065783074513699,
+          "slope": -0.013979411013411583,
+          "slope_ci95_scene_boot": [
+            -0.029234327215395598,
+            0.002267024495718428
+          ],
+          "spearman_rho": -0.11669310101861019,
+          "spearman_p": 0.04787238740372793,
+          "isotonic_r2": 0.036562216986134266,
+          "jt_trend": {
+            "JT_z": -2.1730550370085298,
+            "p_two_sided": 0.029776175237376856,
+            "n_bins": 4,
+            "bin_sizes": [
+              72,
+              72,
+              72,
+              72
+            ],
+            "bin_means": [
+              0.3480835204633574,
+              0.49875107407569885,
+              0.48563699920972186,
+              -0.10615836394329865
+            ]
+          },
+          "verdict": "不可估：斜率的 scene 级 bootstrap CI 含 0（功效不足，不得据此宣称无分级）"
+        },
+        "ttc": {
+          "n_events": 288,
+          "n_scenes": 149,
+          "dose": "ttc",
+          "dose_label": "TTC [s]",
+          "role": "敏感性分析（混杂距离与速度）",
+          "expected_sign": "-",
+          "observable_to_single_frame": false,
+          "winsor_quantile": 0.99,
+          "n_winsorized": 6,
+          "dose_quantiles": [
+            0.215,
+            3.747,
+            4.608,
+            5.294,
+            99.0
+          ],
+          "b_mean": 0.3065783074513699,
+          "slope": 0.09946107256562849,
+          "slope_ci95_scene_boot": [
+            -0.03344989546119562,
+            0.23528773733096148
+          ],
+          "spearman_rho": 0.04520136304626534,
+          "spearman_p": 0.44477954628224137,
+          "isotonic_r2": 0.0038183852780167005,
+          "jt_trend": {
+            "JT_z": 0.7812876188371278,
+            "p_two_sided": 0.4346333504512949,
+            "n_bins": 4,
+            "bin_sizes": [
+              72,
+              72,
+              72,
+              72
+            ],
+            "bin_means": [
+              -0.025191060836530395,
+              0.6411403204417891,
+              0.1829827974239985,
+              0.42738117277622223
+            ]
+          },
+          "verdict": "不可估：斜率的 scene 级 bootstrap CI 含 0（功效不足，不得据此宣称无分级）"
+        }
+      },
+      "multivariate": {
+        "spec": "b ~ v_close + d_long + ego_speed",
+        "n_events": 288,
+        "n_scenes": 149,
+        "corr_v_close_d_long": 0.6886421073104234,
+        "corr_v_close_ego_speed": 0.6189905491598536,
+        "coef": {
+          "v_close": {
+            "beta": -0.08366595506145817,
+            "ci95_scene_boot": [
+              -0.1660708396168455,
+              -0.0027013806325142152
+            ],
+            "excludes_zero": true
+          },
+          "d_long": {
+            "beta": 0.0012838223743198568,
+            "ci95_scene_boot": [
+              -0.024166819432407557,
+              0.02819667772877611
+            ],
+            "excludes_zero": false
+          },
+          "ego_speed": {
+            "beta": 0.00018608194342242975,
+            "ci95_scene_boot": [
+              -0.13332784619383786,
+              0.11673418654769153
+            ],
+            "excludes_zero": false
+          },
+          "intercept": {
+            "beta": 0.8428248127096627,
+            "ci95_scene_boot": [
+              0.31186762537580665,
+              1.3712953942872257
+            ],
+            "excludes_zero": true
+          }
+        },
+        "verdict": "控制距离/自车速度后，v_close 的偏系数 CI 仍不含 0 ⇒ 该关系不能由所控变量解释（**不等于模型感知了速度**，见报告讨论）"
+      },
+      "multivariate_full": {
+        "spec": "b ~ v_close + d_long + ego_speed + log_area + |lat| + ecc + two_wheeler",
+        "n_events": 287,
+        "n_scenes": 149,
+        "corr_v_close_d_long": 0.6850601948641206,
+        "corr_v_close_ego_speed": 0.6220541556637134,
+        "coef": {
+          "v_close": {
+            "beta": -0.0780629740771059,
+            "ci95_scene_boot": [
+              -0.17519736108032313,
+              0.013158568726645253
+            ],
+            "excludes_zero": false
+          },
+          "d_long": {
+            "beta": -0.005652494294247804,
+            "ci95_scene_boot": [
+              -0.05463965697934153,
+              0.0402800237698312
+            ],
+            "excludes_zero": false
+          },
+          "ego_speed": {
+            "beta": -0.006375330400128179,
+            "ci95_scene_boot": [
+              -0.14631500424943364,
+              0.12157525481349779
+            ],
+            "excludes_zero": false
+          },
+          "log_area": {
+            "beta": 0.007899331598036451,
+            "ci95_scene_boot": [
+              -0.5384736170860354,
+              0.5110046339222825
+            ],
+            "excludes_zero": false
+          },
+          "abs_lat": {
+            "beta": 0.274858202627388,
+            "ci95_scene_boot": [
+              -0.06818934483131696,
+              0.6365265040742638
+            ],
+            "excludes_zero": false
+          },
+          "ecc": {
+            "beta": -2.025367295977896,
+            "ci95_scene_boot": [
+              -5.199063540029133,
+              0.9721481144085818
+            ],
+            "excludes_zero": false
+          },
+          "two_wheeler": {
+            "beta": 0.039880012049109216,
+            "ci95_scene_boot": [
+              -0.49759357197981796,
+              0.6240647696595711
+            ],
+            "excludes_zero": false
+          },
+          "intercept": {
+            "beta": 0.9598848003866011,
+            "ci95_scene_boot": [
+              -4.169019513603584,
+              6.37299742458688
+            ],
+            "excludes_zero": false
+          }
+        },
+        "verdict": "控制距离/自车速度/可见几何与类别后，v_close 的偏系数 CI 含 0 ⇒ 单变量上看到的 v_close 关系不能与「所控变量经相关性泄漏」区分"
+      }
+    },
+    "LTF": {
+      "role": "主对比：唯一「反应特异」的单帧候选",
+      "n_A_cached": 291,
+      "doses": {
+        "v_close": {
+          "n_events": 291,
+          "n_scenes": 151,
+          "dose": "v_close",
+          "dose_label": "接近速度 v_close [m/s]",
+          "role": "主读数（工单指定）",
+          "expected_sign": "+",
+          "observable_to_single_frame": false,
+          "winsor_quantile": 0.99,
+          "n_winsorized": 6,
+          "dose_quantiles": [
+            0.059,
+            4.696,
+            6.45,
+            8.664,
+            229.185
+          ],
+          "b_mean": 0.020339225270046096,
+          "slope": -0.006046013861167827,
+          "slope_ci95_scene_boot": [
+            -0.009982330530499616,
+            -0.002821347121336815
+          ],
+          "spearman_rho": -0.2237921305860009,
+          "spearman_p": 0.00011805961905152893,
+          "isotonic_r2": 4.6252870820162606e-05,
+          "jt_trend": {
+            "JT_z": -3.5597565331920813,
+            "p_two_sided": 0.0003711987719483556,
+            "n_bins": 4,
+            "bin_sizes": [
+              73,
+              72,
+              73,
+              73
+            ],
+            "bin_means": [
+              0.057145925825589326,
+              0.01368982924355401,
+              0.012687291184516803,
+              -0.0022572327902770205
+            ]
+          },
+          "verdict": "**方向与预期相反**（CI 不含 0）——如实报告，不作有利解读"
+        },
+        "d_long": {
+          "n_events": 291,
+          "n_scenes": 151,
+          "dose": "d_long",
+          "dose_label": "纵向距离 d_long [m]",
+          "role": "必需对照（单帧可观测剂量）",
+          "expected_sign": "-",
+          "observable_to_single_frame": true,
+          "winsor_quantile": 0.99,
+          "n_winsorized": 6,
+          "dose_quantiles": [
+            0.3,
+            20.34,
+            26.423,
+            38.455,
+            49.951
+          ],
+          "b_mean": 0.020339225270046096,
+          "slope": -0.0016874277983612797,
+          "slope_ci95_scene_boot": [
+            -0.0025889993270280117,
+            -0.0007218255127760537
+          ],
+          "spearman_rho": -0.2792754646218693,
+          "spearman_p": 1.2969213424874829e-06,
+          "isotonic_r2": 0.09071126980942834,
+          "jt_trend": {
+            "JT_z": -4.61553734224905,
+            "p_two_sided": 3.920795311529446e-06,
+            "n_bins": 4,
+            "bin_sizes": [
+              73,
+              72,
+              73,
+              73
+            ],
+            "bin_means": [
+              0.04450581092642595,
+              0.04192156427436405,
+              -0.001448692237218357,
+              -0.0033261334038760565
+            ]
+          },
+          "verdict": "显示分级：斜率 CI 不含 0 且方向与预期一致"
+        },
+        "ttc": {
+          "n_events": 291,
+          "n_scenes": 151,
+          "dose": "ttc",
+          "dose_label": "TTC [s]",
+          "role": "敏感性分析（混杂距离与速度）",
+          "expected_sign": "-",
+          "observable_to_single_frame": false,
+          "winsor_quantile": 0.99,
+          "n_winsorized": 6,
+          "dose_quantiles": [
+            0.215,
+            3.745,
+            4.608,
+            5.295,
+            99.0
+          ],
+          "b_mean": 0.020339225270046096,
+          "slope": -0.0013097566429836494,
+          "slope_ci95_scene_boot": [
+            -0.011631527820378733,
+            0.010026522859112262
+          ],
+          "spearman_rho": -0.0843015710457357,
+          "spearman_p": 0.15144613663088552,
+          "isotonic_r2": 0.024090016096564137,
+          "jt_trend": {
+            "JT_z": -1.4967795186807649,
+            "p_two_sided": 0.13445063727123463,
+            "n_bins": 4,
+            "bin_sizes": [
+              73,
+              72,
+              73,
+              73
+            ],
+            "bin_means": [
+              0.008964644623792742,
+              0.041525862386657134,
+              0.02368510912542474,
+              0.007471512850016764
+            ]
+          },
+          "verdict": "不可估：斜率的 scene 级 bootstrap CI 含 0（功效不足，不得据此宣称无分级）"
+        }
+      },
+      "multivariate": {
+        "spec": "b ~ v_close + d_long + ego_speed",
+        "n_events": 291,
+        "n_scenes": 151,
+        "corr_v_close_d_long": 0.6904531899265949,
+        "corr_v_close_ego_speed": 0.6239455399647326,
+        "coef": {
+          "v_close": {
+            "beta": -0.003791512398554856,
+            "ci95_scene_boot": [
+              -0.009663042365060411,
+              0.0015218073467586808
+            ],
+            "excludes_zero": false
+          },
+          "d_long": {
+            "beta": -0.001953983472854284,
+            "ci95_scene_boot": [
+              -0.003587640946728966,
+              -0.00044336450490624455
+            ],
+            "excludes_zero": true
+          },
+          "ego_speed": {
+            "beta": 0.006647525518736807,
+            "ci95_scene_boot": [
+              0.0015729771241447307,
+              0.013174160819033524
+            ],
+            "excludes_zero": true
+          },
+          "intercept": {
+            "beta": 0.0676205953585734,
+            "ci95_scene_boot": [
+              0.03073753324446595,
+              0.09862659377196649
+            ],
+            "excludes_zero": true
+          }
+        },
+        "verdict": "控制距离/自车速度后，v_close 的偏系数 CI 含 0 ⇒ 单变量上看到的 v_close 关系不能与「所控变量经相关性泄漏」区分"
+      },
+      "multivariate_full": {
+        "spec": "b ~ v_close + d_long + ego_speed + log_area + |lat| + ecc + two_wheeler",
+        "n_events": 287,
+        "n_scenes": 149,
+        "corr_v_close_d_long": 0.6850601948641206,
+        "corr_v_close_ego_speed": 0.6220541556637134,
+        "coef": {
+          "v_close": {
+            "beta": -0.004741214960190834,
+            "ci95_scene_boot": [
+              -0.011937188996444591,
+              0.0032412473904410567
+            ],
+            "excludes_zero": false
+          },
+          "d_long": {
+            "beta": -0.0009440694428431052,
+            "ci95_scene_boot": [
+              -0.004233185887633202,
+              0.0023121404086687285
+            ],
+            "excludes_zero": false
+          },
+          "ego_speed": {
+            "beta": 0.008781297373138647,
+            "ci95_scene_boot": [
+              0.0020343573146039792,
+              0.016443408988165722
+            ],
+            "excludes_zero": true
+          },
+          "log_area": {
+            "beta": 0.024569452843174765,
+            "ci95_scene_boot": [
+              -0.013349246915021859,
+              0.06254396187377685
+            ],
+            "excludes_zero": false
+          },
+          "abs_lat": {
+            "beta": 0.0014074343823517496,
+            "ci95_scene_boot": [
+              -0.014819693151837105,
+              0.018248849421287176
+            ],
+            "excludes_zero": false
+          },
+          "ecc": {
+            "beta": -0.09566068013142333,
+            "ci95_scene_boot": [
+              -0.27069038426853204,
+              0.07006463483087738
+            ],
+            "excludes_zero": false
+          },
+          "two_wheeler": {
+            "beta": -0.0008719017255400932,
+            "ci95_scene_boot": [
+              -0.035942359433094734,
+              0.03423870602156213
+            ],
+            "excludes_zero": false
+          },
+          "intercept": {
+            "beta": -0.149799154863647,
+            "ci95_scene_boot": [
+              -0.5214395100558679,
+              0.2185138325273279
+            ],
+            "excludes_zero": false
+          }
+        },
+        "verdict": "控制距离/自车速度/可见几何与类别后，v_close 的偏系数 CI 含 0 ⇒ 单变量上看到的 v_close 关系不能与「所控变量经相关性泄漏」区分"
+      }
+    },
+    "DiffusionDriveV2": {
+      "role": "主对比：b(A) 显著非零、反应不特异",
+      "n_A_cached": 291,
+      "doses": {
+        "v_close": {
+          "n_events": 291,
+          "n_scenes": 151,
+          "dose": "v_close",
+          "dose_label": "接近速度 v_close [m/s]",
+          "role": "主读数（工单指定）",
+          "expected_sign": "+",
+          "observable_to_single_frame": false,
+          "winsor_quantile": 0.99,
+          "n_winsorized": 6,
+          "dose_quantiles": [
+            0.059,
+            4.696,
+            6.45,
+            8.664,
+            229.185
+          ],
+          "b_mean": 0.20065236265716685,
+          "slope": 0.035841486870885106,
+          "slope_ci95_scene_boot": [
+            -0.014275837052317232,
+            0.08944085999088373
+          ],
+          "spearman_rho": 0.030608992581885194,
+          "spearman_p": 0.6030462831165488,
+          "isotonic_r2": 0.03933968732201287,
+          "jt_trend": {
+            "JT_z": 0.5126298559609944,
+            "p_two_sided": 0.6082102645553975,
+            "n_bins": 4,
+            "bin_sizes": [
+              73,
+              72,
+              73,
+              73
+            ],
+            "bin_means": [
+              0.1209826770506493,
+              0.17396700547801125,
+              0.18757353743461713,
+              0.31972067782731906
+            ]
+          },
+          "verdict": "不可估：斜率的 scene 级 bootstrap CI 含 0（功效不足，不得据此宣称无分级）"
+        },
+        "d_long": {
+          "n_events": 291,
+          "n_scenes": 151,
+          "dose": "d_long",
+          "dose_label": "纵向距离 d_long [m]",
+          "role": "必需对照（单帧可观测剂量）",
+          "expected_sign": "-",
+          "observable_to_single_frame": true,
+          "winsor_quantile": 0.99,
+          "n_winsorized": 6,
+          "dose_quantiles": [
+            0.3,
+            20.34,
+            26.423,
+            38.455,
+            49.951
+          ],
+          "b_mean": 0.20065236265716685,
+          "slope": 0.005034298933483962,
+          "slope_ci95_scene_boot": [
+            -0.006758436647344873,
+            0.016347374477102668
+          ],
+          "spearman_rho": 0.017809266847699044,
+          "spearman_p": 0.7622558831530979,
+          "isotonic_r2": 0.003391449120135226,
+          "jt_trend": {
+            "JT_z": 0.03986429013548437,
+            "p_two_sided": 0.9682013208033091,
+            "n_bins": 4,
+            "bin_sizes": [
+              73,
+              72,
+              73,
+              73
+            ],
+            "bin_means": [
+              0.18332768129567578,
+              0.16928495135572222,
+              0.11930299591119975,
+              0.3302641315002964
+            ]
+          },
+          "verdict": "不可估：斜率的 scene 级 bootstrap CI 含 0（功效不足，不得据此宣称无分级）"
+        },
+        "ttc": {
+          "n_events": 291,
+          "n_scenes": 151,
+          "dose": "ttc",
+          "dose_label": "TTC [s]",
+          "role": "敏感性分析（混杂距离与速度）",
+          "expected_sign": "-",
+          "observable_to_single_frame": false,
+          "winsor_quantile": 0.99,
+          "n_winsorized": 6,
+          "dose_quantiles": [
+            0.215,
+            3.745,
+            4.608,
+            5.295,
+            99.0
+          ],
+          "b_mean": 0.20065236265716685,
+          "slope": -0.05174661474426151,
+          "slope_ci95_scene_boot": [
+            -0.15195819025836954,
+            0.045980023166195
+          ],
+          "spearman_rho": -0.03939034017004363,
+          "spearman_p": 0.5032935493023607,
+          "isotonic_r2": 0.03527354323085985,
+          "jt_trend": {
+            "JT_z": -0.6259939310337781,
+            "p_two_sided": 0.5313189220400374,
+            "n_bins": 4,
+            "bin_sizes": [
+              73,
+              72,
+              73,
+              73
+            ],
+            "bin_means": [
+              0.2476029417490306,
+              0.30379852404197055,
+              0.06338466683479205,
+              0.18923627911773447
+            ]
+          },
+          "verdict": "不可估：斜率的 scene 级 bootstrap CI 含 0（功效不足，不得据此宣称无分级）"
+        }
+      },
+      "multivariate": {
+        "spec": "b ~ v_close + d_long + ego_speed",
+        "n_events": 291,
+        "n_scenes": 151,
+        "corr_v_close_d_long": 0.6904531899265949,
+        "corr_v_close_ego_speed": 0.6239455399647326,
+        "coef": {
+          "v_close": {
+            "beta": 0.037651797089864665,
+            "ci95_scene_boot": [
+              -0.029712050542721965,
+              0.11268741900239751
+            ],
+            "excludes_zero": false
+          },
+          "d_long": {
+            "beta": -0.008088071854761581,
+            "ci95_scene_boot": [
+              -0.02695531036732243,
+              0.010838199001438937
+            ],
+            "excludes_zero": false
+          },
+          "ego_speed": {
+            "beta": 0.044027866448204854,
+            "ci95_scene_boot": [
+              -0.05601455172089999,
+              0.13926556357649944
+            ],
+            "excludes_zero": false
+          },
+          "intercept": {
+            "beta": -0.058315042390334464,
+            "ci95_scene_boot": [
+              -0.43599765141108154,
+              0.3356790047210412
+            ],
+            "excludes_zero": false
+          }
+        },
+        "verdict": "控制距离/自车速度后，v_close 的偏系数 CI 含 0 ⇒ 单变量上看到的 v_close 关系不能与「所控变量经相关性泄漏」区分"
+      },
+      "multivariate_full": {
+        "spec": "b ~ v_close + d_long + ego_speed + log_area + |lat| + ecc + two_wheeler",
+        "n_events": 287,
+        "n_scenes": 149,
+        "corr_v_close_d_long": 0.6850601948641206,
+        "corr_v_close_ego_speed": 0.6220541556637134,
+        "coef": {
+          "v_close": {
+            "beta": 0.04659900255501358,
+            "ci95_scene_boot": [
+              -0.041093315892040266,
+              0.1340637387135431
+            ],
+            "excludes_zero": false
+          },
+          "d_long": {
+            "beta": -0.02307745354716995,
+            "ci95_scene_boot": [
+              -0.07183585981952113,
+              0.01815927824480161
+            ],
+            "excludes_zero": false
+          },
+          "ego_speed": {
+            "beta": 0.027809408777336533,
+            "ci95_scene_boot": [
+              -0.0834341809965616,
+              0.13659171598434874
+            ],
+            "excludes_zero": false
+          },
+          "log_area": {
+            "beta": -0.21357485897879824,
+            "ci95_scene_boot": [
+              -0.6883651130738133,
+              0.16485660941758007
+            ],
+            "excludes_zero": false
+          },
+          "abs_lat": {
+            "beta": -0.10783768965669649,
+            "ci95_scene_boot": [
+              -0.420740797273397,
+              0.20906516094758573
+            ],
+            "excludes_zero": false
+          },
+          "ecc": {
+            "beta": 0.16775038896876693,
+            "ci95_scene_boot": [
+              -1.6010469183990363,
+              2.101496685671449
+            ],
+            "excludes_zero": false
+          },
+          "two_wheeler": {
+            "beta": -0.018667779591291046,
+            "ci95_scene_boot": [
+              -0.5169223724454666,
+              0.4791145458422441
+            ],
+            "excludes_zero": false
+          },
+          "intercept": {
+            "beta": 2.2965750862314875,
+            "ci95_scene_boot": [
+              -1.6209527841881033,
+              7.182734158671231
+            ],
+            "excludes_zero": false
+          }
+        },
+        "verdict": "控制距离/自车速度/可见几何与类别后，v_close 的偏系数 CI 含 0 ⇒ 单变量上看到的 v_close 关系不能与「所控变量经相关性泄漏」区分"
+      }
+    },
+    "DiffusionDrive": {
+      "role": "平线基线：b(A) 本身不显著，不纳入主对比",
+      "n_A_cached": 291,
+      "doses": {
+        "v_close": {
+          "n_events": 291,
+          "n_scenes": 151,
+          "dose": "v_close",
+          "dose_label": "接近速度 v_close [m/s]",
+          "role": "主读数（工单指定）",
+          "expected_sign": "+",
+          "observable_to_single_frame": false,
+          "winsor_quantile": 0.99,
+          "n_winsorized": 6,
+          "dose_quantiles": [
+            0.059,
+            4.696,
+            6.45,
+            8.664,
+            229.185
+          ],
+          "b_mean": 0.009501028127481848,
+          "slope": -0.009067862452597227,
+          "slope_ci95_scene_boot": [
+            -0.02293571300960171,
+            0.003960378519603588
+          ],
+          "spearman_rho": -0.0815074301869454,
+          "spearman_p": 0.16552211936128927,
+          "isotonic_r2": 6.281817111009058e-05,
+          "jt_trend": {
+            "JT_z": -1.0059504463876134,
+            "p_two_sided": 0.31443940781914237,
+            "n_bins": 4,
+            "bin_sizes": [
+              73,
+              72,
+              73,
+              73
+            ],
+            "bin_means": [
+              0.01576250924231255,
+              0.029406633641984727,
+              0.012746245893713546,
+              -0.019638596740487502
+            ]
+          },
+          "verdict": "不可估：斜率的 scene 级 bootstrap CI 含 0（功效不足，不得据此宣称无分级）"
+        },
+        "d_long": {
+          "n_events": 291,
+          "n_scenes": 151,
+          "dose": "d_long",
+          "dose_label": "纵向距离 d_long [m]",
+          "role": "必需对照（单帧可观测剂量）",
+          "expected_sign": "-",
+          "observable_to_single_frame": true,
+          "winsor_quantile": 0.99,
+          "n_winsorized": 6,
+          "dose_quantiles": [
+            0.3,
+            20.34,
+            26.423,
+            38.455,
+            49.951
+          ],
+          "b_mean": 0.009501028127481848,
+          "slope": -0.0016109042625802499,
+          "slope_ci95_scene_boot": [
+            -0.006161998525135166,
+            0.0024591212035122386
+          ],
+          "spearman_rho": -0.10367709667792181,
+          "spearman_p": 0.07743814284003511,
+          "isotonic_r2": 0.031635726192644875,
+          "jt_trend": {
+            "JT_z": -1.5297921339492129,
+            "p_two_sided": 0.1260681892748341,
+            "n_bins": 4,
+            "bin_sizes": [
+              73,
+              72,
+              73,
+              73
+            ],
+            "bin_means": [
+              0.029020183604874024,
+              0.0160874476035436,
+              0.011906740191864641,
+              -0.018920033966025263
+            ]
+          },
+          "verdict": "不可估：斜率的 scene 级 bootstrap CI 含 0（功效不足，不得据此宣称无分级）"
+        },
+        "ttc": {
+          "n_events": 291,
+          "n_scenes": 151,
+          "dose": "ttc",
+          "dose_label": "TTC [s]",
+          "role": "敏感性分析（混杂距离与速度）",
+          "expected_sign": "-",
+          "observable_to_single_frame": false,
+          "winsor_quantile": 0.99,
+          "n_winsorized": 6,
+          "dose_quantiles": [
+            0.215,
+            3.745,
+            4.608,
+            5.295,
+            99.0
+          ],
+          "b_mean": 0.009501028127481848,
+          "slope": 0.006444863145041553,
+          "slope_ci95_scene_boot": [
+            -0.009791979628297769,
+            0.024034982510312226
+          ],
+          "spearman_rho": -0.005499950571543916,
+          "spearman_p": 0.9255706808938297,
+          "isotonic_r2": 0.0017472938511738922,
+          "jt_trend": {
+            "JT_z": -0.32701175501764523,
+            "p_two_sided": 0.743658994365753,
+            "n_bins": 4,
+            "bin_sizes": [
+              73,
+              72,
+              73,
+              73
+            ],
+            "bin_means": [
+              -0.004476640526562521,
+              0.01996752681831519,
+              -0.004076985463704148,
+              0.026733588376273848
+            ]
+          },
+          "verdict": "不可估：斜率的 scene 级 bootstrap CI 含 0（功效不足，不得据此宣称无分级）"
+        }
+      },
+      "multivariate": {
+        "spec": "b ~ v_close + d_long + ego_speed",
+        "n_events": 291,
+        "n_scenes": 151,
+        "corr_v_close_d_long": 0.6904531899265949,
+        "corr_v_close_ego_speed": 0.6239455399647326,
+        "coef": {
+          "v_close": {
+            "beta": -0.01035000550305586,
+            "ci95_scene_boot": [
+              -0.022218169065089995,
+              0.0007379421450682871
+            ],
+            "excludes_zero": false
+          },
+          "d_long": {
+            "beta": -0.0010920380305808335,
+            "ci95_scene_boot": [
+              -0.004316291113301621,
+              0.0017917333221987481
+            ],
+            "excludes_zero": false
+          },
+          "ego_speed": {
+            "beta": 0.009295759108217928,
+            "ci95_scene_boot": [
+              -0.019141380126821633,
+              0.038881280938046645
+            ],
+            "excludes_zero": false
+          },
+          "intercept": {
+            "beta": 0.061971775838770025,
+            "ci95_scene_boot": [
+              -0.05980145499710868,
+              0.196650015198018
+            ],
+            "excludes_zero": false
+          }
+        },
+        "verdict": "控制距离/自车速度后，v_close 的偏系数 CI 含 0 ⇒ 单变量上看到的 v_close 关系不能与「所控变量经相关性泄漏」区分"
+      },
+      "multivariate_full": {
+        "spec": "b ~ v_close + d_long + ego_speed + log_area + |lat| + ecc + two_wheeler",
+        "n_events": 287,
+        "n_scenes": 149,
+        "corr_v_close_d_long": 0.6850601948641206,
+        "corr_v_close_ego_speed": 0.6220541556637134,
+        "coef": {
+          "v_close": {
+            "beta": -0.011034395211895158,
+            "ci95_scene_boot": [
+              -0.02555874757708532,
+              0.0032465948611501315
+            ],
+            "excludes_zero": false
+          },
+          "d_long": {
+            "beta": -0.0023502817820861407,
+            "ci95_scene_boot": [
+              -0.011629720220643057,
+              0.005634541667866027
+            ],
+            "excludes_zero": false
+          },
+          "ego_speed": {
+            "beta": 0.013363711941210358,
+            "ci95_scene_boot": [
+              -0.019912405936077314,
+              0.04937147907410485
+            ],
+            "excludes_zero": false
+          },
+          "log_area": {
+            "beta": -0.010632040512538124,
+            "ci95_scene_boot": [
+              -0.10776706519431371,
+              0.07358055241066977
+            ],
+            "excludes_zero": false
+          },
+          "abs_lat": {
+            "beta": -0.00032228096212331156,
+            "ci95_scene_boot": [
+              -0.08603705294238302,
+              0.07468826974259692
+            ],
+            "excludes_zero": false
+          },
+          "ecc": {
+            "beta": 0.071949017315398,
+            "ci95_scene_boot": [
+              -0.2277223066045222,
+              0.382206934436844
+            ],
+            "excludes_zero": false
+          },
+          "two_wheeler": {
+            "beta": 0.020908283424636985,
+            "ci95_scene_boot": [
+              -0.041796546405912204,
+              0.08830632703459874
+            ],
+            "excludes_zero": false
+          },
+          "intercept": {
+            "beta": 0.15227554458906117,
+            "ci95_scene_boot": [
+              -0.9142716181868891,
+              1.3601424711803491
+            ],
+            "excludes_zero": false
+          }
+        },
+        "verdict": "控制距离/自车速度/可见几何与类别后，v_close 的偏系数 CI 含 0 ⇒ 单变量上看到的 v_close 关系不能与「所控变量经相关性泄漏」区分"
+      }
+    }
+  }
+}
