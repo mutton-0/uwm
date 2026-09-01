@@ -44,7 +44,14 @@ def main():
     ap.add_argument("--events", default="")
     ap.add_argument("--device", default="cuda:0")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--corpus", default="nuscenes", choices=["nuscenes", "navsim"],
+                    help="点云来源：nuScenes 走 devkit，navsim 直接读 MergedPointCloud/*.pcd")
+    ap.add_argument("--crop-center-row", type=int, default=0,
+                    help="4:1 裁剪的竖直中心 = 相机主点行；0 = 沿用默认(nuScenes 450)。NAVSIM 用 560（§NS/A46）")
     args = ap.parse_args()
+    if getattr(args, "crop_center_row", 0):
+        import dd_adapter as _DD; _DD.set_crop_center_row(args.crop_center_row)
+        print(f"[crop] CROP_CENTER_ROW -> {args.crop_center_row}")
 
     work = Path(args.work); out_dir = work / "ddv2_cache"; out_dir.mkdir(exist_ok=True)
     events = [json.loads(l) for l in open(work / "mining" / "events_all.jsonl")]
@@ -61,7 +68,12 @@ def main():
         keep = keep[: args.limit]
     print(f"[DDV2-G1] {len(keep)} 事件待缓存 -> {out_dir}", flush=True)
 
-    lidar = NuScenesLidar(args.nuscenes_root)
+    if args.corpus == "navsim":
+        # NAVSIM 语料：点云键用 CAM_F0 的 data_path（filename 去掉 split 前缀），且天然在 ego 系
+        from ddv2_adapter import NavsimLidar
+        lidar = NavsimLidar()
+    else:
+        lidar = NuScenesLidar(args.nuscenes_root)
     runner = DDV2Runner(device=args.device)
     t0, done, fail = time.time(), 0, []
     for i, ev in enumerate(keep):
@@ -80,7 +92,9 @@ def main():
                 for f_ in ev[f"x_{cond}_frames"]:
                     img = cv2.cvtColor(cv2.imread(str(Path(args.nuscenes_root) / f_["filename"])),
                                        cv2.COLOR_BGR2RGB)
-                    pts = lidar.ego_points(f_["sd_token"])
+                    key = (f_["filename"].split("/", 1)[1] if args.corpus == "navsim"
+                           else f_["sd_token"])
+                    pts = lidar.ego_points(key)
                     r = runner.run(img, anchor, reg, lidar_xyz=pts)
                     spds.append(r["commanded_speed"]); trajs.append(r["trajectory"])
                     for pool, v in r["pooled"].items():

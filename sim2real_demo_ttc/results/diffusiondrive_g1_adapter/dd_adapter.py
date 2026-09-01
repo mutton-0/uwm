@@ -37,6 +37,18 @@ DRIVING_COMMAND = G.DRIVING_COMMAND
 
 
 # ------------------------------------------------------------------ 图像
+def set_crop_center_row(row: int):
+    """设置 4:1 裁剪的竖直中心行 = **相机主点行**（§NS/A46）。
+
+    `CROP_CENTER_ROW = 450` 是 nuScenes CAM_FRONT（1600×900，主点 (800, 450)）的主点行。
+    NAVSIM CAM_F0 是 1920×1080、主点 (960, 560)，沿用 450 会把裁剪带整体上移 110 px，
+    等于给模型喂一条偏高的画面。语义上这个常量本来就叫"主点行"，
+    故按各语料自己的主点设置，而不是新加一条特判。
+    默认值不变 ⇒ **既有 nuScenes 侧全部读数逐位不变**。
+    """
+    G.CROP_CENTER_ROW = int(row)
+
+
 def image_to_camera_feature(img_rgb):
     """任意 RGB 图 -> [1,3,512,2048]。与 ghosthead 前端逐像素同一套。"""
     return G.build_camera_feature(G.crop_4to1_no_sky(img_rgb))

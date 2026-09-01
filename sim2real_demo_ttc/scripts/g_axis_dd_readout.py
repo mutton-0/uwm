@@ -200,6 +200,8 @@ def main():
     ap.add_argument("--neg", default="D2a", help="几何匹配负例类名（主读数的对照）")
     ap.add_argument("--floor", default="D2cV", help="证伪地板类名")
     ap.add_argument("--report-negs", nargs="*", default=["D2cV", "D2c", "D2b", "D2bV"])
+    ap.add_argument("--restrict-events", default="",
+                    help="事件 id 清单文件；给定时只用清单内事件（地理敏感性分析用）")
     ap.add_argument("--stimuli", default="nuScenes G1 语料 + N1 D2a/D2b/D2c/D2cV 负例（与 SimLingo 同一份）")
     ap.add_argument("--out", default="/data/ruolin/uwm/sim2real_demo_ttc/results/g_positive_calibration_diffusiondrive.json")
     args = ap.parse_args()
@@ -214,8 +216,11 @@ def main():
            "readable_layers": args.readable_layers,
            "arms": {}}
 
+    keep_ev = set(Path(args.restrict_events).read_text().split()) if args.restrict_events else None
     for pool in args.pools:
         items = load_dd_cache(args.cache, pool)
+        if keep_ev is not None:
+            items = {k: v for k, v in items.items() if k in keep_ev}
         by = defaultdict(list)
         for eid, e in items.items():
             t = e["etype"]

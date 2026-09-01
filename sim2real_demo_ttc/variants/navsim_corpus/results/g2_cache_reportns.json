@@ -1,0 +1,22 @@
+{
+  "n_events": 2402,
+  "cached": 2365,
+  "skipped_existing": 37,
+  "failed": [],
+  "completeness": 1.0,
+  "ckpt_sha1": "3ff2eadbb919218d",
+  "preprocess_hash": "eeb470cbc2ad",
+  "pool_modes": [
+    "region_mean",
+    "region_max",
+    "bg_mean",
+    "vision_mean",
+    "last_token",
+    "query_mean",
+    "query_first",
+    "seq_mean"
+  ],
+  "waypoint_dt_s": 0.25,
+  "prompt_anchor": "clean",
+  "elapsed_s": 681.007128238678
+}

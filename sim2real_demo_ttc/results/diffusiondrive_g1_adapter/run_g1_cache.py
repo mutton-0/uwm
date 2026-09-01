@@ -36,9 +36,14 @@ def main():
     ap.add_argument("--use-matched", action="store_true", default=True)
     ap.add_argument("--device", default="cuda:0")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--crop-center-row", type=int, default=0,
+                    help="4:1 裁剪的竖直中心 = 相机主点行；0 = 沿用默认(nuScenes 450)。NAVSIM 用 560（§NS/A46）")
     ap.add_argument("--overwrite", action="store_true")
     ap.add_argument("--events", default="", help="事件 id 清单文件；给定时忽略 --types/--use-matched")
     args = ap.parse_args()
+    if getattr(args, "crop_center_row", 0):
+        import dd_adapter as _DD; _DD.set_crop_center_row(args.crop_center_row)
+        print(f"[crop] CROP_CENTER_ROW -> {args.crop_center_row}")
 
     work = Path(args.work)
     out_dir = work / "dd_cache"; out_dir.mkdir(exist_ok=True)

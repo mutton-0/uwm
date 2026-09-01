@@ -1,0 +1,26 @@
+{
+  "split": "test",
+  "n_logs": 147,
+  "n_scenes": 1880,
+  "n_events": 15051,
+  "by_type": {
+    "type_D": 3075,
+    "type_D2b": 3810,
+    "type_D2c": 2255,
+    "type_D2ctxP": 436,
+    "type_B": 178,
+    "type_C": 1111,
+    "type_D2aP": 1064,
+    "skipped_short_scene": 146,
+    "type_D2a": 2725,
+    "type_A": 397,
+    "skipped_no_frames": 2
+  },
+  "n_event_scenes": 1850,
+  "maps": [
+    "sg-one-north",
+    "us-ma-boston",
+    "us-nv-las-vegas-strip",
+    "us-pa-pittsburgh-hazelwood"
+  ]
+}

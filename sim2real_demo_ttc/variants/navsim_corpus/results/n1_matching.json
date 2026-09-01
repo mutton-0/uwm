@@ -1,0 +1,103 @@
+{
+  "pos_types": [
+    "A"
+  ],
+  "n_pos_total": 386,
+  "caliper": {
+    "log_area": 0.15,
+    "ecc": 0.06
+  },
+  "negatives": {
+    "D": {
+      "n_neg_pool": 2925,
+      "n_pairs": 286,
+      "pre_match": {
+        "smd_log_area": 0.45291904733893434,
+        "smd_ecc": -1.5535195695084731
+      },
+      "post_match": {
+        "smd_log_area": 0.03965280554196751,
+        "smd_ecc": -0.04184831505588247
+      },
+      "usable": true
+    },
+    "D2a": {
+      "n_neg_pool": 2678,
+      "n_pairs": 382,
+      "pre_match": {
+        "smd_log_area": 1.2864723499609927,
+        "smd_ecc": 0.2733866286602034
+      },
+      "post_match": {
+        "smd_log_area": 0.015323926012301751,
+        "smd_ecc": -0.009518235768776633
+      },
+      "usable": true
+    },
+    "D2aP": {
+      "n_neg_pool": 1060,
+      "n_pairs": 344,
+      "pre_match": {
+        "smd_log_area": -0.27783003228978226,
+        "smd_ecc": 0.5061316683939066
+      },
+      "post_match": {
+        "smd_log_area": -0.04563968766596112,
+        "smd_ecc": 0.025768938197801433
+      },
+      "usable": true
+    },
+    "D2b": {
+      "n_neg_pool": 3500,
+      "n_pairs": 381,
+      "pre_match": {
+        "smd_log_area": -0.02062031764427694,
+        "smd_ecc": -1.4347885210717017
+      },
+      "post_match": {
+        "smd_log_area": 0.01361975711500718,
+        "smd_ecc": 0.0025347962524331644
+      },
+      "usable": true
+    },
+    "D2bV": {
+      "n_neg_pool": 1115,
+      "n_pairs": 113,
+      "pre_match": {
+        "smd_log_area": 0.5763713560613081,
+        "smd_ecc": -1.7328934849378976
+      },
+      "post_match": {
+        "smd_log_area": 0.13004702695934944,
+        "smd_ecc": -0.1479990192983659
+      },
+      "usable": true
+    },
+    "D2c": {
+      "n_neg_pool": 2222,
+      "n_pairs": 383,
+      "pre_match": {
+        "smd_log_area": -0.203564940735342,
+        "smd_ecc": 0.29357078912840767
+      },
+      "post_match": {
+        "smd_log_area": -0.005832437378654484,
+        "smd_ecc": 5.797232185663041e-05
+      },
+      "usable": true
+    },
+    "D2cV": {
+      "n_neg_pool": 915,
+      "n_pairs": 296,
+      "pre_match": {
+        "smd_log_area": -0.03469894612738719,
+        "smd_ecc": 0.3487961932595562
+      },
+      "post_match": {
+        "smd_log_area": -0.006154803256600403,
+        "smd_ecc": 0.04474223023181896
+      },
+      "usable": true
+    }
+  }
+}

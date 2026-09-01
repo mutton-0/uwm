@@ -160,6 +160,55 @@ class DDV2Runner(DD.DDRunner):
                 "has_region": bool(reg), "n_region_tokens": len(reg)}
 
 
+class NavsimLidar:
+    """NAVSIM/OpenScene 的点云读取器：读 MergedPointCloud 的 .pcd，返回 **ego 系** 点。
+
+    比 nuScenes 侧简单一档，原因是数据源本身的便利（成本反转的一个具体例子）：
+    NAVSIM 的 `lidar2ego` 是恒等变换（translation [0,0,0]、rotation [1,0,0,0]，已实测核对），
+    故点云**天然就在 ego 系**，不需要 sensor→ego 的旋转平移。
+    nuScenes 侧则必须先取 LIDAR_TOP 的 calibrated_sensor 再做一次变换。
+
+    键用 CAM_F0 的 data_path（与其余适配器的 `sd_token` 位置同构），
+    由 `event_id -> lidar_path` 的映射表在构造时一次性建好。
+    """
+
+    def __init__(self, blob_root="/data/dataset/navsim/dataset/sensor_blobs",
+                 log_root="/data/dataset/navsim/dataset/navsim_logs", split="test"):
+        import pathlib, pickle, glob
+        self.blob = pathlib.Path(blob_root) / split
+        self.map = {}                       # CAM_F0 data_path -> lidar_path
+        for f in sorted(glob.glob(str(pathlib.Path(log_root) / split / "*.pkl"))):
+            for fr in pickle.load(open(f, "rb")):
+                self.map[fr["cams"]["CAM_F0"]["data_path"]] = fr["lidar_path"]
+        self._cache = {}
+
+    @staticmethod
+    def _read_pcd(path):
+        """二进制 PCD（FIELDS x y z intensity lidar_info ring，SIZE 4 4 4 1 1 1）。"""
+        with open(path, "rb") as fh:
+            raw = fh.read()
+        i = raw.find(b"DATA binary\n")
+        assert i >= 0, f"非二进制 PCD: {path}"
+        head = raw[:i].decode("ascii", "ignore")
+        n = int([l for l in head.splitlines() if l.startswith("POINTS")][0].split()[1])
+        body = raw[i + len(b"DATA binary\n"):]
+        rec = np.dtype([("x", "<f4"), ("y", "<f4"), ("z", "<f4"),
+                        ("intensity", "u1"), ("lidar_info", "u1"), ("ring", "u1")])
+        a = np.frombuffer(body[: n * rec.itemsize], dtype=rec, count=n)
+        return np.stack([a["x"], a["y"], a["z"]], axis=1).astype(np.float32)
+
+    def ego_points(self, cam_path):
+        if cam_path in self._cache:
+            return self._cache[cam_path]
+        lp = self.map.get(cam_path)
+        if lp is None:
+            return np.zeros((0, 3), np.float32)
+        pts = self._read_pcd(self.blob / lp)      # 已在 ego 系，无需变换
+        if len(self._cache) < 64:
+            self._cache[cam_path] = pts
+        return pts
+
+
 class NuScenesLidar:
     """按 CAM_FRONT 的 sample_data token 取同 sample 的 LIDAR_TOP 点云，变换到 ego 系。
 

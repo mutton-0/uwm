@@ -24,3 +24,8 @@ variants/*/pilot_query_states.npz
 # 第二场景（前车急刹）的表征缓存与候选池（均可由 lb1/lb2 + 各适配器重建）
 variants/lead_brake/cache/
 variants/lead_brake/mining/_lb_pool.npy
+# NAVSIM 独立语料的表征缓存（可由 ns1 + 各适配器重建）
+variants/navsim_corpus/cache/
+variants/navsim_corpus/dd_cache/
+variants/navsim_corpus/ltf_cache/
+variants/navsim_corpus/ddv2_cache/

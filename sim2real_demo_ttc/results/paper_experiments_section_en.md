@@ -139,7 +139,7 @@ pre-registered primary readout per experiment with everything else marked as sen
 three-state adjudication (PASS / FAIL / **indeterminate**), with insufficient power always recorded
 as indeterminate rather than forced into a binary; random-direction controls carry **their own
 per-layer null distribution**; all cross-model comparisons use **within-model normalized** quantities
-only. An amendment ledger is maintained throughout; the experiments reported here registered **40**
+only. An amendment ledger is maintained throughout; the experiments reported here registered **48**
 amendments, seven of which converted an already-obtained positive result back into a negative or
 indeterminate one (§4.4).
 
@@ -227,6 +227,24 @@ scores.
 > C-domain and C-hazard are the **same patching method applied to two pairing sources** (sim↔real
 > rendering pairs vs G1 clean↔ghost), not two metrics; the two columns are not comparable to
 > each other.
+
+**Table 1(c). Cross-data-source replication (NAVSIM/OpenScene, independently collected; criteria field-identical to (a), only the data source changed).**
+**This is not a separate table but a re-measurement of the same readouts from (a) on a second data source**; the G1 columns are the (a) columns.
+
+| Policy | G: primary − D2cV floor (NAVSIM) | G: same readout (G1) | F①: b-AUC (NAVSIM) | F①: (G1) | C-hazard: profile / layer (NAVSIM) | C-hazard: (G1) |
+| --- | --- | --- | --- | --- | --- | --- |
+| SimLingo | −0.009 [−0.060, +0.042] | +0.035 [−0.026, +0.097] | **0.534 [0.481, 0.585]** | 0.534 [0.469, 0.592] | cascade ρ=−0.997 / commitment L4 | cascade ρ=−0.997 / L3 |
+| DiffusionDrive | −0.034 [−0.085, +0.018] | +0.009 [−0.047, +0.065] | 0.472 [0.406, 0.539] | 0.553 [0.486, 0.623] | interior peak ρ=+0.857 / **L6** | interior peak ρ=+0.929 / **L6** |
+| **LTF** | **+0.011 [−0.038, +0.065]** | **+0.070 [+0.017, +0.126]** ✅ | 0.546 [0.496, 0.593] | **0.583 [0.519, 0.639]** ✅ | interior peak ρ=+0.786 / L7 | interior peak ρ=+0.929 / L6 |
+| DiffusionDriveV2 | +0.048 [−0.020, +0.111] | +0.025 [−0.044, +0.097] | 0.471 [0.421, 0.524] | **0.556 [0.501, 0.613]** ✅ | interior peak ρ=+0.667; **self-check fails** | interior peak ρ=+0.810; **self-check fails** |
+
+> **Corpus**: NAVSIM/OpenScene test split, 147 logs / 1880 scenes; A = 397, D2a = 382, D2cV = 134
+> (G1: 291 / 283 / 212). The CI width of primary − floor is **0.103 against G1's 0.109**, i.e.
+> comparable power ⇒ "indeterminate" in this block **cannot** be uniformly attributed to low power.
+> **G: 0/4 replicate** (including LTF, G1's only positive); **F①: 1/4 replicates** (SimLingo digit
+> for digit at 0.534); **C: 8/8 replicate** (sign, commitment-layer presence, responsible-layer mode
+> — even DiffusionDriveV2's self-check failure). See `cross_corpus_generality_report_{zh,en}.md`;
+> adjudications and deviations in §NS/A45–A48.
 
 The matrix yields five findings, developed in §4.2.3–§4.2.7.
 
@@ -387,7 +405,7 @@ read as "the whole encoder is more invariant" (§CE/A37). We put this qualificat
 rather than a footnote, because it is precisely what distinguishes this framework from "reporting a
 robustness score".
 
-### 4.2.6 The first G-axis positive: the falsification floor is not uncrossable
+### 4.2.6 The first G-axis positive: on G1, the falsification floor is not uncrossable
 
 The G-axis primary readouts of the first two candidates were both indeterminate (§4.4.1), which
 leaves a genuine ambiguity: is it that "the model has no hazard concept", or that "our D2cV floor is
@@ -397,16 +415,35 @@ analysis of +0.085 [+0.031, +0.140] and $+0.056 \pm 0.028$ across 10 CV fold-ass
 first time the sd is **smaller** than the effect. It is the first G-axis readout in this line of work
 whose CI excludes 0.
 
-Its value is not "LTF is better" but that it **calibrates the whole table with a positive**: under
-the same D2cV floor, the same stimulus set and the same statistical protocol, some candidate does
-cross the floor, so the other candidates' indeterminacy **cannot** be attributed to the floor being
-uncrossable in principle. Before this, the conclusion of §4.4.1 could only read "indeterminate at
-this sample size"; it can now read "indeterminate at a sample size at which another candidate
-crossed".
+Its value is not "LTF is better" but that it **calibrates this corpus with a positive**: under the
+same D2cV floor, the same stimulus set and the same statistical protocol, some candidate does cross
+the floor, so on G1 the other candidates' indeterminacy **cannot** be attributed to the floor being
+uncrossable in principle.
 
 Notably, LTF is also the only one of the four single-frame candidates that simultaneously satisfies
 "b(A) significantly non-zero" and "b-AUC(A vs D2a) CI excluding 0.5" (0.583 [0.519, 0.639]) — it is
 the candidate whose G and F point the **same** way. It contrasts directly with the next section.
+
+> **⚠️ Cross-data-source result (§NS/A48; this section's claim has been narrowed accordingly)**
+>
+> This positive **does not replicate on an independently collected data source (NAVSIM/OpenScene),
+> and this is not a power problem**: primary − floor falls from **+0.070 [+0.017, +0.126]** to
+> **+0.011 [−0.038, +0.065]** while the CI width is **0.103 vs 0.109** (more positives, 397 > 291,
+> and more geometry-matched negatives, 382 > 283, compensating the smaller floor, 134 < 212) — power
+> is comparable or slightly better. Restricted to the subset **geographically disjoint** from
+> nuScenes (Las Vegas + Pittsburgh) it is more negative still: **−0.044 [−0.111, +0.038]**.
+>
+> **What collapsed is not the primary readout but its gap to the floor**: CV-AUC(A vs D2a) on the new
+> corpus is 0.630 [0.592, 0.669] ($p = 3.1 \times 10^{-10}$), *stronger* than G1's 0.623; what rose
+> is the **falsification floor** (0.553 → 0.620). LTF separates "A vs geometry-matched statics" just
+> as well on the new corpus, but it separates "A vs same-class, same-geometry VRUs differing only in
+> relative velocity" equally well — and the latter is a discrimination a single-frame model is
+> **structurally unable** to make.
+>
+> **This section's "positive calibration" therefore holds only on the G1 corpus and is not evidence
+> that the floor is crossable in general.** We do not delete the original readout (it was genuinely
+> measured); we narrow its scope and register the result in Limitation 2 of §4.5. Point-by-point
+> comparison: `cross_corpus_generality_report_{zh,en}.md`.
 
 ### 4.2.7 The G/F dissociation is cleanest on AutoVLA
 
@@ -512,7 +549,7 @@ who ranks first, and no set of weights can be justified from the data itself.**
 ## 4.4 Ablation-like Analyses: why these numbers can be believed
 
 Every item in this section is a **negative check**: its purpose is not to make numbers look better
-but to exclude the case in which numbers look good while meaning nothing. This work registered 40
+but to exclude the case in which numbers look good while meaning nothing. This work registered 48
 amendments during execution, seven of which converted an already-obtained positive result back into a
 negative or indeterminate one; the five most consequential are given below.
 
@@ -532,9 +569,14 @@ localized to the D2cV sample size (212), not to pooling or model choice.
 **LTF is the sole exception, and it changes how this whole paragraph reads** (see §4.2.6): its
 effect exceeds twice the fold-assignment sd for the first time, and its CI excludes 0. Before this,
 "three candidates are all indeterminate" and "the floor is set so high that nobody could cross it"
-were indistinguishable explanations; LTF's positive rules out the latter. **Under the same floor,
-the same stimulus set and the same statistical protocol, a candidate did cross, so the remaining
-candidates' indeterminacy is a conclusion about those candidates, not about the floor.**
+were indistinguishable explanations; LTF's positive rules out the latter **on this corpus**.
+
+**But that positive does not cross data sources (§NS/A48)**: on an independently collected corpus of
+comparable power (NAVSIM/OpenScene; 397 positives vs 291, CI width 0.103 vs 0.109) the same readout
+falls to +0.011 [−0.038, +0.065], and turns to −0.044 on the geographically disjoint subset.
+**The exclusion in the previous paragraph is therefore valid on G1 only**: the statement "the
+remaining candidates' indeterminacy is a conclusion about those candidates" is scoped to the G1
+corpus and does not generalize to "this floor is crossable in general".
 
 **The two multi-frame candidates (Alpamayo-R1, AutoVLA) do not enter this table.** D2cV is
 constructed so that "the only difference is a relative velocity a **single-frame** model is
@@ -674,7 +716,7 @@ empirical 99.9th percentile of that null is 0.100–0.154 whereas the Gaussian-t
 read off as an empirical quantile) reduced the number of "doubly corroborated" candidates from
 **11 to 0**.
 
-> Sources: `amendments.md` (all 40 amendments), `analytic_vs_empirical.md`,
+> Sources: `amendments.md` (all 48 amendments), `analytic_vs_empirical.md`,
 > `c_axis_shape_diagnostics.json`, `cosine_matrix.json`, `generalizable_tips.md`.
 
 ---
@@ -695,7 +737,10 @@ limitation persists when the trigger criterion is changed (three independent cri
 differences of $+0.003$ / $-0.022$ / $+0.023$, all with CIs crossing zero), so it is not a
 peculiarity of one scenario type. **LTF is the one candidate that crosses the floor**, which narrows
 this from "a limitation of the method" to "a limitation of those three candidates at this sample
-size".
+size". **But that positive does not cross data sources**: on an independently collected corpus of
+comparable power it falls to +0.011 [−0.038, +0.065], and to −0.044 on the geographically disjoint
+subset (§NS/A48). This narrowing therefore **holds on G1 only**; in the cross-corpus sense, no
+candidate in this paper yields a robust G-axis positive.
 
 **3. The falsification floor does not hold for multi-frame candidates, and no ready substitute
 exists.** D2cV rests on relative velocity being structurally unobservable to a single-frame model,

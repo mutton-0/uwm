@@ -1,0 +1,238 @@
+{
+  "design": "行动层反事实测试（协议 §3.5）：① 危险有无 = A 的 ghost−clean；② 几何混淆 = D2a 的 ghost−clean。读出对象为最终规划动作，不是表征。",
+  "b_definition": "b = v_plan(clean) − v_plan(ghost)，正 = 目标出现后减速",
+  "models": {
+    "SimLingo": {
+      "group_sizes": {
+        "A": 386,
+        "D2a": 382,
+        "D2cV": 296
+      },
+      "b_mean_A": {
+        "mean": 0.18785565862567236,
+        "ci95": [
+          -0.07166493170094743,
+          0.4685131864588462
+        ],
+        "n": 386,
+        "significant": false
+      },
+      "b_mean_D2a": {
+        "mean": 0.018976189527680112,
+        "ci95": [
+          -0.2176268797510492,
+          0.24686052249736673
+        ],
+        "n": 382,
+        "significant": false
+      },
+      "b_mean_D2cV": {
+        "mean": 0.0865855098802697,
+        "ci95": [
+          -0.045049949308166706,
+          0.2485419200690452
+        ],
+        "n": 296,
+        "significant": false
+      },
+      "b_auc_A_vs_D2a": {
+        "auc": 0.5335295553807341,
+        "p_mwu": 0.1077921319252488,
+        "ci95_scene_bootstrap": [
+          0.48098455099305276,
+          0.5851900515813709
+        ],
+        "p_boot_le_0.5": 0.1045,
+        "n_pos": 386,
+        "n_neg": 382
+      },
+      "b_auc_A_vs_D2cV": {
+        "auc": 0.5259023596134995,
+        "p_mwu": 0.24590613907337744,
+        "ci95_scene_bootstrap": [
+          0.45446275553564824,
+          0.5991572102594429
+        ],
+        "p_boot_le_0.5": 0.242,
+        "n_pos": 386,
+        "n_neg": 296
+      },
+      "verdict_action_counterfactual": "不可估：b-AUC 的 scene 级 CI 跨 0.5",
+      "confound_response_significant": false
+    },
+    "DiffusionDrive": {
+      "group_sizes": {
+        "A": 397,
+        "D2a": 382,
+        "D2cV": 134
+      },
+      "b_mean_A": {
+        "mean": -0.01596627497027443,
+        "ci95": [
+          -0.04693244196882417,
+          0.016389545387415376
+        ],
+        "n": 397,
+        "significant": false
+      },
+      "b_mean_D2a": {
+        "mean": 0.015560306842726563,
+        "ci95": [
+          -0.01492295063154984,
+          0.055705071574637756
+        ],
+        "n": 382,
+        "significant": false
+      },
+      "b_mean_D2cV": {
+        "mean": 0.034168692653192514,
+        "ci95": [
+          0.011353857508478424,
+          0.05602781765805825
+        ],
+        "n": 134,
+        "significant": true
+      },
+      "b_auc_A_vs_D2a": {
+        "auc": 0.4722064699909003,
+        "p_mwu": 0.1794834451079348,
+        "ci95_scene_bootstrap": [
+          0.40550869336714174,
+          0.5390780021145998
+        ],
+        "p_boot_le_0.5": 0.787,
+        "n_pos": 397,
+        "n_neg": 382
+      },
+      "b_auc_A_vs_D2cV": {
+        "auc": 0.4073649385315237,
+        "p_mwu": 0.0013336895708212372,
+        "ci95_scene_bootstrap": [
+          0.32993708023234614,
+          0.4910870694886393
+        ],
+        "p_boot_le_0.5": 0.9855,
+        "n_pos": 397,
+        "n_neg": 134
+      },
+      "verdict_action_counterfactual": "不可估：b-AUC 的 scene 级 CI 跨 0.5",
+      "confound_response_significant": false
+    },
+    "LTF": {
+      "group_sizes": {
+        "A": 397,
+        "D2a": 382,
+        "D2cV": 134
+      },
+      "b_mean_A": {
+        "mean": 0.023477325007150544,
+        "ci95": [
+          0.009760471139665038,
+          0.036186700563777485
+        ],
+        "n": 397,
+        "significant": true
+      },
+      "b_mean_D2a": {
+        "mean": 0.005903365503733305,
+        "ci95": [
+          -0.007290390329799417,
+          0.019495900838936528
+        ],
+        "n": 382,
+        "significant": false
+      },
+      "b_mean_D2cV": {
+        "mean": 0.03154613109437554,
+        "ci95": [
+          0.00292306273463822,
+          0.07178312088777446
+        ],
+        "n": 134,
+        "significant": true
+      },
+      "b_auc_A_vs_D2a": {
+        "auc": 0.5460456038086697,
+        "p_mwu": 0.02615017891008628,
+        "ci95_scene_bootstrap": [
+          0.4956691062863503,
+          0.5931940370305957
+        ],
+        "p_boot_le_0.5": 0.033,
+        "n_pos": 397,
+        "n_neg": 382
+      },
+      "b_auc_A_vs_D2cV": {
+        "auc": 0.5102259483439227,
+        "p_mwu": 0.7234064950629702,
+        "ci95_scene_bootstrap": [
+          0.4140698299283224,
+          0.605630727212432
+        ],
+        "p_boot_le_0.5": 0.382,
+        "n_pos": 397,
+        "n_neg": 134
+      },
+      "verdict_action_counterfactual": "不可估：b-AUC 的 scene 级 CI 跨 0.5",
+      "confound_response_significant": false
+    },
+    "DiffusionDriveV2": {
+      "group_sizes": {
+        "A": 397,
+        "D2a": 382,
+        "D2cV": 134
+      },
+      "b_mean_A": {
+        "mean": -0.07816007818735816,
+        "ci95": [
+          -0.2058142209606426,
+          0.058449891055443126
+        ],
+        "n": 397,
+        "significant": false
+      },
+      "b_mean_D2a": {
+        "mean": 0.03302114646082149,
+        "ci95": [
+          -0.11262937461522594,
+          0.18269414700800657
+        ],
+        "n": 382,
+        "significant": false
+      },
+      "b_mean_D2cV": {
+        "mean": 0.012518457693061721,
+        "ci95": [
+          -0.08211600720025251,
+          0.1150858600322782
+        ],
+        "n": 134,
+        "significant": false
+      },
+      "b_auc_A_vs_D2a": {
+        "auc": 0.47068985981246786,
+        "p_mwu": 0.1568915431673746,
+        "ci95_scene_bootstrap": [
+          0.4208584945911866,
+          0.5237497206381491
+        ],
+        "p_boot_le_0.5": 0.854,
+        "n_pos": 397,
+        "n_neg": 382
+      },
+      "b_auc_A_vs_D2cV": {
+        "auc": 0.4503552765141547,
+        "p_mwu": 0.08553992765729172,
+        "ci95_scene_bootstrap": [
+          0.3791251916929939,
+          0.5167651898287637
+        ],
+        "p_boot_le_0.5": 0.934,
+        "n_pos": 397,
+        "n_neg": 134
+      },
+      "verdict_action_counterfactual": "不可估：b-AUC 的 scene 级 CI 跨 0.5",
+      "confound_response_significant": false
+    }
+  }
+}
