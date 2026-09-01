@@ -252,5 +252,13 @@
       "ALL": 0.8272444159455312
     }
   ],
-  "verdict": "不可估（**充分割集自检不通过**：patch-ALL 中位数 +0.552，远离 1）"
+  "verdict": "不可估（**充分割集自检不通过**：patch-ALL 中位数 +0.552，远离 1）",
+  "commitment_layer": {
+    "layer": -1,
+    "depth_fraction": null,
+    "prefix_layer": -1,
+    "criterion": "mean recovery ≥ 0.9 的**最深**层（前缀版并列报告：要求 L 及之前每一层都满足）",
+    "reading": "patch 到该层为止行为仍完全回到 clean ⇒ 危险信号在此之后才被定死",
+    "note": "TransFuser 系为**递增**剖面（内部峰），承诺层在此形态下不是主读数，仅为与 VLA 栈对齐的并列量"
+  }
 }

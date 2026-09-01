@@ -74,7 +74,16 @@ def _longest_run(ids):
 
 
 class PooledCapture:
-    """在钩子里当场池化（VLA 序列很长，不保留全张量）；只留 prefill 那一次。"""
+    """在钩子里当场池化（VLA 序列很长，不保留全张量）；只留 prefill 那一次。
+
+    C-hazard 需要在同一组钩子上再做两件事，故本类同时支持：
+      * ``capture_full = True``  —— 额外保留 prefill 的**全序列**隐状态 [S, C]（CPU float32），
+        供 activation patching 当参考侧；不开启时行为与原来完全一致（只池化，不留全张量）；
+      * ``set_patch(d, tokens)`` —— 在 prefill 前向里把第 L 层的输出**替换**为参考侧激活。
+        ``tokens="all"`` 换整条 prompt（与 DD/LTF/DDv2 的 320 融合 token 全换同构，见 §CE/A32），
+        ``tokens="image"`` 只换图像 token 段。decode step（S=1）一律不动，
+        patch 通过 KV cache 自然影响后续所有生成步。
+    """
 
     def __init__(self, model, prefix="vlm.model.layers"):
         layers = [(n, m) for n, m in model.named_modules()
@@ -86,26 +95,54 @@ class PooledCapture:
         assert layers, "未找到语言塔 DecoderLayer"
         self.n_layers = len(layers)
         self.mask = None
+        self.capture_full = False
+        self._patch = None
+        self._patch_tokens = "all"
         self.reset()
         self._h = [m.register_forward_hook(self._mk(i)) for i, (_n, m) in enumerate(layers)]
 
     def reset(self):
         self.pooled = {p: [None] * self.n_layers for p in POOLS}
+        self.full = [None] * self.n_layers
         self.seen = [0] * self.n_layers
+
+    def set_patch(self, d, tokens="all"):
+        """d: {layer_idx: np.ndarray[S, C]} 或 None（清除）。"""
+        self._patch = d
+        self._patch_tokens = tokens
 
     def _mk(self, i):
         def hook(_m, _inp, out):
             h = out[0] if isinstance(out, (tuple, list)) else out
             S = h.shape[1]
-            if S <= 1 or S <= self.seen[i]:
-                return
+            if S <= 1:                      # decode step 不动
+                return None
+            ref = None if self._patch is None else self._patch.get(i)
+            if ref is not None:
+                r = torch.as_tensor(ref, device=h.device, dtype=h.dtype)
+                # 序列长度必须完全一致才能逐位置替换；不一致时**放弃这次 patch 而不是截断对齐**，
+                # 截断会把「换掉了什么」变成一个不受控的量。调用方按此判据丢弃该事件。
+                if r.shape[0] != S:
+                    raise RuntimeError(f"patch seq_len {r.shape[0]} != run seq_len {S} @L{i}")
+                h = h.clone()
+                if self._patch_tokens == "image" and self.mask is not None and len(self.mask) == S:
+                    m = torch.as_tensor(self.mask, device=h.device)
+                    h[0, m] = r[m]
+                else:
+                    h[0] = r
+                out = (h,) + tuple(out[1:]) if isinstance(out, (tuple, list)) else h
+            if S <= self.seen[i]:
+                return out if ref is not None else None
             self.seen[i] = S
             x = h[0].float()
+            if self.capture_full:
+                self.full[i] = x.cpu().numpy()
             self.pooled["last_token"][i] = x[-1].cpu().numpy()
             self.pooled["seq_mean"][i] = x.mean(0).cpu().numpy()
             if self.mask is not None and len(self.mask) == S and self.mask.any():
                 m = torch.as_tensor(self.mask, device=x.device)
                 self.pooled["vision_mean"][i] = x[m].mean(0).cpu().numpy()
+            return out if ref is not None else None
         return hook
 
 
@@ -152,6 +189,12 @@ class AutoVLARunner:
                         for s in samples]
         return out
 
+    def set_patch(self, d, tokens="all"):
+        self.cap.set_patch(d, tokens)
+
+    def set_capture_full(self, flag):
+        self.cap.capture_full = bool(flag)
+
     @torch.no_grad()
     def run(self, cam_sd_token, speed_mps, accel=0.0):
         feats = {"images": self.temporal_paths(cam_sd_token), "sensor_data_path": None,
@@ -173,6 +216,7 @@ class AutoVLARunner:
         pooled = {p: (np.stack(v).astype(np.float32) if all(x is not None for x in v) else None)
                   for p, v in self.cap.pooled.items()}
         return {"trajectory": traj, "pooled": pooled, "cot": cot,
+                "full": self.cap.full if self.cap.capture_full else None,
                 "commanded_speed": float(np.linalg.norm(np.asarray(traj)[0, :2]) / 0.5),
                 "image_token_id": self.image_token_id,
                 "n_image_tokens": int(self.cap.mask.sum()), "seq_len": int(len(ids))}

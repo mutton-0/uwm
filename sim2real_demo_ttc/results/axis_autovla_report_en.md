@@ -148,7 +148,7 @@ padded with a number)**:
 | --- | --- | --- |
 | F② representation injection | **not measured** | Not completed inside the timebox. Note this is *not* a finding of unmeasurability — AutoVLA's injection site (the LLM residual stream) is structurally the same as SimLingo's, so a priori it should be measurable. Recorded as not-measured, not as not-applicable. |
 | I domain invariance | **not applicable** | The domain-paired corpus (CARLA ↔ world-model re-rendering) has only a **single frame** per timestep, whereas AutoVLA requires 4. The gap is on the stimulus side, not the model side (§CE/A36). |
-| C failure concentration | **not measured** | Same timebox reason. The C-hazard pairing (G1 clean↔ghost) is applicable to AutoVLA in principle and the cache already exists; this is the most direct next step in this line of work. |
+| C-hazard | **now measured** (see below); $C_m$ **not applicable** | The profile is step-shaped, so the top-2-share formula's premise is structurally violated (§CE/A39). We report the commitment layer instead. |
 
 **One observation about candidate-pool design**: AutoVLA and Alpamayo-R1 are the only two
 multi-frame candidates in the pool, and they are also the only two for which **the falsification
@@ -180,3 +180,54 @@ of scope this round.
    than new evidence — **which is exactly why this repository mandates the 10-seed fold-assignment
    stability check**. Registered as §CE/A38. F① is unaffected (b is a per-event quantity that never
    passes through CV).
+
+---
+
+## Results (follow-up): C-hazard
+
+This cell was listed as "not measured: budget" in `candidate_expansion_DONE.md` and is filled in
+here. The protocol matches DiffusionDrive / LTF / DiffusionDriveV2 item for item: pairing = G1
+clean↔ghost (paired real-input swap; noise corruption prohibited); metric = the continuous quantity
+$v_{plan}$; degraded samples = the top 12 by $|v_{clean} - v_{ghost}|$; patch scope = **the full
+prompt residual stream** (the analogue of swapping all 320 fused tokens on the DD family, §CE/A32).
+The one new implementation detail is that the patch is applied on the **prefill** forward pass;
+decode steps ($S$ = 1) are left untouched, and the patch reaches every subsequent generation step
+through the KV cache.
+
+**Table 3. C-hazard readout for AutoVLA. 12 events / 11 scenes, 36 layers, patch scope = full prompt residual stream.**
+
+| Quantity | Value | Criterion | Conclusion |
+| --- | --- | --- | --- |
+| patch-ALL recovery (sufficient-cut-set check) | **+1.000** (median +1.000) | must lie in [0.7, 1.3] | **passes** |
+| Recovery profile | ≈1.0 across L0–L20; decays from L21 (0.84 → 0.77 → 0.56 → 0.37 → 0.10 → **0.00** @L35) | — | **step / cascade** |
+| Spearman(layer, recovery) | **−0.859** | $\rho < -0.7$ ⇒ cascade ⇒ $C_m$ inapplicable | **$C_m$ not applicable** |
+| $C_m$ (nominal, for audit only) | 0.079 [0.069, 0.094] (36-layer diffuse baseline 0.056) | — | **carries no adjudicative weight** |
+| **Commitment layer** (deepest layer with mean recovery ≥ 0.9) | **L20 / 36 (depth 0.58)** | substitute readout under a step profile | the decision is fixed only past mid-stack |
+| Responsible-layer mode / normalized entropy | L0 / 0.158 | — | consistent with a step shape |
+
+**Verdict: indeterminate (the formula's premise is violated: the profile is a step)** — the same
+treatment SimLingo's C-domain cascade received, not a standard invented for AutoVLA.
+
+### Why it is a step, and why that is not "we failed to measure it"
+
+After patching layer $L$'s output, **every layer deeper than $L$ is recomputed from the clean side**.
+In a pure autoregressive transformer stack the residual stream is the only pathway, so patching any
+early layer already suffices to return behaviour fully to clean. This is determined by the
+architecture, not by instrument failure — the patch-ALL self-check passing at +1.000 is the evidence.
+
+**Changing the patch scope does not help**: a separate run patching only the image-token segment
+(`--tokens image`) still leaves the profile saturated at 1.0 across L0–L21, Spearman $-0.876$. The
+scope is not the problem.
+
+This report therefore yields something more valuable than "what is AutoVLA's C": **$C_m$ is not
+comparable between the TransFuser family and VLA stacks**, and DiffusionDrive's and LTF's interior
+peak at L6 is **a property of TransFuser's stage-wise re-injection design** (§CE/A39).
+
+### A sample limitation that must be reported alongside
+
+Across the 12 selected events, the **median $|v_{clean} - v_{ghost}|$ is only 0.267 m/s** (range
+0.199 – 7.940). This is self-consistent with the F① result — AutoVLA's planned speed shows no
+detectable response to an object appearing, so there were few large-gap events to select from. The
+consequence is that recovery has a small denominator and is heavily quantized (in practice it takes
+only a few values: 1.000 / 0.917 / 0.000). **The commitment layer L20 should be read at the
+granularity of "mid-stack", not as a specific layer index.**

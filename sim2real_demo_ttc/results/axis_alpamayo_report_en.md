@@ -122,14 +122,16 @@ the representation side added, the answer is unambiguous: **it saw it**. P1's "d
 therefore be re-read as a **broken F link** rather than a perception deficit — an **interpretive
 revision** of an existing conclusion (not a numerical one; the b-AUC is unchanged digit for digit).
 
-**4. F② and the C axis were not measured; the reason is recorded honestly.** F② (representation
-injection): Alpamayo has a flow-matching action head plus a VLM rollout at ≈ 2.7 s per forward, so a
-complete four-part injection battery (40 events × 169 conditions × 2 frames) would need ≈ 4 GPU-hours,
-beyond this round's budget allocation for candidate expansion; moreover, per this round's §CE/A31
-finding that injection measurability is determined by the encoder, Alpamayo's encoder differs from all
-three families measured so far, so its result cannot be extrapolated ⇒ marked **not measured**, not
-"not applicable". C axis: requires either a domain pairing (Alpamayo lacks a multi-camera domain-pair
-adapter) or clean↔ghost patching (equally bound by the 2.7 s per-forward cost) ⇒ **not measured**.
+**4. F② is still not measured; C-hazard has now been measured (below); C-domain is not applicable.**
+F② (representation injection): Alpamayo has a flow-matching action head plus a VLM rollout at ≈ 2.7 s
+per forward, so a complete four-part injection battery (40 events × 169 conditions × 2 frames) would
+need ≈ 4 GPU-hours, beyond this round's budget allocation for candidate expansion; moreover, per this
+round's §CE/A31 finding that injection measurability is determined by the encoder, Alpamayo's encoder
+differs from all three families measured so far, so its result cannot be extrapolated ⇒ marked
+**not measured**, not "not applicable". C-domain: the domain-paired corpus has one frame per timestep
+while Alpamayo needs several ⇒ **not applicable** (stimulus-side gap, §CE/A36). C-hazard: now
+measured and adjudicated **indeterminate** (step-shaped profile, so the $C_m$ formula's premise is
+structurally violated) — see the follow-up section below.
 
 ---
 
@@ -149,3 +151,59 @@ adapter) or clean↔ghost patching (equally bound by the 2.7 s per-forward cost)
 3. **F②/C are marked "not measured" rather than "not applicable"**: per work-order §6, "not
    applicable" is reserved for an operationalization that does not apply to the architecture;
    Alpamayo's case is **insufficient budget**, a different situation, and is recorded as such.
+
+---
+
+## Results (follow-up): C-hazard
+
+This cell was listed as "not measured: budget" in `candidate_expansion_DONE.md`. The protocol matches
+the other four candidates item for item: pairing = G1 clean↔ghost; corruption = paired real-input
+swap; metric = the continuous quantity $v_{plan}$; degraded samples = the top 12 by
+$|v_{clean} - v_{ghost}|$; patch scope = the full prompt residual stream on the prefill pass.
+
+**Table 3. C-hazard readout for Alpamayo-R1. 12 events / 10 scenes, 36 layers.**
+
+| Quantity | Value | Criterion | Conclusion |
+| --- | --- | --- | --- |
+| patch-ALL recovery (sufficient-cut-set check) | mean +0.965, **median +1.001** | must lie in [0.7, 1.3] | **passes** |
+| Recovery profile | L0 0.584, L1 0.814, **≈0.88–1.01 across L2–L16**, dropping to ≈0.55 from L18, ≈0.42–0.49 at the tail | — | **step / cascade** |
+| Spearman(layer, recovery) | **−0.873** | $\rho < -0.7$ ⇒ cascade ⇒ $C_m$ inapplicable | **$C_m$ not applicable** |
+| $C_m$ (nominal, for audit only) | 0.091 [0.080, 0.106] (36-layer diffuse baseline 0.056) | — | **carries no adjudicative weight** |
+| **Commitment layer** (deepest layer with mean recovery ≥ 0.9) | **L16 / 36 (depth 0.47)** | substitute readout under a step profile | the decision is fixed at mid-stack |
+| Responsible-layer mode / normalized entropy | L1 / 0.520 | — | consistent with a step shape |
+
+**Verdict: indeterminate (the formula's premise is violated: the profile is a step).** The cause is
+structural and identical to AutoVLA's: after patching layer $L$, every deeper layer is recomputed
+from the clean side, and in a pure transformer stack the residual stream is the only pathway, so
+early saturation is forced (§CE/A39).
+
+### An instrument check specific to this candidate: the sampling-noise floor
+
+Alpamayo's rollout uses **stochastic sampling** ($top_p$ = 0.98, $T$ = 0.6), whereas AutoVLA decodes
+greedily at $top_k$ = 1 and is effectively deterministic. That difference has to be quantified on the
+spot, or recovery cannot be interpreted at all.
+
+Across 5 seeds on the same input, $v_{plan}$ measures
+clean [9.719, 9.315, 8.764, 9.343, 9.550] and ghost [9.201, 8.617, 9.347, 9.749, 10.132], giving a
+**pooled sd of 0.430**, i.e. **0.330×** the median clean−ghost gap (1.303).
+
+Our protocol locks both conditions and every patch run to one seed, so this noise is common-mode and
+largely cancels — the measured patch-ALL median of +1.001 (rather than some drifted value) is the
+direct evidence. The floor is therefore a **conservative upper bound** rather than the actual noise.
+It is nonetheless enough to support two qualifications:
+
+1. the wobble between 0.88 and 1.01 along the profile **cannot be interpreted**; and
+2. **the commitment layer L16 is localized only to the granularity of "mid-stack"**, not to a
+   specific layer index.
+
+The adjudication gate is written into the script: if the sd reaches 0.5× the median gap, the verdict
+is indeterminate outright (here 0.330, so it was not triggered).
+
+### One phenomenon recorded as an observation, not a conclusion
+
+Alpamayo's L0 / L1 recovery is only 0.584 / 0.814 — it does **not** saturate, whereas AutoVLA is at
+1.000 already at L0. One possible explanation: when layer $L$'s **output** is patched, that layer's
+own KV entries remain ghost-side (attention happens before the output we replace); AutoVLA's early
+layers contribute negligibly through their own KV while Alpamayo's do not. Neither this round's
+sample size (12 events) nor the sampling noise above is sufficient to establish this, so it is
+**recorded as an observation, not a conclusion**.

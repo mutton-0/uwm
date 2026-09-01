@@ -130,7 +130,7 @@ pre-registered primary readout per experiment with everything else marked as sen
 three-state adjudication (PASS / FAIL / **indeterminate**), with insufficient power always recorded
 as indeterminate rather than forced into a binary; random-direction controls carry **their own
 per-layer null distribution**; all cross-model comparisons use **within-model normalized** quantities
-only. An amendment ledger is maintained throughout; the experiments reported here registered **38**
+only. An amendment ledger is maintained throughout; the experiments reported here registered **39**
 amendments, seven of which converted an already-obtained positive result back into a negative or
 indeterminate one (§4.4).
 
@@ -185,10 +185,10 @@ scores.
 
 **(b) Multi-frame candidates — D2cV is not a falsification floor (§CE/A34); the G column uses the permutation null instead**
 
-| Policy | G: CV-AUC(A vs D2a) | permutation floor | random-direction floor | direction geometry purity ρ(proj, log area) | F①: b-AUC(A vs D2a) | F①: b(A) [m/s] | F② | I | C |
+| Policy | G: CV-AUC(A vs D2a) | permutation floor | random-direction floor | direction geometry purity ρ(proj, log area) | F①: b-AUC(A vs D2a) | F①: b(A) [m/s] | F② | I | C-hazard: profile shape / commitment layer |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Alpamayo-R1 | 0.562 [0.502, 0.623] | 0.504 ± 0.012 | 0.508 ± 0.029 | +0.019 (p=0.73) | 0.446 [0.374, 0.519] | −0.080 [−0.178, +0.017] | n.m. | **n/a**³ | n.m. |
-| **AutoVLA** | **0.608 [0.562, 0.654]** | 0.504 ± 0.020 | 0.522 ± 0.020 | +0.045 (p=0.28)⁴ | 0.508 [0.451, 0.563] | +0.037 [−0.035, +0.119] | n.m. | **n/a**³ | n.m. |
+| Alpamayo-R1 | 0.562 [0.502, 0.623] | 0.504 ± 0.012 | 0.508 ± 0.029 | +0.019 (p=0.73) | 0.446 [0.374, 0.519] | −0.080 [−0.178, +0.017] | n.m. | **n/a**³ | cascade ρ=−0.873 / **L16** (depth 0.47); $C_m$ **n/a**⁵ |
+| **AutoVLA** | **0.608 [0.562, 0.654]** | 0.504 ± 0.020 | 0.522 ± 0.020 | +0.045 (p=0.28)⁴ | 0.508 [0.451, 0.563] | +0.037 [−0.035, +0.119] | n.m. | **n/a**³ | cascade ρ=−0.859 / **L20** (depth 0.58); $C_m$ **n/a**⁵ |
 
 > ¹ DiffusionDriveV2 must be fed a real lidar BEV histogram, and the domain-paired corpus is purely
 >   rendered with no point clouds; an all-zero histogram would fold "missing lidar" into the domain
@@ -201,6 +201,16 @@ scores.
 >   geometry. D2a is caliper-matched on log area and ecc, so the **between-group** confound is
 >   controlled; the residual within-group correlation is weaker than in the first version of this
 >   readout, which used only the A+D2a cache and was fold-assignment noise (§CE/A38).
+> ⁵ Both VLA candidates' recovery profiles are **step/cascade shaped** ($\rho < -0.7$), so under the
+>   pre-existing applicability criterion of §4.4.4 the top-2-share formula's premise is violated and
+>   $C_m$ adjudicates as indeterminate. This is **structural**: in a pure transformer stack the
+>   residual stream is the only pathway, so patching any early layer leaves every deeper layer
+>   clean-derived and recovery saturates at 1.0 early. The TransFuser family escapes this only
+>   because each fusion block re-injects un-patched CNN features (§CE/A39). **$C_m$ is therefore not
+>   comparable between the TransFuser family and VLA stacks**; the substitute readout shared by both
+>   groups is the **commitment layer** (deepest layer with mean recovery ≥ 0.9, i.e. "how deep before
+>   the decision is fixed") — all three TransFuser-family members have **no** commitment layer (no
+>   single layer reaches 0.9), which is another way of stating "interior peak".
 > C-domain and C-hazard are the **same patching method applied to two pairing sources** (sim↔real
 > rendering pairs vs G1 clean↔ghost), not two metrics; the two columns are not comparable to
 > each other.
@@ -233,16 +243,61 @@ from "where does the rendering-domain failure enter" to "where does the hazard-i
 change enter". Under that pairing, DiffusionDrive and LTF — **two candidates sharing one encoder
 architecture** — both localize the responsible layer at **L6** ($C_m$ 0.801 [0.710, 0.884] and 0.789
 [0.725, 0.857] respectively, against a diffuse baseline of 0.250, with patch-ALL = +1.000 for both).
-This is the only place in the paper where two candidates give a **concordant** diagnosis, and it
-falls precisely on the pair that shares an encoder — a convergent-validity check on the readout.
+Two candidates give a **concordant** diagnosis here, and they are precisely the pair that shares an
+encoder — which reads as a convergent-validity check on the readout. The next-but-one paragraph
+qualifies how much that concordance actually establishes.
 
 **DiffusionDriveV2 is indeterminate under the same pairing, and that cell deserves its own note.**
 Its patch-ALL recovery median is only **+0.552**, far from 1 — swapping all 320 fused tokens at once
 returns behaviour only halfway. Under the discipline of §4.1.3 this means the patched tokens are not
 a sufficient cut set under this pairing and the per-layer shares are uninterpretable. **Its nominal
-$C_m$ is 0.845 (median 0.990), the highest in the table, and we adjudicate it indeterminate rather
-than best.** This cell is a direct expression of the paper's reporting discipline: when the
-self-check fails, the best-looking number is exactly the one that must not be reported.
+$C_m$ is 0.845 (median 0.990), the highest among the three TransFuser-family members — which share
+one 8-layer diffuse baseline of 0.250, so that comparison is legitimate — and we adjudicate it
+indeterminate rather than best.** This cell is a direct expression of the paper's reporting
+discipline: when the self-check fails, the best-looking number is exactly the one that must not be
+reported.
+
+**Measuring the two VLA candidates turned this same cell into a conclusion about the
+operationalization itself (§CE/A39).** Alpamayo-R1's and AutoVLA's recovery profiles are the
+**exact opposite** of the TransFuser family's: not an interior peak but a **step** — recovery
+saturates near 1.0 across L0–L20 for AutoVLA and L2–L16 for Alpamayo before decaying to 0
+(Spearman $-0.859$ and $-0.873$ respectively). Both pass the patch-ALL self-check
+(+1.000 / +1.001), so this is not instrument failure.
+
+The reason is structural: **patching layer $L$'s output leaves every layer deeper than $L$ to be
+recomputed from the clean side.** In a pure autoregressive transformer stack the residual stream is
+the only pathway, so patching any early layer suffices to return behaviour fully to clean and the
+profile must saturate. The TransFuser family escapes this **only because each of its fusion blocks
+re-injects un-patched image features from the CNN branches**. Changing the patch scope does not help
+either: patching only the image-token segment still leaves AutoVLA's profile saturated across
+L0–L21 (Spearman $-0.876$).
+
+This conclusion has consequences in both directions, and both must be written down.
+**Forward**: $C_m$ is **not comparable between the TransFuser family and VLA stacks**, and both VLAs'
+$C_m$ adjudicate as indeterminate under the pre-existing criterion of §4.4.4 — the same treatment
+SimLingo's C-domain cascade received, not a new standard invented for them.
+**Backward**: DiffusionDrive's and LTF's interior peak at L6 is a **property of TransFuser's
+stage-wise re-injection design**, not a general fact about where hazard signals enter a network.
+We read DiffusionDrive's and LTF's agreement above as a convergent-validity check; it now needs one
+more clause: **they concord partly because they share one fusion design** — and the two VLAs concord
+with each other too (both step-shaped, commitment layers L16 and L20), for the same reason: a shared
+stack structure. **Concordance appearing along architecture-family lines is itself evidence that
+what is being measured is the architecture, not only the model.**
+
+One shape quantity remains well defined under a step profile and comparable between the two VLAs:
+the **commitment layer** (the deepest layer with mean recovery ≥ 0.9, i.e. "how deep before the
+decision is fixed"). AutoVLA's is L20 / 36 (depth 0.58), Alpamayo's is L16 / 36 (depth 0.47). All
+three TransFuser-family members have **no** commitment layer (no single layer reaches 0.9), which is
+another way of stating "interior peak".
+
+**One further instrument check on the Alpamayo side**: its rollout is stochastic sampling
+($top_p$ = 0.98, $T$ = 0.6), whereas AutoVLA decodes greedily at $top_k$ = 1. Across 5 seeds on the
+same input, $v_{plan}$ has sd **0.430**, i.e. **0.330×** the median clean−ghost gap (1.303). Our
+protocol locks both conditions and every patch run to one seed, so this noise is common-mode and
+largely cancels (the measured patch-ALL of +1.001 is the evidence), making the floor a
+**conservative upper bound**. It is nonetheless large enough that the wobble between 0.88 and 1.01
+along Alpamayo's profile **cannot be interpreted**, and the commitment layer L16 is localized only
+to the granularity of "mid-stack".
 
 ### 4.2.4 The F axis: the information is in the representation but does not drive the action
 
@@ -414,19 +469,20 @@ evidence. We therefore deliver a matrix **with blanks and explicit "not comparab
 than a scalar that looks clean but cannot be audited.
 
 **Growing the pool from 2 to 6 turns this argument from "it should be so in principle" into
-something countable.** Of the 54 cells in Table 1, **14 carry no usable number**: 4 are n/a (the
-operationalization does not apply), 7 are n.m. (not measured within budget), and 3 read "instrument
+something countable.** Of the 54 cells in Table 1, **12 carry no usable number**: 4 are n/a (the
+operationalization does not apply), 5 are n.m. (not measured within budget), and 3 read "instrument
 without resolving power" (F② injection across all three TransFuser-family members). A further
-**11 cells carry a number but adjudicate as indeterminate**: three single-frame candidates' G, four
-candidates' F①, and DiffusionDriveV2's C-hazard — that last one's nominal value being the highest in
-the table. Synthesizing a scalar would require an imputation decision for each of those 25 cells.
-And their reasons fall into **five distinct kinds**: stimulus-side gaps (DiffusionDriveV2's I axis
-lacks lidar; the multi-frame candidates lack temporal frames), violated operationalization premises
-(the D2cV floor for multi-frame candidates), instruments without resolving power (F② injection on
-diffusion heads and on the TransFuser encoder), insufficient statistical power (most G and F①
-cells), and a failed self-check (DiffusionDriveV2's C-hazard). **Filling all five kinds of absence
-with one imputed value collapses five different statements of "we do not know" into one statement of
-"we know".**
+**10 cells carry a number but adjudicate as indeterminate**: three single-frame candidates' G, four
+candidates' F①, DiffusionDriveV2's C-hazard (whose nominal value is the highest of the three
+TransFuser-family members), and both VLAs' $C_m$ (step-shaped profile, so the formula's premise is
+structurally violated). Synthesizing a scalar would require an imputation decision for each of those
+22 cells. And their reasons fall into **five distinct kinds**: stimulus-side gaps
+(DiffusionDriveV2's I axis lacks lidar; the multi-frame candidates lack temporal frames), violated
+operationalization premises (the D2cV floor for multi-frame candidates; $C_m$ on a VLA stack),
+instruments without resolving power (F② injection on diffusion heads and on the TransFuser encoder),
+insufficient statistical power (most G and F① cells), and a failed self-check (DiffusionDriveV2's
+C-hazard). **Filling all five kinds of absence with one imputed value collapses five different
+statements of "we do not know" into one statement of "we know".**
 
 More concretely: **no candidate in this table dominates on every measurable axis.** LTF is the best
 single-frame candidate on G and F① but its I-axis ordering holds only at the peak layer; AutoVLA ties LTF for
@@ -440,7 +496,7 @@ who ranks first, and no set of weights can be justified from the data itself.**
 ## 4.4 Ablation-like Analyses: why these numbers can be believed
 
 Every item in this section is a **negative check**: its purpose is not to make numbers look better
-but to exclude the case in which numbers look good while meaning nothing. This work registered 38
+but to exclude the case in which numbers look good while meaning nothing. This work registered 39
 amendments during execution, seven of which converted an already-obtained positive result back into a
 negative or indeterminate one; the five most consequential are given below.
 
@@ -528,8 +584,27 @@ of 0.083 would be interpreted as "PASS: failure is concentrated" — **a misread
 an applicability criterion ($\rho < -0.7$ ⇒ cascade ⇒ formula inapplicable) and use three
 depth-independent shape statistics for cross-model comparison: Spearman(layer, recovery), the
 fraction of layers needed to reach 80% of recovery mass, and the normalized entropy of the
-responsible-layer argmax. $C_m$'s diffuse baseline varies with depth (0.250 at 8 layers vs 0.083 at
-24), so **its value is not comparable across models**.
+responsible-layer argmax. $C_m$'s diffuse baseline varies with depth (0.250 at 8 layers vs 0.083 and
+0.056 at 24 and 36), so **its value is not comparable across models**.
+
+**With the expanded pool, this criterion is upgraded from "one model happens to be a cascade" to
+"one class of architecture must be a cascade".** The five candidates' C-hazard profiles separate
+cleanly **by architecture family**: all three TransFuser-family members are **increasing** profiles
+(Spearman $+0.881$ / $+0.929$ / $+0.810$, interior peak at L6), and both VLAs are **step** profiles
+($-0.859$ / $-0.873$, saturating at 1.0 from around L0). The reason is in §4.2.3: in a pure
+transformer stack, patching layer $L$ leaves every deeper layer clean-derived, so early saturation is
+forced; the TransFuser family escapes only because each fusion block re-injects un-patched CNN
+features. The applicability criterion is therefore not a just-in-case robustness appendix: **it cuts
+the candidate pool exactly along the architecture-family boundary.** Read literally, $C_m$ would
+place the two VLAs' 0.079 / 0.091 (against a 36-layer baseline of 0.056) in one ordering with the
+three TransFuser members' 0.789–0.845 (against an 8-layer baseline of 0.250), producing a ranking
+determined entirely by depth and architecture and unrelated to whether failure is concentrated.
+
+Under a step profile we report the **commitment layer** instead (the deepest layer with mean recovery
+≥ 0.9): the one informative quantity in that regime, and comparable between the two VLAs (AutoVLA
+L20/36, Alpamayo L16/36). None of the three TransFuser-family members has a commitment layer (no
+single layer reaches 0.9 recovery) — **the same quantity degenerating to opposite ends on the two
+families is precisely what shows it is a shape statistic and not a score.**
 
 ### 4.4.5 The attribution control: an improved behavioural score is not a validated diagnosis
 
@@ -553,7 +628,7 @@ empirical 99.9th percentile of that null is 0.100–0.154 whereas the Gaussian-t
 read off as an empirical quantile) reduced the number of "doubly corroborated" candidates from
 **11 to 0**.
 
-> Sources: `amendments.md` (all 38 amendments), `analytic_vs_empirical.md`,
+> Sources: `amendments.md` (all 39 amendments), `analytic_vs_empirical.md`,
 > `c_axis_shape_diagnostics.json`, `cosine_matrix.json`, `generalizable_tips.md`.
 
 ---
@@ -586,13 +661,23 @@ across the two groups.** Filling this gap requires constructing a further negati
 "same class, same geometry, **same relative velocity**, differing only in the label", which on
 nuScenes means re-mining the corpus and was out of scope this round.
 
-**4. Parts of the F and C operationalizations are not portable.** F's injection protocol is
-unmeasurable across the entire TransFuser encoder family (three members under two different action
-heads, all unmeasurable, §4.4.2); C's top-2-share formula has its premise violated on a cascade
-profile, and on DiffusionDriveV2 the patch-ALL sufficient-cut-set check fails, forcing an
-indeterminate verdict. None of these is a statement that the model is poor on that axis; all are
-statements that the operationalization does not apply to that encoder, profile shape or pairing. We
-therefore decline to fold them into a single score.
+**4. Parts of the F and C operationalizations are not portable, and both non-portability boundaries
+fall along architecture families.** F's injection protocol is unmeasurable across the entire
+TransFuser encoder family (three members under two different action heads, all unmeasurable,
+§4.4.2); C's top-2-share formula has its premise **structurally** violated across the entire VLA
+stack (both members give step profiles, §4.4.4, §CE/A39), and on DiffusionDriveV2 the patch-ALL
+sufficient-cut-set check additionally fails, forcing an indeterminate verdict. **Neither boundary is
+randomly placed: F② cuts along the encoder family and $C_m$ cuts along "is it a pure transformer
+stack".** None of these is a statement that the model is poor on that axis; all are statements that
+the operationalization does not apply to that encoder, profile shape or pairing. We therefore
+decline to fold them into a single score.
+
+**One backward consequence that must be acknowledged**: DiffusionDrive and LTF localize C-hazard to
+the same layer L6, which we presented as a convergent-validity check. Measuring the two VLAs shows
+that **this interior peak is a property of TransFuser's stage-wise re-injection design**, and the
+two concord partly because they share one fusion design. That convergent validity therefore holds
+only *within* the encoder family and is not evidence for the general validity of the C-hazard
+readout.
 
 **5. The I axis covers only half the pool, and every gap is on the stimulus side.**
 DiffusionDriveV2 needs real lidar and both multi-frame candidates need 4 timesteps, while the

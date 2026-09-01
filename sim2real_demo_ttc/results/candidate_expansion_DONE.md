@@ -2,7 +2,7 @@
 
 > 工单：[`../../docs/candidate_pool_expansion_workorder.md`](../../docs/candidate_pool_expansion_workorder.md)
 > 承接：`headline_pilot_DONE.md`。本轮全部自行决策登记在 [`amendments.md`](amendments.md) §CE/A27–A38（12 条）。
-> 完成日期：2026-08-31。
+> 完成日期：2026-08-31；**C-hazard 补测于 2026-09-01**，见 `candidate_expansion_DONE_supplement.md`。
 
 ---
 
@@ -10,11 +10,11 @@
 
 | 候选 | 状态 | G | F① | F② | I | C | 报告 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| **Alpamayo-R1** (10B) | **部分完成**（G/F 已测，F②/C 预算内未测） | 0.562 [0.502, 0.623]，显著高于置换地板 0.504±0.012 | 0.446 [0.374, 0.519] 不可估 | n.m. | **n/a**（语料单帧） | n.m. | `axis_alpamayo_report_{zh,en}.md` |
+| **Alpamayo-R1** (10B) | **部分完成**（G/F/C-hazard 已测，F② 预算内未测） | 0.562 [0.502, 0.623]，显著高于置换地板 0.504±0.012 | 0.446 [0.374, 0.519] 不可估 | n.m. | **n/a**（语料单帧） | **C-hazard 不可估**（阶跃剖面 ρ=−0.873；承诺层 L16/36） | `axis_alpamayo_report_{zh,en}.md` |
 | **LTF** (Latent TransFuser) | **完整测完 G/F/I/C** | **+0.070 [+0.017, +0.126]** ← 本工作线**第一个 G 轴阳性** | **0.583 [0.519, 0.639] PASS** | 不可测（斜率 +0.00040，上界 −0.00004） | $I_m$ 0.583 (L6)，行为端 0.160 | **C-hazard PASS** $C_m$ 0.789 [0.725, 0.857]，L6 | `axis_ltf_report_{zh,en}.md` |
 | **TransFuser** | **确认与 LTF 为同一候选，不单列**（三项独立检查） | —— | —— | —— | —— | —— | `axis_transfuser_report_{zh,en}.md` |
 | **DiffusionDriveV2** | **完整测完 G/F/C**（I 轴 n/a） | +0.025 [−0.044, +0.097] 不可估 | **0.556 [0.501, 0.613] PASS**，b(A) +0.201 | 不可测 | **n/a**（域配对语料无 lidar） | **不可估**（patch-ALL 自检不通过，中位数 0.552） | `axis_diffusiondrivev2_report_{zh,en}.md` |
-| **AutoVLA** | **部分完成**（G/F 已测，F②/C 预算内未测），**1 天时间盒内完成，未触发跳过条款** | 0.608 [0.562, 0.654]，$p$ = 7.7e-6，与 LTF 的 0.623 不可区分 | 0.508 [0.451, 0.563] 不可估 | n.m. | **n/a**（语料单帧） | n.m. | `axis_autovla_report_{zh,en}.md` |
+| **AutoVLA** | **部分完成**（G/F/C-hazard 已测，F② 预算内未测），**1 天时间盒内完成，未触发跳过条款** | 0.608 [0.562, 0.654]，$p$ = 7.7e-6，与 LTF 的 0.623 不可区分 | 0.508 [0.451, 0.563] 不可估 | n.m. | **n/a**（语料单帧） | **C-hazard 不可估**（阶跃剖面 ρ=−0.859；承诺层 L20/36） | `axis_autovla_report_{zh,en}.md` |
 | UniAD / VAD / SparseDrive | **未尝试**（工单明确排除：mmcv 1.x 与 sm_120 不兼容） | —— | —— | —— | —— | —— | —— |
 
 **没有一个候选被静默跳过；没有一个"不适用"格是用填充值凑出来的。**
@@ -37,9 +37,10 @@
 5. **G 与 F 的分离在 AutoVLA 上最干净**：原始 G 读数与全表最高者不可区分，
    F① 却是全表最接近 0.5 的（0.508），且 $b(A)$ 与 $b$(D2a) **都**与 0 不可区分——
    不是"反应不特异"，是**根本不反应**。→ 论文 §4.2.7。
-6. **DiffusionDriveV2 的 C-hazard 名义值全表最高（$C_m$ 0.845）而我们判它不可估**，
-   因为 patch-ALL 充分割集自检不通过（中位数 0.552）。
+6. **DiffusionDriveV2 的 C-hazard 名义值在三个 TransFuser 系成员里最高（$C_m$ 0.845）
+   而我们判它不可估**，因为 patch-ALL 充分割集自检不通过（中位数 0.552）。
    自检不通过时，看起来最好的数字恰恰是最不能报的数字。→ 论文 §4.2.3。
+   （$C_m$ 只在同层数、同架构族内可比；跨族不可比见 §CE/A39 与补充完成标志。）
 
 ## 3. 产出物路径
 
@@ -68,7 +69,7 @@
 | `results/v_hazard_{ltf,ddv2,autovla,alpa}_*.npz` | 冻结的判别方向（逐层） |
 | `results/f_axis_action_counterfactual.json` | F① 六个候选一张表 |
 | `results/f_axis_dd_steer_{ltf,ltf_brake,ddv2,ddv2_brake}.json` | F② 注入 + 站内上界标定 |
-| `results/c_axis_hazard_{dd,ltf,ddv2}.json` | C-hazard（含 patch-ALL 充分割集自检字段） |
+| `results/c_axis_hazard_{dd,ltf,ddv2,alpa,autovla}.json` | C-hazard（含 patch-ALL 充分割集自检、`commitment_layer`；Alpamayo 另含 `sampling_noise_floor`） |
 | `results/i_axis_domain.json` | I 轴，新增 `ltf` 条目与 `same_encoder_layer_matched_check` 字段 |
 
 ### 3.4 报告（每候选中英双语，期刊 Methods/Results 结构）
@@ -97,7 +98,7 @@
 
 ### 3.6 修正案
 
-`results/amendments.md` §CE/A27–A38（12 条），其中两条把已得阳性改回不可估：
+`results/amendments.md` §CE/A27–A39（13 条），其中两条把已得阳性改回不可估：
 **A33**（DDv2 的 C-hazard 首版 $C_m$ 0.932 作废重跑 → 不可估）、
 **A34**（Alpamayo 的"A vs D2cV 显著"从判据降级为并列报告）。
 
@@ -108,7 +109,7 @@
 | 项 | 状态 | 理由 |
 | --- | --- | --- |
 | Alpamayo-R1 / AutoVLA 的 F② | 未测 | 预算。**不是"不可测"的结论**——两者注入位点（LLM 残差流）与 SimLingo 同构，先验上应当可测。 |
-| Alpamayo-R1 / AutoVLA 的 C-hazard | 未测 | 预算。配对与缓存均已具备，是本工作线最直接的下一步。 |
+| ~~Alpamayo-R1 / AutoVLA 的 C-hazard~~ | **已补测（2026-09-01）** | 见 `candidate_expansion_DONE_supplement.md` 与 §CE/A39。两者均判不可估（阶跃剖面），并由此得到一条关于操作化本身的结论。 |
 | LTF / SimLingo 的 C-domain / C-hazard 交叉格 | 未测 | 预算。SimLingo 只测了 C-domain，LTF 只测了 C-hazard。 |
 | 多帧候选的证伪地板 | **无法在本语料上补** | 需要另造"同类别、同几何、**同相对速度**、只差标签"的负例类，意味着重新挖掘 nuScenes。 |
 | DiffusionDriveV2 / 多帧候选的 I 轴 | **n/a** | 语料侧缺失（无点云 / 无时序帧），非模型侧不可测。用零填充会污染读数。 |
