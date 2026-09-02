@@ -116,6 +116,13 @@ def main():
     ap.add_argument("--crop-center-row", type=int, default=0)
     ap.add_argument("--corpus", default="nuscenes", choices=["nuscenes", "navsim"],
                     help="DDv2 的点云来源；navsim 直接读 MergedPointCloud/*.pcd（§NS/A47）")
+    ap.add_argument("--lidar-margin", type=float, default=0.25,
+                    help="3D 框各轴外扩（米）。**不是为了多删点而调的**：nuScenes 标注/标定误差约 "
+                         "0.1~0.3 m，实测有点落在框外 5 cm 处；2D 侧的 bbox_to_tokens 也已外扩 1 token。"
+                         "0.0 作为敏感性口径并列报告（§FM/A59）")
+    ap.add_argument("--occlude-lidar", action="store_true",
+                    help="DDv2 专用：同时删掉落在实体 3D 框内的点云点（§FM/A59）。"
+                         "不开启时行为与旧版逐位一致（只涂 RGB）")
     ap.add_argument("--sl-config", default="/data/ruolin/uwm/sim2real_demo_ttc/configs/n1_d2.yaml")
     ap.add_argument("--out", default="")
     args = ap.parse_args()
@@ -157,10 +164,38 @@ def main():
                 from ddv2_adapter import NuScenesLidar
                 lidar = NuScenesLidar(args.nuscenes_root)
 
-        def infer(img, ev, fr):
-            # NAVSIM 侧点云按 CAM_F0 的 data_path 索引（filename 去掉 split 前缀）
+        WB3 = None
+        if args.occlude_lidar:
+            if args.model != "ddv2":
+                raise SystemExit("--occlude-lidar 只对 ddv2 有意义（其余候选不吃点云）")
+            from f3_window_boxes import WindowBoxes, points_in_box, mirror_box3d
+            WB3 = WindowBoxes(lidar.nusc if hasattr(lidar, "nusc") else None)
+            LID_STATS = {"events": 0, "n_pts_occ": [], "n_pts_ctrl": [], "no_box3d": 0}
+
+        def _lidar_for(ev, fr, arm):
+            """arm ∈ {None, 'occ', 'ctrl'}；返回该臂应当喂给模型的点云。
+
+            **两臂对称处理**：occ 臂删实体 3D 框内的点，ctrl 臂删**镜像 3D 框**内的点
+            （沿 ego 纵轴 y -> −y，体积严格相等、纵向距离相同），
+            使"删除范围"这个变量在两臂之间可比 —— 与 RGB 侧的水平镜像对照框同一构造。
+            """
             key = (fr["filename"].split("/", 1)[1] if args.corpus == "navsim" else fr.get("sd_token"))
-            kw = {} if lidar is None else {"lidar_xyz": lidar.ego_points(key)}
+            pts = None if lidar is None else lidar.ego_points(key)
+            if pts is None or arm is None or WB3 is None:
+                return pts
+            b3 = WB3.box3d_for(ev, fr["t"])
+            if b3 is None:
+                LID_STATS["no_box3d"] += 1
+                return pts
+            c, sz, yaw = b3 if arm == "occ" else mirror_box3d(*b3)
+            g = float(args.lidar_margin)
+            sz = (sz[0] + 2 * g, sz[1] + 2 * g, sz[2] + 2 * g)
+            m = points_in_box(pts, c, sz, yaw)
+            LID_STATS["n_pts_" + arm].append(int(m.sum()))
+            return pts[~m]
+
+        def infer(img, ev, fr, arm=None):
+            kw = {} if lidar is None else {"lidar_xyz": _lidar_for(ev, fr, arm)}
             return float(runner.run(img, spd(ev), **kw)["commanded_speed"])
     elif args.model == "simlingo":
         from omegaconf import OmegaConf
@@ -171,7 +206,7 @@ def main():
         from g2_cache import commanded_speed
         runner = SimLingoRunner(cfg, capture_hidden=False)
 
-        def infer(img, ev, fr):
+        def infer(img, ev, fr, arm=None):
             return float(commanded_speed(runner.infer(img, spd(ev), pool_modes=()).waypoints))
     else:
         raise SystemExit("VLA 候选走 f3_occlusion_vla.py（多帧输入，接口不同）")
@@ -193,8 +228,10 @@ def main():
             skipped["no_control_box"] += 1; continue
         v_clean = infer(ic, ev, fc)
         v_ghost = infer(ig, ev, fg)
-        v_occ = infer(occlude(ig, bb), ev, fg)
-        v_ctrl = infer(occlude(ig, cb), ev, fg)
+        v_occ = infer(occlude(ig, bb), ev, fg, "occ")
+        v_ctrl = infer(occlude(ig, cb), ev, fg, "ctrl")
+        if args.occlude_lidar:
+            LID_STATS["events"] += 1
         recs.append({"eid": ev["event_id"], "scene": ev["scene_name"],
                      "v_clean": v_clean, "v_ghost": v_ghost, "v_occ": v_occ, "v_ctrl": v_ctrl,
                      "b_ghost": v_ghost - v_clean, "b_occ": v_occ - v_clean,
@@ -204,7 +241,10 @@ def main():
             print(f"[F3/{LABEL}] {i+1}/{len(evs)}", flush=True)
 
     out = {"model": LABEL, "design": "F-3 遮挡必要性检验：clean / ghost / occ / ctrl 四臂",
-           "occlusion": "危险实体投影框涂为图像均值色（中性灰斑）",
+           "occlusion": ("危险实体投影框涂为图像均值色（中性灰斑）"
+                         + ("；**并删掉落在该实体 3D 框内的点云点**（§FM/A59）"
+                            if args.occlude_lidar else "")),
+           "occlude_lidar": bool(args.occlude_lidar),
            "control_arm": "同面积、同离心率带、不与原框重叠的对照框（隔离「加灰斑」这一效应）",
            "primary": "必要性比 R = 1 − b_occ / b_ghost；PASS 门槛：R 的 scene 级 CI 下界 > 0.5",
            "n_events": len(recs), "skipped": dict(skipped), "per_event": recs}
@@ -246,6 +286,23 @@ def main():
             print(f"[F3/{LABEL}] 对照臂 R_ctrl = {c['mean']:+.3f}  CI {np.round(c['ci95'],3).tolist()}"
                   f"  ← 应接近 0（涂别处不该让动作退回）")
     print(f"[F3/{LABEL}] 判定：{out['verdict']}")
+    if args.occlude_lidar:
+        po = np.array(LID_STATS["n_pts_occ"], float); pc = np.array(LID_STATS["n_pts_ctrl"], float)
+        out["lidar_removal"] = {
+            "events": LID_STATS["events"], "no_box3d": LID_STATS["no_box3d"],
+            "control_volume": "实体 3D 框沿 ego 纵轴镜像（y -> −y, yaw -> −yaw），体积严格相等",
+            "margin_m": float(args.lidar_margin),
+            "n_points_removed_occ": {"mean": float(po.mean()) if len(po) else None,
+                                     "median": float(np.median(po)) if len(po) else None,
+                                     "n": int(len(po))},
+            "n_points_removed_ctrl": {"mean": float(pc.mean()) if len(pc) else None,
+                                      "median": float(np.median(pc)) if len(pc) else None,
+                                      "n": int(len(pc))},
+            "note": "两臂的删点数应同量级；若 ctrl 臂显著更少，说明镜像位置落在空旷处，"
+                    "「删除范围」未完全匹配，须在报告中如实写出"}
+        print(f"[F3/{LABEL}] lidar 删点：occ 均值 {po.mean():.0f} / 中位 {np.median(po):.0f}；"
+              f"ctrl 均值 {pc.mean():.0f} / 中位 {np.median(pc):.0f}"
+              f"（{LID_STATS['events']} 事件，3D 框缺失 {LID_STATS['no_box3d']}）")
     Path(args.out).write_text(json.dumps(out, indent=2, ensure_ascii=False))
     print(f"[F3/{LABEL}] wrote {args.out}")
 

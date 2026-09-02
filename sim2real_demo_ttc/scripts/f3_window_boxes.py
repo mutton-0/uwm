@@ -86,3 +86,55 @@ class WindowBoxes:
             self.stats["frames_visible"] += 1
             out.append(bb)
         return out
+
+    def box3d_for(self, ev, t_s):
+        """返回该实体在时刻 t_s 的 **ego 系 3D 框**：(center[3], (w, l, h), yaw) 或 None。
+
+        取值与 `frame_bbox` 的 2D 投影**同源**：同一个 `p_ego` 中心、同一个 `_size`、
+        同一条按最近关键帧取的朝向 `_rot`。故"删掉这个 3D 框里的点"与
+        "涂掉这个 3D 框投影出的 2D 框"作用在同一个物理实体上，不是两套独立近似。
+        """
+        from pyquaternion import Quaternion
+        try:
+            geo = self.geo(ev["scene_name"])
+        except Exception:                                              # noqa: BLE001
+            return None
+        o = geo["per_obj"].get(ev["object_token"])
+        if o is None or not o.get("_rot") or o["_size"] is None:
+            return None
+        gt = geo["grid_t"]
+        j = int(np.argmin(np.abs(gt - t_s)))
+        if abs(gt[j] - t_s) > self.tol or not bool(o["valid"][j]):
+            return None
+        ti = int(np.argmin(np.abs(np.asarray(o["_rot_t"]) - gt[j])))
+        yaw_w = Quaternion(o["_rot"][ti]).yaw_pitch_roll[0]
+        yaw_e = yaw_w - Quaternion(matrix=geo["R_we"][j]).yaw_pitch_roll[0]
+        w, l, h = (list(o["_size"]) + [0, 0, 0])[:3]
+        c = np.asarray(o["p_ego"][j], float)
+        if not np.all(np.isfinite(c)):
+            return None
+        return c, (float(w), float(l), float(h)), float(yaw_e)
+
+
+def points_in_box(pts, center, size, yaw):
+    """ego 系点云落在该 3D 框内的布尔掩码。size = (w, l, h)，x 方向长 l、y 方向宽 w
+    （与 `g1_mine_events.box_corners_ego` 的约定逐字段一致）。"""
+    if pts is None or len(pts) == 0:
+        return np.zeros(0, bool)
+    w, l, h = size
+    d = np.asarray(pts, float)[:, :3] - np.asarray(center, float)[None, :]
+    c, s = np.cos(-yaw), np.sin(-yaw)
+    x = c * d[:, 0] - s * d[:, 1]
+    y = s * d[:, 0] + c * d[:, 1]
+    return (np.abs(x) <= l / 2) & (np.abs(y) <= w / 2) & (np.abs(d[:, 2]) <= h / 2)
+
+
+def mirror_box3d(center, size, yaw):
+    """把 3D 框沿 ego 纵轴镜像（y -> −y，yaw -> −yaw）—— 对照臂的 3D 体积。
+
+    与 RGB 侧 `control_box` 的**水平镜像**同一几何构造：
+    纵向距离、尺寸、俯仰不变，只把横向位置翻到另一侧 ⇒ 体积严格相等、成像离心率带相同。
+    """
+    c = np.asarray(center, float).copy()
+    c[1] = -c[1]
+    return c, size, -yaw

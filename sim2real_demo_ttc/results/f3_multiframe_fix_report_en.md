@@ -154,3 +154,92 @@ occlusion only, so it was not done here and is listed as an open item.
    and can serve as that work order's input.
 5. **Alpamayo's sampling noise** (`top_p=0.98, T=0.6`) remains: this round drives it to 0 by locking
    the seed, but that guarantees reproducibility, not robustness (already registered in §CE/A39).
+
+
+---
+
+# Addendum: closing DiffusionDriveV2's lidar channel (§FM/A59)
+
+> Follows the open item registered in §3 of this report. No old result file was deleted; the new runs
+> are saved as `f3_occlusion_ddv2_lidar.json` (primary) and `f3_occlusion_ddv2_lidar_m0.json`
+> (sensitivity).
+
+## A.0 Direct conclusion
+
+| Question | Answer |
+| --- | --- |
+| Is the lidar channel closed? | **Yes**, with symmetric point removal on both the occ and ctrl arms |
+| Did the verdict change? | **No.** Still "indeterminate: the baseline response itself is indistinguishable from 0" |
+| Did $b_{ghost}$ / $R$ change? | $b_{ghost}$ is **unchanged to the digit** (−0.1803; unaffected by construction); $R$ still does not enter the verdict |
+| **A correction to my own previous claim** | Last round's §FM/A58 stated "**the pedestrian remains fully present in the point cloud**". **That was an overstatement.** Measured on G1's A-class events, the entity's 3D box contains a **median of 1 point**, and **42% of events contain none at all** |
+
+## A.1 What the fix does (symmetric across arms)
+
+* **occ arm**: delete points falling inside the entity's **ego-frame 3D box**. That 3D box is
+  **the same source** as the RGB side's 2D box — same `p_ego` centre, same `_size`, same
+  nearest-keyframe orientation — so "deleting points" and "painting the box" act on the same physical
+  entity rather than on two independent approximations.
+* **ctrl arm**: delete points inside the **mirrored 3D box** ($y \to -y$, $yaw \to -yaw$ about the
+  ego longitudinal axis). Strictly equal volume at the same longitudinal range — the same geometric
+  construction as the RGB control box's horizontal mirror. **Not occ-only**, otherwise "extent of
+  removal" would not be comparable between the arms.
+* **Margin = 0.25 m** on each axis. **This was not tuned to delete more points**: nuScenes
+  annotation/calibration error is roughly 0.1–0.3 m and points were measured falling 5 cm outside the
+  box; the 2D side's `bbox_to_tokens` already dilates by 1 token. **Margin = 0.0 is reported alongside
+  as a sensitivity.**
+
+## A.2 Three configurations compared (G1, n = 282 / 147 scenes)
+
+| Configuration | $b_{ghost}$ | $b_{occ}$ | $b_{ctrl}$ | Verdict |
+| --- | --- | --- | --- | --- |
+| RGB only (old) | −0.1803 [−0.3487, +0.0032] | −0.2060 [−0.3707, −0.0290] | −0.1767 [−0.3461, +0.0074] | indeterminate (no baseline response) |
+| **RGB + lidar, m = 0.25 (primary)** | **−0.1803 [−0.3487, +0.0032]** | −0.2009 [−0.3658, −0.0256] | −0.1745 [−0.3435, +0.0097] | **indeterminate (no baseline response)** |
+| RGB + lidar, m = 0.00 (sensitivity) | −0.1803 [−0.3487, +0.0032] | −0.2014 [−0.3659, −0.0256] | −0.1779 [−0.3469, +0.0061] | indeterminate (no baseline response) |
+
+**All three configurations give the identical verdict.** As with the multi-frame fix, the gate is
+$b_{ghost}$ (the un-occluded arm), and closing the lidar channel affects only $b_{occ}$ / $b_{ctrl}$,
+so it **cannot change the verdict by construction**.
+
+## A.3 Fix effect vs noise floor
+
+$b_{ghost}$ is unaffected by construction, so its measured movement is the run-to-run noise floor:
+
+| Configuration | $\Delta b_{ghost}$ (noise floor) | $\Delta b_{occ}$ (lidar-closure effect) | Events with $b_{occ}$ entirely unchanged |
+| --- | --- | --- | --- |
+| m = 0.25 | **0/282 non-zero, mean 0.0000** | 104/282 non-zero, mean **+0.0051 [−0.0036, +0.0145]** | **178/282** (no points in the box to begin with) |
+| m = 0.00 | 0/282 non-zero, mean 0.0000 | 68/282 non-zero, mean +0.0046 [−0.0028, +0.0131] | 214/282 |
+
+* **DDv2 is the only bit-deterministic candidate of the three F-3 subjects** (noise floor exactly 0; no
+  sampling in decoding);
+* **but $\Delta b_{occ}$'s CI spans 0**, so the behavioural change from closing the lidar channel is
+  **indistinguishable from zero**.
+
+## A.4 Why the effect is so small: the entity is barely in the point cloud to begin with
+
+| Quantity | Value |
+| --- | --- |
+| Entity longitudinal range, percentiles (10/25/50/75/90) | 17.3 / 20.8 / **27.1** / 39.0 / 49.4 m |
+| Points removed, occ arm (m = 0.25) | mean **6.2**, **median 1** |
+| Points removed, ctrl arm (m = 0.25) | mean 4.0, median 0 |
+| Points removed, occ arm (m = 0.00) | mean 2.1, median 0 |
+
+nuScenes uses a 32-beam lidar, and the A-class VRUs sit at a median range of **27 m**, where a
+pedestrian returns only a handful of points and frequently none. **The real exposure of this "lidar
+leak" on this corpus is therefore far smaller than I asserted last round.**
+
+**The fix is still necessary**, for the same reasons as the multi-frame one: (i) it is a correctness
+issue and should not rest on the accident that this corpus happens to be point-sparse; (ii) on
+close-range events or a higher-beam sensor (e.g. NAVSIM/OpenScene's MergedPointCloud) the exposure
+would immediately grow; (iii) with both arms now symmetric, the readout's meaning is clean.
+
+## A.5 An imperfect match that must be stated
+
+**"Extent of removal" is only of the same order between the arms, not equal**: occ removes a mean of
+6.2 / median 1, ctrl a mean of 4.0 / median 0 (m = 0.25). The mirrored volume is strictly equal in
+size and range, but it frequently lands on **empty road surface** where there were no points anyway.
+
+**How this is handled**: report both arms' removal distributions honestly, and **do not hand-pick a
+control placement whose point count matches** — doing so would let point-cloud density determine the
+control box's position and introduce a new selection bias. Under the current convention both
+$\Delta b_{occ}$ and $\Delta b_{ctrl}$ are indistinguishable from 0, so this imperfect match does not
+affect the conclusion.
