@@ -4,6 +4,7 @@
 > Follows [`f3_multiframe_fix_DONE.md`](f3_multiframe_fix_DONE.md) (§FM/A56–A59, the fixes as validated on G1).
 > Autonomous decisions: [`amendments.md`](amendments.md) §FC/A60–A61.
 > Artifacts: `f3_occlusion_{leadbrake,navsim}_ddv2_lidar{,_m0}.json`,
+> `f3_clean_arm_audit_{g1,leadbrake}.json` (measured clean-arm visibility; script `scripts/f3_clean_arm_audit.py`),
 > `f3_occlusion_leadbrake_{alpa,autovla}_mf.json`, `ns_yaw_audit{,_vehicle}.json`,
 > `f3_within_frame_effect.json`. **No old result file was deleted.**
 
@@ -217,6 +218,12 @@ of wider scope:
 > **In 219 of the 288 G1 class-A events (76.0%), the entity is already visible in the clean frame.**
 > Across the 218 events visible in both frames, the ghost/clean imaged-area ratio has a median of
 > **1.67** and the longitudinal distance moves from a median of **31.3 m to 25.2 m**.
+>
+> **The lead-braking corpus is more extreme: 103/103 = 100.0%**, with an imaged-area ratio median of
+> **1.00** (p25 0.77 / p75 1.22) and longitudinal distance 31.4 m → 31.8 m. This follows directly
+> from how that scenario is defined — an **already-tracked** lead vehicle beginning to brake hard —
+> so the entity is present throughout at essentially unchanged range, and $b_{ghost}$ there
+> contrasts **braking onset** rather than entity presence.
 
 `f3_occlusion_necessity.py` describes the clean arm as "the hazardous entity is simply not present",
 but the clean frame is drawn from 1.0–1.5 s before emergence, and `t_emergence` marks "entering the

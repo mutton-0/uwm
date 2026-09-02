@@ -4,6 +4,7 @@
 > 承接 [`f3_multiframe_fix_DONE.md`](f3_multiframe_fix_DONE.md)（§FM/A56–A59，G1 语料上的修复）。
 > 自行决策见 [`amendments.md`](amendments.md) §FC/A60–A61。
 > 产出物：`f3_occlusion_{leadbrake,navsim}_ddv2_lidar{,_m0}.json`、
+> `f3_clean_arm_audit_{g1,leadbrake}.json`（clean 臂可见性实测，脚本 `scripts/f3_clean_arm_audit.py`）、
 > `f3_occlusion_leadbrake_{alpa,autovla}_mf.json`、`ns_yaw_audit{,_vehicle}.json`、
 > `f3_within_frame_effect.json`。**旧结果文件一个没删。**
 
@@ -187,6 +188,11 @@ CI 半宽从 0.48 收到 0.19 即为直接证据）。
 
 > **G1 A 类 288 个事件里，219 个（76.0%）在 clean 帧上实体就已经可见。**
 > 两帧都可见的 218 例里，成像面积比 ghost/clean 中位 **1.67**，纵距中位 **31.3 m → 25.2 m**。
+>
+> **前车急刹语料更极端：103/103 = 100.0%**，成像面积比中位 **1.00**（p25 0.77 / p75 1.22），
+> 纵距中位 31.4 m → 31.8 m。这是场景定义的直接后果——该语料按定义就是
+> "**已被跟踪的**前车开始急刹"，实体全程在场且距离几乎不变，
+> ⇒ 该语料上的 $b_{ghost}$ 对比的是**制动起始**而非**实体有无**。
 
 `f3_occlusion_necessity.py` 把 clean 臂描述为"危险实体本来就不在场"，
 但 clean 帧取自 emergence 前 1.0~1.5 s，而 `t_emergence` 标记的是"进走廊 / TTC 越阈"，

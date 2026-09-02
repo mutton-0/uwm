@@ -85,19 +85,64 @@
 
 ---
 
-## 未做（依赖的报告尚未产出）
+### 3. `sec/4_experiments.tex` — 多帧平均降噪的结果折进三处（Table 3 脚注 1 / Validity Checks 第 6 行 / DiffusionDrive 段）
+
+**依据**：`results/f3_temporal_averaging_report_{zh,en}.md`、`results/f3_tavg_summary.json`、
+`results/amendments.md` §FC/A62。
+
+**结论先说**：四个单帧候选（DD / LTF / DDv2 / SimLingo）在 9.9 帧窗口平均下
+**判定一格没变** ⇒ 按工单要求走"验证了原判定不是噪声 artifact"的写法，
+**没有**改动 Table 3 或 Table 4 的任何判定格。
+
+| 位置 | 改动 | 依据数字 |
+|---|---|---|
+| Table 3 脚注 1 | 加两句：① $b_{ghost}$ 比的是危险帧对 emergence 前的帧，而后者**219/288** 已可见（面积比中位 **1.67**）⇒ 量的是"走近"而非"出现"；② 四臂改成 **9.9 帧**窗口均值后，两个受影响候选的 $b_{ghost}$ 仍与 0 不可区分，**本表所有判定不变** | `f3_clean_arm_audit_g1.json`；`f3_tavg_summary.json`（`verdict_changed` 四个候选均 false） |
+| Validity Checks 第 6 行 | 标题由 "occlusion completeness" 扩为 "occlusion completeness **and temporal sampling**"（否则新句与标题不符）；末尾加一句：窗口平均同样不改任何判定，**CI 半宽比值 0.45–1.11** | `f3_tavg_summary.json`（`noise_reduction_ratio` = 0.450 / 1.106 / 0.873 / 0.986） |
+| "The most informative cell is DiffusionDrive" 段 | ① 在"does not react to hazard frames at all"后补"窗口平均下仍然如此"；② 加一句：窗口平均下同帧擦除**确实**移动了它的规划速度（$-0.0084\,[-0.0155,-0.0026]$），但**不超过**在别处涂等面积灰斑（$\lvert d_{occ}\rvert-\lvert d_{ctrl}\rvert=-0.0012\,[-0.0069,+0.0037]$）⇒ 是对扰动敏感，不是对危险敏感 | `f3_tavg_dd.json` / `f3_tavg_summary.json`（`d_occ_multi`、`abs_diff_multi`） |
+
+**三处联动核查的结果（上一条指令点名要查的）**：
+
+1. **Table 3 脚注 1 的适用范围** —— 需要改，已改。原文只说"$b_{ghost}$ 与 0 不可区分"，
+   没说这个对比本身是什么；补上 219/288 与降噪确认两句后，读者能判断这句话的强度。
+2. **"The most informative cell is DiffusionDrive" 那段** —— **原论断仍成立且被加强**：
+   窗口平均下 $b_{ghost}$ 依旧跨 0。但"does not react to hazard frames at all"需要一句限定，
+   因为同帧擦除下它**有**响应——只是不具危险特异性。加这句反而更支持"seeing / acting 独立"。
+3. **Validity Checks 那行的"三个判定全部不变"** —— 仍然成立（那句说的是遮挡完整性修复），
+   本次是在其后**追加**窗口平均的同类结论，没有改动原句。
+
+**明确没有做的事**：
+* **没有**因为 DDv2 在"clean 臂未被污染"子集（n = 67）上 $b_{ghost}$ 变显著而改任何格子。
+  该分组是**事后协变量**选出的、无多重比较控制、且方向不一致（SimLingo 反向），
+  报告 §3.5 已标注为探索性，论文里**一个字都没引用**。
+* **没有**把 DD 的降噪比值 0.450 写成"平均能降噪一半"。它超出加性噪声模型最乐观的 0.962，
+  机制是重尾（峰度 63.5 → 10.8）而非噪声；论文只引用了不依赖该解释的"判定不变"与比值区间。
+* **没有**改 Table 4 的 F-3 格（那格属工单第 3 项，已在「已完成 2」处理）。
+
+**编译验证**：`~/bin/tectonic 0.15.0` 重编译通过，**12 页**（与基线一致），
+`0` 个 LaTeX Error、`0` 个 undefined control sequence；3 处 overfull hbox 仍位于
+`1_intro:96` / `3_method:91` / `4_experiments:108–121`，**均为基线自带**。
+`author-kit/main.pdf` 已就地更新。
+
+---
+
+## 未做
 
 工单的第 2、3 项依赖两份**目前不存在**的报告，按"不要提前用还没出的中间结果"的要求**未动**：
 
 | 待办 | 依赖 | 现状 |
 |---|---|---|
-| 2. 多帧平均降噪结果 → 更新 `tab:main-matrix-v1`（Table 3）/ `tab:generality`（Table 4）及相关段落 | `results/f3_temporal_averaging_report_{zh,en}.md` | **进行中**（DD / LTF / DDv2 已出，SimLingo 在跑） |
+| ~~2. 多帧平均降噪结果 → `tab:main-matrix-v1` / `tab:generality` 及相关段落~~ | `results/f3_temporal_averaging_report_{zh,en}.md` | **已产出，见上文「已完成 3」**（四候选判定零变化 ⇒ 未改任何判定格，只加确证性表述） |
 | ~~3. 前车急刹 / NAVSIM 语料推广后的复现数字 → `tab:generality`~~ | `results/f3_corpus_extension_report_{zh,en}.md` | **已产出，见上文「已完成 2」** |
 
-第 3 项已于本次完成（见「已完成 2」）。第 2 项待 `f3_temporal_averaging_report` 四个候选齐全后续做——
-若显示判定基本不变，按要求写成"验证了原判定不是噪声 artifact"，不夸大；
-若某候选判定改变，则需连带检查 Table 3 脚注 1 的适用范围、"The most informative cell is DiffusionDrive" 那段论证、
-以及 Validity Checks 新增行里"三个判定全部不变"这句。
+工单的第 2、3 项均已完成（见「已完成 2」「已完成 3」）。三处联动已逐条核查，结论写在「已完成 3」里。
+
+剩余未做项（与本论文草稿相关的）：
+
+| 项 | 理由 |
+|---|---|
+| 用 $d_{occ}$ 重构 F-3 的门 | 属方法改动而非结果更新；须先想清分母该用什么（见 `f3_corpus_extension_report_zh.md` §4） |
+| NAVSIM 车辆类读数按更正朝向重算 | 本论文用到的 NAVSIM F-3 正例全是 VRU（朝向缺陷影响小：IoU 中位 0.899）；车辆类读数不在本草稿里 |
+| 前车急刹 × DDv2 的"反向擦除效应" | 需单独机制实验；本草稿未引用该数字 |
 
 **一处需要留意的现有表述**：Table 3 里 Alpamayo-R1 / AutoVLA / DiffusionDriveV2 三格现为
 "no baseline response"。若多帧平均降噪把其中任何一格改成"有小的真实响应"，

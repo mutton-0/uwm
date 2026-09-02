@@ -142,7 +142,7 @@ AutoVLA & n.m.\textsuperscript{3} & -- & no baseline response & indeterminate\te
 \end{tabular}}
 
 \vspace{4pt}
-{\scriptsize\textsuperscript{1}The baseline response $b_{ghost}$ is itself indistinguishable from 0: untestable, not a failed test. \textsuperscript{2}Occluding the hazard entity removes only 11\% of the response -- a blind-action signature~\cite{embodiedinterp2026}. \textsuperscript{3}Not measured (video-token layout unresolved for these two), not n/a.}
+{\scriptsize\textsuperscript{1}The baseline response $b_{ghost}$ is itself indistinguishable from 0: untestable, not a failed test. $b_{ghost}$ contrasts a hazard frame against a pre-emergence frame, in $219/288$ of which the entity is already visible (ghost/clean imaged-area ratio median $1.67$), so it measures a closer approach rather than an appearance. The reading is not an artifact of single-frame sampling: re-running all four arms as the mean of a $9.9$-frame window per event leaves $b_{ghost}$ indistinguishable from 0 for both affected candidates and every verdict in this table unchanged. \textsuperscript{2}Occluding the hazard entity removes only 11\% of the response -- a blind-action signature~\cite{embodiedinterp2026}. \textsuperscript{3}Not measured (video-token layout unresolved for these two), not n/a.}
 \end{table}
 
 Two required control arms do real work here. G-VS's \texttt{position\_only} floor (token
@@ -158,8 +158,12 @@ LTF's FAIL to mean what it says.
 \textbf{The most informative cell is DiffusionDrive}: the highest G-VS selectivity in the
 table ($+0.038$, its representation does carry object-ness information) paired with an F-3
 baseline response indistinguishable from zero (its action does not react to hazard frames
-at all). Seeing and acting on it are independent, without any judgement of what counts as
-dangerous.
+at all, and still does not under a $9.9$-frame window average). Seeing and acting on it are
+independent, without any judgement of what counts as dangerous. Its action is not inert:
+under the window average, erasing the entity within a frame does move its planned speed
+($-0.0084\,[-0.0155,-0.0026]$), but by no more than painting an equal-area patch elsewhere
+does ($\lvert d_{occ}\rvert-\lvert d_{ctrl}\rvert = -0.0012\,[-0.0069,+0.0037]$) -- a
+sensitivity to the perturbation, not to the hazard.
 
 \paragraph{G-VS and F-3 generalize across a structurally different scenario and an
 independently collected data source.} All results above are measured on one ghost-probe
@@ -382,7 +386,7 @@ Analytic Jacobian cross-check & An empirical injection slope being a measurement
 Recovery-profile shape diagnostic & Applying $C_m$ where its interior-peak premise is violated & SimLingo's profile is a monotone cascade ($\rho=-0.997$); reading its $C_m$ literally would misreport a null as a concentrated failure \\
 Attribution control (task-only arm, pilot) & Crediting a targeted intervention for a gain produced by the baseline objective alone & 98\% of the pilot's apparent behavioural gain is attributable to task fine-tuning alone, not to the coupling term \\
 Full-population null enumeration vs.\ Gaussian-tail extrapolation & Under-estimating a multiple-comparison threshold in an argmax-over-116k search & Empirical 99.9th percentile is up to an order of magnitude above the Gaussian estimate; the number of ``doubly corroborated'' directions drops from 11 to 0 once corrected \\
-F-3 occlusion completeness (per-frame projection across the input window; non-camera sensor channels) & An F-3 necessity reading produced by an occlusion that leaves the entity present in the model's input & The entity projects into a mean of $4.00/4$ window frames for Alpamayo-R1 and $3.44/4$ for AutoVLA, and into the lidar returns of the one point-cloud-consuming candidate (median 1 point at a median range of $27$\,m); occluding every frame into which it projects and deleting the returns inside its 3D box, with the control arm treated symmetrically throughout, leaves all three affected verdicts unchanged. $b_{ghost}$ is unaffected by construction and the lidar channel contributes $\Delta b_{occ}=+0.005\ [-0.004,+0.015]$, so the F-3 readings of \cref{tab:main-matrix-v1} do not rest on the completeness of the occlusion \\
+F-3 occlusion completeness and temporal sampling (per-frame projection across the input window; non-camera sensor channels; one frame vs.\ a window average) & An F-3 necessity reading produced by an occlusion that leaves the entity present in the model's input & The entity projects into a mean of $4.00/4$ window frames for Alpamayo-R1 and $3.44/4$ for AutoVLA, and into the lidar returns of the one point-cloud-consuming candidate (median 1 point at a median range of $27$\,m); occluding every frame into which it projects and deleting the returns inside its 3D box, with the control arm treated symmetrically throughout, leaves all three affected verdicts unchanged. $b_{ghost}$ is unaffected by construction and the lidar channel contributes $\Delta b_{occ}=+0.005\ [-0.004,+0.015]$, so the F-3 readings of \cref{tab:main-matrix-v1} do not rest on the completeness of the occlusion. Re-running all four arms as the mean of a $9.9$-frame window per event, on the four single-frame candidates, likewise leaves every verdict unchanged (CI half-width ratios $0.45$--$1.11$), so they do not rest on single-frame sampling either \\
 \bottomrule
 \end{tabular}
 \end{table*}
