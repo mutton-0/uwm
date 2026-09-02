@@ -105,7 +105,7 @@ TransFuser 系三个成员则因每个融合块都从 CNN 分支重注入特征�
 scene 级重采样（同场景多帧不独立）；每个实验预注册单一主读数，其余标为敏感性分析；
 三态判定（PASS / FAIL / **不可估**），功效不足一律记不可估而非二元化；
 随机方向对照**逐层自带零分布**；所有跨模型比较只用**模型内归一化**的量。
-全过程维护修正案账本，本文涉及的实验共登记 **52 条**修正案，
+全过程维护修正案账本，本文涉及的实验共登记 **55 条**修正案，
 其中 7 条把已经得到的阳性结果改回阴性或不可估（见 §4.4）。
 
 > 真源：`n1_report.md`、`axis_naming_alignment.md`、`amendments.md`、
@@ -204,6 +204,36 @@ G-VS 用 SAM 分割伪 GT（客观 GT），F-3 用输入层遮挡（因果操作
 > ² 遮住关键实体只移除 11% 的响应 ⇒ **blind action 签名**（Embodied Interpretability）。
 > ³ n.m. = 未测（非不适用）：两个 VLA 的 video token 布局，见 §GF/A50。
 > 详见 `g_vs_f3_unified_matrix_report_{zh,en}.md`。
+
+**Table 1(v1-rep). G-VS / F-3 的跨场景 · 跨数据源复现（与 Table 1(v1) 同一批读数，换语料重测）。**
+
+| Policy | G-VS selectivity：G1 / 前车急刹 / NAVSIM | F-3：G1 / 前车急刹 / NAVSIM |
+| --- | --- | --- |
+| **SimLingo** | **+0.027 P / +0.040 P / +0.035 P** | 不可估 / 无基线响应 / 不可估 |
+| DiffusionDrive | +0.038 **P** / +0.028 — / +0.017 — | **无基线响应 ×3** |
+| **LTF** | +0.019 — / +0.021 — / +0.024 **P** | **FAIL** / 无基线响应 / **FAIL** |
+| DiffusionDriveV2 | +0.016 — / +0.041 **P** / +0.019 **P** | 无基线响应 ×3 |
+| Alpamayo-R1 / AutoVLA | n.m.（VLA token 布局，§GF/A50） | 无基线响应 ×2 / NAVSIM n/a¹ |
+
+> P = PASS，— = 不可估。¹ 两个 VLA 的适配器依赖 nuScenes devkit / `sd_token`，
+> NAVSIM 数据不是这个格式 ⇒ **语料侧接口缺失**，非模型侧不可测。
+>
+> **两条核心结论的复现情况**：
+> **① LTF 的 F-3 FAIL 在 NAVSIM 上复现**（$R$ = +0.008 [−0.068, +0.078]，
+> $b_{ghost}$ −0.0249 vs G1 −0.0245，几乎逐位相同）；前车急刹上**无从检验**（基线响应消失）。
+> **② DiffusionDrive 的"零 F-3 响应" 3/3 复现，但"高 G-VS 选择性"只有 1/3。**
+>
+> **新轴 vs 老轴的稳健性**：G-VS 的 **点估计** 12 格全部落在 [+0.016, +0.041] 窄带、无一变号
+> （老 G 的 LTF 阳性点估计从 +0.070 塌到 +0.011），但**三态判定仍会翻**——
+> 效应量与 CI 半宽同量级。故准确说法是
+> **"新轴的读数比老轴稳，判定尚未稳；仍不及 C-hazard 的 6/6、8/8"**。
+>
+> **一条本轮才暴露的不利发现（未因是自家新轴而放松判定）**：NAVSIM 上
+> `position_only` 地板（只用 token 坐标）**超过了** trained mIoU
+> （DDv2 0.371 vs 0.355；SimLingo 0.411 vs 0.408）。selectivity 是对 random_init 的配对差、
+> 坐标先验被抵消，故 PASS 判定不受影响；**但 "G-VS PASS" 不能读成"表征比知道坐标更有用"**。
+> G-VS 目前只支持"表征含有超出随机初始化的物体性信息"这一较弱主张。
+> 详见 `g_vs_f3_replication_report_{zh,en}.md`。
 
 **这张表最值得看的一格是 DiffusionDrive**：G-VS selectivity 全表最高（+0.038，表征里确有物体性信息），
 而 F-3 的基线响应与 0 不可区分（动作对危险帧根本没反应）。
@@ -512,7 +542,7 @@ SimLingo 的 I 轴表征端最好，行为端却最差。
 ## 4.4 Ablation-like Analyses：为什么这些数字可以被相信
 
 本节的每一项都是**否定性检验**：它们的作用不是把数字做得更好看，而是排除"数字看起来好但没意义"的情形。
-本工作在执行中登记了 52 条修正案，其中 7 条把已经得到的阳性结果改回阴性或不可估
+本工作在执行中登记了 55 条修正案，其中 7 条把已经得到的阳性结果改回阴性或不可估
 （本轮新增两条：§CE/A33 把 DiffusionDriveV2 的 C-hazard 从 $C_m$ 0.932 作废重跑至不可估，
 §CE/A34 把 Alpamayo 的「A vs D2cV 显著」从判据降级为并列报告）；
 下面逐条给出其中最关键的五项。
@@ -656,7 +686,7 @@ pilot 中若只跑基线与耦合两臂，会看到 b-AUC $+0.051$ 的改善并�
 改为**全总体枚举**（116,546 条，$\alpha$ = 0.05/950 = 5.26 × 10⁻⁵ 可直接取经验分位）后，
 "双重印证"的候选数由 **11 条降为 0 条**。
 
-> 真源：`amendments.md`（52 条修正案全文）、`analytic_vs_empirical.md`、
+> 真源：`amendments.md`（55 条修正案全文）、`analytic_vs_empirical.md`、
 > `c_axis_shape_diagnostics.json`、`cosine_matrix.json`、`generalizable_tips.md`。
 
 ---

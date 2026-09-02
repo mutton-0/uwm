@@ -67,15 +67,19 @@ def main():
     ap.add_argument("--work", default=str(W))
     ap.add_argument("--nuscenes-root", default="/data/dataset/nuscenes/v1.0-trainval")
     ap.add_argument("--layer", type=int, default=6, help="取哪一层的 token 特征（TransFuser 系默认 L6 = C 轴责任层）")
+    ap.add_argument("--corpus", default="nuscenes", choices=["nuscenes", "navsim"])
+    ap.add_argument("--pos", default="A", help="正例类名（G1/NAVSIM 用 A，前车急刹用 LB）")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--device", default="cuda:0")
+    ap.add_argument("--crop-center-row", type=int, default=0,
+                    help="4:1 裁剪主点行；NAVSIM 语料用 560（§NS/A46）")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
     work = Path(args.work)
     gt_dir = work / "sam_gt"
 
     evs = [json.loads(l) for l in open(work / "mining" / "events_all.jsonl")]
-    evs = [e for e in evs if e["event_type"] == "A" and (gt_dir / f"{e['event_id']}.png").exists()]
+    evs = [e for e in evs if e["event_type"] == args.pos and (gt_dir / f"{e['event_id']}.png").exists()]
     if args.limit:
         evs = evs[: args.limit]
     print(f"[GVS-EX/{args.model}] {len(evs)} 个事件有伪 GT")
@@ -87,6 +91,8 @@ def main():
         sys.path.insert(0, str(RES / "ltf_g1_adapter")); sys.path.insert(0, str(RES / "ddv2_g1_adapter"))
         import dd_adapter as DD
         import torch
+        if args.crop_center_row:
+            DD.set_crop_center_row(args.crop_center_row)
         R = {"dd": lambda: __import__("dd_adapter").DDRunner,
              "ltf": lambda: __import__("ltf_adapter").LTFRunner,
              "ddv2": lambda: __import__("ddv2_adapter").DDV2Runner}[args.model]()
@@ -98,12 +104,17 @@ def main():
                 m.reset_parameters()
         lidar = None
         if args.model == "ddv2":
-            from ddv2_adapter import NuScenesLidar
-            lidar = NuScenesLidar(args.nuscenes_root)
+            if args.corpus == "navsim":
+                from ddv2_adapter import NavsimLidar
+                lidar = NavsimLidar()
+            else:
+                from ddv2_adapter import NuScenesLidar
+                lidar = NuScenesLidar(args.nuscenes_root)
         ROWS, COLS = DD.IMG_VERT, DD.IMG_HORZ
 
         def tok_feats(rn, img, fr):
-            kw = {} if lidar is None else {"lidar_xyz": lidar.ego_points(fr["sd_token"])}
+            key = (fr["filename"].split("/", 1)[1] if args.corpus == "navsim" else fr.get("sd_token"))
+            kw = {} if lidar is None else {"lidar_xyz": lidar.ego_points(key)}
             rn.run(img, float(np.mean([fr["ego_speed_mps"]])), **kw)
             h = rn._buf[args.layer]                       # [n_tok, C]
             return h[: DD.N_IMG_TOK].float().cpu().numpy()

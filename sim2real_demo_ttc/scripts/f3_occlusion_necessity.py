@@ -114,6 +114,8 @@ def main():
                     help="|b_ghost| 门槛：低于此值的事件不进 R 的统计（分母守卫）")
     ap.add_argument("--device", default="cuda:0")
     ap.add_argument("--crop-center-row", type=int, default=0)
+    ap.add_argument("--corpus", default="nuscenes", choices=["nuscenes", "navsim"],
+                    help="DDv2 的点云来源；navsim 直接读 MergedPointCloud/*.pcd（§NS/A47）")
     ap.add_argument("--sl-config", default="/data/ruolin/uwm/sim2real_demo_ttc/configs/n1_d2.yaml")
     ap.add_argument("--out", default="")
     args = ap.parse_args()
@@ -148,11 +150,17 @@ def main():
         runner = R(device=args.device)
         lidar = None
         if args.model == "ddv2":
-            from ddv2_adapter import NuScenesLidar
-            lidar = NuScenesLidar(args.nuscenes_root)
+            if args.corpus == "navsim":
+                from ddv2_adapter import NavsimLidar
+                lidar = NavsimLidar()
+            else:
+                from ddv2_adapter import NuScenesLidar
+                lidar = NuScenesLidar(args.nuscenes_root)
 
         def infer(img, ev, fr):
-            kw = {} if lidar is None else {"lidar_xyz": lidar.ego_points(fr["sd_token"])}
+            # NAVSIM 侧点云按 CAM_F0 的 data_path 索引（filename 去掉 split 前缀）
+            key = (fr["filename"].split("/", 1)[1] if args.corpus == "navsim" else fr.get("sd_token"))
+            kw = {} if lidar is None else {"lidar_xyz": lidar.ego_points(key)}
             return float(runner.run(img, spd(ev), **kw)["commanded_speed"])
     elif args.model == "simlingo":
         from omegaconf import OmegaConf

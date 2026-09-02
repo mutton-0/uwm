@@ -40,6 +40,7 @@ def main():
     ap.add_argument("--model", required=True, choices=["alpa", "autovla"])
     ap.add_argument("--work", default=str(W))
     ap.add_argument("--nuscenes-root", default="/data/dataset/nuscenes/v1.0-trainval")
+    ap.add_argument("--pos", default="A", help="正例类名（G1 用 A，前车急刹用 LB）")
     ap.add_argument("--limit", type=int, default=120, help="慢模型控成本：默认只跑前 120 个事件")
     ap.add_argument("--min-b", type=float, default=0.02)
     ap.add_argument("--device", default="cuda:0")
@@ -52,9 +53,9 @@ def main():
 
     from PIL import Image      # VLA 环境（Alpamayo venv）没有 cv2，只有 PIL；功能等价
     evs = [json.loads(l) for l in open(work / "mining" / "events_all.jsonl")]
-    evs = [e for e in evs if e["event_type"] == "A"
+    evs = [e for e in evs if e["event_type"] == args.pos
            and e["x_ghost_frames"] and e["x_ghost_frames"][0].get("bbox_xyxy")]
-    print(f"[F3/{LABEL}] A 类可用事件 {len(evs)}（含投影框）")
+    print(f"[F3/{LABEL}] {args.pos} 类可用事件 {len(evs)}（含投影框）")
 
     tmp = Path(tempfile.mkdtemp(prefix="f3_occ_"))
     rng = np.random.default_rng(0)

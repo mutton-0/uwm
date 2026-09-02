@@ -139,7 +139,7 @@ pre-registered primary readout per experiment with everything else marked as sen
 three-state adjudication (PASS / FAIL / **indeterminate**), with insufficient power always recorded
 as indeterminate rather than forced into a binary; random-direction controls carry **their own
 per-layer null distribution**; all cross-model comparisons use **within-model normalized** quantities
-only. An amendment ledger is maintained throughout; the experiments reported here registered **52**
+only. An amendment ledger is maintained throughout; the experiments reported here registered **55**
 amendments, seven of which converted an already-obtained positive result back into a negative or
 indeterminate one (§4.4).
 
@@ -258,6 +258,39 @@ Tables 1(a)–(c) below are all retained, recast as secondary evidence (§4.2.9)
 > (Embodied Interpretability).
 > ³ n.m. = not measured (not "not applicable"): the two VLAs' video-token layouts, see §GF/A50.
 > Details in `g_vs_f3_unified_matrix_report_{zh,en}.md`.
+
+**Table 1(v1-rep). Cross-scenario and cross-data-source replication of G-VS / F-3 (the same readouts as Table 1(v1), re-measured on other corpora).**
+
+| Policy | G-VS selectivity: G1 / lead braking / NAVSIM | F-3: G1 / lead braking / NAVSIM |
+| --- | --- | --- |
+| **SimLingo** | **+0.027 P / +0.040 P / +0.035 P** | indet. / no baseline response / indet. |
+| DiffusionDrive | +0.038 **P** / +0.028 — / +0.017 — | **no baseline response ×3** |
+| **LTF** | +0.019 — / +0.021 — / +0.024 **P** | **FAIL** / no baseline response / **FAIL** |
+| DiffusionDriveV2 | +0.016 — / +0.041 **P** / +0.019 **P** | no baseline response ×3 |
+| Alpamayo-R1 / AutoVLA | n.m. (VLA token layout, §GF/A50) | no baseline response ×2 / NAVSIM n/a¹ |
+
+> P = PASS, — = indeterminate. ¹ Both VLA adapters depend on the nuScenes devkit / `sd_token`, and
+> NAVSIM data is not in that format ⇒ a **stimulus-side interface gap**, not model-side
+> unmeasurability.
+>
+> **Replication of the two core conclusions**: **(i) LTF's F-3 FAIL replicates on NAVSIM**
+> ($R$ = +0.008 [−0.068, +0.078]; $b_{ghost}$ −0.0249 vs G1's −0.0245, nearly identical digit for
+> digit), and is **untestable** on lead braking (the baseline response vanishes). **(ii)
+> DiffusionDrive's "zero F-3 response" replicates 3/3, but its "high G-VS selectivity" only 1/3.**
+>
+> **New axes vs old, on robustness**: all 12 G-VS **point estimates** fall in the narrow band
+> [+0.016, +0.041] with no sign change (the old G's LTF positive collapsed from +0.070 to +0.011),
+> **yet the three-state verdicts still flip** — the effect size is the same order as the CI
+> half-width. The accurate statement is therefore **"the new axes' readouts are more stable than the
+> old ones', their verdicts are not yet, and neither reaches C-hazard's 6/6 and 8/8"**.
+>
+> **An unfavourable finding exposed only this round (no standard was relaxed because these are our own
+> new axes)**: on NAVSIM the `position_only` floor (token coordinates alone) **exceeds** the trained
+> mIoU (DDv2 0.371 vs 0.355; SimLingo 0.411 vs 0.408). Selectivity is a paired difference against
+> random_init and the coordinate prior cancels, so the PASS verdicts are unaffected; **but "G-VS PASS"
+> must not be read as "the representation is more useful than knowing the coordinates".** G-VS
+> currently supports only the weaker claim that the representation carries object-ness information
+> beyond random initialization. See `g_vs_f3_replication_report_{zh,en}.md`.
 
 **The most informative cell in this table is DiffusionDrive**: the highest G-VS selectivity in the
 table (+0.038 — its representation does carry object-ness information), yet an F-3 baseline response
@@ -615,7 +648,7 @@ who ranks first, and no set of weights can be justified from the data itself.**
 ## 4.4 Ablation-like Analyses: why these numbers can be believed
 
 Every item in this section is a **negative check**: its purpose is not to make numbers look better
-but to exclude the case in which numbers look good while meaning nothing. This work registered 52
+but to exclude the case in which numbers look good while meaning nothing. This work registered 55
 amendments during execution, seven of which converted an already-obtained positive result back into a
 negative or indeterminate one; the five most consequential are given below.
 
@@ -782,7 +815,7 @@ empirical 99.9th percentile of that null is 0.100–0.154 whereas the Gaussian-t
 read off as an empirical quantile) reduced the number of "doubly corroborated" candidates from
 **11 to 0**.
 
-> Sources: `amendments.md` (all 52 amendments), `analytic_vs_empirical.md`,
+> Sources: `amendments.md` (all 55 amendments), `analytic_vs_empirical.md`,
 > `c_axis_shape_diagnostics.json`, `cosine_matrix.json`, `generalizable_tips.md`.
 
 ---
