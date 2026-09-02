@@ -120,6 +120,8 @@ def main():
                     help="3D 框各轴外扩（米）。**不是为了多删点而调的**：nuScenes 标注/标定误差约 "
                          "0.1~0.3 m，实测有点落在框外 5 cm 处；2D 侧的 bbox_to_tokens 也已外扩 1 token。"
                          "0.0 作为敏感性口径并列报告（§FM/A59）")
+    ap.add_argument("--navsim-split", default="test",
+                    help="NAVSIM log 分片（--corpus navsim 时用于定位 3D 框来源的 log pkl）")
     ap.add_argument("--occlude-lidar", action="store_true",
                     help="DDv2 专用：同时删掉落在实体 3D 框内的点云点（§FM/A59）。"
                          "不开启时行为与旧版逐位一致（只涂 RGB）")
@@ -169,7 +171,10 @@ def main():
             if args.model != "ddv2":
                 raise SystemExit("--occlude-lidar 只对 ddv2 有意义（其余候选不吃点云）")
             from f3_window_boxes import WindowBoxes, points_in_box, mirror_box3d
-            WB3 = WindowBoxes(lidar.nusc if hasattr(lidar, "nusc") else None)
+            # NAVSIM 走 ns1_navsim_geometry 后端（无 nusc devkit），且其 3D 框朝向本就在
+            # ego 系 ⇒ WindowBoxes 内部不再减 ψ_ego。约定由实测判定，见 §FC/A60。
+            WB3 = WindowBoxes(lidar.nusc if hasattr(lidar, "nusc") else None,
+                              corpus=args.corpus, split=args.navsim_split)
             LID_STATS = {"events": 0, "n_pts_occ": [], "n_pts_ctrl": [], "no_box3d": 0}
 
         def _lidar_for(ev, fr, arm):

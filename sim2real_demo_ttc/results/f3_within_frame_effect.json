@@ -1,0 +1,1261 @@
+{
+  "design": "同一帧内擦除效应 d_occ = v_ghost − v_occ，绕开被污染的 clean 臂",
+  "context": "G1 A 类 219/288 (76.0%) 的事件在 clean 帧上实体已可见 ⇒ b_ghost 量的是'走近 6m'而非'出现'；d_occ 不受此影响",
+  "n_cells": 25,
+  "n_rescued": 6,
+  "n_rescued_and_specific": 4,
+  "n_rescued_specific_expected_direction": 2,
+  "sign_convention": "v_plan 是指令速度；擦掉危险应让模型提速 ⇒ d_occ = v_ghost − v_occ **为负**才是预期方向",
+  "rows": [
+    {
+      "file": "f3_occlusion_alpa.json",
+      "model": "Alpamayo-R1",
+      "n": 99,
+      "b_ghost": {
+        "mean": 0.032794045679496994,
+        "ci95": [
+          -0.12277543530457104,
+          0.19071271345559235
+        ],
+        "n": 99,
+        "n_scenes": 50
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": 0.005841043260362413,
+        "ci95": [
+          -0.03210454512046432,
+          0.041327600508112586
+        ],
+        "n": 99,
+        "n_scenes": 50
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": 0.0010855968552406388,
+        "ci95": [
+          -0.021803985614634418,
+          0.027063150200485366
+        ],
+        "n": 99,
+        "n_scenes": 50
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.022378813136707653,
+        "ci95": [
+          -0.0021073593254442567,
+          0.04906456938995441
+        ],
+        "n": 99,
+        "n_scenes": 50
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分** ⇒ 没有可供必要性检验的响应。",
+      "rescued": false,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_alpa_mf.json",
+      "model": "Alpamayo-R1",
+      "n": 99,
+      "b_ghost": {
+        "mean": 0.032794045679496994,
+        "ci95": [
+          -0.12277543530457104,
+          0.19071271345559235
+        ],
+        "n": 99,
+        "n_scenes": 50
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": -0.0017068313829826586,
+        "ci95": [
+          -0.06891395155270001,
+          0.05888374374829285
+        ],
+        "n": 99,
+        "n_scenes": 50
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": -0.01779822628907483,
+        "ci95": [
+          -0.08035868047547423,
+          0.05138294592361319
+        ],
+        "n": 99,
+        "n_scenes": 50
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": -0.031125391372526536,
+        "ci95": [
+          -0.09917724769500279,
+          0.04522211045364658
+        ],
+        "n": 99,
+        "n_scenes": 50
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分** ⇒ 没有可供必要性检验的响应。",
+      "rescued": false,
+      "direction": "预期（擦掉危险→提速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_autovla.json",
+      "model": "AutoVLA",
+      "n": 119,
+      "b_ghost": {
+        "mean": -0.055138941071614496,
+        "ci95": [
+          -0.21937679033346322,
+          0.02771501617143214
+        ],
+        "n": 119,
+        "n_scenes": 52
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": -0.0167930306506758,
+        "ci95": [
+          -0.05644700351926562,
+          0.007124166158010373
+        ],
+        "n": 119,
+        "n_scenes": 52
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": 0.0039012011359719667,
+        "ci95": [
+          -0.002373055039025319,
+          0.011498800000290875
+        ],
+        "n": 119,
+        "n_scenes": 52
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.02051480076894039,
+        "ci95": [
+          -0.0024221879048425643,
+          0.060581407877345554
+        ],
+        "n": 119,
+        "n_scenes": 52
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分** ⇒ 没有可供必要性检验的响应。",
+      "rescued": false,
+      "direction": "预期（擦掉危险→提速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_autovla_mf.json",
+      "model": "AutoVLA",
+      "n": 119,
+      "b_ghost": {
+        "mean": -0.055843578166320545,
+        "ci95": [
+          -0.2206053490500872,
+          0.027486344995413248
+        ],
+        "n": 119,
+        "n_scenes": 52
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": -0.0221727971269303,
+        "ci95": [
+          -0.06280742156560773,
+          0.0031772632838282773
+        ],
+        "n": 119,
+        "n_scenes": 52
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": 0.0016772100905410382,
+        "ci95": [
+          -0.00904403783582087,
+          0.011741402601612421
+        ],
+        "n": 119,
+        "n_scenes": 52
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.014669241023664716,
+        "ci95": [
+          -0.013912395086854394,
+          0.057424276702721364
+        ],
+        "n": 119,
+        "n_scenes": 52
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分** ⇒ 没有可供必要性检验的响应。",
+      "rescued": false,
+      "direction": "预期（擦掉危险→提速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_dd.json",
+      "model": "DiffusionDrive",
+      "n": 282,
+      "b_ghost": {
+        "mean": -0.028941136778246425,
+        "ci95": [
+          -0.08588181478510246,
+          0.021638529987747134
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": -0.017929155088908282,
+        "ci95": [
+          -0.058946058710536015,
+          0.004071620765197077
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": -0.016979721843773592,
+        "ci95": [
+          -0.06297376447099061,
+          0.009963298156843247
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": -0.00017603634731143923,
+        "ci95": [
+          -0.02008068161200063,
+          0.013256708201844087
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": false,
+      "direction": "预期（擦掉危险→提速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_ddv2.json",
+      "model": "DiffusionDriveV2",
+      "n": 282,
+      "b_ghost": {
+        "mean": -0.18026489122433864,
+        "ci95": [
+          -0.3486812286137103,
+          0.0031723994513243956
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": 0.02571392039510798,
+        "ci95": [
+          -0.031028254501515442,
+          0.09006238342473638
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": -0.003567151196882234,
+        "ci95": [
+          -0.06063820529085968,
+          0.05909876409520707
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.04909680555211314,
+        "ci95": [
+          -0.008991112194217344,
+          0.110392985701872
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": false,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_ddv2_lidar.json",
+      "model": "DiffusionDriveV2",
+      "n": 282,
+      "b_ghost": {
+        "mean": -0.18026489122433864,
+        "ci95": [
+          -0.3486812286137103,
+          0.0031723994513243956
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": 0.02066230685417111,
+        "ci95": [
+          -0.038514219697860085,
+          0.0854293998286378
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": -0.00575791542411696,
+        "ci95": [
+          -0.06413299150926274,
+          0.0573280705812848
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.049186341187104264,
+        "ci95": [
+          -0.010836556553672324,
+          0.11038313721147634
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": false,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_ddv2_lidar_m0.json",
+      "model": "DiffusionDriveV2",
+      "n": 282,
+      "b_ghost": {
+        "mean": -0.18026489122433864,
+        "ci95": [
+          -0.3486812286137103,
+          0.0031723994513243956
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": 0.021139827193626275,
+        "ci95": [
+          -0.03561729816146992,
+          0.08626077250606608
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": -0.002391017973423004,
+        "ci95": [
+          -0.058951523314539275,
+          0.06012145060149072
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.056073663861933326,
+        "ci95": [
+          -0.0034401451147693606,
+          0.11811172709651167
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": false,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_leadbrake_alpa.json",
+      "model": "Alpamayo-R1",
+      "n": 51,
+      "b_ghost": {
+        "mean": -0.07280671226737254,
+        "ci95": [
+          -0.23744740491029898,
+          0.08940310177836083
+        ],
+        "n": 51,
+        "n_scenes": 51
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": 0.07301036525499441,
+        "ci95": [
+          -0.02879265043085587,
+          0.20129287060208648
+        ],
+        "n": 51,
+        "n_scenes": 51
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": -0.009710049389076292,
+        "ci95": [
+          -0.05151186575222869,
+          0.028209896348462455
+        ],
+        "n": 51,
+        "n_scenes": 51
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.12321567007650931,
+        "ci95": [
+          0.03805184872505967,
+          0.23805926106014177
+        ],
+        "n": 51,
+        "n_scenes": 51
+      },
+      "occ_exceeds_ctrl": true,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分** ⇒ 没有可供必要性检验的响应。",
+      "rescued": false,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_leadbrake_alpa_mf.json",
+      "model": "Alpamayo-R1",
+      "n": 51,
+      "b_ghost": {
+        "mean": -0.07280671226737254,
+        "ci95": [
+          -0.23744740491029898,
+          0.08940310177836083
+        ],
+        "n": 51,
+        "n_scenes": 51
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": 0.15362762296503849,
+        "ci95": [
+          0.054516350365028145,
+          0.26865735823284503
+        ],
+        "n": 51,
+        "n_scenes": 51
+      },
+      "d_occ_significant": true,
+      "d_ctrl": {
+        "mean": 0.0915030912934419,
+        "ci95": [
+          0.007979950002695926,
+          0.1835693431397279
+        ],
+        "n": 51,
+        "n_scenes": 51
+      },
+      "d_ctrl_significant": true,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.06297672212274526,
+        "ci95": [
+          -0.008335425570412018,
+          0.15264871190233595
+        ],
+        "n": 51,
+        "n_scenes": 51
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分** ⇒ 没有可供必要性检验的响应。",
+      "rescued": true,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": false,
+      "wf_verdict": "显著但**不特异**：同面积灰斑（ctrl 臂）也显著 ⇒ 可能只是画面多了块灰斑"
+    },
+    {
+      "file": "f3_occlusion_leadbrake_autovla.json",
+      "model": "AutoVLA",
+      "n": 88,
+      "b_ghost": {
+        "mean": 0.04360873565416445,
+        "ci95": [
+          -0.00942054323199066,
+          0.1395092478131545
+        ],
+        "n": 88,
+        "n_scenes": 81
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": -0.0012095543471249666,
+        "ci95": [
+          -0.006852051592155878,
+          0.0034968720542060006
+        ],
+        "n": 88,
+        "n_scenes": 81
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": 2.695484594865279e-05,
+        "ci95": [
+          -0.006083466285882994,
+          0.0059317575411850145
+        ],
+        "n": 88,
+        "n_scenes": 81
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": -0.0021423914215781474,
+        "ci95": [
+          -0.009806345856233394,
+          0.005997991457913989
+        ],
+        "n": 88,
+        "n_scenes": 81
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分** ⇒ 没有可供必要性检验的响应。",
+      "rescued": false,
+      "direction": "预期（擦掉危险→提速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_leadbrake_dd.json",
+      "model": "DiffusionDrive",
+      "n": 90,
+      "b_ghost": {
+        "mean": -0.026874030795362262,
+        "ci95": [
+          -0.17338980812614738,
+          0.12546460611532076
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": 0.0037058109210597145,
+        "ci95": [
+          -0.12454752232139792,
+          0.1194417893838212
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": 0.017864612448546622,
+        "ci95": [
+          -0.06663256812388536,
+          0.12314166436512103
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.0646327250947555,
+        "ci95": [
+          -0.0738453800340896,
+          0.21033918469453616
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": false,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_leadbrake_ddv2.json",
+      "model": "DiffusionDriveV2",
+      "n": 90,
+      "b_ghost": {
+        "mean": -0.104884512639708,
+        "ci95": [
+          -0.4747859190480831,
+          0.20964014928634975
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": 0.22430456628402073,
+        "ci95": [
+          0.04982327228367684,
+          0.41242204779040476
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "d_occ_significant": true,
+      "d_ctrl": {
+        "mean": 0.012128688643376033,
+        "ci95": [
+          -0.13061515322602507,
+          0.15611911647931434
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.22005026034182973,
+        "ci95": [
+          0.014249638966735333,
+          0.4205556653803963
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "occ_exceeds_ctrl": true,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": true,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": true,
+      "wf_verdict": "显著且特异，但**方向与预期相反**（擦掉危险反而减速）"
+    },
+    {
+      "file": "f3_occlusion_leadbrake_ddv2_lidar.json",
+      "model": "DiffusionDriveV2",
+      "n": 90,
+      "b_ghost": {
+        "mean": -0.104884512639708,
+        "ci95": [
+          -0.4747859190480831,
+          0.20964014928634975
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": 0.29920716451274026,
+        "ci95": [
+          0.09646482357988817,
+          0.5120058454875123
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "d_occ_significant": true,
+      "d_ctrl": {
+        "mean": 0.008970614522695541,
+        "ci95": [
+          -0.16339643388658148,
+          0.18136680083710952
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.19391736942860816,
+        "ci95": [
+          -0.022465745898586516,
+          0.40966229040061486
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": true,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": false,
+      "wf_verdict": "显著且特异，但**方向与预期相反**（擦掉危险反而减速）"
+    },
+    {
+      "file": "f3_occlusion_leadbrake_ddv2_lidar_m0.json",
+      "model": "DiffusionDriveV2",
+      "n": 90,
+      "b_ghost": {
+        "mean": -0.104884512639708,
+        "ci95": [
+          -0.4747859190480831,
+          0.20964014928634975
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": 0.2815089897976981,
+        "ci95": [
+          0.06537806037854361,
+          0.5062015084337952
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "d_occ_significant": true,
+      "d_ctrl": {
+        "mean": 0.06626077534423934,
+        "ci95": [
+          -0.08301491932688694,
+          0.21978082856712278
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.2876588822238975,
+        "ci95": [
+          0.06961562893700904,
+          0.5040848462882447
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "occ_exceeds_ctrl": true,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": true,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": true,
+      "wf_verdict": "显著且特异，但**方向与预期相反**（擦掉危险反而减速）"
+    },
+    {
+      "file": "f3_occlusion_leadbrake_ltf.json",
+      "model": "LTF",
+      "n": 90,
+      "b_ghost": {
+        "mean": -0.0067898698151111605,
+        "ci95": [
+          -0.031073295575636137,
+          0.014424009907658842
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": -0.02834487451861302,
+        "ci95": [
+          -0.04645302193456667,
+          -0.01134062336610729
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "d_occ_significant": true,
+      "d_ctrl": {
+        "mean": 0.007245435048308637,
+        "ci95": [
+          -0.0004754731463659824,
+          0.015617298509160263
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.03457405765851339,
+        "ci95": [
+          0.02187053462426232,
+          0.04847476681445135
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "occ_exceeds_ctrl": true,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": true,
+      "direction": "预期（擦掉危险→提速）",
+      "specific": true,
+      "wf_verdict": "显著且特异，方向符合预期"
+    },
+    {
+      "file": "f3_occlusion_leadbrake_simlingo.json",
+      "model": "SimLingo",
+      "n": 90,
+      "b_ghost": {
+        "mean": 0.05203317554874553,
+        "ci95": [
+          -0.2596877163463773,
+          0.39623072669940096
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": -0.5095859005219406,
+        "ci95": [
+          -0.7361543850254227,
+          -0.30663077053556775
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "d_occ_significant": true,
+      "d_ctrl": {
+        "mean": -0.031630112644698886,
+        "ci95": [
+          -0.1172999381486233,
+          0.04778839878427067
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.4123820745282703,
+        "ci95": [
+          0.23094937098019305,
+          0.6164685774439324
+        ],
+        "n": 90,
+        "n_scenes": 83
+      },
+      "occ_exceeds_ctrl": true,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": true,
+      "direction": "预期（擦掉危险→提速）",
+      "specific": true,
+      "wf_verdict": "显著且特异，方向符合预期"
+    },
+    {
+      "file": "f3_occlusion_ltf.json",
+      "model": "LTF",
+      "n": 282,
+      "b_ghost": {
+        "mean": -0.024475965596048546,
+        "ci95": [
+          -0.038432848870945314,
+          -0.010152713488540105
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "b_ghost_significant": true,
+      "d_occ": {
+        "mean": -0.007492363593270276,
+        "ci95": [
+          -0.010955295162550926,
+          -0.004338570616144347
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "d_occ_significant": true,
+      "d_ctrl": {
+        "mean": -0.003420962341103359,
+        "ci95": [
+          -0.006714791574571846,
+          5.776848442603621e-05
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.0013172421191574623,
+        "ci95": [
+          -0.0023361736683640256,
+          0.004860604931506394
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "FAIL：遮住关键实体后动作基本不变 ⇒ 驱动动作的不是这个实体（盲目泛化签名）",
+      "rescued": false,
+      "direction": "预期（擦掉危险→提速）",
+      "specific": false,
+      "wf_verdict": "显著且特异，方向符合预期"
+    },
+    {
+      "file": "f3_occlusion_navsim_dd.json",
+      "model": "DiffusionDrive",
+      "n": 372,
+      "b_ghost": {
+        "mean": 0.020449409942312907,
+        "ci95": [
+          -0.01325982505869862,
+          0.052817510313069346
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": 0.0015033330187521955,
+        "ci95": [
+          -0.004371457248157856,
+          0.008062933822584117
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": 0.0076783785736689,
+        "ci95": [
+          0.0005858167140220312,
+          0.014806477615449211
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "d_ctrl_significant": true,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": -0.013716529884565901,
+        "ci95": [
+          -0.020497189503634237,
+          -0.006946084815912907
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": false,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_navsim_ddv2.json",
+      "model": "DiffusionDriveV2",
+      "n": 372,
+      "b_ghost": {
+        "mean": 0.07450968749140219,
+        "ci95": [
+          -0.06947870747972254,
+          0.21813398139031456
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": 0.021118738077661042,
+        "ci95": [
+          -0.02111064467835999,
+          0.06317507837835942
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": 0.004753066226840019,
+        "ci95": [
+          -0.04529320753895466,
+          0.05690215248828997
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": -0.009823862403150528,
+        "ci95": [
+          -0.07257821194318291,
+          0.051424766673475196
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": false,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_navsim_ddv2_lidar.json",
+      "model": "DiffusionDriveV2",
+      "n": 372,
+      "b_ghost": {
+        "mean": 0.061879187536936615,
+        "ci95": [
+          -0.11313460506963116,
+          0.2483064272116362
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": -0.022671800116778062,
+        "ci95": [
+          -0.0701776440092748,
+          0.02509052173893048
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": 0.00907289559241905,
+        "ci95": [
+          -0.029867873101255844,
+          0.0496778374182267
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.02117417733715747,
+        "ci95": [
+          -0.024400769099063108,
+          0.06915601795012505
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": false,
+      "direction": "预期（擦掉危险→提速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_navsim_ddv2_lidar_m0.json",
+      "model": "DiffusionDriveV2",
+      "n": 372,
+      "b_ghost": {
+        "mean": 0.061879187536936615,
+        "ci95": [
+          -0.11313460506963116,
+          0.2483064272116362
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "b_ghost_significant": false,
+      "d_occ": {
+        "mean": -0.007082833808356075,
+        "ci95": [
+          -0.049860879267175126,
+          0.03690064682110677
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": 0.008441563475356307,
+        "ci95": [
+          -0.03341115127675659,
+          0.05221163382746796
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.006359251246096626,
+        "ci95": [
+          -0.03521559611550842,
+          0.04659115564162325
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "不可估：**基线响应本身与 0 不可区分**（b_ghost 的 CI 跨 0）",
+      "rescued": false,
+      "direction": "预期（擦掉危险→提速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_navsim_ltf.json",
+      "model": "LTF",
+      "n": 372,
+      "b_ghost": {
+        "mean": -0.024861807237699707,
+        "ci95": [
+          -0.03986884405891874,
+          -0.009907904636779223
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "b_ghost_significant": true,
+      "d_occ": {
+        "mean": 0.0007141516794280339,
+        "ci95": [
+          -0.003148424228721385,
+          0.004439395423821192
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "d_occ_significant": false,
+      "d_ctrl": {
+        "mean": 0.0052144333297106365,
+        "ci95": [
+          0.0009234618700212231,
+          0.009793439720018352
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "d_ctrl_significant": true,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": -0.004381258550140085,
+        "ci95": [
+          -0.0073045889373366465,
+          -0.0015081304180173166
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "occ_exceeds_ctrl": false,
+      "verdict_original": "FAIL：遮住关键实体后动作基本不变 ⇒ 驱动动作的不是这个实体（盲目泛化签名）",
+      "rescued": false,
+      "direction": "反向（擦掉危险→反而减速）",
+      "specific": false,
+      "wf_verdict": "不显著：同帧擦除未改变动作"
+    },
+    {
+      "file": "f3_occlusion_navsim_simlingo.json",
+      "model": "SimLingo",
+      "n": 372,
+      "b_ghost": {
+        "mean": -0.24819036652534318,
+        "ci95": [
+          -0.5255850610007358,
+          -0.017485304608682712
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "b_ghost_significant": true,
+      "d_occ": {
+        "mean": -0.21190770436328665,
+        "ci95": [
+          -0.4102846355334053,
+          -0.07351046236824149
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "d_occ_significant": true,
+      "d_ctrl": {
+        "mean": 0.03383923981899536,
+        "ci95": [
+          -0.03218503762390243,
+          0.11721040417465882
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.16998326586389173,
+        "ci95": [
+          0.03003074491141832,
+          0.36836521949969964
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "occ_exceeds_ctrl": true,
+      "verdict_original": "不可估：必要性比的 scene 级 CI 跨 0.5",
+      "rescued": false,
+      "direction": "预期（擦掉危险→提速）",
+      "specific": true,
+      "wf_verdict": "显著且特异，方向符合预期"
+    },
+    {
+      "file": "f3_occlusion_simlingo.json",
+      "model": "SimLingo",
+      "n": 282,
+      "b_ghost": {
+        "mean": -0.44412395617667033,
+        "ci95": [
+          -0.6978506265208125,
+          -0.1896601268129512
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "b_ghost_significant": true,
+      "d_occ": {
+        "mean": -0.17381060570610543,
+        "ci95": [
+          -0.29053479367152735,
+          -0.06777696802990553
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "d_occ_significant": true,
+      "d_ctrl": {
+        "mean": -0.010770300053165737,
+        "ci95": [
+          -0.06855243239991086,
+          0.047341072934523096
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "d_ctrl_significant": false,
+      "abs_occ_minus_abs_ctrl": {
+        "mean": 0.13012699015332874,
+        "ci95": [
+          0.03105339387244825,
+          0.24167457100455841
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "occ_exceeds_ctrl": true,
+      "verdict_original": "不可估：必要性比的 scene 级 CI 跨 0.5",
+      "rescued": false,
+      "direction": "预期（擦掉危险→提速）",
+      "specific": true,
+      "wf_verdict": "显著且特异，方向符合预期"
+    }
+  ]
+}

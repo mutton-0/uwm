@@ -34,25 +34,79 @@ import g1_mine_events as G1                                            # noqa: E
 CFG = "/data/ruolin/uwm/sim2real_demo_ttc/configs/n1_d2.yaml"
 
 
-class WindowBoxes:
-    """按 scene 缓存 geo，提供 (event, 时间戳列表) -> 逐帧 bbox 的查询。"""
+NS_CFG = "/data/ruolin/uwm/sim2real_demo_ttc/configs/navsim_corpus.yaml"
+NS_LOGS = Path("/data/dataset/navsim/dataset/navsim_logs")
 
-    def __init__(self, nusc, cfg_path=CFG, tol_s=0.06):
+
+class WindowBoxes:
+    """按 scene 缓存 geo，提供 (event, 时间戳列表) -> 逐帧 bbox / 3D 框的查询。
+
+    **两个语料的后端（§FC/A60）**：
+      corpus="nuscenes"（默认，行为与本模块首版逐位一致）
+          geo 来自 `g1_mine_events.compute_scene_geometry(nusc, scene, cfg)`；
+          `_rot` 存的是**世界系**朝向 ⇒ 取 ego 系朝向要减去 ego 航向 ψ。
+      corpus="navsim"
+          geo 来自 `ns1_navsim_geometry.build_geo(log 帧, cfg)`（同一份结构，字段逐个对齐）；
+          NAVSIM 的 `gt_boxes[:, 6]` **本就在 ego(=lidar) 系**（`ns1` 注释即写明位置在 lidar 系，
+          且 lidar2ego 为恒等），故 `_rot` 里存的是 **ego 系**朝向 ⇒ **不能再减 ψ**。
+          该约定不是读代码推断的，是实测判定的：取 ego 转向 > 0.15 rad 的 scene 里 276 条车辆轨迹，
+          `std(yaw)` 0.308 → `std(yaw + ψ)` 0.106，77.2% 的轨迹加上 ψ 后才沿时间稳定
+          （停驻/直行车辆的**世界系**朝向应近似恒定）。见 `scripts/ns_yaw_audit.py`。
+    """
+
+    def __init__(self, nusc, cfg_path=CFG, tol_s=0.06, corpus="nuscenes", split="test"):
         self.nusc = nusc
-        self.cfg = OmegaConf.to_container(OmegaConf.load(cfg_path), resolve=True)
+        self.corpus = corpus
+        self.split = split
+        self.cfg = OmegaConf.to_container(
+            OmegaConf.load(NS_CFG if corpus == "navsim" else cfg_path), resolve=True)
+        # `_rot` 里存的朝向在哪个坐标系 —— 决定 box3d_for 要不要减 ψ_ego
+        self.yaw_frame = "ego" if corpus == "navsim" else "world"
         self.tol = float(tol_s)
         self._geo = {}
-        self._scene = {s["name"]: s for s in nusc.scene}
+        self._scene = ({s["name"]: s for s in nusc.scene}
+                       if corpus == "nuscenes" else None)
+        self._log_cache = {}
         self.stats = {"frames_total": 0, "frames_visible": 0, "frames_no_box": 0,
                       "frames_off_grid": 0, "events_no_geo": 0}
 
-    def geo(self, scene_name):
-        if scene_name not in self._geo:
+    # ---- geo 后端 ----
+    def _geo_navsim(self, ev):
+        import pickle
+        from collections import defaultdict as _dd
+        import ns1_navsim_geometry as NS
+        log_name = ev["log_name"]
+        if log_name not in self._log_cache:
+            if len(self._log_cache) > 2:                 # log pkl 很大，只留最近几个
+                self._log_cache.pop(next(iter(self._log_cache)))
+            lf = NS_LOGS / self.split / f"{log_name}.pkl"
+            if not lf.exists():
+                cand = list((NS_LOGS / self.split).glob(f"{log_name}*.pkl"))
+                if not cand:
+                    raise FileNotFoundError(f"NAVSIM log not found: {log_name}")
+                lf = cand[0]
+            by = _dd(list)
+            for f in pickle.load(open(lf, "rb")):
+                by[f["scene_token"]].append(f)
+            self._log_cache[log_name] = by
+        fl = self._log_cache[log_name].get(ev["scene_token"])
+        if not fl:
+            raise KeyError(ev["scene_token"])
+        return NS.build_geo(sorted(fl, key=lambda z: z["timestamp"]), self.cfg, self.split)
+
+    def geo(self, ev):
+        """ev 可以是事件 dict，也可以是 scene_name 字符串（nuScenes 向后兼容）。"""
+        if isinstance(ev, str):
+            ev = {"scene_name": ev}
+        key = ((ev.get("scene_token") or ev["scene_name"]) if self.corpus == "navsim"
+               else ev["scene_name"])
+        if key not in self._geo:
             if len(self._geo) > 3:                       # geo 很大，只留最近几个 scene
                 self._geo.pop(next(iter(self._geo)))
-            self._geo[scene_name] = G1.compute_scene_geometry(
-                self.nusc, self._scene[scene_name], self.cfg)
-        return self._geo[scene_name]
+            self._geo[key] = (self._geo_navsim(ev) if self.corpus == "navsim"
+                              else G1.compute_scene_geometry(
+                                  self.nusc, self._scene[ev["scene_name"]], self.cfg))
+        return self._geo[key]
 
     def boxes_for(self, ev, timestamps_s):
         """timestamps_s: 窗口内每一帧的**绝对时间（秒）**，与 geo['grid_t'] 同一时基。
@@ -60,7 +114,7 @@ class WindowBoxes:
         返回与之等长的 list，每项是 [x0,y0,x1,y1] 或 None（该帧投影不出来/不可见）。
         """
         try:
-            geo = self.geo(ev["scene_name"])
+            geo = self.geo(ev)
         except Exception:                                              # noqa: BLE001
             self.stats["events_no_geo"] += 1
             return [None] * len(timestamps_s)
@@ -96,7 +150,7 @@ class WindowBoxes:
         """
         from pyquaternion import Quaternion
         try:
-            geo = self.geo(ev["scene_name"])
+            geo = self.geo(ev)
         except Exception:                                              # noqa: BLE001
             return None
         o = geo["per_obj"].get(ev["object_token"])
@@ -107,8 +161,10 @@ class WindowBoxes:
         if abs(gt[j] - t_s) > self.tol or not bool(o["valid"][j]):
             return None
         ti = int(np.argmin(np.abs(np.asarray(o["_rot_t"]) - gt[j])))
-        yaw_w = Quaternion(o["_rot"][ti]).yaw_pitch_roll[0]
-        yaw_e = yaw_w - Quaternion(matrix=geo["R_we"][j]).yaw_pitch_roll[0]
+        yaw_s = Quaternion(o["_rot"][ti]).yaw_pitch_roll[0]
+        # nuScenes：_rot 是世界系 ⇒ 减 ego 航向；NAVSIM：_rot 本就在 ego 系 ⇒ 不减（见类注释）
+        yaw_e = (yaw_s if self.yaw_frame == "ego"
+                 else yaw_s - Quaternion(matrix=geo["R_we"][j]).yaw_pitch_roll[0])
         w, l, h = (list(o["_size"]) + [0, 0, 0])[:3]
         c = np.asarray(o["p_ego"][j], float)
         if not np.all(np.isfinite(c)):
