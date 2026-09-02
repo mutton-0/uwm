@@ -7,9 +7,17 @@
             `NUSCENES_CAMERA_MAPPING` 里 CAM_FRONT 出现两次（索引 1 与 6，
             分别对应 120° 广角与 30° 长焦位），按 camera_indices 排序后是第 1、3 行。
             **两行都要遮**，否则模型仍能从另一路前视看到该实体。
-            时间维取最后一帧（`img_ts` 以 t0_us 结尾）。
   AutoVLA：`temporal_paths()` 返回 3 相机 × 4 时刻的**文件路径**，
-            故把遮挡版写到临时文件再替换 `front_camera` 的最后一个路径。
+            故把遮挡版写到临时文件再替换 `front_camera` 的对应路径。
+
+**§FM/A56 修复（本版）：窗口内每一帧独立投影 + 独立遮挡。**
+旧版只遮窗口最后一帧（t0），隐含假设"更早的帧早于 emergence 因而看不到实体"。
+实测该假设对 Alpamayo **完全不成立**（窗口 4×0.1 s = 0.3 s，而 t0 − t_emergence 的分位
+是 [0.30, 0.35, 0.40] s ⇒ 288 个 A 类事件里 280 个的 4 帧**全部**落在 emergence 之后）。
+现改为：对窗口内每个时间戳，用 `scripts/f3_window_boxes.WindowBoxes` 重新投影该实体
+（复用挖掘期的 `compute_scene_geometry` + `frame_bbox`，一行未改），
+可见则用**该帧自己的均值色**涂掉，不可见则该帧不动。
+对照臂同理逐帧涂同一个对照框，保证"遮挡面积"在两臂之间可比。
 
 统计与判定与非 VLA 版逐条一致（含必需的 ctrl 对照臂）。
 """
@@ -33,6 +41,19 @@ RES = Path("/data/ruolin/uwm/sim2real_demo_ttc/results")
 W = Path("/data/ruolin/uwm/sim2real_demo_ttc/variants/n1_d2")
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from f3_occlusion_necessity import boot_scene, occlude, control_box     # noqa: E402
+
+# `f3_window_boxes` 会 import g1_mine_events -> pyquaternion / nuscenes devkit。
+# 这两个包在本机只存在于 `external/autovla_deps`，而该目录**必须在 torch/torchvision
+# 完成算子注册之后**才能上 sys.path（§CE/A35 的 transformers 4.49 顺序约束）。
+# 故这里**延迟到 runner 构造完成之后**再 import，且用 append 而非 insert。
+def _load_window_boxes():
+    import importlib.util as _u
+    if _u.find_spec("pyquaternion") is None or _u.find_spec("nuscenes") is None:
+        d = "/data/ruolin/uwm/external/autovla_deps"
+        if d not in sys.path:
+            sys.path.append(d)
+    from f3_window_boxes import WindowBoxes as _WB
+    return _WB
 
 
 def main():
@@ -59,6 +80,7 @@ def main():
 
     tmp = Path(tempfile.mkdtemp(prefix="f3_occ_"))
     rng = np.random.default_rng(0)
+    WB = None                       # 逐帧投影器，在拿到 runner.nusc / runner.r.ndi 后构造
 
     if args.model == "alpa":
         sys.path.insert(0, str(RES / "alpamayo_g1_adapter"))
@@ -66,50 +88,99 @@ def main():
         runner = AlpaPatchRunner(device=args.device)
         FRONT_ROWS = (1, 3)          # 排序后 camera_indices = [0,1,2,6]，1 与 6 都是 CAM_FRONT
 
-        def run_with(ev, cond, box=None):
-            """cond='clean'|'ghost'；box 非空时遮挡前视相机最后一帧的该区域。"""
+        def _fill(imf, row, t, box):
+            """把 image_frames[row, t] 的 box 区域涂成**该帧自己的**均值色。"""
+            x0, y0, x1, y1 = [int(round(v)) for v in box]
+            H, Wd = imf.shape[-2], imf.shape[-1]
+            x0 = max(0, min(x0, Wd - 1)); x1 = max(x0 + 1, min(x1, Wd))
+            y0 = max(0, min(y0, H - 1)); y1 = max(y0 + 1, min(y1, H))
+            fill = imf[row, t].float().mean(dim=(1, 2))[:, None, None].to(imf.dtype)
+            imf[row, t, :, y0:y1, x0:x1] = fill
+
+        def run_with(ev, cond, mode=None, cbox=None):
+            """mode=None 原始；'occ' 逐帧遮实体；'ctrl' 逐帧遮对照框（cbox）。"""
             r = runner.r
             data = r.load(ev["scene_name"], ev[f"x_{cond}_frames"][0]["t"])
             a = r.load(ev["scene_name"], ev["x_clean_frames"][0]["t"])
             data["ego_history_xyz"] = a["ego_history_xyz"]; data["ego_history_rot"] = a["ego_history_rot"]
-            if box is not None:
-                imf = data["image_frames"]                      # [n_cam, T, C, H, W]
-                x0, y0, x1, y1 = [int(round(v)) for v in box]
-                H, Wd = imf.shape[-2], imf.shape[-1]
-                x0 = max(0, min(x0, Wd - 1)); x1 = max(x0 + 1, min(x1, Wd))
-                y0 = max(0, min(y0, H - 1)); y1 = max(y0 + 1, min(y1, H))
+            if mode is None:
+                return runner.run_from_data(data), 0
+            imf = data["image_frames"]                     # [n_cam, T, C, H, W]
+            ts = np.asarray(data["absolute_timestamps"]) * 1e-6        # [n_cam, T]，µs -> s
+            # 只遮两路前视；两路时间戳相同，取第一路作为窗口时间轴
+            ref_row = next((r_ for r_ in FRONT_ROWS if r_ < imf.shape[0]), None)
+            if ref_row is None:
+                return runner.run_from_data(data), 0
+            win_t = ts[ref_row].tolist()
+            boxes = (WB.boxes_for(ev, win_t) if mode == "occ"
+                     else [cbox] * len(win_t))             # 对照框逐帧同位置
+            n_hit = 0
+            for ti, bx in enumerate(boxes):
+                if bx is None:
+                    continue
                 for row in FRONT_ROWS:
                     if row < imf.shape[0]:
-                        fill = imf[row, -1].float().mean(dim=(1, 2))[:, None, None].to(imf.dtype)
-                        imf[row, -1, :, y0:y1, x0:x1] = fill
-            return runner.run_from_data(data)
+                        _fill(imf, row, ti, bx)
+                n_hit += 1
+            return runner.run_from_data(data), n_hit
 
         if not hasattr(runner, "run_from_data"):
             raise SystemExit("AlpaPatchRunner 需要 run_from_data（见 alpa_patch.py）")
+        _WB = _load_window_boxes()
+        from nuscenes.nuscenes import NuScenes
+        WB = _WB(NuScenes(version="v1.0-trainval", dataroot=args.nuscenes_root, verbose=False))
     else:
         sys.path.insert(0, str(RES / "autovla_g1_adapter"))
         from autovla_adapter import AutoVLARunner
         runner = AutoVLARunner(device=args.device, nuscenes_root=args.nuscenes_root)
+        WB = _load_window_boxes()(runner.nusc)   # AutoVLA 适配器自带 NuScenes 实例，直接复用
 
-        def run_with(ev, cond, box=None):
+        def _front_window(tok):
+            """复刻 temporal_paths 的 prev 链，返回前视 4 帧的 (路径, 绝对时间秒)。"""
+            nusc = runner.nusc
+            sd = nusc.get("sample_data", tok)
+            samples, t = [], sd["sample_token"]
+            for _ in range(4):
+                sm = nusc.get("sample", t)
+                samples.append(sm)
+                t = sm["prev"] if sm["prev"] else t
+            samples = samples[::-1]
+            out = []
+            for sm in samples:
+                s_ = nusc.get("sample_data", sm["data"]["CAM_FRONT"])
+                out.append((str(Path(runner.root) / s_["filename"]), s_["timestamp"] * 1e-6))
+            return out
+
+        def run_with(ev, cond, mode=None, cbox=None):
             tok = ev[f"x_{cond}_frames"][0]["sd_token"]
             spd = float(np.mean([f["ego_speed_mps"] for f in ev["x_clean_frames"]]))
-            if box is None:
-                return runner.run(tok, spd)["commanded_speed"]
-            paths = runner.temporal_paths(tok)
-            im = np.array(Image.open(paths["front_camera"][-1]).convert("RGB"))
-            x0, y0, x1, y1 = [int(round(v)) for v in box]
-            H, Wd = im.shape[:2]
-            x0 = max(0, min(x0, Wd - 1)); x1 = max(x0 + 1, min(x1, Wd))
-            y0 = max(0, min(y0, H - 1)); y1 = max(y0 + 1, min(y1, H))
-            im[y0:y1, x0:x1] = im.reshape(-1, 3).mean(0).astype(im.dtype)
-            p = tmp / f"{ev['event_id']}_occ.jpg"
-            Image.fromarray(im).save(str(p), quality=95)
+            if mode is None:
+                return runner.run(tok, spd)["commanded_speed"], 0
+            win = _front_window(tok)
+            boxes = (WB.boxes_for(ev, [t for _p, t in win]) if mode == "occ"
+                     else [cbox] * len(win))
+            newp, n_hit = [], 0
+            for k, ((pth, _t), bx) in enumerate(zip(win, boxes)):
+                if bx is None:
+                    newp.append(pth); continue
+                im = np.array(Image.open(pth).convert("RGB"))
+                x0, y0, x1, y1 = [int(round(v)) for v in bx]
+                H, Wd = im.shape[:2]
+                x0 = max(0, min(x0, Wd - 1)); x1 = max(x0 + 1, min(x1, Wd))
+                y0 = max(0, min(y0, H - 1)); y1 = max(y0 + 1, min(y1, H))
+                im[y0:y1, x0:x1] = im.reshape(-1, 3).mean(0).astype(im.dtype)
+                q = tmp / f"{ev['event_id']}_{mode}_{k}.jpg"
+                Image.fromarray(im).save(str(q), quality=95)
+                newp.append(str(q)); n_hit += 1
             orig = runner.temporal_paths
-            runner.temporal_paths = lambda t, _o=orig, _p=str(p): (
-                lambda d: (d["front_camera"].__setitem__(-1, _p), d)[1])(_o(t))
+
+            def _patched(t, _o=orig, _np=list(newp)):
+                d = _o(t)
+                d["front_camera"] = _np
+                return d
+            runner.temporal_paths = _patched
             try:
-                return runner.run(tok, spd)["commanded_speed"]
+                return runner.run(tok, spd)["commanded_speed"], n_hit
             finally:
                 runner.temporal_paths = orig
 
@@ -134,23 +205,28 @@ def main():
         if cb is None:
             skipped["no_control_box"] += 1; continue
         try:
-            v_clean = run_with(ev, "clean")
-            v_ghost = run_with(ev, "ghost")
-            v_occ = run_with(ev, "ghost", bb)
-            v_ctrl = run_with(ev, "ghost", cb)
+            v_clean, _ = run_with(ev, "clean")
+            v_ghost, _ = run_with(ev, "ghost")
+            v_occ, n_occ = run_with(ev, "ghost", "occ")
+            v_ctrl, n_ctrl = run_with(ev, "ghost", "ctrl", cb)
         except Exception as exc:                                     # noqa: BLE001
             skipped[f"fwd:{type(exc).__name__}"] += 1
             print(f"[F3/{LABEL}] FAIL {ev['event_id']}: {exc}"); continue
+        if n_occ == 0:
+            # 窗口内一帧都没投影出实体 ⇒ 这个事件的 occ 臂等于什么都没做，不能进统计
+            skipped["occ_no_frame_hit"] += 1; continue
         recs.append({"eid": ev["event_id"], "scene": ev["scene_name"],
                      "v_clean": v_clean, "v_ghost": v_ghost, "v_occ": v_occ, "v_ctrl": v_ctrl,
                      "b_ghost": v_ghost - v_clean, "b_occ": v_occ - v_clean,
-                     "b_ctrl": v_ctrl - v_clean})
+                     "b_ctrl": v_ctrl - v_clean,
+                     "n_frames_occluded": int(n_occ), "n_frames_ctrl": int(n_ctrl)})
         if (i + 1) % 20 == 0:
             print(f"[F3/{LABEL}] {i+1}/{len(evs)} done={len(recs)}", flush=True)
 
-    out = {"model": LABEL, "design": "F-3 遮挡必要性检验（VLA：遮前视相机目标时刻）",
-           "occlusion": "前视相机最后一帧的实体投影框涂为该帧均值色"
+    out = {"model": LABEL, "design": "F-3 遮挡必要性检验（VLA：**窗口内每一帧**独立投影+遮挡，§FM/A56）",
+           "occlusion": "窗口内每一帧独立投影该实体，可见则用**该帧自己的**均值色涂掉"
                         + ("；Alpamayo 两路前视（120° 与 30°）都遮" if args.model == "alpa" else ""),
+           "window_projection_stats": (WB.stats if WB else None),
            "control_arm": "同面积、同离心率带、不重叠的对照框",
            "n_events": len(recs), "n_limit": args.limit, "skipped": dict(skipped),
            "per_event": recs}
