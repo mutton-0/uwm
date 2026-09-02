@@ -1,0 +1,77 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Domain-gap measurement for driving.}
+Distributional divergence measures (MMD~\cite{gretton2012mmd}, two-sample domain
+classifiers~\cite{lopezpaz2017revisiting}, failing-loudly-style
+detectors~\cite{rabanser2019failing}) and driving-specific corruption benchmarks
+(nuScenes-C, Robo3D~\cite{kong2023robo3d}, RoboBEV~\cite{xie2023robobev}) quantify
+\emph{how much} a distribution has shifted or a metric has degraded. They operate at the
+correlational tier of evidence and do not localize \emph{where} in a model a shift
+enters or \emph{through which pathway} it becomes a task failure -- the question this
+paper's Concentration and Faithfulness axes are designed to answer.
+
+\paragraph{Open-loop leaderboard limitations.}
+NAVSIM~\cite{navsim2024} was built specifically to correct known exploitable shortcuts in
+the nuScenes open-loop leaderboard, most notably the ``ego status is all you
+need''\cite{egostatus2024} phenomenon in which a planner can score well by extrapolating
+its own past motion rather than perceiving the scene. This paper's finding that public
+scores across benchmarks are not commensurable (\cref{sec:experiments}) is consistent
+with, and extends, this line of work: even benchmarks explicitly designed to fix one
+shortcut remain mutually incomparable once policies are trained natively on different
+platforms (CARLA Leaderboard vs.\ NAVSIM).
+
+\paragraph{Causal representation learning and invariance.}
+Invariant risk minimization~\cite{arjovsky2019irm} and independence-constrained causal
+representation learning~\cite{icrl2025} seek representations invariant to
+non-causal nuisance factors, typically verified at the level of aggregate benchmark
+improvement or saliency visualization. Our Invariance axis operationalizes the same
+underlying idea with paired controlled domain shift (\cref{sec:method}), which permits a
+direct, per-pair causal readout instead of a distributional approximation, and we report
+representational and behavioural invariance as two separate, independently validated
+quantities rather than a single number.
+
+\paragraph{Causal confusion in imitation learning.}
+\citet{dehaan2019causal} show that an imitation-learned driving policy can attend to a
+spurious cue (e.g.\ its own brake-light state) instead of the true causal driver of an
+expert's action, a failure invisible to open-loop accuracy. Our Faithfulness axis is a
+direct representation-level instrument for this phenomenon: rather than asking whether
+the policy's output is accurate, it asks whether the direction that \emph{encodes} a
+hazard concept coincides with the direction that \emph{drives} the corresponding action.
+
+\paragraph{Shortcut learning.}
+\citet{geirhos2020shortcut} formalize shortcut learning as the use of a
+decision rule that solves training data via an unintended, non-robust cue. Our Grounding
+axis asks the mirrored question at the representation level -- whether a policy's
+internal hazard-discriminative direction survives a falsification control matched on
+every incidental correlate (class, geometry) except the causal one (relative motion) --
+and, as \cref{sec:experiments} reports, finds this to be a genuinely hard bar to clear
+even for policies that behave plausibly.
+
+\paragraph{Mechanistic interpretability and causal localization.}
+Activation patching and causal mediation analysis~\cite{meng2022rome,vig2020mediation},
+together with representation-similarity tools such as CKA~\cite{kornblith2019cka}, form
+the technical basis of our Concentration axis. \citet{hase2023localization} show that
+localization signals (e.g.\ causal tracing) do not always agree with where editing is
+most effective, a caution we adopt directly: \cref{sec:experiments} finds that
+divergence-based and causal-patching-based localizations peak at different layers, and
+that a localization formula's premise (an interior peak) must itself be checked before
+its output is trusted. Representation-engineering approaches to eliciting and steering
+concepts~\cite{zou2023repe} inform our injection-based Faithfulness readout and its
+in-house upper-bound calibration (\cref{sec:experiments}).
+
+\paragraph{Benchmark-to-deployment gap in driving policies.}
+Concurrent work~\cite{bridgesim2026} evaluates eleven end-to-end driving policies sourced
+from multiple pretraining platforms and shows an open-loop-to-closed-loop gap exists at
+scale, using test-time adaptation to close part of it. ODP-Bench~\cite{odpbench2025}
+studies benchmark predictive validity for out-of-distribution detection more broadly.
+Our contribution is complementary rather than a re-derivation of the same phenomenon: we
+do not add a twelfth model to a larger closed-loop sweep, but ask, for a small number of
+already-divergent candidates, \emph{which causal-chain link} a benchmark-to-deployment
+gap enters, using representation-level, small-sample, no-closed-loop-required
+diagnostics, and we report a diagnosis-guided intervention rather than a benchmark
+number alone. MDAD-style ranking-reliability analysis~\cite{mdad2025} and
+tinyBenchmarks-style item-response reduction~\cite{tinybenchmarks} address a related but
+distinct problem -- how many benchmark items are needed to rank many models reliably --
+and are not directly applicable when, as here, no pre-existing model-by-item answer
+matrix exists to calibrate against.

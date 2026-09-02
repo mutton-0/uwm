@@ -1,0 +1,148 @@
+\section{The GFIC Diagnostic Protocol}
+\label{sec:method}
+
+\paragraph{Design principle.}
+Each axis targets one link of the causal chain
+\emph{perception $\to$ concept $\to$ action $\to$ robustness under domain shift $\to$
+locatable failure}, is anchored to an independent literature (\cref{sec:related}), and is
+required to pass a causal-validity check before being trusted, not merely to produce a
+number that correlates with an outcome. All four axes are operationalized on a shared
+stimulus set (\cref{sec:experiments}) so that cross-model comparisons are always
+within-model-normalized, never raw-score comparisons.
+
+\begin{figure*}[t]
+\centering
+\newcommand{\gficbox}[1]{\tikz[baseline=-0.5ex]\node[draw, rounded corners, align=center, inner sep=3pt, minimum height=6mm, font=\scriptsize]{#1};}
+\newcommand{\gfichl}[1]{\tikz[baseline=-0.5ex]\node[draw=cvprblue, thick, fill=cvprblue!12, rounded corners, align=center, inner sep=3pt, minimum height=6mm, font=\scriptsize]{#1};}
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{\small (a) G: representation vs.\ objective segmentation GT}\\[3pt]
+\begin{tikzpicture}[every node/.style={font=\scriptsize}, box/.style={draw, rounded corners, align=center, minimum height=6mm, inner sep=3pt}, hl/.style={box, fill=cvprblue!12, draw=cvprblue, thick}, arr/.style={-{Latex[length=1.5mm]}, thick}]
+\node[box] (frame) {Frame};
+\node[hl, right=5mm of frame] (rep) {Repr.};
+\node[box, above right=2mm and 5mm of rep] (probe) {Linear probe};
+\node[box, below right=2mm and 5mm of rep] (sam) {SAM pseudo-GT};
+\node[box, right=17mm of rep] (cmp) {mIoU compare};
+\draw[arr] (frame) -- (rep);
+\draw[arr] (rep) -- (probe);
+\draw[arr] (frame.north) .. controls +(0,10mm) and +(-8mm,3mm) .. (sam.west);
+\draw[arr] (probe) -- (cmp);
+\draw[arr] (sam) -- (cmp);
+\end{tikzpicture}\\[2pt]
+{\scriptsize selectivity $=$ mIoU(trained) $-$ mIoU(rand-init)}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{\small (b) F: occlude the hazard entity, check necessity}\\[3pt]
+\begin{tikzpicture}[every node/.style={font=\scriptsize}, box/.style={draw, rounded corners, align=center, minimum height=6mm, inner sep=3pt}, hl/.style={box, fill=cvprblue!12, draw=cvprblue, thick}, arr/.style={-{Latex[length=1.5mm]}, thick}]
+\node[box] (ghost) {Ghost frame};
+\node[hl, right=5mm of ghost] (occ) {Occlude entity};
+\node[box, right=5mm of occ] (act) {Action};
+\node[box, below=5mm of ghost] (clean) {Clean frame};
+\draw[arr] (ghost) -- (occ);
+\draw[arr] (occ) -- (act);
+\draw[arr] (clean.east) -| (act.south);
+\end{tikzpicture}\\[2pt]
+{\scriptsize $R = (a_{occ}-a_{clean})/(a_{ghost}-a_{clean})$}
+\end{minipage}
+
+\vspace{6pt}
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{\small (c) I: same scene, two renderings, two orderings}\\[3pt]
+\begin{tikzpicture}[every node/.style={font=\scriptsize}, box/.style={draw, rounded corners, align=center, minimum height=6mm, inner sep=3pt}, hl/.style={box, fill=cvprblue!12, draw=cvprblue, thick}, arr/.style={-{Latex[length=1.5mm]}, thick}]
+\node[box] (sim) {CARLA render};
+\node[box, below=4mm of sim] (real) {Real-style render};
+\node[hl, right=7mm of sim, yshift=-5mm] (model) {Model};
+\node[box, right=9mm of model, yshift=5mm] (repD) {Repr.\ $D_L$};
+\node[box, right=9mm of model, yshift=-5mm] (behD) {Behav.\ $\Delta v_{cmd}$};
+\draw[arr] (sim) -- (model);
+\draw[arr] (real) -- (model);
+\draw[arr] (model) -- (repD);
+\draw[arr] (model) -- (behD);
+\end{tikzpicture}\\[2pt]
+{\scriptsize the two orderings can disagree}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{\small (d) C: patch one layer, read the recovery profile}\\[3pt]
+\begin{tikzpicture}[every node/.style={font=\scriptsize}, box/.style={draw, rounded corners, align=center, minimum height=6mm, minimum width=5mm, inner sep=2pt}, hl/.style={box, fill=cvprblue!12, draw=cvprblue, thick}, arr/.style={-{Latex[length=1.5mm]}, thick}]
+\node[box] (l0) {L0};
+\node[box, right=2mm of l0] (l1) {L1};
+\node[hl, right=2mm of l1] (l2) {L2};
+\node[box, right=2mm of l2] (l3) {L3};
+\node[box, right=9mm of l3] (curve) {recovery$(L)$};
+\draw[arr] (l3.east) -- (curve.west);
+\end{tikzpicture}\\[2pt]
+{\scriptsize swap one layer sim$\to$real; cascade vs.\ interior peak}
+\end{minipage}
+\caption{The GFIC protocol at a glance. Each axis compares a policy's internal
+representation or action against an independent, causally-motivated reference (an
+objective segmentation target for G, an input-level occlusion for F, a controlled
+rendering pair for I, a paired activation swap for C) rather than a hand-labelled
+semantic construct.}
+\label{fig:gfic-overview}
+\end{figure*}
+
+\paragraph{G (Grounding).}
+A linear probe is trained on the representation to recover object-ness segmentation,
+using Segment Anything~\cite{kirillov2023sam} pseudo-ground-truth as an objective,
+task-independent target (\cref{fig:gfic-overview}a). The primary readout is
+\begin{equation}
+G_m = \mathrm{mIoU}(\text{trained probe}) - \mathrm{mIoU}(\text{probe on random-init net}),
+\end{equation}
+a selectivity score against a control-task floor~\cite{hewitt2019designing}: the
+random-initialization arm shares the probe's capacity and architecture but not its
+learned features, so any gap above it reflects genuine content rather than probe
+capacity. A second floor, \texttt{position\_only} (the probe given token coordinates
+alone, no representation), bounds how much of the raw score is a spatial prior rather
+than content; $G_m$ is a paired difference and remains valid even when that floor is
+large.
+
+\paragraph{F (Faithfulness).}
+We test necessity directly at the input (\cref{fig:gfic-overview}b): the hazard entity is
+occluded in the frame, and the resulting action is compared against the original
+(hazard-present) action and the no-hazard baseline. With $a_{ghost}$, $a_{occ}$,
+$a_{clean}$ the planned action under the three conditions, the primary readout is the
+necessity ratio
+\begin{equation}
+R = \frac{a_{occ} - a_{clean}}{a_{ghost} - a_{clean}},
+\end{equation}
+$R \approx 0$ meaning the action fully reverts once the entity is removed (necessity
+holds) and $R \approx 1$ meaning occlusion leaves the action unchanged from the
+hazard-present case -- a blind-action signature -- i.e.\ the entity is not what drives it.
+A grey-patch control arm, occluding an equal area elsewhere in the frame, rules out that
+occlusion by itself (independent of location) moves the action.
+
+\paragraph{I (Invariance).}
+\Cref{fig:gfic-overview}c. Given a controlled appearance-only domain pairing
+($do(\text{appearance})$, geometry and
+ground truth held fixed), we report two quantities: the representational
+\begin{equation}
+D_L = \frac{\mathbb{E}\lVert Z_L(x_{real}) - Z_L(x_{sim})\rVert}{\mathbb{E}\lVert Z_L(x)\rVert},
+\qquad I_m = 1 - D_{L^*},
+\end{equation}
+and the behavioural domain sensitivity
+$\mathbb{E}|\Delta v_{cmd}| / \overline{v_{cmd}}$ on the same pairing. Invariance is not
+reported as a single number: as \cref{sec:experiments} shows, the two readouts can order
+the same models oppositely, which is itself diagnostic information a scalar would erase.
+
+\paragraph{C (Concentration).}
+\Cref{fig:gfic-overview}d. On the same domain pairing, we perform layer-wise activation
+patching in which the
+corruption is always a paired real-input swap (never synthetic noise) and the recovery
+metric is always continuous (never binarized):
+$\mathrm{recovery}(L) = $ the fraction of the sim-vs-real behavioural gap closed by
+patching layer $L$'s activations from the sim run into the real run. The summary
+statistic $C_m$ = top-2-layer share of total recovery is reported only after a shape
+diagnostic confirms the recovery profile has an interior peak (\cref{sec:experiments});
+when the profile is instead monotonic (a cascade), we report profile shape statistics
+(Spearman correlation between layer index and recovery, responsible-layer entropy)
+instead, since $C_m$'s premise is violated and its value is not meaningful.
+
+\paragraph{Why no composite score.}
+We deliberately do not combine G, F, I, C into a single weighted score. The four axes
+differ in units, in adjudication state (some cells are indeterminate, some are not
+comparable across a given pair of models), and in what a violated premise means for
+their formula. Collapsing them into a scalar would require assigning weights with no
+independent justification and would make the provenance of any resulting ranking
+unauditable. We instead report the full matrix, with explicit ``not comparable'' and
+``indeterminate'' labels treated as part of the result.

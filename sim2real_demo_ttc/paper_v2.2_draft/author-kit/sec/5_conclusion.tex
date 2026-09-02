@@ -1,0 +1,17 @@
+\section{Conclusion}
+
+Public benchmark rank and deployment fit can be genuinely different questions, and in our
+two-policy case study they were not even the same \emph{kind} of question: the two
+policies' public scores were not commensurable at all. We proposed GFIC, a four-axis
+diagnostic protocol anchored to independent causal-inference and interpretability
+literatures, and showed on a ghost-probe target scenario that it localizes
+benchmark-to-deployment gaps to specific, actionable links of a policy's causal chain --
+a repair site for one policy that differs from another's, a causal-confusion signature
+invisible to open-loop scoring, and a domain-robustness ordering that reverses between
+representation and behaviour. We further showed, honestly, that repairing a diagnosed
+link does not guarantee a behavioural gain at a small budget, a finding that survived
+only because of an attribution-control arm designed to rule out exactly this confound.
+We deliberately stopped short of a single composite score, and short of a fully closed
+three-way comparison against post-training outcomes at scale; both are natural next
+steps, together with extending the protocol to additional scenario types and to policies
+whose native training domain can be independently verified.

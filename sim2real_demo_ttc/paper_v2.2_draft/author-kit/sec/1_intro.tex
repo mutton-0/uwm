@@ -1,0 +1,141 @@
+\section{Introduction}
+\label{sec:intro}
+
+Selecting a base policy to post-train for a specific deployment scenario is, in current
+practice, largely a leaderboard-reading exercise: rank candidates on nuScenes, NAVSIM, or
+the CARLA Leaderboard, and pick the winner. This is convenient because public scores are
+free to look up and directly comparable \emph{within} one benchmark. It is also
+epistemically thin for a different question -- ``which policy will behave best on
+\emph{my} target scenario after post-training'' -- because a benchmark score is a single
+scalar aggregate over a fixed distribution of driving situations, while a deployment
+scenario is typically rare, safety-critical, and out of that distribution. A policy that
+tops a benchmark by being reliably mediocre everywhere can lose to a policy that is
+worse on average but happens to have the right internal machinery for the scenario that
+matters.
+
+The obvious response -- run both candidates on the target scenario and compare -- is
+exactly what full closed-loop re-benchmarking requires, and it is precisely the cost this
+line of work tries to avoid: closed-loop simulators (CARLA, Bench2Drive) are expensive to
+build scenario content for, and a numeric score, even a target-domain one, still only
+tells us \emph{how much} a policy degrades, not \emph{where in the model} the
+degradation originates or \emph{what it would cost to fix}. Two policies can obtain
+identical target-domain scores for entirely different internal reasons, and the correct
+post-training prescription is different in each case.
+
+This paper asks a narrower, answerable version of the question: instead of predicting a
+full ranking, can we build a small set of literature-grounded, causally validated axes
+that \emph{localize} where a benchmark-to-deployment gap enters a policy's causal chain,
+using only a modest amount of paired out-of-distribution data and no closed-loop
+simulation? We propose four such axes -- \textbf{G}rounding, \textbf{F}aithfulness,
+\textbf{I}nvariance, and \textbf{C}oncentration (GFIC) -- each anchored to an independent
+body of causal-inference or interpretability literature rather than invented ad hoc for
+one scenario:
+
+\begin{itemize}
+    \item \textbf{G (Grounding)}, after shortcut learning~\cite{geirhos2020shortcut}: does
+    the policy's internal representation encode objective, task-independent scene
+    structure -- what is object versus background -- beyond what its architecture's
+    prior alone provides, rather than relying on a task-irrelevant shortcut?
+    \item \textbf{F (Faithfulness)}, after causal confusion in imitation
+    learning~\cite{dehaan2019causal}: does the hazard entity actually drive the action,
+    or does removing it from the input at test time leave the action unchanged?
+    \item \textbf{I (Invariance)}, after invariant risk minimization~\cite{arjovsky2019irm}:
+    is the policy's behaviour stable under a controlled appearance-domain shift, and does
+    its representational stability agree with its behavioural stability?
+    \item \textbf{C (Concentration)}, after localization-for-editing
+    work~\cite{hase2023localization,meng2022rome}: when the policy does degrade under
+    domain shift, is the causal responsibility concentrated in a small, identifiable set
+    of layers, or diffuse?
+\end{itemize}
+
+We instantiate this protocol on a ghost-probe (occluded pedestrian sudden emergence)
+target scenario mined from nuScenes and validate it on \textbf{six} end-to-end driving
+policies chosen to separate three confounds a smaller pool cannot: encoder family,
+action-head family, and native training domain. Three policies (DiffusionDrive, LTF,
+DiffusionDriveV2) share one encoder under three different action heads; two (SimLingo,
+and the two VLAs Alpamayo-R1 and AutoVLA) are architecturally unrelated to that family and
+to each other. This design is deliberate: a diagnostic protocol's portability failures,
+and the boundary between ``the encoder determines it'' and ``the action head determines
+it,'' are invisible in a pool of two.
+
+As \cref{fig:pipeline} summarizes, GFIC is positioned as an explicit, causally validated
+step between a policy finishing training and a deployment decision -- one that today is
+typically skipped in favour of reading a leaderboard.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  node distance=5mm and 7mm,
+  every node/.style={font=\small},
+  box/.style={draw, rounded corners, align=center, minimum height=8mm, minimum width=24mm, inner sep=2pt},
+  hl/.style={box, fill=cvprblue!12, draw=cvprblue, thick},
+  small/.style={draw, rounded corners, align=center, minimum height=7mm, minimum width=24mm, font=\scriptsize, inner sep=2pt},
+  hlsmall/.style={small, fill=cvprblue!12, draw=cvprblue, thick},
+  arr/.style={-{Latex[length=2mm]}, thick}
+]
+\node[box] (train) {Trained /\\post-trained policy};
+\node[hl, right=of train] (diag) {GFIC diagnosis\\\textbf{(this paper)}};
+\node[box, right=of diag] (deploy) {Deployment\\decision};
+\draw[arr] (train) -- (diag);
+\draw[arr] (diag) -- (deploy);
+
+\node[small, below=13mm of train] (pub) {Public\\leaderboard rank};
+\node[hlsmall, below=13mm of diag] (axis) {GFIC axis\\rank};
+\node[small, below=13mm of deploy] (real) {Real deployment\\rank (target-specific)};
+\draw[-{Latex[length=1.5mm]}, gray] (train.south) .. controls +(0,-6mm) and +(0,6mm) .. (pub.north);
+\draw[-{Latex[length=1.5mm]}, cvprblue] (diag.south) -- (axis.north);
+\draw[-{Latex[length=1.5mm]}, gray] (deploy.south) .. controls +(0,-6mm) and +(0,6mm) .. (real.north);
+
+\node[font=\scriptsize\bfseries] at ($(pub.east)!0.5!(axis.west)$) {$\overset{?}{=}$};
+\node[font=\scriptsize\bfseries] at ($(axis.east)!0.5!(real.west)$) {$\overset{?}{=}$};
+\end{tikzpicture}
+\caption{GFIC as an explicit diagnostic step between training and deployment. A public
+leaderboard rank, a GFIC axis profile, and a real target-scenario deployment rank need
+not agree with one another (\cref{sec:experiments} shows cases of each disagreement);
+this paper measures the middle term causally, from a small amount of target-domain
+out-of-distribution data and with no closed-loop simulator.}
+\label{fig:pipeline}
+\end{figure}
+
+Our contributions are:
+
+\begin{enumerate}
+    \item A four-axis diagnostic protocol (GFIC) that is domain- and scenario-general by
+    construction -- the ghost-probe scenario is one instantiation, not the definition --
+    each axis anchored to an independent, established literature and each measured with
+    an explicit causal-validity check rather than a correlational proxy alone. We test
+    portability along two independent axes of generality: a second, causally distinct
+    scenario type (an already-tracked lead vehicle braking hard, rather than a new entity
+    entering the path) and a second, independently collected data source (NAVSIM's
+    underlying OpenScene/nuPlan logs). Concentration's architectural law replicates
+    completely (14 of 14 cells across both tests); Grounding and Faithfulness -- G-VS and
+    F-3, our objective-ground-truth readouts that require no semantic judgement of danger
+    -- are markedly less portable: G-VS's point estimate is stable across both tests but
+    its three-state verdict is not, and F-3 is only testable where a candidate shows any
+    baseline response to a hazard frame at all, a structural limit of a necessity test
+    rather than a defect of one corpus. The four axes are not equally portable, and no
+    single-corpus, single-scenario study could have shown that.
+    \item A demonstration that public benchmark scores can fail to even define a ranking
+    across a pool of six candidates (different benchmark, domain, protocol, and metric),
+    which motivates the need for an orthogonal, target-domain diagnostic rather than a
+    benchmark-substitute score.
+    \item Empirical evidence that a single axis (Concentration) can prescribe genuinely
+    different repair sites for policies public scores cannot distinguish, and generalizes
+    into a pre-registered, held-out-confirmed law separating two architecture families
+    with no sign overlap; and that a second axis (Invariance) orders two policies sharing
+    an identical encoder oppositely depending on whether it is read from representations
+    or from behaviour -- two independent arguments against compressing diagnosis into one
+    number.
+    \item Two objective-ground-truth readouts for Grounding and Faithfulness --
+    segmentation-probe selectivity against Segment Anything pseudo-ground-truth (G-VS) and
+    input-level occlusion necessity (F-3) -- that need no judgement of ``what counts as
+    dangerous'' and, for the first time, apply uniformly across all six candidates
+    regardless of architecture or language interface. Without any hazard criterion, they
+    identify a joint dissociation on DiffusionDrive (the representation demonstrably
+    encodes object-level information that the action does not act on) together with an
+    analogous blind-action signature on LTF, and both dissociations replicate across the
+    scenario- and data-source-generality tests of contribution 1.
+    \item A diagnosis-guided pilot post-training intervention with an attribution-control
+    arm, reported honestly as a partial success: the targeted causal link is repaired,
+    but the repair does not translate into a behavioural gain at the tested budget.
+\end{enumerate}

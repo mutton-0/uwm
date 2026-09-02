@@ -1,0 +1,44 @@
+\begin{abstract}
+Model selection for autonomous-driving policies is dominated by public leaderboards
+(nuScenes, NAVSIM, CARLA Leaderboard), yet a policy's rank on such a benchmark is not
+guaranteed to predict its fit for a specific deployment scenario, and the two rankings
+can be structurally incomparable to begin with. We introduce a four-axis diagnostic
+protocol -- \textbf{G}rounding, \textbf{F}aithfulness, \textbf{I}nvariance, and
+\textbf{C}oncentration (GFIC) -- each anchored to an independent causal-inference or
+interpretability literature (shortcut learning, causal confusion in imitation learning,
+invariant risk minimization, and localization-for-editing, respectively), designed to
+localize \emph{where in a policy's causal chain} a benchmark-to-deployment gap enters,
+using only a modest amount of paired out-of-distribution data and requiring no
+closed-loop simulator to compute. We instantiate the protocol on a ghost-probe (occluded
+pedestrian emergence) target scenario, mined from nuScenes, across \textbf{six}
+end-to-end driving policies spanning three encoder families, three action-head families
+and five nominally distinct native training domains. Grounding and Faithfulness are operationalized as two objective-ground-truth readouts
+that require no human judgement of ``what counts as dangerous'' and apply uniformly to
+all six candidates regardless of architecture or language interface: G-VS asks whether a
+linear probe recovers objective segmentation ground truth from the representation, and
+F-3 asks whether occluding the hazard entity at the input causally reverts the action
+toward baseline. Under one shared stimulus set and one statistical protocol we find: (i)
+public scores fail to define even a partial ranking across the pool; (ii) the
+Concentration axis prescribes different repair sites for policies with no shared public
+score, and, tested as a pre-registered held-out prediction, cleanly separates two
+architecture families with no sign overlap -- three TransFuser-family policies show an
+interior failure peak while three pure-transformer policies, including one withheld
+until after the prediction was registered, show a monotone cascade; (iii) without any
+hazard criterion, G-VS and F-3 identify a joint dissociation on DiffusionDrive -- the
+highest segmentation-probe selectivity in the pool paired with no detectable action
+response to a hazard frame at all -- together with an analogous blind-action signature on
+LTF; tested for portability across a structurally different scenario and an
+independently collected data source, Concentration's architectural law replicates
+completely (14 of 14 cells), the DiffusionDrive/LTF dissociations replicate as well,
+and G-VS's point estimate is stable throughout while its three-state verdict is more
+sample-size-sensitive than Concentration's; (iv) the Invariance axis orders two policies
+that share an identical encoder architecture oppositely on its representational versus
+behavioural readout, showing that domain robustness cannot be compressed into one number;
+and (v) a diagnosis-guided pilot post-training run, targeting the causal disconnect
+between a candidate's hazard-relevant representation and its braking action, can
+decisively repair that link without producing a behavioural gain at a small fixed
+budget, an honest negative result obtained only after an attribution-control arm rules
+out a confound. We report a fully audited trail of pre-registered validity checks for
+every effect above, and we explicitly decline to compress the four axes into a single
+weighted score.
+\end{abstract}
