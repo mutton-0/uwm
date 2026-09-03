@@ -1,0 +1,163 @@
+{
+  "model": "LTF (ltf_sim_navtest.ckpt)",
+  "corpus": "G1 (nuScenes) A 类 VRU 突现",
+  "note": "本文件在 2026-09-03 被一次重复执行的同名工单覆盖过，现按磁盘实际文件与 results/f3_occlusion_ltf.json 重建；数值口径未变。",
+  "v_definition": "v_plan = |traj[0]| / 0.5 s（规划轨迹第一步位移 ÷ dt）",
+  "occlusion": "实体投影框涂为该帧图像均值色（f3_occlusion_necessity.occlude）",
+  "groups": {
+    "flat": [
+      {
+        "event_id": "scene-0019_006_A",
+        "files": [
+          "flat__scene-0019_006_A__clean.jpg",
+          "flat__scene-0019_006_A__ctrl.jpg",
+          "flat__scene-0019_006_A__ghost.jpg",
+          "flat__scene-0019_006_A__occ.jpg",
+          "flat__scene-0019_006_A__zoom_ghost_vs_occ.jpg"
+        ],
+        "object_class": "human.pedestrian.adult",
+        "d_long_at_emergence_m": 27.1,
+        "bbox_xyxy": [
+          855.4,
+          467.8,
+          891.3,
+          555.7
+        ],
+        "v_clean": 4.2585,
+        "v_ghost": 4.2582,
+        "v_occ": 4.2593,
+        "v_ctrl": 4.2721,
+        "b_ghost": -0.0003,
+        "b_occ": 0.0009,
+        "b_ctrl": 0.0136
+      },
+      {
+        "event_id": "scene-0961_015_A",
+        "files": [
+          "flat__scene-0961_015_A__clean.jpg",
+          "flat__scene-0961_015_A__ctrl.jpg",
+          "flat__scene-0961_015_A__ghost.jpg",
+          "flat__scene-0961_015_A__occ.jpg",
+          "flat__scene-0961_015_A__zoom_ghost_vs_occ.jpg"
+        ],
+        "object_class": "human.pedestrian.construction_worker",
+        "d_long_at_emergence_m": 18.8,
+        "bbox_xyxy": [
+          715.6,
+          457.1,
+          787.4,
+          598.7
+        ],
+        "v_clean": 4.9205,
+        "v_ghost": 4.9207,
+        "v_occ": 4.8951,
+        "v_ctrl": 4.907,
+        "b_ghost": 0.0002,
+        "b_occ": -0.0254,
+        "b_ctrl": -0.0135
+      },
+      {
+        "event_id": "scene-1064_002_A",
+        "files": [
+          "flat__scene-1064_002_A__clean.jpg",
+          "flat__scene-1064_002_A__ctrl.jpg",
+          "flat__scene-1064_002_A__ghost.jpg",
+          "flat__scene-1064_002_A__occ.jpg",
+          "flat__scene-1064_002_A__zoom_ghost_vs_occ.jpg"
+        ],
+        "object_class": "vehicle.motorcycle",
+        "d_long_at_emergence_m": 29.4,
+        "bbox_xyxy": [
+          747.8,
+          456.5,
+          816.9,
+          549.0
+        ],
+        "v_clean": 0.0044,
+        "v_ghost": 0.0047,
+        "v_occ": 0.0058,
+        "v_ctrl": 0.0041,
+        "b_ghost": 0.0004,
+        "b_occ": 0.0014,
+        "b_ctrl": -0.0002
+      }
+    ],
+    "reacted": [
+      {
+        "event_id": "scene-0069_000_A",
+        "files": [
+          "reacted__scene-0069_000_A__clean.jpg",
+          "reacted__scene-0069_000_A__ctrl.jpg",
+          "reacted__scene-0069_000_A__ghost.jpg",
+          "reacted__scene-0069_000_A__occ.jpg",
+          "reacted__scene-0069_000_A__zoom_ghost_vs_occ.jpg"
+        ],
+        "object_class": "human.pedestrian.adult",
+        "d_long_at_emergence_m": 23.7,
+        "bbox_xyxy": [
+          878.4,
+          449.7,
+          935.6,
+          553.6
+        ],
+        "v_clean": 4.0295,
+        "v_ghost": 3.68,
+        "v_occ": 3.6811,
+        "v_ctrl": 3.6707,
+        "b_ghost": -0.3494,
+        "b_occ": -0.3483,
+        "b_ctrl": -0.3587
+      },
+      {
+        "event_id": "scene-0433_000_A",
+        "files": [
+          "reacted__scene-0433_000_A__clean.jpg",
+          "reacted__scene-0433_000_A__ctrl.jpg",
+          "reacted__scene-0433_000_A__ghost.jpg",
+          "reacted__scene-0433_000_A__occ.jpg",
+          "reacted__scene-0433_000_A__zoom_ghost_vs_occ.jpg"
+        ],
+        "object_class": "human.pedestrian.adult",
+        "d_long_at_emergence_m": 47.9,
+        "bbox_xyxy": [
+          825.2,
+          463.2,
+          843.8,
+          510.6
+        ],
+        "v_clean": 6.5913,
+        "v_ghost": 6.195,
+        "v_occ": 6.2205,
+        "v_ctrl": 6.3656,
+        "b_ghost": -0.3963,
+        "b_occ": -0.3707,
+        "b_ctrl": -0.2257
+      },
+      {
+        "event_id": "scene-0858_004_A",
+        "files": [
+          "reacted__scene-0858_004_A__clean.jpg",
+          "reacted__scene-0858_004_A__ctrl.jpg",
+          "reacted__scene-0858_004_A__ghost.jpg",
+          "reacted__scene-0858_004_A__occ.jpg",
+          "reacted__scene-0858_004_A__zoom_ghost_vs_occ.jpg"
+        ],
+        "object_class": "vehicle.motorcycle",
+        "d_long_at_emergence_m": 19.3,
+        "bbox_xyxy": [
+          693.1,
+          416.0,
+          884.2,
+          567.7
+        ],
+        "v_clean": 3.5807,
+        "v_ghost": 3.2856,
+        "v_occ": 3.3121,
+        "v_ctrl": 3.2896,
+        "b_ghost": -0.2951,
+        "b_occ": -0.2686,
+        "b_ctrl": -0.2911
+      }
+    ]
+  }
+}

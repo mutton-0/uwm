@@ -1,0 +1,226 @@
+{
+  "note": "纯图像重建，未重跑推理；数值取自 f3_occlusion_ltf.json",
+  "b_ghost = v_ghost - v_clean": "负 = 看到危险后规划速度下调",
+  "groups": {
+    "reacted": [
+      {
+        "eid": "scene-0433_000_A",
+        "scene": "scene-0433",
+        "v_clean": 6.591261386871338,
+        "v_ghost": 6.195000648498535,
+        "v_occ": 6.22051477432251,
+        "v_ctrl": 6.365600109100342,
+        "b_ghost": -0.39626073837280273,
+        "d_occ": 0.02551412582397461,
+        "d_ctrl": 0.17059946060180664,
+        "bbox_xyxy": [
+          825.2205397747911,
+          463.23263883750633,
+          843.7550153893407,
+          510.6346062584388
+        ],
+        "control_bbox_xyxy": [
+          756.2449846106593,
+          463.23263883750633,
+          774.7794602252089,
+          510.6346062584388
+        ],
+        "bbox_area_frac": 0.0006101184786423243,
+        "bbox_px": 878,
+        "d_long_ghost_m": 44.75942869649109,
+        "entity_visible_in_clean_frame": true,
+        "clean_file": "sweeps/CAM_FRONT/n015-2018-10-08-15-52-24+0800__CAM_FRONT__1538985522612460.jpg",
+        "ghost_file": "samples/CAM_FRONT/n015-2018-10-08-15-52-24+0800__CAM_FRONT__1538985524112460.jpg",
+        "files": {
+          "clean": "reacted__scene-0433_000_A__clean.jpg",
+          "ghost": "reacted__scene-0433_000_A__ghost.jpg",
+          "occ": "reacted__scene-0433_000_A__occ.jpg",
+          "ctrl": "reacted__scene-0433_000_A__ctrl.jpg",
+          "zoom": "reacted__scene-0433_000_A__zoom_ghost_vs_occ.jpg"
+        }
+      },
+      {
+        "eid": "scene-0069_000_A",
+        "scene": "scene-0069",
+        "v_clean": 4.029464244842529,
+        "v_ghost": 3.6800267696380615,
+        "v_occ": 3.681140899658203,
+        "v_ctrl": 3.6707231998443604,
+        "b_ghost": -0.3494374752044678,
+        "d_occ": 0.0011141300201416016,
+        "d_ctrl": -0.009303569793701172,
+        "bbox_xyxy": [
+          878.4051297622468,
+          449.7218154346295,
+          935.5994943663987,
+          553.6223962050731
+        ],
+        "control_bbox_xyxy": [
+          664.4005056336013,
+          449.7218154346295,
+          721.5948702377532,
+          553.6223962050731
+        ],
+        "bbox_area_frac": 0.004126755346644365,
+        "bbox_px": 5942,
+        "d_long_ghost_m": 22.125725256947423,
+        "entity_visible_in_clean_frame": true,
+        "clean_file": "sweeps/CAM_FRONT/n008-2018-08-01-15-52-19-0400__CAM_FRONT__1533153482612404.jpg",
+        "ghost_file": "sweeps/CAM_FRONT/n008-2018-08-01-15-52-19-0400__CAM_FRONT__1533153484112404.jpg",
+        "files": {
+          "clean": "reacted__scene-0069_000_A__clean.jpg",
+          "ghost": "reacted__scene-0069_000_A__ghost.jpg",
+          "occ": "reacted__scene-0069_000_A__occ.jpg",
+          "ctrl": "reacted__scene-0069_000_A__ctrl.jpg",
+          "zoom": "reacted__scene-0069_000_A__zoom_ghost_vs_occ.jpg"
+        }
+      },
+      {
+        "eid": "scene-0858_004_A",
+        "scene": "scene-0858",
+        "v_clean": 3.5806620121002197,
+        "v_ghost": 3.28556227684021,
+        "v_occ": 3.3120932579040527,
+        "v_ctrl": 3.289555311203003,
+        "b_ghost": -0.29509973526000977,
+        "d_occ": 0.026530981063842773,
+        "d_ctrl": 0.003993034362792969,
+        "bbox_xyxy": [
+          693.1055987711851,
+          415.99641388112747,
+          884.1577011520392,
+          567.725833374364
+        ],
+        "control_bbox_xyxy": [
+          693.1055987711851,
+          112.53757489465437,
+          884.1577011520392,
+          264.2669943878909
+        ],
+        "bbox_area_frac": 0.020130711518895405,
+        "bbox_px": 28988,
+        "d_long_ghost_m": 15.952633875545336,
+        "entity_visible_in_clean_frame": true,
+        "clean_file": "sweeps/CAM_FRONT/n015-2018-10-08-16-03-24+0800__CAM_FRONT__1538986124612460.jpg",
+        "ghost_file": "sweeps/CAM_FRONT/n015-2018-10-08-16-03-24+0800__CAM_FRONT__1538986126112460.jpg",
+        "files": {
+          "clean": "reacted__scene-0858_004_A__clean.jpg",
+          "ghost": "reacted__scene-0858_004_A__ghost.jpg",
+          "occ": "reacted__scene-0858_004_A__occ.jpg",
+          "ctrl": "reacted__scene-0858_004_A__ctrl.jpg",
+          "zoom": "reacted__scene-0858_004_A__zoom_ghost_vs_occ.jpg"
+        }
+      }
+    ],
+    "flat": [
+      {
+        "eid": "scene-0961_015_A",
+        "scene": "scene-0961",
+        "v_clean": 4.920480251312256,
+        "v_ghost": 4.920713424682617,
+        "v_occ": 4.895116329193115,
+        "v_ctrl": 4.906982898712158,
+        "b_ghost": 0.00023317337036132812,
+        "d_occ": -0.025597095489501953,
+        "d_ctrl": -0.013730525970458984,
+        "bbox_xyxy": [
+          715.5804881116266,
+          457.0788227110153,
+          787.41058126087,
+          598.6761399340008
+        ],
+        "control_bbox_xyxy": [
+          812.58941873913,
+          457.0788227110153,
+          884.4195118883734,
+          598.6761399340008
+        ],
+        "bbox_area_frac": 0.007063158670701408,
+        "bbox_px": 10170,
+        "d_long_ghost_m": 17.04946153737535,
+        "entity_visible_in_clean_frame": true,
+        "clean_file": "sweeps/CAM_FRONT/n015-2018-09-26-11-17-24+0800__CAM_FRONT__1537932327112460.jpg",
+        "ghost_file": "sweeps/CAM_FRONT/n015-2018-09-26-11-17-24+0800__CAM_FRONT__1537932328612460.jpg",
+        "files": {
+          "clean": "flat__scene-0961_015_A__clean.jpg",
+          "ghost": "flat__scene-0961_015_A__ghost.jpg",
+          "occ": "flat__scene-0961_015_A__occ.jpg",
+          "ctrl": "flat__scene-0961_015_A__ctrl.jpg",
+          "zoom": "flat__scene-0961_015_A__zoom_ghost_vs_occ.jpg"
+        }
+      },
+      {
+        "eid": "scene-0019_006_A",
+        "scene": "scene-0019",
+        "v_clean": 4.258461952209473,
+        "v_ghost": 4.2581787109375,
+        "v_occ": 4.259346008300781,
+        "v_ctrl": 4.272086143493652,
+        "b_ghost": -0.00028324127197265625,
+        "d_occ": 0.00116729736328125,
+        "d_ctrl": 0.013907432556152344,
+        "bbox_xyxy": [
+          855.4463735679471,
+          467.76886339345344,
+          891.2522716309743,
+          555.7390000297764
+        ],
+        "control_bbox_xyxy": [
+          708.7477283690257,
+          467.76886339345344,
+          744.5536264320529,
+          555.7390000297764
+        ],
+        "bbox_area_frac": 0.002187395656243577,
+        "bbox_px": 3149,
+        "d_long_ghost_m": 25.38238653923711,
+        "entity_visible_in_clean_frame": true,
+        "clean_file": "sweeps/CAM_FRONT/n015-2018-07-18-11-50-34+0800__CAM_FRONT__1531885867862460.jpg",
+        "ghost_file": "sweeps/CAM_FRONT/n015-2018-07-18-11-50-34+0800__CAM_FRONT__1531885869362460.jpg",
+        "files": {
+          "clean": "flat__scene-0019_006_A__clean.jpg",
+          "ghost": "flat__scene-0019_006_A__ghost.jpg",
+          "occ": "flat__scene-0019_006_A__occ.jpg",
+          "ctrl": "flat__scene-0019_006_A__ctrl.jpg",
+          "zoom": "flat__scene-0019_006_A__zoom_ghost_vs_occ.jpg"
+        }
+      },
+      {
+        "eid": "scene-1064_002_A",
+        "scene": "scene-1064",
+        "v_clean": 0.004392193164676428,
+        "v_ghost": 0.004746170248836279,
+        "v_occ": 0.005770202726125717,
+        "v_ctrl": 0.004143467638641596,
+        "b_ghost": 0.0003539770841598511,
+        "d_occ": 0.0010240324772894382,
+        "d_ctrl": -0.0006027026101946831,
+        "bbox_xyxy": [
+          747.7694247265879,
+          456.53889673137667,
+          816.8878708934933,
+          548.954856153265
+        ],
+        "control_bbox_xyxy": [
+          747.7694247265879,
+          271.7069778875999,
+          816.8878708934933,
+          364.1229373094883
+        ],
+        "bbox_area_frac": 0.00443586633073938,
+        "bbox_px": 6387,
+        "d_long_ghost_m": 25.997498645023974,
+        "entity_visible_in_clean_frame": true,
+        "clean_file": "sweeps/CAM_FRONT/n015-2018-11-21-19-21-35+0800__CAM_FRONT__1542799530262460.jpg",
+        "ghost_file": "sweeps/CAM_FRONT/n015-2018-11-21-19-21-35+0800__CAM_FRONT__1542799531762460.jpg",
+        "files": {
+          "clean": "flat__scene-1064_002_A__clean.jpg",
+          "ghost": "flat__scene-1064_002_A__ghost.jpg",
+          "occ": "flat__scene-1064_002_A__occ.jpg",
+          "ctrl": "flat__scene-1064_002_A__ctrl.jpg",
+          "zoom": "flat__scene-1064_002_A__zoom_ghost_vs_occ.jpg"
+        }
+      }
+    ]
+  }
+}

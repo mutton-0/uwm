@@ -1,0 +1,315 @@
+{
+  "design": "F-3 必要性比 R 的估计量 B（汇总均值之比）小范围确认：LTF 与 SimLingo",
+  "no_new_inference": true,
+  "estimator_A": "逐事件先算 R_i = 1 − b_occ,i/b_ghost,i，再取 scene 级 bootstrap 均值",
+  "estimator_B": "R = 1 − mean(b_occ)/mean(b_ghost)，分子分母共用同一次 scene 级重抽",
+  "threshold": "三态门槛不变：R 的 scene 级 CI 相对 0.5 的位置；开门条件仍是 b_ghost 显著",
+  "cells": [
+    {
+      "cell": "G1 × LTF",
+      "src": "f3_occlusion_ltf.json",
+      "n_events": 282,
+      "min_b_gate": 0.02,
+      "n_gated": 211,
+      "baseline_response_significant": true,
+      "b_ghost": {
+        "mean": -0.024475965596048546,
+        "ci95": [
+          -0.038432848870945314,
+          -0.010152713488540105
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "estimator_A": {
+        "R": {
+          "mean": 0.11307116586729245,
+          "ci95": [
+            0.04440278034881545,
+            0.19120779996061005
+          ],
+          "n": 211,
+          "n_scenes": 121
+        },
+        "R_ctrl": {
+          "mean": 0.02882523778475033,
+          "ci95": [
+            -0.030675105797993357,
+            0.08068163342967391
+          ],
+          "n": 211,
+          "n_scenes": 121
+        },
+        "n_used": 211,
+        "verdict": "FAIL：遮住关键实体后动作基本不变 ⇒ 驱动动作的不是这个实体（盲目泛化签名）"
+      },
+      "estimator_B_gated": {
+        "R": {
+          "mean": 0.28321405952388207,
+          "ci95": [
+            0.1578778391858366,
+            0.6803094641016653
+          ],
+          "mean_numerator": -0.009211490080819876,
+          "mean_denominator": -0.03252483332326627,
+          "n_events": 211,
+          "n_scenes": 121,
+          "n_boot": 5000
+        },
+        "R_ctrl": {
+          "mean": 0.13301293312188267,
+          "ci95": [
+            -0.005338927398203013,
+            0.29293323537368926
+          ],
+          "mean_numerator": -0.004326223479627998,
+          "mean_denominator": -0.03252483332326627,
+          "n_events": 211,
+          "n_scenes": 121,
+          "n_boot": 5000
+        },
+        "n_used": 211,
+        "verdict": "不可估：必要性比的 scene 级 CI 跨 0.5"
+      },
+      "estimator_B_all": {
+        "R": {
+          "mean": 0.30611105265157995,
+          "ci95": [
+            0.17237542494769523,
+            0.7104578438833743
+          ],
+          "mean_numerator": -0.007492363593270276,
+          "mean_denominator": -0.024475965596048546,
+          "n_events": 282,
+          "n_scenes": 147,
+          "n_boot": 5000
+        },
+        "R_ctrl": {
+          "mean": 0.13976822804717648,
+          "ci95": [
+            -0.003332693032816261,
+            0.32571887484062284
+          ],
+          "mean_numerator": -0.003420962341103359,
+          "mean_denominator": -0.024475965596048546,
+          "n_events": 282,
+          "n_scenes": 147,
+          "n_boot": 5000
+        },
+        "n_used": 282,
+        "verdict": "不可估：必要性比的 scene 级 CI 跨 0.5"
+      },
+      "verdict_tags": {
+        "A": "FAIL",
+        "B_gated": "不可估",
+        "B_all": "不可估"
+      },
+      "A_vs_B_gated_same_verdict": false,
+      "B_gated_vs_B_all_same_verdict": true
+    },
+    {
+      "cell": "NAVSIM × LTF",
+      "src": "f3_occlusion_navsim_ltf.json",
+      "n_events": 372,
+      "min_b_gate": 0.02,
+      "n_gated": 295,
+      "baseline_response_significant": true,
+      "b_ghost": {
+        "mean": -0.024861807237699707,
+        "ci95": [
+          -0.03986884405891874,
+          -0.009907904636779223
+        ],
+        "n": 372,
+        "n_scenes": 151
+      },
+      "estimator_A": {
+        "R": {
+          "mean": 0.008039066522842503,
+          "ci95": [
+            -0.0675163100134171,
+            0.0782356208702309
+          ],
+          "n": 295,
+          "n_scenes": 120
+        },
+        "R_ctrl": {
+          "mean": -0.03306645975750012,
+          "ci95": [
+            -0.132288338267546,
+            0.053758625804001134
+          ],
+          "n": 295,
+          "n_scenes": 120
+        },
+        "n_used": 295,
+        "verdict": "FAIL：遮住关键实体后动作基本不变 ⇒ 驱动动作的不是这个实体（盲目泛化签名）"
+      },
+      "estimator_B_gated": {
+        "R": {
+          "mean": 0.010433744124870616,
+          "ci95": [
+            -0.12051671271252852,
+            0.17189115254918355
+          ],
+          "mean_numerator": -0.00032610879674301307,
+          "mean_denominator": -0.031255203581778176,
+          "n_events": 295,
+          "n_scenes": 120,
+          "n_boot": 5000
+        },
+        "R_ctrl": {
+          "mean": -0.18297256778274304,
+          "ci95": [
+            -0.5793363892910917,
+            -0.036788154810364876
+          ],
+          "mean_numerator": 0.00571884485593034,
+          "mean_denominator": -0.031255203581778176,
+          "n_events": 295,
+          "n_scenes": 120,
+          "n_boot": 5000
+        },
+        "n_used": 295,
+        "verdict": "FAIL：遮住关键实体后动作基本不变（盲目泛化签名）"
+      },
+      "estimator_B_all": {
+        "R": {
+          "mean": -0.028724849830913158,
+          "ci95": [
+            -0.23674822976050863,
+            0.14746508441560627
+          ],
+          "mean_numerator": 0.0007141516794280339,
+          "mean_denominator": -0.024861807237699707,
+          "n_events": 372,
+          "n_scenes": 151,
+          "n_boot": 5000
+        },
+        "R_ctrl": {
+          "mean": -0.20973669692859756,
+          "ci95": [
+            -0.7052593066983263,
+            -0.031974130174745874
+          ],
+          "mean_numerator": 0.0052144333297106365,
+          "mean_denominator": -0.024861807237699707,
+          "n_events": 372,
+          "n_scenes": 151,
+          "n_boot": 5000
+        },
+        "n_used": 372,
+        "verdict": "FAIL：遮住关键实体后动作基本不变（盲目泛化签名）"
+      },
+      "verdict_tags": {
+        "A": "FAIL",
+        "B_gated": "FAIL",
+        "B_all": "FAIL"
+      },
+      "A_vs_B_gated_same_verdict": true,
+      "B_gated_vs_B_all_same_verdict": true
+    },
+    {
+      "cell": "G1 × SimLingo",
+      "src": "f3_occlusion_simlingo.json",
+      "n_events": 282,
+      "min_b_gate": 0.02,
+      "n_gated": 273,
+      "baseline_response_significant": true,
+      "b_ghost": {
+        "mean": -0.44412395617667033,
+        "ci95": [
+          -0.6978506265208125,
+          -0.1896601268129512
+        ],
+        "n": 282,
+        "n_scenes": 147
+      },
+      "estimator_A": {
+        "R": {
+          "mean": 0.46146662176198017,
+          "ci95": [
+            0.16620952997422497,
+            0.7894574599383932
+          ],
+          "n": 273,
+          "n_scenes": 143
+        },
+        "R_ctrl": {
+          "mean": 0.15492538932201036,
+          "ci95": [
+            -0.04758038213987546,
+            0.3992542456309975
+          ],
+          "n": 273,
+          "n_scenes": 143
+        },
+        "n_used": 273,
+        "verdict": "不可估：必要性比的 scene 级 CI 跨 0.5"
+      },
+      "estimator_B_gated": {
+        "R": {
+          "mean": 0.38656376622781224,
+          "ci95": [
+            0.15634004452365768,
+            0.8753596046527008
+          ],
+          "mean_numerator": -0.1773140088829038,
+          "mean_denominator": -0.45869278078796444,
+          "n_events": 273,
+          "n_scenes": 143,
+          "n_boot": 5000
+        },
+        "R_ctrl": {
+          "mean": 0.04045960149917978,
+          "ci95": [
+            -0.11218630065539789,
+            0.1733161942406686
+          ],
+          "mean_numerator": -0.01855852712123167,
+          "mean_denominator": -0.45869278078796444,
+          "n_events": 273,
+          "n_scenes": 143,
+          "n_boot": 5000
+        },
+        "n_used": 273,
+        "verdict": "不可估：必要性比的 scene 级 CI 跨 0.5"
+      },
+      "estimator_B_all": {
+        "R": {
+          "mean": 0.3913560691532803,
+          "ci95": [
+            0.1556547894934583,
+            0.872259135769126
+          ],
+          "mean_numerator": -0.17381060570610543,
+          "mean_denominator": -0.44412395617667033,
+          "n_events": 282,
+          "n_scenes": 147,
+          "n_boot": 5000
+        },
+        "R_ctrl": {
+          "mean": 0.02425066223827243,
+          "ci95": [
+            -0.14683195957442177,
+            0.1544686620023937
+          ],
+          "mean_numerator": -0.010770300053165737,
+          "mean_denominator": -0.44412395617667033,
+          "n_events": 282,
+          "n_scenes": 147,
+          "n_boot": 5000
+        },
+        "n_used": 282,
+        "verdict": "不可估：必要性比的 scene 级 CI 跨 0.5"
+      },
+      "verdict_tags": {
+        "A": "不可估",
+        "B_gated": "不可估",
+        "B_all": "不可估"
+      },
+      "A_vs_B_gated_same_verdict": true,
+      "B_gated_vs_B_all_same_verdict": true
+    }
+  ]
+}
