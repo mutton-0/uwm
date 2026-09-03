@@ -20,6 +20,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.734,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -70,6 +74,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -105,6 +113,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -140,6 +152,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -175,6 +191,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.04769384284807459,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.048,
+      "cat": "vehicle.car",
+      "s_m": 29.7
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -217,6 +241,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -252,6 +280,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.871,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -302,6 +334,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 1.008,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -366,6 +402,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.488,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -430,6 +470,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -465,6 +509,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -500,6 +548,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.038874851518770785,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.039,
+      "cat": "vehicle.bus.rigid",
+      "s_m": 29.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -542,6 +598,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.6480169583849822,
+    "a_vru_max": 0.794,
+    "a_non_vru_max": 0.5148735163485938,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.515,
+      "cat": "movable_object.barrier",
+      "s_m": 35.5
+    },
     "n_competitors": 7,
     "f3_mask_group": [
       {
@@ -634,6 +698,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.5945066053110774,
+    "a_vru_max": 0.77,
+    "a_non_vru_max": 0.4901800112623907,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.49,
+      "cat": "movable_object.barrier",
+      "s_m": 34.4
+    },
     "n_competitors": 8,
     "f3_mask_group": [
       {
@@ -726,6 +798,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.6560918501053139,
+    "a_vru_max": 0.613,
+    "a_non_vru_max": 0.4132092933330232,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.413,
+      "cat": "movable_object.barrier",
+      "s_m": 30.5
+    },
     "n_competitors": 7,
     "f3_mask_group": [
       {
@@ -818,6 +898,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.6604305490154808,
+    "a_vru_max": 0.63,
+    "a_non_vru_max": 0.4152750891510377,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.415,
+      "cat": "movable_object.barrier",
+      "s_m": 29.3
+    },
     "n_competitors": 7,
     "f3_mask_group": [
       {
@@ -910,6 +998,14 @@
     "vru_share_of_max": 0.8932488833689151,
     "explained_ratio": 0.7104616908261204,
     "vru_class_share": 0.6754241035869621,
+    "a_vru_max": 0.581,
+    "a_non_vru_max": 0.3367949246461448,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.337,
+      "cat": "movable_object.barrier",
+      "s_m": 27.5
+    },
     "n_competitors": 6,
     "f3_mask_group": [
       {
@@ -994,6 +1090,14 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 0.7180429995624864,
     "vru_class_share": 0.618977658777412,
+    "a_vru_max": 0.518,
+    "a_non_vru_max": 0.3063772128285123,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.306,
+      "cat": "movable_object.barrier",
+      "s_m": 26.2
+    },
     "n_competitors": 5,
     "f3_mask_group": [
       {
@@ -1070,6 +1174,14 @@
     "vru_share_of_max": 0.9457512641475713,
     "explained_ratio": 0.6082478623743229,
     "vru_class_share": 0.6275632002137743,
+    "a_vru_max": 0.444,
+    "a_non_vru_max": 0.24971878438607523,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.25,
+      "cat": "movable_object.barrier",
+      "s_m": 25.1
+    },
     "n_competitors": 5,
     "f3_mask_group": [
       {
@@ -1146,6 +1258,14 @@
     "vru_share_of_max": 0.9392076511803656,
     "explained_ratio": 0.09407483186530197,
     "vru_class_share": 0.6001973094978805,
+    "a_vru_max": 0.05,
+    "a_non_vru_max": 0.0335663967407082,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.034,
+      "cat": "movable_object.barrier",
+      "s_m": 19.7
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -1208,6 +1328,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.4707124038885735,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.471,
+      "cat": "movable_object.trafficcone",
+      "s_m": 11.4
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -1262,6 +1390,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.505322449070877,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.505,
+      "cat": "movable_object.trafficcone",
+      "s_m": 11.1
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -1316,6 +1452,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1351,6 +1491,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1386,6 +1530,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1421,6 +1569,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1456,6 +1608,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1491,6 +1647,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1526,6 +1686,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1561,6 +1725,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1596,6 +1764,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1631,6 +1803,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1666,6 +1842,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1701,6 +1881,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1736,6 +1920,10 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 0.706215073787539,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.281,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1771,6 +1959,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1806,6 +1998,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1841,6 +2037,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1876,6 +2076,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.8466559015779899,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.847,
+      "cat": "vehicle.car",
+      "s_m": 53.6
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -1918,6 +2126,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1953,6 +2165,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -1988,6 +2204,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -2023,6 +2243,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.127,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -2087,6 +2311,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.7224431624404478,
+    "a_vru_max": 0.092,
+    "a_non_vru_max": 0.06279148572080223,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.063,
+      "cat": "vehicle.car",
+      "s_m": 19.1
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -2157,6 +2389,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.4059672530704586,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.406,
+      "cat": "vehicle.car",
+      "s_m": 22.3
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -2199,6 +2439,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.4098372896203912,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.41,
+      "cat": "vehicle.car",
+      "s_m": 20.6
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -2241,6 +2489,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -2276,6 +2528,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -2311,6 +2567,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 1.2645977438373808,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 1.265,
+      "cat": "vehicle.car",
+      "s_m": 28.9
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -2353,6 +2617,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -2388,6 +2656,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -2423,6 +2695,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -2458,6 +2734,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -2493,6 +2773,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -2528,6 +2812,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -2563,6 +2851,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -2598,6 +2890,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -2633,6 +2929,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.20330082972308514,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.203,
+      "cat": "vehicle.car",
+      "s_m": 31.3
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -2675,6 +2979,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.23658165443423348,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.237,
+      "cat": "vehicle.car",
+      "s_m": 29.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -2717,6 +3029,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.21448995430200213,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.214,
+      "cat": "vehicle.car",
+      "s_m": 21.8
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -2759,6 +3079,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.2173927509082372,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.217,
+      "cat": "vehicle.car",
+      "s_m": 20.5
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -2801,6 +3129,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.2173927509082372,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.217,
+      "cat": "vehicle.car",
+      "s_m": 20.5
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -2843,6 +3179,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.1904057072949622,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.19,
+      "cat": "vehicle.car",
+      "s_m": 19.8
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -2885,6 +3229,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.18509455822245166,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.185,
+      "cat": "vehicle.car",
+      "s_m": 19.4
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -2927,6 +3279,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.07485083604633624,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.075,
+      "cat": "vehicle.car",
+      "s_m": 15.7
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -2969,6 +3329,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.361072956534471,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.361,
+      "cat": "movable_object.trafficcone",
+      "s_m": 37.4
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -3023,6 +3391,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3058,6 +3430,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3093,6 +3469,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3128,6 +3508,10 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 1.1075748013968199,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.467,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3163,6 +3547,10 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 0.7203142409555182,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.363,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3198,6 +3586,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3233,6 +3625,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3268,6 +3664,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3303,6 +3703,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3338,6 +3742,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3373,6 +3781,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3408,6 +3820,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3443,6 +3859,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3478,6 +3898,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3513,6 +3937,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3548,6 +3976,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3583,6 +4015,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3618,6 +4054,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3653,6 +4093,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3688,6 +4132,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3723,6 +4171,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3758,6 +4210,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3793,6 +4249,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3828,6 +4288,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -3863,6 +4327,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.819,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -3913,6 +4381,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.799,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -3963,6 +4435,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.791,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -4013,6 +4489,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.791,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -4063,6 +4543,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4098,6 +4582,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4133,6 +4621,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.20617959549867615,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.206,
+      "cat": "vehicle.truck",
+      "s_m": 24.8
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -4175,6 +4671,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.1412436546228168,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.141,
+      "cat": "vehicle.truck",
+      "s_m": 22.3
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -4217,6 +4721,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.17119083064530155,
+    "a_vru_max": 0.042,
+    "a_non_vru_max": 0.17317370886461955,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.173,
+      "cat": "movable_object.barrier",
+      "s_m": 23.0
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -4279,6 +4791,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.17868878727320714,
+    "a_vru_max": 0.046,
+    "a_non_vru_max": 0.19595903938044723,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.196,
+      "cat": "movable_object.barrier",
+      "s_m": 21.0
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -4341,6 +4861,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.17868878727320714,
+    "a_vru_max": 0.046,
+    "a_non_vru_max": 0.19595903938044723,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.196,
+      "cat": "movable_object.barrier",
+      "s_m": 21.0
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -4403,6 +4931,14 @@
     "vru_share_of_max": 0.15310364745318117,
     "explained_ratio": 0.13544762756718234,
     "vru_class_share": 0.3254039834419396,
+    "a_vru_max": 0.231,
+    "a_non_vru_max": 0.32628736946410786,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.326,
+      "cat": "movable_object.barrier",
+      "s_m": 12.2
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -4465,6 +5001,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.010597802904978441,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.011,
+      "cat": "vehicle.car",
+      "s_m": 18.6
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -4507,6 +5051,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.10235264090308788,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.102,
+      "cat": "vehicle.car",
+      "s_m": 30.4
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -4549,6 +5101,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4584,6 +5140,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4619,6 +5179,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4654,6 +5218,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4689,6 +5257,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4724,6 +5296,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4759,6 +5335,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4794,6 +5374,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4829,6 +5413,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4864,6 +5452,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4899,6 +5491,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4934,6 +5530,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -4969,6 +5569,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5004,6 +5608,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5039,6 +5647,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5074,6 +5686,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.184,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -5124,6 +5740,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5159,6 +5779,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5194,6 +5818,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.14953315719631344,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.15,
+      "cat": "vehicle.car",
+      "s_m": 29.7
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -5236,6 +5868,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5271,6 +5907,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.6923453899046935,
+    "a_vru_max": 0.695,
+    "a_non_vru_max": 0.308979611843777,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.309,
+      "cat": "vehicle.car",
+      "s_m": 28.5
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -5327,6 +5971,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.5330527797894679,
+    "a_vru_max": 0.571,
+    "a_non_vru_max": 0.4999915356515802,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.5,
+      "cat": "vehicle.car",
+      "s_m": 19.6
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -5383,6 +6035,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5418,6 +6074,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5453,6 +6113,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5488,6 +6152,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5523,6 +6191,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5558,6 +6230,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.21293412386722418,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.213,
+      "cat": "movable_object.barrier",
+      "s_m": 40.8
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -5606,6 +6286,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5641,6 +6325,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5676,6 +6364,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5711,6 +6403,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5746,6 +6442,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.7721017531618757,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.772,
+      "cat": "movable_object.trafficcone",
+      "s_m": 9.2
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -5794,6 +6498,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.6126636618099798,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.613,
+      "cat": "movable_object.trafficcone",
+      "s_m": 15.1
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -5848,6 +6560,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5883,6 +6599,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -5918,6 +6638,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.22284009358728438,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.223,
+      "cat": "vehicle.truck",
+      "s_m": 34.0
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -5960,6 +6688,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.052838092050766304,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.053,
+      "cat": "vehicle.truck",
+      "s_m": 11.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -6002,6 +6738,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.052838092050766304,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.053,
+      "cat": "vehicle.truck",
+      "s_m": 11.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -6044,6 +6788,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -6079,6 +6827,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.41063788922830213,
+    "a_vru_max": 0.24,
+    "a_non_vru_max": 0.34419714797807843,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.344,
+      "cat": "vehicle.car",
+      "s_m": 22.0
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -6135,6 +6891,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.47634481736509776,
+    "a_vru_max": 0.303,
+    "a_non_vru_max": 0.3329048632945063,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.333,
+      "cat": "vehicle.car",
+      "s_m": 20.1
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -6191,6 +6955,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.259,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -6255,6 +7023,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.4410496859956729,
+    "a_vru_max": 0.124,
+    "a_non_vru_max": 0.15687382896154334,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.157,
+      "cat": "vehicle.truck",
+      "s_m": 25.8
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -6311,6 +7087,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.4410496859956729,
+    "a_vru_max": 0.124,
+    "a_non_vru_max": 0.15687382896154334,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.157,
+      "cat": "vehicle.truck",
+      "s_m": 25.8
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -6367,6 +7151,14 @@
     "vru_share_of_max": 0.7890677846407981,
     "explained_ratio": 0.6156780996321257,
     "vru_class_share": 0.4410496859956729,
+    "a_vru_max": 0.124,
+    "a_non_vru_max": 0.15687382896154334,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.157,
+      "cat": "vehicle.truck",
+      "s_m": 25.8
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -6409,6 +7201,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.5564455225239828,
+    "a_vru_max": 0.123,
+    "a_non_vru_max": 0.09843879735287457,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.098,
+      "cat": "vehicle.truck",
+      "s_m": 24.2
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -6465,6 +7265,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.558029630480982,
+    "a_vru_max": 0.121,
+    "a_non_vru_max": 0.09605522455797272,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.096,
+      "cat": "vehicle.truck",
+      "s_m": 24.7
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -6521,6 +7329,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.4787179282869574,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.479,
+      "cat": "vehicle.car",
+      "s_m": 28.6
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -6563,6 +7379,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.4309036213066336,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.431,
+      "cat": "vehicle.car",
+      "s_m": 26.7
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -6605,6 +7429,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.060860982236803265,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.061,
+      "cat": "vehicle.car",
+      "s_m": 9.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -6647,6 +7479,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.06572629985984327,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.066,
+      "cat": "vehicle.car",
+      "s_m": 10.3
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -6689,6 +7529,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.06572629985984327,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.066,
+      "cat": "vehicle.car",
+      "s_m": 10.3
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -6731,6 +7579,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -6766,6 +7618,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -6801,6 +7657,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -6836,6 +7696,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -6871,6 +7735,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.37753638246541565,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.378,
+      "cat": "vehicle.car",
+      "s_m": 49.2
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -6913,6 +7785,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.36920956156455925,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.369,
+      "cat": "vehicle.car",
+      "s_m": 43.6
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -6961,6 +7841,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.36759711809576834,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.368,
+      "cat": "vehicle.car",
+      "s_m": 33.5
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -7009,6 +7897,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.5833854012463551,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.583,
+      "cat": "movable_object.trafficcone",
+      "s_m": 19.8
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -7063,6 +7959,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 1.5660338943965203e-05,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.0,
+      "cat": "vehicle.bus.rigid",
+      "s_m": 18.3
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -7105,6 +8009,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.3484461416262479,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.348,
+      "cat": "vehicle.car",
+      "s_m": 14.6
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -7147,6 +8059,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7182,6 +8098,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7217,6 +8137,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7252,6 +8176,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7287,6 +8215,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7322,6 +8254,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7357,6 +8293,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0454698332388672,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.045,
+      "cat": "vehicle.car",
+      "s_m": 30.3
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -7399,6 +8343,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.32147130992968104,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.321,
+      "cat": "vehicle.car",
+      "s_m": 19.2
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -7441,6 +8393,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.32147130992968104,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.321,
+      "cat": "vehicle.car",
+      "s_m": 19.2
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -7483,6 +8443,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7518,6 +8482,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7553,6 +8521,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7588,6 +8560,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7623,6 +8599,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 4.721984017186385,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 4.722,
+      "cat": "vehicle.car",
+      "s_m": 27.3
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -7665,6 +8649,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7700,6 +8688,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7735,6 +8727,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7770,6 +8766,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7805,6 +8805,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7840,6 +8844,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7875,6 +8883,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7910,6 +8922,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7945,6 +8961,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -7980,6 +9000,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8015,6 +9039,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 1.9155669589940836,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 1.916,
+      "cat": "movable_object.barrier",
+      "s_m": 3.9
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -8069,6 +9101,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8104,6 +9140,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8139,6 +9179,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8174,6 +9218,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8209,6 +9257,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8244,6 +9296,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8279,6 +9335,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8314,6 +9374,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8349,6 +9413,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8384,6 +9452,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8419,6 +9491,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.5896962828368375,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.59,
+      "cat": "vehicle.car",
+      "s_m": 23.7
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -8461,6 +9541,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8496,6 +9580,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8531,6 +9619,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8566,6 +9658,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8601,6 +9697,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8636,6 +9736,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8671,6 +9775,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8706,6 +9814,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8741,6 +9853,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -8776,6 +9892,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.172,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -8826,6 +9946,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.172,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -8876,6 +10000,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.154,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -8926,6 +10054,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.019,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -8976,6 +10108,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9011,6 +10147,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.5302536936516259,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.53,
+      "cat": "vehicle.truck",
+      "s_m": 40.8
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -9053,6 +10197,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9088,6 +10236,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9123,6 +10275,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9158,6 +10314,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9193,6 +10353,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9228,6 +10392,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9263,6 +10431,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9298,6 +10470,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9333,6 +10509,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.1478645309814028,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.148,
+      "cat": "vehicle.car",
+      "s_m": 56.8
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -9375,6 +10559,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.1345327965489972,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.135,
+      "cat": "vehicle.car",
+      "s_m": 55.0
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -9417,6 +10609,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.231,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -9467,6 +10663,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.15582304146924603,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.156,
+      "cat": "vehicle.car",
+      "s_m": 41.4
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -9509,6 +10713,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.2432049968972884,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.243,
+      "cat": "vehicle.car",
+      "s_m": 26.8
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -9551,6 +10763,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9586,6 +10802,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9621,6 +10841,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9656,6 +10880,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9691,6 +10919,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9726,6 +10958,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9761,6 +10997,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9796,6 +11036,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9831,6 +11075,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9866,6 +11114,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9901,6 +11153,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9936,6 +11192,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -9971,6 +11231,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.5934087933898786,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.593,
+      "cat": "vehicle.car",
+      "s_m": 40.2
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -10013,6 +11281,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.43783892564816235,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.438,
+      "cat": "vehicle.car",
+      "s_m": 44.8
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -10055,6 +11331,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -10090,6 +11370,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -10125,6 +11409,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.589209704319208,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.589,
+      "cat": "vehicle.car",
+      "s_m": 47.9
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -10167,6 +11459,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -10202,6 +11498,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.43038509981008227,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.43,
+      "cat": "vehicle.car",
+      "s_m": 32.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -10244,6 +11548,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.45115576102917493,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.451,
+      "cat": "vehicle.car",
+      "s_m": 30.5
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -10286,6 +11598,14 @@
     "vru_share_of_max": 0.6340220534063216,
     "explained_ratio": 0.5374822344950404,
     "vru_class_share": 0.6482640492120451,
+    "a_vru_max": 0.268,
+    "a_non_vru_max": 0.42252966799054187,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.423,
+      "cat": "vehicle.car",
+      "s_m": 25.3
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -10356,6 +11676,14 @@
     "vru_share_of_max": 0.6222328223748429,
     "explained_ratio": 0.5274880991116824,
     "vru_class_share": 0.6482640492120451,
+    "a_vru_max": 0.268,
+    "a_non_vru_max": 0.42252966799054187,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.423,
+      "cat": "vehicle.car",
+      "s_m": 25.3
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -10426,6 +11754,14 @@
     "vru_share_of_max": 0.5738697964019595,
     "explained_ratio": 0.479665216341135,
     "vru_class_share": 0.6435581095902381,
+    "a_vru_max": 0.257,
+    "a_non_vru_max": 0.4138147247985637,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.414,
+      "cat": "vehicle.car",
+      "s_m": 24.2
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -10496,6 +11832,14 @@
     "vru_share_of_max": 0.5340402324926883,
     "explained_ratio": 0.402888054351336,
     "vru_class_share": 0.6139606023753461,
+    "a_vru_max": 0.193,
+    "a_non_vru_max": 0.36023795464370595,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.36,
+      "cat": "vehicle.car",
+      "s_m": 19.4
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -10566,6 +11910,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0394123216094925,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.039,
+      "cat": "vehicle.car",
+      "s_m": 10.0
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -10608,6 +11960,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.03631783488158759,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.036,
+      "cat": "vehicle.car",
+      "s_m": 9.9
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -10650,6 +12010,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.5053679900463858,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.505,
+      "cat": "vehicle.car",
+      "s_m": 22.4
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -10692,6 +12060,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.5053679900463858,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.505,
+      "cat": "vehicle.car",
+      "s_m": 22.4
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -10734,6 +12110,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -10769,6 +12149,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -10804,6 +12188,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -10839,6 +12227,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -10874,6 +12266,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.35418629028416415,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.354,
+      "cat": "vehicle.car",
+      "s_m": 27.6
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -10916,6 +12316,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.2663308365854916,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.266,
+      "cat": "vehicle.car",
+      "s_m": 19.6
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -10958,6 +12366,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.17082722987219207,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.171,
+      "cat": "vehicle.car",
+      "s_m": 15.8
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -11000,6 +12416,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -11035,6 +12455,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -11070,6 +12494,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0023380693505214265,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.002,
+      "cat": "vehicle.car",
+      "s_m": 52.5
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -11112,6 +12544,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -11147,6 +12583,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -11182,6 +12622,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -11217,6 +12661,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -11252,6 +12700,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.5287094819133287,
+    "a_vru_max": 0.09,
+    "a_non_vru_max": 0.08031845990764426,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.08,
+      "cat": "vehicle.car",
+      "s_m": 39.4
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -11308,6 +12764,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.6960496571188358,
+    "a_vru_max": 0.098,
+    "a_non_vru_max": 0.08410098391342623,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.084,
+      "cat": "vehicle.car",
+      "s_m": 34.7
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -11378,6 +12842,14 @@
     "vru_share_of_max": 0.9318315516194648,
     "explained_ratio": 0.21420511354352856,
     "vru_class_share": 0.7579350461318465,
+    "a_vru_max": 0.124,
+    "a_non_vru_max": 0.0977677742364943,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.098,
+      "cat": "vehicle.car",
+      "s_m": 16.0
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -11448,6 +12920,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.7580378352384597,
+    "a_vru_max": 0.121,
+    "a_non_vru_max": 0.09466864666081479,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.095,
+      "cat": "vehicle.car",
+      "s_m": 15.7
+    },
     "n_competitors": 4,
     "f3_mask_group": [
       {
@@ -11532,6 +13012,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.7519538327802038,
+    "a_vru_max": 0.097,
+    "a_non_vru_max": 0.07539031659851023,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.075,
+      "cat": "vehicle.car",
+      "s_m": 15.2
+    },
     "n_competitors": 4,
     "f3_mask_group": [
       {
@@ -11616,6 +13104,14 @@
     "vru_share_of_max": 0.6695979406684657,
     "explained_ratio": 0.0854749556409802,
     "vru_class_share": 0.7675242529257353,
+    "a_vru_max": 0.065,
+    "a_non_vru_max": 0.050463563130332005,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.05,
+      "cat": "vehicle.car",
+      "s_m": 14.7
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -11686,6 +13182,10 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 0.7885924226130622,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.732,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -11721,6 +13221,10 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 0.7934965387701375,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.741,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -11771,6 +13275,10 @@
     "vru_share_of_max": 0.7844263034739793,
     "explained_ratio": 0.6117126565831016,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.647,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -11835,6 +13343,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.026936237674825947,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.027,
+      "cat": "vehicle.car",
+      "s_m": 18.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -11877,6 +13393,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -11912,6 +13432,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -11947,6 +13471,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -11982,6 +13510,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12017,6 +13549,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12052,6 +13588,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12087,6 +13627,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12122,6 +13666,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12157,6 +13705,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12192,6 +13744,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12227,6 +13783,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12262,6 +13822,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12297,6 +13861,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.474,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -12347,6 +13915,10 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 0.6423073670606543,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.447,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12382,6 +13954,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12417,6 +13993,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12452,6 +14032,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.038264192365509424,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.038,
+      "cat": "vehicle.bus.rigid",
+      "s_m": 35.7
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -12494,6 +14082,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12529,6 +14121,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.5523240622978964,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.552,
+      "cat": "vehicle.truck",
+      "s_m": 34.0
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -12571,6 +14171,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.022971401422798188,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.023,
+      "cat": "vehicle.truck",
+      "s_m": 15.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -12613,6 +14221,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.1588072149550953,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.159,
+      "cat": "vehicle.truck",
+      "s_m": 20.6
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -12655,6 +14271,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12690,6 +14310,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.01919191079372681,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.019,
+      "cat": "vehicle.car",
+      "s_m": 47.0
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -12732,6 +14360,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12767,6 +14399,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12802,6 +14438,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12837,6 +14477,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12872,6 +14516,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12907,6 +14555,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12942,6 +14594,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -12977,6 +14633,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13012,6 +14672,10 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 1.03897136772244,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.241,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -13062,6 +14726,10 @@
     "vru_share_of_max": 0.9528100562978726,
     "explained_ratio": 1.1199817246758645,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.284,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -13112,6 +14780,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13147,6 +14819,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13182,6 +14858,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13217,6 +14897,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13252,6 +14936,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13287,6 +14975,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13322,6 +15014,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13357,6 +15053,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13392,6 +15092,10 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 1.1791576794934495,
     "vru_class_share": 1.0,
+    "a_vru_max": 1.013,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13427,6 +15131,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 25.462473976958577,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 25.462,
+      "cat": "movable_object.barrier",
+      "s_m": 0.0
+    },
     "n_competitors": 7,
     "f3_mask_group": [
       {
@@ -13487,6 +15199,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13522,6 +15238,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13557,6 +15277,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13592,6 +15316,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.1879274311616921,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.188,
+      "cat": "vehicle.car",
+      "s_m": 11.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -13634,6 +15366,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13669,6 +15405,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.9595188105926051,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.96,
+      "cat": "movable_object.barrier",
+      "s_m": 11.4
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -13723,6 +15467,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13758,6 +15506,10 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 0.49160187533949185,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.094,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -13808,6 +15560,10 @@
     "vru_share_of_max": 0.983341942826993,
     "explained_ratio": 0.45490252712428336,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.09,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -13858,6 +15614,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13893,6 +15653,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -13928,6 +15692,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.19896987531888224,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.199,
+      "cat": "vehicle.car",
+      "s_m": 44.3
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -13970,6 +15742,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.1882021353905,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.188,
+      "cat": "movable_object.trafficcone",
+      "s_m": 13.3
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -14018,6 +15798,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.1882021353905,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.188,
+      "cat": "movable_object.trafficcone",
+      "s_m": 13.3
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -14066,6 +15854,14 @@
     "vru_share_of_max": 0.9982211918595906,
     "explained_ratio": 0.7206582645748876,
     "vru_class_share": 0.6056090762396275,
+    "a_vru_max": 0.535,
+    "a_non_vru_max": 0.48201881066381447,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.482,
+      "cat": "movable_object.trafficcone",
+      "s_m": 7.5
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -14128,6 +15924,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.655608401704536,
+    "a_vru_max": 0.552,
+    "a_non_vru_max": 0.3651572617690282,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.365,
+      "cat": "movable_object.trafficcone",
+      "s_m": 8.0
+    },
     "n_competitors": 4,
     "f3_mask_group": [
       {
@@ -14204,6 +16008,14 @@
     "vru_share_of_max": 0.9151884918615506,
     "explained_ratio": 0.7230908909452537,
     "vru_class_share": 0.6357331316910492,
+    "a_vru_max": 0.649,
+    "a_non_vru_max": 0.49441841078817195,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.494,
+      "cat": "movable_object.trafficcone",
+      "s_m": 7.6
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -14266,6 +16078,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14301,6 +16117,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14336,6 +16156,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14371,6 +16195,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14406,6 +16234,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14441,6 +16273,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.2624198982669375,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.262,
+      "cat": "movable_object.barrier",
+      "s_m": 36.4
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -14483,6 +16323,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.05217720753166415,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.052,
+      "cat": "vehicle.truck",
+      "s_m": 68.7
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -14525,6 +16373,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14560,6 +16412,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14595,6 +16451,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.02361118661649888,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.024,
+      "cat": "vehicle.car",
+      "s_m": 11.6
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -14637,6 +16501,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.5297260804230448,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.53,
+      "cat": "vehicle.car",
+      "s_m": 21.4
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -14679,6 +16551,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14714,6 +16590,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.6049745456147078,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.605,
+      "cat": "movable_object.debris",
+      "s_m": 47.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -14756,6 +16640,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14791,6 +16679,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14826,6 +16718,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14861,6 +16757,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14896,6 +16796,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14931,6 +16835,10 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 1.5774214223611596,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.708,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -14966,6 +16874,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15001,6 +16913,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.03886027309827877,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.039,
+      "cat": "vehicle.car",
+      "s_m": 35.2
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -15049,6 +16969,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15084,6 +17008,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15119,6 +17047,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15154,6 +17086,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15189,6 +17125,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.03316043748127831,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.033,
+      "cat": "vehicle.car",
+      "s_m": 39.5
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -15231,6 +17175,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15266,6 +17214,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15301,6 +17253,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15336,6 +17292,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15371,6 +17331,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.53,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -15421,6 +17385,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.529,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -15471,6 +17439,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15506,6 +17478,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15541,6 +17517,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15576,6 +17556,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15611,6 +17595,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15646,6 +17634,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.029729676062149706,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.03,
+      "cat": "vehicle.truck",
+      "s_m": 41.9
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -15688,6 +17684,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15723,6 +17723,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15758,6 +17762,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15793,6 +17801,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -15828,6 +17840,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.389,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -15892,6 +17908,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.117,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -15942,6 +17962,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.118,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -15992,6 +18016,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -16027,6 +18055,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.269,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -16077,6 +18109,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -16112,6 +18148,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -16147,6 +18187,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -16182,6 +18226,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -16217,6 +18265,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -16252,6 +18304,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.45340973991894024,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.453,
+      "cat": "movable_object.trafficcone",
+      "s_m": 8.3
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -16294,6 +18354,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.5284194815465413,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.528,
+      "cat": "movable_object.trafficcone",
+      "s_m": 7.2
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -16336,6 +18404,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -16371,6 +18443,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -16406,6 +18482,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -16441,6 +18521,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -16476,6 +18560,10 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 0.45306767845878926,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.183,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -16526,6 +18614,10 @@
     "vru_share_of_max": 0.9608676478448446,
     "explained_ratio": 0.27334100038071285,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.112,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -16576,6 +18668,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.261,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -16640,6 +18736,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.8959809550176262,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.896,
+      "cat": "vehicle.car",
+      "s_m": 49.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -16682,6 +18786,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.2748510616364819,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.275,
+      "cat": "vehicle.car",
+      "s_m": 29.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -16724,6 +18836,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.2748510616364819,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.275,
+      "cat": "vehicle.car",
+      "s_m": 29.1
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -16766,6 +18886,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.14114020349554046,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.141,
+      "cat": "vehicle.car",
+      "s_m": 15.8
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -16808,6 +18936,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.5363582893332195,
+    "a_vru_max": 0.08,
+    "a_non_vru_max": 0.06883889158508441,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.069,
+      "cat": "vehicle.car",
+      "s_m": 14.6
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -16864,6 +19000,14 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 0.1466436944161113,
     "vru_class_share": 0.5363582893332195,
+    "a_vru_max": 0.08,
+    "a_non_vru_max": 0.06883889158508441,
+    "dominant_is_vru": true,
+    "top_non_vru": {
+      "a_req": 0.069,
+      "cat": "vehicle.car",
+      "s_m": 14.6
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -16906,6 +19050,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -16941,6 +19089,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -16976,6 +19128,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17011,6 +19167,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17046,6 +19206,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17081,6 +19245,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.692,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -17131,6 +19299,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.669,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -17181,6 +19353,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17216,6 +19392,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17251,6 +19431,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17286,6 +19470,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17321,6 +19509,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17356,6 +19548,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17391,6 +19587,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17426,6 +19626,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.009782816415733727,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.01,
+      "cat": "vehicle.car",
+      "s_m": 49.5
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -17468,6 +19676,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.011092953476512133,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.011,
+      "cat": "vehicle.car",
+      "s_m": 30.7
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -17516,6 +19732,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.10422421579001179,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.104,
+      "cat": "vehicle.car",
+      "s_m": 56.4
+    },
     "n_competitors": 2,
     "f3_mask_group": [
       {
@@ -17564,6 +19788,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.4121363922572274,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.412,
+      "cat": "vehicle.car",
+      "s_m": 43.5
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -17606,6 +19838,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.44624415496665887,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.446,
+      "cat": "vehicle.car",
+      "s_m": 37.5
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -17648,6 +19888,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17683,6 +19927,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17718,6 +19966,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17753,6 +20005,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17788,6 +20044,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17823,6 +20083,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17858,6 +20122,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17893,6 +20161,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17928,6 +20200,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17963,6 +20239,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -17998,6 +20278,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.573,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -18048,6 +20332,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.569525305366939,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.57,
+      "cat": "vehicle.car",
+      "s_m": 28.7
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -18090,6 +20382,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18125,6 +20421,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.06903523008110982,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.069,
+      "cat": "vehicle.car",
+      "s_m": 65.2
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -18167,6 +20471,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18202,6 +20510,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18237,6 +20549,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18272,6 +20588,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18307,6 +20627,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0003535964040732015,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.0,
+      "cat": "vehicle.car",
+      "s_m": 20.3
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -18349,6 +20677,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.37682962044595464,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.377,
+      "cat": "vehicle.car",
+      "s_m": 25.1
+    },
     "n_competitors": 3,
     "f3_mask_group": [
       {
@@ -18403,6 +20739,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18438,6 +20778,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18473,6 +20817,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18508,6 +20856,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18543,6 +20895,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18578,6 +20934,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 1.0222182551687904,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 1.022,
+      "cat": "vehicle.car",
+      "s_m": 28.4
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -18620,6 +20984,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.6307100314933143,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.631,
+      "cat": "vehicle.car",
+      "s_m": 14.7
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -18662,6 +21034,14 @@
     "vru_share_of_max": 0.5447513249032941,
     "explained_ratio": 0.06012415488889977,
     "vru_class_share": 0.3526466144558233,
+    "a_vru_max": 0.033,
+    "a_non_vru_max": 0.0604038592347258,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.06,
+      "cat": "vehicle.car",
+      "s_m": 9.2
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {
@@ -18704,6 +21084,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18739,6 +21123,10 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": false,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18774,6 +21162,10 @@
     "vru_share_of_max": 1.0,
     "explained_ratio": 0.1025428694767952,
     "vru_class_share": 1.0,
+    "a_vru_max": 0.009,
+    "a_non_vru_max": 0.0,
+    "dominant_is_vru": true,
+    "top_non_vru": null,
     "n_competitors": 0,
     "f3_mask_group": [
       {
@@ -18809,6 +21201,14 @@
     "vru_share_of_max": 0.0,
     "explained_ratio": 0.0,
     "vru_class_share": 0.0,
+    "a_vru_max": 0.0,
+    "a_non_vru_max": 0.031879286576658256,
+    "dominant_is_vru": false,
+    "top_non_vru": {
+      "a_req": 0.032,
+      "cat": "vehicle.car",
+      "s_m": 10.0
+    },
     "n_competitors": 1,
     "f3_mask_group": [
       {

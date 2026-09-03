@@ -155,6 +155,16 @@ def main():
                                    "lat_m": round(dmin, 2), "a_req": round(a, 3),
                                    "is_target": False})
         mask_group.sort(key=lambda z: z["s_m"])
+        # **支配性硬规则**（用户 2026-09-03 指出）：走廊内单个刹车需求最大的目标必须是 VRU。
+        # 群体合计占比有个漏洞：若干个分散的行人加起来可以盖过一辆更近的大车，
+        # 但司机是为**最紧迫的那一个**刹车的，不是为一群人的算术和。
+        a_vru_max = max(m["a_req"] for m in mask_group)
+        a_non_vru_max = max([x[0] for x in others
+                             if not x[1].startswith(("human.", "vehicle.bicycle",
+                                                     "vehicle.motorcycle"))] + [0.0])
+        top_non_vru = next((x for x in others
+                            if not x[1].startswith(("human.", "vehicle.bicycle",
+                                                    "vehicle.motorcycle"))), None)
         tot = a_v + sum(x[0] for x in others)
         share = (a_v / tot) if tot > 1e-9 else 0.0
         amax = max([a_v] + [x[0] for x in others])
@@ -168,6 +178,10 @@ def main():
                     "vru_share": share, "vru_share_of_max": (a_v / amax) if amax > 1e-9 else 0.0,
                     "explained_ratio": (a_v / a_obs) if (a_obs and np.isfinite(a_obs) and a_obs > 1e-6) else 0.0,
                     "vru_class_share": ((a_v + sum(x[0] for x in others if x[1].startswith(("human.", "vehicle.bicycle", "vehicle.motorcycle")))) / tot) if tot > 1e-9 else 0.0,
+                    "a_vru_max": a_vru_max, "a_non_vru_max": a_non_vru_max,
+                    "dominant_is_vru": bool(a_vru_max > a_non_vru_max),
+                    "top_non_vru": ({"a_req": round(top_non_vru[0],3), "cat": top_non_vru[1],
+                                     "s_m": top_non_vru[2]} if top_non_vru else None),
                     "n_competitors": len(others),
                     "f3_mask_group": mask_group, "n_mask_group": len(mask_group),
                     "top_competitors": [{"a_req": round(x[0], 3), "cat": x[1],
@@ -185,6 +199,8 @@ def main():
     for t in (0.6,):
         g = [o for o in out if o["vru_class_share"] > t]
         print(f"  VRU **类别**合计占比 > {t}: {len(g):4d} 事件 / {len({o['scene'] for o in g}):3d} scene")
+    dom = [o for o in out if o["dominant_is_vru"]]
+    print(f"  走廊内**单个**刹车需求最大的是 VRU: {len(dom)} / {len(out)}")
     print("  再要求行人的刹车需求能解释观测减速（explained_ratio）：")
     for er in (0.2, 0.3, 0.5):
         g = [o for o in out if o["vru_share"] > 0.6 and o["explained_ratio"] > er]
