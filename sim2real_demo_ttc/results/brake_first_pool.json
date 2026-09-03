@@ -1,0 +1,682 @@
+{
+  "design": "刹车优先挖矿：先找人类减速片段，再归因到走廊内 VRU",
+  "n_scenes_scanned": 850,
+  "n_brake_episodes": 752,
+  "n_candidates_raw": 18,
+  "n_candidates_dedup": 18,
+  "n_scenes_with_candidate": 18,
+  "T1_a_req_ge_0.4": {
+    "n": 13,
+    "n_scenes": 13
+  },
+  "candidates": [
+    {
+      "scene": "scene-0003",
+      "frame_idx": 196,
+      "t": 1533201487.01246,
+      "ego_v0": 3.82,
+      "ego_vmin": 2.32,
+      "dv": -1.5,
+      "rel_decel": 0.393,
+      "a_obs": 0.567,
+      "brake_dur_s": 2.65,
+      "a_vru_sum": 4.284,
+      "a_vru_max": 1.761,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 3.108,
+      "lead_vru": {
+        "token": "069a7d8902d14560b1890064b43a1a15",
+        "cat": "human.pedestrian.adult",
+        "s_m": 8.8,
+        "lat_m": 1.91
+      },
+      "ttc_s": 2.3,
+      "n_mask_group": 3,
+      "f3_mask_group": [
+        {
+          "token": "069a7d8902d14560b1890064b43a1a15",
+          "cat": "human.pedestrian.adult",
+          "s_m": 8.8,
+          "lat_m": 1.91,
+          "a_req": 1.761,
+          "visible": true
+        },
+        {
+          "token": "ed71fa49b49c47aaa8f1de7880332ac8",
+          "cat": "human.pedestrian.adult",
+          "s_m": 9.8,
+          "lat_m": 1.79,
+          "a_req": 1.371,
+          "visible": true
+        },
+        {
+          "token": "a721d524937f4a228fa6aac3296fb3bc",
+          "cat": "human.pedestrian.adult",
+          "s_m": 10.9,
+          "lat_m": 1.09,
+          "a_req": 1.152,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0007",
+      "frame_idx": 40,
+      "t": 1531884261.36246,
+      "ego_v0": 7.15,
+      "ego_vmin": 2.42,
+      "dv": -4.72,
+      "rel_decel": 0.661,
+      "a_obs": 0.7,
+      "brake_dur_s": 6.75,
+      "a_vru_sum": 1.04,
+      "a_vru_max": 1.04,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.486,
+      "lead_vru": {
+        "token": "ff15860117544737b71a43637657c0ca",
+        "cat": "human.pedestrian.adult",
+        "s_m": 33.9,
+        "lat_m": 1.99
+      },
+      "ttc_s": 4.7,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "ff15860117544737b71a43637657c0ca",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.9,
+          "lat_m": 1.99,
+          "a_req": 1.04,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0071",
+      "frame_idx": 148,
+      "t": 1533153558.8624039,
+      "ego_v0": 3.21,
+      "ego_vmin": 2.06,
+      "dv": -1.14,
+      "rel_decel": 0.356,
+      "a_obs": 0.475,
+      "brake_dur_s": 2.4,
+      "a_vru_sum": 0.642,
+      "a_vru_max": 0.642,
+      "a_non_vru_max": 0.296,
+      "vru_class_share": 0.684,
+      "explained_ratio": 1.351,
+      "lead_vru": {
+        "token": "e64be77927ca45bf8a15f8671a614741",
+        "cat": "human.pedestrian.adult",
+        "s_m": 17.2,
+        "lat_m": 1.68
+      },
+      "ttc_s": 5.4,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "e64be77927ca45bf8a15f8671a614741",
+          "cat": "human.pedestrian.adult",
+          "s_m": 17.2,
+          "lat_m": 1.68,
+          "a_req": 0.642,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0151",
+      "frame_idx": 19,
+      "t": 1533114328.1624599,
+      "ego_v0": 5.51,
+      "ego_vmin": 3.51,
+      "dv": -2.01,
+      "rel_decel": 0.364,
+      "a_obs": 0.422,
+      "brake_dur_s": 4.75,
+      "a_vru_sum": 0.777,
+      "a_vru_max": 0.777,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.841,
+      "lead_vru": {
+        "token": "31a8227b9a194e099a25cf1b0deac81b",
+        "cat": "vehicle.bicycle",
+        "s_m": 37.7,
+        "lat_m": 0.3
+      },
+      "ttc_s": 6.8,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "31a8227b9a194e099a25cf1b0deac81b",
+          "cat": "vehicle.bicycle",
+          "s_m": 37.7,
+          "lat_m": 0.3,
+          "a_req": 0.777,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0179",
+      "frame_idx": 21,
+      "t": 1532662730.6624599,
+      "ego_v0": 1.15,
+      "ego_vmin": 0.01,
+      "dv": -1.14,
+      "rel_decel": 0.988,
+      "a_obs": 0.179,
+      "brake_dur_s": 6.35,
+      "a_vru_sum": 0.239,
+      "a_vru_max": 0.239,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.334,
+      "lead_vru": {
+        "token": "24698bdca670415b9e16e573c7cd6a6a",
+        "cat": "human.pedestrian.adult",
+        "s_m": 15.8,
+        "lat_m": 0.73
+      },
+      "ttc_s": 13.7,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "24698bdca670415b9e16e573c7cd6a6a",
+          "cat": "human.pedestrian.adult",
+          "s_m": 15.8,
+          "lat_m": 0.73,
+          "a_req": 0.239,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0187",
+      "frame_idx": 59,
+      "t": 1532663093.86246,
+      "ego_v0": 3.74,
+      "ego_vmin": 2.13,
+      "dv": -1.61,
+      "rel_decel": 0.431,
+      "a_obs": 0.192,
+      "brake_dur_s": 8.4,
+      "a_vru_sum": 0.641,
+      "a_vru_max": 0.491,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 2.559,
+      "lead_vru": {
+        "token": "735fa680e31d461099f4b821ba422c3a",
+        "cat": "human.pedestrian.adult",
+        "s_m": 22.4,
+        "lat_m": 1.24
+      },
+      "ttc_s": 6.0,
+      "n_mask_group": 2,
+      "f3_mask_group": [
+        {
+          "token": "735fa680e31d461099f4b821ba422c3a",
+          "cat": "human.pedestrian.adult",
+          "s_m": 22.4,
+          "lat_m": 1.24,
+          "a_req": 0.491,
+          "visible": true
+        },
+        {
+          "token": "d08ef0a802b04155bdec7d8eac05722a",
+          "cat": "human.pedestrian.adult",
+          "s_m": 17.5,
+          "lat_m": 1.42,
+          "a_req": 0.15,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0250",
+      "frame_idx": 3,
+      "t": 1534867368.1624038,
+      "ego_v0": 1.45,
+      "ego_vmin": 0.51,
+      "dv": -0.94,
+      "rel_decel": 0.647,
+      "a_obs": 0.751,
+      "brake_dur_s": 1.25,
+      "a_vru_sum": 0.305,
+      "a_vru_max": 0.305,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.406,
+      "lead_vru": {
+        "token": "d94525dbcc0e44fca669c26ac874930e",
+        "cat": "human.pedestrian.adult",
+        "s_m": 10.6,
+        "lat_m": 0.98
+      },
+      "ttc_s": 7.3,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "d94525dbcc0e44fca669c26ac874930e",
+          "cat": "human.pedestrian.adult",
+          "s_m": 10.6,
+          "lat_m": 0.98,
+          "a_req": 0.305,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0397",
+      "frame_idx": 51,
+      "t": 1535731385.8624039,
+      "ego_v0": 2.02,
+      "ego_vmin": 0.15,
+      "dv": -1.86,
+      "rel_decel": 0.925,
+      "a_obs": 0.287,
+      "brake_dur_s": 6.5,
+      "a_vru_sum": 0.108,
+      "a_vru_max": 0.093,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.325,
+      "lead_vru": {
+        "token": "b4d849be5e7b45e58e5b6a254b9bdd03",
+        "cat": "human.pedestrian.adult",
+        "s_m": 23.8,
+        "lat_m": 1.75
+      },
+      "ttc_s": 11.8,
+      "n_mask_group": 2,
+      "f3_mask_group": [
+        {
+          "token": "b4d849be5e7b45e58e5b6a254b9bdd03",
+          "cat": "human.pedestrian.adult",
+          "s_m": 23.8,
+          "lat_m": 1.75,
+          "a_req": 0.093,
+          "visible": true
+        },
+        {
+          "token": "66bb4ad7a4b24539a980951a60f7a10f",
+          "cat": "human.pedestrian.adult",
+          "s_m": 21.7,
+          "lat_m": 1.74,
+          "a_req": 0.014,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0427",
+      "frame_idx": 2,
+      "t": 1538985290.4124599,
+      "ego_v0": 5.83,
+      "ego_vmin": 2.42,
+      "dv": -3.41,
+      "rel_decel": 0.584,
+      "a_obs": 0.573,
+      "brake_dur_s": 5.95,
+      "a_vru_sum": 0.853,
+      "a_vru_max": 0.478,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.835,
+      "lead_vru": {
+        "token": "e8dd1ecb52704d0a962052e722aebd8e",
+        "cat": "human.pedestrian.adult",
+        "s_m": 38.1,
+        "lat_m": 0.65
+      },
+      "ttc_s": 6.5,
+      "n_mask_group": 2,
+      "f3_mask_group": [
+        {
+          "token": "e8dd1ecb52704d0a962052e722aebd8e",
+          "cat": "human.pedestrian.adult",
+          "s_m": 38.1,
+          "lat_m": 0.65,
+          "a_req": 0.478,
+          "visible": true
+        },
+        {
+          "token": "3ab93ae8b1524fce8248fa7a9e1c5bd5",
+          "cat": "human.pedestrian.adult",
+          "s_m": 36.0,
+          "lat_m": 1.56,
+          "a_req": 0.374,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0544",
+      "frame_idx": 208,
+      "t": 1535659504.512404,
+      "ego_v0": 2.19,
+      "ego_vmin": 0.47,
+      "dv": -1.72,
+      "rel_decel": 0.784,
+      "a_obs": 0.716,
+      "brake_dur_s": 2.4,
+      "a_vru_sum": 0.439,
+      "a_vru_max": 0.439,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.613,
+      "lead_vru": {
+        "token": "e2dadbf6909a4a258bb14fdbf38e9d66",
+        "cat": "human.pedestrian.adult",
+        "s_m": 10.7,
+        "lat_m": 1.65
+      },
+      "ttc_s": 4.9,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "e2dadbf6909a4a258bb14fdbf38e9d66",
+          "cat": "human.pedestrian.adult",
+          "s_m": 10.7,
+          "lat_m": 1.65,
+          "a_req": 0.439,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0710",
+      "frame_idx": 40,
+      "t": 1535573410.413125,
+      "ego_v0": 2.04,
+      "ego_vmin": 0.0,
+      "dv": -2.04,
+      "rel_decel": 0.999,
+      "a_obs": 0.204,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.205,
+      "a_vru_max": 0.103,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.507,
+      "lead_vru": {
+        "token": "d1f1462d7300446c8f361b974214829a",
+        "cat": "human.pedestrian.adult",
+        "s_m": 18.8,
+        "lat_m": 1.14
+      },
+      "ttc_s": 9.2,
+      "n_mask_group": 2,
+      "f3_mask_group": [
+        {
+          "token": "d1f1462d7300446c8f361b974214829a",
+          "cat": "human.pedestrian.adult",
+          "s_m": 18.8,
+          "lat_m": 1.14,
+          "a_req": 0.103,
+          "visible": true
+        },
+        {
+          "token": "ae0a52ad3ed04cf295999347c184dc22",
+          "cat": "human.pedestrian.adult",
+          "s_m": 18.8,
+          "lat_m": 0.15,
+          "a_req": 0.102,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0717",
+      "frame_idx": 162,
+      "t": 1535573603.6124039,
+      "ego_v0": 2.45,
+      "ego_vmin": 0.0,
+      "dv": -2.44,
+      "rel_decel": 0.998,
+      "a_obs": 0.741,
+      "brake_dur_s": 3.3,
+      "a_vru_sum": 0.556,
+      "a_vru_max": 0.556,
+      "a_non_vru_max": 0.211,
+      "vru_class_share": 0.725,
+      "explained_ratio": 0.75,
+      "lead_vru": {
+        "token": "1dd0fa28fc7641b09cec550fad61178b",
+        "cat": "human.pedestrian.adult",
+        "s_m": 11.9,
+        "lat_m": 1.33
+      },
+      "ttc_s": 4.9,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "1dd0fa28fc7641b09cec550fad61178b",
+          "cat": "human.pedestrian.adult",
+          "s_m": 11.9,
+          "lat_m": 1.33,
+          "a_req": 0.556,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0731",
+      "frame_idx": 102,
+      "t": 1535573968.4124038,
+      "ego_v0": 1.24,
+      "ego_vmin": 0.0,
+      "dv": -1.24,
+      "rel_decel": 1.0,
+      "a_obs": 0.124,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.377,
+      "a_vru_max": 0.204,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.652,
+      "lead_vru": {
+        "token": "e22b557ae1bc4196a0436be4d3c2e319",
+        "cat": "human.pedestrian.adult",
+        "s_m": 9.3,
+        "lat_m": 1.65
+      },
+      "ttc_s": 7.5,
+      "n_mask_group": 2,
+      "f3_mask_group": [
+        {
+          "token": "e22b557ae1bc4196a0436be4d3c2e319",
+          "cat": "human.pedestrian.adult",
+          "s_m": 9.3,
+          "lat_m": 1.65,
+          "a_req": 0.204,
+          "visible": true
+        },
+        {
+          "token": "c4b1214213714ac68591b3fa70baadf5",
+          "cat": "human.pedestrian.adult",
+          "s_m": 8.2,
+          "lat_m": 0.39,
+          "a_req": 0.173,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0862",
+      "frame_idx": 17,
+      "t": 1538986199.26246,
+      "ego_v0": 4.72,
+      "ego_vmin": 0.0,
+      "dv": -4.72,
+      "rel_decel": 1.0,
+      "a_obs": 0.505,
+      "brake_dur_s": 9.35,
+      "a_vru_sum": 0.872,
+      "a_vru_max": 0.872,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.728,
+      "lead_vru": {
+        "token": "f726cc58ae044b009041ec2fd69f67a4",
+        "cat": "human.pedestrian.adult",
+        "s_m": 13.6,
+        "lat_m": 1.73
+      },
+      "ttc_s": 2.9,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "f726cc58ae044b009041ec2fd69f67a4",
+          "cat": "human.pedestrian.adult",
+          "s_m": 13.6,
+          "lat_m": 1.73,
+          "a_req": 0.872,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0917",
+      "frame_idx": 32,
+      "t": 1538984296.1624599,
+      "ego_v0": 5.2,
+      "ego_vmin": 1.02,
+      "dv": -4.19,
+      "rel_decel": 0.804,
+      "a_obs": 0.419,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.446,
+      "a_vru_max": 0.446,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.065,
+      "lead_vru": {
+        "token": "24666ac5c59b47e899cb34c50cc9bfdb",
+        "cat": "human.pedestrian.adult",
+        "s_m": 27.8,
+        "lat_m": 0.55
+      },
+      "ttc_s": 5.3,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "24666ac5c59b47e899cb34c50cc9bfdb",
+          "cat": "human.pedestrian.adult",
+          "s_m": 27.8,
+          "lat_m": 0.55,
+          "a_req": 0.446,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-1016",
+      "frame_idx": 136,
+      "t": 1542194046.4124599,
+      "ego_v0": 6.07,
+      "ego_vmin": 3.66,
+      "dv": -2.4,
+      "rel_decel": 0.396,
+      "a_obs": 0.539,
+      "brake_dur_s": 4.45,
+      "a_vru_sum": 0.569,
+      "a_vru_max": 0.569,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.055,
+      "lead_vru": {
+        "token": "a58bbda382f94c91a3f1940605a9e5ce",
+        "cat": "human.pedestrian.adult",
+        "s_m": 37.1,
+        "lat_m": 0.26
+      },
+      "ttc_s": 6.1,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "a58bbda382f94c91a3f1940605a9e5ce",
+          "cat": "human.pedestrian.adult",
+          "s_m": 37.1,
+          "lat_m": 0.26,
+          "a_req": 0.569,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-1055",
+      "frame_idx": 214,
+      "t": 1542799049.61246,
+      "ego_v0": 9.57,
+      "ego_vmin": 6.63,
+      "dv": -2.94,
+      "rel_decel": 0.307,
+      "a_obs": 1.633,
+      "brake_dur_s": 1.8,
+      "a_vru_sum": 2.359,
+      "a_vru_max": 2.359,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.445,
+      "lead_vru": {
+        "token": "5673a13d2f3b4004bac590be1e4b7cc9",
+        "cat": "human.pedestrian.adult",
+        "s_m": 34.2,
+        "lat_m": 1.72
+      },
+      "ttc_s": 3.6,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "5673a13d2f3b4004bac590be1e4b7cc9",
+          "cat": "human.pedestrian.adult",
+          "s_m": 34.2,
+          "lat_m": 1.72,
+          "a_req": 2.359,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-1088",
+      "frame_idx": 57,
+      "t": 1542800632.76246,
+      "ego_v0": 6.45,
+      "ego_vmin": 2.23,
+      "dv": -4.22,
+      "rel_decel": 0.654,
+      "a_obs": 0.819,
+      "brake_dur_s": 5.15,
+      "a_vru_sum": 0.623,
+      "a_vru_max": 0.623,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.761,
+      "lead_vru": {
+        "token": "26a68fd3e448439ea524000483ba4f50",
+        "cat": "human.pedestrian.adult",
+        "s_m": 23.9,
+        "lat_m": 0.73
+      },
+      "ttc_s": 3.7,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "26a68fd3e448439ea524000483ba4f50",
+          "cat": "human.pedestrian.adult",
+          "s_m": 23.9,
+          "lat_m": 0.73,
+          "a_req": 0.623,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}
