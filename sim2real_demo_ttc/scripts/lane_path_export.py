@@ -39,7 +39,12 @@ def main():
             evs[e["event_id"]] = e
 
     ok = [r for r in lpf.values() if r["status"] == "ok"]
-    kept = sorted([r for r in ok if r["keep_2m"]], key=lambda z: z["d_long_ghost_m"])
+    kept_all = sorted([r for r in ok if r["keep_2m"]], key=lambda z: z["d_long_ghost_m"])
+    kept = []                                    # 按距离分层抽 5 个，覆盖不同距离
+    for lo, hi in ((0, 15), (15, 22), (22, 30), (30, 40), (40, 200)):
+        g = [r for r in kept_all if lo <= r["d_long_ghost_m"] < hi]
+        if g:
+            kept.append(min(g, key=lambda z: z["lat_to_real_path_m"]))
     drop = [r for r in ok if not r["keep_2m"]]
     # 筛掉组：按距离分层各取一个，尽量覆盖不同距离与不同转角
     drop_sel = []
@@ -74,7 +79,10 @@ def main():
                 f"VRU longitudinal dist = {r['d_long_ghost_m']:.1f} m"
                 f" | ego heading change over window = {r['ego_heading_change_deg']:+.1f} deg",
                 f"closest ego-VRU approach in space-time = {r['min_approach_m']:.2f} m"
-                f" | ego v0 = {r['ego_speed_ghost_mps']:.1f} m/s",
+                f" | ego v0 = {r['ego_speed_ghost_mps']:.1f} m/s"
+                f" | human driver dv = {r['ego_delta_v_mps']:+.2f} m/s",
+                f"path: realized {r['arc_realized_m']:.1f} m + straight extension 20 m"
+                f"   closest point on {'EXTENSION (extrapolated)' if r['closest_on_extension'] else 'REALIZED path'}",
             ], bb, col)
             p = OUT / f"{grp}__{r['eid']}.jpg"
             cv2.imwrite(str(p), cv2.cvtColor(im, cv2.COLOR_RGB2BGR),
@@ -88,8 +96,11 @@ def main():
                 "min_approach_m": r["min_approach_m"],
                 "ego_speed_ghost_mps": r["ego_speed_ghost_mps"],
                 "ego_delta_v_mps": r["ego_delta_v_mps"],
-                "oncoming": r["oncoming"], "ghost_file": fg["filename"]})
-            print(f"[{grp}] {r['eid']:20s} 到真实路径 {r['lat_to_real_path_m']:5.2f}m "
+                "oncoming": r["oncoming"], "arc_realized_m": r["arc_realized_m"],
+                "closest_on_extension": r["closest_on_extension"],
+                "ghost_file": fg["filename"]})
+            print(f"[{grp}] {r['eid']:20s} {'ext' if r['closest_on_extension'] else 'real'} "
+                  f"到真实路径 {r['lat_to_real_path_m']:5.2f}m "
                   f"旧 {abs(r['lat_instantaneous_m']):4.2f}m  d {r['d_long_ghost_m']:5.1f}m "
                   f"转角 {r['ego_heading_change_deg']:+6.1f}°")
     (OUT / "meta.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False))

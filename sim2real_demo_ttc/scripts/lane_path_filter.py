@@ -76,6 +76,8 @@ def main():
     ap.add_argument("--oncoming-mps", type=float, default=-2.0)
     ap.add_argument("--pad-m", type=float, default=5.0)
     ap.add_argument("--max-window-s", type=float, default=10.0)
+    ap.add_argument("--extend-m", type=float, default=20.0,
+                    help="沿窗口最后一帧自车**真实航向**把路径向前直线延伸的长度")
     ap.add_argument("--out", default=str(RES / "lane_path_filter.json"))
     args = ap.parse_args()
 
@@ -118,7 +120,19 @@ def main():
         poly_w = exyz[j:k + 1, :2]
         rel = poly_w - exyz[j, :2]
         poly = (rel @ R[:2, :2])                                   # world -> ego(t_g)
-        n_pts, dur = len(poly), float(gt[min(k, len(gt) - 1)] - t_g)
+        n_real, dur = len(poly), float(gt[min(k, len(gt) - 1)] - t_g)
+
+        # ---- 沿最后一帧自车真实航向做直线延伸（§2.3）----
+        # 用 R_we[k] 的车头方向而不是末端几点拟合：后者在自车近乎停住时方向会抖。
+        if args.extend_m > 0 and n_real >= 1:
+            fwd_w = geo["R_we"][k][:2, 0]                           # 世界系下 k 帧车头方向
+            fwd = fwd_w @ R[:2, :2]                                 # -> ego(t_g)
+            fwd = fwd / (np.linalg.norm(fwd) + 1e-12)
+            n_seg = max(2, int(args.extend_m / 1.0))
+            ext = poly[-1] + np.outer(np.linspace(0, args.extend_m, n_seg)[1:], fwd)
+            poly = np.vstack([poly, ext])
+        n_pts = len(poly)
+        reach = arc + (args.extend_m if n_real >= 1 else 0.0)
 
         if n_pts < 2:
             rows.append({"eid": ev["event_id"], "scene": sn, "status": "path_insufficient",
@@ -152,12 +166,15 @@ def main():
         dmin, seg, tang = point_to_polyline(p_ped_ego, poly)
         # 路径没走满时仍可**确定性保留**：既然已走的这段就进了走廊，再走下去也改变不了"在途"这一事实。
         # 只有"已走完的部分没进走廊、但路径还没延伸到行人纵深"才是真的判不了。
-        if arc < need and dmin >= args.corridor:
+        # 最近点是否落在**延伸段**上（延伸是外推假设，需单独标记）
+        on_ext = bool(seg >= max(0, n_real - 1)) if n_real >= 1 else True
+        if reach < need and dmin >= args.corridor:
             rows.append({"eid": ev["event_id"], "scene": sn, "status": "path_insufficient",
                          "arc_travelled_m": arc, "arc_needed_m": need, "window_s": dur,
                          "n_path_pts": n_pts, "d_long_ghost_m": d_long,
                          "lat_to_real_path_partial_m": dmin,
                          "ego_heading_change_deg": yaw_chg,
+                         "reach_m": reach,
                          "lat_instantaneous_m": lat_inst,
                          "ego_speed_ghost_mps": float(geo["ego_speed"][j])}); continue
         v_obj = np.asarray(o["v_obj_ego"][j], float)[:2]           # ego(t_g) 系下目标速度
@@ -172,7 +189,10 @@ def main():
                      "d_long_ghost_m": d_long, "oncoming": oncoming, "v_along_path_mps": v_along,
                      "keep_2m": bool(dmin < args.corridor and not oncoming),
                      "keep_1p5m": bool(dmin < args.corridor_tight and not oncoming),
-                     "window_s": dur, "arc_travelled_m": arc, "n_path_pts": n_pts, "path_complete": bool(arc >= need),
+                     "window_s": dur, "arc_travelled_m": arc, "n_path_pts": n_pts, "n_real_pts": n_real,
+                     "path_complete": bool(reach >= need),
+                     "arc_realized_m": arc, "reach_m": reach,
+                     "closest_on_extension": on_ext,
                      "min_approach_m": min_approach, "lat_at_min_approach_m": lat_at_min,
                      "keep_approach_2m": bool(min_approach < args.corridor and not oncoming),
                      "keep_approach_1p5m": bool(min_approach < args.corridor_tight and not oncoming),
@@ -198,6 +218,8 @@ def main():
     print(f"  筛掉                 {len(drop):4d} ({len(drop)/n*100:5.1f}% of {n})")
     print(f"  敏感性 1.5 m 保留     {sum(r['keep_1p5m'] for r in ok):4d}")
     print(f"  其中因对向被剔        {sum(r['oncoming'] for r in ok):4d}")
+    kx = [r for r in ok if r["keep_2m"] and r.get("closest_on_extension")]
+    print(f"  其中最近点落在延伸段  {len(kx):4d}（外推所致，需单独看）")
     ka = [r for r in ok if r.get("keep_approach_2m")]
     print(f"  保留组 scene 数       {len({r['scene'] for r in kept})}")
     print(f"  --- 判据 C（时空最近接近 < 2.0 m，含行人自身运动）---")
@@ -208,6 +230,8 @@ def main():
                     "corridor_tight_m": args.corridor_tight,
                     "oncoming_along_path_mps": args.oncoming_mps,
                     "window": f"弧长 >= d_long + {args.pad_m} m，上限 {args.max_window_s} s",
+                    "extend_m": args.extend_m,
+                    "extend_dir": "窗口最后一帧自车真实航向（R_we[k] 车头方向），直线外推",
                     "reference_axis": "自车真实未来轨迹（world ego_xyz），非瞬时朝向"},
            "counts": {"total": n, "ok": len(ok), "path_insufficient": len(ins),
                       "no_track": len(nt), "keep_2m": len(kept), "drop_2m": len(drop),
@@ -216,7 +240,8 @@ def main():
                       "keep_approach_1p5m": int(sum(r.get("keep_approach_1p5m", False) for r in ok)),
                       "keep_approach_scenes": len({r["scene"] for r in ok if r.get("keep_approach_2m")}),
                       "oncoming": int(sum(r["oncoming"] for r in ok)),
-                      "keep_scenes": len({r["scene"] for r in kept})},
+                      "keep_scenes": len({r["scene"] for r in kept}),
+                      "keep_via_extension": int(sum(1 for r in kept if r.get("closest_on_extension")))},
            "per_event": rows}
     Path(args.out).write_text(json.dumps(out, indent=2, ensure_ascii=False))
     print(f"[LPF] wrote {args.out}")
