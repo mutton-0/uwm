@@ -1,0 +1,76 @@
+{
+  "type": "D",
+  "name": "harmless appearance",
+  "role": "NEGATIVE",
+  "rule": "never enters corridor AND own TTC > 6s throughout (max 2 per scene)",
+  "n_total_in_corpus": 1423,
+  "n_sampled": 6,
+  "events": [
+    {
+      "event_id": "scene-0240_003_D",
+      "scene": "scene-0240",
+      "file": "scene-0240_003_D.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 5.928873545565664,
+      "lat_at_emergence_OLD": 2.772492902646619,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": null,
+      "ego_speed_mps": 0.0012382879769492709
+    },
+    {
+      "event_id": "scene-0398_001_D",
+      "scene": "scene-0398",
+      "file": "scene-0398_001_D.jpg",
+      "object_class": "human.pedestrian.adult",
+      "d_long_at_emergence": 26.25383991507806,
+      "lat_at_emergence_OLD": 9.340653862533662,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 6.0226277985882275,
+      "ego_speed_mps": 2.1182527763696313
+    },
+    {
+      "event_id": "scene-0301_001_D",
+      "scene": "scene-0301",
+      "file": "scene-0301_001_D.jpg",
+      "object_class": "human.pedestrian.adult",
+      "d_long_at_emergence": 38.598536500921135,
+      "lat_at_emergence_OLD": -8.320127331999393,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 25.71226609085721,
+      "ego_speed_mps": 0.00035676264847073127
+    },
+    {
+      "event_id": "scene-0454_025_D",
+      "scene": "scene-0454",
+      "file": "scene-0454_025_D.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 50.6752813348612,
+      "lat_at_emergence_OLD": 15.413659102492769,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 6.298272142746256,
+      "ego_speed_mps": 7.615266099075864
+    },
+    {
+      "event_id": "scene-0648_002_D",
+      "scene": "scene-0648",
+      "file": "scene-0648_002_D.jpg",
+      "object_class": "vehicle.motorcycle",
+      "d_long_at_emergence": 65.75344867338454,
+      "lat_at_emergence_OLD": 4.648998005215952,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 6.464375023453481,
+      "ego_speed_mps": 7.969335475325091
+    },
+    {
+      "event_id": "scene-0884_002_D",
+      "scene": "scene-0884",
+      "file": "scene-0884_002_D.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 186.29365173610307,
+      "lat_at_emergence_OLD": 3.3887007735798553,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 10.505705426232412,
+      "ego_speed_mps": 6.255408064517547e-06
+    }
+  ]
+}

@@ -78,6 +78,10 @@ def main():
     ap.add_argument("--max-window-s", type=float, default=10.0)
     ap.add_argument("--extend-m", type=float, default=20.0,
                     help="沿窗口最后一帧自车**真实航向**把路径向前直线延伸的长度")
+    ap.add_argument("--classes", default="",
+                    help="逗号分隔的 object_class 子串过滤（如 pedestrian,cyclist）；空=不过滤")
+    ap.add_argument("--restrict-to-f3", action="store_true", default=False,
+                    help="只复判 F-3 LTF 那轮用过的事件（A 类默认行为）")
     ap.add_argument("--out", default=str(RES / "lane_path_filter.json"))
     args = ap.parse_args()
 
@@ -87,10 +91,17 @@ def main():
     nusc = NuScenes("v1.0-trainval", dataroot="/data/dataset/nuscenes/v1.0-trainval", verbose=False)
     scene_by_name = {s["name"]: s for s in nusc.scene}
 
-    keep_ids = {r["eid"] for r in json.load(open(RES / "f3_occlusion_ltf.json"))["per_event"]}
     evs = [json.loads(l) for l in open(Path(args.work) / "mining" / "events_all.jsonl")]
-    evs = [e for e in evs if e["event_type"] == args.pos and e["event_id"] in keep_ids]
-    print(f"[LPF] 复判事件 {len(evs)}（与 F-3 LTF 那轮同一批）")
+    evs = [e for e in evs if e["event_type"] == args.pos]
+    if args.restrict_to_f3:
+        keep_ids = {r["eid"] for r in json.load(open(RES / "f3_occlusion_ltf.json"))["per_event"]}
+        evs = [e for e in evs if e["event_id"] in keep_ids]
+    if args.classes:
+        pats = [c.strip() for c in args.classes.split(",") if c.strip()]
+        evs = [e for e in evs if any(c in str(e.get("object_class", "")) for c in pats)]
+    # 复判需要 ghost 帧有投影框（与 F-3 的可用性条件一致）
+    evs = [e for e in evs if e.get("x_ghost_frames") and e["x_ghost_frames"][0].get("bbox_xyxy")]
+    print(f"[LPF] 复判事件 {len(evs)}  (pos={args.pos}, classes={args.classes or 'all'})")
 
     geo_cache = {}
     rows = []

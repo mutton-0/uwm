@@ -1,0 +1,76 @@
+{
+  "type": "B",
+  "name": "close cut-in",
+  "role": "POSITIVE",
+  "rule": "d_long <= 25m, TTC < 6s, lateral velocity toward ego lane -- the lead-brake corpus",
+  "n_total_in_corpus": 103,
+  "n_sampled": 6,
+  "events": [
+    {
+      "event_id": "scene-0219_001_B",
+      "scene": "scene-0219",
+      "file": "scene-0219_001_B.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 8.361092453976008,
+      "lat_at_emergence_OLD": 1.3448716268232164,
+      "ttc_at_emergence": 5.030355085277871,
+      "min_ttc_1s": 5.030355085277871,
+      "ego_speed_mps": 0.021439714295840726
+    },
+    {
+      "event_id": "scene-0870_003_B",
+      "scene": "scene-0870",
+      "file": "scene-0870_003_B.jpg",
+      "object_class": "vehicle.truck",
+      "d_long_at_emergence": 14.005084424199774,
+      "lat_at_emergence_OLD": -1.813478341807957,
+      "ttc_at_emergence": 3.0455801840055297,
+      "min_ttc_1s": 1.836134273503085,
+      "ego_speed_mps": 0.000981137179058987
+    },
+    {
+      "event_id": "scene-0331_001_B",
+      "scene": "scene-0331",
+      "file": "scene-0331_001_B.jpg",
+      "object_class": "vehicle.truck",
+      "d_long_at_emergence": 17.190153582364495,
+      "lat_at_emergence_OLD": -1.9348301918802777,
+      "ttc_at_emergence": 2.3769287427280017,
+      "min_ttc_1s": 1.8591192409890658,
+      "ego_speed_mps": 0.0013751609951847688
+    },
+    {
+      "event_id": "scene-0945_012_B",
+      "scene": "scene-0945",
+      "file": "scene-0945_012_B.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 21.46597617190207,
+      "lat_at_emergence_OLD": 1.5016457643884704,
+      "ttc_at_emergence": 2.6191647922939354,
+      "min_ttc_1s": 2.606553068463918,
+      "ego_speed_mps": 0.008157693568881024
+    },
+    {
+      "event_id": "scene-0856_004_B",
+      "scene": "scene-0856",
+      "file": "scene-0856_004_B.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 23.261515979576505,
+      "lat_at_emergence_OLD": 1.9428234238533193,
+      "ttc_at_emergence": 2.175554689017062,
+      "min_ttc_1s": 1.0354458359250782,
+      "ego_speed_mps": 6.342905908986221
+    },
+    {
+      "event_id": "scene-0295_008_B",
+      "scene": "scene-0295",
+      "file": "scene-0295_008_B.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 24.975070517208657,
+      "lat_at_emergence_OLD": -1.6174135770917546,
+      "ttc_at_emergence": 8.504161907724662,
+      "min_ttc_1s": 5.713641169476287,
+      "ego_speed_mps": 3.649465551974342e-07
+    }
+  ]
+}

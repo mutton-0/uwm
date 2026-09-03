@@ -1,0 +1,76 @@
+{
+  "type": "D2ctxP",
+  "name": "D2c context placebo",
+  "role": "CONTROL",
+  "rule": "window shifted 2.5s earlier",
+  "n_total_in_corpus": 203,
+  "n_sampled": 6,
+  "events": [
+    {
+      "event_id": "scene-0161_005_D2ctxP",
+      "scene": "scene-0161",
+      "file": "scene-0161_005_D2ctxP.jpg",
+      "object_class": "movable_object.debris",
+      "d_long_at_emergence": 7.619489322735066,
+      "lat_at_emergence_OLD": -2.2241335300615215,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 4.9401256288993105,
+      "ego_speed_mps": 1.1423548236943097
+    },
+    {
+      "event_id": "scene-0159_007_D2ctxP",
+      "scene": "scene-0159",
+      "file": "scene-0159_007_D2ctxP.jpg",
+      "object_class": "vehicle.truck",
+      "d_long_at_emergence": 26.78802245483295,
+      "lat_at_emergence_OLD": 12.536500675164932,
+      "ttc_at_emergence": 7.8118299306907995,
+      "min_ttc_1s": 7.0290196051811185,
+      "ego_speed_mps": 3.150287699572858
+    },
+    {
+      "event_id": "scene-1099_002_D2ctxP",
+      "scene": "scene-1099",
+      "file": "scene-1099_002_D2ctxP.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 34.23735020097414,
+      "lat_at_emergence_OLD": 9.62958436306243,
+      "ttc_at_emergence": 2.1086807767023052,
+      "min_ttc_1s": 2.5872554993642387,
+      "ego_speed_mps": 0.0005972140908458616
+    },
+    {
+      "event_id": "scene-0398_013_D2ctxP",
+      "scene": "scene-0398",
+      "file": "scene-0398_013_D2ctxP.jpg",
+      "object_class": "vehicle.truck",
+      "d_long_at_emergence": 43.46047123361705,
+      "lat_at_emergence_OLD": -11.923713448785962,
+      "ttc_at_emergence": 5.047228373917197,
+      "min_ttc_1s": 5.4046888320431625,
+      "ego_speed_mps": 4.935620820104088
+    },
+    {
+      "event_id": "scene-0167_004_D2ctxP",
+      "scene": "scene-0167",
+      "file": "scene-0167_004_D2ctxP.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 58.62836118273407,
+      "lat_at_emergence_OLD": -15.105154236365792,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 5.071036733643299,
+      "ego_speed_mps": 10.07212435250248
+    },
+    {
+      "event_id": "scene-0763_002_D2ctxP",
+      "scene": "scene-0763",
+      "file": "scene-0763_002_D2ctxP.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 94.44427811165818,
+      "lat_at_emergence_OLD": 6.4541248485502996,
+      "ttc_at_emergence": 20.739818974419602,
+      "min_ttc_1s": 3.5608353552214003,
+      "ego_speed_mps": 6.470386268358574
+    }
+  ]
+}

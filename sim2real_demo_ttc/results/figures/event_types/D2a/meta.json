@@ -1,0 +1,76 @@
+{
+  "type": "D2a",
+  "name": "parked / stationary vehicle",
+  "role": "GEOMETRY-BALANCED NEG",
+  "rule": "large and central target, but harmless by state (parked/stopped)",
+  "n_total_in_corpus": 1003,
+  "n_sampled": 6,
+  "events": [
+    {
+      "event_id": "scene-0945_017_D2a",
+      "scene": "scene-0945",
+      "file": "scene-0945_017_D2a.jpg",
+      "object_class": "movable_object.trafficcone",
+      "d_long_at_emergence": 4.983053203094805,
+      "lat_at_emergence_OLD": 1.248581464264229,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": null,
+      "ego_speed_mps": 0.8414545460305629
+    },
+    {
+      "event_id": "scene-0416_009_D2a",
+      "scene": "scene-0416",
+      "file": "scene-0416_009_D2a.jpg",
+      "object_class": "movable_object.pushable_pullable",
+      "d_long_at_emergence": 17.923810511871615,
+      "lat_at_emergence_OLD": 1.5534845242176927,
+      "ttc_at_emergence": 2.1112472663014947,
+      "min_ttc_1s": 1.1767533171170041,
+      "ego_speed_mps": 8.303667790778194
+    },
+    {
+      "event_id": "scene-0018_008_D2a",
+      "scene": "scene-0018",
+      "file": "scene-0018_008_D2a.jpg",
+      "object_class": "movable_object.trafficcone",
+      "d_long_at_emergence": 25.31735599675494,
+      "lat_at_emergence_OLD": 1.9424351254774046,
+      "ttc_at_emergence": 2.853787719585349,
+      "min_ttc_1s": 7.501857712421221,
+      "ego_speed_mps": 2.1885760534947902
+    },
+    {
+      "event_id": "scene-0285_010_D2a",
+      "scene": "scene-0285",
+      "file": "scene-0285_010_D2a.jpg",
+      "object_class": "movable_object.barrier",
+      "d_long_at_emergence": 32.533127428392014,
+      "lat_at_emergence_OLD": 0.0041797677275889535,
+      "ttc_at_emergence": 4.143812186576435,
+      "min_ttc_1s": 4.028048148253355,
+      "ego_speed_mps": 6.368337347041027
+    },
+    {
+      "event_id": "scene-0061_055_D2a",
+      "scene": "scene-0061",
+      "file": "scene-0061_055_D2a.jpg",
+      "object_class": "movable_object.trafficcone",
+      "d_long_at_emergence": 42.56481757282811,
+      "lat_at_emergence_OLD": 0.5139315869840596,
+      "ttc_at_emergence": 2.3787992220786287,
+      "min_ttc_1s": 11.101931463900218,
+      "ego_speed_mps": 3.791781632335787
+    },
+    {
+      "event_id": "scene-0522_005_D2a",
+      "scene": "scene-0522",
+      "file": "scene-0522_005_D2a.jpg",
+      "object_class": "movable_object.debris",
+      "d_long_at_emergence": 49.996952519663054,
+      "lat_at_emergence_OLD": 1.3008640849084687,
+      "ttc_at_emergence": 6.023510494515661,
+      "min_ttc_1s": 5.448914903151715,
+      "ego_speed_mps": 8.303786161505787
+    }
+  ]
+}

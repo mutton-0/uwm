@@ -1,0 +1,63 @@
+{
+  "event_id": "scene-0070_005_A",
+  "candidate": "AutoVLA（3 相机 × 4 关键帧，窗口以目标帧结尾）",
+  "object_class": "human.pedestrian.adult",
+  "scene_name": "scene-0070",
+  "d_long_at_emergence": 13.953472185732865,
+  "window": [
+    {
+      "frame": 0,
+      "filename": "samples/CAM_FRONT/n008-2018-08-01-15-52-19-0400__CAM_FRONT__1533153530662404.jpg",
+      "t_rel_to_t0": -1.5,
+      "bbox_xyxy": [
+        46.1,
+        506.6,
+        183.1,
+        680.0
+      ],
+      "occluded_old": false,
+      "occluded_new": true
+    },
+    {
+      "frame": 1,
+      "filename": "samples/CAM_FRONT/n008-2018-08-01-15-52-19-0400__CAM_FRONT__1533153531162404.jpg",
+      "t_rel_to_t0": -1.0,
+      "bbox_xyxy": [
+        336.6,
+        479.2,
+        464.1,
+        652.8
+      ],
+      "occluded_old": false,
+      "occluded_new": true
+    },
+    {
+      "frame": 2,
+      "filename": "samples/CAM_FRONT/n008-2018-08-01-15-52-19-0400__CAM_FRONT__1533153531662404.jpg",
+      "t_rel_to_t0": -0.5,
+      "bbox_xyxy": [
+        639.6,
+        464.2,
+        769.1,
+        648.8
+      ],
+      "occluded_old": false,
+      "occluded_new": true
+    },
+    {
+      "frame": 3,
+      "filename": "samples/CAM_FRONT/n008-2018-08-01-15-52-19-0400__CAM_FRONT__1533153532162404.jpg",
+      "t_rel_to_t0": 0.0,
+      "bbox_xyxy": [
+        998.4,
+        450.6,
+        1149.4,
+        662.6
+      ],
+      "occluded_old": true,
+      "occluded_new": true
+    }
+  ],
+  "fill": "该帧自己的图像均值色（与 f3_occlusion_* 完全一致）",
+  "note": "旧版只遮 frame3（t0）；新版逐帧投影后 4 帧全遮 ⇒ 旧版漏遮 3 帧"
+}

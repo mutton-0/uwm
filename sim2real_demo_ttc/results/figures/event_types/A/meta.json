@@ -1,0 +1,76 @@
+{
+  "type": "A",
+  "name": "VRU emergence",
+  "role": "POSITIVE",
+  "rule": "VRU enters corridor, TTC < 5s (1.0s window)",
+  "n_total_in_corpus": 288,
+  "n_sampled": 6,
+  "events": [
+    {
+      "event_id": "scene-0185_004_A",
+      "scene": "scene-0185",
+      "file": "scene-0185_004_A.jpg",
+      "object_class": "human.pedestrian.adult",
+      "d_long_at_emergence": 5.836487915158815,
+      "lat_at_emergence_OLD": 1.9878360336353627,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 4.03963679312772,
+      "ego_speed_mps": 0.02039837992557482
+    },
+    {
+      "event_id": "scene-0345_017_A",
+      "scene": "scene-0345",
+      "file": "scene-0345_017_A.jpg",
+      "object_class": "human.pedestrian.construction_worker",
+      "d_long_at_emergence": 19.249400048756193,
+      "lat_at_emergence_OLD": 0.4193162321688558,
+      "ttc_at_emergence": 2.797470845400931,
+      "min_ttc_1s": 3.018656999625331,
+      "ego_speed_mps": 5.197133259703044
+    },
+    {
+      "event_id": "scene-0422_012_A",
+      "scene": "scene-0422",
+      "file": "scene-0422_012_A.jpg",
+      "object_class": "human.pedestrian.adult",
+      "d_long_at_emergence": 24.155062334970474,
+      "lat_at_emergence_OLD": 1.7914095539653023,
+      "ttc_at_emergence": 4.85911849006049,
+      "min_ttc_1s": 3.5429586744602957,
+      "ego_speed_mps": 3.617722514668255
+    },
+    {
+      "event_id": "scene-1020_004_A",
+      "scene": "scene-1020",
+      "file": "scene-1020_004_A.jpg",
+      "object_class": "human.pedestrian.adult",
+      "d_long_at_emergence": 31.588563342345104,
+      "lat_at_emergence_OLD": -1.668791488788094,
+      "ttc_at_emergence": 3.6644111575096416,
+      "min_ttc_1s": 3.0075002108186037,
+      "ego_speed_mps": 6.753735597327127
+    },
+    {
+      "event_id": "scene-1110_013_A",
+      "scene": "scene-1110",
+      "file": "scene-1110_013_A.jpg",
+      "object_class": "human.pedestrian.adult",
+      "d_long_at_emergence": 41.38821270191674,
+      "lat_at_emergence_OLD": -1.909576721354335,
+      "ttc_at_emergence": 4.08390337423698,
+      "min_ttc_1s": 2.8719785306301953,
+      "ego_speed_mps": 7.843216608947491
+    },
+    {
+      "event_id": "scene-0057_002_A",
+      "scene": "scene-0057",
+      "file": "scene-0057_002_A.jpg",
+      "object_class": "human.pedestrian.adult",
+      "d_long_at_emergence": 49.9509440716356,
+      "lat_at_emergence_OLD": 1.2623376678974643,
+      "ttc_at_emergence": 5.00827768738993,
+      "min_ttc_1s": 3.9698911872243903,
+      "ego_speed_mps": 9.962859015847986
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "type": "D2b",
+  "name": "distant large target",
+  "role": "GEOMETRY-BALANCED NEG",
+  "rule": "top 3 by apparent area -- deliberately geometry-matched to positives",
+  "n_total_in_corpus": 1680,
+  "n_sampled": 6,
+  "events": [
+    {
+      "event_id": "scene-0683_004_D2b",
+      "scene": "scene-0683",
+      "file": "scene-0683_004_D2b.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 5.826697575425456,
+      "lat_at_emergence_OLD": 2.6833297710878456,
+      "ttc_at_emergence": 3.819453533291287,
+      "min_ttc_1s": 4.921744371490754,
+      "ego_speed_mps": 1.1845383754174459
+    },
+    {
+      "event_id": "scene-0687_011_D2b",
+      "scene": "scene-0687",
+      "file": "scene-0687_011_D2b.jpg",
+      "object_class": "human.pedestrian.adult",
+      "d_long_at_emergence": 23.31845883027069,
+      "lat_at_emergence_OLD": -6.825512872254174,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 0.6540989078873846,
+      "ego_speed_mps": 9.228704986638213
+    },
+    {
+      "event_id": "scene-0138_005_D2b",
+      "scene": "scene-0138",
+      "file": "scene-0138_005_D2b.jpg",
+      "object_class": "vehicle.bicycle",
+      "d_long_at_emergence": 32.46276937422467,
+      "lat_at_emergence_OLD": 8.033052401426271,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 2.3044891406874943,
+      "ego_speed_mps": 8.138315145821322
+    },
+    {
+      "event_id": "scene-0075_003_D2b",
+      "scene": "scene-0075",
+      "file": "scene-0075_003_D2b.jpg",
+      "object_class": "human.pedestrian.adult",
+      "d_long_at_emergence": 41.830880570882876,
+      "lat_at_emergence_OLD": -10.888341222942113,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 2.058876903725005,
+      "ego_speed_mps": 9.9038352151715
+    },
+    {
+      "event_id": "scene-0850_005_D2b",
+      "scene": "scene-0850",
+      "file": "scene-0850_005_D2b.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 59.75901000688569,
+      "lat_at_emergence_OLD": -7.027635124158522,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 0.5793937857883839,
+      "ego_speed_mps": 10.724940624705535
+    },
+    {
+      "event_id": "scene-0884_001_D2b",
+      "scene": "scene-0884",
+      "file": "scene-0884_001_D2b.jpg",
+      "object_class": "vehicle.car",
+      "d_long_at_emergence": 205.04828111225206,
+      "lat_at_emergence_OLD": 1.3329099393555564,
+      "ttc_at_emergence": 99.0,
+      "min_ttc_1s": 15.009547266741281,
+      "ego_speed_mps": 1.0017845419361109e-05
+    }
+  ]
+}
