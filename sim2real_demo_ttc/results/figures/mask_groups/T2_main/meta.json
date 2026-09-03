@@ -1,0 +1,534 @@
+[
+  {
+    "eid": "scene-0862_000_A",
+    "file": "scene-0862_000_A.jpg",
+    "n_mask_group": 1,
+    "n_boxes_drawn": 1,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          915.6227116559305,
+          419.3643163676283,
+          1070.7571003576793,
+          666.7554343076623
+        ],
+        "is_target": true,
+        "token": "f726cc58ae044b009041ec2fd69f67a4",
+        "cat": "human.pedestrian.adult",
+        "s_m": 10.3,
+        "lat_m": 0.88,
+        "a_req": 0.708
+      }
+    ]
+  },
+  {
+    "eid": "scene-0653_005_A",
+    "file": "scene-0653_005_A.jpg",
+    "n_mask_group": 2,
+    "n_boxes_drawn": 2,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          950.2139329112539,
+          425.68498967003524,
+          1106.0902820084752,
+          676.1523737115715
+        ],
+        "is_target": true,
+        "token": "7e8da5e0a1ea4fe5b7ecb8594e1ed1fb",
+        "cat": "human.pedestrian.adult",
+        "s_m": 11.1,
+        "lat_m": 0.6,
+        "a_req": 0.241
+      },
+      {
+        "bbox_xyxy": [
+          1011.4249262713726,
+          418.59226715465684,
+          1152.849794620202,
+          641.1468567901912
+        ],
+        "is_target": false,
+        "token": "e9bba8b99d3044418ec1179484757135",
+        "cat": "human.pedestrian.adult",
+        "s_m": 12.2,
+        "lat_m": 1.16,
+        "a_req": 0.236
+      }
+    ]
+  },
+  {
+    "eid": "scene-0653_006_A",
+    "file": "scene-0653_006_A.jpg",
+    "n_mask_group": 2,
+    "n_boxes_drawn": 2,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          867.1815040186308,
+          424.0807455070319,
+          1033.7411812949242,
+          702.3798372965191
+        ],
+        "is_target": false,
+        "token": "7e8da5e0a1ea4fe5b7ecb8594e1ed1fb",
+        "cat": "human.pedestrian.adult",
+        "s_m": 9.6,
+        "lat_m": 0.06,
+        "a_req": 0.284
+      },
+      {
+        "bbox_xyxy": [
+          910.9599410919792,
+          419.39467505718176,
+          1059.7547909681105,
+          663.7395375580359
+        ],
+        "is_target": true,
+        "token": "e9bba8b99d3044418ec1179484757135",
+        "cat": "human.pedestrian.adult",
+        "s_m": 10.6,
+        "lat_m": 0.36,
+        "a_req": 0.271
+      }
+    ]
+  },
+  {
+    "eid": "scene-0544_004_A",
+    "file": "scene-0544_004_A.jpg",
+    "n_mask_group": 1,
+    "n_boxes_drawn": 1,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          668.2367678249715,
+          430.5568700404278,
+          773.057643806877,
+          608.6132999127478
+        ],
+        "is_target": true,
+        "token": "e2dadbf6909a4a258bb14fdbf38e9d66",
+        "cat": "human.pedestrian.adult",
+        "s_m": 16.1,
+        "lat_m": 0.65,
+        "a_req": 0.447
+      }
+    ]
+  },
+  {
+    "eid": "scene-0017_016_A",
+    "file": "scene-0017_016_A.jpg",
+    "n_mask_group": 3,
+    "n_boxes_drawn": 3,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          697.2187179034606,
+          436.5551975641439,
+          782.6006705811619,
+          596.0341296531149
+        ],
+        "is_target": false,
+        "token": "93ea8442be9b4e0d82d924f9c88f23c0",
+        "cat": "human.pedestrian.adult",
+        "s_m": 15.6,
+        "lat_m": 1.65,
+        "a_req": 0.444
+      },
+      {
+        "bbox_xyxy": [
+          676.7624715065749,
+          445.0453069767632,
+          744.4326849443186,
+          590.9043192969681
+        ],
+        "is_target": true,
+        "token": "06aa6ee6f2e24cbaa72f7b8620e5bfa1",
+        "cat": "human.pedestrian.adult",
+        "s_m": 16.7,
+        "lat_m": 1.44,
+        "a_req": 0.42
+      },
+      {
+        "bbox_xyxy": [
+          689.1130055137232,
+          436.7405208591201,
+          738.1731631450151,
+          571.2999563704008
+        ],
+        "is_target": false,
+        "token": "4494f07521014bdd8d328966239575d0",
+        "cat": "human.pedestrian.adult",
+        "s_m": 18.8,
+        "lat_m": 1.87,
+        "a_req": 0.353
+      }
+    ]
+  },
+  {
+    "eid": "scene-0017_015_A",
+    "file": "scene-0017_015_A.jpg",
+    "n_mask_group": 3,
+    "n_boxes_drawn": 3,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          666.1160945793805,
+          432.64400550059395,
+          742.6010020834445,
+          580.7657256318721
+        ],
+        "is_target": true,
+        "token": "93ea8442be9b4e0d82d924f9c88f23c0",
+        "cat": "human.pedestrian.adult",
+        "s_m": 16.7,
+        "lat_m": 1.41,
+        "a_req": 0.518
+      },
+      {
+        "bbox_xyxy": [
+          643.9939292785654,
+          440.45744032709956,
+          708.0301879124725,
+          577.0251861624109
+        ],
+        "is_target": false,
+        "token": "06aa6ee6f2e24cbaa72f7b8620e5bfa1",
+        "cat": "human.pedestrian.adult",
+        "s_m": 17.7,
+        "lat_m": 1.18,
+        "a_req": 0.479
+      },
+      {
+        "bbox_xyxy": [
+          675.1583534705951,
+          435.1692097852787,
+          721.6158910723738,
+          562.1158812845636
+        ],
+        "is_target": false,
+        "token": "4494f07521014bdd8d328966239575d0",
+        "cat": "human.pedestrian.adult",
+        "s_m": 19.8,
+        "lat_m": 1.87,
+        "a_req": 0.407
+      }
+    ]
+  },
+  {
+    "eid": "scene-0017_014_A",
+    "file": "scene-0017_014_A.jpg",
+    "n_mask_group": 4,
+    "n_boxes_drawn": 4,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          693.8268128720555,
+          441.6344954800409,
+          748.3552008850877,
+          566.7197126870609
+        ],
+        "is_target": true,
+        "token": "9e8a924e81aa42d2a8c812c37de1a856",
+        "cat": "human.pedestrian.adult",
+        "s_m": 18.1,
+        "lat_m": 1.89,
+        "a_req": 0.519
+      },
+      {
+        "bbox_xyxy": [
+          638.3218422240942,
+          437.0950504898694,
+          708.4893352633546,
+          572.8490443558414
+        ],
+        "is_target": false,
+        "token": "93ea8442be9b4e0d82d924f9c88f23c0",
+        "cat": "human.pedestrian.adult",
+        "s_m": 18.1,
+        "lat_m": 1.13,
+        "a_req": 0.581
+      },
+      {
+        "bbox_xyxy": [
+          616.4893936748821,
+          444.0924170330213,
+          675.5908153953017,
+          570.1875261828163
+        ],
+        "is_target": false,
+        "token": "06aa6ee6f2e24cbaa72f7b8620e5bfa1",
+        "cat": "human.pedestrian.adult",
+        "s_m": 19.1,
+        "lat_m": 0.87,
+        "a_req": 0.506
+      },
+      {
+        "bbox_xyxy": [
+          665.9067485543299,
+          439.69887538213914,
+          709.1630933398114,
+          557.9499147131086
+        ],
+        "is_target": false,
+        "token": "4494f07521014bdd8d328966239575d0",
+        "cat": "human.pedestrian.adult",
+        "s_m": 21.2,
+        "lat_m": 1.86,
+        "a_req": 0.438
+      }
+    ]
+  },
+  {
+    "eid": "scene-0710_001_D2c",
+    "file": "scene-0710_001_D2c.jpg",
+    "n_mask_group": 2,
+    "n_boxes_drawn": 2,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          878.0945853424677,
+          453.65741067474386,
+          955.0483005519828,
+          583.3780649710156
+        ],
+        "is_target": true,
+        "token": "ae0a52ad3ed04cf295999347c184dc22",
+        "cat": "human.pedestrian.adult",
+        "s_m": 19.1,
+        "lat_m": 0.09,
+        "a_req": 0.089
+      },
+      {
+        "bbox_xyxy": [
+          803.4121886179257,
+          449.3673075244843,
+          881.5884214232899,
+          587.8315363783928
+        ],
+        "is_target": false,
+        "token": "d1f1462d7300446c8f361b974214829a",
+        "cat": "human.pedestrian.adult",
+        "s_m": 19.1,
+        "lat_m": 0.97,
+        "a_req": 0.09
+      }
+    ]
+  },
+  {
+    "eid": "scene-0710_000_D2c",
+    "file": "scene-0710_000_D2c.jpg",
+    "n_mask_group": 2,
+    "n_boxes_drawn": 2,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          886.5664906885313,
+          449.0768118863737,
+          959.1365177079501,
+          578.4962788334096
+        ],
+        "is_target": true,
+        "token": "d1f1462d7300446c8f361b974214829a",
+        "cat": "human.pedestrian.adult",
+        "s_m": 20.6,
+        "lat_m": 0.05,
+        "a_req": 0.094
+      },
+      {
+        "bbox_xyxy": [
+          971.0893142049514,
+          453.7910887300829,
+          1045.0213234729324,
+          575.3161413222349
+        ],
+        "is_target": false,
+        "token": "ae0a52ad3ed04cf295999347c184dc22",
+        "cat": "human.pedestrian.adult",
+        "s_m": 20.6,
+        "lat_m": 1.32,
+        "a_req": 0.082
+      }
+    ]
+  },
+  {
+    "eid": "scene-0521_008_A",
+    "file": "scene-0521_008_A.jpg",
+    "n_mask_group": 3,
+    "n_boxes_drawn": 3,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          748.6257460000455,
+          460.29759613534594,
+          820.0021867982898,
+          582.6494338040425
+        ],
+        "is_target": false,
+        "token": "38a07710e45b4f6a845e934ea2f0dc83",
+        "cat": "human.pedestrian.adult",
+        "s_m": 19.7,
+        "lat_m": 1.24,
+        "a_req": 0.647
+      },
+      {
+        "bbox_xyxy": [
+          897.1593511480398,
+          455.35555666355776,
+          971.9135695981518,
+          569.8454943498251
+        ],
+        "is_target": true,
+        "token": "244f6a020bb74fa8a52a4750ebff1e59",
+        "cat": "human.pedestrian.adult",
+        "s_m": 21.8,
+        "lat_m": 1.1,
+        "a_req": 0.508
+      },
+      {
+        "bbox_xyxy": [
+          712.1478635444834,
+          457.5164017861425,
+          779.804305345359,
+          578.0290374684581
+        ],
+        "is_target": false,
+        "token": "2a5d7607b62a49b7a8bb4616639b4631",
+        "cat": "human.pedestrian.adult",
+        "s_m": 21.8,
+        "lat_m": 1.93,
+        "a_req": 0.541
+      }
+    ]
+  },
+  {
+    "eid": "scene-0521_007_A",
+    "file": "scene-0521_007_A.jpg",
+    "n_mask_group": 2,
+    "n_boxes_drawn": 2,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          875.3199102765399,
+          477.13004721083263,
+          929.5360757362766,
+          568.9348291441087
+        ],
+        "is_target": true,
+        "token": "38a07710e45b4f6a845e934ea2f0dc83",
+        "cat": "human.pedestrian.adult",
+        "s_m": 26.9,
+        "lat_m": 0.61,
+        "a_req": 0.741
+      },
+      {
+        "bbox_xyxy": [
+          834.0765356730593,
+          477.0450262615029,
+          884.1214957633119,
+          569.1819935328136
+        ],
+        "is_target": false,
+        "token": "2a5d7607b62a49b7a8bb4616639b4631",
+        "cat": "human.pedestrian.adult",
+        "s_m": 27.9,
+        "lat_m": 0.27,
+        "a_req": 0.695
+      }
+    ]
+  },
+  {
+    "eid": "scene-0952_002_D2c",
+    "file": "scene-0952_002_D2c.jpg",
+    "n_mask_group": 2,
+    "n_boxes_drawn": 2,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          849.1661009056969,
+          490.3224263978274,
+          914.6398441245192,
+          573.4365584404834
+        ],
+        "is_target": true,
+        "token": "0df6ee587eb34d39b32e151b9c46f09f",
+        "cat": "human.pedestrian.adult",
+        "s_m": 26.9,
+        "lat_m": 0.42,
+        "a_req": 0.183
+      },
+      {
+        "bbox_xyxy": [
+          940.6907838799535,
+          494.52581023537033,
+          982.6490166834997,
+          571.3533073233148
+        ],
+        "is_target": false,
+        "token": "14ee0fefd6024afc9f5c84df3b419ac0",
+        "cat": "human.pedestrian.adult",
+        "s_m": 26.9,
+        "lat_m": 1.18,
+        "a_req": 0.123
+      }
+    ]
+  },
+  {
+    "eid": "scene-0521_005_A",
+    "file": "scene-0521_005_A.jpg",
+    "n_mask_group": 1,
+    "n_boxes_drawn": 1,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          876.4114704694309,
+          472.9883674276322,
+          917.5826261071421,
+          548.4604038480027
+        ],
+        "is_target": true,
+        "token": "2a5d7607b62a49b7a8bb4616639b4631",
+        "cat": "human.pedestrian.adult",
+        "s_m": 33.7,
+        "lat_m": 1.04,
+        "a_req": 0.732
+      }
+    ]
+  },
+  {
+    "eid": "scene-0666_001_A",
+    "file": "scene-0666_001_A.jpg",
+    "n_mask_group": 1,
+    "n_boxes_drawn": 1,
+    "missing_projection": [],
+    "boxes": [
+      {
+        "bbox_xyxy": [
+          810.0948636713458,
+          469.53189214311857,
+          842.067313552976,
+          521.0043516395774
+        ],
+        "is_target": true,
+        "token": "f591051da9f4486baf096582810db4fd",
+        "cat": "human.pedestrian.adult",
+        "s_m": 46.5,
+        "lat_m": 1.8,
+        "a_req": 1.013
+      }
+    ]
+  }
+]
