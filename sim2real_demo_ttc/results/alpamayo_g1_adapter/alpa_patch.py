@@ -126,7 +126,7 @@ class AlpaPatchRunner:
         return self.r.covers(scene, t)
 
     @torch.no_grad()
-    def run_from_data(self, data, seed=None):
+    def run_from_data(self, data, seed=None, return_traj=False):
         """在**已构造好的 data**（可能已被遮挡过）上做一次前向 —— F-3 用。
 
         与 `run()` 共用同一条前向路径与同一个 seed 复位纪律，
@@ -146,7 +146,10 @@ class AlpaPatchRunner:
             pred_xyz, _r, _extra = self.r.model.sample_trajectories_from_data_with_vlm_rollout(
                 data=mi, top_p=0.98, temperature=0.6, num_traj_samples=1,
                 max_generation_length=256, return_extra=True)
-        return plan_speed(pred_xyz.float().cpu().numpy()[0, 0, 0])
+        traj = pred_xyz.float().cpu().numpy()[0, 0, 0]
+        # return_traj=False 时行为与首版逐位一致（F-3 速度版口径不受影响）；
+        # True 时额外交出完整规划轨迹，供距离读数使用。
+        return (plan_speed(traj), traj) if return_traj else plan_speed(traj)
 
     @torch.no_grad()
     def run(self, scene_name, t_sec, ego_anchor_t=None, seed=None):

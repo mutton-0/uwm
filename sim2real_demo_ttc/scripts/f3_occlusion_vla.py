@@ -65,6 +65,8 @@ def main():
     ap.add_argument("--limit", type=int, default=120, help="慢模型控成本：默认只跑前 120 个事件")
     ap.add_argument("--min-b", type=float, default=0.02)
     ap.add_argument("--device", default="cuda:0")
+    ap.add_argument("--save-traj", action="store_true",
+                    help="逐臂落盘**完整规划轨迹**（不只是第一步）；距离读数需要。默认关闭以保证既有产物逐位不变")
     ap.add_argument("--out", default="")
     args = ap.parse_args()
     LABEL = {"alpa": "Alpamayo-R1", "autovla": "AutoVLA"}[args.model]
@@ -104,13 +106,15 @@ def main():
             a = r.load(ev["scene_name"], ev["x_clean_frames"][0]["t"])
             data["ego_history_xyz"] = a["ego_history_xyz"]; data["ego_history_rot"] = a["ego_history_rot"]
             if mode is None:
-                return runner.run_from_data(data), 0
+                r = runner.run_from_data(data, return_traj=args.save_traj)
+                return (r[0], 0, np.asarray(r[1], float).tolist()) if args.save_traj else (r, 0, None)
             imf = data["image_frames"]                     # [n_cam, T, C, H, W]
             ts = np.asarray(data["absolute_timestamps"]) * 1e-6        # [n_cam, T]，µs -> s
             # 只遮两路前视；两路时间戳相同，取第一路作为窗口时间轴
             ref_row = next((r_ for r_ in FRONT_ROWS if r_ < imf.shape[0]), None)
             if ref_row is None:
-                return runner.run_from_data(data), 0
+                r = runner.run_from_data(data, return_traj=args.save_traj)
+                return (r[0], 0, np.asarray(r[1], float).tolist()) if args.save_traj else (r, 0, None)
             win_t = ts[ref_row].tolist()
             boxes = (WB.boxes_for(ev, win_t) if mode == "occ"
                      else [cbox] * len(win_t))             # 对照框逐帧同位置
@@ -122,7 +126,9 @@ def main():
                     if row < imf.shape[0]:
                         _fill(imf, row, ti, bx)
                 n_hit += 1
-            return runner.run_from_data(data), n_hit
+            r = runner.run_from_data(data, return_traj=args.save_traj)
+            return ((r[0], n_hit, np.asarray(r[1], float).tolist()) if args.save_traj
+                    else (r, n_hit, None))
 
         if not hasattr(runner, "run_from_data"):
             raise SystemExit("AlpaPatchRunner 需要 run_from_data（见 alpa_patch.py）")
@@ -155,7 +161,9 @@ def main():
             tok = ev[f"x_{cond}_frames"][0]["sd_token"]
             spd = float(np.mean([f["ego_speed_mps"] for f in ev["x_clean_frames"]]))
             if mode is None:
-                return runner.run(tok, spd)["commanded_speed"], 0
+                o = runner.run(tok, spd)
+                return (o["commanded_speed"], 0,
+                        np.asarray(o["trajectory"], float).tolist() if args.save_traj else None)
             win = _front_window(tok)
             boxes = (WB.boxes_for(ev, [t for _p, t in win]) if mode == "occ"
                      else [cbox] * len(win))
@@ -180,7 +188,9 @@ def main():
                 return d
             runner.temporal_paths = _patched
             try:
-                return runner.run(tok, spd)["commanded_speed"], n_hit
+                o = runner.run(tok, spd)
+                return (o["commanded_speed"], n_hit,
+                        np.asarray(o["trajectory"], float).tolist() if args.save_traj else None)
             finally:
                 runner.temporal_paths = orig
 
@@ -205,10 +215,10 @@ def main():
         if cb is None:
             skipped["no_control_box"] += 1; continue
         try:
-            v_clean, _ = run_with(ev, "clean")
-            v_ghost, _ = run_with(ev, "ghost")
-            v_occ, n_occ = run_with(ev, "ghost", "occ")
-            v_ctrl, n_ctrl = run_with(ev, "ghost", "ctrl", cb)
+            v_clean, _, tj_clean = run_with(ev, "clean")
+            v_ghost, _, tj_ghost = run_with(ev, "ghost")
+            v_occ, n_occ, tj_occ = run_with(ev, "ghost", "occ")
+            v_ctrl, n_ctrl, tj_ctrl = run_with(ev, "ghost", "ctrl", cb)
         except Exception as exc:                                     # noqa: BLE001
             skipped[f"fwd:{type(exc).__name__}"] += 1
             print(f"[F3/{LABEL}] FAIL {ev['event_id']}: {exc}"); continue
@@ -219,7 +229,11 @@ def main():
                      "v_clean": v_clean, "v_ghost": v_ghost, "v_occ": v_occ, "v_ctrl": v_ctrl,
                      "b_ghost": v_ghost - v_clean, "b_occ": v_occ - v_clean,
                      "b_ctrl": v_ctrl - v_clean,
-                     "n_frames_occluded": int(n_occ), "n_frames_ctrl": int(n_ctrl)})
+                     "n_frames_occluded": int(n_occ), "n_frames_ctrl": int(n_ctrl),
+                     **({"t_clean": ev["x_clean_frames"][0]["t"],
+                         "t_ghost": ev["x_ghost_frames"][0]["t"],
+                         "traj_clean": tj_clean, "traj_ghost": tj_ghost,
+                         "traj_occ": tj_occ, "traj_ctrl": tj_ctrl} if args.save_traj else {})})
         if (i + 1) % 20 == 0:
             print(f"[F3/{LABEL}] {i+1}/{len(evs)} done={len(recs)}", flush=True)
 
@@ -229,6 +243,7 @@ def main():
            "window_projection_stats": (WB.stats if WB else None),
            "control_arm": "同面积、同离心率带、不重叠的对照框",
            "n_events": len(recs), "n_limit": args.limit, "skipped": dict(skipped),
+           "save_traj": bool(args.save_traj),
            "per_event": recs}
     sc = [r["scene"] for r in recs]
     for k in ("b_ghost", "b_occ", "b_ctrl"):

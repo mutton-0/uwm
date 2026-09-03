@@ -126,6 +126,8 @@ def main():
                     help="DDv2 专用：同时删掉落在实体 3D 框内的点云点（§FM/A59）。"
                          "不开启时行为与旧版逐位一致（只涂 RGB）")
     ap.add_argument("--sl-config", default="/data/ruolin/uwm/sim2real_demo_ttc/configs/n1_d2.yaml")
+    ap.add_argument("--save-traj", action="store_true",
+                    help="逐臂落盘**完整规划轨迹**（不只是第一步）；距离读数需要。默认关闭以保证既有产物逐位不变")
     ap.add_argument("--out", default="")
     args = ap.parse_args()
     LABEL = {"dd": "DiffusionDrive", "ltf": "LTF", "ddv2": "DiffusionDriveV2",
@@ -201,7 +203,9 @@ def main():
 
         def infer(img, ev, fr, arm=None):
             kw = {} if lidar is None else {"lidar_xyz": _lidar_for(ev, fr, arm)}
-            return float(runner.run(img, spd(ev), **kw)["commanded_speed"])
+            r = runner.run(img, spd(ev), **kw)
+            return (float(r["commanded_speed"]),
+                    np.asarray(r["trajectory"], float).tolist() if args.save_traj else None)
     elif args.model == "simlingo":
         from omegaconf import OmegaConf
         sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -212,7 +216,9 @@ def main():
         runner = SimLingoRunner(cfg, capture_hidden=False)
 
         def infer(img, ev, fr, arm=None):
-            return float(commanded_speed(runner.infer(img, spd(ev), pool_modes=()).waypoints))
+            res = runner.infer(img, spd(ev), pool_modes=())
+            return (float(commanded_speed(res.waypoints)),
+                    np.asarray(res.waypoints, float).tolist() if args.save_traj else None)
     else:
         raise SystemExit("VLA 候选走 f3_occlusion_vla.py（多帧输入，接口不同）")
 
@@ -231,17 +237,20 @@ def main():
         cb = control_box(ig, bb, rng)
         if cb is None:
             skipped["no_control_box"] += 1; continue
-        v_clean = infer(ic, ev, fc)
-        v_ghost = infer(ig, ev, fg)
-        v_occ = infer(occlude(ig, bb), ev, fg, "occ")
-        v_ctrl = infer(occlude(ig, cb), ev, fg, "ctrl")
+        v_clean, tj_clean = infer(ic, ev, fc)
+        v_ghost, tj_ghost = infer(ig, ev, fg)
+        v_occ, tj_occ = infer(occlude(ig, bb), ev, fg, "occ")
+        v_ctrl, tj_ctrl = infer(occlude(ig, cb), ev, fg, "ctrl")
         if args.occlude_lidar:
             LID_STATS["events"] += 1
         recs.append({"eid": ev["event_id"], "scene": ev["scene_name"],
                      "v_clean": v_clean, "v_ghost": v_ghost, "v_occ": v_occ, "v_ctrl": v_ctrl,
                      "b_ghost": v_ghost - v_clean, "b_occ": v_occ - v_clean,
                      "b_ctrl": v_ctrl - v_clean,
-                     "bbox_area_frac": float((bb[2]-bb[0])*(bb[3]-bb[1]) / (ig.shape[0]*ig.shape[1]))})
+                     "bbox_area_frac": float((bb[2]-bb[0])*(bb[3]-bb[1]) / (ig.shape[0]*ig.shape[1])),
+                     **({"t_clean": fc["t"], "t_ghost": fg["t"],
+                         "traj_clean": tj_clean, "traj_ghost": tj_ghost,
+                         "traj_occ": tj_occ, "traj_ctrl": tj_ctrl} if args.save_traj else {})})
         if (i + 1) % 50 == 0:
             print(f"[F3/{LABEL}] {i+1}/{len(evs)}", flush=True)
 
@@ -249,7 +258,7 @@ def main():
            "occlusion": ("危险实体投影框涂为图像均值色（中性灰斑）"
                          + ("；**并删掉落在该实体 3D 框内的点云点**（§FM/A59）"
                             if args.occlude_lidar else "")),
-           "occlude_lidar": bool(args.occlude_lidar),
+           "occlude_lidar": bool(args.occlude_lidar), "save_traj": bool(args.save_traj),
            "control_arm": "同面积、同离心率带、不与原框重叠的对照框（隔离「加灰斑」这一效应）",
            "primary": "必要性比 R = 1 − b_occ / b_ghost；PASS 门槛：R 的 scene 级 CI 下界 > 0.5",
            "n_events": len(recs), "skipped": dict(skipped), "per_event": recs}
