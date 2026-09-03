@@ -1,0 +1,3356 @@
+[
+  {
+    "eid": "scene-0003_008_A",
+    "scene": "scene-0003",
+    "pool": "A",
+    "d_long_ghost_m": 17.760143047782954,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 1.6145536151343673,
+    "ego_speed_min_future_mps": 1.6145536151343673,
+    "lat_to_real_path_m": 0.7457698034869982,
+    "vru_area_px": 5557.001215126399,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 1,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        18.6,
+        "human.pedestrian.adult",
+        6965
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0003_009_A",
+    "scene": "scene-0003",
+    "pool": "A",
+    "d_long_ghost_m": 18.009371441299134,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 2.0878752412356607,
+    "ego_speed_min_future_mps": 2.0878752412356607,
+    "lat_to_real_path_m": 0.7213575786014769,
+    "vru_area_px": 7498.914801833027,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 1,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0003_011_A",
+    "scene": "scene-0003",
+    "pool": "A",
+    "d_long_ghost_m": 16.581855237180978,
+    "ego_delta_v_mps": -0.4548593321902459,
+    "ego_speed_ghost_mps": 2.774710462113054,
+    "ego_speed_min_future_mps": 2.319851129922808,
+    "lat_to_real_path_m": 0.8699454291902402,
+    "vru_area_px": 8947.55459072454,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 1,
+    "n_closer_in_corridor": 3,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        16.1,
+        "human.pedestrian.adult",
+        9582
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0004_024_A",
+    "scene": "scene-0004",
+    "pool": "A",
+    "d_long_ghost_m": 45.92372506810981,
+    "ego_delta_v_mps": -0.797882557196484,
+    "ego_speed_ghost_mps": 9.189393643355574,
+    "ego_speed_min_future_mps": 8.39151108615909,
+    "lat_to_real_path_m": 0.9674922583317597,
+    "vru_area_px": 1299.3775649797178,
+    "n_bigger_in_corridor": 10,
+    "n_barrier_cone": 12,
+    "n_closer_in_corridor": 12,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        5.3,
+        "movable_object.barrier",
+        297562
+      ],
+      [
+        7.4,
+        "movable_object.barrier",
+        123457
+      ],
+      [
+        9.6,
+        "movable_object.barrier",
+        60285
+      ],
+      [
+        11.7,
+        "movable_object.barrier",
+        36002
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0017_014_A",
+    "scene": "scene-0017",
+    "pool": "A",
+    "d_long_ghost_m": 19.125123007425522,
+    "ego_delta_v_mps": -4.08729707025085,
+    "ego_speed_ghost_mps": 4.106100347865464,
+    "ego_speed_min_future_mps": 0.018803277614614148,
+    "lat_to_real_path_m": 1.888482833802804,
+    "vru_area_px": 5657.41317601788,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 1,
+    "n_closer_in_corridor": 4,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        18.3,
+        "human.pedestrian.adult",
+        6086
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0017_015_A",
+    "scene": "scene-0017",
+    "pool": "A",
+    "d_long_ghost_m": 16.929800545291073,
+    "ego_delta_v_mps": -3.786696463468446,
+    "ego_speed_ghost_mps": 3.80549974108306,
+    "ego_speed_min_future_mps": 0.018803277614614148,
+    "lat_to_real_path_m": 1.410118676339341,
+    "vru_area_px": 7213.62410203868,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 1,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0017_016_A",
+    "scene": "scene-0017",
+    "pool": "A",
+    "d_long_ghost_m": 16.699522529975226,
+    "ego_delta_v_mps": -3.4160326496292797,
+    "ego_speed_ghost_mps": 3.4348359272438937,
+    "ego_speed_min_future_mps": 0.018803277614614148,
+    "lat_to_real_path_m": 1.4384432010604546,
+    "vru_area_px": 6120.223190491086,
+    "n_bigger_in_corridor": 3,
+    "n_barrier_cone": 1,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        15.9,
+        "human.pedestrian.adult",
+        8297
+      ],
+      [
+        16.9,
+        "human.pedestrian.adult",
+        7460
+      ],
+      [
+        17.7,
+        "human.pedestrian.adult",
+        6383
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0346_004_A",
+    "scene": "scene-0346",
+    "pool": "A",
+    "d_long_ghost_m": 26.349186103241987,
+    "ego_delta_v_mps": -0.9701780124784194,
+    "ego_speed_ghost_mps": 4.556545460676631,
+    "ego_speed_min_future_mps": 3.5863674481982115,
+    "lat_to_real_path_m": 1.2996719613835173,
+    "vru_area_px": 3508.375963018058,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        23.4,
+        "vehicle.car",
+        9845
+      ]
+    ],
+    "object_class": "vehicle.motorcycle"
+  },
+  {
+    "eid": "scene-0521_005_A",
+    "scene": "scene-0521",
+    "pool": "A",
+    "d_long_ghost_m": 33.837169518637914,
+    "ego_delta_v_mps": -4.640287572944705,
+    "ego_speed_ghost_mps": 6.834428904525615,
+    "ego_speed_min_future_mps": 2.1941413315809104,
+    "lat_to_real_path_m": 1.041295176751886,
+    "vru_area_px": 1958.5732930478707,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0521_007_A",
+    "scene": "scene-0521",
+    "pool": "A",
+    "d_long_ghost_m": 26.966378038461503,
+    "ego_delta_v_mps": -3.828448772180572,
+    "ego_speed_ghost_mps": 6.022590103761482,
+    "ego_speed_min_future_mps": 2.1941413315809104,
+    "lat_to_real_path_m": 0.6102353953199955,
+    "vru_area_px": 2281.835140952467,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        28.1,
+        "human.pedestrian.adult",
+        2906
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0521_008_A",
+    "scene": "scene-0521",
+    "pool": "A",
+    "d_long_ghost_m": 21.788182989859116,
+    "ego_delta_v_mps": -2.4481703679995954,
+    "ego_speed_ghost_mps": 4.642311699580506,
+    "ego_speed_min_future_mps": 2.1941413315809104,
+    "lat_to_real_path_m": 1.1044722006955408,
+    "vru_area_px": 5165.820005412159,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0544_004_A",
+    "scene": "scene-0544",
+    "pool": "A",
+    "d_long_ghost_m": 16.20948954901244,
+    "ego_delta_v_mps": -2.815616227276942,
+    "ego_speed_ghost_mps": 3.287828971395564,
+    "ego_speed_min_future_mps": 0.4722127441186222,
+    "lat_to_real_path_m": 0.6519789568694035,
+    "vru_area_px": 9918.499762836831,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0599_014_A",
+    "scene": "scene-0599",
+    "pool": "A",
+    "d_long_ghost_m": 30.28448665567263,
+    "ego_delta_v_mps": -0.32043022608941296,
+    "ego_speed_ghost_mps": 7.8877580082445995,
+    "ego_speed_min_future_mps": 7.5673277821551865,
+    "lat_to_real_path_m": 0.7322242401678735,
+    "vru_area_px": 3089.023967084326,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "vehicle.bicycle"
+  },
+  {
+    "eid": "scene-0653_005_A",
+    "scene": "scene-0653",
+    "pool": "A",
+    "d_long_ghost_m": 11.2192488786443,
+    "ego_delta_v_mps": -1.8457538006221181,
+    "ego_speed_ghost_mps": 1.8468405433590462,
+    "ego_speed_min_future_mps": 0.0010867427369280187,
+    "lat_to_real_path_m": 0.6049784076441792,
+    "vru_area_px": 25797.94490843347,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0653_006_A",
+    "scene": "scene-0653",
+    "pool": "A",
+    "d_long_ghost_m": 11.55713657988993,
+    "ego_delta_v_mps": -1.8150231425892323,
+    "ego_speed_ghost_mps": 1.8161098853261604,
+    "ego_speed_min_future_mps": 0.0010867427369280187,
+    "lat_to_real_path_m": 0.3596756740988923,
+    "vru_area_px": 23152.97547786997,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        10.3,
+        "human.pedestrian.adult",
+        31488
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0655_001_A",
+    "scene": "scene-0655",
+    "pool": "A",
+    "d_long_ghost_m": 47.040867930147975,
+    "ego_delta_v_mps": -2.3196159993260306,
+    "ego_speed_ghost_mps": 8.471715794416328,
+    "ego_speed_min_future_mps": 6.152099795090297,
+    "lat_to_real_path_m": 1.6957330774415122,
+    "vru_area_px": 770.8577851773513,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0666_001_A",
+    "scene": "scene-0666",
+    "pool": "A",
+    "d_long_ghost_m": 46.59472808608119,
+    "ego_delta_v_mps": -8.249075965343025,
+    "ego_speed_ghost_mps": 10.332975575197729,
+    "ego_speed_min_future_mps": 2.0838996098547033,
+    "lat_to_real_path_m": 1.7985086620062867,
+    "vru_area_px": 998.1114616362838,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0717_013_A",
+    "scene": "scene-0717",
+    "pool": "A",
+    "d_long_ghost_m": 12.882275675802475,
+    "ego_delta_v_mps": -2.444423714098037,
+    "ego_speed_ghost_mps": 2.4492979837619866,
+    "ego_speed_min_future_mps": 0.004874269663949491,
+    "lat_to_real_path_m": 0.9493710574766704,
+    "vru_area_px": 19737.07367448964,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 3,
+    "n_closer_in_corridor": 3,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        16.5,
+        "vehicle.car",
+        25526
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0717_015_A",
+    "scene": "scene-0717",
+    "pool": "A",
+    "d_long_ghost_m": 12.828303910635547,
+    "ego_delta_v_mps": -2.3811626397805243,
+    "ego_speed_ghost_mps": 2.3860369094444738,
+    "ego_speed_min_future_mps": 0.004874269663949491,
+    "lat_to_real_path_m": 1.1427528807490344,
+    "vru_area_px": 20470.179145576065,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 3,
+    "n_closer_in_corridor": 4,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        11.6,
+        "human.pedestrian.adult",
+        25108
+      ],
+      [
+        15.6,
+        "vehicle.car",
+        28993
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0848_003_A",
+    "scene": "scene-0848",
+    "pool": "A",
+    "d_long_ghost_m": 34.34602075080622,
+    "ego_delta_v_mps": -0.368891121741429,
+    "ego_speed_ghost_mps": 9.120678804297945,
+    "ego_speed_min_future_mps": 8.751787682556516,
+    "lat_to_real_path_m": 1.7646618549230557,
+    "vru_area_px": 1959.0082783273706,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0852_000_A",
+    "scene": "scene-0852",
+    "pool": "A",
+    "d_long_ghost_m": 46.540559025330666,
+    "ego_delta_v_mps": -0.10963479498010464,
+    "ego_speed_ghost_mps": 9.113165476303548,
+    "ego_speed_min_future_mps": 9.003530681323443,
+    "lat_to_real_path_m": 1.2240130162562846,
+    "vru_area_px": 959.3800023228657,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0862_000_A",
+    "scene": "scene-0862",
+    "pool": "A",
+    "d_long_ghost_m": 11.186456385366878,
+    "ego_delta_v_mps": -3.903299595409528,
+    "ego_speed_ghost_mps": 3.9037420724174767,
+    "ego_speed_min_future_mps": 0.00044247700794874896,
+    "lat_to_real_path_m": 0.8792213232665549,
+    "vru_area_px": 27043.79411967047,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0901_004_A",
+    "scene": "scene-0901",
+    "pool": "A",
+    "d_long_ghost_m": 26.13858617054939,
+    "ego_delta_v_mps": -0.6340208126807205,
+    "ego_speed_ghost_mps": 5.645981438520689,
+    "ego_speed_min_future_mps": 5.0119606258399685,
+    "lat_to_real_path_m": 1.3011660833715986,
+    "vru_area_px": 4419.840610873879,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-1094_015_A",
+    "scene": "scene-1094",
+    "pool": "A",
+    "d_long_ghost_m": 39.240114660223945,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 8.09997556221983,
+    "ego_speed_min_future_mps": 8.09997556221983,
+    "lat_to_real_path_m": 1.4164589376477028,
+    "vru_area_px": 1723.1958731527968,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        23.9,
+        "vehicle.car",
+        10949
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0026_002_D",
+    "scene": "scene-0026",
+    "pool": "Dcla",
+    "d_long_ghost_m": 69.25529867816027,
+    "ego_delta_v_mps": -3.944649297730233,
+    "ego_speed_ghost_mps": 7.2280385493973345,
+    "ego_speed_min_future_mps": 3.2833892516671015,
+    "lat_to_real_path_m": 0.8892416872800414,
+    "vru_area_px": 466.2514105779313,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "vehicle.motorcycle"
+  },
+  {
+    "eid": "scene-0076_000_D",
+    "scene": "scene-0076",
+    "pool": "Dcla",
+    "d_long_ghost_m": 45.056927920672734,
+    "ego_delta_v_mps": -1.9190960629266334,
+    "ego_speed_ghost_mps": 6.072815247777458,
+    "ego_speed_min_future_mps": 4.153719184850825,
+    "lat_to_real_path_m": 1.8248701361029926,
+    "vru_area_px": 1384.2261374693717,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "vehicle.bicycle"
+  },
+  {
+    "eid": "scene-0370_004_D",
+    "scene": "scene-0370",
+    "pool": "Dcla",
+    "d_long_ghost_m": 97.6867279608283,
+    "ego_delta_v_mps": -0.3235479284738396,
+    "ego_speed_ghost_mps": 10.428792894797,
+    "ego_speed_min_future_mps": 10.105244966323161,
+    "lat_to_real_path_m": 1.9998838294667898,
+    "vru_area_px": 205.42906108806696,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-1070_004_D",
+    "scene": "scene-1070",
+    "pool": "Dcla",
+    "d_long_ghost_m": 66.53816909800592,
+    "ego_delta_v_mps": -2.3917746565393028,
+    "ego_speed_ghost_mps": 11.732839075637575,
+    "ego_speed_min_future_mps": 9.341064419098272,
+    "lat_to_real_path_m": 0.3718424705638769,
+    "vru_area_px": 649.1974896667244,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        16.2,
+        "vehicle.car",
+        20121
+      ]
+    ],
+    "object_class": "vehicle.motorcycle"
+  },
+  {
+    "eid": "scene-1087_000_D",
+    "scene": "scene-1087",
+    "pool": "Dcla",
+    "d_long_ghost_m": 55.84370248623738,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 4.501364546876401,
+    "ego_speed_min_future_mps": 4.501364546876401,
+    "lat_to_real_path_m": 1.0487904768435112,
+    "vru_area_px": 628.3330303018205,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0071_003_D2b",
+    "scene": "scene-0071",
+    "pool": "D2b",
+    "d_long_ghost_m": 62.526888517155555,
+    "ego_delta_v_mps": -3.965900039761773,
+    "ego_speed_ghost_mps": 6.030484374679767,
+    "ego_speed_min_future_mps": 2.0645843349179938,
+    "lat_to_real_path_m": 0.807995713479174,
+    "vru_area_px": 540.8350248291802,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        58.2,
+        "vehicle.car",
+        1585
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0071_004_D2b",
+    "scene": "scene-0071",
+    "pool": "D2b",
+    "d_long_ghost_m": 51.33045304822691,
+    "ego_delta_v_mps": -3.979914107111031,
+    "ego_speed_ghost_mps": 6.044498442029025,
+    "ego_speed_min_future_mps": 2.0645843349179938,
+    "lat_to_real_path_m": 0.9934220962313094,
+    "vru_area_px": 493.09947330549136,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        45.7,
+        "movable_object.debris",
+        787
+      ],
+      [
+        50.0,
+        "vehicle.construction",
+        8283
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-1090_000_D2b",
+    "scene": "scene-1090",
+    "pool": "D2b",
+    "d_long_ghost_m": 76.44654927323889,
+    "ego_delta_v_mps": -0.5194565710253052,
+    "ego_speed_ghost_mps": 6.739637980878495,
+    "ego_speed_min_future_mps": 6.22018140985319,
+    "lat_to_real_path_m": 1.985861362811369,
+    "vru_area_px": 312.1530341069487,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0017_019_D2c",
+    "scene": "scene-0017",
+    "pool": "D2c",
+    "d_long_ghost_m": 10.958854652026153,
+    "ego_delta_v_mps": -0.992294857304835,
+    "ego_speed_ghost_mps": 1.0110981349194492,
+    "ego_speed_min_future_mps": 0.018803277614614148,
+    "lat_to_real_path_m": 1.0407123235591678,
+    "vru_area_px": 25685.525339944183,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0024_003_D2c",
+    "scene": "scene-0024",
+    "pool": "D2c",
+    "d_long_ghost_m": 46.41771350407049,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 0.17051977169194998,
+    "ego_speed_min_future_mps": 0.17051977169194998,
+    "lat_to_real_path_m": 1.0637195043365293,
+    "vru_area_px": 771.555653339753,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        45.8,
+        "human.pedestrian.adult",
+        1097
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0024_004_D2c",
+    "scene": "scene-0024",
+    "pool": "D2c",
+    "d_long_ghost_m": 45.550959254403054,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 0.5387644592999935,
+    "ego_speed_min_future_mps": 0.5387644592999935,
+    "lat_to_real_path_m": 1.1333895373375025,
+    "vru_area_px": 1110.7008081369047,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0026_000_D2c",
+    "scene": "scene-0026",
+    "pool": "D2c",
+    "d_long_ghost_m": 43.937229917156294,
+    "ego_delta_v_mps": -0.026276115096444563,
+    "ego_speed_ghost_mps": 4.606271500984488,
+    "ego_speed_min_future_mps": 4.579995385888044,
+    "lat_to_real_path_m": 0.4110226974668067,
+    "vru_area_px": 793.2453571951424,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        43.4,
+        "human.pedestrian.adult",
+        982
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0028_006_D2c",
+    "scene": "scene-0028",
+    "pool": "D2c",
+    "d_long_ghost_m": 6.658789774189597,
+    "ego_delta_v_mps": -0.0004781572422914486,
+    "ego_speed_ghost_mps": 0.001102014924401432,
+    "ego_speed_min_future_mps": 0.0006238576821099834,
+    "lat_to_real_path_m": 1.5542791628406756,
+    "vru_area_px": 43964.49450086329,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0028_007_D2c",
+    "scene": "scene-0028",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.335426154252868,
+    "ego_delta_v_mps": -0.00022262460141099884,
+    "ego_speed_ghost_mps": 0.0008464822835209823,
+    "ego_speed_min_future_mps": 0.0006238576821099834,
+    "lat_to_real_path_m": 1.5684224787317729,
+    "vru_area_px": 26835.942028618843,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        6.9,
+        "human.pedestrian.adult",
+        39455
+      ],
+      [
+        7.6,
+        "human.pedestrian.adult",
+        37365
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0028_008_D2c",
+    "scene": "scene-0028",
+    "pool": "D2c",
+    "d_long_ghost_m": 7.560216984439354,
+    "ego_delta_v_mps": -0.00022262460141099884,
+    "ego_speed_ghost_mps": 0.0008464822835209823,
+    "ego_speed_min_future_mps": 0.0006238576821099834,
+    "lat_to_real_path_m": 1.4981979326254298,
+    "vru_area_px": 37364.54777634551,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        6.9,
+        "human.pedestrian.adult",
+        39455
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0067_018_D2c",
+    "scene": "scene-0067",
+    "pool": "D2c",
+    "d_long_ghost_m": 10.767551622389327,
+    "ego_delta_v_mps": -0.47925316326528766,
+    "ego_speed_ghost_mps": 0.48673973625915923,
+    "ego_speed_min_future_mps": 0.007486572993871556,
+    "lat_to_real_path_m": 1.450914417385081,
+    "vru_area_px": 29501.60071159292,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0130_000_D2c",
+    "scene": "scene-0130",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.816557724496844,
+    "ego_delta_v_mps": -7.577724573541105e-06,
+    "ego_speed_ghost_mps": 3.820905639858601e-05,
+    "ego_speed_min_future_mps": 3.0631331825044904e-05,
+    "lat_to_real_path_m": 1.2952020212942161,
+    "vru_area_px": 30624.109392391154,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.1,
+        "human.pedestrian.adult",
+        35573
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0130_001_D2c",
+    "scene": "scene-0130",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.07493799636794,
+    "ego_delta_v_mps": -7.577724573541105e-06,
+    "ego_speed_ghost_mps": 3.820905639858601e-05,
+    "ego_speed_min_future_mps": 3.0631331825044904e-05,
+    "lat_to_real_path_m": 1.2365298614760576,
+    "vru_area_px": 35573.29988331079,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0158_014_D2c",
+    "scene": "scene-0158",
+    "pool": "D2c",
+    "d_long_ghost_m": 25.409078891026155,
+    "ego_delta_v_mps": -0.7745219346732486,
+    "ego_speed_ghost_mps": 2.57983437445481,
+    "ego_speed_min_future_mps": 1.8053124397815612,
+    "lat_to_real_path_m": 1.8970916267930238,
+    "vru_area_px": 3947.004632584142,
+    "n_bigger_in_corridor": 4,
+    "n_barrier_cone": 3,
+    "n_closer_in_corridor": 4,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        13.4,
+        "movable_object.barrier",
+        30106
+      ],
+      [
+        15.5,
+        "movable_object.barrier",
+        20424
+      ],
+      [
+        16.2,
+        "movable_object.barrier",
+        20042
+      ],
+      [
+        17.3,
+        "human.pedestrian.construction_worker",
+        7099
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0218_007_D2c",
+    "scene": "scene-0218",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.030623231342435,
+    "ego_delta_v_mps": -5.281322350209365e-06,
+    "ego_speed_ghost_mps": 5.302488939959502e-06,
+    "ego_speed_min_future_mps": 2.116658975013713e-08,
+    "lat_to_real_path_m": 1.9555759838417395,
+    "vru_area_px": 46283.01982127549,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        7.0,
+        "human.pedestrian.adult",
+        72981
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0231_005_D2c",
+    "scene": "scene-0231",
+    "pool": "D2c",
+    "d_long_ghost_m": 13.591537614958028,
+    "ego_delta_v_mps": -0.020437015798991924,
+    "ego_speed_ghost_mps": 0.021613006147267137,
+    "ego_speed_min_future_mps": 0.0011759903482752116,
+    "lat_to_real_path_m": 1.486230773515032,
+    "vru_area_px": 13170.37149180064,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 3,
+    "n_closer_in_corridor": 3,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        12.6,
+        "human.pedestrian.adult",
+        15582
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0231_006_D2c",
+    "scene": "scene-0231",
+    "pool": "D2c",
+    "d_long_ghost_m": 12.586367136010532,
+    "ego_delta_v_mps": -0.012622205921798047,
+    "ego_speed_ghost_mps": 0.01374950671230607,
+    "ego_speed_min_future_mps": 0.0011273007905080229,
+    "lat_to_real_path_m": 1.3909762230591445,
+    "vru_area_px": 15637.480292759832,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 3,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0233_003_D2c",
+    "scene": "scene-0233",
+    "pool": "D2c",
+    "d_long_ghost_m": 4.211638716601845,
+    "ego_delta_v_mps": -0.000644331194496828,
+    "ego_speed_ghost_mps": 0.000678478010698324,
+    "ego_speed_min_future_mps": 3.4146816201496026e-05,
+    "lat_to_real_path_m": 0.7971525912162742,
+    "vru_area_px": 390495.1585540045,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0239_003_D2c",
+    "scene": "scene-0239",
+    "pool": "D2c",
+    "d_long_ghost_m": 16.109078797835437,
+    "ego_delta_v_mps": -5.713433414426986e-06,
+    "ego_speed_ghost_mps": 5.878526794237424e-06,
+    "ego_speed_min_future_mps": 1.650933798104389e-07,
+    "lat_to_real_path_m": 0.45381641513611265,
+    "vru_area_px": 10991.943848683619,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        16.7,
+        "vehicle.car",
+        34008
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0239_004_D2c",
+    "scene": "scene-0239",
+    "pool": "D2c",
+    "d_long_ghost_m": 10.697851933309273,
+    "ego_delta_v_mps": -1.989449727831823e-06,
+    "ego_speed_ghost_mps": 2.1585515618598586e-06,
+    "ego_speed_min_future_mps": 1.6910183402803569e-07,
+    "lat_to_real_path_m": 1.5004349665532843,
+    "vru_area_px": 23198.798305771757,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0241_002_D2c",
+    "scene": "scene-0241",
+    "pool": "D2c",
+    "d_long_ghost_m": 36.096075240260056,
+    "ego_delta_v_mps": -1.146003551269496,
+    "ego_speed_ghost_mps": 2.910814967485105,
+    "ego_speed_min_future_mps": 1.7648114162156092,
+    "lat_to_real_path_m": 0.716985279985801,
+    "vru_area_px": 1146.2212269368943,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        26.2,
+        "vehicle.truck",
+        27260
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0244_008_D2c",
+    "scene": "scene-0244",
+    "pool": "D2c",
+    "d_long_ghost_m": 17.10857202696164,
+    "ego_delta_v_mps": -0.0008782144525348987,
+    "ego_speed_ghost_mps": 0.0015145933496815566,
+    "ego_speed_min_future_mps": 0.0006363788971466579,
+    "lat_to_real_path_m": 1.2428688996567416,
+    "vru_area_px": 8673.336077024227,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 3,
+    "n_closer_in_corridor": 4,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.8,
+        "vehicle.car",
+        70815
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0262_000_D2c",
+    "scene": "scene-0262",
+    "pool": "D2c",
+    "d_long_ghost_m": 6.953431600835467,
+    "ego_delta_v_mps": -0.15748550861587043,
+    "ego_speed_ghost_mps": 0.16228994613319003,
+    "ego_speed_min_future_mps": 0.0048044375173195856,
+    "lat_to_real_path_m": 1.5262512248112698,
+    "vru_area_px": 83404.10843035606,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0297_000_D2c",
+    "scene": "scene-0297",
+    "pool": "D2c",
+    "d_long_ghost_m": 4.513655987152111,
+    "ego_delta_v_mps": -0.005529512632387007,
+    "ego_speed_ghost_mps": 0.005760753957342459,
+    "ego_speed_min_future_mps": 0.0002312413249554526,
+    "lat_to_real_path_m": 0.4409008548061879,
+    "vru_area_px": 301940.74812687375,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0301_000_D2c",
+    "scene": "scene-0301",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.511868149651626,
+    "ego_delta_v_mps": -0.0006839379040766402,
+    "ego_speed_ghost_mps": 0.0007293144775042356,
+    "ego_speed_min_future_mps": 4.5376573427595406e-05,
+    "lat_to_real_path_m": 1.3546498744826778,
+    "vru_area_px": 41422.229928024106,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0323_000_D2c",
+    "scene": "scene-0323",
+    "pool": "D2c",
+    "d_long_ghost_m": 7.686480254547592,
+    "ego_delta_v_mps": -0.00021413614247245533,
+    "ego_speed_ghost_mps": 0.00021942183979443188,
+    "ego_speed_min_future_mps": 5.285697321976546e-06,
+    "lat_to_real_path_m": 1.3441370091031686,
+    "vru_area_px": 46807.07840022415,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0323_004_D2c",
+    "scene": "scene-0323",
+    "pool": "D2c",
+    "d_long_ghost_m": 6.66774326134383,
+    "ego_delta_v_mps": -5.0467932550939786e-05,
+    "ego_speed_ghost_mps": 5.204904630295209e-05,
+    "ego_speed_min_future_mps": 1.5811137520123018e-06,
+    "lat_to_real_path_m": 1.4180146434354157,
+    "vru_area_px": 72634.14222192261,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0323_006_D2c",
+    "scene": "scene-0323",
+    "pool": "D2c",
+    "d_long_ghost_m": 7.614079574860741,
+    "ego_delta_v_mps": -7.612858450710075e-05,
+    "ego_speed_ghost_mps": 7.770969825911304e-05,
+    "ego_speed_min_future_mps": 1.5811137520123018e-06,
+    "lat_to_real_path_m": 1.6017984492395587,
+    "vru_area_px": 56116.375511334285,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        6.7,
+        "human.pedestrian.adult",
+        72163
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0323_007_D2c",
+    "scene": "scene-0323",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.416567606990869,
+    "ego_delta_v_mps": -0.00016482850294684512,
+    "ego_speed_ghost_mps": 0.0001664096166988574,
+    "ego_speed_min_future_mps": 1.5811137520123018e-06,
+    "lat_to_real_path_m": 1.4432789398425208,
+    "vru_area_px": 46103.38215355543,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        6.6,
+        "human.pedestrian.adult",
+        72995
+      ],
+      [
+        7.4,
+        "human.pedestrian.adult",
+        60321
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0323_009_D2c",
+    "scene": "scene-0323",
+    "pool": "D2c",
+    "d_long_ghost_m": 16.652504465364444,
+    "ego_delta_v_mps": -0.00012174777403991112,
+    "ego_speed_ghost_mps": 0.00012590937722325475,
+    "ego_speed_min_future_mps": 4.161603183343637e-06,
+    "lat_to_real_path_m": 1.5236380675696914,
+    "vru_area_px": 8197.991080380689,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0323_010_D2c",
+    "scene": "scene-0323",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.02553990102144,
+    "ego_delta_v_mps": -0.00020363073744276912,
+    "ego_speed_ghost_mps": 0.00020779234062611276,
+    "ego_speed_min_future_mps": 4.161603183343637e-06,
+    "lat_to_real_path_m": 1.4122708056118798,
+    "vru_area_px": 68106.59130384211,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0323_011_D2c",
+    "scene": "scene-0323",
+    "pool": "D2c",
+    "d_long_ghost_m": 7.2931542142019055,
+    "ego_delta_v_mps": -0.0001705387574618077,
+    "ego_speed_ghost_mps": 0.00017470036064515135,
+    "ego_speed_min_future_mps": 4.161603183343637e-06,
+    "lat_to_real_path_m": 1.36883964573705,
+    "vru_area_px": 63573.635714867145,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        8.0,
+        "human.pedestrian.adult",
+        68058
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0355_006_D2c",
+    "scene": "scene-0355",
+    "pool": "D2c",
+    "d_long_ghost_m": 5.678479668892729,
+    "ego_delta_v_mps": -3.6469985089794717e-06,
+    "ego_speed_ghost_mps": 6.6511139000660344e-06,
+    "ego_speed_min_future_mps": 3.0041153910865627e-06,
+    "lat_to_real_path_m": 1.4469532684985276,
+    "vru_area_px": 312811.89095766016,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 5,
+    "n_closer_in_corridor": 3,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.construction_worker"
+  },
+  {
+    "eid": "scene-0356_008_D2c",
+    "scene": "scene-0356",
+    "pool": "D2c",
+    "d_long_ghost_m": 12.206140160384763,
+    "ego_delta_v_mps": -0.010396009203504145,
+    "ego_speed_ghost_mps": 0.010784272355070533,
+    "ego_speed_min_future_mps": 0.0003882631515663882,
+    "lat_to_real_path_m": 1.856437530609948,
+    "vru_area_px": 12827.847707314275,
+    "n_bigger_in_corridor": 3,
+    "n_barrier_cone": 7,
+    "n_closer_in_corridor": 7,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        6.8,
+        "movable_object.barrier",
+        122058
+      ],
+      [
+        8.9,
+        "movable_object.barrier",
+        63891
+      ],
+      [
+        10.9,
+        "movable_object.barrier",
+        39390
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0356_014_D2c",
+    "scene": "scene-0356",
+    "pool": "D2c",
+    "d_long_ghost_m": 12.759746143537802,
+    "ego_delta_v_mps": -0.002524812673835752,
+    "ego_speed_ghost_mps": 0.002903550973613579,
+    "ego_speed_min_future_mps": 0.00037873829977782696,
+    "lat_to_real_path_m": 1.5964216830471971,
+    "vru_area_px": 12279.91058024457,
+    "n_bigger_in_corridor": 4,
+    "n_barrier_cone": 7,
+    "n_closer_in_corridor": 8,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        6.8,
+        "movable_object.barrier",
+        122021
+      ],
+      [
+        8.9,
+        "movable_object.barrier",
+        63878
+      ],
+      [
+        10.4,
+        "human.pedestrian.adult",
+        18813
+      ],
+      [
+        10.9,
+        "movable_object.barrier",
+        39384
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0356_015_D2c",
+    "scene": "scene-0356",
+    "pool": "D2c",
+    "d_long_ghost_m": 13.39193238538834,
+    "ego_delta_v_mps": -0.002524812673835752,
+    "ego_speed_ghost_mps": 0.002903550973613579,
+    "ego_speed_min_future_mps": 0.00037873829977782696,
+    "lat_to_real_path_m": 1.693947326678241,
+    "vru_area_px": 11343.006248986661,
+    "n_bigger_in_corridor": 5,
+    "n_barrier_cone": 7,
+    "n_closer_in_corridor": 9,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        6.8,
+        "movable_object.barrier",
+        122021
+      ],
+      [
+        8.9,
+        "movable_object.barrier",
+        63878
+      ],
+      [
+        10.4,
+        "human.pedestrian.adult",
+        18813
+      ],
+      [
+        10.9,
+        "movable_object.barrier",
+        39384
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0356_018_D2c",
+    "scene": "scene-0356",
+    "pool": "D2c",
+    "d_long_ghost_m": 12.234992582641958,
+    "ego_delta_v_mps": -0.0010672982500669254,
+    "ego_speed_ghost_mps": 0.0014460365498447523,
+    "ego_speed_min_future_mps": 0.00037873829977782696,
+    "lat_to_real_path_m": 1.8950588200700833,
+    "vru_area_px": 8042.75661171076,
+    "n_bigger_in_corridor": 6,
+    "n_barrier_cone": 7,
+    "n_closer_in_corridor": 9,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        6.8,
+        "movable_object.barrier",
+        122012
+      ],
+      [
+        8.9,
+        "movable_object.barrier",
+        63875
+      ],
+      [
+        10.9,
+        "movable_object.barrier",
+        39383
+      ],
+      [
+        11.5,
+        "human.pedestrian.adult",
+        15620
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0357_006_D2c",
+    "scene": "scene-0357",
+    "pool": "D2c",
+    "d_long_ghost_m": 14.011680535317963,
+    "ego_delta_v_mps": -2.4822848726681214e-05,
+    "ego_speed_ghost_mps": 2.6478104608569277e-05,
+    "ego_speed_min_future_mps": 1.6552558818880617e-06,
+    "lat_to_real_path_m": 1.3485124786691498,
+    "vru_area_px": 12901.026135144275,
+    "n_bigger_in_corridor": 4,
+    "n_barrier_cone": 7,
+    "n_closer_in_corridor": 10,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        6.9,
+        "movable_object.barrier",
+        123330
+      ],
+      [
+        8.9,
+        "movable_object.barrier",
+        67806
+      ],
+      [
+        11.0,
+        "movable_object.barrier",
+        48839
+      ],
+      [
+        12.0,
+        "human.pedestrian.adult",
+        14990
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0364_003_D2c",
+    "scene": "scene-0364",
+    "pool": "D2c",
+    "d_long_ghost_m": 48.86910161724751,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 6.031880979510337,
+    "ego_speed_min_future_mps": 6.031880979510337,
+    "lat_to_real_path_m": 1.590336756133359,
+    "vru_area_px": 814.9275031849954,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "vehicle.bicycle"
+  },
+  {
+    "eid": "scene-0425_002_D2c",
+    "scene": "scene-0425",
+    "pool": "D2c",
+    "d_long_ghost_m": 36.22399990933181,
+    "ego_delta_v_mps": -0.09649243087504678,
+    "ego_speed_ghost_mps": 2.0404775393298125,
+    "ego_speed_min_future_mps": 1.9439851084547657,
+    "lat_to_real_path_m": 1.6223197822463695,
+    "vru_area_px": 2340.5278570444543,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0464_001_D2c",
+    "scene": "scene-0464",
+    "pool": "D2c",
+    "d_long_ghost_m": 10.070929368237548,
+    "ego_delta_v_mps": -8.243766562316418e-06,
+    "ego_speed_ghost_mps": 8.681261728679037e-06,
+    "ego_speed_min_future_mps": 4.37495166362619e-07,
+    "lat_to_real_path_m": 1.517265255865729,
+    "vru_area_px": 68972.62607422647,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0464_006_D2c",
+    "scene": "scene-0464",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.89805911755131,
+    "ego_delta_v_mps": -7.372490265131165e-07,
+    "ego_speed_ghost_mps": 8.767527659210214e-07,
+    "ego_speed_min_future_mps": 1.395037394079048e-07,
+    "lat_to_real_path_m": 1.3087959798925777,
+    "vru_area_px": 48884.34656654734,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0477_007_D2c",
+    "scene": "scene-0477",
+    "pool": "D2c",
+    "d_long_ghost_m": 37.30693912127939,
+    "ego_delta_v_mps": -4.435958335748914,
+    "ego_speed_ghost_mps": 4.437927045730773,
+    "ego_speed_min_future_mps": 0.001968709981858763,
+    "lat_to_real_path_m": 1.7525065489543712,
+    "vru_area_px": 1519.0667780800443,
+    "n_bigger_in_corridor": 3,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 3,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        25.4,
+        "vehicle.car",
+        10525
+      ],
+      [
+        40.0,
+        "human.pedestrian.adult",
+        2120
+      ],
+      [
+        41.2,
+        "human.pedestrian.adult",
+        1850
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0477_008_D2c",
+    "scene": "scene-0477",
+    "pool": "D2c",
+    "d_long_ghost_m": 35.10495633847009,
+    "ego_delta_v_mps": -4.435958335748914,
+    "ego_speed_ghost_mps": 4.437927045730773,
+    "ego_speed_min_future_mps": 0.001968709981858763,
+    "lat_to_real_path_m": 0.8656522360543731,
+    "vru_area_px": 1497.9221384841096,
+    "n_bigger_in_corridor": 4,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        25.4,
+        "vehicle.car",
+        10525
+      ],
+      [
+        37.3,
+        "human.pedestrian.adult",
+        1519
+      ],
+      [
+        40.0,
+        "human.pedestrian.adult",
+        2120
+      ],
+      [
+        41.2,
+        "human.pedestrian.adult",
+        1850
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0477_009_D2c",
+    "scene": "scene-0477",
+    "pool": "D2c",
+    "d_long_ghost_m": 35.017033238859504,
+    "ego_delta_v_mps": -4.282498131422918,
+    "ego_speed_ghost_mps": 4.284466841404777,
+    "ego_speed_min_future_mps": 0.001968709981858763,
+    "lat_to_real_path_m": 0.9718239812890042,
+    "vru_area_px": 1442.3487942343816,
+    "n_bigger_in_corridor": 5,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        24.3,
+        "vehicle.car",
+        11584
+      ],
+      [
+        34.1,
+        "human.pedestrian.adult",
+        1594
+      ],
+      [
+        36.3,
+        "human.pedestrian.adult",
+        1611
+      ],
+      [
+        39.1,
+        "human.pedestrian.adult",
+        2226
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0477_011_D2c",
+    "scene": "scene-0477",
+    "pool": "D2c",
+    "d_long_ghost_m": 30.92364027076692,
+    "ego_delta_v_mps": -3.5335461274627105,
+    "ego_speed_ghost_mps": 3.5355148374445693,
+    "ego_speed_min_future_mps": 0.001968709981858763,
+    "lat_to_real_path_m": 1.396378915542738,
+    "vru_area_px": 2675.7682719456493,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 3,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        19.5,
+        "vehicle.car",
+        18634
+      ],
+      [
+        35.3,
+        "human.pedestrian.adult",
+        2754
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0501_017_D2c",
+    "scene": "scene-0501",
+    "pool": "D2c",
+    "d_long_ghost_m": 14.849341617907845,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 1.5513732142157155,
+    "ego_speed_min_future_mps": 1.5513732142157155,
+    "lat_to_real_path_m": 1.8044599234678498,
+    "vru_area_px": 13294.78601447064,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.construction_worker"
+  },
+  {
+    "eid": "scene-0518_016_D2c",
+    "scene": "scene-0518",
+    "pool": "D2c",
+    "d_long_ghost_m": 14.66709738750055,
+    "ego_delta_v_mps": -1.1369243004875231,
+    "ego_speed_ghost_mps": 1.6534156125713664,
+    "ego_speed_min_future_mps": 0.5164913120838432,
+    "lat_to_real_path_m": 0.2913947758935743,
+    "vru_area_px": 12971.000030350062,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        13.3,
+        "human.pedestrian.adult",
+        15186
+      ],
+      [
+        17.0,
+        "vehicle.car",
+        30388
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0518_019_D2c",
+    "scene": "scene-0518",
+    "pool": "D2c",
+    "d_long_ghost_m": 14.826480180593553,
+    "ego_delta_v_mps": -0.6152556535498468,
+    "ego_speed_ghost_mps": 1.13174696563369,
+    "ego_speed_min_future_mps": 0.5164913120838432,
+    "lat_to_real_path_m": 1.1642163007738775,
+    "vru_area_px": 11616.527946381762,
+    "n_bigger_in_corridor": 3,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        12.1,
+        "human.pedestrian.adult",
+        19107
+      ],
+      [
+        13.4,
+        "human.pedestrian.adult",
+        15835
+      ],
+      [
+        15.7,
+        "vehicle.car",
+        36155
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0532_006_D2c",
+    "scene": "scene-0532",
+    "pool": "D2c",
+    "d_long_ghost_m": 14.678121387597926,
+    "ego_delta_v_mps": -0.00012130141144753813,
+    "ego_speed_ghost_mps": 0.00035834744952714296,
+    "ego_speed_min_future_mps": 0.00023704603807960482,
+    "lat_to_real_path_m": 0.9295456028477149,
+    "vru_area_px": 10519.057525379663,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "vehicle.bicycle"
+  },
+  {
+    "eid": "scene-0539_001_D2c",
+    "scene": "scene-0539",
+    "pool": "D2c",
+    "d_long_ghost_m": 46.66432465908193,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 1.4792969858373841,
+    "ego_speed_min_future_mps": 1.4792969858373841,
+    "lat_to_real_path_m": 0.9290490590558779,
+    "vru_area_px": 1073.7652907474912,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0539_002_D2c",
+    "scene": "scene-0539",
+    "pool": "D2c",
+    "d_long_ghost_m": 49.340830481272086,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 2.27700960396114,
+    "ego_speed_min_future_mps": 2.27700960396114,
+    "lat_to_real_path_m": 1.3139490325191576,
+    "vru_area_px": 889.5888805479113,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        45.6,
+        "human.pedestrian.adult",
+        1128
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0539_004_D2c",
+    "scene": "scene-0539",
+    "pool": "D2c",
+    "d_long_ghost_m": 49.04105539867143,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 3.12735929180754,
+    "ego_speed_min_future_mps": 3.12735929180754,
+    "lat_to_real_path_m": 1.6020278508258183,
+    "vru_area_px": 900.908104970479,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        44.2,
+        "human.pedestrian.adult",
+        1200
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0553_007_D2c",
+    "scene": "scene-0553",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.035733868391583,
+    "ego_delta_v_mps": -2.766963235375232e-05,
+    "ego_speed_ghost_mps": 2.7994844665870525e-05,
+    "ego_speed_min_future_mps": 3.2521231211820573e-07,
+    "lat_to_real_path_m": 1.4406806895314177,
+    "vru_area_px": 47593.059094960096,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0553_010_D2c",
+    "scene": "scene-0553",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.71823837216835,
+    "ego_delta_v_mps": -3.372701476531141e-05,
+    "ego_speed_ghost_mps": 3.3957766690796164e-05,
+    "ego_speed_min_future_mps": 2.3075192548475327e-07,
+    "lat_to_real_path_m": 1.3761387477765004,
+    "vru_area_px": 29512.600683137785,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        8.0,
+        "human.pedestrian.adult",
+        47845
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0553_011_D2c",
+    "scene": "scene-0553",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.69272367164048,
+    "ego_delta_v_mps": -4.652811810806749e-07,
+    "ego_speed_ghost_mps": 6.960331065654282e-07,
+    "ego_speed_min_future_mps": 2.3075192548475327e-07,
+    "lat_to_real_path_m": 1.587952421406463,
+    "vru_area_px": 23527.2932883258,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 3,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        8.0,
+        "human.pedestrian.adult",
+        48803
+      ],
+      [
+        8.6,
+        "human.pedestrian.adult",
+        30381
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0553_014_D2c",
+    "scene": "scene-0553",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.800197856355005,
+    "ego_delta_v_mps": -2.0548849159081362e-05,
+    "ego_speed_ghost_mps": 2.0779601084566116e-05,
+    "ego_speed_min_future_mps": 2.3075192548475327e-07,
+    "lat_to_real_path_m": 1.5040539199294156,
+    "vru_area_px": 42177.314755184474,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0553_015_D2c",
+    "scene": "scene-0553",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.038732138071829,
+    "ego_delta_v_mps": -4.941917362878277e-05,
+    "ego_speed_ghost_mps": 4.9649925554267524e-05,
+    "ego_speed_min_future_mps": 2.3075192548475327e-07,
+    "lat_to_real_path_m": 1.5924321476455656,
+    "vru_area_px": 44003.97278939204,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0553_016_D2c",
+    "scene": "scene-0553",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.858457823031562,
+    "ego_delta_v_mps": -4.941917362878277e-05,
+    "ego_speed_ghost_mps": 4.9649925554267524e-05,
+    "ego_speed_min_future_mps": 2.3075192548475327e-07,
+    "lat_to_real_path_m": 1.3975940367416937,
+    "vru_area_px": 36973.02060612053,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        8.0,
+        "human.pedestrian.adult",
+        44004
+      ],
+      [
+        9.7,
+        "human.pedestrian.adult",
+        42916
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0553_018_D2c",
+    "scene": "scene-0553",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.454123208733376,
+    "ego_delta_v_mps": -2.1568403093406585e-05,
+    "ego_speed_ghost_mps": 2.179915501889134e-05,
+    "ego_speed_min_future_mps": 2.3075192548475327e-07,
+    "lat_to_real_path_m": 1.3518351837790423,
+    "vru_area_px": 25148.259163448998,
+    "n_bigger_in_corridor": 3,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        8.2,
+        "human.pedestrian.adult",
+        42577
+      ],
+      [
+        9.1,
+        "human.pedestrian.adult",
+        34644
+      ],
+      [
+        9.7,
+        "human.pedestrian.adult",
+        43142
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0593_008_D2c",
+    "scene": "scene-0593",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.098718684999517,
+    "ego_delta_v_mps": -0.000994521695827881,
+    "ego_speed_ghost_mps": 0.0012129024763093221,
+    "ego_speed_min_future_mps": 0.00021838078048144112,
+    "lat_to_real_path_m": 1.7122204077175391,
+    "vru_area_px": 40414.84961740341,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0593_009_D2c",
+    "scene": "scene-0593",
+    "pool": "D2c",
+    "d_long_ghost_m": 7.137299078496779,
+    "ego_delta_v_mps": -0.0006137979355208751,
+    "ego_speed_ghost_mps": 0.0008321787160023162,
+    "ego_speed_min_future_mps": 0.00021838078048144112,
+    "lat_to_real_path_m": 1.3924502748338012,
+    "vru_area_px": 69620.60536631611,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0673_010_D2c",
+    "scene": "scene-0673",
+    "pool": "D2c",
+    "d_long_ghost_m": 12.244363906555307,
+    "ego_delta_v_mps": -0.001371792314101646,
+    "ego_speed_ghost_mps": 0.0020406541216793986,
+    "ego_speed_min_future_mps": 0.0006688618075777525,
+    "lat_to_real_path_m": 1.485926899612707,
+    "vru_area_px": 24821.993123890497,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 2,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0676_006_D2c",
+    "scene": "scene-0676",
+    "pool": "D2c",
+    "d_long_ghost_m": 17.244016486176633,
+    "ego_delta_v_mps": -0.14569464825872536,
+    "ego_speed_ghost_mps": 1.48057160228876,
+    "ego_speed_min_future_mps": 1.3348769540300347,
+    "lat_to_real_path_m": 1.2727757311434913,
+    "vru_area_px": 6765.2628111606755,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 1,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.wheelchair"
+  },
+  {
+    "eid": "scene-0677_003_D2c",
+    "scene": "scene-0677",
+    "pool": "D2c",
+    "d_long_ghost_m": 20.44294917092982,
+    "ego_delta_v_mps": -0.3870669119248962,
+    "ego_speed_ghost_mps": 2.2823399875166266,
+    "ego_speed_min_future_mps": 1.8952730755917304,
+    "lat_to_real_path_m": 1.0136603714472139,
+    "vru_area_px": 6034.297318348351,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 1,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.8,
+        "movable_object.trafficcone",
+        25976
+      ]
+    ],
+    "object_class": "human.pedestrian.wheelchair"
+  },
+  {
+    "eid": "scene-0705_002_D2c",
+    "scene": "scene-0705",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.482962013996872,
+    "ego_delta_v_mps": -4.4660798387266987e-07,
+    "ego_speed_ghost_mps": 4.805131324849125e-07,
+    "ego_speed_min_future_mps": 3.3905148612242587e-08,
+    "lat_to_real_path_m": 1.4624635727383652,
+    "vru_area_px": 31297.645923986154,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        8.7,
+        "human.pedestrian.adult",
+        36699
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0705_003_D2c",
+    "scene": "scene-0705",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.743576825286324,
+    "ego_delta_v_mps": -4.4660798387266987e-07,
+    "ego_speed_ghost_mps": 4.805131324849125e-07,
+    "ego_speed_min_future_mps": 3.3905148612242587e-08,
+    "lat_to_real_path_m": 1.5923064169377996,
+    "vru_area_px": 36699.34420649949,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0710_000_D2c",
+    "scene": "scene-0710",
+    "pool": "D2c",
+    "d_long_ghost_m": 21.272084377454615,
+    "ego_delta_v_mps": -1.9121286320592124,
+    "ego_speed_ghost_mps": 1.9140523308838058,
+    "ego_speed_min_future_mps": 0.0019236988245933421,
+    "lat_to_real_path_m": 0.05107405481133045,
+    "vru_area_px": 4723.875444711737,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 1,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0710_001_D2c",
+    "scene": "scene-0710",
+    "pool": "D2c",
+    "d_long_ghost_m": 19.304024634501967,
+    "ego_delta_v_mps": -1.9334893584183144,
+    "ego_speed_ghost_mps": 1.9350509990428177,
+    "ego_speed_min_future_mps": 0.0015616406245032859,
+    "lat_to_real_path_m": 0.0945189913811578,
+    "vru_area_px": 4871.694523023431,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 1,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        8.2,
+        "movable_object.trafficcone",
+        6954
+      ],
+      [
+        20.0,
+        "human.pedestrian.adult",
+        5397
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0710_005_D2c",
+    "scene": "scene-0710",
+    "pool": "D2c",
+    "d_long_ghost_m": 12.39601571675987,
+    "ego_delta_v_mps": -0.014481970131529442,
+    "ego_speed_ghost_mps": 0.016709946012771495,
+    "ego_speed_min_future_mps": 0.0022279758812420534,
+    "lat_to_real_path_m": 1.1462549517964382,
+    "vru_area_px": 14974.318014637403,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 2,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0714_002_D2c",
+    "scene": "scene-0714",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.933134293628676,
+    "ego_delta_v_mps": -0.00045841167082588474,
+    "ego_speed_ghost_mps": 0.00048817561598967537,
+    "ego_speed_min_future_mps": 2.9763945163790647e-05,
+    "lat_to_real_path_m": 1.4309008393754958,
+    "vru_area_px": 38696.58609879853,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0714_003_D2c",
+    "scene": "scene-0714",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.8727994010468,
+    "ego_delta_v_mps": -0.0002806344483698186,
+    "ego_speed_ghost_mps": 0.0003103983935336092,
+    "ego_speed_min_future_mps": 2.9763945163790647e-05,
+    "lat_to_real_path_m": 1.3603020438471065,
+    "vru_area_px": 29678.067279971,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        8.8,
+        "human.pedestrian.adult",
+        39672
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0717_016_D2c",
+    "scene": "scene-0717",
+    "pool": "D2c",
+    "d_long_ghost_m": 17.758165462748757,
+    "ego_delta_v_mps": -0.03738984433054585,
+    "ego_speed_ghost_mps": 0.042264113994495346,
+    "ego_speed_min_future_mps": 0.004874269663949491,
+    "lat_to_real_path_m": 0.5479164091576972,
+    "vru_area_px": 6103.6990837384565,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 2,
+    "n_closer_in_corridor": 4,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        6.3,
+        "human.pedestrian.adult",
+        119702
+      ],
+      [
+        12.2,
+        "vehicle.car",
+        50340
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0718_000_D2c",
+    "scene": "scene-0718",
+    "pool": "D2c",
+    "d_long_ghost_m": 18.8085000701323,
+    "ego_delta_v_mps": -0.001166425177994284,
+    "ego_speed_ghost_mps": 0.0012252827935154522,
+    "ego_speed_min_future_mps": 5.885761552116817e-05,
+    "lat_to_real_path_m": 1.5017977714391153,
+    "vru_area_px": 8456.486185464995,
+    "n_bigger_in_corridor": 3,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 3,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.6,
+        "vehicle.car",
+        96938
+      ],
+      [
+        14.9,
+        "human.pedestrian.adult",
+        11476
+      ],
+      [
+        17.9,
+        "human.pedestrian.adult",
+        8549
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0718_001_D2c",
+    "scene": "scene-0718",
+    "pool": "D2c",
+    "d_long_ghost_m": 17.939322984407895,
+    "ego_delta_v_mps": -0.0011267002254577289,
+    "ego_speed_ghost_mps": 0.0011838343702113105,
+    "ego_speed_min_future_mps": 5.7134144753581665e-05,
+    "lat_to_real_path_m": 1.578208186304364,
+    "vru_area_px": 8526.96092590863,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.6,
+        "vehicle.car",
+        96934
+      ],
+      [
+        14.9,
+        "human.pedestrian.adult",
+        11442
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0718_002_D2c",
+    "scene": "scene-0718",
+    "pool": "D2c",
+    "d_long_ghost_m": 15.006047324200315,
+    "ego_delta_v_mps": -0.001038979535611759,
+    "ego_speed_ghost_mps": 0.0010938903462135582,
+    "ego_speed_min_future_mps": 5.491081060179926e-05,
+    "lat_to_real_path_m": 1.5285411771479926,
+    "vru_area_px": 11273.976845371833,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.6,
+        "vehicle.car",
+        96917
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0718_009_D2c",
+    "scene": "scene-0718",
+    "pool": "D2c",
+    "d_long_ghost_m": 14.74099487201922,
+    "ego_delta_v_mps": -0.0001252875372289322,
+    "ego_speed_ghost_mps": 0.0001355006042571024,
+    "ego_speed_min_future_mps": 1.0213067028170202e-05,
+    "lat_to_real_path_m": 1.3471359844903739,
+    "vru_area_px": 17386.051848648574,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.6,
+        "vehicle.car",
+        96556
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0718_010_D2c",
+    "scene": "scene-0718",
+    "pool": "D2c",
+    "d_long_ghost_m": 16.888091396028596,
+    "ego_delta_v_mps": -0.00011475268255473734,
+    "ego_speed_ghost_mps": 0.00012496574958290754,
+    "ego_speed_min_future_mps": 1.0213067028170202e-05,
+    "lat_to_real_path_m": 1.3651476403633307,
+    "vru_area_px": 12173.01526761066,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.6,
+        "vehicle.car",
+        96539
+      ],
+      [
+        14.7,
+        "human.pedestrian.adult",
+        17441
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0718_014_D2c",
+    "scene": "scene-0718",
+    "pool": "D2c",
+    "d_long_ghost_m": 16.38510601154512,
+    "ego_delta_v_mps": -3.4588393639705956e-05,
+    "ego_speed_ghost_mps": 4.480146066787616e-05,
+    "ego_speed_min_future_mps": 1.0213067028170202e-05,
+    "lat_to_real_path_m": 1.558155930753437,
+    "vru_area_px": 10775.38211368275,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.6,
+        "vehicle.car",
+        96352
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0718_015_D2c",
+    "scene": "scene-0718",
+    "pool": "D2c",
+    "d_long_ghost_m": 18.629133986218125,
+    "ego_delta_v_mps": -3.4588393639705956e-05,
+    "ego_speed_ghost_mps": 4.480146066787616e-05,
+    "ego_speed_min_future_mps": 1.0213067028170202e-05,
+    "lat_to_real_path_m": 1.5403571162998912,
+    "vru_area_px": 8915.416668018097,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.6,
+        "vehicle.car",
+        96352
+      ],
+      [
+        16.4,
+        "human.pedestrian.adult",
+        10775
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0727_005_D2c",
+    "scene": "scene-0727",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.796730768798303,
+    "ego_delta_v_mps": -0.0002798865691460858,
+    "ego_speed_ghost_mps": 0.0002819665988047471,
+    "ego_speed_min_future_mps": 2.080029658661267e-06,
+    "lat_to_real_path_m": 1.3122868070913705,
+    "vru_area_px": 40943.22857556553,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0727_006_D2c",
+    "scene": "scene-0727",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.504370228516812,
+    "ego_delta_v_mps": -0.00015688099676105586,
+    "ego_speed_ghost_mps": 0.00015896102641971713,
+    "ego_speed_min_future_mps": 2.080029658661267e-06,
+    "lat_to_real_path_m": 1.4458438783870977,
+    "vru_area_px": 31220.877981154707,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        8.4,
+        "human.pedestrian.adult",
+        45952
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0731_000_D2c",
+    "scene": "scene-0731",
+    "pool": "D2c",
+    "d_long_ghost_m": 4.730451358874735,
+    "ego_delta_v_mps": -0.20839038581871233,
+    "ego_speed_ghost_mps": 0.20940885648839377,
+    "ego_speed_min_future_mps": 0.0010184706696814388,
+    "lat_to_real_path_m": 1.3755487781166968,
+    "vru_area_px": 261004.94240412308,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0731_003_D2c",
+    "scene": "scene-0731",
+    "pool": "D2c",
+    "d_long_ghost_m": 4.191934857856589,
+    "ego_delta_v_mps": -0.21865225212806066,
+    "ego_speed_ghost_mps": 0.2193919887645139,
+    "ego_speed_min_future_mps": 0.0007397366364532405,
+    "lat_to_real_path_m": 0.8139980744488667,
+    "vru_area_px": 377601.7377350138,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0747_000_D2c",
+    "scene": "scene-0747",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.195819355907751,
+    "ego_delta_v_mps": -0.0013369397781449986,
+    "ego_speed_ghost_mps": 0.0014055036111750411,
+    "ego_speed_min_future_mps": 6.856383303004253e-05,
+    "lat_to_real_path_m": 1.3520055140263731,
+    "vru_area_px": 49589.653829877316,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0758_004_D2c",
+    "scene": "scene-0758",
+    "pool": "D2c",
+    "d_long_ghost_m": 10.501155319413474,
+    "ego_delta_v_mps": -5.94382793646706e-05,
+    "ego_speed_ghost_mps": 6.187739681825224e-05,
+    "ego_speed_min_future_mps": 2.4391174535816408e-06,
+    "lat_to_real_path_m": 1.4886362569721552,
+    "vru_area_px": 29579.34039661785,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0758_005_D2c",
+    "scene": "scene-0758",
+    "pool": "D2c",
+    "d_long_ghost_m": 11.366649545198008,
+    "ego_delta_v_mps": -7.810413558373815e-05,
+    "ego_speed_ghost_mps": 8.05432530373198e-05,
+    "ego_speed_min_future_mps": 2.4391174535816408e-06,
+    "lat_to_real_path_m": 1.5085637594255468,
+    "vru_area_px": 19464.0657016645,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        10.5,
+        "human.pedestrian.adult",
+        29279
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0758_011_D2c",
+    "scene": "scene-0758",
+    "pool": "D2c",
+    "d_long_ghost_m": 19.64644690938986,
+    "ego_delta_v_mps": -5.731268382027558e-05,
+    "ego_speed_ghost_mps": 5.754094835892265e-05,
+    "ego_speed_min_future_mps": 2.2826453864707134e-07,
+    "lat_to_real_path_m": 0.22962262207944142,
+    "vru_area_px": 8575.976514903296,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        22.6,
+        "vehicle.car",
+        15049
+      ]
+    ],
+    "object_class": "vehicle.bicycle"
+  },
+  {
+    "eid": "scene-0764_003_D2c",
+    "scene": "scene-0764",
+    "pool": "D2c",
+    "d_long_ghost_m": 7.826372729643998,
+    "ego_delta_v_mps": -0.6423276500262505,
+    "ego_speed_ghost_mps": 5.513638235391619,
+    "ego_speed_min_future_mps": 4.871310585365369,
+    "lat_to_real_path_m": 1.9103785997099512,
+    "vru_area_px": 39511.78018739237,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "vehicle.bicycle"
+  },
+  {
+    "eid": "scene-0764_004_D2c",
+    "scene": "scene-0764",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.382011568058289,
+    "ego_delta_v_mps": -0.06169139409240376,
+    "ego_speed_ghost_mps": 4.66593074829207,
+    "ego_speed_min_future_mps": 4.604239354199667,
+    "lat_to_real_path_m": 1.713001508462271,
+    "vru_area_px": 33180.705876769825,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "vehicle.bicycle"
+  },
+  {
+    "eid": "scene-0764_005_D2c",
+    "scene": "scene-0764",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.924980450810235,
+    "ego_delta_v_mps": -0.025979555000517074,
+    "ego_speed_ghost_mps": 4.728390227038412,
+    "ego_speed_min_future_mps": 4.702410672037895,
+    "lat_to_real_path_m": 1.8414041448672245,
+    "vru_area_px": 21842.44921313335,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "vehicle.bicycle"
+  },
+  {
+    "eid": "scene-0765_000_D2c",
+    "scene": "scene-0765",
+    "pool": "D2c",
+    "d_long_ghost_m": 13.28167410758095,
+    "ego_delta_v_mps": -4.133827014493338e-05,
+    "ego_speed_ghost_mps": 4.2021657952882935e-05,
+    "ego_speed_min_future_mps": 6.833878079495503e-07,
+    "lat_to_real_path_m": 0.9118184640983243,
+    "vru_area_px": 19187.087583026143,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        16.0,
+        "vehicle.car",
+        27524
+      ]
+    ],
+    "object_class": "vehicle.motorcycle"
+  },
+  {
+    "eid": "scene-0799_002_D2c",
+    "scene": "scene-0799",
+    "pool": "D2c",
+    "d_long_ghost_m": 32.37900622571252,
+    "ego_delta_v_mps": -0.9162860853731338,
+    "ego_speed_ghost_mps": 9.583907025021952,
+    "ego_speed_min_future_mps": 8.667620939648819,
+    "lat_to_real_path_m": 1.7324219958101443,
+    "vru_area_px": 2102.3366243751716,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        19.5,
+        "vehicle.car",
+        19300
+      ]
+    ],
+    "object_class": "vehicle.motorcycle"
+  },
+  {
+    "eid": "scene-0860_003_D2c",
+    "scene": "scene-0860",
+    "pool": "D2c",
+    "d_long_ghost_m": 17.972924066834167,
+    "ego_delta_v_mps": -0.00228031582175753,
+    "ego_speed_ghost_mps": 0.003291240746500588,
+    "ego_speed_min_future_mps": 0.001010924924743058,
+    "lat_to_real_path_m": 1.4723531350314263,
+    "vru_area_px": 4333.95190098095,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0861_001_D2c",
+    "scene": "scene-0861",
+    "pool": "D2c",
+    "d_long_ghost_m": 12.889850823245487,
+    "ego_delta_v_mps": -0.00019687249534918502,
+    "ego_speed_ghost_mps": 0.00038531349756530713,
+    "ego_speed_min_future_mps": 0.0001884410022161221,
+    "lat_to_real_path_m": 0.08896708547722301,
+    "vru_area_px": 17006.290153031136,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        6.7,
+        "vehicle.car",
+        184358
+      ]
+    ],
+    "object_class": "vehicle.motorcycle"
+  },
+  {
+    "eid": "scene-0861_002_D2c",
+    "scene": "scene-0861",
+    "pool": "D2c",
+    "d_long_ghost_m": 11.969522158103297,
+    "ego_delta_v_mps": -4.58082228415709e-05,
+    "ego_speed_ghost_mps": 0.000234249225057693,
+    "ego_speed_min_future_mps": 0.0001884410022161221,
+    "lat_to_real_path_m": 1.1441195763312006,
+    "vru_area_px": 19325.869804342947,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "vehicle.motorcycle"
+  },
+  {
+    "eid": "scene-0862_002_D2c",
+    "scene": "scene-0862",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.963431860744521,
+    "ego_delta_v_mps": -0.0011459883477278646,
+    "ego_speed_ghost_mps": 0.0015884653556766137,
+    "ego_speed_min_future_mps": 0.00044247700794874896,
+    "lat_to_real_path_m": 0.8785316861347346,
+    "vru_area_px": 31616.262390754855,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0863_002_D2c",
+    "scene": "scene-0863",
+    "pool": "D2c",
+    "d_long_ghost_m": 48.56594250125832,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 4.333807388220254,
+    "ego_speed_min_future_mps": 4.333807388220254,
+    "lat_to_real_path_m": 1.4759723370316975,
+    "vru_area_px": 1457.402788285625,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        22.3,
+        "human.pedestrian.adult",
+        6602
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0898_002_D2c",
+    "scene": "scene-0898",
+    "pool": "D2c",
+    "d_long_ghost_m": 7.872076374560483,
+    "ego_delta_v_mps": -0.0021643429047636035,
+    "ego_speed_ghost_mps": 0.002363146036413189,
+    "ego_speed_min_future_mps": 0.0001988031316495854,
+    "lat_to_real_path_m": 1.4814896154596233,
+    "vru_area_px": 60520.52801907486,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        7.0,
+        "human.pedestrian.adult",
+        101057
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0898_003_D2c",
+    "scene": "scene-0898",
+    "pool": "D2c",
+    "d_long_ghost_m": 6.946237528689592,
+    "ego_delta_v_mps": -0.0018236255763356963,
+    "ego_speed_ghost_mps": 0.0020224287079852817,
+    "ego_speed_min_future_mps": 0.0001988031316495854,
+    "lat_to_real_path_m": 1.5457804928790675,
+    "vru_area_px": 102119.9438357206,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0898_004_D2c",
+    "scene": "scene-0898",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.177549530021983,
+    "ego_delta_v_mps": -0.0013375062718171899,
+    "ego_speed_ghost_mps": 0.0015363094034667752,
+    "ego_speed_min_future_mps": 0.0001988031316495854,
+    "lat_to_real_path_m": 1.3877118757168958,
+    "vru_area_px": 27552.948229667763,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        6.9,
+        "human.pedestrian.adult",
+        104216
+      ],
+      [
+        7.8,
+        "human.pedestrian.adult",
+        60620
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0898_006_D2c",
+    "scene": "scene-0898",
+    "pool": "D2c",
+    "d_long_ghost_m": 8.97690243990945,
+    "ego_delta_v_mps": -0.0002950895260166893,
+    "ego_speed_ghost_mps": 0.0004938926576662747,
+    "ego_speed_min_future_mps": 0.0001988031316495854,
+    "lat_to_real_path_m": 1.4942517270086322,
+    "vru_area_px": 45632.00684239496,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0925_001_D2c",
+    "scene": "scene-0925",
+    "pool": "D2c",
+    "d_long_ghost_m": 7.894859103975273,
+    "ego_delta_v_mps": -0.02137429563105114,
+    "ego_speed_ghost_mps": 0.024396530672829857,
+    "ego_speed_min_future_mps": 0.0030222350417787175,
+    "lat_to_real_path_m": 1.0841265889227076,
+    "vru_area_px": 46520.64731075025,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        7.1,
+        "human.pedestrian.adult",
+        73484
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0925_002_D2c",
+    "scene": "scene-0925",
+    "pool": "D2c",
+    "d_long_ghost_m": 7.106796941809933,
+    "ego_delta_v_mps": -0.02137429563105114,
+    "ego_speed_ghost_mps": 0.024396530672829857,
+    "ego_speed_min_future_mps": 0.0030222350417787175,
+    "lat_to_real_path_m": 1.3207530201607323,
+    "vru_area_px": 73484.06430818865,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0952_002_D2c",
+    "scene": "scene-0952",
+    "pool": "D2c",
+    "d_long_ghost_m": 27.04000186271377,
+    "ego_delta_v_mps": -3.440180086163665,
+    "ego_speed_ghost_mps": 3.4419623321285275,
+    "ego_speed_min_future_mps": 0.001782245964862641,
+    "lat_to_real_path_m": 0.42256158059088345,
+    "vru_area_px": 3558.6489725456045,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0952_003_D2c",
+    "scene": "scene-0952",
+    "pool": "D2c",
+    "d_long_ghost_m": 25.610320950475586,
+    "ego_delta_v_mps": -3.051077919473011,
+    "ego_speed_ghost_mps": 3.0528601654378735,
+    "ego_speed_min_future_mps": 0.001782245964862641,
+    "lat_to_real_path_m": 0.23477191690550211,
+    "vru_area_px": 2505.154659742163,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        25.2,
+        "human.pedestrian.adult",
+        4126
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0956_002_D2c",
+    "scene": "scene-0956",
+    "pool": "D2c",
+    "d_long_ghost_m": 16.70855648534485,
+    "ego_delta_v_mps": -0.001565741493642043,
+    "ego_speed_ghost_mps": 0.0016457929867966707,
+    "ego_speed_min_future_mps": 8.00514931546277e-05,
+    "lat_to_real_path_m": 1.5435511144438434,
+    "vru_area_px": 6167.309878545327,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.5,
+        "vehicle.car",
+        95162
+      ],
+      [
+        15.8,
+        "human.pedestrian.adult",
+        6301
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0956_003_D2c",
+    "scene": "scene-0956",
+    "pool": "D2c",
+    "d_long_ghost_m": 15.936521982129696,
+    "ego_delta_v_mps": -0.001476048282330144,
+    "ego_speed_ghost_mps": 0.0015519194121619685,
+    "ego_speed_min_future_mps": 7.587112983182447e-05,
+    "lat_to_real_path_m": 1.6187638382496907,
+    "vru_area_px": 6219.425558502301,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.5,
+        "vehicle.car",
+        95162
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0958_002_D2c",
+    "scene": "scene-0958",
+    "pool": "D2c",
+    "d_long_ghost_m": 19.56548823272407,
+    "ego_delta_v_mps": -0.26790124848155816,
+    "ego_speed_ghost_mps": 5.129999210713268,
+    "ego_speed_min_future_mps": 4.86209796223171,
+    "lat_to_real_path_m": 0.3623423305025337,
+    "vru_area_px": 6046.96991187069,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "vehicle.motorcycle"
+  },
+  {
+    "eid": "scene-0958_008_D2c",
+    "scene": "scene-0958",
+    "pool": "D2c",
+    "d_long_ghost_m": 15.836471997760567,
+    "ego_delta_v_mps": -1.3576348625044368,
+    "ego_speed_ghost_mps": 1.3635108792832904,
+    "ego_speed_min_future_mps": 0.0058760167788537146,
+    "lat_to_real_path_m": 0.8708910215262875,
+    "vru_area_px": 10970.5680484776,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        14.9,
+        "vehicle.car",
+        36844
+      ],
+      [
+        21.8,
+        "vehicle.car",
+        18225
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0976_002_D2c",
+    "scene": "scene-0976",
+    "pool": "D2c",
+    "d_long_ghost_m": 11.056635604072966,
+    "ego_delta_v_mps": -3.297579396026473e-05,
+    "ego_speed_ghost_mps": 3.324689249195049e-05,
+    "ego_speed_min_future_mps": 2.7109853168575947e-07,
+    "lat_to_real_path_m": 1.5136007710540045,
+    "vru_area_px": 26743.915492629618,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0976_004_D2c",
+    "scene": "scene-0976",
+    "pool": "D2c",
+    "d_long_ghost_m": 11.122115509711712,
+    "ego_delta_v_mps": -1.2285103372905056e-05,
+    "ego_speed_ghost_mps": 1.2556201904590816e-05,
+    "ego_speed_min_future_mps": 2.7109853168575947e-07,
+    "lat_to_real_path_m": 1.5342320558789075,
+    "vru_area_px": 25679.607475005658,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0989_002_D2c",
+    "scene": "scene-0989",
+    "pool": "D2c",
+    "d_long_ghost_m": 7.591555918745704,
+    "ego_delta_v_mps": -0.002041832354118337,
+    "ego_speed_ghost_mps": 0.0029336440372341225,
+    "ego_speed_min_future_mps": 0.0008918116831157855,
+    "lat_to_real_path_m": 1.4572869002921618,
+    "vru_area_px": 49149.06416589836,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0991_004_D2c",
+    "scene": "scene-0991",
+    "pool": "D2c",
+    "d_long_ghost_m": 12.156757419444375,
+    "ego_delta_v_mps": -0.003945476270568262,
+    "ego_speed_ghost_mps": 0.004268962089994815,
+    "ego_speed_min_future_mps": 0.0003234858194265529,
+    "lat_to_real_path_m": 1.8283569616788091,
+    "vru_area_px": 18852.977194875868,
+    "n_bigger_in_corridor": 2,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        8.7,
+        "vehicle.car",
+        81490
+      ],
+      [
+        17.6,
+        "vehicle.car",
+        20973
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0991_005_D2c",
+    "scene": "scene-0991",
+    "pool": "D2c",
+    "d_long_ghost_m": 13.563631482592845,
+    "ego_delta_v_mps": -0.0028740676084958697,
+    "ego_speed_ghost_mps": 0.0031975534279224224,
+    "ego_speed_min_future_mps": 0.0003234858194265529,
+    "lat_to_real_path_m": 1.8565406426199411,
+    "vru_area_px": 12018.280597345918,
+    "n_bigger_in_corridor": 3,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        8.7,
+        "vehicle.car",
+        81494
+      ],
+      [
+        11.7,
+        "human.pedestrian.adult",
+        20752
+      ],
+      [
+        17.6,
+        "vehicle.car",
+        20986
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-0991_008_D2c",
+    "scene": "scene-0991",
+    "pool": "D2c",
+    "d_long_ghost_m": 11.417130441556367,
+    "ego_delta_v_mps": -0.0010700907880644697,
+    "ego_speed_ghost_mps": 0.0013935766074910226,
+    "ego_speed_min_future_mps": 0.0003234858194265529,
+    "lat_to_real_path_m": 1.712343459032975,
+    "vru_area_px": 16125.168601669071,
+    "n_bigger_in_corridor": 3,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 4,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        8.7,
+        "vehicle.car",
+        81261
+      ],
+      [
+        9.1,
+        "human.pedestrian.adult",
+        37596
+      ],
+      [
+        11.0,
+        "human.pedestrian.adult",
+        19540
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-1006_003_D2c",
+    "scene": "scene-1006",
+    "pool": "D2c",
+    "d_long_ghost_m": 10.563714564707746,
+    "ego_delta_v_mps": -0.001702568915386484,
+    "ego_speed_ghost_mps": 0.0025073913891493996,
+    "ego_speed_min_future_mps": 0.0008048224737629156,
+    "lat_to_real_path_m": 1.8027748753580177,
+    "vru_area_px": 19876.892137787898,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-1006_004_D2c",
+    "scene": "scene-1006",
+    "pool": "D2c",
+    "d_long_ghost_m": 11.36865022962406,
+    "ego_delta_v_mps": -0.0006382049473295205,
+    "ego_speed_ghost_mps": 0.001443027421092436,
+    "ego_speed_min_future_mps": 0.0008048224737629156,
+    "lat_to_real_path_m": 1.5221232732862437,
+    "vru_area_px": 14633.80796140981,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        10.8,
+        "human.pedestrian.adult",
+        19063
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-1006_006_D2c",
+    "scene": "scene-1006",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.22088781694347,
+    "ego_delta_v_mps": 0.0,
+    "ego_speed_ghost_mps": 0.15076097363781726,
+    "ego_speed_min_future_mps": 0.15076097363781726,
+    "lat_to_real_path_m": 1.1150730244624762,
+    "vru_area_px": 27949.47587512246,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-1070_005_D2c",
+    "scene": "scene-1070",
+    "pool": "D2c",
+    "d_long_ghost_m": 48.68981378780513,
+    "ego_delta_v_mps": -0.5088752661470117,
+    "ego_speed_ghost_mps": 9.849939685245284,
+    "ego_speed_min_future_mps": 9.341064419098272,
+    "lat_to_real_path_m": 1.4982724221712158,
+    "vru_area_px": 1236.4149738971537,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        13.6,
+        "vehicle.car",
+        29930
+      ]
+    ],
+    "object_class": "vehicle.motorcycle"
+  },
+  {
+    "eid": "scene-1072_000_D2c",
+    "scene": "scene-1072",
+    "pool": "D2c",
+    "d_long_ghost_m": 27.471123746635417,
+    "ego_delta_v_mps": -0.3462694568912532,
+    "ego_speed_ghost_mps": 8.689147079590448,
+    "ego_speed_min_future_mps": 8.342877622699195,
+    "lat_to_real_path_m": 1.7349903022899216,
+    "vru_area_px": 3502.5581128342837,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 2,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        13.2,
+        "vehicle.car",
+        32460
+      ]
+    ],
+    "object_class": "vehicle.motorcycle"
+  },
+  {
+    "eid": "scene-1093_003_D2c",
+    "scene": "scene-1093",
+    "pool": "D2c",
+    "d_long_ghost_m": 22.170819078360225,
+    "ego_delta_v_mps": -2.2165065302646343,
+    "ego_speed_ghost_mps": 2.217899127826352,
+    "ego_speed_min_future_mps": 0.0013925975617176455,
+    "lat_to_real_path_m": 1.7257786084525755,
+    "vru_area_px": 3903.731241860528,
+    "n_bigger_in_corridor": 1,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 1,
+    "vru_is_dominant": false,
+    "bigger_examples": [
+      [
+        9.7,
+        "vehicle.car",
+        77423
+      ]
+    ],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-1096_000_D2c",
+    "scene": "scene-1096",
+    "pool": "D2c",
+    "d_long_ghost_m": 9.320385136053627,
+    "ego_delta_v_mps": -2.7152192102805664e-06,
+    "ego_speed_ghost_mps": 3.186710426374049e-06,
+    "ego_speed_min_future_mps": 4.7149121609348286e-07,
+    "lat_to_real_path_m": 1.5384263905379556,
+    "vru_area_px": 29576.23982566916,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  },
+  {
+    "eid": "scene-1100_010_D2c",
+    "scene": "scene-1100",
+    "pool": "D2c",
+    "d_long_ghost_m": 20.07258974148061,
+    "ego_delta_v_mps": -0.521144285591288,
+    "ego_speed_ghost_mps": 0.521160072832339,
+    "ego_speed_min_future_mps": 1.578724105100656e-05,
+    "lat_to_real_path_m": 0.890686992863716,
+    "vru_area_px": 3322.7344147886665,
+    "n_bigger_in_corridor": 0,
+    "n_barrier_cone": 0,
+    "n_closer_in_corridor": 0,
+    "vru_is_dominant": true,
+    "bigger_examples": [],
+    "object_class": "human.pedestrian.adult"
+  }
+]

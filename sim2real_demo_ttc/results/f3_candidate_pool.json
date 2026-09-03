@@ -1,0 +1,1369 @@
+{
+  "note": "F-3 候选语料池。遮挡臂必须遮 f3_mask_group 里的**全部** VRU 实例。",
+  "attribution": "a_i = max(v_close,0)^2/(2*max(s-2,0.5))；vru_class_share = 走廊内全部VRU的a之和/总和",
+  "known_gap": "nuScenes 不标注交通信号灯 ⇒ 红灯刹车无法归因；stopped_long_s 为代理指标",
+  "tiers": {
+    "T1_strict": {
+      "n_events": 8,
+      "n_scenes": 4,
+      "events": [
+        {
+          "eid": "scene-0862_000_A",
+          "scene": "scene-0862",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.708,
+          "a_obs": 0.449,
+          "ego_v0": 3.9,
+          "d_long": 11.2,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "f726cc58ae044b009041ec2fd69f67a4",
+              "cat": "human.pedestrian.adult",
+              "s_m": 10.3,
+              "lat_m": 0.88,
+              "a_req": 0.708,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0544_004_A",
+          "scene": "scene-0544",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.447,
+          "a_obs": 0.695,
+          "ego_v0": 3.29,
+          "d_long": 16.2,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "e2dadbf6909a4a258bb14fdbf38e9d66",
+              "cat": "human.pedestrian.adult",
+              "s_m": 16.1,
+              "lat_m": 0.65,
+              "a_req": 0.447,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0017_016_A",
+          "scene": "scene-0017",
+          "pool": "A",
+          "vru_class_share": 0.628,
+          "vru_share": 0.217,
+          "a_req_vru": 0.42,
+          "a_obs": 0.69,
+          "ego_v0": 3.43,
+          "d_long": 16.7,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "93ea8442be9b4e0d82d924f9c88f23c0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 15.6,
+              "lat_m": 1.65,
+              "a_req": 0.444,
+              "is_target": false
+            },
+            {
+              "token": "06aa6ee6f2e24cbaa72f7b8620e5bfa1",
+              "cat": "human.pedestrian.adult",
+              "s_m": 16.7,
+              "lat_m": 1.44,
+              "a_req": 0.42,
+              "is_target": true
+            },
+            {
+              "token": "4494f07521014bdd8d328966239575d0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 18.8,
+              "lat_m": 1.87,
+              "a_req": 0.353,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0017_015_A",
+          "scene": "scene-0017",
+          "pool": "A",
+          "vru_class_share": 0.619,
+          "vru_share": 0.228,
+          "a_req_vru": 0.518,
+          "a_obs": 0.721,
+          "ego_v0": 3.81,
+          "d_long": 16.9,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "93ea8442be9b4e0d82d924f9c88f23c0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 16.7,
+              "lat_m": 1.41,
+              "a_req": 0.518,
+              "is_target": true
+            },
+            {
+              "token": "06aa6ee6f2e24cbaa72f7b8620e5bfa1",
+              "cat": "human.pedestrian.adult",
+              "s_m": 17.7,
+              "lat_m": 1.18,
+              "a_req": 0.479,
+              "is_target": false
+            },
+            {
+              "token": "4494f07521014bdd8d328966239575d0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.8,
+              "lat_m": 1.87,
+              "a_req": 0.407,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0017_014_A",
+          "scene": "scene-0017",
+          "pool": "A",
+          "vru_class_share": 0.675,
+          "vru_share": 0.171,
+          "a_req_vru": 0.519,
+          "a_obs": 0.73,
+          "ego_v0": 4.11,
+          "d_long": 19.1,
+          "n_mask_group": 4,
+          "f3_mask_group": [
+            {
+              "token": "9e8a924e81aa42d2a8c812c37de1a856",
+              "cat": "human.pedestrian.adult",
+              "s_m": 18.1,
+              "lat_m": 1.89,
+              "a_req": 0.519,
+              "is_target": true
+            },
+            {
+              "token": "93ea8442be9b4e0d82d924f9c88f23c0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 18.1,
+              "lat_m": 1.13,
+              "a_req": 0.581,
+              "is_target": false
+            },
+            {
+              "token": "06aa6ee6f2e24cbaa72f7b8620e5bfa1",
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.1,
+              "lat_m": 0.87,
+              "a_req": 0.506,
+              "is_target": false
+            },
+            {
+              "token": "4494f07521014bdd8d328966239575d0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 21.2,
+              "lat_m": 1.86,
+              "a_req": 0.438,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0521_008_A",
+          "scene": "scene-0521",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 0.299,
+          "a_req_vru": 0.508,
+          "a_obs": 0.83,
+          "ego_v0": 4.64,
+          "d_long": 21.8,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "38a07710e45b4f6a845e934ea2f0dc83",
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.7,
+              "lat_m": 1.24,
+              "a_req": 0.647,
+              "is_target": false
+            },
+            {
+              "token": "244f6a020bb74fa8a52a4750ebff1e59",
+              "cat": "human.pedestrian.adult",
+              "s_m": 21.8,
+              "lat_m": 1.1,
+              "a_req": 0.508,
+              "is_target": true
+            },
+            {
+              "token": "2a5d7607b62a49b7a8bb4616639b4631",
+              "cat": "human.pedestrian.adult",
+              "s_m": 21.8,
+              "lat_m": 1.93,
+              "a_req": 0.541,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0521_007_A",
+          "scene": "scene-0521",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 0.516,
+          "a_req_vru": 0.741,
+          "a_obs": 0.934,
+          "ego_v0": 6.02,
+          "d_long": 27.0,
+          "n_mask_group": 2,
+          "f3_mask_group": [
+            {
+              "token": "38a07710e45b4f6a845e934ea2f0dc83",
+              "cat": "human.pedestrian.adult",
+              "s_m": 26.9,
+              "lat_m": 0.61,
+              "a_req": 0.741,
+              "is_target": true
+            },
+            {
+              "token": "2a5d7607b62a49b7a8bb4616639b4631",
+              "cat": "human.pedestrian.adult",
+              "s_m": 27.9,
+              "lat_m": 0.27,
+              "a_req": 0.695,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0521_005_A",
+          "scene": "scene-0521",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.732,
+          "a_obs": 0.928,
+          "ego_v0": 6.83,
+          "d_long": 33.8,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "2a5d7607b62a49b7a8bb4616639b4631",
+              "cat": "human.pedestrian.adult",
+              "s_m": 33.7,
+              "lat_m": 1.04,
+              "a_req": 0.732,
+              "is_target": true
+            }
+          ]
+        }
+      ]
+    },
+    "T2_main": {
+      "n_events": 13,
+      "n_scenes": 7,
+      "events": [
+        {
+          "eid": "scene-0717_015_A",
+          "scene": "scene-0717",
+          "pool": "A",
+          "vru_class_share": 0.636,
+          "vru_share": 0.304,
+          "a_req_vru": 0.594,
+          "a_obs": 0.821,
+          "ego_v0": 2.39,
+          "d_long": 12.8,
+          "n_mask_group": 2,
+          "f3_mask_group": [
+            {
+              "token": "1dd0fa28fc7641b09cec550fad61178b",
+              "cat": "human.pedestrian.adult",
+              "s_m": 10.8,
+              "lat_m": 0.34,
+              "a_req": 0.649,
+              "is_target": false
+            },
+            {
+              "token": "44af9590c8c148178b7a128d8176859a",
+              "cat": "human.pedestrian.adult",
+              "s_m": 11.8,
+              "lat_m": 1.14,
+              "a_req": 0.594,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0717_013_A",
+          "scene": "scene-0717",
+          "pool": "A",
+          "vru_class_share": 0.606,
+          "vru_share": 0.303,
+          "a_req_vru": 0.534,
+          "a_obs": 0.741,
+          "ego_v0": 2.45,
+          "d_long": 12.9,
+          "n_mask_group": 2,
+          "f3_mask_group": [
+            {
+              "token": "1dd0fa28fc7641b09cec550fad61178b",
+              "cat": "human.pedestrian.adult",
+              "s_m": 12.8,
+              "lat_m": 0.95,
+              "a_req": 0.534,
+              "is_target": true
+            },
+            {
+              "token": "44af9590c8c148178b7a128d8176859a",
+              "cat": "human.pedestrian.adult",
+              "s_m": 13.8,
+              "lat_m": 1.65,
+              "a_req": 0.535,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0544_004_A",
+          "scene": "scene-0544",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.447,
+          "a_obs": 0.695,
+          "ego_v0": 3.29,
+          "d_long": 16.2,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "e2dadbf6909a4a258bb14fdbf38e9d66",
+              "cat": "human.pedestrian.adult",
+              "s_m": 16.1,
+              "lat_m": 0.65,
+              "a_req": 0.447,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0017_016_A",
+          "scene": "scene-0017",
+          "pool": "A",
+          "vru_class_share": 0.628,
+          "vru_share": 0.217,
+          "a_req_vru": 0.42,
+          "a_obs": 0.69,
+          "ego_v0": 3.43,
+          "d_long": 16.7,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "93ea8442be9b4e0d82d924f9c88f23c0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 15.6,
+              "lat_m": 1.65,
+              "a_req": 0.444,
+              "is_target": false
+            },
+            {
+              "token": "06aa6ee6f2e24cbaa72f7b8620e5bfa1",
+              "cat": "human.pedestrian.adult",
+              "s_m": 16.7,
+              "lat_m": 1.44,
+              "a_req": 0.42,
+              "is_target": true
+            },
+            {
+              "token": "4494f07521014bdd8d328966239575d0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 18.8,
+              "lat_m": 1.87,
+              "a_req": 0.353,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0017_015_A",
+          "scene": "scene-0017",
+          "pool": "A",
+          "vru_class_share": 0.619,
+          "vru_share": 0.228,
+          "a_req_vru": 0.518,
+          "a_obs": 0.721,
+          "ego_v0": 3.81,
+          "d_long": 16.9,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "93ea8442be9b4e0d82d924f9c88f23c0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 16.7,
+              "lat_m": 1.41,
+              "a_req": 0.518,
+              "is_target": true
+            },
+            {
+              "token": "06aa6ee6f2e24cbaa72f7b8620e5bfa1",
+              "cat": "human.pedestrian.adult",
+              "s_m": 17.7,
+              "lat_m": 1.18,
+              "a_req": 0.479,
+              "is_target": false
+            },
+            {
+              "token": "4494f07521014bdd8d328966239575d0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.8,
+              "lat_m": 1.87,
+              "a_req": 0.407,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0017_014_A",
+          "scene": "scene-0017",
+          "pool": "A",
+          "vru_class_share": 0.675,
+          "vru_share": 0.171,
+          "a_req_vru": 0.519,
+          "a_obs": 0.73,
+          "ego_v0": 4.11,
+          "d_long": 19.1,
+          "n_mask_group": 4,
+          "f3_mask_group": [
+            {
+              "token": "9e8a924e81aa42d2a8c812c37de1a856",
+              "cat": "human.pedestrian.adult",
+              "s_m": 18.1,
+              "lat_m": 1.89,
+              "a_req": 0.519,
+              "is_target": true
+            },
+            {
+              "token": "93ea8442be9b4e0d82d924f9c88f23c0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 18.1,
+              "lat_m": 1.13,
+              "a_req": 0.581,
+              "is_target": false
+            },
+            {
+              "token": "06aa6ee6f2e24cbaa72f7b8620e5bfa1",
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.1,
+              "lat_m": 0.87,
+              "a_req": 0.506,
+              "is_target": false
+            },
+            {
+              "token": "4494f07521014bdd8d328966239575d0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 21.2,
+              "lat_m": 1.86,
+              "a_req": 0.438,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0521_008_A",
+          "scene": "scene-0521",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 0.299,
+          "a_req_vru": 0.508,
+          "a_obs": 0.83,
+          "ego_v0": 4.64,
+          "d_long": 21.8,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "38a07710e45b4f6a845e934ea2f0dc83",
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.7,
+              "lat_m": 1.24,
+              "a_req": 0.647,
+              "is_target": false
+            },
+            {
+              "token": "244f6a020bb74fa8a52a4750ebff1e59",
+              "cat": "human.pedestrian.adult",
+              "s_m": 21.8,
+              "lat_m": 1.1,
+              "a_req": 0.508,
+              "is_target": true
+            },
+            {
+              "token": "2a5d7607b62a49b7a8bb4616639b4631",
+              "cat": "human.pedestrian.adult",
+              "s_m": 21.8,
+              "lat_m": 1.93,
+              "a_req": 0.541,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0521_007_A",
+          "scene": "scene-0521",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 0.516,
+          "a_req_vru": 0.741,
+          "a_obs": 0.934,
+          "ego_v0": 6.02,
+          "d_long": 27.0,
+          "n_mask_group": 2,
+          "f3_mask_group": [
+            {
+              "token": "38a07710e45b4f6a845e934ea2f0dc83",
+              "cat": "human.pedestrian.adult",
+              "s_m": 26.9,
+              "lat_m": 0.61,
+              "a_req": 0.741,
+              "is_target": true
+            },
+            {
+              "token": "2a5d7607b62a49b7a8bb4616639b4631",
+              "cat": "human.pedestrian.adult",
+              "s_m": 27.9,
+              "lat_m": 0.27,
+              "a_req": 0.695,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0521_005_A",
+          "scene": "scene-0521",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.732,
+          "a_obs": 0.928,
+          "ego_v0": 6.83,
+          "d_long": 33.8,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "2a5d7607b62a49b7a8bb4616639b4631",
+              "cat": "human.pedestrian.adult",
+              "s_m": 33.7,
+              "lat_m": 1.04,
+              "a_req": 0.732,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0666_001_A",
+          "scene": "scene-0666",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 1.013,
+          "a_obs": 0.859,
+          "ego_v0": 10.33,
+          "d_long": 46.6,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "f591051da9f4486baf096582810db4fd",
+              "cat": "human.pedestrian.adult",
+              "s_m": 46.5,
+              "lat_m": 1.8,
+              "a_req": 1.013,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0071_004_D2b",
+          "scene": "scene-0071",
+          "pool": "D2b",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.363,
+          "a_obs": 0.504,
+          "ego_v0": 6.04,
+          "d_long": 51.3,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "c95947410a1b4ff19dfada102de10ff2",
+              "cat": "human.pedestrian.adult",
+              "s_m": 52.3,
+              "lat_m": 0.99,
+              "a_req": 0.363,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0071_003_D2b",
+          "scene": "scene-0071",
+          "pool": "D2b",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.467,
+          "a_obs": 0.422,
+          "ego_v0": 6.03,
+          "d_long": 62.5,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "e64be77927ca45bf8a15f8671a614741",
+              "cat": "human.pedestrian.adult",
+              "s_m": 63.0,
+              "lat_m": 0.81,
+              "a_req": 0.467,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0026_002_D",
+          "scene": "scene-0026",
+          "pool": "D",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.281,
+          "a_obs": 0.398,
+          "ego_v0": 7.23,
+          "d_long": 69.3,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "6834e14c29684039aa3a8990c83b1fcd",
+              "cat": "vehicle.motorcycle",
+              "s_m": 69.3,
+              "lat_m": 0.89,
+              "a_req": 0.281,
+              "is_target": true
+            }
+          ]
+        }
+      ]
+    },
+    "T3_wide": {
+      "n_events": 23,
+      "n_scenes": 12,
+      "events": [
+        {
+          "eid": "scene-0862_000_A",
+          "scene": "scene-0862",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.708,
+          "a_obs": 0.449,
+          "ego_v0": 3.9,
+          "d_long": 11.2,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "f726cc58ae044b009041ec2fd69f67a4",
+              "cat": "human.pedestrian.adult",
+              "s_m": 10.3,
+              "lat_m": 0.88,
+              "a_req": 0.708,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0653_005_A",
+          "scene": "scene-0653",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 0.505,
+          "a_req_vru": 0.241,
+          "a_obs": 0.232,
+          "ego_v0": 1.85,
+          "d_long": 11.2,
+          "n_mask_group": 2,
+          "f3_mask_group": [
+            {
+              "token": "7e8da5e0a1ea4fe5b7ecb8594e1ed1fb",
+              "cat": "human.pedestrian.adult",
+              "s_m": 11.1,
+              "lat_m": 0.6,
+              "a_req": 0.241,
+              "is_target": true
+            },
+            {
+              "token": "e9bba8b99d3044418ec1179484757135",
+              "cat": "human.pedestrian.adult",
+              "s_m": 12.2,
+              "lat_m": 1.16,
+              "a_req": 0.236,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0653_006_A",
+          "scene": "scene-0653",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 0.488,
+          "a_req_vru": 0.271,
+          "a_obs": 0.242,
+          "ego_v0": 1.82,
+          "d_long": 11.6,
+          "n_mask_group": 2,
+          "f3_mask_group": [
+            {
+              "token": "7e8da5e0a1ea4fe5b7ecb8594e1ed1fb",
+              "cat": "human.pedestrian.adult",
+              "s_m": 9.6,
+              "lat_m": 0.06,
+              "a_req": 0.284,
+              "is_target": false
+            },
+            {
+              "token": "e9bba8b99d3044418ec1179484757135",
+              "cat": "human.pedestrian.adult",
+              "s_m": 10.6,
+              "lat_m": 0.36,
+              "a_req": 0.271,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0717_015_A",
+          "scene": "scene-0717",
+          "pool": "A",
+          "vru_class_share": 0.636,
+          "vru_share": 0.304,
+          "a_req_vru": 0.594,
+          "a_obs": 0.821,
+          "ego_v0": 2.39,
+          "d_long": 12.8,
+          "n_mask_group": 2,
+          "f3_mask_group": [
+            {
+              "token": "1dd0fa28fc7641b09cec550fad61178b",
+              "cat": "human.pedestrian.adult",
+              "s_m": 10.8,
+              "lat_m": 0.34,
+              "a_req": 0.649,
+              "is_target": false
+            },
+            {
+              "token": "44af9590c8c148178b7a128d8176859a",
+              "cat": "human.pedestrian.adult",
+              "s_m": 11.8,
+              "lat_m": 1.14,
+              "a_req": 0.594,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0717_013_A",
+          "scene": "scene-0717",
+          "pool": "A",
+          "vru_class_share": 0.606,
+          "vru_share": 0.303,
+          "a_req_vru": 0.534,
+          "a_obs": 0.741,
+          "ego_v0": 2.45,
+          "d_long": 12.9,
+          "n_mask_group": 2,
+          "f3_mask_group": [
+            {
+              "token": "1dd0fa28fc7641b09cec550fad61178b",
+              "cat": "human.pedestrian.adult",
+              "s_m": 12.8,
+              "lat_m": 0.95,
+              "a_req": 0.534,
+              "is_target": true
+            },
+            {
+              "token": "44af9590c8c148178b7a128d8176859a",
+              "cat": "human.pedestrian.adult",
+              "s_m": 13.8,
+              "lat_m": 1.65,
+              "a_req": 0.535,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0544_004_A",
+          "scene": "scene-0544",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.447,
+          "a_obs": 0.695,
+          "ego_v0": 3.29,
+          "d_long": 16.2,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "e2dadbf6909a4a258bb14fdbf38e9d66",
+              "cat": "human.pedestrian.adult",
+              "s_m": 16.1,
+              "lat_m": 0.65,
+              "a_req": 0.447,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0017_016_A",
+          "scene": "scene-0017",
+          "pool": "A",
+          "vru_class_share": 0.628,
+          "vru_share": 0.217,
+          "a_req_vru": 0.42,
+          "a_obs": 0.69,
+          "ego_v0": 3.43,
+          "d_long": 16.7,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "93ea8442be9b4e0d82d924f9c88f23c0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 15.6,
+              "lat_m": 1.65,
+              "a_req": 0.444,
+              "is_target": false
+            },
+            {
+              "token": "06aa6ee6f2e24cbaa72f7b8620e5bfa1",
+              "cat": "human.pedestrian.adult",
+              "s_m": 16.7,
+              "lat_m": 1.44,
+              "a_req": 0.42,
+              "is_target": true
+            },
+            {
+              "token": "4494f07521014bdd8d328966239575d0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 18.8,
+              "lat_m": 1.87,
+              "a_req": 0.353,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0017_015_A",
+          "scene": "scene-0017",
+          "pool": "A",
+          "vru_class_share": 0.619,
+          "vru_share": 0.228,
+          "a_req_vru": 0.518,
+          "a_obs": 0.721,
+          "ego_v0": 3.81,
+          "d_long": 16.9,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "93ea8442be9b4e0d82d924f9c88f23c0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 16.7,
+              "lat_m": 1.41,
+              "a_req": 0.518,
+              "is_target": true
+            },
+            {
+              "token": "06aa6ee6f2e24cbaa72f7b8620e5bfa1",
+              "cat": "human.pedestrian.adult",
+              "s_m": 17.7,
+              "lat_m": 1.18,
+              "a_req": 0.479,
+              "is_target": false
+            },
+            {
+              "token": "4494f07521014bdd8d328966239575d0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.8,
+              "lat_m": 1.87,
+              "a_req": 0.407,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0017_014_A",
+          "scene": "scene-0017",
+          "pool": "A",
+          "vru_class_share": 0.675,
+          "vru_share": 0.171,
+          "a_req_vru": 0.519,
+          "a_obs": 0.73,
+          "ego_v0": 4.11,
+          "d_long": 19.1,
+          "n_mask_group": 4,
+          "f3_mask_group": [
+            {
+              "token": "9e8a924e81aa42d2a8c812c37de1a856",
+              "cat": "human.pedestrian.adult",
+              "s_m": 18.1,
+              "lat_m": 1.89,
+              "a_req": 0.519,
+              "is_target": true
+            },
+            {
+              "token": "93ea8442be9b4e0d82d924f9c88f23c0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 18.1,
+              "lat_m": 1.13,
+              "a_req": 0.581,
+              "is_target": false
+            },
+            {
+              "token": "06aa6ee6f2e24cbaa72f7b8620e5bfa1",
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.1,
+              "lat_m": 0.87,
+              "a_req": 0.506,
+              "is_target": false
+            },
+            {
+              "token": "4494f07521014bdd8d328966239575d0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 21.2,
+              "lat_m": 1.86,
+              "a_req": 0.438,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0710_001_D2c",
+          "scene": "scene-0710",
+          "pool": "D2c",
+          "vru_class_share": 1.0,
+          "vru_share": 0.496,
+          "a_req_vru": 0.089,
+          "a_obs": 0.195,
+          "ego_v0": 1.94,
+          "d_long": 19.3,
+          "n_mask_group": 2,
+          "f3_mask_group": [
+            {
+              "token": "ae0a52ad3ed04cf295999347c184dc22",
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.1,
+              "lat_m": 0.09,
+              "a_req": 0.089,
+              "is_target": true
+            },
+            {
+              "token": "d1f1462d7300446c8f361b974214829a",
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.1,
+              "lat_m": 0.97,
+              "a_req": 0.09,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0710_000_D2c",
+          "scene": "scene-0710",
+          "pool": "D2c",
+          "vru_class_share": 1.0,
+          "vru_share": 0.533,
+          "a_req_vru": 0.094,
+          "a_obs": 0.191,
+          "ego_v0": 1.91,
+          "d_long": 21.3,
+          "n_mask_group": 2,
+          "f3_mask_group": [
+            {
+              "token": "d1f1462d7300446c8f361b974214829a",
+              "cat": "human.pedestrian.adult",
+              "s_m": 20.6,
+              "lat_m": 0.05,
+              "a_req": 0.094,
+              "is_target": true
+            },
+            {
+              "token": "ae0a52ad3ed04cf295999347c184dc22",
+              "cat": "human.pedestrian.adult",
+              "s_m": 20.6,
+              "lat_m": 1.32,
+              "a_req": 0.082,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0521_008_A",
+          "scene": "scene-0521",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 0.299,
+          "a_req_vru": 0.508,
+          "a_obs": 0.83,
+          "ego_v0": 4.64,
+          "d_long": 21.8,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "38a07710e45b4f6a845e934ea2f0dc83",
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.7,
+              "lat_m": 1.24,
+              "a_req": 0.647,
+              "is_target": false
+            },
+            {
+              "token": "244f6a020bb74fa8a52a4750ebff1e59",
+              "cat": "human.pedestrian.adult",
+              "s_m": 21.8,
+              "lat_m": 1.1,
+              "a_req": 0.508,
+              "is_target": true
+            },
+            {
+              "token": "2a5d7607b62a49b7a8bb4616639b4631",
+              "cat": "human.pedestrian.adult",
+              "s_m": 21.8,
+              "lat_m": 1.93,
+              "a_req": 0.541,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0521_007_A",
+          "scene": "scene-0521",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 0.516,
+          "a_req_vru": 0.741,
+          "a_obs": 0.934,
+          "ego_v0": 6.02,
+          "d_long": 27.0,
+          "n_mask_group": 2,
+          "f3_mask_group": [
+            {
+              "token": "38a07710e45b4f6a845e934ea2f0dc83",
+              "cat": "human.pedestrian.adult",
+              "s_m": 26.9,
+              "lat_m": 0.61,
+              "a_req": 0.741,
+              "is_target": true
+            },
+            {
+              "token": "2a5d7607b62a49b7a8bb4616639b4631",
+              "cat": "human.pedestrian.adult",
+              "s_m": 27.9,
+              "lat_m": 0.27,
+              "a_req": 0.695,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0952_002_D2c",
+          "scene": "scene-0952",
+          "pool": "D2c",
+          "vru_class_share": 1.0,
+          "vru_share": 0.598,
+          "a_req_vru": 0.183,
+          "a_obs": 0.405,
+          "ego_v0": 3.44,
+          "d_long": 27.0,
+          "n_mask_group": 2,
+          "f3_mask_group": [
+            {
+              "token": "0df6ee587eb34d39b32e151b9c46f09f",
+              "cat": "human.pedestrian.adult",
+              "s_m": 26.9,
+              "lat_m": 0.42,
+              "a_req": 0.183,
+              "is_target": true
+            },
+            {
+              "token": "14ee0fefd6024afc9f5c84df3b419ac0",
+              "cat": "human.pedestrian.adult",
+              "s_m": 26.9,
+              "lat_m": 1.18,
+              "a_req": 0.123,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0477_011_D2c",
+          "scene": "scene-0477",
+          "pool": "D2c",
+          "vru_class_share": 0.614,
+          "vru_share": 0.206,
+          "a_req_vru": 0.192,
+          "a_obs": 0.478,
+          "ego_v0": 3.54,
+          "d_long": 30.9,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "d9c8722b589e4dd884b2a28b063bd8d7",
+              "cat": "human.pedestrian.adult",
+              "s_m": 28.9,
+              "lat_m": 1.4,
+              "a_req": 0.192,
+              "is_target": true
+            },
+            {
+              "token": "6dfa6971ad304a5d9ff3c8be7c3abdc2",
+              "cat": "human.pedestrian.adult",
+              "s_m": 28.9,
+              "lat_m": 0.95,
+              "a_req": 0.187,
+              "is_target": false
+            },
+            {
+              "token": "81cb4cc16e534db2a2e2e792f38e3ce7",
+              "cat": "human.pedestrian.adult",
+              "s_m": 28.9,
+              "lat_m": 0.99,
+              "a_req": 0.193,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0521_005_A",
+          "scene": "scene-0521",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.732,
+          "a_obs": 0.928,
+          "ego_v0": 6.83,
+          "d_long": 33.8,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "2a5d7607b62a49b7a8bb4616639b4631",
+              "cat": "human.pedestrian.adult",
+              "s_m": 33.7,
+              "lat_m": 1.04,
+              "a_req": 0.732,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0477_009_D2c",
+          "scene": "scene-0477",
+          "pool": "D2c",
+          "vru_class_share": 0.644,
+          "vru_share": 0.205,
+          "a_req_vru": 0.237,
+          "a_obs": 0.495,
+          "ego_v0": 4.28,
+          "d_long": 35.0,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "6dfa6971ad304a5d9ff3c8be7c3abdc2",
+              "cat": "human.pedestrian.adult",
+              "s_m": 33.7,
+              "lat_m": 0.97,
+              "a_req": 0.237,
+              "is_target": true
+            },
+            {
+              "token": "9752a06eb87940e58cca6ed7110b83f9",
+              "cat": "human.pedestrian.adult",
+              "s_m": 33.7,
+              "lat_m": 1.68,
+              "a_req": 0.257,
+              "is_target": false
+            },
+            {
+              "token": "81cb4cc16e534db2a2e2e792f38e3ce7",
+              "cat": "human.pedestrian.adult",
+              "s_m": 33.7,
+              "lat_m": 0.56,
+              "a_req": 0.252,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0477_008_D2c",
+          "scene": "scene-0477",
+          "pool": "D2c",
+          "vru_class_share": 0.648,
+          "vru_share": 0.219,
+          "a_req_vru": 0.263,
+          "a_obs": 0.498,
+          "ego_v0": 4.44,
+          "d_long": 35.1,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "81cb4cc16e534db2a2e2e792f38e3ce7",
+              "cat": "human.pedestrian.adult",
+              "s_m": 34.8,
+              "lat_m": 0.87,
+              "a_req": 0.263,
+              "is_target": true
+            },
+            {
+              "token": "6dfa6971ad304a5d9ff3c8be7c3abdc2",
+              "cat": "human.pedestrian.adult",
+              "s_m": 34.8,
+              "lat_m": 1.21,
+              "a_req": 0.248,
+              "is_target": false
+            },
+            {
+              "token": "9752a06eb87940e58cca6ed7110b83f9",
+              "cat": "human.pedestrian.adult",
+              "s_m": 34.8,
+              "lat_m": 1.75,
+              "a_req": 0.268,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0477_007_D2c",
+          "scene": "scene-0477",
+          "pool": "D2c",
+          "vru_class_share": 0.648,
+          "vru_share": 0.223,
+          "a_req_vru": 0.268,
+          "a_obs": 0.498,
+          "ego_v0": 4.44,
+          "d_long": 37.3,
+          "n_mask_group": 3,
+          "f3_mask_group": [
+            {
+              "token": "9752a06eb87940e58cca6ed7110b83f9",
+              "cat": "human.pedestrian.adult",
+              "s_m": 34.8,
+              "lat_m": 1.75,
+              "a_req": 0.268,
+              "is_target": true
+            },
+            {
+              "token": "6dfa6971ad304a5d9ff3c8be7c3abdc2",
+              "cat": "human.pedestrian.adult",
+              "s_m": 34.8,
+              "lat_m": 1.21,
+              "a_req": 0.248,
+              "is_target": false
+            },
+            {
+              "token": "81cb4cc16e534db2a2e2e792f38e3ce7",
+              "cat": "human.pedestrian.adult",
+              "s_m": 34.8,
+              "lat_m": 0.87,
+              "a_req": 0.263,
+              "is_target": false
+            }
+          ]
+        },
+        {
+          "eid": "scene-0666_001_A",
+          "scene": "scene-0666",
+          "pool": "A",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 1.013,
+          "a_obs": 0.859,
+          "ego_v0": 10.33,
+          "d_long": 46.6,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "f591051da9f4486baf096582810db4fd",
+              "cat": "human.pedestrian.adult",
+              "s_m": 46.5,
+              "lat_m": 1.8,
+              "a_req": 1.013,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0071_004_D2b",
+          "scene": "scene-0071",
+          "pool": "D2b",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.363,
+          "a_obs": 0.504,
+          "ego_v0": 6.04,
+          "d_long": 51.3,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "c95947410a1b4ff19dfada102de10ff2",
+              "cat": "human.pedestrian.adult",
+              "s_m": 52.3,
+              "lat_m": 0.99,
+              "a_req": 0.363,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0071_003_D2b",
+          "scene": "scene-0071",
+          "pool": "D2b",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.467,
+          "a_obs": 0.422,
+          "ego_v0": 6.03,
+          "d_long": 62.5,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "e64be77927ca45bf8a15f8671a614741",
+              "cat": "human.pedestrian.adult",
+              "s_m": 63.0,
+              "lat_m": 0.81,
+              "a_req": 0.467,
+              "is_target": true
+            }
+          ]
+        },
+        {
+          "eid": "scene-0026_002_D",
+          "scene": "scene-0026",
+          "pool": "D",
+          "vru_class_share": 1.0,
+          "vru_share": 1.0,
+          "a_req_vru": 0.281,
+          "a_obs": 0.398,
+          "ego_v0": 7.23,
+          "d_long": 69.3,
+          "n_mask_group": 1,
+          "f3_mask_group": [
+            {
+              "token": "6834e14c29684039aa3a8990c83b1fcd",
+              "cat": "vehicle.motorcycle",
+              "s_m": 69.3,
+              "lat_m": 0.89,
+              "a_req": 0.281,
+              "is_target": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

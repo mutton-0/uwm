@@ -1,0 +1,697 @@
+{
+  "criterion": "刹车 case -> 归因 -> 行人占比",
+  "a_req": "a_i = max(v_close,0)^2 / (2*max(s-2.0, 0.5))，s 沿真实未来路径的弧长位置",
+  "groups": {
+    "solo": {
+      "n": 7,
+      "events": [
+        {
+          "eid": "scene-0862_000_A",
+          "scene": "scene-0862",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 1.0,
+          "vru_class_share": 1.0,
+          "explained_ratio": 1.5774214223611596,
+          "a_req_vru": 0.7077182029822991,
+          "a_obs_mps2": 0.44865512345011316,
+          "ego_v0_mps": 3.9037420724174767,
+          "ego_delta_v_mps": -3.903299595409528,
+          "d_long_ghost_m": 11.186456385366878,
+          "lat_to_real_path_m": 0.8792213232665549,
+          "stopped_long_s": 7.0999932289123535,
+          "n_competitors": 0,
+          "top_competitors": [],
+          "file": "scene-0862_000_A.jpg"
+        },
+        {
+          "eid": "scene-0544_004_A",
+          "scene": "scene-0544",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 1.0,
+          "vru_class_share": 1.0,
+          "explained_ratio": 0.6423073670606543,
+          "a_req_vru": 0.44654100416993575,
+          "a_obs_mps2": 0.6952138914635367,
+          "ego_v0_mps": 3.287828971395564,
+          "ego_delta_v_mps": -2.815616227276942,
+          "d_long_ghost_m": 16.20948954901244,
+          "lat_to_real_path_m": 0.6519789568694035,
+          "stopped_long_s": 0.09999990463256836,
+          "n_competitors": 0,
+          "top_competitors": [],
+          "file": "scene-0544_004_A.jpg"
+        },
+        {
+          "eid": "scene-0521_005_A",
+          "scene": "scene-0521",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 1.0,
+          "vru_class_share": 1.0,
+          "explained_ratio": 0.7885924226130622,
+          "a_req_vru": 0.7318591237539502,
+          "a_obs_mps2": 0.9280575145889409,
+          "ego_v0_mps": 6.834428904525615,
+          "ego_delta_v_mps": -4.640287572944705,
+          "d_long_ghost_m": 33.837169518637914,
+          "lat_to_real_path_m": 1.041295176751886,
+          "stopped_long_s": 0.0,
+          "n_competitors": 0,
+          "top_competitors": [],
+          "file": "scene-0521_005_A.jpg"
+        },
+        {
+          "eid": "scene-0666_001_A",
+          "scene": "scene-0666",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 1.0,
+          "vru_class_share": 1.0,
+          "explained_ratio": 1.1791576794934495,
+          "a_req_vru": 1.0132251426966403,
+          "a_obs_mps2": 0.8592787549260659,
+          "ego_v0_mps": 10.332975575197729,
+          "ego_delta_v_mps": -8.249075965343025,
+          "d_long_ghost_m": 46.59472808608119,
+          "lat_to_real_path_m": 1.7985086620062867,
+          "stopped_long_s": 0.0,
+          "n_competitors": 0,
+          "top_competitors": [],
+          "file": "scene-0666_001_A.jpg"
+        },
+        {
+          "eid": "scene-0071_004_D2b",
+          "scene": "scene-0071",
+          "pool": "D2b",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 1.0,
+          "vru_class_share": 1.0,
+          "explained_ratio": 0.7203142409555182,
+          "a_req_vru": 0.3628846550030967,
+          "a_obs_mps2": 0.503786589755215,
+          "ego_v0_mps": 6.044498442029025,
+          "ego_delta_v_mps": -3.979914107111031,
+          "d_long_ghost_m": 51.33045304822691,
+          "lat_to_real_path_m": 0.9934220962313094,
+          "stopped_long_s": 0.0,
+          "n_competitors": 0,
+          "top_competitors": [],
+          "file": "scene-0071_004_D2b.jpg"
+        },
+        {
+          "eid": "scene-0071_003_D2b",
+          "scene": "scene-0071",
+          "pool": "D2b",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 1.0,
+          "vru_class_share": 1.0,
+          "explained_ratio": 1.1075748013968199,
+          "a_req_vru": 0.4672905217377116,
+          "a_obs_mps2": 0.42190425526870723,
+          "ego_v0_mps": 6.030484374679767,
+          "ego_delta_v_mps": -3.965900039761773,
+          "d_long_ghost_m": 62.526888517155555,
+          "lat_to_real_path_m": 0.807995713479174,
+          "stopped_long_s": 0.0,
+          "n_competitors": 0,
+          "top_competitors": [],
+          "file": "scene-0071_003_D2b.jpg"
+        },
+        {
+          "eid": "scene-0026_002_D",
+          "scene": "scene-0026",
+          "pool": "D",
+          "object_class": "vehicle.motorcycle",
+          "vru_share": 1.0,
+          "vru_class_share": 1.0,
+          "explained_ratio": 0.706215073787539,
+          "a_req_vru": 0.28139110187249566,
+          "a_obs_mps2": 0.39844958330236757,
+          "ego_v0_mps": 7.2280385493973345,
+          "ego_delta_v_mps": -3.944649297730233,
+          "d_long_ghost_m": 69.25529867816027,
+          "lat_to_real_path_m": 0.8892416872800414,
+          "stopped_long_s": 0.0,
+          "n_competitors": 0,
+          "top_competitors": [],
+          "file": "scene-0026_002_D.jpg"
+        }
+      ]
+    },
+    "group": {
+      "n": 16,
+      "events": [
+        {
+          "eid": "scene-0653_005_A",
+          "scene": "scene-0653",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.5052182758853949,
+          "vru_class_share": 1.0,
+          "explained_ratio": 1.03897136772244,
+          "a_req_vru": 0.2412182816615182,
+          "a_obs_mps2": 0.23217028799388378,
+          "ego_v0_mps": 1.8468405433590462,
+          "ego_delta_v_mps": -1.8457538006221181,
+          "d_long_ghost_m": 11.2192488786443,
+          "lat_to_real_path_m": 0.6049784076441792,
+          "stopped_long_s": 7.799992561340332,
+          "n_competitors": 1,
+          "top_competitors": [
+            {
+              "a_req": 0.236,
+              "cat": "human.pedestrian.adult",
+              "s_m": 12.2,
+              "lat_m": 1.16
+            }
+          ],
+          "file": "scene-0653_005_A.jpg"
+        },
+        {
+          "eid": "scene-0653_006_A",
+          "scene": "scene-0653",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.4879174260830083,
+          "vru_class_share": 1.0,
+          "explained_ratio": 1.1199817246758645,
+          "a_req_vru": 0.27103903327515944,
+          "a_obs_mps2": 0.2420030856785643,
+          "ego_v0_mps": 1.8161098853261604,
+          "ego_delta_v_mps": -1.8150231425892323,
+          "d_long_ghost_m": 11.55713657988993,
+          "lat_to_real_path_m": 0.3596756740988923,
+          "stopped_long_s": 7.799992561340332,
+          "n_competitors": 1,
+          "top_competitors": [
+            {
+              "a_req": 0.284,
+              "cat": "human.pedestrian.adult",
+              "s_m": 9.6,
+              "lat_m": 0.06
+            }
+          ],
+          "file": "scene-0653_006_A.jpg"
+        },
+        {
+          "eid": "scene-0717_015_A",
+          "scene": "scene-0717",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.3037902788634819,
+          "vru_class_share": 0.6357331316910492,
+          "explained_ratio": 0.7230908909452537,
+          "a_req_vru": 0.593723137799044,
+          "a_obs_mps2": 0.8210906059443026,
+          "ego_v0_mps": 2.3860369094444738,
+          "ego_delta_v_mps": -2.3811626397805243,
+          "d_long_ghost_m": 12.828303910635547,
+          "lat_to_real_path_m": 1.1427528807490344,
+          "stopped_long_s": 1.7999982833862305,
+          "n_competitors": 3,
+          "top_competitors": [
+            {
+              "a_req": 0.649,
+              "cat": "human.pedestrian.adult",
+              "s_m": 10.8,
+              "lat_m": 0.34
+            },
+            {
+              "a_req": 0.494,
+              "cat": "movable_object.trafficcone",
+              "s_m": 7.6,
+              "lat_m": 1.9
+            },
+            {
+              "a_req": 0.217,
+              "cat": "vehicle.car",
+              "s_m": 15.0,
+              "lat_m": 0.14
+            }
+          ],
+          "file": "scene-0717_015_A.jpg"
+        },
+        {
+          "eid": "scene-0717_013_A",
+          "scene": "scene-0717",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.30253498278752383,
+          "vru_class_share": 0.6056090762396275,
+          "explained_ratio": 0.7206582645748876,
+          "a_req_vru": 0.5338164173157403,
+          "a_obs_mps2": 0.7407344695209118,
+          "ego_v0_mps": 2.4492979837619866,
+          "ego_delta_v_mps": -2.444423714098037,
+          "d_long_ghost_m": 12.882275675802475,
+          "lat_to_real_path_m": 0.9493710574766704,
+          "stopped_long_s": 1.7999982833862305,
+          "n_competitors": 3,
+          "top_competitors": [
+            {
+              "a_req": 0.535,
+              "cat": "human.pedestrian.adult",
+              "s_m": 13.8,
+              "lat_m": 1.65
+            },
+            {
+              "a_req": 0.482,
+              "cat": "movable_object.trafficcone",
+              "s_m": 7.5,
+              "lat_m": 1.9
+            },
+            {
+              "a_req": 0.214,
+              "cat": "vehicle.car",
+              "s_m": 15.9,
+              "lat_m": 0.15
+            }
+          ],
+          "file": "scene-0717_013_A.jpg"
+        },
+        {
+          "eid": "scene-0017_016_A",
+          "scene": "scene-0017",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.21658734199453575,
+          "vru_class_share": 0.6275632002137743,
+          "explained_ratio": 0.6082478623743229,
+          "a_req_vru": 0.419756896678189,
+          "a_obs_mps2": 0.6901082973635929,
+          "ego_v0_mps": 3.4348359272438937,
+          "ego_delta_v_mps": -3.4160326496292797,
+          "d_long_ghost_m": 16.699522529975226,
+          "lat_to_real_path_m": 1.4384432010604546,
+          "stopped_long_s": 1.4999985694885254,
+          "n_competitors": 5,
+          "top_competitors": [
+            {
+              "a_req": 0.444,
+              "cat": "human.pedestrian.adult",
+              "s_m": 15.6,
+              "lat_m": 1.65
+            },
+            {
+              "a_req": 0.353,
+              "cat": "human.pedestrian.adult",
+              "s_m": 18.8,
+              "lat_m": 1.87
+            },
+            {
+              "a_req": 0.25,
+              "cat": "movable_object.barrier",
+              "s_m": 25.1,
+              "lat_m": 0.04
+            },
+            {
+              "a_req": 0.24,
+              "cat": "movable_object.barrier",
+              "s_m": 25.1,
+              "lat_m": 1.97
+            }
+          ],
+          "file": "scene-0017_016_A.jpg"
+        },
+        {
+          "eid": "scene-0017_015_A",
+          "scene": "scene-0017",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.2284629099725764,
+          "vru_class_share": 0.618977658777412,
+          "explained_ratio": 0.7180429995624864,
+          "a_req_vru": 0.5179073295456884,
+          "a_obs_mps2": 0.721276204713724,
+          "ego_v0_mps": 3.80549974108306,
+          "ego_delta_v_mps": -3.786696463468446,
+          "d_long_ghost_m": 16.929800545291073,
+          "lat_to_real_path_m": 1.410118676339341,
+          "stopped_long_s": 1.4999842643737793,
+          "n_competitors": 5,
+          "top_competitors": [
+            {
+              "a_req": 0.479,
+              "cat": "human.pedestrian.adult",
+              "s_m": 17.7,
+              "lat_m": 1.18
+            },
+            {
+              "a_req": 0.407,
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.8,
+              "lat_m": 1.87
+            },
+            {
+              "a_req": 0.306,
+              "cat": "movable_object.barrier",
+              "s_m": 26.2,
+              "lat_m": 0.04
+            },
+            {
+              "a_req": 0.283,
+              "cat": "movable_object.barrier",
+              "s_m": 26.2,
+              "lat_m": 1.96
+            }
+          ],
+          "file": "scene-0017_015_A.jpg"
+        },
+        {
+          "eid": "scene-0017_014_A",
+          "scene": "scene-0017",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.17142976580404476,
+          "vru_class_share": 0.6754241035869621,
+          "explained_ratio": 0.7104616908261204,
+          "a_req_vru": 0.5185478637306509,
+          "a_obs_mps2": 0.7298744892601974,
+          "ego_v0_mps": 4.106100347865464,
+          "ego_delta_v_mps": -4.08729707025085,
+          "d_long_ghost_m": 19.125123007425522,
+          "lat_to_real_path_m": 1.888482833802804,
+          "stopped_long_s": 1.4999842643737793,
+          "n_competitors": 6,
+          "top_competitors": [
+            {
+              "a_req": 0.581,
+              "cat": "human.pedestrian.adult",
+              "s_m": 18.1,
+              "lat_m": 1.13
+            },
+            {
+              "a_req": 0.506,
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.1,
+              "lat_m": 0.87
+            },
+            {
+              "a_req": 0.438,
+              "cat": "human.pedestrian.adult",
+              "s_m": 21.2,
+              "lat_m": 1.86
+            },
+            {
+              "a_req": 0.337,
+              "cat": "movable_object.barrier",
+              "s_m": 27.5,
+              "lat_m": 0.04
+            }
+          ],
+          "file": "scene-0017_014_A.jpg"
+        },
+        {
+          "eid": "scene-0710_001_D2c",
+          "scene": "scene-0710",
+          "pool": "D2c",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.49580050801798126,
+          "vru_class_share": 1.0,
+          "explained_ratio": 0.45490252712428336,
+          "a_req_vru": 0.08884329871639568,
+          "a_obs_mps2": 0.19530183592961864,
+          "ego_v0_mps": 1.9350509990428177,
+          "ego_delta_v_mps": -1.9334893584183144,
+          "d_long_ghost_m": 19.304024634501967,
+          "lat_to_real_path_m": 0.0945189913811578,
+          "stopped_long_s": 7.599992752075195,
+          "n_competitors": 1,
+          "top_competitors": [
+            {
+              "a_req": 0.09,
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.1,
+              "lat_m": 0.97
+            }
+          ],
+          "file": "scene-0710_001_D2c.jpg"
+        },
+        {
+          "eid": "scene-0710_000_D2c",
+          "scene": "scene-0710",
+          "pool": "D2c",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.5327386747969027,
+          "vru_class_share": 1.0,
+          "explained_ratio": 0.49160187533949185,
+          "a_req_vru": 0.0940006021410646,
+          "a_obs_mps2": 0.19121286320592124,
+          "ego_v0_mps": 1.9140523308838058,
+          "ego_delta_v_mps": -1.9121286320592124,
+          "d_long_ghost_m": 21.272084377454615,
+          "lat_to_real_path_m": 0.05107405481133045,
+          "stopped_long_s": 6.799993515014648,
+          "n_competitors": 1,
+          "top_competitors": [
+            {
+              "a_req": 0.082,
+              "cat": "human.pedestrian.adult",
+              "s_m": 20.6,
+              "lat_m": 1.32
+            }
+          ],
+          "file": "scene-0710_000_D2c.jpg"
+        },
+        {
+          "eid": "scene-0521_008_A",
+          "scene": "scene-0521",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.29942430980095003,
+          "vru_class_share": 1.0,
+          "explained_ratio": 0.6117126565831016,
+          "a_req_vru": 0.5076531441933131,
+          "a_obs_mps2": 0.829888246924556,
+          "ego_v0_mps": 4.642311699580506,
+          "ego_delta_v_mps": -2.4481703679995954,
+          "d_long_ghost_m": 21.788182989859116,
+          "lat_to_real_path_m": 1.1044722006955408,
+          "stopped_long_s": 0.0,
+          "n_competitors": 2,
+          "top_competitors": [
+            {
+              "a_req": 0.647,
+              "cat": "human.pedestrian.adult",
+              "s_m": 19.7,
+              "lat_m": 1.24
+            },
+            {
+              "a_req": 0.541,
+              "cat": "human.pedestrian.adult",
+              "s_m": 21.8,
+              "lat_m": 1.93
+            }
+          ],
+          "file": "scene-0521_008_A.jpg"
+        },
+        {
+          "eid": "scene-0521_007_A",
+          "scene": "scene-0521",
+          "pool": "A",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.5161506237227563,
+          "vru_class_share": 1.0,
+          "explained_ratio": 0.7934965387701375,
+          "a_req_vru": 0.7409416878648224,
+          "a_obs_mps2": 0.9337680149345436,
+          "ego_v0_mps": 6.022590103761482,
+          "ego_delta_v_mps": -3.828448772180572,
+          "d_long_ghost_m": 26.966378038461503,
+          "lat_to_real_path_m": 0.6102353953199955,
+          "stopped_long_s": 0.0,
+          "n_competitors": 1,
+          "top_competitors": [
+            {
+              "a_req": 0.695,
+              "cat": "human.pedestrian.adult",
+              "s_m": 27.9,
+              "lat_m": 0.27
+            }
+          ],
+          "file": "scene-0521_007_A.jpg"
+        },
+        {
+          "eid": "scene-0952_002_D2c",
+          "scene": "scene-0952",
+          "pool": "D2c",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.5980128617620274,
+          "vru_class_share": 1.0,
+          "explained_ratio": 0.45306767845878926,
+          "a_req_vru": 0.18336875354333285,
+          "a_obs_mps2": 0.40472706896043115,
+          "ego_v0_mps": 3.4419623321285275,
+          "ego_delta_v_mps": -3.440180086163665,
+          "d_long_ghost_m": 27.04000186271377,
+          "lat_to_real_path_m": 0.42256158059088345,
+          "stopped_long_s": 4.2999958992004395,
+          "n_competitors": 1,
+          "top_competitors": [
+            {
+              "a_req": 0.123,
+              "cat": "human.pedestrian.adult",
+              "s_m": 26.9,
+              "lat_m": 1.18
+            }
+          ],
+          "file": "scene-0952_002_D2c.jpg"
+        },
+        {
+          "eid": "scene-0477_011_D2c",
+          "scene": "scene-0477",
+          "pool": "D2c",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.20616056965880755,
+          "vru_class_share": 0.6139606023753461,
+          "explained_ratio": 0.402888054351336,
+          "a_req_vru": 0.1923815610506152,
+          "a_obs_mps2": 0.4775062426716928,
+          "ego_v0_mps": 3.5355148374445693,
+          "ego_delta_v_mps": -3.5335461274627105,
+          "d_long_ghost_m": 30.92364027076692,
+          "lat_to_real_path_m": 1.396378915542738,
+          "stopped_long_s": 3.1999969482421875,
+          "n_competitors": 3,
+          "top_competitors": [
+            {
+              "a_req": 0.36,
+              "cat": "vehicle.car",
+              "s_m": 19.4,
+              "lat_m": 0.76
+            },
+            {
+              "a_req": 0.193,
+              "cat": "human.pedestrian.adult",
+              "s_m": 28.9,
+              "lat_m": 0.99
+            },
+            {
+              "a_req": 0.187,
+              "cat": "human.pedestrian.adult",
+              "s_m": 28.9,
+              "lat_m": 0.95
+            }
+          ],
+          "file": "scene-0477_011_D2c.jpg"
+        },
+        {
+          "eid": "scene-0477_009_D2c",
+          "scene": "scene-0477",
+          "pool": "D2c",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.2045512350785796,
+          "vru_class_share": 0.6435581095902381,
+          "explained_ratio": 0.479665216341135,
+          "a_req_vru": 0.23747577186828464,
+          "a_obs_mps2": 0.49508649736943466,
+          "ego_v0_mps": 4.284466841404777,
+          "ego_delta_v_mps": -4.282498131422918,
+          "d_long_ghost_m": 35.017033238859504,
+          "lat_to_real_path_m": 0.9718239812890042,
+          "stopped_long_s": 3.1999969482421875,
+          "n_competitors": 3,
+          "top_competitors": [
+            {
+              "a_req": 0.414,
+              "cat": "vehicle.car",
+              "s_m": 24.2,
+              "lat_m": 0.72
+            },
+            {
+              "a_req": 0.257,
+              "cat": "human.pedestrian.adult",
+              "s_m": 33.7,
+              "lat_m": 1.68
+            },
+            {
+              "a_req": 0.252,
+              "cat": "human.pedestrian.adult",
+              "s_m": 33.7,
+              "lat_m": 0.56
+            }
+          ],
+          "file": "scene-0477_009_D2c.jpg"
+        },
+        {
+          "eid": "scene-0477_008_D2c",
+          "scene": "scene-0477",
+          "pool": "D2c",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.21886165338948807,
+          "vru_class_share": 0.6482640492120451,
+          "explained_ratio": 0.5274880991116824,
+          "a_req_vru": 0.2629118278508602,
+          "a_obs_mps2": 0.49842229292683093,
+          "ego_v0_mps": 4.437927045730773,
+          "ego_delta_v_mps": -4.435958335748914,
+          "d_long_ghost_m": 35.10495633847009,
+          "lat_to_real_path_m": 0.8656522360543731,
+          "stopped_long_s": 3.1999969482421875,
+          "n_competitors": 3,
+          "top_competitors": [
+            {
+              "a_req": 0.423,
+              "cat": "vehicle.car",
+              "s_m": 25.3,
+              "lat_m": 0.72
+            },
+            {
+              "a_req": 0.268,
+              "cat": "human.pedestrian.adult",
+              "s_m": 34.8,
+              "lat_m": 1.75
+            },
+            {
+              "a_req": 0.248,
+              "cat": "human.pedestrian.adult",
+              "s_m": 34.8,
+              "lat_m": 1.21
+            }
+          ],
+          "file": "scene-0477_008_D2c.jpg"
+        },
+        {
+          "eid": "scene-0477_007_D2c",
+          "scene": "scene-0477",
+          "pool": "D2c",
+          "object_class": "human.pedestrian.adult",
+          "vru_share": 0.22300834977540404,
+          "vru_class_share": 0.6482640492120451,
+          "explained_ratio": 0.5374822344950404,
+          "a_req_vru": 0.26789312772445467,
+          "a_obs_mps2": 0.49842229292683093,
+          "ego_v0_mps": 4.437927045730773,
+          "ego_delta_v_mps": -4.435958335748914,
+          "d_long_ghost_m": 37.30693912127939,
+          "lat_to_real_path_m": 1.7525065489543712,
+          "stopped_long_s": 3.1999969482421875,
+          "n_competitors": 3,
+          "top_competitors": [
+            {
+              "a_req": 0.423,
+              "cat": "vehicle.car",
+              "s_m": 25.3,
+              "lat_m": 0.72
+            },
+            {
+              "a_req": 0.263,
+              "cat": "human.pedestrian.adult",
+              "s_m": 34.8,
+              "lat_m": 0.87
+            },
+            {
+              "a_req": 0.248,
+              "cat": "human.pedestrian.adult",
+              "s_m": 34.8,
+              "lat_m": 1.21
+            }
+          ],
+          "file": "scene-0477_007_D2c.jpg"
+        }
+      ]
+    }
+  }
+}
