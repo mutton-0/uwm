@@ -59,6 +59,9 @@ def _load_window_boxes():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True, choices=["alpa", "autovla"])
+    ap.add_argument("--speed-floor", type=float, default=0.0,
+                    help="把喂给模型的当前速度观测覆盖为 max(真实, 该值) m/s；0=关闭（默认）。"
+                         "仅对 autovla 生效 —— alpa 喂的是自车历史轨迹而非速度标量。")
     ap.add_argument("--work", default=str(W))
     ap.add_argument("--nuscenes-root", default="/data/dataset/nuscenes/v1.0-trainval")
     ap.add_argument("--pos", default="A", help="正例类名（G1 用 A，前车急刹用 LB）")
@@ -160,6 +163,11 @@ def main():
         def run_with(ev, cond, mode=None, cbox=None):
             tok = ev[f"x_{cond}_frames"][0]["sd_token"]
             spd = float(np.mean([f["ego_speed_mps"] for f in ev["x_clean_frames"]]))
+            if args.speed_floor > 0:
+                if args.model == "alpa":
+                    raise SystemExit("--speed-floor 对 alpa 无效：它吃的是 ego_history 轨迹，"
+                                     "不是速度标量；见 speed_override_report_zh.md 第 5 节")
+                spd = max(spd, args.speed_floor)
             if mode is None:
                 o = runner.run(tok, spd)
                 return (o["commanded_speed"], 0,

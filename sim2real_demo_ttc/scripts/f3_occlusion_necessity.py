@@ -126,15 +126,20 @@ def main():
                     help="DDv2 专用：同时删掉落在实体 3D 框内的点云点（§FM/A59）。"
                          "不开启时行为与旧版逐位一致（只涂 RGB）")
     ap.add_argument("--sl-config", default="/data/ruolin/uwm/sim2real_demo_ttc/configs/n1_d2.yaml")
+    ap.add_argument("--speed-floor", type=float, default=0.0,
+                    help="把喂给模型的**当前速度观测**覆盖为 max(真实速度, 该值) m/s；"
+                         "0=关闭（默认，既有产物逐位不变）。这是控制协变量，不是给模型下达目标。")
     ap.add_argument("--save-traj", action="store_true",
                     help="逐臂落盘**完整规划轨迹**（不只是第一步）；距离读数需要。默认关闭以保证既有产物逐位不变")
     ap.add_argument("--out", default="")
     args = ap.parse_args()
     LABEL = {"dd": "DiffusionDrive", "ltf": "LTF", "ddv2": "DiffusionDriveV2",
              "simlingo": "SimLingo", "alpa": "Alpamayo-R1", "autovla": "AutoVLA"}[args.model]
-    work = Path(args.work)
-    if not args.out:
-        args.out = str(RES / f"f3_occlusion_{args.model}.json")
+    work = Path(args.work).resolve()
+    # **必须在构造 runner 之前把输出路径绝对化**：SimLingoRunner 会 os.chdir 到它自己的
+    # repo（见 simlingo_runner），相对 --out 会在跑完全部事件后的写盘那一步才炸。
+    args.out = str(Path(args.out).resolve() if args.out
+                   else RES / f"f3_occlusion_{args.model}.json")
 
     import cv2
     evs = [json.loads(l) for l in open(work / "mining" / "events_all.jsonl")]
@@ -223,7 +228,14 @@ def main():
         raise SystemExit("VLA 候选走 f3_occlusion_vla.py（多帧输入，接口不同）")
 
     def spd(ev):
-        return float(np.mean([f["ego_speed_mps"] for f in ev["x_clean_frames"]]))
+        """喂给模型的当前速度观测。四臂共用同一份（锚在 clean），见 §deconfound B。
+
+        `--speed-floor > 0` 时统一抬到 max(真实, floor)：跨事件的"背景速度差异"
+        是 F-3 读数里最大的噪声源之一（LTF 的 v_plan 与输入速度 corr=0.9996），
+        把它压平后，臂间差异更接近纯图像驱动。**不改变任何图像与遮挡逻辑。**
+        """
+        v = float(np.mean([f["ego_speed_mps"] for f in ev["x_clean_frames"]]))
+        return max(v, args.speed_floor) if args.speed_floor > 0 else v
 
     rng = np.random.default_rng(0)
     recs, skipped = [], defaultdict(int)
