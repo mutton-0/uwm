@@ -41,13 +41,36 @@ import g1_mine_events as G1                                            # noqa: E
 from lane_path_filter import point_to_polyline                         # noqa: E402
 
 D_SAFE = 2.0
+# **静态物专用的更紧走廊**（场景特定调整，理由见下）。
+# 2.0 m 走廊 = 半车宽 1 m + 1 m 缓冲；那 1 m 缓冲是给**会动的**目标留的
+# （行人可能走进来、车可能变道）。静态路障不会动 ⇒ 缓冲无依据。
+# 实测后果：路边一整排护栏平行于行车路径、永远落在 2 m 走廊内，
+# 且近距离使 a_req 爆炸（scene-0047：护栏 4.2 m / 横向 1.81 m ⇒ a_req 149.67，
+# 是实测减速的 150 倍）。对静态物收紧到半车宽。
+STATIC_CORRIDOR = 1.0
+STATIC_PREFIX = ("movable_object.", "static_object.")
+# **几何与人类行为的一致性上界**：a_req 远大于实测减速，说明几何判定与真实情况脱节
+# （通常是走廊误纳了不该纳的东西）。下界 0.3 早已有，此处补上界。
+# 注意这是**几何 vs 人类行为**的一致性检查，不是按模型测量结果筛样本。
+MAX_EXPLAINED_RATIO = 10.0
 # **危险类 = 归因口径 = 遮挡口径**（用户 2026-09-04）。
 # 三者必须是同一个集合：归因认定"是这些东西触发了减速"，遮挡臂就必须遮掉这些东西，
 # 否则遮完之后触发物还在，测出的必然是假 FAIL。
 # `animal` 此前被 g1_mine_events.obj_class 映射为 other 并在 geo 构造时丢弃 ——
 # 既不可遮、也不当竞争者（双向缺失）：狗冲上路、走廊里恰有行人时，
 # 会把这次刹车错算到行人头上。现通过 G1.set_include_animal(True) 纳入。
-HAZARD_PREFIX = ("human.", "vehicle.bicycle", "vehicle.motorcycle", "animal")
+# **场景类型 -> 危险类**。归因口径与遮挡口径必须是同一集合（见 f3_gt_axis_method_v2.md §1.1）。
+SCENARIO_HAZARD = {
+    # 鬼探头：VRU 突现。animal 此前被 obj_class 映射为 other 并在 geo 构造时丢弃
+    # （既不可遮也不当竞争者），现经 set_include_animal(True) 纳入。
+    "ghost": ("human.", "vehicle.bicycle", "vehicle.motorcycle", "animal"),
+    # 前车 / 静态路障：机动车 + 可移动路障类。
+    # **与本项目旧的"前车急刹(B 类)"语料无关** —— 那批用 cut-in 判据挖的，
+    # 已知自车常停在路口、判据误伤严重；此处是用 brake-first 重新挖。
+    "lead": ("vehicle.car", "vehicle.truck", "vehicle.bus", "vehicle.trailer",
+             "vehicle.construction", "vehicle.emergency", "movable_object."),
+}
+HAZARD_PREFIX = SCENARIO_HAZARD["ghost"]     # 由 --scenario 覆盖
 VRU_PREFIX = HAZARD_PREFIX          # 向后兼容旧名
 
 
@@ -82,6 +105,8 @@ def brake_episodes(v, t, min_dv=0.5, min_rel=0.30, max_win_s=10.0):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--scenario", default="ghost", choices=sorted(SCENARIO_HAZARD),
+                    help="决定危险类 H（=归因口径=遮挡口径）")
     ap.add_argument("--corpus", default="nuscenes", choices=["nuscenes", "navsim"],
                     help="navsim 走 ns1_navsim_geometry.build_geo —— 其 geo 与 "
                          "compute_scene_geometry 逐字段对齐，故挖矿逻辑一行未改")
@@ -95,7 +120,11 @@ def main():
 
     from omegaconf import OmegaConf
 
-    G1.set_include_animal(True)     # 危险类含 animal —— 归因与遮挡口径必须一致
+    global HAZARD_PREFIX
+    HAZARD_PREFIX = SCENARIO_HAZARD[args.scenario]
+    if args.scenario == "ghost":
+        G1.set_include_animal(True)     # 危险类含 animal —— 归因与遮挡口径必须一致
+    print(f"[BFM] scenario={args.scenario}  危险类 H = {HAZARD_PREFIX}")
 
     # ---- 两个语料的 scene 迭代器；都产出 (scene 显示名, geo) ----
     if args.corpus == "nuscenes":
@@ -165,7 +194,9 @@ def main():
             def demand(o):
                 p = np.asarray(o["p_ego"][j], float)[:2]
                 dmin, seg, tang = point_to_polyline(p, poly)
-                if dmin >= args.corridor:
+                lim = (STATIC_CORRIDOR if o["cat"].startswith(STATIC_PREFIX)
+                       else args.corridor)
+                if dmin >= lim:
                     return 0.0, dmin, 0.0
                 s = (float(np.linalg.norm(np.diff(poly[:seg + 1], axis=0), axis=1).sum())
                      if seg > 0 else 0.0)
@@ -194,7 +225,8 @@ def main():
             n_animal = sum(1 for x in vrus if x[2].startswith("animal"))
             if share <= 0.6 or a_vru_max < 1.5 * max(a_oth_max, 1e-9):
                 continue
-            if a_obs < 1e-6 or (a_vru_max / a_obs) <= 0.3:
+            er = (a_vru_max / a_obs) if a_obs > 1e-6 else 0.0
+            if er <= 0.3 or er > MAX_EXPLAINED_RATIO:
                 continue
             vis = [x for x in vrus if x[5]]                 # 必须能投影出来才谈遮挡
             if not vis:
@@ -232,6 +264,9 @@ def main():
     T1 = [c for c in ded if c["a_vru_max"] >= 0.4]
     out = {"design": "刹车优先挖矿：先找人类减速片段，再归因到走廊内 VRU",
            "corpus": args.corpus, "split": (args.split if args.corpus == "navsim" else None),
+           "scenario": args.scenario, "hazard_classes": list(HAZARD_PREFIX),
+           "static_corridor_m": STATIC_CORRIDOR,
+           "explained_ratio_bounds": [0.3, MAX_EXPLAINED_RATIO],
            "n_scenes_scanned": n_sc, "n_brake_episodes": n_ep,
            "n_candidates_raw": len(cands), "n_candidates_dedup": len(ded),
            "n_scenes_with_candidate": len({c["scene"] for c in ded}),

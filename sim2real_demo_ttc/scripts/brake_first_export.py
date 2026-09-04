@@ -15,6 +15,8 @@ NS_BLOBS = "/data/dataset/navsim/dataset/sensor_blobs"
 def main():
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 8
     corpus = sys.argv[2] if len(sys.argv) > 2 else "nuscenes"
+    poolf = sys.argv[3] if len(sys.argv) > 3 else None
+    outdir = sys.argv[4] if len(sys.argv) > 4 else None
     from omegaconf import OmegaConf
     G1.set_include_animal(True)     # 与挖矿同口径：危险类含 animal
     global OUT
@@ -23,7 +25,7 @@ def main():
         cfg=OmegaConf.to_container(OmegaConf.load(ROOT/"configs/n1_d2.yaml"),resolve=True)
         nusc=NuScenes("v1.0-trainval",dataroot=NUSC,verbose=False)
         sc={s['name']:s for s in nusc.scene}
-        pool=json.load(open(RES/"brake_first_pool.json"))["candidates"]
+        pool=json.load(open(RES/(poolf or "brake_first_pool.json")))["candidates"]
         root=NUSC
         def build(c): return G1.compute_scene_geometry(nusc, sc[c["scene"]], cfg)
     else:
@@ -32,7 +34,7 @@ def main():
         import ns1_navsim_geometry as NS
         OUT = RES/"figures"/"brake_first_navsim"
         cfg=OmegaConf.to_container(OmegaConf.load(ROOT/"configs/navsim_corpus.yaml"),resolve=True)
-        pool=json.load(open(RES/"brake_first_pool_navsim.json"))["candidates"]
+        pool=json.load(open(RES/(poolf or "brake_first_pool_navsim.json")))["candidates"]
         root=NS_BLOBS
         _cache={}
         def build(c):
@@ -42,7 +44,12 @@ def main():
                         _cache.setdefault(f["scene_name"], []).append(f)
             fl=sorted(_cache[c["scene"]], key=lambda z: z["timestamp"])
             return NS.build_geo(fl, cfg, "test")
-    pool=sorted(pool,key=lambda z:-z["a_vru_max"])[:n]
+    if outdir: OUT = RES/"figures"/outdir
+    # **分层抽样**：按 a_req 分位均匀取，覆盖强弱两端而非只看最强的
+    pool=[c for c in pool if c["a_vru_max"]>=0.4]
+    pool=sorted(pool,key=lambda z:z["a_vru_max"])
+    idx=np.linspace(0,len(pool)-1,min(n,len(pool))).astype(int)
+    pool=[pool[i] for i in sorted(set(idx),reverse=True)]
     OUT.mkdir(parents=True,exist_ok=True); meta=[]
     for c in pool:
         geo=build(c)
