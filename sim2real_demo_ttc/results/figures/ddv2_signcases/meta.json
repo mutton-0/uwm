@@ -1,0 +1,110 @@
+{
+  "corpus": "NAVSIM",
+  "scenario": "lead",
+  "readout": "arc_full",
+  "note": "正负两端各 3 例；删点数中位 268、无零删点事件 ⇒ '没点可删'不成立",
+  "events": [
+    {
+      "scene": "log-0045-scene-0015",
+      "tag": "NEG",
+      "file": "NEG__log-0045-scene-0015.jpg",
+      "b_model": -4.547442660645785,
+      "b_gt": 1.1640307472278923,
+      "n_lidar_del_clean": 80,
+      "n_lidar_del_ctrl": 85,
+      "ego_v0": 12.13,
+      "a_req": 4.287,
+      "lead": {
+        "token": "426f5a6893f55c1d",
+        "cat": "vehicle.car",
+        "s_m": 33.6,
+        "lat_m": 0.28
+      }
+    },
+    {
+      "scene": "log-0044-scene-0013",
+      "tag": "NEG",
+      "file": "NEG__log-0044-scene-0013.jpg",
+      "b_model": -3.8911436744227634,
+      "b_gt": 1.061237957330138,
+      "n_lidar_del_clean": 371,
+      "n_lidar_del_ctrl": 291,
+      "ego_v0": 7.85,
+      "a_req": 2.977,
+      "lead": {
+        "token": "aa115a4c04445496",
+        "cat": "vehicle.car",
+        "s_m": 29.8,
+        "lat_m": 0.14
+      }
+    },
+    {
+      "scene": "log-0039-scene-0004",
+      "tag": "NEG",
+      "file": "NEG__log-0039-scene-0004.jpg",
+      "b_model": -3.560899938293857,
+      "b_gt": 2.6241465679309046,
+      "n_lidar_del_clean": 145,
+      "n_lidar_del_ctrl": 157,
+      "ego_v0": 10.34,
+      "a_req": 1.751,
+      "lead": {
+        "token": "b98c27af3b2a5661",
+        "cat": "vehicle.car",
+        "s_m": 31.9,
+        "lat_m": 0.43
+      }
+    },
+    {
+      "scene": "log-0034-scene-0012",
+      "tag": "POS",
+      "file": "POS__log-0034-scene-0012.jpg",
+      "b_model": 1.7568256484544644,
+      "b_gt": 0.6019273475481146,
+      "n_lidar_del_clean": 407,
+      "n_lidar_del_ctrl": 342,
+      "ego_v0": 9.91,
+      "a_req": 2.919,
+      "lead": {
+        "token": "063a9d9430045bb8",
+        "cat": "vehicle.car",
+        "s_m": 19.1,
+        "lat_m": 0.34
+      }
+    },
+    {
+      "scene": "log-0124-scene-0015",
+      "tag": "POS",
+      "file": "POS__log-0124-scene-0015.jpg",
+      "b_model": 2.063562352230271,
+      "b_gt": 2.6020325805440283,
+      "n_lidar_del_clean": 494,
+      "n_lidar_del_ctrl": 474,
+      "ego_v0": 4.75,
+      "a_req": 0.744,
+      "lead": {
+        "token": "def4c948101a5350",
+        "cat": "vehicle.car",
+        "s_m": 17.2,
+        "lat_m": 0.6
+      }
+    },
+    {
+      "scene": "log-0087-scene-0007",
+      "tag": "POS",
+      "file": "POS__log-0087-scene-0007.jpg",
+      "b_model": 2.9354667198700275,
+      "b_gt": 0.9884444649864097,
+      "n_lidar_del_clean": 158,
+      "n_lidar_del_ctrl": 501,
+      "ego_v0": 10.78,
+      "a_req": 7.136,
+      "lead": {
+        "token": "60b9f9235a3e55a2",
+        "cat": "vehicle.car",
+        "s_m": 29.8,
+        "lat_m": 0.44
+      }
+    }
+  ]
+}
