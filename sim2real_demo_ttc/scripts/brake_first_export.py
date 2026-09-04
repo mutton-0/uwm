@@ -16,6 +16,7 @@ def main():
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 8
     corpus = sys.argv[2] if len(sys.argv) > 2 else "nuscenes"
     from omegaconf import OmegaConf
+    G1.set_include_animal(True)     # 与挖矿同口径：危险类含 animal
     global OUT
     if corpus == "nuscenes":
         from nuscenes.nuscenes import NuScenes

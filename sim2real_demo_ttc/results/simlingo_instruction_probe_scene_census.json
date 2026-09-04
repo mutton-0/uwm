@@ -1,0 +1,1461 @@
+{
+  "n_events": 288,
+  "other_pedestrians_in_view": {
+    "mean": 4.072916666666667,
+    "median": 2.0,
+    "frac_zero": 0.22569444444444445,
+    "frac_ge1": 0.7743055555555556,
+    "quantiles_p10_p50_p90": [
+      0.0,
+      2.0,
+      12.0
+    ]
+  },
+  "vehicles_in_view": {
+    "mean": 4.357638888888889,
+    "median": 3.0,
+    "frac_zero": 0.1111111111111111
+  },
+  "per_event": [
+    {
+      "event_id": "scene-0002_011_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 5
+    },
+    {
+      "event_id": "scene-0003_008_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0003_009_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0003_011_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0004_024_A",
+      "other_peds_in_view": 6,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0006_007_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0006_008_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0007_000_A",
+      "other_peds_in_view": 5,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0007_005_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0008_005_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0017_010_A",
+      "other_peds_in_view": 17,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-0017_011_A",
+      "other_peds_in_view": 16,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0017_012_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0017_013_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0017_014_A",
+      "other_peds_in_view": 13,
+      "vehicles_in_view": 7
+    },
+    {
+      "event_id": "scene-0017_015_A",
+      "other_peds_in_view": 14,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0017_016_A",
+      "other_peds_in_view": 13,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0018_020_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0018_021_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0018_022_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0019_003_A",
+      "other_peds_in_view": 7,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0019_006_A",
+      "other_peds_in_view": 8,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0019_008_A",
+      "other_peds_in_view": 8,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0020_006_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0022_000_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0022_001_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0022_005_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0025_003_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0025_004_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0025_005_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0025_006_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0025_007_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0027_000_A",
+      "other_peds_in_view": 5,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0030_000_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0030_003_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0031_002_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0031_005_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0031_012_A",
+      "other_peds_in_view": 6,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0031_013_A",
+      "other_peds_in_view": 5,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0031_014_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0031_015_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0031_016_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0032_000_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0035_004_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0035_006_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0035_007_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0044_005_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0049_004_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0049_005_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0049_006_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0050_005_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0052_003_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0053_002_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 6
+    },
+    {
+      "event_id": "scene-0053_005_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0054_001_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 7
+    },
+    {
+      "event_id": "scene-0056_001_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0056_006_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0056_007_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0057_002_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 7
+    },
+    {
+      "event_id": "scene-0058_006_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 12
+    },
+    {
+      "event_id": "scene-0058_013_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 5
+    },
+    {
+      "event_id": "scene-0061_001_A",
+      "other_peds_in_view": 16,
+      "vehicles_in_view": 13
+    },
+    {
+      "event_id": "scene-0061_008_A",
+      "other_peds_in_view": 15,
+      "vehicles_in_view": 13
+    },
+    {
+      "event_id": "scene-0061_012_A",
+      "other_peds_in_view": 17,
+      "vehicles_in_view": 12
+    },
+    {
+      "event_id": "scene-0061_013_A",
+      "other_peds_in_view": 17,
+      "vehicles_in_view": 12
+    },
+    {
+      "event_id": "scene-0061_014_A",
+      "other_peds_in_view": 17,
+      "vehicles_in_view": 11
+    },
+    {
+      "event_id": "scene-0061_025_A",
+      "other_peds_in_view": 13,
+      "vehicles_in_view": 7
+    },
+    {
+      "event_id": "scene-0061_027_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 7
+    },
+    {
+      "event_id": "scene-0069_000_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0069_001_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0069_002_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0069_003_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0069_004_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0070_005_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0071_007_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 5
+    },
+    {
+      "event_id": "scene-0071_017_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0072_005_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0073_006_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0102_000_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0133_003_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 17
+    },
+    {
+      "event_id": "scene-0133_004_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 17
+    },
+    {
+      "event_id": "scene-0133_005_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 17
+    },
+    {
+      "event_id": "scene-0134_007_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0139_004_A",
+      "other_peds_in_view": 7,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0151_007_A",
+      "other_peds_in_view": 7,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0151_009_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0151_011_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0151_014_A",
+      "other_peds_in_view": 10,
+      "vehicles_in_view": 6
+    },
+    {
+      "event_id": "scene-0151_015_A",
+      "other_peds_in_view": 10,
+      "vehicles_in_view": 6
+    },
+    {
+      "event_id": "scene-0151_018_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 5
+    },
+    {
+      "event_id": "scene-0151_020_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0151_021_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0151_022_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0151_023_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0151_024_A",
+      "other_peds_in_view": 11,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0154_001_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0162_003_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-0165_001_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-0171_011_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0171_013_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0178_005_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0185_000_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0185_001_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0185_002_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0185_003_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0185_004_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0203_000_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0203_001_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 6
+    },
+    {
+      "event_id": "scene-0234_009_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0234_011_A",
+      "other_peds_in_view": 10,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0247_005_A",
+      "other_peds_in_view": 7,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0247_006_A",
+      "other_peds_in_view": 7,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0255_003_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 12
+    },
+    {
+      "event_id": "scene-0269_005_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0269_007_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0273_002_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0273_004_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0277_005_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0317_005_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0345_007_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0345_014_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0345_017_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0346_004_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0347_004_A",
+      "other_peds_in_view": 6,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0347_005_A",
+      "other_peds_in_view": 6,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0348_000_A",
+      "other_peds_in_view": 5,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0348_001_A",
+      "other_peds_in_view": 5,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0348_002_A",
+      "other_peds_in_view": 5,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0352_005_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0352_006_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0352_021_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0352_043_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0353_001_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0354_006_A",
+      "other_peds_in_view": 7,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0363_002_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0363_010_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0370_006_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0371_000_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0376_003_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-0376_004_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-0377_005_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0392_000_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 6
+    },
+    {
+      "event_id": "scene-0398_017_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 10
+    },
+    {
+      "event_id": "scene-0414_000_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0418_001_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0418_003_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0419_003_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0422_006_A",
+      "other_peds_in_view": 11,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0422_010_A",
+      "other_peds_in_view": 14,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0422_011_A",
+      "other_peds_in_view": 14,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0422_012_A",
+      "other_peds_in_view": 14,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0422_013_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0425_001_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0426_003_A",
+      "other_peds_in_view": 7,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0426_004_A",
+      "other_peds_in_view": 7,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0429_001_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0432_000_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0432_001_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0432_003_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0433_000_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0435_005_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0439_002_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0446_004_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0450_004_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 13
+    },
+    {
+      "event_id": "scene-0476_000_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0476_001_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0500_004_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0500_005_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 7
+    },
+    {
+      "event_id": "scene-0500_007_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 12
+    },
+    {
+      "event_id": "scene-0500_010_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 12
+    },
+    {
+      "event_id": "scene-0517_004_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0518_002_A",
+      "other_peds_in_view": 7,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0518_003_A",
+      "other_peds_in_view": 7,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0518_004_A",
+      "other_peds_in_view": 8,
+      "vehicles_in_view": 5
+    },
+    {
+      "event_id": "scene-0521_005_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-0521_007_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 11
+    },
+    {
+      "event_id": "scene-0521_008_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-0525_002_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 13
+    },
+    {
+      "event_id": "scene-0525_003_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 11
+    },
+    {
+      "event_id": "scene-0534_000_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 16
+    },
+    {
+      "event_id": "scene-0539_010_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 6
+    },
+    {
+      "event_id": "scene-0544_004_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 7
+    },
+    {
+      "event_id": "scene-0556_005_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 6
+    },
+    {
+      "event_id": "scene-0582_002_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0598_001_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0599_014_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0650_002_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 7
+    },
+    {
+      "event_id": "scene-0653_005_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0653_006_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0655_001_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 18
+    },
+    {
+      "event_id": "scene-0658_001_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0658_005_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 5
+    },
+    {
+      "event_id": "scene-0661_015_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0663_000_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 12
+    },
+    {
+      "event_id": "scene-0663_001_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 12
+    },
+    {
+      "event_id": "scene-0663_002_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 13
+    },
+    {
+      "event_id": "scene-0666_001_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 7
+    },
+    {
+      "event_id": "scene-0674_005_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 18
+    },
+    {
+      "event_id": "scene-0685_016_A",
+      "other_peds_in_view": 18,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0687_004_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 6
+    },
+    {
+      "event_id": "scene-0712_009_A",
+      "other_peds_in_view": 7,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0716_007_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0717_013_A",
+      "other_peds_in_view": 12,
+      "vehicles_in_view": 8
+    },
+    {
+      "event_id": "scene-0717_015_A",
+      "other_peds_in_view": 13,
+      "vehicles_in_view": 6
+    },
+    {
+      "event_id": "scene-0737_000_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0737_001_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0737_002_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0737_006_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0848_003_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0851_008_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0852_000_A",
+      "other_peds_in_view": 11,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0858_004_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0858_005_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0862_000_A",
+      "other_peds_in_view": 5,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0863_001_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0864_005_A",
+      "other_peds_in_view": 6,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0865_000_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0865_001_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0866_006_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0877_000_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0891_002_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 10
+    },
+    {
+      "event_id": "scene-0891_003_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 10
+    },
+    {
+      "event_id": "scene-0891_004_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 11
+    },
+    {
+      "event_id": "scene-0891_008_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 16
+    },
+    {
+      "event_id": "scene-0896_006_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 14
+    },
+    {
+      "event_id": "scene-0901_004_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 16
+    },
+    {
+      "event_id": "scene-0916_000_A",
+      "other_peds_in_view": 16,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-0916_001_A",
+      "other_peds_in_view": 16,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-0916_002_A",
+      "other_peds_in_view": 17,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-0916_003_A",
+      "other_peds_in_view": 15,
+      "vehicles_in_view": 10
+    },
+    {
+      "event_id": "scene-0916_005_A",
+      "other_peds_in_view": 8,
+      "vehicles_in_view": 13
+    },
+    {
+      "event_id": "scene-0916_007_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 12
+    },
+    {
+      "event_id": "scene-0917_000_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0917_001_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0917_019_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-0919_000_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-0920_009_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0928_009_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0928_010_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0928_011_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0931_003_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0931_004_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0931_005_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0931_011_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-0961_001_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0961_007_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-0961_013_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-0961_015_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0967_003_A",
+      "other_peds_in_view": 5,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-0967_007_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-1000_001_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-1000_002_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-1008_003_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 6
+    },
+    {
+      "event_id": "scene-1008_004_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 6
+    },
+    {
+      "event_id": "scene-1010_002_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-1011_000_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-1012_008_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-1014_009_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-1014_010_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-1017_003_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-1020_002_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-1020_004_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-1055_009_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-1064_002_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-1066_000_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-1081_005_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-1084_000_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 7
+    },
+    {
+      "event_id": "scene-1084_007_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 2
+    },
+    {
+      "event_id": "scene-1085_001_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-1086_005_A",
+      "other_peds_in_view": 2,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-1089_005_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-1089_025_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-1092_000_A",
+      "other_peds_in_view": 3,
+      "vehicles_in_view": 0
+    },
+    {
+      "event_id": "scene-1094_015_A",
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-1098_005_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 5
+    },
+    {
+      "event_id": "scene-1100_011_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-1101_002_A",
+      "other_peds_in_view": 1,
+      "vehicles_in_view": 1
+    },
+    {
+      "event_id": "scene-1108_005_A",
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 9
+    },
+    {
+      "event_id": "scene-1110_004_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-1110_005_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 3
+    },
+    {
+      "event_id": "scene-1110_006_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-1110_007_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-1110_008_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-1110_009_A",
+      "other_peds_in_view": 9,
+      "vehicles_in_view": 4
+    },
+    {
+      "event_id": "scene-1110_010_A",
+      "other_peds_in_view": 11,
+      "vehicles_in_view": 5
+    },
+    {
+      "event_id": "scene-1110_011_A",
+      "other_peds_in_view": 11,
+      "vehicles_in_view": 5
+    },
+    {
+      "event_id": "scene-1110_012_A",
+      "other_peds_in_view": 11,
+      "vehicles_in_view": 5
+    },
+    {
+      "event_id": "scene-1110_013_A",
+      "other_peds_in_view": 11,
+      "vehicles_in_view": 6
+    }
+  ]
+}

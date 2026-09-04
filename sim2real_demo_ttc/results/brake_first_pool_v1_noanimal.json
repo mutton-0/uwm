@@ -1,7 +1,5 @@
 {
   "design": "刹车优先挖矿：先找人类减速片段，再归因到走廊内 VRU",
-  "corpus": "nuscenes",
-  "split": null,
   "n_scenes_scanned": 850,
   "n_brake_episodes": 752,
   "n_candidates_raw": 18,
@@ -35,13 +33,6 @@
       },
       "ttc_s": 2.3,
       "n_mask_group": 3,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "069a7d8902d14560b1890064b43a1a15",
@@ -92,13 +83,6 @@
       },
       "ttc_s": 4.7,
       "n_mask_group": 1,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "ff15860117544737b71a43637657c0ca",
@@ -133,13 +117,6 @@
       },
       "ttc_s": 5.4,
       "n_mask_group": 1,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "e64be77927ca45bf8a15f8671a614741",
@@ -174,13 +151,6 @@
       },
       "ttc_s": 6.8,
       "n_mask_group": 1,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "31a8227b9a194e099a25cf1b0deac81b",
@@ -215,13 +185,6 @@
       },
       "ttc_s": 13.7,
       "n_mask_group": 1,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "24698bdca670415b9e16e573c7cd6a6a",
@@ -256,13 +219,6 @@
       },
       "ttc_s": 6.0,
       "n_mask_group": 2,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "735fa680e31d461099f4b821ba422c3a",
@@ -305,13 +261,6 @@
       },
       "ttc_s": 7.3,
       "n_mask_group": 1,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "d94525dbcc0e44fca669c26ac874930e",
@@ -346,13 +295,6 @@
       },
       "ttc_s": 11.8,
       "n_mask_group": 2,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "b4d849be5e7b45e58e5b6a254b9bdd03",
@@ -395,13 +337,6 @@
       },
       "ttc_s": 6.5,
       "n_mask_group": 2,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "e8dd1ecb52704d0a962052e722aebd8e",
@@ -431,7 +366,7 @@
       "rel_decel": 0.784,
       "a_obs": 0.716,
       "brake_dur_s": 2.4,
-      "a_vru_sum": 0.793,
+      "a_vru_sum": 0.439,
       "a_vru_max": 0.439,
       "a_non_vru_max": 0.0,
       "vru_class_share": 1.0,
@@ -443,14 +378,7 @@
         "lat_m": 1.65
       },
       "ttc_s": 4.9,
-      "n_mask_group": 2,
-      "n_animal_in_mask": 1,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
+      "n_mask_group": 1,
       "f3_mask_group": [
         {
           "token": "e2dadbf6909a4a258bb14fdbf38e9d66",
@@ -458,14 +386,6 @@
           "s_m": 10.7,
           "lat_m": 1.65,
           "a_req": 0.439,
-          "visible": true
-        },
-        {
-          "token": "7541b30197a342dbb0daa9ce16cdcdde",
-          "cat": "animal",
-          "s_m": 11.8,
-          "lat_m": 1.03,
-          "a_req": 0.354,
           "visible": true
         }
       ]
@@ -493,13 +413,6 @@
       },
       "ttc_s": 9.2,
       "n_mask_group": 2,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "d1f1462d7300446c8f361b974214829a",
@@ -542,13 +455,6 @@
       },
       "ttc_s": 4.9,
       "n_mask_group": 1,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "1dd0fa28fc7641b09cec550fad61178b",
@@ -583,13 +489,6 @@
       },
       "ttc_s": 7.5,
       "n_mask_group": 2,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "e22b557ae1bc4196a0436be4d3c2e319",
@@ -632,13 +531,6 @@
       },
       "ttc_s": 2.9,
       "n_mask_group": 1,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "f726cc58ae044b009041ec2fd69f67a4",
@@ -673,13 +565,6 @@
       },
       "ttc_s": 5.3,
       "n_mask_group": 1,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "24666ac5c59b47e899cb34c50cc9bfdb",
@@ -714,13 +599,6 @@
       },
       "ttc_s": 6.1,
       "n_mask_group": 1,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "a58bbda382f94c91a3f1940605a9e5ce",
@@ -755,13 +633,6 @@
       },
       "ttc_s": 3.6,
       "n_mask_group": 1,
-      "n_animal_in_mask": 0,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
       "f3_mask_group": [
         {
           "token": "5673a13d2f3b4004bac590be1e4b7cc9",
@@ -783,35 +654,20 @@
       "rel_decel": 0.654,
       "a_obs": 0.819,
       "brake_dur_s": 5.15,
-      "a_vru_sum": 1.252,
-      "a_vru_max": 0.629,
+      "a_vru_sum": 0.623,
+      "a_vru_max": 0.623,
       "a_non_vru_max": 0.0,
       "vru_class_share": 1.0,
-      "explained_ratio": 0.768,
+      "explained_ratio": 0.761,
       "lead_vru": {
-        "token": "b170929fa0e6465e889a53dd8c7ef867",
-        "cat": "animal",
+        "token": "26a68fd3e448439ea524000483ba4f50",
+        "cat": "human.pedestrian.adult",
         "s_m": 23.9,
-        "lat_m": 1.19
+        "lat_m": 0.73
       },
       "ttc_s": 3.7,
-      "n_mask_group": 2,
-      "n_animal_in_mask": 1,
-      "hazard_classes": [
-        "human.",
-        "vehicle.bicycle",
-        "vehicle.motorcycle",
-        "animal"
-      ],
+      "n_mask_group": 1,
       "f3_mask_group": [
-        {
-          "token": "b170929fa0e6465e889a53dd8c7ef867",
-          "cat": "animal",
-          "s_m": 23.9,
-          "lat_m": 1.19,
-          "a_req": 0.629,
-          "visible": true
-        },
         {
           "token": "26a68fd3e448439ea524000483ba4f50",
           "cat": "human.pedestrian.adult",

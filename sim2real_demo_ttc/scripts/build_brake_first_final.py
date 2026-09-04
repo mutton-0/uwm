@@ -36,7 +36,9 @@ QA = {
   "scene-0151": {"verdict": "keep", "note": "自行车 37.7m，零竞争。本池唯一非行人类目标。"},
   "scene-0071": {"verdict": "keep", "note": "17.2m。非VRU 竞争 0.30 vs VRU 0.64，比值 2.1× —— "
                  "过 1.5× 余量但不宽裕，标记为边缘。"},
-  "scene-1088": {"verdict": "keep", "note": "23.9m，零竞争。"},
+  "scene-1088": {"verdict": "keep", "note": "**夜间**，23.9m，零竞争。遮挡组 1->2（animal 纳入后）。"
+                 "**注意：主导危险是动物而非行人**（a_req 0.629 vs 0.623）—— "
+                 "修复前该事件的最强触发物完全不可见。夜景遮挡对比度问题同 scene-1055。"},
   "scene-1016": {"verdict": "keep", "note": "37.1m，零竞争。"},
   "scene-0717": {"verdict": "keep-marginal",
                  "note": "11.9m。**边缘**：正前方有停驻 SUV、右侧 Eversource 工程车与锥桶，"
@@ -49,13 +51,14 @@ QA = {
   "scene-0917": {"verdict": "keep", "note": "27.8m 横穿，零竞争。但**画面内另有 4-5 个未遮 VRU**"
                  "（走廊外，按判据不遮）—— 属已登记的残留偏差（R 会被低估），本例尤为明显。"},
   "scene-0544": {"verdict": "keep", "note": "10.7m 人行横道，绿灯，零竞争。"
-                 "**遛狗场景：狗属 animal 类、不在 VRU 定义内，遮挡后仍可见** —— "
-                 "'有东西在横穿'的线索未被完全移除，记为该事件的残留。"},
+                 "**遛狗场景**：狗此前属 animal 类、被 obj_class 映射为 other 而整个丢出 geo，"
+                 "既不可遮也不当竞争者。**已修**（危险类纳入 animal）：遮挡组 1->2，"
+                 "现为 [行人 10.7m a=0.439, 动物 11.8m a=0.354]，两者一起遮。"},
 }
 
 
 def main():
-    d = json.load(open(RES / "brake_first_pool.json"))
+    d = json.load(open(RES / "brake_first_pool.json"))   # v2：危险类含 animal
     cands = d["candidates"]
     keep = [c for c in cands if c["a_vru_max"] >= A_REQ_MIN]
     drop = [c for c in cands if c["a_vru_max"] < A_REQ_MIN]
@@ -74,6 +77,9 @@ def main():
       "design": "刹车优先挖矿：先找人类减速片段，再归因到走廊内 VRU",
       "scan": {"n_scenes": d["n_scenes_scanned"], "n_brake_episodes": d["n_brake_episodes"],
                "full_scan": True},
+      "hazard_classes": ["human.", "vehicle.bicycle", "vehicle.motorcycle", "animal"],
+      "hazard_class_principle": "归因口径 = 遮挡口径：归因认定是这些类触发了减速，"
+                                "遮挡臂就必须遮掉这些类，否则遮完触发物还在，必测出假 FAIL",
       "decisions_2026_09_04": {
         "a_req_min": A_REQ_MIN,
         "excluded_low_a_req": [{"scene": c["scene"], "a_req": c["a_vru_max"]} for c in drop],
@@ -103,7 +109,9 @@ def main():
         "夜间灰斑对比度：灰斑取全图均值色，暗场景下与背景差异小（scene-1055）。"
         "是否改用局部均值/噪声填充需单独实验，**不得据此筛样本**。",
         "走廊外未遮 VRU 残留：R 方向性低估，scene-0917 最明显（见 unmasked_vru_residual.json）。",
-        "非 VRU 类横穿目标（狗等 animal 类）不在遮挡组内（scene-0544）。",
+        "**已修**：animal 此前被 obj_class 映射为 other、在 geo 构造时丢弃 —— "
+        "既不可遮也不当竞争者（双向缺失）。现纳入危险类，归因与遮挡同一集合。"
+        "影响 2 个事件（scene-0544、scene-1088），候选集本身未变。",
       ],
       "candidates": sorted(keep, key=lambda z: -z["a_vru_max"]),
       "deferred_low_a_req": sorted(drop, key=lambda z: -z["a_vru_max"]),

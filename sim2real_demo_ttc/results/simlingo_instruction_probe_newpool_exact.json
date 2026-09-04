@@ -1,0 +1,58 @@
+{
+  "hazard_reject/acc_target_speed": {
+    "n10": 2,
+    "n01": 1,
+    "n_discordant": 3,
+    "exact_p": 1.0,
+    "note": "不一致对 3/13，其比例 95% 上界 53.8%"
+  },
+  "hazard_reject/acc_faster": {
+    "n10": 0,
+    "n01": 0,
+    "n_discordant": 0,
+    "exact_p": 1.0,
+    "note": "0/13 事件发生变化 ⇒ 真实变化率 95% 上界 20.6%（bootstrap 的 [0,0] 是退化产物，不可读作'确证无效应'）"
+  },
+  "hazard_reject/dec_slower": {
+    "n10": 2,
+    "n01": 0,
+    "n_discordant": 2,
+    "exact_p": 0.5,
+    "note": "不一致对 2/13，其比例 95% 上界 45.4%"
+  },
+  "hazard_reject/dec_stop": {
+    "n10": 1,
+    "n01": 0,
+    "n_discordant": 1,
+    "exact_p": 1.0,
+    "note": "不一致对 1/13，其比例 95% 上界 36.0%"
+  },
+  "pedestrian_reject/acc_target_speed": {
+    "n10": 0,
+    "n01": 0,
+    "n_discordant": 0,
+    "exact_p": 1.0,
+    "note": "0/13 事件发生变化 ⇒ 真实变化率 95% 上界 20.6%（bootstrap 的 [0,0] 是退化产物，不可读作'确证无效应'）"
+  },
+  "pedestrian_reject/acc_faster": {
+    "n10": 0,
+    "n01": 0,
+    "n_discordant": 0,
+    "exact_p": 1.0,
+    "note": "0/13 事件发生变化 ⇒ 真实变化率 95% 上界 20.6%（bootstrap 的 [0,0] 是退化产物，不可读作'确证无效应'）"
+  },
+  "pedestrian_reject/dec_slower": {
+    "n10": 0,
+    "n01": 0,
+    "n_discordant": 0,
+    "exact_p": 1.0,
+    "note": "0/13 事件发生变化 ⇒ 真实变化率 95% 上界 20.6%（bootstrap 的 [0,0] 是退化产物，不可读作'确证无效应'）"
+  },
+  "pedestrian_reject/dec_stop": {
+    "n10": 0,
+    "n01": 0,
+    "n_discordant": 0,
+    "exact_p": 1.0,
+    "note": "0/13 事件发生变化 ⇒ 真实变化率 95% 上界 20.6%（bootstrap 的 [0,0] 是退化产物，不可读作'确证无效应'）"
+  }
+}

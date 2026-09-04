@@ -89,13 +89,13 @@
     "ego_v0": 6.45,
     "dv": -4.22,
     "a_obs": 0.819,
-    "a_vru_max": 0.623,
+    "a_vru_max": 0.629,
     "a_non_vru_max": 0.0,
     "vru_class_share": 1.0,
     "ttc_s": 3.7,
-    "n_mask_group": 1,
+    "n_mask_group": 2,
     "file": "scene-1088_f57.jpg",
-    "n_boxes_drawn": 1
+    "n_boxes_drawn": 2
   },
   {
     "scene": "scene-1016",
@@ -177,9 +177,9 @@
     "a_non_vru_max": 0.0,
     "vru_class_share": 1.0,
     "ttc_s": 4.9,
-    "n_mask_group": 1,
+    "n_mask_group": 2,
     "file": "scene-0544_f208.jpg",
-    "n_boxes_drawn": 1
+    "n_boxes_drawn": 2
   },
   {
     "scene": "scene-0250",

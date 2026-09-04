@@ -1,0 +1,157 @@
+{
+  "purpose": "新语料探针的遮挡/对照臂正确性目视核查（多框事件为主，ctrl 逐框镜像为本轮新代码路径）",
+  "events": [
+    {
+      "event_id": "scene-0003_f196",
+      "scene": "scene-0003",
+      "frame_idx": 196,
+      "n_mask_group": 3,
+      "layout": "左上=原图(绿框=遮挡组 f3_mask_group，橙框=ctrl 对照框位置) 右上=occ 右下=grey 左下=ctrl",
+      "mask_boxes": [
+        [
+          1052.0,
+          445.6,
+          1244.6,
+          752.3
+        ],
+        [
+          1006.7,
+          443.7,
+          1195.0,
+          729.5
+        ],
+        [
+          898.7,
+          456.5,
+          1072.7,
+          712.7
+        ]
+      ],
+      "control_boxes": [
+        [
+          355.4,
+          445.6,
+          548.0,
+          752.3
+        ],
+        [
+          630.0,
+          443.7,
+          818.3,
+          729.5
+        ],
+        [
+          1246.6,
+          456.5,
+          1420.6,
+          712.7
+        ]
+      ],
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 4,
+      "file": "scene-0003_f196_quad.png"
+    },
+    {
+      "event_id": "scene-0187_f59",
+      "scene": "scene-0187",
+      "frame_idx": 59,
+      "n_mask_group": 2,
+      "layout": "左上=原图(绿框=遮挡组 f3_mask_group，橙框=ctrl 对照框位置) 右上=occ 右下=grey 左下=ctrl",
+      "mask_boxes": [
+        [
+          885.0,
+          475.8,
+          962.0,
+          596.7
+        ],
+        [
+          677.9,
+          484.6,
+          765.2,
+          626.6
+        ]
+      ],
+      "control_boxes": [
+        [
+          885.0,
+          233.9,
+          962.0,
+          354.9
+        ],
+        [
+          677.9,
+          200.7,
+          765.2,
+          342.6
+        ]
+      ],
+      "other_peds_in_view": 0,
+      "vehicles_in_view": 0,
+      "file": "scene-0187_f59_quad.png"
+    },
+    {
+      "event_id": "scene-0427_f2",
+      "scene": "scene-0427",
+      "frame_idx": 2,
+      "n_mask_group": 2,
+      "layout": "左上=原图(绿框=遮挡组 f3_mask_group，橙框=ctrl 对照框位置) 右上=occ 右下=grey 左下=ctrl",
+      "mask_boxes": [
+        [
+          662.7,
+          463.8,
+          688.0,
+          523.8
+        ],
+        [
+          629.5,
+          456.5,
+          656.6,
+          521.5
+        ]
+      ],
+      "control_boxes": [
+        [
+          912.0,
+          463.8,
+          937.3,
+          523.8
+        ],
+        [
+          943.4,
+          456.5,
+          970.5,
+          521.5
+        ]
+      ],
+      "other_peds_in_view": 6,
+      "vehicles_in_view": 4,
+      "file": "scene-0427_f2_quad.png"
+    },
+    {
+      "event_id": "scene-0917_f32",
+      "scene": "scene-0917",
+      "frame_idx": 32,
+      "n_mask_group": 1,
+      "layout": "左上=原图(绿框=遮挡组 f3_mask_group，橙框=ctrl 对照框位置) 右上=occ 右下=grey 左下=ctrl",
+      "mask_boxes": [
+        [
+          560.3,
+          452.3,
+          618.9,
+          546.9
+        ]
+      ],
+      "control_boxes": [
+        [
+          981.1,
+          452.3,
+          1039.7,
+          546.9
+        ]
+      ],
+      "other_peds_in_view": 4,
+      "vehicles_in_view": 1,
+      "file": "scene-0917_f32_quad.png"
+    }
+  ]
+}

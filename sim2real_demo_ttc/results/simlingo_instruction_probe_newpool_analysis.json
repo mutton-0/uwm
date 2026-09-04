@@ -1,0 +1,464 @@
+{
+  "corpus": "nuScenes v1.0-trainval (G1)",
+  "source_pool": "brake_first_pool_final.json",
+  "occlusion_logic": "brake-first f3_mask_group 整组遮挡（走廊内全部 VRU）",
+  "clean_arm": "本脚本构造：同场景 frame_idx-15（-1.5s）；新语料未定义 clean",
+  "merge_with_old_pool": false,
+  "n_events": 13,
+  "n_scenes": 13,
+  "n_clean_available": 12,
+  "scene_census": {
+    "other_pedestrians_in_view": {
+      "mean": 5.0,
+      "median": 4.0,
+      "frac_zero": 0.23076923076923078,
+      "per_event": {
+        "scene-1055_f214": 0,
+        "scene-0003_f196": 0,
+        "scene-0007_f40": 5,
+        "scene-0862_f17": 4,
+        "scene-0151_f19": 8,
+        "scene-0071_f148": 1,
+        "scene-1088_f57": 1,
+        "scene-1016_f136": 22,
+        "scene-0717_f162": 12,
+        "scene-0187_f59": 0,
+        "scene-0427_f2": 6,
+        "scene-0917_f32": 4,
+        "scene-0544_f208": 2
+      }
+    },
+    "vehicles_in_view": {
+      "mean": 3.4615384615384617,
+      "median": 4.0,
+      "frac_zero": 0.07692307692307693
+    }
+  },
+  "hazard_reject_all": {
+    "acc_target_speed": {
+      "direction": "up",
+      "rate": {
+        "clean": 0.3333333333333333,
+        "ghost": 0.5384615384615384,
+        "occ": 0.46153846153846156,
+        "ctrl": 0.5384615384615384
+      },
+      "n_clean_events": 12,
+      "L1_ghost_minus_occ": {
+        "mean": 0.07692307692307693,
+        "ci95": [
+          -0.15384615384615385,
+          0.3076923076923077
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L1_paired_counts": {
+        "n10_only_first": 2,
+        "n01_only_second": 1,
+        "n_concordant": 10
+      },
+      "L2_ctrl_minus_occ": {
+        "mean": 0.07692307692307693,
+        "ci95": [
+          -0.15384615384615385,
+          0.3076923076923077
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L2_paired_counts": {
+        "n10_only_first": 2,
+        "n01_only_second": 1,
+        "n_concordant": 10
+      }
+    },
+    "acc_faster": {
+      "direction": "up",
+      "rate": {
+        "clean": 0.25,
+        "ghost": 0.07692307692307693,
+        "occ": 0.07692307692307693,
+        "ctrl": 0.07692307692307693
+      },
+      "n_clean_events": 12,
+      "L1_ghost_minus_occ": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L1_paired_counts": {
+        "n10_only_first": 0,
+        "n01_only_second": 0,
+        "n_concordant": 13
+      },
+      "L2_ctrl_minus_occ": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L2_paired_counts": {
+        "n10_only_first": 0,
+        "n01_only_second": 0,
+        "n_concordant": 13
+      }
+    },
+    "dec_slower": {
+      "direction": "down",
+      "rate": {
+        "clean": 0.16666666666666666,
+        "ghost": 0.15384615384615385,
+        "occ": 0.0,
+        "ctrl": 0.07692307692307693
+      },
+      "n_clean_events": 12,
+      "L1_ghost_minus_occ": {
+        "mean": 0.15384615384615385,
+        "ci95": [
+          0.0,
+          0.38461538461538464
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L1_paired_counts": {
+        "n10_only_first": 2,
+        "n01_only_second": 0,
+        "n_concordant": 11
+      },
+      "L2_ctrl_minus_occ": {
+        "mean": 0.07692307692307693,
+        "ci95": [
+          0.0,
+          0.23076923076923078
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L2_paired_counts": {
+        "n10_only_first": 1,
+        "n01_only_second": 0,
+        "n_concordant": 12
+      }
+    },
+    "dec_stop": {
+      "direction": "down",
+      "rate": {
+        "clean": 0.08333333333333333,
+        "ghost": 0.07692307692307693,
+        "occ": 0.0,
+        "ctrl": 0.07692307692307693
+      },
+      "n_clean_events": 12,
+      "L1_ghost_minus_occ": {
+        "mean": 0.07692307692307693,
+        "ci95": [
+          0.0,
+          0.23076923076923078
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L1_paired_counts": {
+        "n10_only_first": 1,
+        "n01_only_second": 0,
+        "n_concordant": 12
+      },
+      "L2_ctrl_minus_occ": {
+        "mean": 0.07692307692307693,
+        "ci95": [
+          0.0,
+          0.23076923076923078
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L2_paired_counts": {
+        "n10_only_first": 1,
+        "n01_only_second": 0,
+        "n_concordant": 12
+      }
+    }
+  },
+  "pedestrian_reject_all": {
+    "acc_target_speed": {
+      "direction": "up",
+      "rate": {
+        "clean": 0.16666666666666666,
+        "ghost": 0.07692307692307693,
+        "occ": 0.07692307692307693,
+        "ctrl": 0.23076923076923078
+      },
+      "n_clean_events": 12,
+      "L1_ghost_minus_occ": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L1_paired_counts": {
+        "n10_only_first": 0,
+        "n01_only_second": 0,
+        "n_concordant": 13
+      },
+      "L2_ctrl_minus_occ": {
+        "mean": 0.15384615384615385,
+        "ci95": [
+          0.0,
+          0.38461538461538464
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L2_paired_counts": {
+        "n10_only_first": 2,
+        "n01_only_second": 0,
+        "n_concordant": 11
+      }
+    },
+    "acc_faster": {
+      "direction": "up",
+      "rate": {
+        "clean": 0.16666666666666666,
+        "ghost": 0.07692307692307693,
+        "occ": 0.07692307692307693,
+        "ctrl": 0.07692307692307693
+      },
+      "n_clean_events": 12,
+      "L1_ghost_minus_occ": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L1_paired_counts": {
+        "n10_only_first": 0,
+        "n01_only_second": 0,
+        "n_concordant": 13
+      },
+      "L2_ctrl_minus_occ": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L2_paired_counts": {
+        "n10_only_first": 0,
+        "n01_only_second": 0,
+        "n_concordant": 13
+      }
+    },
+    "dec_slower": {
+      "direction": "down",
+      "rate": {
+        "clean": 0.0,
+        "ghost": 0.0,
+        "occ": 0.0,
+        "ctrl": 0.0
+      },
+      "n_clean_events": 12,
+      "L1_ghost_minus_occ": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L1_paired_counts": {
+        "n10_only_first": 0,
+        "n01_only_second": 0,
+        "n_concordant": 13
+      },
+      "L2_ctrl_minus_occ": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L2_paired_counts": {
+        "n10_only_first": 0,
+        "n01_only_second": 0,
+        "n_concordant": 13
+      }
+    },
+    "dec_stop": {
+      "direction": "down",
+      "rate": {
+        "clean": 0.0,
+        "ghost": 0.0,
+        "occ": 0.0,
+        "ctrl": 0.0
+      },
+      "n_clean_events": 12,
+      "L1_ghost_minus_occ": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L1_paired_counts": {
+        "n10_only_first": 0,
+        "n01_only_second": 0,
+        "n_concordant": 13
+      },
+      "L2_ctrl_minus_occ": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "L2_paired_counts": {
+        "n10_only_first": 0,
+        "n01_only_second": 0,
+        "n_concordant": 13
+      }
+    }
+  },
+  "hazard_reject_no_other_ped": {
+    "skipped": "该子集仅 3 个事件，低于 bootstrap 最低 5 个 scene 的门槛，不出读数"
+  },
+  "trajectory_compliance": {
+    "acc_target_speed": {
+      "comply_rate": {
+        "ghost": 0.23076923076923078,
+        "occ": 0.23076923076923078,
+        "ctrl": 0.23076923076923078,
+        "grey": 0.07692307692307693
+      },
+      "ghost_minus_occ": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "paired_counts": {
+        "n10_only_first": 0,
+        "n01_only_second": 0,
+        "n_concordant": 13
+      }
+    },
+    "acc_faster": {
+      "comply_rate": {
+        "ghost": 0.5384615384615384,
+        "occ": 0.46153846153846156,
+        "ctrl": 0.46153846153846156,
+        "grey": 0.07692307692307693
+      },
+      "ghost_minus_occ": {
+        "mean": 0.07692307692307693,
+        "ci95": [
+          -0.15384615384615385,
+          0.3076923076923077
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "paired_counts": {
+        "n10_only_first": 2,
+        "n01_only_second": 1,
+        "n_concordant": 10
+      }
+    },
+    "dec_slower": {
+      "comply_rate": {
+        "ghost": 0.38461538461538464,
+        "occ": 0.5384615384615384,
+        "ctrl": 0.46153846153846156,
+        "grey": 0.3076923076923077
+      },
+      "ghost_minus_occ": {
+        "mean": -0.15384615384615385,
+        "ci95": [
+          -0.38461538461538464,
+          0.0
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "paired_counts": {
+        "n10_only_first": 0,
+        "n01_only_second": 2,
+        "n_concordant": 11
+      }
+    },
+    "dec_stop": {
+      "comply_rate": {
+        "ghost": 0.15384615384615385,
+        "occ": 0.3076923076923077,
+        "ctrl": 0.3076923076923077,
+        "grey": 0.38461538461538464
+      },
+      "ghost_minus_occ": {
+        "mean": -0.15384615384615385,
+        "ci95": [
+          -0.38461538461538464,
+          0.0
+        ],
+        "n": 13,
+        "n_scenes": 13
+      },
+      "paired_counts": {
+        "n10_only_first": 0,
+        "n01_only_second": 2,
+        "n_concordant": 11
+      }
+    }
+  },
+  "L3_selectivity_floor": {
+    "acc_target_speed": {
+      "ghost": 0.5384615384615384,
+      "occ": 0.46153846153846156,
+      "grey": 0.0
+    },
+    "acc_faster": {
+      "ghost": 0.07692307692307693,
+      "occ": 0.07692307692307693,
+      "grey": 0.0
+    },
+    "dec_slower": {
+      "ghost": 0.15384615384615385,
+      "occ": 0.0,
+      "grey": 0.0
+    },
+    "dec_stop": {
+      "ghost": 0.07692307692307693,
+      "occ": 0.0,
+      "grey": 0.0
+    }
+  },
+  "probe_liveness": {
+    "baseline_arms_with_refusal": 0,
+    "hazard_rejects_total": 38
+  }
+}

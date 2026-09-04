@@ -41,7 +41,14 @@ import g1_mine_events as G1                                            # noqa: E
 from lane_path_filter import point_to_polyline                         # noqa: E402
 
 D_SAFE = 2.0
-VRU_PREFIX = ("human.", "vehicle.bicycle", "vehicle.motorcycle")
+# **危险类 = 归因口径 = 遮挡口径**（用户 2026-09-04）。
+# 三者必须是同一个集合：归因认定"是这些东西触发了减速"，遮挡臂就必须遮掉这些东西，
+# 否则遮完之后触发物还在，测出的必然是假 FAIL。
+# `animal` 此前被 g1_mine_events.obj_class 映射为 other 并在 geo 构造时丢弃 ——
+# 既不可遮、也不当竞争者（双向缺失）：狗冲上路、走廊里恰有行人时，
+# 会把这次刹车错算到行人头上。现通过 G1.set_include_animal(True) 纳入。
+HAZARD_PREFIX = ("human.", "vehicle.bicycle", "vehicle.motorcycle", "animal")
+VRU_PREFIX = HAZARD_PREFIX          # 向后兼容旧名
 
 
 def brake_episodes(v, t, min_dv=0.5, min_rel=0.30, max_win_s=10.0):
@@ -87,6 +94,8 @@ def main():
     args = ap.parse_args()
 
     from omegaconf import OmegaConf
+
+    G1.set_include_animal(True)     # 危险类含 animal —— 归因与遮挡口径必须一致
 
     # ---- 两个语料的 scene 迭代器；都产出 (scene 显示名, geo) ----
     if args.corpus == "nuscenes":
@@ -172,7 +181,7 @@ def main():
                     continue
                 rec = (a, tok, o["cat"], round(s, 1), round(dmin, 2),
                        bool(o["visible"][j]))
-                (vrus if o["cat"].startswith(VRU_PREFIX) else others).append(rec)
+                (vrus if o["cat"].startswith(HAZARD_PREFIX) else others).append(rec)
             if not vrus:
                 continue
             vrus.sort(reverse=True); others.sort(reverse=True)
@@ -182,6 +191,7 @@ def main():
                 continue
             share = a_vru_sum / tot
             a_vru_max = vrus[0][0]; a_oth_max = others[0][0] if others else 0.0
+            n_animal = sum(1 for x in vrus if x[2].startswith("animal"))
             if share <= 0.6 or a_vru_max < 1.5 * max(a_oth_max, 1e-9):
                 continue
             if a_obs < 1e-6 or (a_vru_max / a_obs) <= 0.3:
@@ -204,7 +214,8 @@ def main():
               "lead_vru": {"token": lead[1], "cat": lead[2], "s_m": lead[3],
                            "lat_m": lead[4]},
               "ttc_s": round(ttc, 1),
-              "n_mask_group": len(vrus),
+              "n_mask_group": len(vrus), "n_animal_in_mask": n_animal,
+              "hazard_classes": list(HAZARD_PREFIX),
               "f3_mask_group": [{"token": x[1], "cat": x[2], "s_m": x[3], "lat_m": x[4],
                                  "a_req": round(x[0], 3), "visible": x[5]} for x in vrus],
             })

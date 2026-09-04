@@ -26,6 +26,23 @@ VEHICLE_PREFIXES = ("vehicle.car", "vehicle.truck", "vehicle.bus", "vehicle.trai
 STATIC_PREFIXES = ("movable_object.", "static_object.")
 
 
+# 动物：nuScenes 里 `animal`（787 条标注）**原本映射为 other、在 compute_scene_geometry
+# 里被整个丢弃** —— 既不能被遮挡，也不能当归因竞争者，是双向缺失。
+# brake-first 语料要求"归因认定的减速触发物 = 遮挡对象"，故需要它可见。
+# **默认关闭**，保证既有挖矿产物逐位不变；只有显式调用 set_include_animal(True) 才生效。
+INCLUDE_ANIMAL = False
+
+
+def set_include_animal(flag: bool) -> None:
+    """把 `animal` 从 other 提升为独立类 `animal`，使其进入 per_obj。
+
+    仅供 brake-first 管线使用（见 scripts/brake_first_miner.py）。
+    影响面：per_obj 会多出 animal 条目 ⇒ in_corridor / frame_ttc 也会计入它们。
+    """
+    global INCLUDE_ANIMAL
+    INCLUDE_ANIMAL = bool(flag)
+
+
 def obj_class(name: str) -> str:
     if name.startswith(VRU_PREFIXES):
         return "vru"
@@ -33,6 +50,8 @@ def obj_class(name: str) -> str:
         return "vehicle"
     if name.startswith(STATIC_PREFIXES):
         return "static"
+    if INCLUDE_ANIMAL and name.startswith("animal"):
+        return "animal"
     return "other"
 
 

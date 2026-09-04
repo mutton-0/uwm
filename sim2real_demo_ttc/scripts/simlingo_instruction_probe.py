@@ -154,6 +154,8 @@ def main():
     ap.add_argument("--limit", type=int, default=0, help="0 = 全量；试点用 25")
     ap.add_argument("--pos", default="A")
     ap.add_argument("--with-grey", action="store_true", help="加一条均值灰图对照臂（选择性地板）")
+    ap.add_argument("--with-occ", action="store_true",
+                    help="加 occ/ctrl 两臂：在**同一张 ghost 帧**上抹掉实体（occ）/在别处抹同面积灰斑（ctrl）")
     ap.add_argument("--work", default=str(W))
     ap.add_argument("--nuscenes-root", default=NUSC)
     ap.add_argument("--config", default="/data/ruolin/uwm/sim2real_demo_ttc/configs/n1_d2.yaml")
@@ -163,6 +165,7 @@ def main():
 
     import cv2
     from g2_cache import commanded_speed
+    from f3_occlusion_necessity import control_box, occlude
     evs = [json.loads(l) for l in open(Path(args.work) / "mining" / "events_all.jsonl")]
     evs = [e for e in evs if e["event_type"] == args.pos
            and e["x_ghost_frames"] and e["x_ghost_frames"][0].get("bbox_xyxy")]
@@ -175,11 +178,25 @@ def main():
     def read(fn):
         return cv2.cvtColor(cv2.imread(str(Path(args.nuscenes_root) / fn)), cv2.COLOR_BGR2RGB)
 
-    recs = []
+    recs, skipped = [], defaultdict(int)
     for i, ev in enumerate(evs):
         spd = float(np.mean([f["ego_speed_mps"] for f in ev["x_clean_frames"]]))
         gh = read(ev["x_ghost_frames"][0]["filename"])
         imgs = {"clean": read(ev["x_clean_frames"][0]["filename"]), "ghost": gh}
+        if args.with_occ:
+            # **为什么必须加这两臂**：本语料的 clean 窗口是 [t_e-1.5, t_e-0.5]，
+            # 而 t_emergence 是"进入走廊/越过 TTC 阈值"、不是"开始可见"
+            # （已在 §FM/A57 确认）。实测 82% 的 clean 帧**仍带该实体的 bbox**。
+            # 所以 clean↔ghost 是「实体在场但尚未构成危险」↔「实体在场且已构成危险」，
+            # **不是**「行人不在」↔「行人在」。要做真正的在场/不在场操作，
+            # 只能在同一张 ghost 帧上把实体抹掉。
+            bb = ev["x_ghost_frames"][0]["bbox_xyxy"]
+            cb = control_box(gh, bb, np.random.default_rng(abs(hash(ev["event_id"])) % 2**31))
+            if cb is None:
+                skipped["no_control_box"] += 1
+                continue          # 无合法对照框 ⇒ 整个事件跳过，不做单臂近似
+            imgs["occ"] = occlude(gh, bb)      # 实体被抹掉
+            imgs["ctrl"] = occlude(gh, cb)     # 别处抹同面积灰斑（隔离"多了一块灰斑"这件事）
         if args.with_grey:
             # 选择性地板（Hewitt & Liang 纪律）：整幅均值灰图，画面里没有任何实体。
             # 若"危险类拒绝"在这里仍以相近比例出现，说明它由 prompt 文本先验驱动、
@@ -222,7 +239,8 @@ def main():
 
     # ---- 汇总：拒绝率与轨迹服从率，按 frame × instruction ----
     summ = {}
-    for frame in (("clean", "ghost", "grey") if args.with_grey else ("clean", "ghost")):
+    FRAMES = ["clean", "ghost"] + (["occ", "ctrl"] if args.with_occ else []) + (["grey"] if args.with_grey else [])
+    for frame in FRAMES:
         for name, direction, _ in instructions(5.0):
             k = f"{frame}/{name}"
             rej = [1.0 if r["arms"][k]["explicit_reject"] else 0.0 for r in recs]
@@ -267,6 +285,38 @@ def main():
                       "delta_reject_rate_ghost_minus_clean": boot_scene(d_rej, sc),
                       "delta_noncomply_rate_ghost_minus_clean": boot_scene(d_non, sc)}
     out["core_contrast"] = core
+    out["skipped"] = dict(skipped)
+
+    if args.with_occ:
+        # **主对比**：ghost − occ = 同一张帧上"实体在 vs 实体被抹掉"。
+        # **对照**：ctrl − occ = 两臂都有一块同面积灰斑，只差灰斑盖住的是不是那个实体。
+        #   若 ghost−occ 与 ctrl−occ 同号同量级，效应来自"画面被涂了一块"，与实体无关。
+        occ_c = {}
+        for name, direction, _ in instructions(5.0):
+            sc = [r["scene"] for r in recs]
+            def hz(fr):
+                return [1.0 if r["arms"][f"{fr}/{name}"]["hazard_reject"] else 0.0 for r in recs]
+            g, o, c = hz("ghost"), hz("occ"), hz("ctrl")
+            occ_c[name] = {
+                "direction": direction,
+                "hazard_reject_ghost": float(np.mean(g)),
+                "hazard_reject_occ": float(np.mean(o)),
+                "hazard_reject_ctrl": float(np.mean(c)),
+                "delta_ghost_minus_occ": boot_scene([a - b for a, b in zip(g, o)], sc),
+                "delta_ctrl_minus_occ": boot_scene([a - b for a, b in zip(c, o)], sc)}
+        out["occ_contrast"] = occ_c
+        print("\n**主对比**（同一张 ghost 帧上抹掉实体）危险类拒绝率")
+        print("  %-18s %7s %7s %7s | %-22s %s" % (
+            "指令", "ghost", "occ", "ctrl", "ghost−occ(主)", "ctrl−occ(对照,应≈0)"))
+        for name, v in occ_c.items():
+            a, b = v["delta_ghost_minus_occ"], v["delta_ctrl_minus_occ"]
+            print("  %-18s %6.1f%% %6.1f%% %6.1f%% | %-22s %s" % (
+                name, 100 * v["hazard_reject_ghost"], 100 * v["hazard_reject_occ"],
+                100 * v["hazard_reject_ctrl"],
+                "%+.3f %s" % (a["mean"], np.round(a["ci95"], 3).tolist()) if a else "—",
+                "%+.3f %s" % (b["mean"], np.round(b["ci95"], 3).tolist()) if b else "—"))
+    if skipped:
+        print("[IP] skipped:", dict(skipped))
     print("\n核心对比（ghost − clean，正 = 有行人时更常拒绝/不服从 = 假设成立方向）")
     for name, v in core.items():
         h = v["delta_hazard_reject_ghost_minus_clean"]; b = v["delta_noncomply_rate_ghost_minus_clean"]
