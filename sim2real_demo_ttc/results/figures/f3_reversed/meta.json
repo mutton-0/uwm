@@ -1,0 +1,304 @@
+{
+  "readout": "arc_full",
+  "definition": "反向 = b_model < 0（b_GT 13/13 全正）",
+  "events": [
+    {
+      "scene": "scene-1055",
+      "file": "4rev__scene-1055.jpg",
+      "n_reversed": 4,
+      "reversed_models": [
+        "SimLingo",
+        "LTF",
+        "DD",
+        "DDv2"
+      ],
+      "b_gt_arc_full": 3.484782156196041,
+      "b_model": {
+        "SimLingo": -0.10084145476378303,
+        "LTF": -0.10170459752616523,
+        "DD": -0.20756685657322738,
+        "DDv2": -0.004099290525185317
+      },
+      "ego_v0": 9.57,
+      "ego_vmin": 6.63,
+      "a_obs": 1.633,
+      "a_req": 2.359,
+      "n_mask": 1,
+      "lead_vru": {
+        "token": "5673a13d2f3b4004bac590be1e4b7cc9",
+        "cat": "human.pedestrian.adult",
+        "s_m": 34.2,
+        "lat_m": 1.72
+      }
+    },
+    {
+      "scene": "scene-0071",
+      "file": "3rev__scene-0071.jpg",
+      "n_reversed": 3,
+      "reversed_models": [
+        "LTF",
+        "DD",
+        "DDv2"
+      ],
+      "b_gt_arc_full": 0.858640673406355,
+      "b_model": {
+        "SimLingo": 2.000925536175057,
+        "LTF": -0.14636631960936275,
+        "DD": -0.2100228678759848,
+        "DDv2": -0.015608636142523835
+      },
+      "ego_v0": 3.21,
+      "ego_vmin": 2.06,
+      "a_obs": 0.475,
+      "a_req": 0.642,
+      "n_mask": 1,
+      "lead_vru": {
+        "token": "e64be77927ca45bf8a15f8671a614741",
+        "cat": "human.pedestrian.adult",
+        "s_m": 17.2,
+        "lat_m": 1.68
+      }
+    },
+    {
+      "scene": "scene-0862",
+      "file": "3rev__scene-0862.jpg",
+      "n_reversed": 3,
+      "reversed_models": [
+        "SimLingo",
+        "LTF",
+        "DDv2"
+      ],
+      "b_gt_arc_full": 2.2198261551064893,
+      "b_model": {
+        "SimLingo": -1.557727462097005,
+        "LTF": -0.006961033658978266,
+        "DD": 0.04048037656967374,
+        "DDv2": -0.0112313217940061
+      },
+      "ego_v0": 4.72,
+      "ego_vmin": 0.0,
+      "a_obs": 0.505,
+      "a_req": 0.872,
+      "n_mask": 1,
+      "lead_vru": {
+        "token": "f726cc58ae044b009041ec2fd69f67a4",
+        "cat": "human.pedestrian.adult",
+        "s_m": 13.6,
+        "lat_m": 1.73
+      }
+    },
+    {
+      "scene": "scene-1016",
+      "file": "3rev__scene-1016.jpg",
+      "n_reversed": 3,
+      "reversed_models": [
+        "SimLingo",
+        "LTF",
+        "DD"
+      ],
+      "b_gt_arc_full": 0.7210707135278698,
+      "b_model": {
+        "SimLingo": -0.08328593364229064,
+        "LTF": -0.025480255306148614,
+        "DD": -0.10691438356812455,
+        "DDv2": 0.011039886924425701
+      },
+      "ego_v0": 6.07,
+      "ego_vmin": 3.66,
+      "a_obs": 0.539,
+      "a_req": 0.569,
+      "n_mask": 1,
+      "lead_vru": {
+        "token": "a58bbda382f94c91a3f1940605a9e5ce",
+        "cat": "human.pedestrian.adult",
+        "s_m": 37.1,
+        "lat_m": 0.26
+      }
+    },
+    {
+      "scene": "scene-0151",
+      "file": "2rev__scene-0151.jpg",
+      "n_reversed": 2,
+      "reversed_models": [
+        "SimLingo",
+        "DDv2"
+      ],
+      "b_gt_arc_full": 0.7912123988233519,
+      "b_model": {
+        "SimLingo": -0.48732756509286546,
+        "LTF": 0.005664345918156677,
+        "DD": 0.004805458532146867,
+        "DDv2": -2.359740905536418
+      },
+      "ego_v0": 5.51,
+      "ego_vmin": 3.51,
+      "a_obs": 0.422,
+      "a_req": 0.777,
+      "n_mask": 1,
+      "lead_vru": {
+        "token": "31a8227b9a194e099a25cf1b0deac81b",
+        "cat": "vehicle.bicycle",
+        "s_m": 37.7,
+        "lat_m": 0.3
+      }
+    },
+    {
+      "scene": "scene-0717",
+      "file": "2rev__scene-0717.jpg",
+      "n_reversed": 2,
+      "reversed_models": [
+        "DD",
+        "DDv2"
+      ],
+      "b_gt_arc_full": 0.7225197069221165,
+      "b_model": {
+        "SimLingo": 0.16469113796878787,
+        "LTF": 0.13112499051154924,
+        "DD": -0.019411526110671762,
+        "DDv2": -0.09552926498860148
+      },
+      "ego_v0": 2.45,
+      "ego_vmin": 0.0,
+      "a_obs": 0.741,
+      "a_req": 0.556,
+      "n_mask": 1,
+      "lead_vru": {
+        "token": "1dd0fa28fc7641b09cec550fad61178b",
+        "cat": "human.pedestrian.adult",
+        "s_m": 11.9,
+        "lat_m": 1.33
+      }
+    },
+    {
+      "scene": "scene-0917",
+      "file": "2rev__scene-0917.jpg",
+      "n_reversed": 2,
+      "reversed_models": [
+        "SimLingo",
+        "DDv2"
+      ],
+      "b_gt_arc_full": 0.8529410879949522,
+      "b_model": {
+        "SimLingo": -0.7792866975020996,
+        "LTF": 0.46333096738892143,
+        "DD": 0.0782752922958565,
+        "DDv2": -0.004152921426342271
+      },
+      "ego_v0": 5.2,
+      "ego_vmin": 1.02,
+      "a_obs": 0.419,
+      "a_req": 0.446,
+      "n_mask": 1,
+      "lead_vru": {
+        "token": "24666ac5c59b47e899cb34c50cc9bfdb",
+        "cat": "human.pedestrian.adult",
+        "s_m": 27.8,
+        "lat_m": 0.55
+      }
+    },
+    {
+      "scene": "scene-0003",
+      "file": "1rev__scene-0003.jpg",
+      "n_reversed": 1,
+      "reversed_models": [
+        "DD"
+      ],
+      "b_gt_arc_full": 0.4548197646176937,
+      "b_model": {
+        "SimLingo": 0.05390396147298615,
+        "LTF": 0.09591836889760774,
+        "DD": -0.01899117751642554,
+        "DDv2": 2.792119316900854
+      },
+      "ego_v0": 3.82,
+      "ego_vmin": 2.32,
+      "a_obs": 0.567,
+      "a_req": 1.761,
+      "n_mask": 3,
+      "lead_vru": {
+        "token": "069a7d8902d14560b1890064b43a1a15",
+        "cat": "human.pedestrian.adult",
+        "s_m": 8.8,
+        "lat_m": 1.91
+      }
+    },
+    {
+      "scene": "scene-0007",
+      "file": "1rev__scene-0007.jpg",
+      "n_reversed": 1,
+      "reversed_models": [
+        "SimLingo"
+      ],
+      "b_gt_arc_full": 0.47529985138080644,
+      "b_model": {
+        "SimLingo": -0.40736543144522264,
+        "LTF": 0.07305282602088425,
+        "DD": 0.08976960594299621,
+        "DDv2": 0.02593651066510816
+      },
+      "ego_v0": 7.15,
+      "ego_vmin": 2.42,
+      "a_obs": 0.7,
+      "a_req": 1.04,
+      "n_mask": 1,
+      "lead_vru": {
+        "token": "ff15860117544737b71a43637657c0ca",
+        "cat": "human.pedestrian.adult",
+        "s_m": 33.9,
+        "lat_m": 1.99
+      }
+    },
+    {
+      "scene": "scene-0187",
+      "file": "1rev__scene-0187.jpg",
+      "n_reversed": 1,
+      "reversed_models": [
+        "DDv2"
+      ],
+      "b_gt_arc_full": 0.76391433746236,
+      "b_model": {
+        "SimLingo": 1.3019177522516276,
+        "LTF": 0.05434921170333862,
+        "DD": 0.14699897032801013,
+        "DDv2": -1.0187744971373416
+      },
+      "ego_v0": 3.74,
+      "ego_vmin": 2.13,
+      "a_obs": 0.192,
+      "a_req": 0.491,
+      "n_mask": 2,
+      "lead_vru": {
+        "token": "735fa680e31d461099f4b821ba422c3a",
+        "cat": "human.pedestrian.adult",
+        "s_m": 22.4,
+        "lat_m": 1.24
+      }
+    },
+    {
+      "scene": "scene-0544",
+      "file": "1rev__scene-0544.jpg",
+      "n_reversed": 1,
+      "reversed_models": [
+        "DDv2"
+      ],
+      "b_gt_arc_full": 0.8406436210442139,
+      "b_model": {
+        "SimLingo": 0.8612560246302197,
+        "LTF": 1.4064965828700169,
+        "DD": 0.01993106867376271,
+        "DDv2": -0.007921241497980347
+      },
+      "ego_v0": 2.19,
+      "ego_vmin": 0.47,
+      "a_obs": 0.716,
+      "a_req": 0.439,
+      "n_mask": 2,
+      "lead_vru": {
+        "token": "e2dadbf6909a4a258bb14fdbf38e9d66",
+        "cat": "human.pedestrian.adult",
+        "s_m": 10.7,
+        "lat_m": 1.65
+      }
+    }
+  ]
+}
