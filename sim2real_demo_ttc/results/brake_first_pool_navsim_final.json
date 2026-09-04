@@ -1,0 +1,782 @@
+{
+  "corpus": "NAVSIM / OpenScene (nuPlan-derived), split=test",
+  "independent_of_nuscenes_pool": true,
+  "note": "与 nuScenes 池**不合并**，两语料各自独立（用户 2026-09-04 决定）",
+  "design": "刹车优先挖矿：先找人类减速片段，再归因到走廊内 VRU（判据与 nuScenes 逐条相同）",
+  "scan": {
+    "n_scenes": 1880,
+    "n_brake_episodes": 968,
+    "full_scan": true,
+    "n_logs": 147
+  },
+  "n_events": 8,
+  "n_scenes": 8,
+  "low_speed_stats": {
+    "threshold_mps": 3.0,
+    "note": "仅统计与标签，未用于排除",
+    "primary_pool": {
+      "n_low": 2,
+      "n_total": 8,
+      "frac_low": 0.25,
+      "v0_low": {
+        "log-0061-scene-0004": 2.52,
+        "log-0089-scene-0006": 2.33
+      }
+    },
+    "deferred_pool": {
+      "n_low": 4,
+      "n_total": 6,
+      "frac_low": 0.667
+    },
+    "all_candidates": {
+      "n_low": 6,
+      "n_total": 14,
+      "frac_low": 0.429
+    }
+  },
+  "qa": {
+    "method": "逐候选目视 ghost 帧 + 遮挡后图像并排（results/figures/brake_first_navsim/）",
+    "n_reviewed": 8,
+    "n_rejected_at_qa": 0,
+    "marginal": [
+      "log-0126-scene-0010"
+    ]
+  },
+  "open_diagnostics": [
+    "**未标注交通管制**：NAVSIM 的 geo 同样不标注信号灯 / STOP 标志。log-0020（信号灯）与 log-0110（STOP 标志）的停车可能部分归因于此，无法用几何量剥离。",
+    "走廊外未遮 VRU 残留：log-0089（并排的第二个骑行者）、log-0061-scene-0004（另 2 人横穿）最明显。",
+    "跟车场景与归因公式的分歧：log-0126-scene-0010 的前车因与自车同速而 a_req≈0，物理正确但与人的直觉不符。"
+  ],
+  "candidates": [
+    {
+      "scene": "log-0020-scene-0005",
+      "frame_idx": 0,
+      "t": 1621982542.900222,
+      "ego_v0": 8.09,
+      "ego_vmin": 0.08,
+      "dv": -8.01,
+      "rel_decel": 0.99,
+      "a_obs": 0.843,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 3.512,
+      "a_vru_max": 1.249,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.481,
+      "lead_vru": {
+        "token": "da04f5faa6b95222",
+        "cat": "human.pedestrian.adult",
+        "s_m": 37.2,
+        "lat_m": 0.34
+      },
+      "ttc_s": 4.6,
+      "n_mask_group": 3,
+      "f3_mask_group": [
+        {
+          "token": "da04f5faa6b95222",
+          "cat": "human.pedestrian.adult",
+          "s_m": 37.2,
+          "lat_m": 0.34,
+          "a_req": 1.249,
+          "visible": true
+        },
+        {
+          "token": "8e436ff8f06b5cfa",
+          "cat": "human.pedestrian.adult",
+          "s_m": 39.3,
+          "lat_m": 0.79,
+          "a_req": 1.142,
+          "visible": true
+        },
+        {
+          "token": "954a8c6d81415132",
+          "cat": "human.pedestrian.adult",
+          "s_m": 40.3,
+          "lat_m": 1.48,
+          "a_req": 1.121,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 8.09,
+        "threshold": 3.0
+      },
+      "qa": {
+        "verdict": "keep",
+        "note": "拉斯维加斯大道。3 人横穿 37.2m，自车 8.09->0.08（完全停住），零非VRU竞争，3/3 全遮。**但路口有交通信号灯**（geo 不标注信号灯）—— 这次停车可能部分是为红灯，属已登记的未标注交通管制混淆。另有若干走廊外未遮 VRU。"
+      }
+    },
+    {
+      "scene": "log-0089-scene-0006",
+      "frame_idx": 18,
+      "t": 1631216015.400439,
+      "ego_v0": 2.33,
+      "ego_vmin": 0.0,
+      "dv": -2.32,
+      "rel_decel": 1.0,
+      "a_obs": 0.423,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 1.08,
+      "a_vru_max": 1.08,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 2.556,
+      "lead_vru": {
+        "token": "182393ac5af3549b",
+        "cat": "vehicle.bicycle",
+        "s_m": 19.8,
+        "lat_m": 0.92
+      },
+      "ttc_s": 8.5,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "182393ac5af3549b",
+          "cat": "vehicle.bicycle",
+          "s_m": 19.8,
+          "lat_m": 0.92,
+          "a_req": 1.08,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": true,
+        "ego_v0_mps": 2.33,
+        "threshold": 3.0
+      },
+      "qa": {
+        "verdict": "keep",
+        "note": "骑行者横穿 19.8m，自车 2.33->0.0。**旁边紧挨着第二个骑行者未被遮**（在 2m 走廊外）—— 遮挡组记 1，但视觉上'有人在横穿'的线索未被完全移除。属已登记的残留偏差。"
+      }
+    },
+    {
+      "scene": "log-0126-scene-0010",
+      "frame_idx": 13,
+      "t": 1632941077.099561,
+      "ego_v0": 8.18,
+      "ego_vmin": 3.38,
+      "dv": -4.8,
+      "rel_decel": 0.587,
+      "a_obs": 0.64,
+      "brake_dur_s": 7.5,
+      "a_vru_sum": 1.055,
+      "a_vru_max": 1.055,
+      "a_non_vru_max": 0.07,
+      "vru_class_share": 0.894,
+      "explained_ratio": 1.649,
+      "lead_vru": {
+        "token": "856d729f3ed55917",
+        "cat": "human.pedestrian.adult",
+        "s_m": 29.4,
+        "lat_m": 0.44
+      },
+      "ttc_s": 3.6,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "856d729f3ed55917",
+          "cat": "human.pedestrian.adult",
+          "s_m": 29.4,
+          "lat_m": 0.44,
+          "a_req": 1.055,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 8.18,
+        "threshold": 3.0
+      },
+      "qa": {
+        "verdict": "keep-marginal",
+        "note": "**边缘**：正前方本车道内有一辆黑色 SUV，行人在 29.4m（部分被 SUV 遮挡）。a_non_vru 仅 0.07 —— 物理上正确（该车与自车同速前行，v_close≈0 ⇒ 无需刹车），但目视这是典型的跟车场景。归因公式与人的直觉在此分歧，标记为边缘供后续留意。另 explains 1.649（超解释）。"
+      }
+    },
+    {
+      "scene": "log-0111-scene-0024",
+      "frame_idx": 18,
+      "t": 1631823321.500209,
+      "ego_v0": 7.32,
+      "ego_vmin": 2.44,
+      "dv": -4.88,
+      "rel_decel": 0.667,
+      "a_obs": 0.488,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 1.995,
+      "a_vru_max": 1.013,
+      "a_non_vru_max": 0.427,
+      "vru_class_share": 0.728,
+      "explained_ratio": 2.075,
+      "lead_vru": {
+        "token": "44d8ae7e17cf5c12",
+        "cat": "human.pedestrian.adult",
+        "s_m": 33.3,
+        "lat_m": 0.18
+      },
+      "ttc_s": 4.5,
+      "n_mask_group": 2,
+      "f3_mask_group": [
+        {
+          "token": "44d8ae7e17cf5c12",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.3,
+          "lat_m": 0.18,
+          "a_req": 1.013,
+          "visible": true
+        },
+        {
+          "token": "4f40da4068e55cc2",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.3,
+          "lat_m": 0.22,
+          "a_req": 0.982,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 7.32,
+        "threshold": 3.0
+      },
+      "qa": {
+        "verdict": "keep",
+        "note": "两人横穿 33.3m、lat 0.18m（几乎正对车道中线），自车 7.32->2.44，2/2 全遮。前方有车，非VRU 0.427 vs VRU 1.013（比值 2.37×，过 1.5× 余量）。"
+      }
+    },
+    {
+      "scene": "log-0061-scene-0003",
+      "frame_idx": 33,
+      "t": 1630341071.000102,
+      "ego_v0": 6.01,
+      "ego_vmin": 2.96,
+      "dv": -3.04,
+      "rel_decel": 0.506,
+      "a_obs": 1.014,
+      "brake_dur_s": 3.0,
+      "a_vru_sum": 0.841,
+      "a_vru_max": 0.841,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.83,
+      "lead_vru": {
+        "token": "b6ab449de7285a86",
+        "cat": "human.pedestrian.adult",
+        "s_m": 28.6,
+        "lat_m": 1.11
+      },
+      "ttc_s": 4.8,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "b6ab449de7285a86",
+          "cat": "human.pedestrian.adult",
+          "s_m": 28.6,
+          "lat_m": 1.11,
+          "a_req": 0.841,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 6.01,
+        "threshold": 3.0
+      },
+      "qa": {
+        "verdict": "keep",
+        "note": "干净。行人横穿 28.6m，自车 6.01->2.96，零非VRU竞争。**a_obs 1.014 为本语料最高**，是唯一超过 1.0 m/s² 的真刹车。"
+      }
+    },
+    {
+      "scene": "log-0110-scene-0030",
+      "frame_idx": 6,
+      "t": 1631822788.49957,
+      "ego_v0": 5.42,
+      "ego_vmin": 0.01,
+      "dv": -5.4,
+      "rel_decel": 0.997,
+      "a_obs": 0.72,
+      "brake_dur_s": 7.5,
+      "a_vru_sum": 1.284,
+      "a_vru_max": 0.643,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.892,
+      "lead_vru": {
+        "token": "4cb160f59099585a",
+        "cat": "human.pedestrian.adult",
+        "s_m": 32.1,
+        "lat_m": 1.62
+      },
+      "ttc_s": 5.9,
+      "n_mask_group": 2,
+      "f3_mask_group": [
+        {
+          "token": "4cb160f59099585a",
+          "cat": "human.pedestrian.adult",
+          "s_m": 32.1,
+          "lat_m": 1.62,
+          "a_req": 0.643,
+          "visible": true
+        },
+        {
+          "token": "7151cb9ec48a5be0",
+          "cat": "human.pedestrian.adult",
+          "s_m": 32.1,
+          "lat_m": 1.59,
+          "a_req": 0.641,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 5.42,
+        "threshold": 3.0
+      },
+      "qa": {
+        "verdict": "keep",
+        "note": "住宅街，行人横穿 32.1m，自车 5.42->0.01（完全停住），2/2 全遮，零非VRU竞争。**但路口有 STOP 标志**（geo 不标注）—— 停车可能是为该标志，属未标注交通管制混淆。"
+      }
+    },
+    {
+      "scene": "log-0062-scene-0003",
+      "frame_idx": 0,
+      "t": 1630341374.500299,
+      "ego_v0": 4.81,
+      "ego_vmin": 1.09,
+      "dv": -3.71,
+      "rel_decel": 0.772,
+      "a_obs": 0.53,
+      "brake_dur_s": 7.0,
+      "a_vru_sum": 0.507,
+      "a_vru_max": 0.507,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.956,
+      "lead_vru": {
+        "token": "483a9616cf8b5961",
+        "cat": "human.pedestrian.adult",
+        "s_m": 27.5,
+        "lat_m": 1.87
+      },
+      "ttc_s": 5.7,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "483a9616cf8b5961",
+          "cat": "human.pedestrian.adult",
+          "s_m": 27.5,
+          "lat_m": 1.87,
+          "a_req": 0.507,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 4.81,
+        "threshold": 3.0
+      },
+      "qa": {
+        "verdict": "keep",
+        "note": "干净。行人横穿 27.5m，自车 4.81->1.09，零非VRU竞争，explains 0.956。"
+      }
+    },
+    {
+      "scene": "log-0061-scene-0004",
+      "frame_idx": 0,
+      "t": 1630341074.500138,
+      "ego_v0": 2.52,
+      "ego_vmin": 0.02,
+      "dv": -2.5,
+      "rel_decel": 0.992,
+      "a_obs": 0.556,
+      "brake_dur_s": 4.5,
+      "a_vru_sum": 0.876,
+      "a_vru_max": 0.466,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.837,
+      "lead_vru": {
+        "token": "897f758fedbf512f",
+        "cat": "human.pedestrian.adult",
+        "s_m": 13.9,
+        "lat_m": 0.5
+      },
+      "ttc_s": 5.5,
+      "n_mask_group": 2,
+      "f3_mask_group": [
+        {
+          "token": "897f758fedbf512f",
+          "cat": "human.pedestrian.adult",
+          "s_m": 13.9,
+          "lat_m": 0.5,
+          "a_req": 0.466,
+          "visible": true
+        },
+        {
+          "token": "0ccfe32fcf6d5a73",
+          "cat": "human.pedestrian.adult",
+          "s_m": 15.0,
+          "lat_m": 0.57,
+          "a_req": 0.41,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": true,
+        "ego_v0_mps": 2.52,
+        "threshold": 3.0
+      },
+      "qa": {
+        "verdict": "keep",
+        "note": "有人行横道标志的标线路口，两人横穿 13.9m、lat 0.5m，自车 2.52->0.02，2/2 全遮。**画面内另有 2 人正在横穿但在走廊外、未被遮** —— 残留偏差在本例明显。"
+      }
+    }
+  ],
+  "deferred_low_a_req": [
+    {
+      "scene": "log-0142-scene-0011",
+      "frame_idx": 18,
+      "t": 1633508619.199655,
+      "ego_v0": 5.04,
+      "ego_vmin": 1.48,
+      "dv": -3.56,
+      "rel_decel": 0.706,
+      "a_obs": 0.375,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.37,
+      "a_vru_max": 0.37,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.987,
+      "lead_vru": {
+        "token": "8821dceb054057df",
+        "cat": "human.pedestrian.adult",
+        "s_m": 37.6,
+        "lat_m": 0.78
+      },
+      "ttc_s": 7.5,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "8821dceb054057df",
+          "cat": "human.pedestrian.adult",
+          "s_m": 37.6,
+          "lat_m": 0.78,
+          "a_req": 0.37,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 5.04,
+        "threshold": 3.0
+      },
+      "status": "deferred: a_req<0.4；不删，等 SimLingo 指令服从探针分支结果再定去留"
+    },
+    {
+      "scene": "log-0037-scene-0013",
+      "frame_idx": 0,
+      "t": 1622761014.700802,
+      "ego_v0": 2.65,
+      "ego_vmin": 0.0,
+      "dv": -2.65,
+      "rel_decel": 1.0,
+      "a_obs": 0.407,
+      "brake_dur_s": 6.5,
+      "a_vru_sum": 0.329,
+      "a_vru_max": 0.329,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.808,
+      "lead_vru": {
+        "token": "6c5ccbbfd73a512b",
+        "cat": "human.pedestrian.adult",
+        "s_m": 20.6,
+        "lat_m": 1.54
+      },
+      "ttc_s": 7.8,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "6c5ccbbfd73a512b",
+          "cat": "human.pedestrian.adult",
+          "s_m": 20.6,
+          "lat_m": 1.54,
+          "a_req": 0.329,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": true,
+        "ego_v0_mps": 2.65,
+        "threshold": 3.0
+      },
+      "status": "deferred: a_req<0.4；不删，等 SimLingo 指令服从探针分支结果再定去留"
+    },
+    {
+      "scene": "log-0125-scene-0014",
+      "frame_idx": 8,
+      "t": 1632940734.599742,
+      "ego_v0": 1.97,
+      "ego_vmin": 0.8,
+      "dv": -1.17,
+      "rel_decel": 0.596,
+      "a_obs": 0.13,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.968,
+      "a_vru_max": 0.292,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 2.236,
+      "lead_vru": {
+        "token": "ce51d9aaec2e504f",
+        "cat": "human.pedestrian.adult",
+        "s_m": 22.4,
+        "lat_m": 1.08
+      },
+      "ttc_s": 11.4,
+      "n_mask_group": 5,
+      "f3_mask_group": [
+        {
+          "token": "ce51d9aaec2e504f",
+          "cat": "human.pedestrian.adult",
+          "s_m": 22.4,
+          "lat_m": 1.08,
+          "a_req": 0.292,
+          "visible": true
+        },
+        {
+          "token": "ed852088f15b5999",
+          "cat": "human.pedestrian.adult",
+          "s_m": 24.5,
+          "lat_m": 0.85,
+          "a_req": 0.236,
+          "visible": true
+        },
+        {
+          "token": "0bdd6b77a9795f12",
+          "cat": "human.pedestrian.adult",
+          "s_m": 28.7,
+          "lat_m": 0.69,
+          "a_req": 0.232,
+          "visible": true
+        },
+        {
+          "token": "de4e4db76cb355d2",
+          "cat": "human.pedestrian.adult",
+          "s_m": 25.6,
+          "lat_m": 1.38,
+          "a_req": 0.204,
+          "visible": true
+        },
+        {
+          "token": "690fd6f566c25dfe",
+          "cat": "human.pedestrian.adult",
+          "s_m": 26.6,
+          "lat_m": 1.73,
+          "a_req": 0.005,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": true,
+        "ego_v0_mps": 1.97,
+        "threshold": 3.0
+      },
+      "status": "deferred: a_req<0.4；不删，等 SimLingo 指令服从探针分支结果再定去留"
+    },
+    {
+      "scene": "log-0139-scene-0034",
+      "frame_idx": 26,
+      "t": 1633507135.699715,
+      "ego_v0": 3.18,
+      "ego_vmin": 2.11,
+      "dv": -1.07,
+      "rel_decel": 0.336,
+      "a_obs": 0.194,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 0.239,
+      "a_vru_max": 0.239,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.23,
+      "lead_vru": {
+        "token": "cbd771eac8f95da1",
+        "cat": "human.pedestrian.adult",
+        "s_m": 22.5,
+        "lat_m": 0.4
+      },
+      "ttc_s": 7.1,
+      "n_mask_group": 1,
+      "f3_mask_group": [
+        {
+          "token": "cbd771eac8f95da1",
+          "cat": "human.pedestrian.adult",
+          "s_m": 22.5,
+          "lat_m": 0.4,
+          "a_req": 0.239,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 3.18,
+        "threshold": 3.0
+      },
+      "status": "deferred: a_req<0.4；不删，等 SimLingo 指令服从探针分支结果再定去留"
+    },
+    {
+      "scene": "log-0126-scene-0013",
+      "frame_idx": 11,
+      "t": 1632941136.099583,
+      "ego_v0": 1.75,
+      "ego_vmin": 0.57,
+      "dv": -1.18,
+      "rel_decel": 0.674,
+      "a_obs": 0.181,
+      "brake_dur_s": 6.5,
+      "a_vru_sum": 0.851,
+      "a_vru_max": 0.219,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.21,
+      "lead_vru": {
+        "token": "bd87ca37944a52e5",
+        "cat": "human.pedestrian.adult",
+        "s_m": 23.0,
+        "lat_m": 1.47
+      },
+      "ttc_s": 13.1,
+      "n_mask_group": 4,
+      "f3_mask_group": [
+        {
+          "token": "bd87ca37944a52e5",
+          "cat": "human.pedestrian.adult",
+          "s_m": 23.0,
+          "lat_m": 1.47,
+          "a_req": 0.219,
+          "visible": true
+        },
+        {
+          "token": "a07cf6c260175f79",
+          "cat": "human.pedestrian.adult",
+          "s_m": 23.0,
+          "lat_m": 0.81,
+          "a_req": 0.218,
+          "visible": true
+        },
+        {
+          "token": "adc2f939e8e25dc5",
+          "cat": "human.pedestrian.adult",
+          "s_m": 26.2,
+          "lat_m": 1.12,
+          "a_req": 0.207,
+          "visible": true
+        },
+        {
+          "token": "8f4d95a8a7515c3f",
+          "cat": "human.pedestrian.adult",
+          "s_m": 26.2,
+          "lat_m": 0.38,
+          "a_req": 0.207,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": true,
+        "ego_v0_mps": 1.75,
+        "threshold": 3.0
+      },
+      "status": "deferred: a_req<0.4；不删，等 SimLingo 指令服从探针分支结果再定去留"
+    },
+    {
+      "scene": "log-0008-scene-0003",
+      "frame_idx": 9,
+      "t": 1621970914.500097,
+      "ego_v0": 0.55,
+      "ego_vmin": 0.0,
+      "dv": -0.55,
+      "rel_decel": 1.0,
+      "a_obs": 0.061,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.136,
+      "a_vru_max": 0.039,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.638,
+      "lead_vru": {
+        "token": "23729b1bf2bf5612",
+        "cat": "human.pedestrian.adult",
+        "s_m": 11.4,
+        "lat_m": 1.17
+      },
+      "ttc_s": 20.7,
+      "n_mask_group": 7,
+      "f3_mask_group": [
+        {
+          "token": "23729b1bf2bf5612",
+          "cat": "human.pedestrian.adult",
+          "s_m": 11.4,
+          "lat_m": 1.17,
+          "a_req": 0.039,
+          "visible": true
+        },
+        {
+          "token": "0e4b0d2a5e8e504e",
+          "cat": "human.pedestrian.adult",
+          "s_m": 12.5,
+          "lat_m": 0.11,
+          "a_req": 0.027,
+          "visible": true
+        },
+        {
+          "token": "36ec87201ad75549",
+          "cat": "human.pedestrian.adult",
+          "s_m": 12.5,
+          "lat_m": 1.46,
+          "a_req": 0.025,
+          "visible": true
+        },
+        {
+          "token": "91c2aa98e21b5c27",
+          "cat": "human.pedestrian.adult",
+          "s_m": 13.5,
+          "lat_m": 0.35,
+          "a_req": 0.024,
+          "visible": true
+        },
+        {
+          "token": "801a3bb916675eb3",
+          "cat": "human.pedestrian.adult",
+          "s_m": 10.4,
+          "lat_m": 0.83,
+          "a_req": 0.01,
+          "visible": true
+        },
+        {
+          "token": "19007cdae8585b5a",
+          "cat": "human.pedestrian.adult",
+          "s_m": 10.4,
+          "lat_m": 0.13,
+          "a_req": 0.007,
+          "visible": true
+        },
+        {
+          "token": "a77a14ab2f2853f5",
+          "cat": "human.pedestrian.adult",
+          "s_m": 11.4,
+          "lat_m": 0.45,
+          "a_req": 0.004,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": true,
+        "ego_v0_mps": 0.55,
+        "threshold": 3.0
+      },
+      "status": "deferred: a_req<0.4；不删，等 SimLingo 指令服从探针分支结果再定去留"
+    }
+  ]
+}

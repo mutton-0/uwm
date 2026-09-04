@@ -9,20 +9,44 @@ sys.path.insert(0,str(ROOT/"scripts"))
 import g1_mine_events as G1
 from f3_occlusion_necessity import occlude
 
+NS_BLOBS = "/data/dataset/navsim/dataset/sensor_blobs"
+
+
 def main():
-    n=int(sys.argv[1]) if len(sys.argv)>1 else 8
+    n = int(sys.argv[1]) if len(sys.argv) > 1 else 8
+    corpus = sys.argv[2] if len(sys.argv) > 2 else "nuscenes"
     from omegaconf import OmegaConf
-    from nuscenes.nuscenes import NuScenes
-    cfg=OmegaConf.to_container(OmegaConf.load(ROOT/"configs/n1_d2.yaml"),resolve=True)
-    nusc=NuScenes("v1.0-trainval",dataroot=NUSC,verbose=False)
-    sc={s['name']:s for s in nusc.scene}
-    pool=json.load(open(RES/"brake_first_pool.json"))["candidates"]
+    global OUT
+    if corpus == "nuscenes":
+        from nuscenes.nuscenes import NuScenes
+        cfg=OmegaConf.to_container(OmegaConf.load(ROOT/"configs/n1_d2.yaml"),resolve=True)
+        nusc=NuScenes("v1.0-trainval",dataroot=NUSC,verbose=False)
+        sc={s['name']:s for s in nusc.scene}
+        pool=json.load(open(RES/"brake_first_pool.json"))["candidates"]
+        root=NUSC
+        def build(c): return G1.compute_scene_geometry(nusc, sc[c["scene"]], cfg)
+    else:
+        import pickle
+        from collections import defaultdict as _dd
+        import ns1_navsim_geometry as NS
+        OUT = RES/"figures"/"brake_first_navsim"
+        cfg=OmegaConf.to_container(OmegaConf.load(ROOT/"configs/navsim_corpus.yaml"),resolve=True)
+        pool=json.load(open(RES/"brake_first_pool_navsim.json"))["candidates"]
+        root=NS_BLOBS
+        _cache={}
+        def build(c):
+            if not _cache:
+                for lf in sorted((NS.NS_ROOT/"navsim_logs"/"test").glob("*.pkl")):
+                    for f in pickle.load(open(lf,"rb")):
+                        _cache.setdefault(f["scene_name"], []).append(f)
+            fl=sorted(_cache[c["scene"]], key=lambda z: z["timestamp"])
+            return NS.build_geo(fl, cfg, "test")
     pool=sorted(pool,key=lambda z:-z["a_vru_max"])[:n]
     OUT.mkdir(parents=True,exist_ok=True); meta=[]
     for c in pool:
-        geo=G1.compute_scene_geometry(nusc,sc[c["scene"]],cfg)
+        geo=build(c)
         j=c["frame_idx"]; fr=geo["frames"][j]
-        img=cv2.cvtColor(cv2.imread(str(Path(NUSC)/fr["filename"])),cv2.COLOR_BGR2RGB)
+        img=cv2.cvtColor(cv2.imread(str(Path(root)/fr["filename"])),cv2.COLOR_BGR2RGB)
         boxes=[]
         for g in c["f3_mask_group"]:
             ob=geo["per_obj"].get(g["token"])

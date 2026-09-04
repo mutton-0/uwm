@@ -35,7 +35,7 @@ runner 现状（`simlingo_runner.py:411`）：
 from __future__ import annotations
 
 import argparse, json, sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 import numpy as np
@@ -44,6 +44,31 @@ RES = Path("/data/ruolin/uwm/sim2real_demo_ttc/results")
 W = Path("/data/ruolin/uwm/sim2real_demo_ttc/variants/n1_d2")
 NUSC = "/data/dataset/nuscenes/v1.0-trainval"
 REJECT_MARK = "ignore instruction"          # 训练时的拒绝句开头（小写匹配）
+
+# 试点跑（simlingo_instruction_probe_pilot.json）发现：模型的拒绝句不是单一模板，
+# 而是**带具体理由**的一族。只用 "ignore instruction" 做二分会把互不相干的机制混在一起
+# ——尤其 "speed that is too low"（拒绝减速到过低速度）与画面里有没有危险实体毫无关系。
+# 故按理由分类，只有"危险类"拒绝才是"模型用到了画面里某个实体"的证据。
+REASONS = [
+    ("hazard_pedestrian",    "because of the pedestrian"),
+    ("hazard_dynamic_agent", "crash with a dynamic agent"),
+    ("hazard_crash",         "leads to a crash"),          # 兜底，须排在上一条之后
+    ("speed_floor",          "speed that is too low"),
+]
+HAZARD = {"hazard_pedestrian", "hazard_dynamic_agent", "hazard_crash"}
+
+
+def classify(lang: str) -> str:
+    """把生成文本映射到拒绝理由 / 服从 / 无 dreamer 响应。"""
+    t = (lang or "").lower()
+    if REJECT_MARK in t:
+        for name, mark in REASONS:
+            if mark in t:
+                return name
+        return "reject_other"
+    if "following the given instruction" in t:
+        return "comply"
+    return "no_dreamer_response"      # 只吐 "Waypoints:"，未进入 dreamer 分支
 
 
 def build_runner(cfg_path, device):
@@ -126,8 +151,9 @@ def boot_scene(vals, scenes, n=5000, seed=0):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--limit", type=int, default=25, help="小样本验证默认 25 个事件")
+    ap.add_argument("--limit", type=int, default=0, help="0 = 全量；试点用 25")
     ap.add_argument("--pos", default="A")
+    ap.add_argument("--with-grey", action="store_true", help="加一条均值灰图对照臂（选择性地板）")
     ap.add_argument("--work", default=str(W))
     ap.add_argument("--nuscenes-root", default=NUSC)
     ap.add_argument("--config", default="/data/ruolin/uwm/sim2real_demo_ttc/configs/n1_d2.yaml")
@@ -152,15 +178,21 @@ def main():
     recs = []
     for i, ev in enumerate(evs):
         spd = float(np.mean([f["ego_speed_mps"] for f in ev["x_clean_frames"]]))
-        imgs = {"clean": read(ev["x_clean_frames"][0]["filename"]),
-                "ghost": read(ev["x_ghost_frames"][0]["filename"])}
+        gh = read(ev["x_ghost_frames"][0]["filename"])
+        imgs = {"clean": read(ev["x_clean_frames"][0]["filename"]), "ghost": gh}
+        if args.with_grey:
+            # 选择性地板（Hewitt & Liang 纪律）：整幅均值灰图，画面里没有任何实体。
+            # 若"危险类拒绝"在这里仍以相近比例出现，说明它由 prompt 文本先验驱动、
+            # 而不是由画面内容驱动，那么 ghost/clean 的任何差值都不能解释为"用到了行人"。
+            imgs["grey"] = np.full_like(gh, gh.reshape(-1, 3).mean(0).astype(gh.dtype))
         rec = {"eid": ev["event_id"], "scene": ev["scene_name"], "ego_speed": spd,
                "d_long": ev.get("d_long_at_emergence"), "arms": {}}
         for frame, img in imgs.items():
             runner.instruction = ""
             r0 = runner.infer(img, spd, pool_modes=())
             v0 = float(commanded_speed(r0.waypoints))
-            rec["arms"][f"{frame}/baseline"] = {"v_plan": v0, "lang": r0.language, "prompt": r0.prompt}
+            rec["arms"][f"{frame}/baseline"] = {"v_plan": v0, "lang": r0.language,
+                                                "reason": classify(r0.language), "prompt": r0.prompt}
             for name, direction, text in instructions(spd):
                 runner.instruction = text
                 r = runner.infer(img, spd, pool_modes=())
@@ -170,6 +202,8 @@ def main():
                     "v_plan": v, "dv_vs_baseline": v - v0, "direction": direction,
                     "instruction": text, "lang": lang,
                     "explicit_reject": bool(REJECT_MARK in lang.lower()),
+                    "reason": classify(lang),
+                    "hazard_reject": bool(classify(lang) in HAZARD),
                     # 轨迹服从：加速类要求 v 上升，减速类要求 v 下降
                     "traj_complies": bool((v - v0) > 0) if direction == "up" else bool((v - v0) < 0),
                     "prompt": r.prompt}
@@ -188,26 +222,34 @@ def main():
 
     # ---- 汇总：拒绝率与轨迹服从率，按 frame × instruction ----
     summ = {}
-    for frame in ("clean", "ghost"):
+    for frame in (("clean", "ghost", "grey") if args.with_grey else ("clean", "ghost")):
         for name, direction, _ in instructions(5.0):
             k = f"{frame}/{name}"
             rej = [1.0 if r["arms"][k]["explicit_reject"] else 0.0 for r in recs]
             com = [1.0 if r["arms"][k]["traj_complies"] else 0.0 for r in recs]
             dv = [r["arms"][k]["dv_vs_baseline"] for r in recs]
             sc = [r["scene"] for r in recs]
+            haz = [1.0 if r["arms"][k]["hazard_reject"] else 0.0 for r in recs]
             summ[k] = {"direction": direction,
                        "explicit_reject_rate": float(np.mean(rej)),
+                       "hazard_reject_rate": float(np.mean(haz)),
+                       "reason_dist": dict(Counter(r["arms"][k]["reason"] for r in recs)),
                        "traj_comply_rate": float(np.mean(com)),
                        "dv_vs_baseline": boot_scene(dv, sc)}
     out["summary"] = summ
 
-    print("\n%-22s %-6s %-14s %-14s %s" % ("臂", "方向", "显式拒绝率", "轨迹服从率", "Δv vs baseline"))
+    print("\n%-22s %-5s %-10s %-10s %-10s %s" % (
+        "臂", "方向", "任意拒绝", "危险类拒绝", "轨迹服从", "Δv vs baseline"))
     for k, v in summ.items():
         b = v["dv_vs_baseline"]
-        print("%-22s %-6s %-14s %-14s %s" % (
+        print("%-22s %-5s %-10s %-10s %-10s %s" % (
             k, v["direction"], "%.1f%%" % (100 * v["explicit_reject_rate"]),
+            "%.1f%%" % (100 * v["hazard_reject_rate"]),
             "%.1f%%" % (100 * v["traj_comply_rate"]),
             "%+.4f %s" % (b["mean"], np.round(b["ci95"], 4).tolist()) if b else "—"))
+    print("\n拒绝理由分布")
+    for k, v in summ.items():
+        print("  %-22s %s" % (k, v["reason_dist"]))
 
     # ---- 核心问题：加速类指令在 ghost 上是否比 clean 上更常被拒绝/不服从 ----
     core = {}
@@ -218,15 +260,18 @@ def main():
         d_non = [(0.0 if r["arms"][gk]["traj_complies"] else 1.0)
                  - (0.0 if r["arms"][ck]["traj_complies"] else 1.0) for r in recs]
         sc = [r["scene"] for r in recs]
+        d_haz = [(1.0 if r["arms"][gk]["hazard_reject"] else 0.0)
+                 - (1.0 if r["arms"][ck]["hazard_reject"] else 0.0) for r in recs]
         core[name] = {"direction": direction,
+                      "delta_hazard_reject_ghost_minus_clean": boot_scene(d_haz, sc),
                       "delta_reject_rate_ghost_minus_clean": boot_scene(d_rej, sc),
                       "delta_noncomply_rate_ghost_minus_clean": boot_scene(d_non, sc)}
     out["core_contrast"] = core
-    print("\n核心对比（ghost − clean，正 = 有行人时更常拒绝/不服从）")
+    print("\n核心对比（ghost − clean，正 = 有行人时更常拒绝/不服从 = 假设成立方向）")
     for name, v in core.items():
-        a = v["delta_reject_rate_ghost_minus_clean"]; b = v["delta_noncomply_rate_ghost_minus_clean"]
-        print("  %-18s 拒绝率差 %s | 不服从率差 %s" % (
-            name, "%+.3f %s" % (a["mean"], np.round(a["ci95"], 3).tolist()) if a else "—",
+        h = v["delta_hazard_reject_ghost_minus_clean"]; b = v["delta_noncomply_rate_ghost_minus_clean"]
+        print("  %-18s 危险类拒绝率差 %s | 不服从率差 %s" % (
+            name, "%+.3f %s" % (h["mean"], np.round(h["ci95"], 3).tolist()) if h else "—",
             "%+.3f %s" % (b["mean"], np.round(b["ci95"], 3).tolist()) if b else "—"))
 
     n_rej_any = sum(1 for r in recs for k, v in r["arms"].items()

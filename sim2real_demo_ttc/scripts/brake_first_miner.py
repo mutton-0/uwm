@@ -75,6 +75,11 @@ def brake_episodes(v, t, min_dv=0.5, min_rel=0.30, max_win_s=10.0):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--corpus", default="nuscenes", choices=["nuscenes", "navsim"],
+                    help="navsim 走 ns1_navsim_geometry.build_geo —— 其 geo 与 "
+                         "compute_scene_geometry 逐字段对齐，故挖矿逻辑一行未改")
+    ap.add_argument("--split", default="test", help="仅 navsim")
+    ap.add_argument("--min-frames", type=int, default=20, help="仅 navsim：scene 最少帧数")
     ap.add_argument("--limit-scenes", type=int, default=0)
     ap.add_argument("--corridor", type=float, default=2.0)
     ap.add_argument("--extend-m", type=float, default=20.0)
@@ -82,19 +87,54 @@ def main():
     args = ap.parse_args()
 
     from omegaconf import OmegaConf
-    from nuscenes.nuscenes import NuScenes
-    cfg = OmegaConf.to_container(OmegaConf.load(ROOT / "configs/n1_d2.yaml"), resolve=True)
-    nusc = NuScenes("v1.0-trainval", dataroot="/data/dataset/nuscenes/v1.0-trainval",
-                    verbose=False)
-    scenes = nusc.scene[: args.limit_scenes] if args.limit_scenes else nusc.scene
-    print(f"[BFM] 扫 {len(scenes)} 个 scene")
+
+    # ---- 两个语料的 scene 迭代器；都产出 (scene 显示名, geo) ----
+    if args.corpus == "nuscenes":
+        from nuscenes.nuscenes import NuScenes
+        cfg = OmegaConf.to_container(OmegaConf.load(ROOT / "configs/n1_d2.yaml"), resolve=True)
+        nusc = NuScenes("v1.0-trainval", dataroot="/data/dataset/nuscenes/v1.0-trainval",
+                        verbose=False)
+        scenes = nusc.scene[: args.limit_scenes] if args.limit_scenes else nusc.scene
+        n_units = len(scenes)
+
+        def iter_scenes():
+            for sc in scenes:
+                try:
+                    yield sc["name"], G1.compute_scene_geometry(nusc, sc, cfg)
+                except Exception:                                      # noqa: BLE001
+                    continue
+    else:
+        import pickle
+        from collections import defaultdict as _dd
+        import ns1_navsim_geometry as NS
+        cfg = OmegaConf.to_container(
+            OmegaConf.load(ROOT / "configs/navsim_corpus.yaml"), resolve=True)
+        logs = sorted((NS.NS_ROOT / "navsim_logs" / args.split).glob("*.pkl"))
+        n_units = len(logs)
+
+        def iter_scenes():
+            n = 0
+            for lf in logs:
+                by = _dd(list)
+                for f in pickle.load(open(lf, "rb")):
+                    by[f["scene_token"]].append(f)
+                for stok, fl in by.items():
+                    fl = sorted(fl, key=lambda z: z["timestamp"])
+                    if len(fl) < args.min_frames:
+                        continue
+                    if args.limit_scenes and n >= args.limit_scenes:
+                        return
+                    n += 1
+                    try:
+                        yield fl[0]["scene_name"], NS.build_geo(fl, cfg, args.split)
+                    except Exception:                                  # noqa: BLE001
+                        continue
+
+    print(f"[BFM] corpus={args.corpus}  待扫 {n_units} 个"
+          f"{'scene' if args.corpus == 'nuscenes' else ' log'}")
 
     cands, n_ep, n_sc = [], 0, 0
-    for si, sc in enumerate(scenes):
-        try:
-            geo = G1.compute_scene_geometry(nusc, sc, cfg)
-        except Exception:                                              # noqa: BLE001
-            continue
+    for si, (scene_name, geo) in enumerate(iter_scenes()):
         n_sc += 1
         gt = geo["grid_t"]; es = geo["ego_speed"]; exyz = geo["ego_xyz"]
         eps = brake_episodes(es, gt)
@@ -154,7 +194,7 @@ def main():
             if not (ttc <= 5.0 or lead[3] <= 40.0):
                 continue
             cands.append({
-              "scene": sc["name"], "frame_idx": j, "t": float(gt[j]),
+              "scene": scene_name, "frame_idx": j, "t": float(gt[j]),
               "ego_v0": round(v0, 2), "ego_vmin": round(vmin, 2), "dv": round(dv, 2),
               "rel_decel": round(rel, 3), "a_obs": round(a_obs, 3),
               "brake_dur_s": round(float(gt[jmin] - gt[j]), 2),
@@ -169,7 +209,7 @@ def main():
                                  "a_req": round(x[0], 3), "visible": x[5]} for x in vrus],
             })
         if (si + 1) % 100 == 0:
-            print(f"  {si+1}/{len(scenes)} scene  减速片段 {n_ep}  候选 {len(cands)}")
+            print(f"  {si+1} scene 已扫  减速片段 {n_ep}  候选 {len(cands)}")
 
     # 去重：同一 scene 同一遮挡组只留 a_vru_max 最大的一条
     best = {}
@@ -180,6 +220,7 @@ def main():
     ded = sorted(best.values(), key=lambda z: (z["scene"], z["frame_idx"]))
     T1 = [c for c in ded if c["a_vru_max"] >= 0.4]
     out = {"design": "刹车优先挖矿：先找人类减速片段，再归因到走廊内 VRU",
+           "corpus": args.corpus, "split": (args.split if args.corpus == "navsim" else None),
            "n_scenes_scanned": n_sc, "n_brake_episodes": n_ep,
            "n_candidates_raw": len(cands), "n_candidates_dedup": len(ded),
            "n_scenes_with_candidate": len({c["scene"] for c in ded}),
