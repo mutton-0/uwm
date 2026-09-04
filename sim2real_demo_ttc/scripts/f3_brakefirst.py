@@ -45,6 +45,27 @@ import g1_mine_events as G1                                            # noqa: E
 from f3_occlusion_necessity import boot_scene, occlude, control_box    # noqa: E402
 
 HAZARD_PREFIX = ("human.", "vehicle.bicycle", "vehicle.motorcycle", "animal")
+LIDAR_MARGIN = 0.25          # 与 §FM/A56-59 的主口径一致
+
+
+def box3d_from_geo(geo, token, j):
+    """该目标在第 j 帧的 **ego 系 3D 框**：(center[3], (w,l,h), yaw)。
+
+    与 `f3_window_boxes.WindowBoxes.box3d_for` 逐行同源，只是直接用帧下标而非时间戳查找 ——
+    保证"删掉的 3D 框"与"涂掉的 2D 框"作用在同一个物理实体上。
+    """
+    from pyquaternion import Quaternion
+    o = geo["per_obj"].get(token)
+    if o is None or not o.get("_rot") or o["_size"] is None or not bool(o["valid"][j]):
+        return None
+    ti = int(np.argmin(np.abs(np.asarray(o["_rot_t"]) - geo["grid_t"][j])))
+    yaw_s = Quaternion(o["_rot"][ti]).yaw_pitch_roll[0]
+    yaw_e = yaw_s - Quaternion(matrix=geo["R_we"][j]).yaw_pitch_roll[0]
+    w, l, h = (list(o["_size"]) + [0, 0, 0])[:3]
+    c = np.asarray(o["p_ego"][j], float)
+    if not np.all(np.isfinite(c)):
+        return None
+    return c, (float(w), float(l), float(h)), float(yaw_e)
 
 
 def _overlap(a, b):
@@ -126,9 +147,16 @@ def main():
              "ltf": lambda: __import__("ltf_adapter").LTFRunner,
              "ddv2": lambda: __import__("ddv2_adapter").DDV2Runner}[args.model]()
         runner = R(device=args.device)
+        lidar = None
+        if args.model == "ddv2":
+            # DDv2 吃点云 —— 只遮 RGB 不删点，等于"危险从图像消失但雷达还在"，
+            # 与前几轮确立的口径（§FM/A56-59）不一致。故此处一并做 3D 框删点。
+            from ddv2_adapter import NuScenesLidar
+            lidar = NuScenesLidar(NUSC)
 
-        def infer(img, spd):
-            o = runner.run(img, spd)
+        def infer(img, spd, pts=None):
+            kw = {} if lidar is None else {"lidar_xyz": pts}
+            o = runner.run(img, spd, **kw)
             return float(o["commanded_speed"]), np.asarray(o["trajectory"], float).tolist()
 
     rng = np.random.default_rng(0)
@@ -157,10 +185,35 @@ def main():
         for cb in cboxes:
             ctrl_img = occlude(ctrl_img, cb)
 
+        # ---- DDv2 的点云三臂：origin 原样，clean 删遮挡组 3D 框内的点，
+        #      ctrl 删**镜像 3D 框**内的点（体积严格相等、纵向距离相同）----
+        pts_o = pts_c = pts_t = None
+        n_del_c = n_del_t = 0
+        if lidar is not None:
+            from f3_window_boxes import points_in_box, mirror_box3d
+            # geo["frames"][j] 的 sample_data token 键名是 "token"（g1_mine_events.py:71），
+            # 不是 "sd_token"（那是事件 x_*_frames 里的命名）
+            pts_o = lidar.ego_points(geo["frames"][j]["token"])
+            pts_c, pts_t = pts_o, pts_o
+            if pts_o is not None:
+                mc = np.zeros(len(pts_o), bool); mt = np.zeros(len(pts_o), bool)
+                for g in c["f3_mask_group"]:
+                    b3 = box3d_from_geo(geo, g["token"], j)
+                    if b3 is None:
+                        continue
+                    cc, sz, yaw = b3
+                    gsz = tuple(x + 2 * LIDAR_MARGIN for x in sz)
+                    mc |= points_in_box(pts_o, cc, gsz, yaw)
+                    cm, szm, yawm = mirror_box3d(cc, sz, yaw)
+                    mt |= points_in_box(pts_o, cm,
+                                        tuple(x + 2 * LIDAR_MARGIN for x in szm), yawm)
+                pts_c = pts_o[~mc]; pts_t = pts_o[~mt]
+                n_del_c, n_del_t = int(mc.sum()), int(mt.sum())
+
         spd = float(geo["ego_speed"][j])          # 三臂共用
-        v_origin, tj_origin = infer(img_o, spd)
-        v_clean, tj_clean = infer(clean_img, spd)
-        v_ctrl, tj_ctrl = infer(ctrl_img, spd)
+        v_origin, tj_origin = infer(img_o, spd, pts_o)
+        v_clean, tj_clean = infer(clean_img, spd, pts_c)
+        v_ctrl, tj_ctrl = infer(ctrl_img, spd, pts_t)
 
         area = lambda bs: sum((b[2]-b[0])*(b[3]-b[1]) for b in bs)
         audit.append({"scene": c["scene"], "n_mask": len(boxes), "n_ctrl": len(cboxes),
@@ -168,6 +221,7 @@ def main():
                       "area_ratio_ctrl_over_mask": round(area(cboxes)/max(area(boxes),1), 3)})
         recs.append({"scene": c["scene"], "eid": c["scene"], "frame_idx": j,
                      "n_mask": len(boxes), "n_ctrl": len(cboxes),
+                     "n_lidar_del_clean": n_del_c, "n_lidar_del_ctrl": n_del_t,
                      "ego_v0": spd, "a_req": c["a_vru_max"],
                      "v_origin": v_origin, "v_clean": v_clean, "v_ctrl": v_ctrl,
                      "b": v_clean - v_origin, "b_ctrl": v_ctrl - v_origin,

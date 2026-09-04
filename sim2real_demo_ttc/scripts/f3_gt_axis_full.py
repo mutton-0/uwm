@@ -32,26 +32,33 @@ import g1_mine_events as G1                                            # noqa: E
 from f3_occlusion_necessity import boot_scene                          # noqa: E402
 
 WP_DT = {"simlingo": 0.25, "dd": 0.5, "ltf": 0.5, "ddv2": 0.5}
+# 各候选**原生** commanded_speed 的定义不同，必须逐模型对齐，否则比的是两个量：
+#   simlingo: |wp[0]-wp[2]|*2        窗口 0.25-0.75s（agent_simlingo.py:815）
+#   DD 家族 : |wp[0]| / PRED_DT      窗口 0-0.5s（第一步位移/dt）
+NATIVE = {"simlingo": ("pair02", 0.25, 0.75), "dd": ("first", 0.0, 0.5),
+          "ltf": ("first", 0.0, 0.5), "ddv2": ("first", 0.0, 0.5)}
 
 
-def model_readouts(wp, dt):
+def model_readouts(wp, dt, native="pair02"):
     """wp: [N,2] 规划轨迹（不含原点，wp[k] 对应 t=(k+1)*dt）。返回三种速度读数。"""
     w = np.asarray(wp, float)[:, :2]
     T = len(w) * dt
     seg = np.linalg.norm(np.diff(w, axis=0), axis=1).sum()
     arc = float(np.linalg.norm(w[0]) + seg)          # 含原点->首点那一段
-    return {"cs_0.5s": float(np.linalg.norm(w[0] - w[2]) * 2.0) if len(w) > 2 else np.nan,
+    cs = (float(np.linalg.norm(w[0] - w[2]) * 2.0) if native == "pair02" and len(w) > 2
+          else float(np.linalg.norm(w[0]) / dt))
+    return {"cs_0.5s": cs,
             "arc_full": arc / T, "chord_full": float(np.linalg.norm(w[-1])) / T,
             "horizon_s": T}
 
 
-def gt_readouts(geo, j, T, dt):
+def gt_readouts(geo, j, T, dt, ta=0.25, tb=0.75):
     """自车真实未来在同一时域 T 上的三种读数（与 model_readouts 同定义）。"""
     gt, exyz = geo["grid_t"], geo["ego_xyz"]
     t0 = gt[j]
     idx = [int(np.argmin(np.abs(gt - (t0 + k * dt)))) for k in range(int(round(T / dt)) + 1)]
     P = exyz[idx, :2] - exyz[j, :2]
-    ka = int(np.argmin(np.abs(gt - (t0 + 0.25)))); kb = int(np.argmin(np.abs(gt - (t0 + 0.75))))
+    ka = int(np.argmin(np.abs(gt - (t0 + ta)))); kb = int(np.argmin(np.abs(gt - (t0 + tb))))
     dt_ab = float(gt[kb] - gt[ka])
     arc = float(np.linalg.norm(np.diff(P, axis=0), axis=1).sum())
     return {"cs_0.5s": (float(np.linalg.norm(exyz[kb, :2] - exyz[ka, :2]) / dt_ab)
@@ -77,16 +84,17 @@ def main():
                     verbose=False)
     scmap = {s["name"]: s for s in nusc.scene}
     f3 = json.load(open(f3p)); dt = WP_DT[args.model]
+    nat, t_a, t_b = NATIVE[args.model]
     KEYS = ("cs_0.5s", "arc_full", "chord_full")
 
     recs = []
     for r in f3["per_event"]:
         geo = G1.compute_scene_geometry(nusc, scmap[r["scene"]], cfg)
         j = r["frame_idx"]; v0 = float(geo["ego_speed"][j])
-        mo = model_readouts(r["traj_origin"], dt)
-        mc = model_readouts(r["traj_clean"], dt)
-        mt = model_readouts(r["traj_ctrl"], dt)
-        g = gt_readouts(geo, j, mo["horizon_s"], dt)
+        mo = model_readouts(r["traj_origin"], dt, nat)
+        mc = model_readouts(r["traj_clean"], dt, nat)
+        mt = model_readouts(r["traj_ctrl"], dt, nat)
+        g = gt_readouts(geo, j, mo["horizon_s"], dt, t_a, t_b)
         rec = {"scene": r["scene"], "v0": v0, "horizon_s": mo["horizon_s"]}
         for k in KEYS:
             rec[f"gt_origin__{k}"] = g[k]
@@ -103,7 +111,9 @@ def main():
            "horizon_s": recs[0]["horizon_s"] if recs else None, "wp_dt": dt,
            "note": "三种读数模型与 GT 用同一定义同一时域；GT clean 臂 = v0（车道保持）",
            "per_event": recs}
-    print(f"[GTFULL/{args.model}] n={len(recs)}/{len(set(sc))}scene  时域 {out['horizon_s']}s\n")
+    out["native_readout"] = {"kind": nat, "window_s": [t_a, t_b]}
+    print(f"[GTFULL/{args.model}] n={len(recs)}/{len(set(sc))}scene  时域 {out['horizon_s']}s  "
+          f"原生读数 {nat} 窗口 {t_a}-{t_b}s\n")
     hdr = f"{'读数':14s}{'b_GT [scene CI]':>30s}{'b_model [scene CI]':>30s}{'方向一致':>10s}{'均值比':>9s}"
     print(hdr)
     for k in KEYS:
