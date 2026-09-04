@@ -1,0 +1,332 @@
+{
+  "model": "simlingo",
+  "pool": "brake_first_pool_final.json",
+  "n_events": 13,
+  "n_scenes": 13,
+  "skipped": {},
+  "design": "三臂同帧：origin(原图) / clean(遮挡组全遮) / ctrl(等面积对照灰斑)",
+  "primary_readout": "b = v_clean - v_origin，预期 > 0（移除危险 ⇒ 敢开快点）",
+  "mask_audit": [
+    {
+      "scene": "scene-1055",
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "mask_area_px": 1446.6899341824112,
+      "ctrl_area_px": 1446.6899341824112,
+      "area_ratio_ctrl_over_mask": 1.0
+    },
+    {
+      "scene": "scene-0003",
+      "n_mask": 3,
+      "n_ctrl": 3,
+      "mask_area_px": 157432.45240770568,
+      "ctrl_area_px": 157432.45240770566,
+      "area_ratio_ctrl_over_mask": 1.0
+    },
+    {
+      "scene": "scene-0007",
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "mask_area_px": 1807.8800013494645,
+      "ctrl_area_px": 1807.8800013494645,
+      "area_ratio_ctrl_over_mask": 1.0
+    },
+    {
+      "scene": "scene-0862",
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "mask_area_px": 21671.00168372816,
+      "ctrl_area_px": 21671.00168372816,
+      "area_ratio_ctrl_over_mask": 1.0
+    },
+    {
+      "scene": "scene-0151",
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "mask_area_px": 1982.6374449590185,
+      "ctrl_area_px": 1982.6374449590185,
+      "area_ratio_ctrl_over_mask": 1.0
+    },
+    {
+      "scene": "scene-0071",
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "mask_area_px": 15442.025602571202,
+      "ctrl_area_px": 15442.025602571202,
+      "area_ratio_ctrl_over_mask": 1.0
+    },
+    {
+      "scene": "scene-1088",
+      "n_mask": 2,
+      "n_ctrl": 2,
+      "mask_area_px": 6492.887598614913,
+      "ctrl_area_px": 6492.887598614913,
+      "area_ratio_ctrl_over_mask": 1.0
+    },
+    {
+      "scene": "scene-1016",
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "mask_area_px": 2185.5291170211,
+      "ctrl_area_px": 2185.5291170211,
+      "area_ratio_ctrl_over_mask": 1.0
+    },
+    {
+      "scene": "scene-0717",
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "mask_area_px": 36096.087473647014,
+      "ctrl_area_px": 36096.087473647014,
+      "area_ratio_ctrl_over_mask": 1.0
+    },
+    {
+      "scene": "scene-0187",
+      "n_mask": 2,
+      "n_ctrl": 2,
+      "mask_area_px": 21712.950092661486,
+      "ctrl_area_px": 21712.950092661486,
+      "area_ratio_ctrl_over_mask": 1.0
+    },
+    {
+      "scene": "scene-0427",
+      "n_mask": 2,
+      "n_ctrl": 2,
+      "mask_area_px": 3275.1787835130935,
+      "ctrl_area_px": 3275.1787835130935,
+      "area_ratio_ctrl_over_mask": 1.0
+    },
+    {
+      "scene": "scene-0917",
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "mask_area_px": 5539.915092391556,
+      "ctrl_area_px": 5539.915092391546,
+      "area_ratio_ctrl_over_mask": 1.0
+    },
+    {
+      "scene": "scene-0544",
+      "n_mask": 2,
+      "n_ctrl": 2,
+      "mask_area_px": 56606.23416401804,
+      "ctrl_area_px": 56606.234164018046,
+      "area_ratio_ctrl_over_mask": 1.0
+    }
+  ],
+  "per_event": [
+    {
+      "scene": "scene-1055",
+      "eid": "scene-1055",
+      "frame_idx": 214,
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "ego_v0": 9.571752945548516,
+      "a_req": 2.359,
+      "v_origin": 9.471846580505371,
+      "v_clean": 9.500157356262207,
+      "v_ctrl": 9.781699180603027,
+      "b": 0.028310775756835938,
+      "b_ctrl": 0.30985260009765625
+    },
+    {
+      "scene": "scene-0003",
+      "eid": "scene-0003",
+      "frame_idx": 196,
+      "n_mask": 3,
+      "n_ctrl": 3,
+      "ego_v0": 3.821184151608896,
+      "a_req": 1.761,
+      "v_origin": 1.0986775159835815,
+      "v_clean": 1.8645542860031128,
+      "v_ctrl": 4.463181018829346,
+      "b": 0.7658767700195312,
+      "b_ctrl": 3.364503502845764
+    },
+    {
+      "scene": "scene-0007",
+      "eid": "scene-0007",
+      "frame_idx": 40,
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "ego_v0": 7.147518756808826,
+      "a_req": 1.04,
+      "v_origin": 3.8572630882263184,
+      "v_clean": 3.3598110675811768,
+      "v_ctrl": 3.9153337478637695,
+      "b": -0.4974520206451416,
+      "b_ctrl": 0.05807065963745117
+    },
+    {
+      "scene": "scene-0862",
+      "eid": "scene-0862",
+      "frame_idx": 17,
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "ego_v0": 4.721673217097074,
+      "a_req": 0.872,
+      "v_origin": 6.563429832458496,
+      "v_clean": 4.760268688201904,
+      "v_ctrl": 6.468391418457031,
+      "b": -1.8031611442565918,
+      "b_ctrl": -0.09503841400146484
+    },
+    {
+      "scene": "scene-0151",
+      "eid": "scene-0151",
+      "frame_idx": 19,
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "ego_v0": 5.5114443949902805,
+      "a_req": 0.777,
+      "v_origin": 7.407585144042969,
+      "v_clean": 7.214301109313965,
+      "v_ctrl": 7.434582233428955,
+      "b": -0.1932840347290039,
+      "b_ctrl": 0.026997089385986328
+    },
+    {
+      "scene": "scene-0071",
+      "eid": "scene-0071",
+      "frame_idx": 148,
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "ego_v0": 3.20523998538932,
+      "a_req": 0.642,
+      "v_origin": 3.8819007873535156,
+      "v_clean": 5.863071918487549,
+      "v_ctrl": 2.614422559738159,
+      "b": 1.9811711311340332,
+      "b_ctrl": -1.2674782276153564
+    },
+    {
+      "scene": "scene-1088",
+      "eid": "scene-1088",
+      "frame_idx": 57,
+      "n_mask": 2,
+      "n_ctrl": 2,
+      "ego_v0": 6.452772793514356,
+      "a_req": 0.629,
+      "v_origin": 7.8789825439453125,
+      "v_clean": 8.889581680297852,
+      "v_ctrl": 7.703948974609375,
+      "b": 1.010599136352539,
+      "b_ctrl": -0.1750335693359375
+    },
+    {
+      "scene": "scene-1016",
+      "eid": "scene-1016",
+      "frame_idx": 136,
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "ego_v0": 6.065518552316521,
+      "a_req": 0.569,
+      "v_origin": 9.687881469726562,
+      "v_clean": 9.625203132629395,
+      "v_ctrl": 9.640653610229492,
+      "b": -0.06267833709716797,
+      "b_ctrl": -0.04722785949707031
+    },
+    {
+      "scene": "scene-0717",
+      "eid": "scene-0717",
+      "frame_idx": 162,
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "ego_v0": 2.4492979837619866,
+      "a_req": 0.556,
+      "v_origin": 4.417110443115234,
+      "v_clean": 5.354933261871338,
+      "v_ctrl": 3.8923895359039307,
+      "b": 0.9378228187561035,
+      "b_ctrl": -0.5247209072113037
+    },
+    {
+      "scene": "scene-0187",
+      "eid": "scene-0187",
+      "frame_idx": 59,
+      "n_mask": 2,
+      "n_ctrl": 2,
+      "ego_v0": 3.7404505004592665,
+      "a_req": 0.491,
+      "v_origin": 2.8128905296325684,
+      "v_clean": 5.245395660400391,
+      "v_ctrl": 2.085293769836426,
+      "b": 2.4325051307678223,
+      "b_ctrl": -0.7275967597961426
+    },
+    {
+      "scene": "scene-0427",
+      "eid": "scene-0427",
+      "frame_idx": 2,
+      "n_mask": 2,
+      "n_ctrl": 2,
+      "ego_v0": 5.831230775362756,
+      "a_req": 0.478,
+      "v_origin": 0.593792200088501,
+      "v_clean": 0.5937532186508179,
+      "v_ctrl": 1.2223504781723022,
+      "b": -3.898143768310547e-05,
+      "b_ctrl": 0.6285582780838013
+    },
+    {
+      "scene": "scene-0917",
+      "eid": "scene-0917",
+      "frame_idx": 32,
+      "n_mask": 1,
+      "n_ctrl": 1,
+      "ego_v0": 5.203912415041332,
+      "a_req": 0.446,
+      "v_origin": 7.760742664337158,
+      "v_clean": 7.140898704528809,
+      "v_ctrl": 7.951820373535156,
+      "b": -0.6198439598083496,
+      "b_ctrl": 0.19107770919799805
+    },
+    {
+      "scene": "scene-0544",
+      "eid": "scene-0544",
+      "frame_idx": 208,
+      "n_mask": 2,
+      "n_ctrl": 2,
+      "ego_v0": 2.1898645403991037,
+      "a_req": 0.439,
+      "v_origin": 5.439306735992432,
+      "v_clean": 5.7003045082092285,
+      "v_ctrl": 5.381927967071533,
+      "b": 0.2609977722167969,
+      "b_ctrl": -0.05737876892089844
+    }
+  ],
+  "b": {
+    "mean": 0.32621731207920956,
+    "ci95": [
+      -0.23753055219466868,
+      0.9115674805182676
+    ],
+    "n": 13,
+    "n_scenes": 13
+  },
+  "b_ctrl": {
+    "mean": 0.12958348714388335,
+    "ci95": [
+      -0.33705662855735186,
+      0.763631863089708
+    ],
+    "n": 13,
+    "n_scenes": 13
+  },
+  "paired_specificity": {
+    "mean": 0.2400159744115976,
+    "ci95": [
+      -0.369849006487773,
+      0.7591785641816946
+    ],
+    "n": 13,
+    "n_scenes": 13
+  },
+  "sign_consistency": {
+    "n_positive": 7,
+    "n": 13,
+    "frac": 0.538,
+    "note": "b>0 = 移除危险后提速 = 预期方向"
+  }
+}
