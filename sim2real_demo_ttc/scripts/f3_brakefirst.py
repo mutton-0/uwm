@@ -107,26 +107,58 @@ def control_boxes_for_group(img, boxes, rng):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="simlingo", choices=["simlingo", "dd", "ltf", "ddv2"])
-    ap.add_argument("--pool", default=str(RES / "brake_first_pool_final.json"))
+    ap.add_argument("--corpus", default="nuscenes", choices=["nuscenes", "navsim"])
+    ap.add_argument("--split", default="test", help="仅 navsim")
+    ap.add_argument("--pool", default="")
     ap.add_argument("--device", default="cuda:0")
     ap.add_argument("--sl-config", default=str(ROOT / "configs" / "n1_d2.yaml"))
     ap.add_argument("--out", default="")
     args = ap.parse_args()
+    if not args.pool:
+        args.pool = str(RES / ("brake_first_pool_final.json" if args.corpus == "nuscenes"
+                               else "brake_first_pool_navsim_final.json"))
+    sfx = "" if args.corpus == "nuscenes" else "_navsim"
     args.out = str(Path(args.out).resolve() if args.out
-                   else RES / f"f3_brakefirst_{args.model}.json")
+                   else RES / f"f3_brakefirst{sfx}_{args.model}.json")
 
     import cv2
     from omegaconf import OmegaConf
-    from nuscenes.nuscenes import NuScenes
     G1.set_include_animal(True)
-    cfg = OmegaConf.to_container(OmegaConf.load(ROOT / "configs/n1_d2.yaml"), resolve=True)
-    nusc = NuScenes("v1.0-trainval", dataroot=NUSC, verbose=False)
-    scmap = {s["name"]: s for s in nusc.scene}
     pool = json.load(open(args.pool))
     cands = pool["candidates"]
-    print(f"[F3BF/{args.model}] {len(cands)} 事件 / {pool['n_scenes']} scene")
+
+    # ---- 两语料的 geo / 图像根；都产出 build_geo(scene_name) 与 IMG_ROOT ----
+    if args.corpus == "nuscenes":
+        from nuscenes.nuscenes import NuScenes
+        cfg = OmegaConf.to_container(OmegaConf.load(ROOT / "configs/n1_d2.yaml"), resolve=True)
+        nusc = NuScenes("v1.0-trainval", dataroot=NUSC, verbose=False)
+        scmap = {s["name"]: s for s in nusc.scene}
+        IMG_ROOT = NUSC
+
+        def build_geo(name):
+            return G1.compute_scene_geometry(nusc, scmap[name], cfg)
+    else:
+        import pickle
+        import ns1_navsim_geometry as NS
+        cfg = OmegaConf.to_container(
+            OmegaConf.load(ROOT / "configs/navsim_corpus.yaml"), resolve=True)
+        IMG_ROOT = "/data/dataset/navsim/dataset/sensor_blobs"
+        _fr = {}
+
+        def build_geo(name):
+            if not _fr:
+                for lf in sorted((NS.NS_ROOT / "navsim_logs" / args.split).glob("*.pkl")):
+                    for f in pickle.load(open(lf, "rb")):
+                        _fr.setdefault(f["scene_name"], []).append(f)
+            fl = sorted(_fr[name], key=lambda z: z["timestamp"])
+            return NS.build_geo(fl, cfg, args.split)
+
+    print(f"[F3BF/{args.model}] corpus={args.corpus}  "
+          f"{len(cands)} 事件 / {pool['n_scenes']} scene")
 
     # ---------------- runner ----------------
+    lidar = None            # 只有 ddv2 会赋值；在此初始化，否则 simlingo 分支下
+                            # 主循环的 `if lidar is not None` 会 UnboundLocalError
     if args.model == "simlingo":
         cfg_sl = OmegaConf.to_container(OmegaConf.load(args.sl_config), resolve=True)
         cfg_sl["model"]["device"] = args.device
@@ -134,7 +166,7 @@ def main():
         from g2_cache import commanded_speed
         runner = SimLingoRunner(cfg_sl, capture_hidden=False)
 
-        def infer(img, spd):
+        def infer(img, spd, pts=None):        # pts 仅为签名对齐，SimLingo 不吃点云
             r = runner.infer(img, spd, pool_modes=())
             wp = np.asarray(r.waypoints, float)
             return float(commanded_speed(wp)), wp.tolist()
@@ -147,12 +179,15 @@ def main():
              "ltf": lambda: __import__("ltf_adapter").LTFRunner,
              "ddv2": lambda: __import__("ddv2_adapter").DDV2Runner}[args.model]()
         runner = R(device=args.device)
-        lidar = None
         if args.model == "ddv2":
             # DDv2 吃点云 —— 只遮 RGB 不删点，等于"危险从图像消失但雷达还在"，
             # 与前几轮确立的口径（§FM/A56-59）不一致。故此处一并做 3D 框删点。
-            from ddv2_adapter import NuScenesLidar
-            lidar = NuScenesLidar(NUSC)
+            if args.corpus == "navsim":
+                from ddv2_adapter import NavsimLidar
+                lidar = NavsimLidar()
+            else:
+                from ddv2_adapter import NuScenesLidar
+                lidar = NuScenesLidar(NUSC)
 
         def infer(img, spd, pts=None):
             kw = {} if lidar is None else {"lidar_xyz": pts}
@@ -162,9 +197,9 @@ def main():
     rng = np.random.default_rng(0)
     recs, skipped, audit = [], defaultdict(int), []
     for i, c in enumerate(cands):
-        geo = G1.compute_scene_geometry(nusc, scmap[c["scene"]], cfg)
+        geo = build_geo(c["scene"])
         j = c["frame_idx"]
-        img_o = cv2.cvtColor(cv2.imread(str(Path(NUSC) / geo["frames"][j]["filename"])),
+        img_o = cv2.cvtColor(cv2.imread(str(Path(IMG_ROOT) / geo["frames"][j]["filename"])),
                              cv2.COLOR_BGR2RGB)
         boxes = []
         for g in c["f3_mask_group"]:
@@ -193,7 +228,9 @@ def main():
             from f3_window_boxes import points_in_box, mirror_box3d
             # geo["frames"][j] 的 sample_data token 键名是 "token"（g1_mine_events.py:71），
             # 不是 "sd_token"（那是事件 x_*_frames 里的命名）
-            pts_o = lidar.ego_points(geo["frames"][j]["token"])
+            pts_o = lidar.ego_points(
+                geo["frames"][j]["filename"].split("/", 1)[1] if args.corpus == "navsim"
+                else geo["frames"][j]["token"])
             pts_c, pts_t = pts_o, pts_o
             if pts_o is not None:
                 mc = np.zeros(len(pts_o), bool); mt = np.zeros(len(pts_o), bool)
@@ -235,6 +272,7 @@ def main():
     sc = [r["scene"] for r in recs]
     out = {"model": args.model, "pool": Path(args.pool).name,
            "n_events": len(recs), "n_scenes": len(set(sc)), "skipped": dict(skipped),
+           "corpus": args.corpus,
            "design": "三臂同帧：origin(原图) / clean(遮挡组全遮) / ctrl(等面积对照灰斑)",
            "primary_readout": "b = v_clean - v_origin，预期 > 0（移除危险 ⇒ 敢开快点）",
            "mask_audit": audit, "per_event": recs}

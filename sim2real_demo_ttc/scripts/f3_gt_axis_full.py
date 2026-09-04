@@ -69,27 +69,47 @@ def gt_readouts(geo, j, T, dt, ta=0.25, tb=0.75):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="simlingo")
+    ap.add_argument("--corpus", default="nuscenes", choices=["nuscenes","navsim"])
+    ap.add_argument("--split", default="test")
     ap.add_argument("--f3", default="")
     ap.add_argument("--out", default="")
     args = ap.parse_args()
-    f3p = Path(args.f3) if args.f3 else RES / f"f3_brakefirst_{args.model}_traj.json"
+    sfx = "" if args.corpus == "nuscenes" else "_navsim"
+    f3p = Path(args.f3) if args.f3 else RES / f"f3_brakefirst{sfx}_{args.model}_traj.json"
     args.out = str(Path(args.out).resolve() if args.out
-                   else RES / f"f3_gt_axis_full_{args.model}.json")
+                   else RES / f"f3_gt_axis_full{sfx}_{args.model}.json")
 
     from omegaconf import OmegaConf
-    from nuscenes.nuscenes import NuScenes
     G1.set_include_animal(True)
-    cfg = OmegaConf.to_container(OmegaConf.load(ROOT / "configs/n1_d2.yaml"), resolve=True)
-    nusc = NuScenes("v1.0-trainval", dataroot="/data/dataset/nuscenes/v1.0-trainval",
-                    verbose=False)
-    scmap = {s["name"]: s for s in nusc.scene}
+    if args.corpus == "nuscenes":
+        from nuscenes.nuscenes import NuScenes
+        cfg = OmegaConf.to_container(OmegaConf.load(ROOT / "configs/n1_d2.yaml"), resolve=True)
+        nusc = NuScenes("v1.0-trainval", dataroot="/data/dataset/nuscenes/v1.0-trainval",
+                        verbose=False)
+        scmap = {s["name"]: s for s in nusc.scene}
+
+        def build_geo(n):
+            return G1.compute_scene_geometry(nusc, scmap[n], cfg)
+    else:
+        import pickle
+        import ns1_navsim_geometry as NS
+        cfg = OmegaConf.to_container(
+            OmegaConf.load(ROOT / "configs/navsim_corpus.yaml"), resolve=True)
+        _fr = {}
+
+        def build_geo(n):
+            if not _fr:
+                for lf in sorted((NS.NS_ROOT / "navsim_logs" / args.split).glob("*.pkl")):
+                    for f in pickle.load(open(lf, "rb")):
+                        _fr.setdefault(f["scene_name"], []).append(f)
+            return NS.build_geo(sorted(_fr[n], key=lambda z: z["timestamp"]), cfg, args.split)
     f3 = json.load(open(f3p)); dt = WP_DT[args.model]
     nat, t_a, t_b = NATIVE[args.model]
     KEYS = ("cs_0.5s", "arc_full", "chord_full")
 
     recs = []
     for r in f3["per_event"]:
-        geo = G1.compute_scene_geometry(nusc, scmap[r["scene"]], cfg)
+        geo = build_geo(r["scene"])
         j = r["frame_idx"]; v0 = float(geo["ego_speed"][j])
         mo = model_readouts(r["traj_origin"], dt, nat)
         mc = model_readouts(r["traj_clean"], dt, nat)
