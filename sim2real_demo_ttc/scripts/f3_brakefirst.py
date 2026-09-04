@@ -115,7 +115,8 @@ def main():
 
         def infer(img, spd):
             r = runner.infer(img, spd, pool_modes=())
-            return float(commanded_speed(r.waypoints))
+            wp = np.asarray(r.waypoints, float)
+            return float(commanded_speed(wp)), wp.tolist()
     else:
         sys.path.insert(0, str(RES / "diffusiondrive_g1_adapter"))
         sys.path.insert(0, str(RES / "ltf_g1_adapter"))
@@ -127,7 +128,8 @@ def main():
         runner = R(device=args.device)
 
         def infer(img, spd):
-            return float(runner.run(img, spd)["commanded_speed"])
+            o = runner.run(img, spd)
+            return float(o["commanded_speed"]), np.asarray(o["trajectory"], float).tolist()
 
     rng = np.random.default_rng(0)
     recs, skipped, audit = [], defaultdict(int), []
@@ -156,9 +158,9 @@ def main():
             ctrl_img = occlude(ctrl_img, cb)
 
         spd = float(geo["ego_speed"][j])          # 三臂共用
-        v_origin = infer(img_o, spd)
-        v_clean = infer(clean_img, spd)
-        v_ctrl = infer(ctrl_img, spd)
+        v_origin, tj_origin = infer(img_o, spd)
+        v_clean, tj_clean = infer(clean_img, spd)
+        v_ctrl, tj_ctrl = infer(ctrl_img, spd)
 
         area = lambda bs: sum((b[2]-b[0])*(b[3]-b[1]) for b in bs)
         audit.append({"scene": c["scene"], "n_mask": len(boxes), "n_ctrl": len(cboxes),
@@ -168,7 +170,10 @@ def main():
                      "n_mask": len(boxes), "n_ctrl": len(cboxes),
                      "ego_v0": spd, "a_req": c["a_vru_max"],
                      "v_origin": v_origin, "v_clean": v_clean, "v_ctrl": v_ctrl,
-                     "b": v_clean - v_origin, "b_ctrl": v_ctrl - v_origin})
+                     "b": v_clean - v_origin, "b_ctrl": v_ctrl - v_origin,
+                     # **完整规划轨迹**：commanded_speed 只用了 0.25-0.75s 两个点，
+                     # 而 SimLingo 轨迹是 10 点 x 0.25s = 2.5s。全轨迹读数需要它。
+                     "traj_origin": tj_origin, "traj_clean": tj_clean, "traj_ctrl": tj_ctrl})
         print(f"  [{i+1}/{len(cands)}] {c['scene']:14s} 遮{len(boxes)}/对照{len(cboxes)}  "
               f"origin {v_origin:.3f} | clean {v_clean:.3f} | ctrl {v_ctrl:.3f}  "
               f"b={v_clean-v_origin:+.3f}")
