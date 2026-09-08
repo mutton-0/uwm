@@ -87,6 +87,9 @@ def tab_deltab():
                 sc=np.array([str(x) for x in z["scene"]]); k=np.array([side_of(x)=="LHD" for x in sc])
                 db=(z["v_alt"]-z["v_orig"])[k]
                 r[f"{scope}_{'clean' if nn else 'noise'}"]=float(db.mean())
+                if scope=="global" and not nn:      # 主条件的分布形状
+                    r["med"]=float(np.median(db)); r["sd"]=float(db.std())
+                    r["eff"]=abs(db.mean())/db.std(); r["agree"]=float(max((db>0).mean(),(db<0).mean()))
                 r["n"]=int(k.sum())
         if len(r)>2: rows.append(r)
     T=[r"\begin{table}[t]",r"\centering",
@@ -95,16 +98,23 @@ def tab_deltab():
        r"(m/s, $\arcfull$) when the same frame is re-rendered as night; positive means faster.",
        r"``sky'' perturbs only the sky region ($17.9\%$ of the frame, containing no",
        r"driving-relevant content); the driving corridor is untouched to the pixel.",
-       r"$n{=}312$ left-hand-drive lead events.}",
-       r"\label{tab:deltab}",r"\small",r"\begin{tabular}{lcccc}",r"\toprule",
-       r"& \multicolumn{2}{c}{sky only} & \multicolumn{2}{c}{whole image} \\",
-       r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}",
-       r"Policy & luminance & \;$+$noise & luminance & \;$+$noise \\",
+       r"$n{=}312$ left-hand-drive lead events. The last two columns give the median and the"
+       r" effect size $|\mu|/\sigma$ of the main condition: the mean is representative only"
+       r" where these agree with it. For SimLingo and DDv2 they do not --- see"
+       r" \Cref{sec:behaviour}.}",
+       r"\label{tab:deltab}",r"\small",r"\setlength{\tabcolsep}{3pt}",
+       r"\begin{tabular}{@{}lcccccc@{}}",r"\toprule",
+       r"& \multicolumn{2}{c}{sky only} & \multicolumn{2}{c}{whole image} &"
+       r" \multicolumn{2}{c}{shape} \\",
+       r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}",
+       r"Policy & lum. & $+$noise & lum. & $+$noise & med. & $|\mu|/\sigma$ \\",
        r"\midrule"]
     for r in rows:
-        g=lambda k: (f"${r[k]:+.3f}$" if k in r else "--")
+        g=lambda k: (f"${r[k]:+.2f}$" if k in r else "--")
+        eff=r.get("eff"); ef=(f"\\textbf{{{eff:.2f}}}" if eff and eff>=1.0 else
+                              (f"{eff:.2f}" if eff else "--"))
         T.append(f"{SHORT[r['model']]} & {g('sky_clean')} & {g('sky_noise')} & "
-                 f"{g('global_clean')} & {g('global_noise')} \\\\")
+                 f"{g('global_clean')} & {g('global_noise')} & {g('med')} & {ef} \\\\")
     T += [r"\bottomrule",r"\end{tabular}",r"\end{table}"]
     (OUT/"tab_deltab.tex").write_text("\n".join(T))
     return rows

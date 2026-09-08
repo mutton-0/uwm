@@ -19,10 +19,12 @@ $v_{\mathrm{decel}}$ cluster ($34$--$46^\circ$; \Cref{tab:geometry}); $v_{\mathr
 sits on the opposite side of the random baseline from both. Because
 $v_{\mathrm{faith}} = h(\text{hazard present}) - h(\text{hazard removed})$, a negative
 projection means the model reads ``it got dark'' the way it reads ``the hazard went away.''
-The behavioural readout agrees: synthetic night raises planned speed by up to $2.05$\,m/s,
-where deleting the lead vehicle from the image raises it by $0.23$\,m/s. Two independent
-readouts---representation geometry and output trajectory---point to the same mechanism, in
-four architectures.
+The behavioural readout agrees: synthetic night raises planned speed by $2.05$\,m/s in
+DiffusionDrive, where deleting the lead vehicle from the image raises it by $0.23$\,m/s. Two
+independent readouts---representation geometry and output trajectory---point to the same
+mechanism. The shift is concentrated in two of four policies ($|\mu|/\sigma = 2.12$ and $1.34$,
+sign agreement $>94\%$) and dispersed in the other two, where the distribution is bimodal and
+the mean describes no event; we report both cases rather than averaging over the difference.
 
 \paragraph{What carries it.} Darkness alone is nearly inert; the effect is carried by sensor
 noise. Perturbing only the sky, with the driving corridor untouched, still recovers a fifth of

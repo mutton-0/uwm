@@ -8,7 +8,10 @@ speed rises accordingly. In representation space the hazard direction and the br
 direction form one family ($34$--$46^\circ$ apart, against a $7^\circ$ reproducibility floor
 and a $90^\circ$ random baseline), while the appearance direction sits past the random line on
 the far side ($93$--$115^\circ$). Behaviourally, the same perturbation raises planned speed by
-up to $2.05$\,m/s --- an order of magnitude more than deleting the lead vehicle from the image.
+$2.05$\,m/s in DiffusionDrive and $1.25$ in LTF, with $>94\%$ of events sharing the sign ---
+an order of magnitude more than deleting the lead vehicle from the image. In the other two
+policies the shift is directionally consistent but dispersed, and we report the distribution
+rather than the mean.
 Two controls sharpen the mechanism. First, the effect is carried by sensor noise, not by low
 luminance: darkening alone changes planned speed by $-0.01$\,m/s, and adding noise of the
 magnitude a real night camera produces flips it to $+0.05$. Second, perturbing \emph{only the
