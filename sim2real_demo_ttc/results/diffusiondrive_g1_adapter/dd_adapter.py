@@ -112,8 +112,13 @@ class DDRunner:
             if pt and i in pt:
                 out = self._apply_patch(out, pt[i])
             st = self._steer
-            if st is not None and st["layer"] == i:
-                out = self._apply_steer(out, st)
+            if st is not None:
+                # **多层同时注入**：_steer 由单个 dict 改为 {layer: spec}，
+                # 加权速度轴需要按层权重同时施加（见 scripts/steer_brake.py --axis speed_w）
+                sp = st.get(i) if isinstance(st, dict) and "layer" not in st else (
+                    st if st.get("layer") == i else None)
+                if sp is not None:
+                    out = self._apply_steer(out, sp)
             self._buf[i] = out.detach().float()[0]      # [320, C_l]
             return out
         return _h
@@ -139,7 +144,8 @@ class DDRunner:
         return out
 
     # ---------------- RepE 式操纵（与 SimLingo 侧 simlingo_runner.set_steering 同构） ----------------
-    def set_steering(self, layer=None, vec=None, alpha=0.0, mode="add", tokens="image"):
+    def set_steering(self, layer=None, vec=None, alpha=0.0, mode="add", tokens="image",
+                     accumulate=False):
         """在第 layer 个 encoder SelfAttention 的输出上操纵；layer=None 关闭。
 
         mode: add / project_out / recover —— 与 SimLingo 侧逐条同义。
@@ -152,8 +158,14 @@ class DDRunner:
             return
         v = torch.as_tensor(np.asarray(vec, dtype=np.float32))
         v = v / (v.norm() + 1e-8)
-        self._steer = {"layer": int(layer), "v": v.to(self.device), "alpha": float(alpha),
-                       "mode": mode, "tokens": tokens}
+        spec = {"v": v.to(self.device), "alpha": float(alpha), "mode": mode, "tokens": tokens}
+        if accumulate:
+            # 累加模式：同一次前向里可在多个层各注一个方向
+            cur = self._steer if isinstance(self._steer, dict) and "layer" not in self._steer else {}
+            cur = dict(cur); cur[int(layer)] = spec
+            self._steer = cur
+        else:
+            self._steer = {"layer": int(layer), **spec}
 
     def _apply_steer(self, out, st):
         n = out.shape[1]
@@ -164,6 +176,15 @@ class DDRunner:
         if st["mode"] == "add":
             sigma = float(sub.std()); self._last_sigma = sigma
             sub = sub + (st["alpha"] * sigma) * v
+        elif st["mode"] == "piecewise":
+            # RepE 分段算子 R' = R + sign(Rᵀv)·v（arXiv 2310.01405 §Rep Control）。
+            # sign 依赖**当前**激活，必须在钩子里内联算 —— 这正是原文「逐层级联、
+            # 在已扰动状态上重算」的实质，且只需一次前向。
+            # 注：对固定的群体读取向量 v，add 算子的级联是恒等的（v 不随 R 变，
+            # 而 sigma 本就按当次前向的实际激活算），故只有分段算子需要这个处理。
+            sigma = float(sub.std()); self._last_sigma = sigma
+            sgn = torch.sign(sub @ v).unsqueeze(1)
+            sub = sub + (st["alpha"] * sigma) * sgn * v.unsqueeze(0)
         elif st["mode"] == "project_out":
             sub = sub - torch.outer(sub @ v, v)
         elif st["mode"] == "recover":

@@ -1,0 +1,326 @@
+[
+ {
+  "model": "dd",
+  "scen": "lead",
+  "layers": [
+   1,
+   2,
+   5
+  ],
+  "topk": 3,
+  "n_lhd": 325,
+  "n_rhd": 8,
+  "cos_lhd_mean": 0.8690695296801053,
+  "cos_lhd_q": [
+   0.7455922722816467,
+   0.8273710012435913,
+   0.8872148990631104,
+   0.9200195074081421,
+   0.951418650150299
+  ],
+  "cos_rhd_mean": 0.8035383895039558,
+  "diff": -0.06553114017614947,
+  "perm_p": 0.0131,
+  "rhd_events": [
+   {
+    "scene": "nuscenes|scene-0045",
+    "corpus": "nuscenes",
+    "cos": 0.7816231846809387,
+    "theta_deg": 38.5905661506658,
+    "pctile_in_LHD": 13.230769230769232
+   },
+   {
+    "scene": "nuscenes|scene-0853",
+    "corpus": "nuscenes",
+    "cos": 0.8035043478012085,
+    "theta_deg": 36.533941901003935,
+    "pctile_in_LHD": 17.846153846153847
+   },
+   {
+    "scene": "nuscenes|scene-0855",
+    "corpus": "nuscenes",
+    "cos": 0.6862442493438721,
+    "theta_deg": 46.66646095841908,
+    "pctile_in_LHD": 1.8461538461538463
+   },
+   {
+    "scene": "nuscenes|scene-1017",
+    "corpus": "nuscenes",
+    "cos": 0.5722918510437012,
+    "theta_deg": 55.08980137716897,
+    "pctile_in_LHD": 0.3076923076923077
+   },
+   {
+    "scene": "nuscenes|scene-0955",
+    "corpus": "nuscenes",
+    "cos": 0.8598349094390869,
+    "theta_deg": 30.70194841578152,
+    "pctile_in_LHD": 33.84615384615385
+   },
+   {
+    "scene": "nuscenes|scene-0268",
+    "corpus": "nuscenes",
+    "cos": 0.8892158269882202,
+    "theta_deg": 27.22512712479681,
+    "pctile_in_LHD": 51.07692307692307
+   },
+   {
+    "scene": "navsim|log-0135-scene-0015",
+    "corpus": "navsim",
+    "cos": 0.8923195600509644,
+    "theta_deg": 26.833815338515763,
+    "pctile_in_LHD": 52.92307692307693
+   },
+   {
+    "scene": "navsim|log-0137-scene-0004",
+    "corpus": "navsim",
+    "cos": 0.9432731866836548,
+    "theta_deg": 19.391282216309648,
+    "pctile_in_LHD": 91.38461538461539
+   }
+  ]
+ },
+ {
+  "model": "ltf",
+  "scen": "lead",
+  "layers": [
+   4,
+   5,
+   6
+  ],
+  "topk": 3,
+  "n_lhd": 325,
+  "n_rhd": 8,
+  "cos_lhd_mean": 0.7948873961888827,
+  "cos_lhd_q": [
+   0.5968978881835938,
+   0.7339104413986206,
+   0.8181490898132324,
+   0.8696300983428955,
+   0.917209243774414
+  ],
+  "cos_rhd_mean": 0.7037947103381157,
+  "diff": -0.09109268585076702,
+  "perm_p": 0.01115,
+  "rhd_events": [
+   {
+    "scene": "nuscenes|scene-0045",
+    "corpus": "nuscenes",
+    "cos": 0.6764308214187622,
+    "theta_deg": 47.434639494127765,
+    "pctile_in_LHD": 12.0
+   },
+   {
+    "scene": "nuscenes|scene-0853",
+    "corpus": "nuscenes",
+    "cos": 0.7363114953041077,
+    "theta_deg": 42.58184778093957,
+    "pctile_in_LHD": 27.076923076923077
+   },
+   {
+    "scene": "nuscenes|scene-0855",
+    "corpus": "nuscenes",
+    "cos": 0.535942792892456,
+    "theta_deg": 57.59212808145974,
+    "pctile_in_LHD": 1.8461538461538463
+   },
+   {
+    "scene": "nuscenes|scene-1017",
+    "corpus": "nuscenes",
+    "cos": 0.520763635635376,
+    "theta_deg": 58.61651138401558,
+    "pctile_in_LHD": 0.9230769230769231
+   },
+   {
+    "scene": "nuscenes|scene-0955",
+    "corpus": "nuscenes",
+    "cos": 0.552506685256958,
+    "theta_deg": 56.46084741156096,
+    "pctile_in_LHD": 2.1538461538461537
+   },
+   {
+    "scene": "nuscenes|scene-0268",
+    "corpus": "nuscenes",
+    "cos": 0.8072084188461304,
+    "theta_deg": 36.17592378444966,
+    "pctile_in_LHD": 46.46153846153846
+   },
+   {
+    "scene": "navsim|log-0135-scene-0015",
+    "corpus": "navsim",
+    "cos": 0.9234163761138916,
+    "theta_deg": 22.569243282934877,
+    "pctile_in_LHD": 97.23076923076923
+   },
+   {
+    "scene": "navsim|log-0137-scene-0004",
+    "corpus": "navsim",
+    "cos": 0.8777774572372437,
+    "theta_deg": 28.6245892895437,
+    "pctile_in_LHD": 80.0
+   }
+  ]
+ },
+ {
+  "model": "ddv2",
+  "scen": "lead",
+  "layers": [
+   0,
+   2,
+   6
+  ],
+  "topk": 3,
+  "n_lhd": 325,
+  "n_rhd": 8,
+  "cos_lhd_mean": 0.8546129201008723,
+  "cos_lhd_q": [
+   0.6804779171943665,
+   0.811874508857727,
+   0.8811856508255005,
+   0.9178244471549988,
+   0.9498063087463379
+  ],
+  "cos_rhd_mean": 0.7601255998015404,
+  "diff": -0.09448732029933193,
+  "perm_p": 0.00405,
+  "rhd_events": [
+   {
+    "scene": "nuscenes|scene-0045",
+    "corpus": "nuscenes",
+    "cos": 0.7365731596946716,
+    "theta_deg": 42.55968627567499,
+    "pctile_in_LHD": 9.846153846153847
+   },
+   {
+    "scene": "nuscenes|scene-0853",
+    "corpus": "nuscenes",
+    "cos": 0.8129478096961975,
+    "theta_deg": 35.61505156111184,
+    "pctile_in_LHD": 26.461538461538463
+   },
+   {
+    "scene": "nuscenes|scene-0855",
+    "corpus": "nuscenes",
+    "cos": 0.7973169684410095,
+    "theta_deg": 37.125349848433416,
+    "pctile_in_LHD": 21.846153846153847
+   },
+   {
+    "scene": "nuscenes|scene-1017",
+    "corpus": "nuscenes",
+    "cos": 0.47502392530441284,
+    "theta_deg": 61.63909218644089,
+    "pctile_in_LHD": 0.3076923076923077
+   },
+   {
+    "scene": "nuscenes|scene-0955",
+    "corpus": "nuscenes",
+    "cos": 0.5799866914749146,
+    "theta_deg": 54.55039340607827,
+    "pctile_in_LHD": 0.3076923076923077
+   },
+   {
+    "scene": "nuscenes|scene-0268",
+    "corpus": "nuscenes",
+    "cos": 0.8856765627861023,
+    "theta_deg": 27.66510533624812,
+    "pctile_in_LHD": 52.307692307692314
+   },
+   {
+    "scene": "navsim|log-0135-scene-0015",
+    "corpus": "navsim",
+    "cos": 0.8566464185714722,
+    "theta_deg": 31.057897231202947,
+    "pctile_in_LHD": 41.84615384615385
+   },
+   {
+    "scene": "navsim|log-0137-scene-0004",
+    "corpus": "navsim",
+    "cos": 0.9368332624435425,
+    "theta_deg": 20.473631343795738,
+    "pctile_in_LHD": 87.38461538461539
+   }
+  ]
+ },
+ {
+  "model": "simlingo",
+  "scen": "lead",
+  "layers": [
+   0,
+   1,
+   2
+  ],
+  "topk": 3,
+  "n_lhd": 325,
+  "n_rhd": 8,
+  "cos_lhd_mean": 0.5859403718549472,
+  "cos_lhd_q": [
+   0.1775764763355255,
+   0.4853985607624054,
+   0.6263126730918884,
+   0.727163553237915,
+   0.8158330202102662
+  ],
+  "cos_rhd_mean": 0.47111721336841583,
+  "diff": -0.11482315848653135,
+  "perm_p": 0.0876,
+  "rhd_events": [
+   {
+    "scene": "nuscenes|scene-0045",
+    "corpus": "nuscenes",
+    "cos": 0.6847585439682007,
+    "theta_deg": 46.78337904087143,
+    "pctile_in_LHD": 62.46153846153846
+   },
+   {
+    "scene": "nuscenes|scene-0853",
+    "corpus": "nuscenes",
+    "cos": 0.2258046567440033,
+    "theta_deg": 76.9498006252216,
+    "pctile_in_LHD": 6.153846153846154
+   },
+   {
+    "scene": "nuscenes|scene-0855",
+    "corpus": "nuscenes",
+    "cos": 0.4311828315258026,
+    "theta_deg": 64.45735095386512,
+    "pctile_in_LHD": 19.384615384615383
+   },
+   {
+    "scene": "nuscenes|scene-1017",
+    "corpus": "nuscenes",
+    "cos": 0.3798644244670868,
+    "theta_deg": 67.67471494813903,
+    "pctile_in_LHD": 13.538461538461538
+   },
+   {
+    "scene": "nuscenes|scene-0955",
+    "corpus": "nuscenes",
+    "cos": 0.29519808292388916,
+    "theta_deg": 72.83058433267324,
+    "pctile_in_LHD": 8.923076923076923
+   },
+   {
+    "scene": "nuscenes|scene-0268",
+    "corpus": "nuscenes",
+    "cos": 0.32538846135139465,
+    "theta_deg": 71.0108885431248,
+    "pctile_in_LHD": 10.76923076923077
+   },
+   {
+    "scene": "navsim|log-0135-scene-0015",
+    "corpus": "navsim",
+    "cos": 0.7503981590270996,
+    "theta_deg": 41.37512056866861,
+    "pctile_in_LHD": 81.53846153846153
+   },
+   {
+    "scene": "navsim|log-0137-scene-0004",
+    "corpus": "navsim",
+    "cos": 0.6763425469398499,
+    "theta_deg": 47.44150634321457,
+    "pctile_in_LHD": 60.61538461538461
+   }
+  ]
+ }
+]

@@ -34,6 +34,7 @@ import argparse, json, sys
 from pathlib import Path
 
 import numpy as np
+from pyquaternion import Quaternion
 
 ROOT = Path("/data/ruolin/uwm/sim2real_demo_ttc"); RES = ROOT / "results"
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -69,7 +70,28 @@ SCENARIO_HAZARD = {
     # 已知自车常停在路口、判据误伤严重；此处是用 brake-first 重新挖。
     "lead": ("vehicle.car", "vehicle.truck", "vehicle.bus", "vehicle.trailer",
              "vehicle.construction", "vehicle.emergency", "movable_object."),
+    # 无保护左转遇障碍：冲突对象可以是**任何**迫使减速的东西
+    # （对向车、横穿 VRU、路口内的静态物），故取全集。
+    "left_turn": ("human.", "vehicle.", "movable_object.", "static_object.", "animal"),
+    # 十字路口遇障碍：同左转，冲突对象取全集
+    "intersection": ("human.", "vehicle.", "movable_object.", "static_object.", "animal"),
 }
+# **场景专属的事件闸门**（在归因之前先筛事件几何）。
+# 无保护左转没有信号灯/路口类型标注 ⇒ 只能用自车轨迹几何做代理判据：
+#   自车在减速窗口内**向左**转过的航向角 >= 阈值。
+# 角度取自**已实现**路径段的首尾切向（不含 20m 直线外推段 —— 那段按构造是直的，
+# 计入会稀释转角）。左为正（ego 系 y 轴指左）。
+LEFT_TURN_MIN_DEG = 25.0
+LEFT_TURN_MAX_DEG = 135.0   # 上界排除掉头/环岛；左转路口按定义 <135°
+LEFT_TURN_MIN_PATH_M = 5.0  # 位移闸门：自车没动就无从谈"转向"
+# **十字路口的代理判据**（无路口类型/信号灯标注）：
+#   查询帧 60m×40m 范围内，存在 >= N 辆**在动**(>1 m/s) 且航向与自车**近垂直**
+#   (|cos| < 0.5) 的车辆 ⇒ 判为存在横向车流 ⇒ 处于路口。
+# 局限：该判据识别的是"有横向车流"，不等于"标准十字路口"；
+# 环岛、T 型口、大型停车场出入口都可能命中。已在报告中写明。
+ISEC_MIN_CROSSFLOW = 2
+ISEC_COS_MAX = 0.5
+ISEC_RANGE_XY = (60.0, 40.0)
 HAZARD_PREFIX = SCENARIO_HAZARD["ghost"]     # 由 --scenario 覆盖
 VRU_PREFIX = HAZARD_PREFIX          # 向后兼容旧名
 
@@ -114,6 +136,27 @@ def main():
     ap.add_argument("--min-frames", type=int, default=20, help="仅 navsim：scene 最少帧数")
     ap.add_argument("--limit-scenes", type=int, default=0)
     ap.add_argument("--corridor", type=float, default=2.0)
+    ap.add_argument("--dump-rejects", default="",
+                    help="把**过了场景闸门但被归因否掉**的事件连同拒绝原因写到该文件，"
+                         "用于回答『这套原则到底能不能选出有效事件』")
+    ap.add_argument("--signal", default="any", choices=["any", "signalized", "unsignalized"],
+                    help="自车实际驶入的路口是否灯控（仅 navsim；靠 nuplan map + 每帧 traffic_lights）")
+    ap.add_argument("--exclude-red", action="store_true",
+                    help="排掉查询帧自车进路为红灯的事件：红灯下减速的原因是灯不是障碍物，"
+                         "F-3 的前提（遮掉原因看响应变化）不成立")
+    ap.add_argument("--require-oncoming", action="store_true",
+                    help="要求存在对向来车（无保护左转的行为学代理：有专用左转绿箭头时"
+                         "对向直行被红灯拦住，不会有对向车流需要让行）")
+    ap.add_argument("--cities", default="",
+                    help="逗号分隔的 map_location 白名单（仅 navsim）。"
+                         "设计用途：nuScenes 只采了波士顿+新加坡，把 NAVSIM 限定成 "
+                         "us-nv-las-vegas-strip,us-pa-pittsburgh-hazelwood 后，"
+                         "benchmark 与 deployment 的城市集合**完全不相交**，"
+                         "跨语料差异才是真域偏移，而不是同城不同语料的混合物。")
+    ap.add_argument("--min-vmin", type=float, default=0.0,
+                    help="减速谷底速度下限 m/s。路口场景用它排掉红灯/人群停车："
+                         "自车停死的减速由信号灯或人群支配，归因公式看不见信号灯。"
+                         "这是对**人类行为**的前置判据，与模型响应无关，不构成按结果筛样本。")
     ap.add_argument("--extend-m", type=float, default=20.0)
     ap.add_argument("--out", default=str(RES / "brake_first_pool.json"))
     args = ap.parse_args()
@@ -138,7 +181,7 @@ def main():
         def iter_scenes():
             for sc in scenes:
                 try:
-                    yield sc["name"], G1.compute_scene_geometry(nusc, sc, cfg)
+                    yield sc["name"], G1.compute_scene_geometry(nusc, sc, cfg), None
                 except Exception:                                      # noqa: BLE001
                     continue
     else:
@@ -164,7 +207,7 @@ def main():
                         return
                     n += 1
                     try:
-                        yield fl[0]["scene_name"], NS.build_geo(fl, cfg, args.split)
+                        yield fl[0]["scene_name"], NS.build_geo(fl, cfg, args.split), fl
                     except Exception:                                  # noqa: BLE001
                         continue
 
@@ -172,18 +215,84 @@ def main():
           f"{'scene' if args.corpus == 'nuscenes' else ' log'}")
 
     cands, n_ep, n_sc = [], 0, 0
-    for si, (scene_name, geo) in enumerate(iter_scenes()):
+    rejects = []
+    CITIES = {x.strip() for x in args.cities.split(",") if x.strip()}
+    n_city_skip = 0
+    for si, (scene_name, geo, raw) in enumerate(iter_scenes()):
+        if CITIES and raw is not None and raw[0].get("map_location") not in CITIES:
+            n_city_skip += 1
+            continue
         n_sc += 1
         gt = geo["grid_t"]; es = geo["ego_speed"]; exyz = geo["ego_xyz"]
         eps = brake_episodes(es, gt)
         n_ep += len(eps)
         for (j, jmin, v0, vmin, dv, rel, a_obs) in eps:
+            if vmin < args.min_vmin:        # 见 --min-vmin：排掉停死的（红灯/人群）
+                continue
             R = geo["R_we"][j]
             # 未来路径：走到本片段谷底，再沿末帧航向外推
             k = min(jmin, len(gt) - 1)
             if k <= j:
                 continue
-            poly = (exyz[j:k + 1, :2] - exyz[j, :2]) @ R[:2, :2]
+            poly_real = (exyz[j:k + 1, :2] - exyz[j, :2]) @ R[:2, :2]
+            # 有符号航向变化（左正右负），只用**已实现**段 —— 20m 外推段按构造是直的。
+            # **必须用真实自车位姿偏航角**，不能用路径切线：自车停住时末段位置重合，
+            # 切线方向是数值噪声，会伪造出 ~180° 的"转向"（2026-09-04 QA 查出 31/38 伪例）。
+            yaw_deg = 0.0
+            path_len = float(np.linalg.norm(np.diff(poly_real, axis=0), axis=1).sum())
+            if path_len >= LEFT_TURN_MIN_PATH_M:
+                yw = np.unwrap([Quaternion(matrix=geo["R_we"][i]).yaw_pitch_roll[0]
+                                for i in range(j, k + 1)])
+                yaw_deg = float(np.degrees(yw[-1] - yw[0]))
+            if args.scenario == "left_turn" and not (
+                    LEFT_TURN_MIN_DEG <= yaw_deg <= LEFT_TURN_MAX_DEG):
+                continue
+            # ---- 信号灯闸门（仅 navsim：nuplan map 解析自车实际驶入的路口）----
+            sig_on, sig_col = None, None
+            if raw is not None and (args.signal != "any" or args.exclude_red):
+                import ns_traffic_light as TLQ
+                ml = raw[j]["map_location"]
+                # 搜索窗口取 j→scene 末尾：刹车往往发生在**进入路口之前**，
+                # 只搜刹车窗口 j..k 会系统性漏检（实测 68 例里漏 4 例、灯控检出 20.6%→25.0%）。
+                pw = [raw[i]["ego2global_translation"][:2] for i in range(j, len(raw))]
+                sig_on, sig_col, _nlc = TLQ.ego_signal(ml, pw, raw[j]["traffic_lights"])
+                if args.signal == "signalized" and not sig_on:
+                    continue
+                if args.signal == "unsignalized" and sig_on:
+                    continue
+                if args.exclude_red and sig_col == "RED":
+                    continue
+            # ---- 对向来车（无保护左转的行为学代理）----
+            n_oncoming = 0
+            if args.require_oncoming or args.scenario == "left_turn":
+                for _t3, _o in geo["per_obj"].items():
+                    if not bool(_o["valid"][j]) or not _o["cat"].startswith("vehicle."):
+                        continue
+                    if float(_o["d_long"][j]) <= 0 or abs(float(_o["lat"][j])) > 40.0:
+                        continue
+                    _v = np.asarray(_o["v_obj_ego"][j], float)[:2]
+                    _sp = float(np.linalg.norm(_v))
+                    if _sp >= 1.0 and _v[0] / _sp < -0.5:      # 朝我开来
+                        n_oncoming += 1
+                if args.require_oncoming and n_oncoming < 1:
+                    continue
+            if args.scenario == "intersection":
+                ncross = 0
+                for _t2, _o in geo["per_obj"].items():
+                    if not bool(_o["valid"][j]) or not _o["cat"].startswith("vehicle."):
+                        continue
+                    _x = float(_o["d_long"][j]); _y = float(_o["lat"][j])
+                    if not (abs(_x) < ISEC_RANGE_XY[0] and abs(_y) < ISEC_RANGE_XY[1]):
+                        continue
+                    _v = np.asarray(_o["v_obj_ego"][j], float)[:2]
+                    _sp = float(np.linalg.norm(_v))
+                    if _sp < 1.0:
+                        continue
+                    if abs(_v[0] / _sp) < ISEC_COS_MAX:      # ego 系 x=前向
+                        ncross += 1
+                if ncross < ISEC_MIN_CROSSFLOW:
+                    continue
+            poly = poly_real
             fwd = geo["R_we"][k][:2, 0] @ R[:2, :2]
             fwd = fwd / (np.linalg.norm(fwd) + 1e-12)
             poly = np.vstack([poly, poly[-1] + np.outer(
@@ -214,6 +323,10 @@ def main():
                        bool(o["visible"][j]))
                 (vrus if o["cat"].startswith(HAZARD_PREFIX) else others).append(rec)
             if not vrus:
+                if args.dump_rejects:
+                    rejects.append({"scene": scene_name, "frame_idx": j,
+                        "ego_v0": round(v0, 2), "ego_vmin": round(vmin, 2),
+                        "a_obs": round(a_obs, 3), "reason": "走廊内没有任何危险类目标(a>0)", "n_other_in_corridor": len(others)})
                 continue
             vrus.sort(reverse=True); others.sort(reverse=True)
             a_vru_sum = sum(x[0] for x in vrus); a_oth_sum = sum(x[0] for x in others)
@@ -224,16 +337,37 @@ def main():
             a_vru_max = vrus[0][0]; a_oth_max = others[0][0] if others else 0.0
             n_animal = sum(1 for x in vrus if x[2].startswith("animal"))
             if share <= 0.6 or a_vru_max < 1.5 * max(a_oth_max, 1e-9):
+                if args.dump_rejects:
+                    rejects.append({"scene": scene_name, "frame_idx": j,
+                        "ego_v0": round(v0, 2), "ego_vmin": round(vmin, 2),
+                        "a_obs": round(a_obs, 3), "reason": "危险类不占主导(share<=0.6 或 无1.5倍优势)", "share": round(share, 3), "a_vru_max": round(a_vru_max, 3), "a_other_max": round(a_oth_max, 3), "lead_cat": (vrus[0][2] if vrus else None)})
                 continue
             er = (a_vru_max / a_obs) if a_obs > 1e-6 else 0.0
             if er <= 0.3 or er > MAX_EXPLAINED_RATIO:
+                if args.dump_rejects:
+                    rejects.append({"scene": scene_name, "frame_idx": j,
+                        "ego_v0": round(v0, 2), "ego_vmin": round(vmin, 2),
+                        "a_obs": round(a_obs, 3), "reason": "解释度越界(explained_ratio 不在 (0.3,10])", "explained_ratio": round(er, 3), "a_vru_max": round(a_vru_max, 3), "lead_cat": vrus[0][2]})
                 continue
             vis = [x for x in vrus if x[5]]                 # 必须能投影出来才谈遮挡
             if not vis:
+                if args.dump_rejects:
+                    rejects.append({"scene": scene_name, "frame_idx": j,
+                        "ego_v0": round(v0, 2), "ego_vmin": round(vmin, 2),
+                        "a_obs": round(a_obs, 3), "reason": "归因目标投影不到图像上(无法遮挡)", "a_vru_max": round(a_vru_max, 3), "lead_cat": vrus[0][2]})
                 continue
             lead = vis[0]
+            # 归因目标的运动方向 vs 自车前向：+1 同向(前车)，-1 对向，~0 横穿
+            _lo = geo["per_obj"][lead[1]]
+            _lv = np.asarray(_lo["v_obj_ego"][j], float)[:2]
+            _lsp = float(np.linalg.norm(_lv))
+            lead_cos = float(_lv[0] / _lsp) if _lsp >= 0.5 else float("nan")
             ttc = lead[3] / max(v0, 0.01)
             if not (ttc <= 5.0 or lead[3] <= 40.0):
+                if args.dump_rejects:
+                    rejects.append({"scene": scene_name, "frame_idx": j,
+                        "ego_v0": round(v0, 2), "ego_vmin": round(vmin, 2),
+                        "a_obs": round(a_obs, 3), "reason": "太远且不紧迫(TTC>5s 且 距离>40m)", "ttc_s": round(ttc, 1), "s_m": lead[3], "a_vru_max": round(a_vru_max, 3), "lead_cat": lead[2]})
                 continue
             cands.append({
               "scene": scene_name, "frame_idx": j, "t": float(gt[j]),
@@ -246,6 +380,10 @@ def main():
               "lead_vru": {"token": lead[1], "cat": lead[2], "s_m": lead[3],
                            "lat_m": lead[4]},
               "ttc_s": round(ttc, 1),
+              "ego_yaw_change_deg": round(yaw_deg, 1),
+              "signalized": sig_on, "signal_color": sig_col,
+              "n_oncoming": n_oncoming,
+              "lead_cos": round(lead_cos, 3),
               "n_mask_group": len(vrus), "n_animal_in_mask": n_animal,
               "hazard_classes": list(HAZARD_PREFIX),
               "f3_mask_group": [{"token": x[1], "cat": x[2], "s_m": x[3], "lat_m": x[4],
@@ -262,10 +400,37 @@ def main():
             best[key] = c
     ded = sorted(best.values(), key=lambda z: (z["scene"], z["frame_idx"]))
     T1 = [c for c in ded if c["a_vru_max"] >= 0.4]
+    if args.dump_rejects:
+        for c in ded:
+            if c["a_vru_max"] < 0.4:
+                rejects.append({"scene": c["scene"], "frame_idx": c["frame_idx"],
+                                "ego_v0": c["ego_v0"], "ego_vmin": c["ego_vmin"],
+                                "a_obs": c["a_obs"], "reason": "归因需求太弱(a_req<0.4)",
+                                "a_vru_max": c["a_vru_max"], "lead_cat": c["lead_vru"]["cat"],
+                                "s_m": c["lead_vru"]["s_m"], "f3_mask_group": c["f3_mask_group"]})
+        from collections import Counter as _C
+        json.dump({"scenario": args.scenario, "corpus": args.corpus,
+                   "n_rejects": len(rejects),
+                   "by_reason": dict(_C(r["reason"] for r in rejects).most_common()),
+                   "rejects": rejects}, open(args.dump_rejects, "w"),
+                  indent=2, ensure_ascii=False)
+        print(f"[BFM] 拒绝原因分布 -> {args.dump_rejects}")
+        for k_, v_ in _C(r["reason"] for r in rejects).most_common():
+            print(f"        {v_:5d}  {k_}")
     out = {"design": "刹车优先挖矿：先找人类减速片段，再归因到走廊内 VRU",
            "corpus": args.corpus, "split": (args.split if args.corpus == "navsim" else None),
            "scenario": args.scenario, "hazard_classes": list(HAZARD_PREFIX),
            "static_corridor_m": STATIC_CORRIDOR,
+           "cities": (sorted(CITIES) or None), "n_scenes_skipped_by_city": n_city_skip,
+           "min_vmin_mps": args.min_vmin, "signal_gate": args.signal,
+           "exclude_red": args.exclude_red, "require_oncoming": args.require_oncoming,
+           "left_turn_gate": ({"min_deg": LEFT_TURN_MIN_DEG, "max_deg": LEFT_TURN_MAX_DEG,
+                              "min_path_m": LEFT_TURN_MIN_PATH_M,
+                              "yaw_source": "ego pose quaternion (unwrapped)"}
+                             if args.scenario == "left_turn" else None),
+           "intersection_proxy": ({"min_crossflow": ISEC_MIN_CROSSFLOW,
+                                   "cos_max": ISEC_COS_MAX, "range_xy": ISEC_RANGE_XY}
+                                  if args.scenario == "intersection" else None),
            "explained_ratio_bounds": [0.3, MAX_EXPLAINED_RATIO],
            "n_scenes_scanned": n_sc, "n_brake_episodes": n_ep,
            "n_candidates_raw": len(cands), "n_candidates_dedup": len(ded),

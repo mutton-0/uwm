@@ -1,0 +1,43 @@
+{
+  "DiffusionDrive": {
+    "n_layers": 8,
+    "spearman_layer_vs_recovery": 0.880952380952381,
+    "p": 0.0038503204637324014,
+    "layers_for_80pct_mass": 3,
+    "layers_for_80pct_frac": 0.375,
+    "argmax_normalized_entropy": 0.6848617231125999,
+    "argmax_layer_mode": 6,
+    "recovery_at_first_layer": 0.0010833333333333335,
+    "recovery_at_last_layer": 0.34475000000000006,
+    "profile_shape": "内部峰（localized）：存在内部责任层，top-2 占比可读作集中度",
+    "top2_share_formula_applicable": true,
+    "C_m_top2_share": 0.858459684278634,
+    "C_m_ci95": [
+      0.7705548440969452,
+      0.9394149809295711
+    ],
+    "diffuse_baseline": 0.25,
+    "patch_all_recovery": null
+  },
+  "SimLingo": {
+    "n_layers": 24,
+    "spearman_layer_vs_recovery": -0.997391304347826,
+    "p": 1.2959468780927448e-26,
+    "layers_for_80pct_mass": 13,
+    "layers_for_80pct_frac": 0.5416666666666666,
+    "argmax_normalized_entropy": 0.27932008807475606,
+    "argmax_layer_mode": 0,
+    "recovery_at_first_layer": 1.0040960331600497,
+    "recovery_at_last_layer": 0.0,
+    "profile_shape": "级联（cascade）：剖面自最前层单调递减，失效在输入接口即已进入，无内部责任层",
+    "top2_share_formula_applicable": false,
+    "C_m_top2_share": 0.1756192752264729,
+    "C_m_ci95": [
+      0.16004976884437933,
+      0.1906230296340177
+    ],
+    "diffuse_baseline": 0.08333333333333333,
+    "patch_all_recovery": 1.0040960331600497,
+    "verdict_override": "不可估（公式前提不成立）：恢复剖面单调递减，top-2 占比不构成集中度证据；实质结论改述为「失效在视觉输入接口即已进入并向下游级联」"
+  }
+}

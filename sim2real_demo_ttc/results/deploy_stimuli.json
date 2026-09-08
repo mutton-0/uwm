@@ -1,0 +1,1012 @@
+{
+  "seed": 0,
+  "query_frame": 3,
+  "cities": [
+    "us-nv-las-vegas-strip",
+    "us-pa-pittsburgh-hazelwood"
+  ],
+  "n_usable": 1069,
+  "n": 200,
+  "stimuli": [
+    {
+      "scene": "log-0001-scene-0003",
+      "frame_idx": 3,
+      "token": "431ae29947e95c26"
+    },
+    {
+      "scene": "log-0001-scene-0005",
+      "frame_idx": 3,
+      "token": "e20cfa3ca2075fd4"
+    },
+    {
+      "scene": "log-0001-scene-0008",
+      "frame_idx": 3,
+      "token": "9821d72bd0245fe8"
+    },
+    {
+      "scene": "log-0001-scene-0015",
+      "frame_idx": 3,
+      "token": "fd2a1e4d00185db9"
+    },
+    {
+      "scene": "log-0001-scene-0016",
+      "frame_idx": 3,
+      "token": "8f3480086d8f5750"
+    },
+    {
+      "scene": "log-0001-scene-0017",
+      "frame_idx": 3,
+      "token": "5f2c3f928abe5f5b"
+    },
+    {
+      "scene": "log-0001-scene-0020",
+      "frame_idx": 3,
+      "token": "ea693cde5d1c580b"
+    },
+    {
+      "scene": "log-0002-scene-0006",
+      "frame_idx": 3,
+      "token": "7a4beefdf23e56cf"
+    },
+    {
+      "scene": "log-0002-scene-0011",
+      "frame_idx": 3,
+      "token": "ca24aaf0de9e5edc"
+    },
+    {
+      "scene": "log-0002-scene-0016",
+      "frame_idx": 3,
+      "token": "722aa8221ebc500c"
+    },
+    {
+      "scene": "log-0002-scene-0027",
+      "frame_idx": 3,
+      "token": "6976874c96f85c49"
+    },
+    {
+      "scene": "log-0003-scene-0001",
+      "frame_idx": 3,
+      "token": "a9f16cb917ea5768"
+    },
+    {
+      "scene": "log-0003-scene-0003",
+      "frame_idx": 3,
+      "token": "7fedb8e5e33d5a87"
+    },
+    {
+      "scene": "log-0003-scene-0004",
+      "frame_idx": 3,
+      "token": "eb13b1def69d528e"
+    },
+    {
+      "scene": "log-0003-scene-0010",
+      "frame_idx": 3,
+      "token": "43bab0f33d1f57fc"
+    },
+    {
+      "scene": "log-0003-scene-0018",
+      "frame_idx": 3,
+      "token": "3e324827089b5173"
+    },
+    {
+      "scene": "log-0003-scene-0022",
+      "frame_idx": 3,
+      "token": "ca88b297fd0c550e"
+    },
+    {
+      "scene": "log-0003-scene-0025",
+      "frame_idx": 3,
+      "token": "f6d62e2895ef5d3c"
+    },
+    {
+      "scene": "log-0004-scene-0005",
+      "frame_idx": 3,
+      "token": "d447448b02595191"
+    },
+    {
+      "scene": "log-0004-scene-0008",
+      "frame_idx": 3,
+      "token": "9ef98d9283155208"
+    },
+    {
+      "scene": "log-0004-scene-0009",
+      "frame_idx": 3,
+      "token": "3314b14aebb156b1"
+    },
+    {
+      "scene": "log-0005-scene-0006",
+      "frame_idx": 3,
+      "token": "f1095c52e1d65ff6"
+    },
+    {
+      "scene": "log-0005-scene-0009",
+      "frame_idx": 3,
+      "token": "080dbabe0d9d5906"
+    },
+    {
+      "scene": "log-0007-scene-0002",
+      "frame_idx": 3,
+      "token": "ab52de60761957cc"
+    },
+    {
+      "scene": "log-0008-scene-0001",
+      "frame_idx": 3,
+      "token": "5e9e8c31277d5edc"
+    },
+    {
+      "scene": "log-0008-scene-0008",
+      "frame_idx": 3,
+      "token": "89fc34d80c2253b7"
+    },
+    {
+      "scene": "log-0008-scene-0013",
+      "frame_idx": 3,
+      "token": "43fceb264fce598e"
+    },
+    {
+      "scene": "log-0008-scene-0014",
+      "frame_idx": 3,
+      "token": "838510ddd5ae56ea"
+    },
+    {
+      "scene": "log-0010-scene-0005",
+      "frame_idx": 3,
+      "token": "3f17c85bd2ff576e"
+    },
+    {
+      "scene": "log-0011-scene-0006",
+      "frame_idx": 3,
+      "token": "85069bffbcbc5377"
+    },
+    {
+      "scene": "log-0011-scene-0012",
+      "frame_idx": 3,
+      "token": "ed51960b813f5f4e"
+    },
+    {
+      "scene": "log-0012-scene-0005",
+      "frame_idx": 3,
+      "token": "fca6cbad5f9b5ab0"
+    },
+    {
+      "scene": "log-0016-scene-0006",
+      "frame_idx": 3,
+      "token": "72201ffd36875aa8"
+    },
+    {
+      "scene": "log-0016-scene-0010",
+      "frame_idx": 3,
+      "token": "80aeb87a50a45ae0"
+    },
+    {
+      "scene": "log-0017-scene-0001",
+      "frame_idx": 3,
+      "token": "c731f82f244a5cc1"
+    },
+    {
+      "scene": "log-0017-scene-0002",
+      "frame_idx": 3,
+      "token": "74f87045b75156f4"
+    },
+    {
+      "scene": "log-0018-scene-0007",
+      "frame_idx": 3,
+      "token": "cc6bfc9dff5f5de1"
+    },
+    {
+      "scene": "log-0019-scene-0005",
+      "frame_idx": 3,
+      "token": "504f9e91ff1e5510"
+    },
+    {
+      "scene": "log-0019-scene-0010",
+      "frame_idx": 3,
+      "token": "969e77b93e7e5de0"
+    },
+    {
+      "scene": "log-0020-scene-0002",
+      "frame_idx": 3,
+      "token": "ff26464550fd58cb"
+    },
+    {
+      "scene": "log-0020-scene-0003",
+      "frame_idx": 3,
+      "token": "5adbc1ccc2fe5d7b"
+    },
+    {
+      "scene": "log-0020-scene-0005",
+      "frame_idx": 3,
+      "token": "5a255d7c7ea854e5"
+    },
+    {
+      "scene": "log-0020-scene-0009",
+      "frame_idx": 3,
+      "token": "3486ee20676858dd"
+    },
+    {
+      "scene": "log-0021-scene-0004",
+      "frame_idx": 3,
+      "token": "824283f3bb945d36"
+    },
+    {
+      "scene": "log-0022-scene-0001",
+      "frame_idx": 3,
+      "token": "d1482fbf0e9d5081"
+    },
+    {
+      "scene": "log-0024-scene-0003",
+      "frame_idx": 3,
+      "token": "7d7132675eb95c31"
+    },
+    {
+      "scene": "log-0024-scene-0005",
+      "frame_idx": 3,
+      "token": "4e3684af73745167"
+    },
+    {
+      "scene": "log-0025-scene-0005",
+      "frame_idx": 3,
+      "token": "ff9ba5194c605c93"
+    },
+    {
+      "scene": "log-0025-scene-0007",
+      "frame_idx": 3,
+      "token": "fd80c5e9fa255abc"
+    },
+    {
+      "scene": "log-0026-scene-0005",
+      "frame_idx": 3,
+      "token": "f2360651ddf25274"
+    },
+    {
+      "scene": "log-0027-scene-0003",
+      "frame_idx": 3,
+      "token": "9095b486715353ea"
+    },
+    {
+      "scene": "log-0027-scene-0004",
+      "frame_idx": 3,
+      "token": "fd01c305c65c5c95"
+    },
+    {
+      "scene": "log-0027-scene-0012",
+      "frame_idx": 3,
+      "token": "e73aa76a243d53de"
+    },
+    {
+      "scene": "log-0028-scene-0002",
+      "frame_idx": 3,
+      "token": "9d28d45a881350ba"
+    },
+    {
+      "scene": "log-0028-scene-0008",
+      "frame_idx": 3,
+      "token": "cbbdd4ba471e51a9"
+    },
+    {
+      "scene": "log-0029-scene-0008",
+      "frame_idx": 3,
+      "token": "331ad46e66bf5dc3"
+    },
+    {
+      "scene": "log-0030-scene-0012",
+      "frame_idx": 3,
+      "token": "4bb133fee366563a"
+    },
+    {
+      "scene": "log-0030-scene-0013",
+      "frame_idx": 3,
+      "token": "59a1c6fdf7f65b43"
+    },
+    {
+      "scene": "log-0030-scene-0014",
+      "frame_idx": 3,
+      "token": "de3b952c89035c75"
+    },
+    {
+      "scene": "log-0031-scene-0004",
+      "frame_idx": 3,
+      "token": "2164f30529f45a05"
+    },
+    {
+      "scene": "log-0031-scene-0008",
+      "frame_idx": 3,
+      "token": "9116098676155b1f"
+    },
+    {
+      "scene": "log-0031-scene-0011",
+      "frame_idx": 3,
+      "token": "57d97e430dea50ee"
+    },
+    {
+      "scene": "log-0031-scene-0012",
+      "frame_idx": 3,
+      "token": "9e6ad30572225665"
+    },
+    {
+      "scene": "log-0031-scene-0013",
+      "frame_idx": 3,
+      "token": "c54f521a571c5dbe"
+    },
+    {
+      "scene": "log-0031-scene-0021",
+      "frame_idx": 3,
+      "token": "a920db5b3c7e563e"
+    },
+    {
+      "scene": "log-0031-scene-0028",
+      "frame_idx": 3,
+      "token": "5ca7353cbe4a5cf7"
+    },
+    {
+      "scene": "log-0031-scene-0030",
+      "frame_idx": 3,
+      "token": "8cada5997ff15526"
+    },
+    {
+      "scene": "log-0031-scene-0034",
+      "frame_idx": 3,
+      "token": "fd9aca404e825b28"
+    },
+    {
+      "scene": "log-0032-scene-0001",
+      "frame_idx": 3,
+      "token": "3bb7b276533b55cc"
+    },
+    {
+      "scene": "log-0032-scene-0008",
+      "frame_idx": 3,
+      "token": "a9044d3ac7c9547a"
+    },
+    {
+      "scene": "log-0033-scene-0002",
+      "frame_idx": 3,
+      "token": "a708f8c8db805496"
+    },
+    {
+      "scene": "log-0034-scene-0002",
+      "frame_idx": 3,
+      "token": "56f5294b63df53b9"
+    },
+    {
+      "scene": "log-0034-scene-0008",
+      "frame_idx": 3,
+      "token": "61ccbcdcad63597f"
+    },
+    {
+      "scene": "log-0034-scene-0013",
+      "frame_idx": 3,
+      "token": "cdeb8d7aa1895708"
+    },
+    {
+      "scene": "log-0035-scene-0003",
+      "frame_idx": 3,
+      "token": "b9a950ae8058561c"
+    },
+    {
+      "scene": "log-0036-scene-0002",
+      "frame_idx": 3,
+      "token": "e13cbecfaaa65d15"
+    },
+    {
+      "scene": "log-0036-scene-0006",
+      "frame_idx": 3,
+      "token": "80bae479c7c15532"
+    },
+    {
+      "scene": "log-0037-scene-0002",
+      "frame_idx": 3,
+      "token": "42d79c8100d45b1d"
+    },
+    {
+      "scene": "log-0037-scene-0008",
+      "frame_idx": 3,
+      "token": "562fe7f3d805588c"
+    },
+    {
+      "scene": "log-0037-scene-0010",
+      "frame_idx": 3,
+      "token": "dca6a613dc2c5051"
+    },
+    {
+      "scene": "log-0037-scene-0011",
+      "frame_idx": 3,
+      "token": "4a4dce8c48955485"
+    },
+    {
+      "scene": "log-0037-scene-0012",
+      "frame_idx": 3,
+      "token": "12dcdf9fde185d25"
+    },
+    {
+      "scene": "log-0038-scene-0011",
+      "frame_idx": 3,
+      "token": "315ade412d0f5304"
+    },
+    {
+      "scene": "log-0040-scene-0001",
+      "frame_idx": 3,
+      "token": "c66d30a7588a5dd8"
+    },
+    {
+      "scene": "log-0040-scene-0009",
+      "frame_idx": 3,
+      "token": "6383c6f42c15544c"
+    },
+    {
+      "scene": "log-0040-scene-0010",
+      "frame_idx": 3,
+      "token": "09f2dbaa540f5942"
+    },
+    {
+      "scene": "log-0040-scene-0018",
+      "frame_idx": 3,
+      "token": "ee3c2c046584542f"
+    },
+    {
+      "scene": "log-0040-scene-0021",
+      "frame_idx": 3,
+      "token": "e23a4cdc58f45a90"
+    },
+    {
+      "scene": "log-0040-scene-0024",
+      "frame_idx": 3,
+      "token": "eb3de9c92ffa54c8"
+    },
+    {
+      "scene": "log-0041-scene-0001",
+      "frame_idx": 3,
+      "token": "8462feefcf135a4a"
+    },
+    {
+      "scene": "log-0041-scene-0007",
+      "frame_idx": 3,
+      "token": "6513d7188aa5597f"
+    },
+    {
+      "scene": "log-0042-scene-0005",
+      "frame_idx": 3,
+      "token": "d88ce24a9cc95ebe"
+    },
+    {
+      "scene": "log-0042-scene-0009",
+      "frame_idx": 3,
+      "token": "e938338b482e52ac"
+    },
+    {
+      "scene": "log-0042-scene-0011",
+      "frame_idx": 3,
+      "token": "c8bd8cf1907b5989"
+    },
+    {
+      "scene": "log-0043-scene-0013",
+      "frame_idx": 3,
+      "token": "3257b4f1ac7e5b62"
+    },
+    {
+      "scene": "log-0043-scene-0019",
+      "frame_idx": 3,
+      "token": "2696edb1deaf5cf0"
+    },
+    {
+      "scene": "log-0043-scene-0021",
+      "frame_idx": 3,
+      "token": "767648ba1c155859"
+    },
+    {
+      "scene": "log-0044-scene-0004",
+      "frame_idx": 3,
+      "token": "efb7293d4a655385"
+    },
+    {
+      "scene": "log-0044-scene-0006",
+      "frame_idx": 3,
+      "token": "fac16a5e5e8f5bf1"
+    },
+    {
+      "scene": "log-0044-scene-0011",
+      "frame_idx": 3,
+      "token": "b87c15c9f6cf54eb"
+    },
+    {
+      "scene": "log-0044-scene-0017",
+      "frame_idx": 3,
+      "token": "9e35dd730a175844"
+    },
+    {
+      "scene": "log-0044-scene-0019",
+      "frame_idx": 3,
+      "token": "68b6ec43aa3d58f2"
+    },
+    {
+      "scene": "log-0044-scene-0021",
+      "frame_idx": 3,
+      "token": "de8af9a058b05724"
+    },
+    {
+      "scene": "log-0044-scene-0022",
+      "frame_idx": 3,
+      "token": "2b59cace0fa8509f"
+    },
+    {
+      "scene": "log-0044-scene-0024",
+      "frame_idx": 3,
+      "token": "e970702e97ea50b2"
+    },
+    {
+      "scene": "log-0045-scene-0003",
+      "frame_idx": 3,
+      "token": "7776415a30fd5e81"
+    },
+    {
+      "scene": "log-0045-scene-0010",
+      "frame_idx": 3,
+      "token": "b1e1c1a12339588a"
+    },
+    {
+      "scene": "log-0046-scene-0001",
+      "frame_idx": 3,
+      "token": "2122e0260d185fd9"
+    },
+    {
+      "scene": "log-0046-scene-0006",
+      "frame_idx": 3,
+      "token": "aeb64aafbe045eb5"
+    },
+    {
+      "scene": "log-0046-scene-0009",
+      "frame_idx": 3,
+      "token": "5df316246fdd56e2"
+    },
+    {
+      "scene": "log-0046-scene-0012",
+      "frame_idx": 3,
+      "token": "21ddbe0297455aba"
+    },
+    {
+      "scene": "log-0046-scene-0021",
+      "frame_idx": 3,
+      "token": "f4fc000622c15741"
+    },
+    {
+      "scene": "log-0046-scene-0027",
+      "frame_idx": 3,
+      "token": "d0ff8d7787975524"
+    },
+    {
+      "scene": "log-0046-scene-0028",
+      "frame_idx": 3,
+      "token": "a932cf57f63656c4"
+    },
+    {
+      "scene": "log-0046-scene-0042",
+      "frame_idx": 3,
+      "token": "c163c57eb6ba568a"
+    },
+    {
+      "scene": "log-0046-scene-0043",
+      "frame_idx": 3,
+      "token": "11566c6a04c75aeb"
+    },
+    {
+      "scene": "log-0046-scene-0044",
+      "frame_idx": 3,
+      "token": "d00c78600089543a"
+    },
+    {
+      "scene": "log-0046-scene-0047",
+      "frame_idx": 3,
+      "token": "85d813567f0e598c"
+    },
+    {
+      "scene": "log-0046-scene-0048",
+      "frame_idx": 3,
+      "token": "7c02919310025b0a"
+    },
+    {
+      "scene": "log-0047-scene-0001",
+      "frame_idx": 3,
+      "token": "c1c0fbb48ae15eca"
+    },
+    {
+      "scene": "log-0047-scene-0005",
+      "frame_idx": 3,
+      "token": "1cbf151b86f958da"
+    },
+    {
+      "scene": "log-0048-scene-0003",
+      "frame_idx": 3,
+      "token": "bc21fc0fb5c3582b"
+    },
+    {
+      "scene": "log-0048-scene-0004",
+      "frame_idx": 3,
+      "token": "1a55612f8632537a"
+    },
+    {
+      "scene": "log-0048-scene-0020",
+      "frame_idx": 3,
+      "token": "e485bc6cdd285588"
+    },
+    {
+      "scene": "log-0048-scene-0024",
+      "frame_idx": 3,
+      "token": "9072858cccc65104"
+    },
+    {
+      "scene": "log-0048-scene-0026",
+      "frame_idx": 3,
+      "token": "4fefedd649f25f84"
+    },
+    {
+      "scene": "log-0048-scene-0034",
+      "frame_idx": 3,
+      "token": "bc4737003f6b5ff0"
+    },
+    {
+      "scene": "log-0048-scene-0036",
+      "frame_idx": 3,
+      "token": "5c29db62d86b5bc6"
+    },
+    {
+      "scene": "log-0048-scene-0043",
+      "frame_idx": 3,
+      "token": "a200f5d710cb5e68"
+    },
+    {
+      "scene": "log-0048-scene-0050",
+      "frame_idx": 3,
+      "token": "38d2b3e6687c581e"
+    },
+    {
+      "scene": "log-0048-scene-0062",
+      "frame_idx": 3,
+      "token": "145a4084574e53ca"
+    },
+    {
+      "scene": "log-0048-scene-0074",
+      "frame_idx": 3,
+      "token": "de7beb5ae45b5eb2"
+    },
+    {
+      "scene": "log-0048-scene-0076",
+      "frame_idx": 3,
+      "token": "6e4de6d9f5425a2a"
+    },
+    {
+      "scene": "log-0049-scene-0009",
+      "frame_idx": 3,
+      "token": "96287a1ae3755722"
+    },
+    {
+      "scene": "log-0049-scene-0010",
+      "frame_idx": 3,
+      "token": "92a263b537fd5b72"
+    },
+    {
+      "scene": "log-0049-scene-0012",
+      "frame_idx": 3,
+      "token": "f947ecc971cd582e"
+    },
+    {
+      "scene": "log-0051-scene-0006",
+      "frame_idx": 3,
+      "token": "7809f6d7094b5a7b"
+    },
+    {
+      "scene": "log-0092-scene-0003",
+      "frame_idx": 3,
+      "token": "99f5512d21b65e92"
+    },
+    {
+      "scene": "log-0093-scene-0001",
+      "frame_idx": 3,
+      "token": "4455373449045011"
+    },
+    {
+      "scene": "log-0093-scene-0004",
+      "frame_idx": 3,
+      "token": "fc8a398075265f44"
+    },
+    {
+      "scene": "log-0093-scene-0008",
+      "frame_idx": 3,
+      "token": "97ff8fa32482524a"
+    },
+    {
+      "scene": "log-0094-scene-0002",
+      "frame_idx": 3,
+      "token": "260ede9e48c05ecd"
+    },
+    {
+      "scene": "log-0094-scene-0008",
+      "frame_idx": 3,
+      "token": "7d5e5b6d03e25c43"
+    },
+    {
+      "scene": "log-0094-scene-0009",
+      "frame_idx": 3,
+      "token": "fbcf57a1a05f52c6"
+    },
+    {
+      "scene": "log-0094-scene-0010",
+      "frame_idx": 3,
+      "token": "bf4511a119bc529d"
+    },
+    {
+      "scene": "log-0095-scene-0003",
+      "frame_idx": 3,
+      "token": "45b8cb109df75841"
+    },
+    {
+      "scene": "log-0096-scene-0001",
+      "frame_idx": 3,
+      "token": "37511ee02c01520e"
+    },
+    {
+      "scene": "log-0097-scene-0007",
+      "frame_idx": 3,
+      "token": "e9ecae5cb86256ab"
+    },
+    {
+      "scene": "log-0098-scene-0001",
+      "frame_idx": 3,
+      "token": "e734933255e85c3a"
+    },
+    {
+      "scene": "log-0098-scene-0009",
+      "frame_idx": 3,
+      "token": "0befef564ed0532f"
+    },
+    {
+      "scene": "log-0098-scene-0012",
+      "frame_idx": 3,
+      "token": "2cb2ff6809da507b"
+    },
+    {
+      "scene": "log-0098-scene-0026",
+      "frame_idx": 3,
+      "token": "ed142f63a6635d1b"
+    },
+    {
+      "scene": "log-0099-scene-0002",
+      "frame_idx": 3,
+      "token": "88519cc092bd5ce5"
+    },
+    {
+      "scene": "log-0099-scene-0006",
+      "frame_idx": 3,
+      "token": "dcc3b1a2a6da565a"
+    },
+    {
+      "scene": "log-0099-scene-0016",
+      "frame_idx": 3,
+      "token": "d123909379205e2d"
+    },
+    {
+      "scene": "log-0099-scene-0017",
+      "frame_idx": 3,
+      "token": "d3a60eba6d0c529b"
+    },
+    {
+      "scene": "log-0100-scene-0002",
+      "frame_idx": 3,
+      "token": "65111e7525db55b7"
+    },
+    {
+      "scene": "log-0100-scene-0004",
+      "frame_idx": 3,
+      "token": "e92a637d847e516c"
+    },
+    {
+      "scene": "log-0101-scene-0016",
+      "frame_idx": 3,
+      "token": "ac49e79bdfbf5302"
+    },
+    {
+      "scene": "log-0101-scene-0018",
+      "frame_idx": 3,
+      "token": "94f9c17d24915da9"
+    },
+    {
+      "scene": "log-0101-scene-0019",
+      "frame_idx": 3,
+      "token": "922dea09166155ef"
+    },
+    {
+      "scene": "log-0101-scene-0020",
+      "frame_idx": 3,
+      "token": "3d6652373ed15158"
+    },
+    {
+      "scene": "log-0102-scene-0003",
+      "frame_idx": 3,
+      "token": "adaf168d387454b1"
+    },
+    {
+      "scene": "log-0102-scene-0011",
+      "frame_idx": 3,
+      "token": "a0fe671bbba05bda"
+    },
+    {
+      "scene": "log-0103-scene-0005",
+      "frame_idx": 3,
+      "token": "53fcec140a2f52cf"
+    },
+    {
+      "scene": "log-0104-scene-0006",
+      "frame_idx": 3,
+      "token": "c2eecf5cfe46536f"
+    },
+    {
+      "scene": "log-0104-scene-0011",
+      "frame_idx": 3,
+      "token": "93085235f2505afa"
+    },
+    {
+      "scene": "log-0105-scene-0005",
+      "frame_idx": 3,
+      "token": "0bdf85ef51d351c1"
+    },
+    {
+      "scene": "log-0106-scene-0005",
+      "frame_idx": 3,
+      "token": "b4e2cca4748356b5"
+    },
+    {
+      "scene": "log-0107-scene-0001",
+      "frame_idx": 3,
+      "token": "bc90213e2c195b36"
+    },
+    {
+      "scene": "log-0108-scene-0013",
+      "frame_idx": 3,
+      "token": "aa83837cecbd54db"
+    },
+    {
+      "scene": "log-0109-scene-0001",
+      "frame_idx": 3,
+      "token": "9d0c632c98825970"
+    },
+    {
+      "scene": "log-0109-scene-0007",
+      "frame_idx": 3,
+      "token": "f17cb00da1e4598c"
+    },
+    {
+      "scene": "log-0109-scene-0010",
+      "frame_idx": 3,
+      "token": "1c6e6f287c2354f1"
+    },
+    {
+      "scene": "log-0110-scene-0001",
+      "frame_idx": 3,
+      "token": "51ad5207706e5602"
+    },
+    {
+      "scene": "log-0110-scene-0003",
+      "frame_idx": 3,
+      "token": "70de9a1d68c2550d"
+    },
+    {
+      "scene": "log-0110-scene-0013",
+      "frame_idx": 3,
+      "token": "6ccc0866ad3d5dc3"
+    },
+    {
+      "scene": "log-0110-scene-0014",
+      "frame_idx": 3,
+      "token": "832dfaf36e19538d"
+    },
+    {
+      "scene": "log-0110-scene-0018",
+      "frame_idx": 3,
+      "token": "d58c959c1eda58ca"
+    },
+    {
+      "scene": "log-0110-scene-0022",
+      "frame_idx": 3,
+      "token": "b7cadfbba8345cd7"
+    },
+    {
+      "scene": "log-0110-scene-0025",
+      "frame_idx": 3,
+      "token": "9e98669426cc50ad"
+    },
+    {
+      "scene": "log-0110-scene-0036",
+      "frame_idx": 3,
+      "token": "2af8c02e60f55a40"
+    },
+    {
+      "scene": "log-0110-scene-0051",
+      "frame_idx": 3,
+      "token": "23d4ff1925895f83"
+    },
+    {
+      "scene": "log-0110-scene-0060",
+      "frame_idx": 3,
+      "token": "495b5637e22158df"
+    },
+    {
+      "scene": "log-0110-scene-0063",
+      "frame_idx": 3,
+      "token": "6a79a2eba5725d0d"
+    },
+    {
+      "scene": "log-0110-scene-0066",
+      "frame_idx": 3,
+      "token": "66d28526c9b55b33"
+    },
+    {
+      "scene": "log-0110-scene-0067",
+      "frame_idx": 3,
+      "token": "be29967a0915518a"
+    },
+    {
+      "scene": "log-0111-scene-0004",
+      "frame_idx": 3,
+      "token": "d5820a5f8c105d11"
+    },
+    {
+      "scene": "log-0111-scene-0007",
+      "frame_idx": 3,
+      "token": "b178ece4400b5faf"
+    },
+    {
+      "scene": "log-0111-scene-0009",
+      "frame_idx": 3,
+      "token": "deeddd5af23b5ae9"
+    },
+    {
+      "scene": "log-0111-scene-0011",
+      "frame_idx": 3,
+      "token": "1ba395e63b455996"
+    },
+    {
+      "scene": "log-0111-scene-0013",
+      "frame_idx": 3,
+      "token": "0ded47f137b35024"
+    },
+    {
+      "scene": "log-0111-scene-0014",
+      "frame_idx": 3,
+      "token": "57488232115c5d40"
+    },
+    {
+      "scene": "log-0111-scene-0018",
+      "frame_idx": 3,
+      "token": "3b2bd03a56b35cb6"
+    },
+    {
+      "scene": "log-0111-scene-0022",
+      "frame_idx": 3,
+      "token": "d2924f6787885209"
+    },
+    {
+      "scene": "log-0111-scene-0024",
+      "frame_idx": 3,
+      "token": "9c2602db70435500"
+    },
+    {
+      "scene": "log-0111-scene-0025",
+      "frame_idx": 3,
+      "token": "f9349f5d723b5421"
+    },
+    {
+      "scene": "log-0111-scene-0026",
+      "frame_idx": 3,
+      "token": "56f1c38d85d65380"
+    },
+    {
+      "scene": "log-0112-scene-0002",
+      "frame_idx": 3,
+      "token": "4a32c7c9866453d9"
+    },
+    {
+      "scene": "log-0112-scene-0004",
+      "frame_idx": 3,
+      "token": "bb767bd6c34f54b8"
+    }
+  ]
+}

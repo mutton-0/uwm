@@ -1,0 +1,31 @@
+{
+  "scenario": "left_turn",
+  "corpus": "navsim",
+  "n_rejects": 2,
+  "by_reason": {
+    "走廊内没有任何危险类目标(a>0)": 1,
+    "解释度越界(explained_ratio 不在 (0.3,10])": 1
+  },
+  "rejects": [
+    {
+      "scene": "log-0007-scene-0005",
+      "frame_idx": 31,
+      "ego_v0": 7.13,
+      "ego_vmin": 2.95,
+      "a_obs": 1.045,
+      "reason": "走廊内没有任何危险类目标(a>0)",
+      "n_other_in_corridor": 0
+    },
+    {
+      "scene": "log-0064-scene-0027",
+      "frame_idx": 0,
+      "ego_v0": 3.96,
+      "ego_vmin": 2.04,
+      "a_obs": 0.191,
+      "reason": "解释度越界(explained_ratio 不在 (0.3,10])",
+      "explained_ratio": 0.091,
+      "a_vru_max": 0.017,
+      "lead_cat": "vehicle.car"
+    }
+  ]
+}

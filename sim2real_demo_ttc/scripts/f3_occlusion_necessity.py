@@ -66,8 +66,45 @@ def boot_scene(vals, scenes, n=5000, seed=0):
             "n": int(sum(len(v) for v in by.values())), "n_scenes": len(keys)}
 
 
-def occlude(img, bbox, mode="mean"):
-    """把 bbox 区域涂成图像均值色（中性灰斑，不引入新的高频结构）。"""
+def _road_stats(img, x0, y0, x1, y1, band=None):
+    """估计紧邻框下方那条路面的颜色统计（中位色 + 每通道 std）。
+
+    取框**正下方**同宽的一条带：地面在物体脚下，这块几乎一定是路面。
+    用中位数而非均值 —— 带里偶尔混进别的物体时不会被拉偏。
+    带高默认取框高的一半（至少 6 px），越界则退回框两侧的同高度带。
+    """
+    H, W_ = img.shape[:2]
+    band = band or max(6, (y1 - y0) // 2)
+    yb0, yb1 = min(y1, H - 1), min(y1 + band, H)
+    patches = []
+    if yb1 > yb0 + 1:
+        patches.append(img[yb0:yb1, x0:x1])
+    if not patches or (yb1 - yb0) < 3:           # 物体贴着画面底边：改取两侧
+        w = max(6, (x1 - x0) // 2)
+        for a, b in ((max(0, x0 - w), x0), (x1, min(W_, x1 + w))):
+            if b > a + 1:
+                patches.append(img[y0:y1, a:b])
+    if not patches:
+        flat = img.reshape(-1, 3)
+        return np.median(flat, 0), flat.std(0)
+    P = np.concatenate([p.reshape(-1, 3) for p in patches], 0).astype(np.float32)
+    return np.median(P, 0), P.std(0)
+
+
+def occlude(img, bbox, mode="mean", rng=None):
+    """把 bbox 区域涂掉。
+
+    mode="mean"       全图均值色（中性灰斑）—— 旧默认。
+    mode="road_flat"  紧邻下方路面的中位色，**不加噪声**。
+    mode="road"       路面中位色 + 匹配该带每通道 std 的高斯噪声。
+                      注意：ctrl 臂的镜像框可能落在建筑/植被上，那条带的 std 很大，
+                      于是会在对照位置画出一块高频噪声斑 —— 实测 b_ctrl 中位
+                      从 -0.002 抬到 +0.070。故必须与 road_flat 三方对照，
+                      才能把"换成路面色"的效应与"注入了噪声"的效应分开。
+                      灰斑本身是画面里的异常物，模型可能是在对"这有个怪东西"反应
+                      而不是对"危险物没了"反应；ctrl 臂就是为查这件事设的。
+                      涂成路面色并配上同等纹理噪声，才更接近"这里本来就是空路"。
+    """
     if bbox is None:
         return None
     H, W_ = img.shape[:2]
@@ -75,7 +112,18 @@ def occlude(img, bbox, mode="mean"):
     x0 = max(0, min(x0, W_ - 1)); x1 = max(x0 + 1, min(x1, W_))
     y0 = max(0, min(y0, H - 1)); y1 = max(y0 + 1, min(y1, H))
     out = img.copy()
-    out[y0:y1, x0:x1] = img.reshape(-1, 3).mean(0).astype(img.dtype) if mode == "mean" else 0
+    if mode in ("road", "road_flat"):
+        med, sd = _road_stats(img, x0, y0, x1, y1)
+        h, w = y1 - y0, x1 - x0
+        fill = np.broadcast_to(med[None, None, :], (h, w, 3)).astype(np.float32).copy()
+        if mode == "road":
+            rng = rng or np.random.default_rng(0)
+            fill += rng.normal(0, 1, (h, w, 3)) * sd[None, None, :]
+        out[y0:y1, x0:x1] = np.clip(fill, 0, 255).astype(img.dtype)
+    elif mode == "mean":
+        out[y0:y1, x0:x1] = img.reshape(-1, 3).mean(0).astype(img.dtype)
+    else:
+        out[y0:y1, x0:x1] = 0
     return out
 
 

@@ -1,0 +1,3430 @@
+{
+  "question": "how many Singapore scenes in nuPlan val/test have sensors published",
+  "n_logs_scanned": 372,
+  "n_logs_failed": 0,
+  "by_city": {
+    "las_vegas": {
+      "logs": 111,
+      "scenes": 1785,
+      "frames": 668470
+    },
+    "us-ma-boston": {
+      "logs": 131,
+      "scenes": 1372,
+      "frames": 496220
+    },
+    "us-pa-pittsburgh-hazelwood": {
+      "logs": 65,
+      "scenes": 792,
+      "frames": 289821
+    },
+    "sg-one-north": {
+      "logs": 65,
+      "scenes": 837,
+      "frames": 307339
+    }
+  },
+  "by_split_city": {
+    "val|las_vegas": {
+      "logs": 61,
+      "scenes": 1007
+    },
+    "val|us-ma-boston": {
+      "logs": 69,
+      "scenes": 655
+    },
+    "val|us-pa-pittsburgh-hazelwood": {
+      "logs": 43,
+      "scenes": 466
+    },
+    "val|sg-one-north": {
+      "logs": 52,
+      "scenes": 629
+    },
+    "test|las_vegas": {
+      "logs": 50,
+      "scenes": 778
+    },
+    "test|us-pa-pittsburgh-hazelwood": {
+      "logs": 22,
+      "scenes": 326
+    },
+    "test|us-ma-boston": {
+      "logs": 62,
+      "scenes": 717
+    },
+    "test|sg-one-north": {
+      "logs": 13,
+      "scenes": 208
+    }
+  },
+  "singapore": {
+    "city_keys": [
+      "sg-one-north"
+    ],
+    "logs": 65,
+    "scenes": 837
+  },
+  "total_scenes_with_sensors": 4786,
+  "threshold_scenes": 8000,
+  "established_yield": {
+    "ghost": 0.0015,
+    "lead": 0.0059
+  },
+  "expected_events": {
+    "ghost": 1.2555,
+    "lead": 4.9383
+  },
+  "target_events": 110,
+  "feasible": false,
+  "per_log": [
+    {
+      "logfile": "2021.06.07.11.59.52_veh-35_02283_02464",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3621,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.12.42.11_veh-38_01777_02078",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 16,
+      "n_frame": 6020,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.12.42.11_veh-38_02445_02843",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 21,
+      "n_frame": 7960,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.12.42.11_veh-38_03254_03455",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 11,
+      "n_frame": 4020,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.12.54.00_veh-35_01843_02314",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 24,
+      "n_frame": 9420,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.13.53.57_veh-35_01772_02032",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 14,
+      "n_frame": 5200,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.13.53.57_veh-35_02489_03145",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 34,
+      "n_frame": 13120,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.17.46.49_veh-35_02607_03120",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 27,
+      "n_frame": 10260,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.17.46.49_veh-35_04084_04828",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 38,
+      "n_frame": 14880,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.17.46.49_veh-35_04839_05184",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 19,
+      "n_frame": 6900,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.17.48.02_veh-38_01949_02085",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 2720,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.18.53.26_veh-26_00005_00427",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 22,
+      "n_frame": 8440,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.18.53.26_veh-26_01208_01412",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 11,
+      "n_frame": 4080,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.19.29.59_veh-38_00474_00922",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 24,
+      "n_frame": 8960,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.19.29.59_veh-38_01025_01274",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 13,
+      "n_frame": 4980,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.19.29.59_veh-38_02615_02779",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 9,
+      "n_frame": 3280,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.19.43.00_veh-35_01782_01986",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 11,
+      "n_frame": 4080,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.07.19.43.00_veh-35_02298_02525",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 13,
+      "n_frame": 4540,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.00.19_veh-35_01722_02119",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 20,
+      "n_frame": 7940,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.00.19_veh-35_02135_02369",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 13,
+      "n_frame": 4680,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.00.19_veh-35_02988_03160",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3440,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.00.19_veh-35_03451_03644",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 11,
+      "n_frame": 3860,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.00.19_veh-35_03655_03792",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 2740,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.00.19_veh-35_04422_04725",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 16,
+      "n_frame": 6060,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.00.19_veh-35_05235_05578",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 18,
+      "n_frame": 6860,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.10.22_veh-38_01912_02498",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 30,
+      "n_frame": 11720,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.10.22_veh-38_05512_05652",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 2800,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.54.54_veh-26_00015_00507",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 26,
+      "n_frame": 9851,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.54.54_veh-26_00733_00983",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 14,
+      "n_frame": 5006,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.54.54_veh-26_01289_01417",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 7,
+      "n_frame": 2562,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.54.54_veh-26_02323_02479",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 3123,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.54.54_veh-26_02994_03970",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 50,
+      "n_frame": 19539,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.12.54.54_veh-26_04262_04732",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 24,
+      "n_frame": 9408,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.14.14.51_veh-35_00893_01188",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 16,
+      "n_frame": 5900,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.14.14.51_veh-35_01508_01763",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 14,
+      "n_frame": 5100,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.14.35.24_veh-26_01989_02235",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 13,
+      "n_frame": 4924,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.14.35.24_veh-26_02555_03004",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 24,
+      "n_frame": 8990,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.14.36.49_veh-38_00312_00694",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 20,
+      "n_frame": 7640,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.16.31.33_veh-38_00015_00262",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 14,
+      "n_frame": 4940,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.16.31.33_veh-38_01589_02072",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 25,
+      "n_frame": 9660,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.16.31.33_veh-38_03406_03605",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 11,
+      "n_frame": 3980,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.16.31.33_veh-38_04275_04425",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 9,
+      "n_frame": 3000,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.17.25.03_veh-35_02448_02655",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 11,
+      "n_frame": 4140,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.17.25.03_veh-35_03522_03716",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3880,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.17.36.50_veh-26_03873_04225",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 19,
+      "n_frame": 7047,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.17.36.50_veh-26_05134_05378",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 13,
+      "n_frame": 4887,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.18.18.30_veh-38_01241_01417",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 9,
+      "n_frame": 3520,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.18.18.30_veh-38_05578_05988",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 22,
+      "n_frame": 8200,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.18.18.30_veh-38_06017_06142",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 2500,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.18.59.48_veh-12_01276_01459",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3660,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.18.59.48_veh-12_02116_02247",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 2620,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.18.59.48_veh-12_03122_03677",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 28,
+      "n_frame": 11100,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.19.16.23_veh-26_00193_00322",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 2583,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.19.16.23_veh-26_00973_01139",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 9,
+      "n_frame": 3324,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.06.08.19.16.23_veh-26_01782_01967",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3705,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.07.24.16.07.03_veh-35_01649_01813",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 9,
+      "n_frame": 3280,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.07.24.16.48.51_veh-17_00016_00166",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 9,
+      "n_frame": 3000,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.07.24.18.06.35_veh-35_03664_03799",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 7,
+      "n_frame": 2700,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.07.24.20.37.45_veh-17_00015_00375",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 19,
+      "n_frame": 7200,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.07.24.22.52.16_veh-35_03236_04096",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 44,
+      "n_frame": 17200,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.07.24.23.50.16_veh-17_01696_02071",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 20,
+      "n_frame": 7500,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.09.17.55.59_veh-28_00021_00307",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 15,
+      "n_frame": 5720,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.09.17.55.59_veh-28_00320_00544",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 12,
+      "n_frame": 4480,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.09.17.55.59_veh-28_00558_00680",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2440,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.09.17.55.59_veh-28_00691_00876",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 10,
+      "n_frame": 3700,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.09.17.55.59_veh-28_00960_01031",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 4,
+      "n_frame": 1420,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.09.17.55.59_veh-28_01065_01167",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 2040,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.09.18.37.41_veh-28_00053_00548",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 26,
+      "n_frame": 9900,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.09.18.37.41_veh-28_00648_00730",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1640,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.13.12.55_veh-45_00386_00472",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 5,
+      "n_frame": 1720,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.13.12.55_veh-45_00507_00867",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 19,
+      "n_frame": 7200,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.14.25.28_veh-42_00333_00472",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 8,
+      "n_frame": 2780,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.14.35.46_veh-45_00011_00162",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 9,
+      "n_frame": 3020,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.14.35.46_veh-45_00440_00501",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 4,
+      "n_frame": 1220,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.14.35.46_veh-45_00549_00693",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 8,
+      "n_frame": 2880,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.14.35.46_veh-45_01568_01663",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 6,
+      "n_frame": 1900,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.15.09.18_veh-45_00216_00862",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 34,
+      "n_frame": 12920,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.17.01.06_veh-45_00228_00689",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 24,
+      "n_frame": 9220,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.17.01.06_veh-45_01557_01681",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 8,
+      "n_frame": 2480,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.17.34.27_veh-45_00696_00786",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 6,
+      "n_frame": 1800,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.17.34.27_veh-45_00808_00993",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 10,
+      "n_frame": 3700,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.17.34.27_veh-45_01478_01553",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 5,
+      "n_frame": 1500,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.17.37.11_veh-08_02359_02623",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 15,
+      "n_frame": 5280,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.18.07.48_veh-45_00203_00300",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 6,
+      "n_frame": 1940,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.18.07.48_veh-45_00873_01142",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 15,
+      "n_frame": 5380,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.18.07.48_veh-45_01504_01722",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 12,
+      "n_frame": 4361,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.18.30.46_veh-08_01674_01850",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 10,
+      "n_frame": 3520,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.18.30.46_veh-08_01985_02093",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 6,
+      "n_frame": 2160,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.18.30.46_veh-08_02327_02583",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 14,
+      "n_frame": 5120,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.18.30.46_veh-08_02605_02732",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 7,
+      "n_frame": 2540,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.19.30.33_veh-45_00290_00484",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 11,
+      "n_frame": 3880,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.19.30.33_veh-45_01391_01523",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 8,
+      "n_frame": 2640,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.20.03.01_veh-45_00021_00143",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 7,
+      "n_frame": 2440,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.20.03.01_veh-45_00171_00238",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 4,
+      "n_frame": 1340,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.20.03.01_veh-45_00269_00428",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 9,
+      "n_frame": 3180,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.20.03.01_veh-45_00463_00588",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 7,
+      "n_frame": 2500,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.20.03.01_veh-45_00687_00787",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 6,
+      "n_frame": 2000,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.24.20.03.01_veh-45_00824_00888",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 4,
+      "n_frame": 1280,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.11.47.30_veh-40_00248_00376",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 7,
+      "n_frame": 2560,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.11.47.30_veh-40_00393_00847",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 24,
+      "n_frame": 9080,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.11.47.30_veh-40_00919_01000",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 1620,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.11.47.30_veh-40_01146_01347",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 11,
+      "n_frame": 4020,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.11.47.30_veh-40_01362_01737",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 19,
+      "n_frame": 7500,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.21.30_veh-40_00056_00155",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 1980,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.21.30_veh-40_00248_00367",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 7,
+      "n_frame": 2380,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.21.30_veh-40_00378_00527",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 9,
+      "n_frame": 2980,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.21.30_veh-40_00538_00638",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 2000,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.21.30_veh-40_00661_00762",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 2020,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.21.30_veh-40_01485_01676",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 10,
+      "n_frame": 3820,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.54.56_veh-40_00024_00106",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1640,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.54.56_veh-40_00305_00667",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 19,
+      "n_frame": 7240,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.54.56_veh-40_00725_00909",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 10,
+      "n_frame": 3680,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.54.56_veh-40_00921_01014",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1860,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.54.56_veh-40_01056_01183",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2540,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.54.56_veh-40_01249_01397",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2960,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.12.54.56_veh-40_01536_01758",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 12,
+      "n_frame": 4440,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.13.27.52_veh-40_00058_00145",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 1740,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.13.27.52_veh-40_00186_00414",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 12,
+      "n_frame": 4560,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.13.27.52_veh-40_00688_00750",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 4,
+      "n_frame": 1240,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.13.27.52_veh-40_00869_01319",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 23,
+      "n_frame": 9000,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.13.27.52_veh-40_01330_01491",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 9,
+      "n_frame": 3220,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.13.27.52_veh-40_01615_01687",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1440,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.01.15_veh-40_00304_00384",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1600,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.01.15_veh-40_00407_00497",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1800,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.01.15_veh-40_00573_00681",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 7,
+      "n_frame": 2160,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.01.15_veh-40_00692_00977",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 15,
+      "n_frame": 5700,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.01.15_veh-40_01109_01272",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 9,
+      "n_frame": 3260,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.01.15_veh-40_01284_01345",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 4,
+      "n_frame": 1220,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.01.15_veh-40_01576_01714",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2760,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.40.58_veh-40_00016_00084",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1360,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.40.58_veh-40_00125_00269",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2880,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.40.58_veh-40_00285_00456",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 9,
+      "n_frame": 3420,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.40.58_veh-40_00467_00668",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 11,
+      "n_frame": 4020,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.40.58_veh-40_00679_00892",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 12,
+      "n_frame": 4260,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.40.58_veh-40_01022_01255",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 12,
+      "n_frame": 4660,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.14.40.58_veh-40_01268_01618",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 18,
+      "n_frame": 7000,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.16.37.21_veh-40_00016_00099",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1660,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.16.37.21_veh-40_00110_00187",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1540,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.16.37.21_veh-40_00198_00265",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1340,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.16.37.21_veh-40_00277_00417",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2800,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.16.37.21_veh-40_00429_00541",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 7,
+      "n_frame": 2240,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.16.37.21_veh-40_00554_00733",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 10,
+      "n_frame": 3580,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.16.37.21_veh-40_00798_00955",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 9,
+      "n_frame": 3140,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.16.37.21_veh-40_01101_01177",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 4,
+      "n_frame": 1520,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.16.37.21_veh-40_01247_01379",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 7,
+      "n_frame": 2640,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.16.37.21_veh-40_01405_01642",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 13,
+      "n_frame": 4740,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.16.37.21_veh-40_01655_01736",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1620,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.17.42.52_veh-40_00389_00526",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2740,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.17.42.52_veh-40_00551_00680",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2580,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.17.42.52_veh-40_00833_00953",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 7,
+      "n_frame": 2400,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.17.42.52_veh-40_01033_01313",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 15,
+      "n_frame": 5600,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.17.42.52_veh-40_01331_01444",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 7,
+      "n_frame": 2260,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.17.42.52_veh-40_01551_01684",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2660,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.18.15.54_veh-40_00038_00199",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 9,
+      "n_frame": 3220,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.18.15.54_veh-40_00227_00324",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 1940,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.18.15.54_veh-40_00335_00568",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 13,
+      "n_frame": 4660,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.18.15.54_veh-40_00579_00980",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 22,
+      "n_frame": 8020,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.18.15.54_veh-40_01010_01094",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1680,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.08.31.18.15.54_veh-40_01143_01496",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 18,
+      "n_frame": 7060,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.15.03.51_veh-45_00178_00336",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 9,
+      "n_frame": 3160,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.15.03.51_veh-45_00390_00585",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 11,
+      "n_frame": 3900,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.16.46.51_veh-45_00149_00900",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 39,
+      "n_frame": 15020,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.16.46.51_veh-45_02322_02510",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 10,
+      "n_frame": 3760,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.18.43.41_veh-45_00885_00952",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 4,
+      "n_frame": 1340,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.18.43.41_veh-45_00965_01195",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 12,
+      "n_frame": 4600,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.18.43.41_veh-45_01245_01529",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 15,
+      "n_frame": 5680,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.18.43.41_veh-45_02296_02477",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 10,
+      "n_frame": 3620,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.18.43.41_veh-45_02503_03013",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 26,
+      "n_frame": 10200,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.19.46.05_veh-45_01937_02119",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 10,
+      "n_frame": 3640,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.20.42.30_veh-45_00464_00579",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 6,
+      "n_frame": 2300,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.20.42.30_veh-45_00805_01078",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 14,
+      "n_frame": 5460,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.20.42.30_veh-45_01097_01242",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 9,
+      "n_frame": 2900,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.09.14.20.42.30_veh-45_01603_01670",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 4,
+      "n_frame": 1340,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.04.03.05_veh-50_00058_00321",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 15,
+      "n_frame": 5260,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.04.03.05_veh-50_00365_00493",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 7,
+      "n_frame": 2560,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.04.03.05_veh-50_00536_00637",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 6,
+      "n_frame": 2020,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.04.03.05_veh-50_00648_00744",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 6,
+      "n_frame": 1920,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.04.03.05_veh-50_01003_01426",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 22,
+      "n_frame": 8460,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.04.03.05_veh-50_01466_01790",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 17,
+      "n_frame": 6480,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.04.38.41_veh-50_00014_00429",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 22,
+      "n_frame": 8300,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.04.38.41_veh-50_00441_00515",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 4,
+      "n_frame": 1480,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.04.38.41_veh-50_00576_00721",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 9,
+      "n_frame": 2900,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.04.38.41_veh-50_00753_00956",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 11,
+      "n_frame": 4060,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.04.38.41_veh-50_00996_01109",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 7,
+      "n_frame": 2260,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.04.38.41_veh-50_01202_01296",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 5,
+      "n_frame": 1880,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.24.06_veh-50_00021_00383",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 19,
+      "n_frame": 7240,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.24.06_veh-50_00431_00527",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 6,
+      "n_frame": 1920,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.24.06_veh-50_00717_01300",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 31,
+      "n_frame": 11660,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.24.06_veh-50_01311_01409",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 6,
+      "n_frame": 1960,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.24.06_veh-50_01420_01553",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 7,
+      "n_frame": 2660,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.24.06_veh-50_01566_01672",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 6,
+      "n_frame": 2120,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.31.40_veh-52_00005_00342",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 18,
+      "n_frame": 6740,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.31.40_veh-52_00355_00454",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 6,
+      "n_frame": 1980,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.31.40_veh-52_00465_00713",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 13,
+      "n_frame": 4960,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.31.40_veh-52_00734_01305",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 30,
+      "n_frame": 11420,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.31.40_veh-52_01316_01565",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 14,
+      "n_frame": 4980,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.31.40_veh-52_01598_02013",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 22,
+      "n_frame": 8300,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.57.40_veh-50_00025_00261",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 13,
+      "n_frame": 4720,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.57.40_veh-50_00485_00624",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 8,
+      "n_frame": 2780,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.57.40_veh-50_00665_00857",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 10,
+      "n_frame": 3840,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.57.40_veh-50_00940_01105",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 9,
+      "n_frame": 3300,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.57.40_veh-50_01131_01452",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 17,
+      "n_frame": 6420,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.57.40_veh-50_01493_01624",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 8,
+      "n_frame": 2620,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.06.57.40_veh-50_01658_01796",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 8,
+      "n_frame": 2760,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.10.04_veh-52_00252_00406",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 9,
+      "n_frame": 3080,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.10.04_veh-52_00418_00563",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 9,
+      "n_frame": 2900,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.10.04_veh-52_00596_00663",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 5,
+      "n_frame": 1340,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.10.04_veh-52_00689_01322",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 33,
+      "n_frame": 12660,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.10.04_veh-52_01442_01802",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 19,
+      "n_frame": 7200,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.38.12_veh-50_00132_00234",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 6,
+      "n_frame": 2039,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.38.12_veh-50_00245_00433",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 10,
+      "n_frame": 3760,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.38.12_veh-50_00898_01058",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 9,
+      "n_frame": 3200,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.38.12_veh-50_01085_01463",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 20,
+      "n_frame": 7559,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.38.12_veh-50_01477_01565",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 6,
+      "n_frame": 1761,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.49.39_veh-52_00563_00680",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 7,
+      "n_frame": 2340,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.49.39_veh-52_00770_00905",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 8,
+      "n_frame": 2700,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.49.39_veh-52_00934_01406",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 25,
+      "n_frame": 9440,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.07.49.39_veh-52_01417_01574",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 9,
+      "n_frame": 3140,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.08.11.15_veh-50_00163_00321",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 9,
+      "n_frame": 3160,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.08.11.15_veh-50_00360_00426",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 4,
+      "n_frame": 1320,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.08.11.15_veh-50_00437_00585",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 9,
+      "n_frame": 2960,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.08.11.15_veh-50_00710_00903",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 11,
+      "n_frame": 3860,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.08.11.15_veh-50_00970_01211",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 13,
+      "n_frame": 4820,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.08.11.15_veh-50_01222_01462",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 13,
+      "n_frame": 4800,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.10.05.08.11.15_veh-50_01566_01801",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 13,
+      "n_frame": 4700,
+      "ok": true,
+      "split": "val"
+    },
+    {
+      "logfile": "2021.05.25.14.16.10_veh-35_00083_00485",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 21,
+      "n_frame": 8040,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.14.16.10_veh-35_01100_01664",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 29,
+      "n_frame": 11280,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.14.16.10_veh-35_01690_02183",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 26,
+      "n_frame": 9860,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.14.16.10_veh-35_02482_02649",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 9,
+      "n_frame": 3340,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.14.16.10_veh-35_03373_03550",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3540,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.14.16.10_veh-35_04097_04328",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 13,
+      "n_frame": 4620,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.14.24.08_veh-25_00934_01067",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 2660,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.14.24.08_veh-25_03764_04034",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 14,
+      "n_frame": 5400,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.14.24.08_veh-25_04059_04203",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 9,
+      "n_frame": 2880,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.14.26.37_veh-27_04122_04279",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 3140,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.15.59.03_veh-30_00625_00855",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 12,
+      "n_frame": 4600,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.15.59.03_veh-30_01478_01643",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3300,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.15.59.03_veh-30_03499_03671",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3440,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.15.59.03_veh-30_04027_04200",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3460,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.15.59.03_veh-30_04463_04606",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 2860,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.16.37.23_veh-25_00005_00217",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 11,
+      "n_frame": 4240,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.16.37.23_veh-25_03311_03550",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 13,
+      "n_frame": 4780,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.17.54.41_veh-35_01654_01850",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 11,
+      "n_frame": 3920,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.17.54.41_veh-35_01905_02121",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 12,
+      "n_frame": 4320,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.17.54.41_veh-35_02723_02902",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3580,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.17.54.41_veh-35_04111_04288",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3540,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.17.54.41_veh-35_04967_05098",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 7,
+      "n_frame": 2620,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.05.25.18.38.25_veh-25_04058_04186",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 2560,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.12.02.06_veh-35_00233_00609",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 20,
+      "n_frame": 7520,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.12.02.06_veh-35_01100_01227",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 7,
+      "n_frame": 2540,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.12.02.06_veh-35_03526_03712",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3720,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.13.55.17_veh-35_00073_00426",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 19,
+      "n_frame": 7060,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.13.55.17_veh-35_00789_00999",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 11,
+      "n_frame": 4200,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.13.55.17_veh-35_02419_02561",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 9,
+      "n_frame": 2840,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.13.55.17_veh-35_02572_02855",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 15,
+      "n_frame": 5660,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.13.55.17_veh-35_02866_03582",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 37,
+      "n_frame": 14320,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.17.06.58_veh-35_00712_00855",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 2860,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.17.06.58_veh-35_02571_02742",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 10,
+      "n_frame": 3420,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.17.06.58_veh-35_02943_03220",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 15,
+      "n_frame": 5540,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.17.06.58_veh-35_03860_03992",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 7,
+      "n_frame": 2640,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.18.47.39_veh-35_00123_00246",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 7,
+      "n_frame": 2460,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.18.47.39_veh-35_00257_00492",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 13,
+      "n_frame": 4700,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.03.18.47.39_veh-35_00503_00777",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 14,
+      "n_frame": 5480,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.28.13.53.26_veh-26_00492_00696",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 11,
+      "n_frame": 4080,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.28.15.02.02_veh-38_02398_02848",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 24,
+      "n_frame": 9000,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.28.15.10.57_veh-16_02438_02580",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 9,
+      "n_frame": 2840,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.28.16.29.11_veh-38_00022_00368",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 18,
+      "n_frame": 6920,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.28.16.29.11_veh-38_01415_01821",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 22,
+      "n_frame": 8120,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.28.16.29.11_veh-38_03263_03766",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 26,
+      "n_frame": 10060,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.28.16.57.59_veh-26_00016_00484",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 25,
+      "n_frame": 9360,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.28.18.03.27_veh-14_00620_01581",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 49,
+      "n_frame": 19220,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.28.20.24.43_veh-38_00369_00601",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 13,
+      "n_frame": 4640,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.28.20.24.43_veh-38_03385_04952",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 79,
+      "n_frame": 31340,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.28.21.16.05_veh-14_00957_01198",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 13,
+      "n_frame": 4820,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.06.28.21.47.53_veh-35_00280_00424",
+      "location": "las_vegas",
+      "map_version": "us-nv-las-vegas-strip",
+      "n_scene": 8,
+      "n_frame": 2880,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.08.16.14.23.37_veh-45_00015_00132",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 7,
+      "n_frame": 2340,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.08.30.13.45.25_veh-40_00520_00595",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 4,
+      "n_frame": 1500,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.08.30.13.45.25_veh-40_00610_00771",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 9,
+      "n_frame": 3220,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.08.30.13.45.25_veh-40_00784_00867",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1660,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.08.30.13.45.25_veh-40_00878_01104",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 13,
+      "n_frame": 4520,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.08.30.13.45.25_veh-40_01116_01336",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 12,
+      "n_frame": 4400,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.08.30.14.54.34_veh-40_00334_00419",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1700,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.08.30.14.54.34_veh-40_00439_00835",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 21,
+      "n_frame": 7920,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.08.30.14.54.34_veh-40_00885_00986",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 2020,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.08.30.16.16.44_veh-40_00256_00716",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 24,
+      "n_frame": 9200,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.08.30.16.16.44_veh-40_00779_01088",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 17,
+      "n_frame": 6180,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.08.30.16.16.44_veh-40_01099_01351",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 14,
+      "n_frame": 5040,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.14.18.22_veh-48_00221_00299",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 4,
+      "n_frame": 1560,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.14.18.22_veh-48_00322_00895",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 29,
+      "n_frame": 11460,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.14.18.22_veh-48_00960_01115",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 3100,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.14.18.22_veh-48_01298_01492",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 11,
+      "n_frame": 3880,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.14.18.22_veh-48_01503_01761",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 14,
+      "n_frame": 5160,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.14.18.22_veh-48_01775_01866",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 1820,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.17.18.51_veh-48_00098_00328",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 13,
+      "n_frame": 4600,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.17.18.51_veh-48_00574_00646",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1440,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.17.18.51_veh-48_00657_00876",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 12,
+      "n_frame": 4380,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.17.18.51_veh-48_00889_01147",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 14,
+      "n_frame": 5160,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.17.18.51_veh-48_01173_01237",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 4,
+      "n_frame": 1280,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.17.18.51_veh-48_01248_01450",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 11,
+      "n_frame": 4040,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.17.18.51_veh-48_01462_01552",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1800,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.18.04.06_veh-40_00555_00731",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 10,
+      "n_frame": 3520,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.18.04.06_veh-40_00743_01071",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 17,
+      "n_frame": 6560,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.18.04.06_veh-40_01340_01425",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1700,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.18.29.25_veh-39_00427_00556",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 7,
+      "n_frame": 2580,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.18.29.25_veh-39_00569_00903",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 18,
+      "n_frame": 6680,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.18.29.25_veh-39_00969_01184",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 12,
+      "n_frame": 4300,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.18.29.25_veh-39_01622_01766",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2880,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.18.38.12_veh-40_00015_00156",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2820,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.18.38.12_veh-40_01247_01425",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 10,
+      "n_frame": 3560,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.18.38.12_veh-40_01437_01622",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 11,
+      "n_frame": 3700,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.19.10.24_veh-39_00148_00372",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 12,
+      "n_frame": 4480,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.19.10.24_veh-39_00489_00629",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2800,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.19.10.24_veh-39_00664_01059",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 20,
+      "n_frame": 7900,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.19.10.24_veh-39_01125_01324",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 11,
+      "n_frame": 3980,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.19.10.24_veh-39_01406_01487",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1620,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.09.19.10.24_veh-39_01746_01868",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 7,
+      "n_frame": 2440,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.13.53.10_veh-42_00077_00153",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 5,
+      "n_frame": 1520,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.13.53.10_veh-42_00180_00342",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 9,
+      "n_frame": 3240,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.13.53.10_veh-42_00630_00818",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 10,
+      "n_frame": 3760,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.13.53.10_veh-42_00860_01069",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 11,
+      "n_frame": 4180,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.13.53.10_veh-42_01510_01591",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 5,
+      "n_frame": 1620,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.14.39.34_veh-42_00032_00186",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 9,
+      "n_frame": 3080,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.14.39.34_veh-42_00297_00935",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 33,
+      "n_frame": 12760,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.14.39.34_veh-42_01111_01448",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 18,
+      "n_frame": 6740,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.14.39.34_veh-42_01609_01687",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 5,
+      "n_frame": 1560,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.15.12.03_veh-42_01037_01434",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 21,
+      "n_frame": 7940,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.15.47.30_veh-45_01199_01391",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 11,
+      "n_frame": 3840,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.16.20.27_veh-08_02435_02525",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 6,
+      "n_frame": 1800,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.17.40.09_veh-45_02539_02745",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 12,
+      "n_frame": 4120,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.19.12.04_veh-42_00289_00398",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 6,
+      "n_frame": 2180,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.19.12.04_veh-42_01088_01192",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 6,
+      "n_frame": 2080,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.19.12.04_veh-42_01221_01380",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 9,
+      "n_frame": 3180,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.19.12.04_veh-42_01438_01677",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 13,
+      "n_frame": 4780,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.19.27.01_veh-45_00472_00711",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 13,
+      "n_frame": 4780,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.19.27.01_veh-45_01749_03230",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 75,
+      "n_frame": 29620,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.19.49.00_veh-42_00990_01609",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 32,
+      "n_frame": 12380,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.16.21.13.37_veh-42_00172_00347",
+      "location": "us-pa-pittsburgh-hazelwood",
+      "map_version": "us-pa-pittsburgh-hazelwood",
+      "n_scene": 10,
+      "n_frame": 3500,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.14.44.26_veh-28_00238_00320",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 1640,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.14.44.26_veh-28_00337_00504",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 10,
+      "n_frame": 3340,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.14.44.26_veh-28_00528_00992",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 24,
+      "n_frame": 9280,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.14.44.26_veh-28_01059_01191",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 8,
+      "n_frame": 2640,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.14.44.26_veh-28_01202_01296",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 5,
+      "n_frame": 1880,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.14.44.26_veh-28_01331_01485",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 9,
+      "n_frame": 3080,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.14.44.26_veh-28_01509_01628",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 7,
+      "n_frame": 2380,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.14.44.26_veh-28_01640_01743",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 2060,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.15.23.04_veh-28_00601_00802",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 11,
+      "n_frame": 4020,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.15.23.04_veh-28_00814_01101",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 16,
+      "n_frame": 5740,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.18.19.40_veh-28_00331_00426",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 1900,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.18.19.40_veh-28_00438_00833",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 21,
+      "n_frame": 7900,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.18.19.40_veh-28_00844_01218",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 19,
+      "n_frame": 7480,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.18.19.40_veh-28_01268_01685",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 22,
+      "n_frame": 8340,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.18.19.40_veh-28_01727_01833",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 2120,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.19.02.14_veh-28_00273_00514",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 13,
+      "n_frame": 4820,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.19.02.14_veh-28_00540_00917",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 19,
+      "n_frame": 7540,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.19.02.14_veh-28_00964_01689",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 37,
+      "n_frame": 14500,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.19.02.14_veh-28_01717_01824",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 7,
+      "n_frame": 2140,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.19.02.14_veh-28_02451_02708",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 14,
+      "n_frame": 5140,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.19.02.14_veh-28_02911_03005",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 6,
+      "n_frame": 1880,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.09.29.19.02.14_veh-28_03198_03360",
+      "location": "us-ma-boston",
+      "map_version": "us-ma-boston",
+      "n_scene": 10,
+      "n_frame": 3240,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.07.26.10_veh-52_00006_00398",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 20,
+      "n_frame": 7840,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.07.26.10_veh-52_00422_00728",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 16,
+      "n_frame": 6120,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.07.26.10_veh-52_00772_00917",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 8,
+      "n_frame": 2900,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.07.26.10_veh-52_00953_01126",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 10,
+      "n_frame": 3460,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.07.26.10_veh-52_01245_02064",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 42,
+      "n_frame": 16380,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.07.26.10_veh-52_02208_02394",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 10,
+      "n_frame": 3720,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.08.16.17_veh-52_00032_00170",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 8,
+      "n_frame": 2760,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.08.16.17_veh-52_00181_00574",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 20,
+      "n_frame": 7860,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.08.16.17_veh-52_00612_00782",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 10,
+      "n_frame": 3400,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.08.16.17_veh-52_00922_01296",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 19,
+      "n_frame": 7480,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.08.16.17_veh-52_01430_01579",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 8,
+      "n_frame": 2979,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.08.16.17_veh-52_01590_01725",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 8,
+      "n_frame": 2700,
+      "ok": true,
+      "split": "test"
+    },
+    {
+      "logfile": "2021.10.06.08.16.17_veh-52_01949_02501",
+      "location": "sg-one-north",
+      "map_version": "sg-one-north",
+      "n_scene": 29,
+      "n_frame": 11041,
+      "ok": true,
+      "split": "test"
+    }
+  ]
+}

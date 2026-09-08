@@ -1,3 +1,7 @@
+> **⚠ 2026-09-05 更正**：本报告的 NAVSIM（deployment）侧数据基于 `ns1_navsim_geometry.py:127`
+> 的速度坐标系 bug，已作废重算。nuScenes（benchmark）侧不受影响。
+> 修正后的结论见 `CORRECTION_2026-09-05_navsim_velocity_frame.md` 与 `f3_master_table.json`。
+
 # 前车 / 静态路障场景：benchmark vs deployment
 
 > 第三步第 1 类交付。方法固定为 `results/f3_gt_axis_method_v2.md`

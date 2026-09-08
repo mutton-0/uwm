@@ -1,0 +1,375 @@
+{
+ "principle": "P-1：左舵=benchmark，右舵=deployment；两语料合并后按舵位切",
+ "metric": "selectivity = mIoU(trained) − mIoU(random_init)，逐 scene 作差后 scene 级 bootstrap",
+ "note": "逐 scene mIoU 重新分组，未重跑 GPU",
+ "cells": [
+  {
+   "scenario": "ghost",
+   "model": "simlingo",
+   "selectivity_benchmark": {
+    "mean": 0.0196096131059324,
+    "ci95": [
+     -0.015473020395955644,
+     0.054080165886657885
+    ],
+    "n": 9
+   },
+   "n_benchmark": 9,
+   "corpus_mix_benchmark": {
+    "nusc": 3,
+    "navsim": 6
+   },
+   "vs_position_only_benchmark": {
+    "mean": 0.03628180269970381,
+    "ci95": [
+     -0.019422355360246234,
+     0.08083935321710727
+    ],
+    "n": 9
+   },
+   "selectivity_deployment": {
+    "mean": 0.047928703938797515,
+    "ci95": [
+     -0.013133417877618828,
+     0.1166259972041019
+    ],
+    "n": 10
+   },
+   "n_deployment": 10,
+   "corpus_mix_deployment": {
+    "nusc": 10,
+    "navsim": 0
+   },
+   "vs_position_only_deployment": {
+    "mean": 0.11086768067663437,
+    "ci95": [
+     0.06200582637754854,
+     0.16047917614185667
+    ],
+    "n": 10
+   }
+  },
+  {
+   "scenario": "ghost",
+   "model": "dd",
+   "selectivity_benchmark": {
+    "mean": 0.00571574654668582,
+    "ci95": [
+     -0.07899452659384204,
+     0.09485083867419535
+    ],
+    "n": 9
+   },
+   "n_benchmark": 9,
+   "corpus_mix_benchmark": {
+    "nusc": 3,
+    "navsim": 6
+   },
+   "vs_position_only_benchmark": {
+    "mean": 0.03546251026249774,
+    "ci95": [
+     -0.009951761040261206,
+     0.07549856524556166
+    ],
+    "n": 9
+   },
+   "selectivity_deployment": {
+    "mean": 0.015166030109946957,
+    "ci95": [
+     -0.033322413818927955,
+     0.06682347964062742
+    ],
+    "n": 10
+   },
+   "n_deployment": 10,
+   "corpus_mix_deployment": {
+    "nusc": 10,
+    "navsim": 0
+   },
+   "vs_position_only_deployment": {
+    "mean": 0.09456517262508393,
+    "ci95": [
+     0.03887205820925907,
+     0.1534502712308039
+    ],
+    "n": 10
+   }
+  },
+  {
+   "scenario": "ghost",
+   "model": "ltf",
+   "selectivity_benchmark": {
+    "mean": -0.0027003989500210485,
+    "ci95": [
+     -0.08487732931827556,
+     0.07944466348051211
+    ],
+    "n": 9
+   },
+   "n_benchmark": 9,
+   "corpus_mix_benchmark": {
+    "nusc": 3,
+    "navsim": 6
+   },
+   "vs_position_only_benchmark": {
+    "mean": 0.0051024904143377025,
+    "ci95": [
+     -0.04016239362355842,
+     0.05160234279620255
+    ],
+    "n": 9
+   },
+   "selectivity_deployment": {
+    "mean": 0.04268634648896926,
+    "ci95": [
+     0.0008231640141681552,
+     0.08702029881382875
+    ],
+    "n": 10
+   },
+   "n_deployment": 10,
+   "corpus_mix_deployment": {
+    "nusc": 10,
+    "navsim": 0
+   },
+   "vs_position_only_deployment": {
+    "mean": 0.12255810481920912,
+    "ci95": [
+     0.06414967263164957,
+     0.17880324743413917
+    ],
+    "n": 10
+   }
+  },
+  {
+   "scenario": "ghost",
+   "model": "ddv2",
+   "selectivity_benchmark": {
+    "mean": 0.0026591885657865234,
+    "ci95": [
+     -0.07273912478077911,
+     0.0766122392744436
+    ],
+    "n": 9
+   },
+   "n_benchmark": 9,
+   "corpus_mix_benchmark": {
+    "nusc": 3,
+    "navsim": 6
+   },
+   "vs_position_only_benchmark": {
+    "mean": 0.005139141562244746,
+    "ci95": [
+     -0.0436617089429438,
+     0.044690725600300844
+    ],
+    "n": 9
+   },
+   "selectivity_deployment": {
+    "mean": 0.10030759376153664,
+    "ci95": [
+     -0.004641024521902469,
+     0.19892919290426284
+    ],
+    "n": 10
+   },
+   "n_deployment": 10,
+   "corpus_mix_deployment": {
+    "nusc": 10,
+    "navsim": 0
+   },
+   "vs_position_only_deployment": {
+    "mean": 0.09061195173990455,
+    "ci95": [
+     0.01783288067168851,
+     0.16112201269963827
+    ],
+    "n": 10
+   }
+  },
+  {
+   "scenario": "lead",
+   "model": "simlingo",
+   "selectivity_benchmark": {
+    "mean": 0.04279939740769103,
+    "ci95": [
+     0.0242846878757406,
+     0.06148345869667258
+    ],
+    "n": 69
+   },
+   "n_benchmark": 69,
+   "corpus_mix_benchmark": {
+    "nusc": 10,
+    "navsim": 59
+   },
+   "vs_position_only_benchmark": {
+    "mean": 0.05173064691887875,
+    "ci95": [
+     0.0338803599931783,
+     0.06915527759836244
+    ],
+    "n": 69
+   },
+   "selectivity_deployment": {
+    "mean": 0.019176152847355656,
+    "ci95": [
+     -0.0138555387617478,
+     0.04680959997371032
+    ],
+    "n": 7
+   },
+   "n_deployment": 7,
+   "corpus_mix_deployment": {
+    "nusc": 6,
+    "navsim": 1
+   },
+   "vs_position_only_deployment": {
+    "mean": -0.027891558258104163,
+    "ci95": [
+     -0.06983971713091547,
+     0.020986814545112118
+    ],
+    "n": 7
+   }
+  },
+  {
+   "scenario": "lead",
+   "model": "dd",
+   "selectivity_benchmark": {
+    "mean": 0.07961109507779544,
+    "ci95": [
+     0.056779708369298416,
+     0.10287227621311114
+    ],
+    "n": 69
+   },
+   "n_benchmark": 69,
+   "corpus_mix_benchmark": {
+    "nusc": 10,
+    "navsim": 59
+   },
+   "vs_position_only_benchmark": {
+    "mean": 0.10177199901156934,
+    "ci95": [
+     0.08016418875173116,
+     0.12255072111736372
+    ],
+    "n": 69
+   },
+   "selectivity_deployment": {
+    "mean": 0.0862030001103515,
+    "ci95": [
+     -0.04203935524225391,
+     0.2150303950927011
+    ],
+    "n": 7
+   },
+   "n_deployment": 7,
+   "corpus_mix_deployment": {
+    "nusc": 6,
+    "navsim": 1
+   },
+   "vs_position_only_deployment": {
+    "mean": 0.01778088525848499,
+    "ci95": [
+     -0.066789847262359,
+     0.09811047851164975
+    ],
+    "n": 7
+   }
+  },
+  {
+   "scenario": "lead",
+   "model": "ltf",
+   "selectivity_benchmark": {
+    "mean": 0.05247997841159235,
+    "ci95": [
+     0.029362342239220258,
+     0.07430636046451808
+    ],
+    "n": 69
+   },
+   "n_benchmark": 69,
+   "corpus_mix_benchmark": {
+    "nusc": 10,
+    "navsim": 59
+   },
+   "vs_position_only_benchmark": {
+    "mean": 0.09010900003227997,
+    "ci95": [
+     0.07034286333049775,
+     0.10990909770783991
+    ],
+    "n": 69
+   },
+   "selectivity_deployment": {
+    "mean": 0.13583311298998385,
+    "ci95": [
+     0.05392006064354878,
+     0.21967204529317194
+    ],
+    "n": 7
+   },
+   "n_deployment": 7,
+   "corpus_mix_deployment": {
+    "nusc": 6,
+    "navsim": 1
+   },
+   "vs_position_only_deployment": {
+    "mean": 0.03990404476283708,
+    "ci95": [
+     0.010029193482669273,
+     0.07416302593121196
+    ],
+    "n": 7
+   }
+  },
+  {
+   "scenario": "lead",
+   "model": "ddv2",
+   "selectivity_benchmark": {
+    "mean": 0.034113360668186835,
+    "ci95": [
+     0.01026669900365174,
+     0.05798630935506798
+    ],
+    "n": 69
+   },
+   "n_benchmark": 69,
+   "corpus_mix_benchmark": {
+    "nusc": 10,
+    "navsim": 59
+   },
+   "vs_position_only_benchmark": {
+    "mean": 0.04668176312145174,
+    "ci95": [
+     0.024425751601879337,
+     0.0677292078211038
+    ],
+    "n": 69
+   },
+   "selectivity_deployment": {
+    "mean": 0.09264019752167352,
+    "ci95": [
+     -0.013533720609785709,
+     0.18494568248325974
+    ],
+    "n": 7
+   },
+   "n_deployment": 7,
+   "corpus_mix_deployment": {
+    "nusc": 6,
+    "navsim": 1
+   },
+   "vs_position_only_deployment": {
+    "mean": -0.022040407304464542,
+    "ci95": [
+     -0.07249527879917674,
+     0.035118347798868764
+    ],
+    "n": 7
+   }
+  }
+ ]
+}

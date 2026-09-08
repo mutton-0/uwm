@@ -102,7 +102,12 @@ def build_geo(frames_raw, cfg, split="test"):
             r = raw[tk[i]]
             r["name"] = nm[i]
             r["p"][j] = b[i, :3]                       # 已在 lidar(=ego) 系
-            r["v"][j] = vel[i]                         # 全局系绝对速度（静物实测 |v|≈0.001）
+            # gt_velocity_3d **已在 ego/lidar 系**，与 gt_boxes 同系，不是全局系。
+            # 2026-09-04 判决性检验：402 个正前方(|y|<2.5m, 8<x<60m)、|v|>=4m/s 的同向前车，
+            #   按 ego 系读 -> cos 中位 +1.000，|cos|>0.9 占 98.5%
+            #   按全局系读 -> cos 中位 +0.245，|cos|>0.9 占  0.0%
+            # 早先"静物 |v|≈0.001"的核对只能证明它是**绝对**速度（非相对），区分不了坐标系。
+            r["v"][j] = vel[i]
             r["size"][j] = (float(b[i, 4]), float(b[i, 3]), float(b[i, 5]))   # (w, l, h)
             r["yaw"][j] = float(b[i, 6])
 
@@ -119,12 +124,14 @@ def build_geo(frames_raw, cfg, split="test"):
         if len(idx) < 3:
             continue
         valid = np.zeros(n, bool); valid[idx] = True
-        p_ego = np.full((n, 3), np.nan); v_glob = np.full((n, 3), np.nan)
+        p_ego = np.full((n, 3), np.nan); v_glob = np.full((n, 3), np.nan)  # v_glob 实为 ego 系
         for j in idx:
             p_ego[j] = r["p"][j]; v_glob[j] = r["v"][j]
-        # 目标绝对速度 → ego 系（与 G1 的 v_obj_ego 同义）
+        # 目标绝对速度已在 ego 系，**不能再转一次**（见上）。
+        # 原实现多转了 R_we^T，等价于把速度绕 -yaw_ego 旋转，使位置与速度处于不同坐标系：
+        # 同速前车的 v_along 被算成 ~0，closing speed 被当作 v0，a_req 按"目标静止"虚高。
         v_obj_ego = np.full((n, 3), np.nan)
-        v_obj_ego[valid] = np.einsum("tij,tj->ti", np.transpose(R_we[valid], (0, 2, 1)), v_glob[valid])
+        v_obj_ego[valid] = v_glob[valid]
         v_ego_ego = np.zeros((n, 3)); v_ego_ego[:, :2] = ego_v_ego
 
         x, y = p_ego[:, 0], p_ego[:, 1]

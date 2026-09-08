@@ -1,0 +1,79 @@
+{
+  "model": "ghost_navsim_simlingo",
+  "task": "G-VS 二类物体性分割探针（SAM 伪 GT）",
+  "primary": "held-out mIoU（scene 级 4 折 CV + scene 级 bootstrap）",
+  "selectivity": {
+    "mean": 0.034321672556254186,
+    "ci95": [
+      -0.004277161175590988,
+      0.0716703603691451
+    ],
+    "n_scenes": 6
+  },
+  "meta": {
+    "grid": "per-image (gh*16, gw*16)",
+    "layer": 6,
+    "token_to_pixel": "InternVL2 dynamic_preprocess 的 tile 网格，每 tile 16x16 token",
+    "random_init": "同架构重建 + 递归 reset_parameters()"
+  },
+  "n_tokens": 41984,
+  "feat_dim": 896,
+  "object_token_frac": 0.2491187118902439,
+  "arms": {
+    "trained": {
+      "per_scene_miou": {
+        "log-0110-scene-0030": 0.4017855382735033,
+        "log-0020-scene-0005": 0.4237004104040412,
+        "log-0037-scene-0013": 0.3254421679362578,
+        "log-0061-scene-0003": 0.4041617017058523,
+        "log-0126-scene-0010": 0.36613369659393985,
+        "log-0111-scene-0024": 0.42433567799921845
+      },
+      "bootstrap": {
+        "mean": 0.3909265321521354,
+        "ci95": [
+          0.3614302361125725,
+          0.4168973581984496
+        ],
+        "n_scenes": 6
+      }
+    },
+    "random_init": {
+      "per_scene_miou": {
+        "log-0110-scene-0030": 0.43208555040060115,
+        "log-0020-scene-0005": 0.3189017675987402,
+        "log-0037-scene-0013": 0.3482413045496301,
+        "log-0061-scene-0003": 0.37277615662339825,
+        "log-0126-scene-0010": 0.29993936126236553,
+        "log-0111-scene-0024": 0.3676850171405525
+      },
+      "bootstrap": {
+        "mean": 0.3566048595958813,
+        "ci95": [
+          0.32387190813297984,
+          0.39177452248949596
+        ],
+        "n_scenes": 6
+      }
+    },
+    "position_only": {
+      "per_scene_miou": {
+        "log-0110-scene-0030": 0.2983800158241867,
+        "log-0020-scene-0005": 0.3479407712935745,
+        "log-0037-scene-0013": 0.4591433966920423,
+        "log-0061-scene-0003": 0.38399133233803406,
+        "log-0126-scene-0010": 0.3061382481124041,
+        "log-0111-scene-0024": 0.3402627276045974
+      },
+      "bootstrap": {
+        "mean": 0.35597608197747316,
+        "ci95": [
+          0.31620667112855894,
+          0.4017539196671307
+        ],
+        "n_scenes": 6
+      }
+    }
+  },
+  "verdict": "不可估：selectivity 的 scene 级 CI 跨 0"
+}

@@ -1,0 +1,349 @@
+{
+  "design": "刹车优先挖矿：先找人类减速片段，再归因到走廊内 VRU",
+  "corpus": "navsim",
+  "split": "test",
+  "scenario": "ghost",
+  "hazard_classes": [
+    "human.",
+    "vehicle.bicycle",
+    "vehicle.motorcycle",
+    "animal"
+  ],
+  "static_corridor_m": 1.0,
+  "cities": [
+    "us-nv-las-vegas-strip",
+    "us-pa-pittsburgh-hazelwood"
+  ],
+  "n_scenes_skipped_by_city": 852,
+  "min_vmin_mps": 0.0,
+  "signal_gate": "any",
+  "exclude_red": false,
+  "require_oncoming": false,
+  "left_turn_gate": null,
+  "intersection_proxy": null,
+  "explained_ratio_bounds": [
+    0.3,
+    10.0
+  ],
+  "n_scenes_scanned": 1028,
+  "n_brake_episodes": 492,
+  "n_candidates_raw": 5,
+  "n_candidates_dedup": 5,
+  "n_scenes_with_candidate": 5,
+  "T1_a_req_ge_0.4": {
+    "n": 4,
+    "n_scenes": 4
+  },
+  "candidates": [
+    {
+      "scene": "log-0008-scene-0003",
+      "frame_idx": 9,
+      "t": 1621970914.500097,
+      "ego_v0": 0.55,
+      "ego_vmin": 0.0,
+      "dv": -0.55,
+      "rel_decel": 1.0,
+      "a_obs": 0.061,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.117,
+      "a_vru_max": 0.034,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.55,
+      "lead_vru": {
+        "token": "a77a14ab2f2853f5",
+        "cat": "human.pedestrian.adult",
+        "s_m": 11.4,
+        "lat_m": 0.45
+      },
+      "ttc_s": 20.7,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.164,
+      "n_mask_group": 7,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "a77a14ab2f2853f5",
+          "cat": "human.pedestrian.adult",
+          "s_m": 11.4,
+          "lat_m": 0.45,
+          "a_req": 0.034,
+          "visible": true
+        },
+        {
+          "token": "19007cdae8585b5a",
+          "cat": "human.pedestrian.adult",
+          "s_m": 10.4,
+          "lat_m": 0.13,
+          "a_req": 0.033,
+          "visible": true
+        },
+        {
+          "token": "801a3bb916675eb3",
+          "cat": "human.pedestrian.adult",
+          "s_m": 10.4,
+          "lat_m": 0.83,
+          "a_req": 0.027,
+          "visible": true
+        },
+        {
+          "token": "36ec87201ad75549",
+          "cat": "human.pedestrian.adult",
+          "s_m": 12.5,
+          "lat_m": 1.46,
+          "a_req": 0.007,
+          "visible": true
+        },
+        {
+          "token": "0e4b0d2a5e8e504e",
+          "cat": "human.pedestrian.adult",
+          "s_m": 12.5,
+          "lat_m": 0.11,
+          "a_req": 0.006,
+          "visible": true
+        },
+        {
+          "token": "91c2aa98e21b5c27",
+          "cat": "human.pedestrian.adult",
+          "s_m": 13.5,
+          "lat_m": 0.35,
+          "a_req": 0.006,
+          "visible": true
+        },
+        {
+          "token": "23729b1bf2bf5612",
+          "cat": "human.pedestrian.adult",
+          "s_m": 11.4,
+          "lat_m": 1.17,
+          "a_req": 0.004,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0020-scene-0005",
+      "frame_idx": 0,
+      "t": 1621982542.900222,
+      "ego_v0": 8.09,
+      "ego_vmin": 0.08,
+      "dv": -8.01,
+      "rel_decel": 0.99,
+      "a_obs": 0.843,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 2.753,
+      "a_vru_max": 1.014,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.202,
+      "lead_vru": {
+        "token": "da04f5faa6b95222",
+        "cat": "human.pedestrian.adult",
+        "s_m": 37.2,
+        "lat_m": 0.34
+      },
+      "ttc_s": 4.6,
+      "ego_yaw_change_deg": -1.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.295,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "da04f5faa6b95222",
+          "cat": "human.pedestrian.adult",
+          "s_m": 37.2,
+          "lat_m": 0.34,
+          "a_req": 1.014,
+          "visible": true
+        },
+        {
+          "token": "8e436ff8f06b5cfa",
+          "cat": "human.pedestrian.adult",
+          "s_m": 39.3,
+          "lat_m": 0.79,
+          "a_req": 0.888,
+          "visible": true
+        },
+        {
+          "token": "954a8c6d81415132",
+          "cat": "human.pedestrian.adult",
+          "s_m": 40.3,
+          "lat_m": 1.48,
+          "a_req": 0.851,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0037-scene-0013",
+      "frame_idx": 0,
+      "t": 1622761014.700802,
+      "ego_v0": 2.65,
+      "ego_vmin": 0.0,
+      "dv": -2.65,
+      "rel_decel": 1.0,
+      "a_obs": 0.407,
+      "brake_dur_s": 6.5,
+      "a_vru_sum": 0.415,
+      "a_vru_max": 0.415,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.019,
+      "lead_vru": {
+        "token": "6c5ccbbfd73a512b",
+        "cat": "human.pedestrian.adult",
+        "s_m": 20.6,
+        "lat_m": 1.54
+      },
+      "ttc_s": 7.8,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.998,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "6c5ccbbfd73a512b",
+          "cat": "human.pedestrian.adult",
+          "s_m": 20.6,
+          "lat_m": 1.54,
+          "a_req": 0.415,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0110-scene-0030",
+      "frame_idx": 6,
+      "t": 1631822788.49957,
+      "ego_v0": 5.42,
+      "ego_vmin": 0.01,
+      "dv": -5.4,
+      "rel_decel": 0.997,
+      "a_obs": 0.72,
+      "brake_dur_s": 7.5,
+      "a_vru_sum": 0.95,
+      "a_vru_max": 0.478,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.664,
+      "lead_vru": {
+        "token": "7151cb9ec48a5be0",
+        "cat": "human.pedestrian.adult",
+        "s_m": 32.1,
+        "lat_m": 1.59
+      },
+      "ttc_s": 5.9,
+      "ego_yaw_change_deg": -0.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.055,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "7151cb9ec48a5be0",
+          "cat": "human.pedestrian.adult",
+          "s_m": 32.1,
+          "lat_m": 1.59,
+          "a_req": 0.478,
+          "visible": true
+        },
+        {
+          "token": "4cb160f59099585a",
+          "cat": "human.pedestrian.adult",
+          "s_m": 32.1,
+          "lat_m": 1.62,
+          "a_req": 0.472,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0111-scene-0024",
+      "frame_idx": 18,
+      "t": 1631823321.500209,
+      "ego_v0": 7.32,
+      "ego_vmin": 2.44,
+      "dv": -4.88,
+      "rel_decel": 0.667,
+      "a_obs": 0.488,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 1.53,
+      "a_vru_max": 0.765,
+      "a_non_vru_max": 0.387,
+      "vru_class_share": 0.72,
+      "explained_ratio": 1.568,
+      "lead_vru": {
+        "token": "44d8ae7e17cf5c12",
+        "cat": "human.pedestrian.adult",
+        "s_m": 33.3,
+        "lat_m": 0.18
+      },
+      "ttc_s": 4.5,
+      "ego_yaw_change_deg": -1.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.313,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "44d8ae7e17cf5c12",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.3,
+          "lat_m": 0.18,
+          "a_req": 0.765,
+          "visible": true
+        },
+        {
+          "token": "4f40da4068e55cc2",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.3,
+          "lat_m": 0.22,
+          "a_req": 0.764,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

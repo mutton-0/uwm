@@ -42,6 +42,17 @@ RES = Path("/data/ruolin/uwm/sim2real_demo_ttc/results")
 W = Path("/data/ruolin/uwm/sim2real_demo_ttc/variants/n1_d2")
 
 
+def read_gray(path):
+    """灰度读图。**不用 cv2**：simlingo 环境的 opencv 构建读不了这批 PNG（返回 None，
+    仅打 findDecoder 警告），而 simscale 环境能读 —— 同一份文件、不同构建。
+    PIL 无此问题，且两端解码结果一致。"""
+    from PIL import Image
+    try:
+        return np.asarray(Image.open(str(path)).convert("L"))
+    except Exception:                                        # noqa: BLE001
+        return None
+
+
 def gt_to_grid(gt, rows, cols, top=None, height=None, thr=0.5):
     """把原图分辨率的 object 掩码下采样到 rows×cols 的 token 网格。
 
@@ -76,6 +87,10 @@ def main():
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
     work = Path(args.work)
+    # **必须在加载模型前取绝对路径**：SimLingo 的模型加载链路里有 os.chdir，
+    # 之后所有相对路径都会指向别处（实测 gt_dir.exists() 变 False，
+    # 于是每个事件都被当成"没有伪 GT"静默跳过）。
+    work = work.resolve()
     gt_dir = work / "sam_gt"
 
     evs = [json.loads(l) for l in open(work / "mining" / "events_all.jsonl")]
@@ -119,11 +134,15 @@ def main():
             h = rn._buf[args.layer]                       # [n_tok, C]
             return h[: DD.N_IMG_TOK].float().cpu().numpy()
 
+        import collections as _c
+        skipc = _c.Counter()
         for i, ev in enumerate(evs):
             fr = ev["x_ghost_frames"][0]
             img = _cv2().cvtColor(_cv2().imread(str(Path(args.nuscenes_root) / fr["filename"])), cv2.COLOR_BGR2RGB)
-            gt = _cv2().imread(str(gt_dir / f"{ev['event_id']}.png"), _cv2().IMREAD_GRAYSCALE)
+            gt = read_gray(gt_dir / f"{ev['event_id']}.png")
             if img is None or gt is None:
+                if i < 3:
+                    print(f"[DBG] img={img is not None} gt={gt is not None}", flush=True)
                 continue
             top, th = DD.crop_geometry((img.shape[1], img.shape[0]))
             g = gt_to_grid(gt, ROWS, COLS, top, th)
@@ -154,6 +173,14 @@ def main():
             if hasattr(m, "reset_parameters"):
                 m.reset_parameters()
         SIDE = 16                                  # 每 tile pixel_shuffle 后 16x16 token
+        from simlingo_runner import carla_post_crop_height
+        _pc = cfg["preprocess"] if "preprocess" in cfg else cfg["model"]["preprocess"]
+        TW = int(_pc["target_width"])
+        POST_H = carla_post_crop_height(int(_pc["carla_camera_height"]))
+        assert not bool(_pc.get("use_global_img", False)), \
+            "use_global_img=True 会多出一个 thumbnail tile，tile 网格推断需另写"
+        print(f"[GVS-EX/simlingo] 画布 {TW}x{POST_H}（等比缩放后裁下部），"
+              f"掩膜走同一变换", flush=True)
 
         def tok_feats(rn, img, spd):
             rn.infer(img, spd, pool_modes=("vision_mean",))
@@ -163,24 +190,46 @@ def main():
             h = hs[args.layer][0, vis, :].float().cpu().numpy()
             return h, int(rn._n_patches)
 
+        import collections as _c
+        skipc = _c.Counter()
         for i, ev in enumerate(evs):
             fr = ev["x_ghost_frames"][0]
             img = _cv2().cvtColor(_cv2().imread(str(Path(args.nuscenes_root) / fr["filename"])), cv2.COLOR_BGR2RGB)
-            gt = _cv2().imread(str(gt_dir / f"{ev['event_id']}.png"), _cv2().IMREAD_GRAYSCALE)
+            gt = read_gray(gt_dir / f"{ev['event_id']}.png")
             if img is None or gt is None:
-                continue
+                skipc["img_or_gt_none"] += 1; continue
             spd = float(np.mean([f_["ego_speed_mps"] for f_ in ev["x_clean_frames"]]))
             with torch.no_grad():
                 f, npat = tok_feats(runner, img, spd)
                 fr_, _ = tok_feats(rnd, img, spd)
             if f.shape[0] != npat * SIDE * SIDE:
-                continue                                   # tile 数与 token 数不自洽，跳过
-            # dynamic_preprocess 把整图重排成 (gh, gw) 个 tile；逐 tile 映射回原图区域
-            gh = int(round(np.sqrt(npat * img.shape[0] / img.shape[1])))
-            gh = max(1, min(gh, npat)); gw = max(1, npat // gh)
-            if gh * gw != npat:
-                continue
-            g = gt_to_grid(gt, gh * SIDE, gw * SIDE)
+                skipc[f"tok_mismatch({f.shape[0]}vs{npat}*256)"] += 1; continue
+            # ---- 两处几何修正（2026-09-07）----
+            # (1) 掩膜必须走与图像**完全相同**的变换：等比缩放到宽 tw，再裁掉下部，
+            #     只留上面 post_h 行。原实现把完整 900 行的掩膜摊到只覆盖上 62%
+            #     画面的 token 网格上，标签整体纵向错位。
+            # (2) tile 网格要按**裁剪后画布**的宽高比（1024:359 ≈ 2.85）来定，
+            #     不是原图的 16:9。原实现 npat=6 时算出 2x3，实际是 1x6，
+            #     于是 token 重排序也是错的。
+            #     DD/LTF/DDv2 那一路传了 crop_geometry，不受这两条影响。
+            H0, W0 = img.shape[:2]
+            sc = TW / W0
+            gt_r = _cv2().resize(gt, (TW, int(round(H0 * sc))),
+                                 interpolation=_cv2().INTER_NEAREST)
+            gt_c = gt_r[:POST_H]
+            if gt_c.size == 0:
+                skipc["gt_crop_empty"] += 1; continue
+            asp = gt_c.shape[1] / gt_c.shape[0]          # 裁剪后画布宽高比
+            cand = [(w_, npat // w_) for w_ in range(1, npat + 1)
+                    if npat % w_ == 0]
+            gw, gh = min(cand, key=lambda z: abs(z[0] / z[1] - asp))
+            if gh != 1 and i == 0:
+                # image_to_token_grid 写死 gh=1（tile 排成单行）。2.85 的画布下
+                # dynamic_preprocess 也确实只会选单行，两者一致；若这里推出 gh>1，
+                # 说明 npat 与画布不自洽，必须查清而不是硬跑。
+                print(f"[GVS-EX/simlingo] 警告：npat={npat} 推出 {gw}x{gh}，"
+                      f"与 image_to_token_grid 的 gh=1 约定不符", flush=True)
+            g = gt_to_grid(gt_c, gh * SIDE, gw * SIDE)
             # token 顺序是 tile-major，需重排成 (gh*SIDE, gw*SIDE) 的行主序
             order = np.arange(npat * SIDE * SIDE).reshape(npat, SIDE, SIDE)
             order = order.reshape(gh, gw, SIDE, SIDE).transpose(0, 2, 1, 3).reshape(-1)
@@ -190,7 +239,11 @@ def main():
             scenes += [ev["scene_name"]] * (gh * SIDE * gw * SIDE)
             if (i + 1) % 25 == 0:
                 print(f"[GVS-EX/simlingo] {i+1}/{len(evs)}", flush=True)
+        if skipc:
+            print(f"[GVS-EX/simlingo] 跳过统计: {dict(skipc)}", flush=True)
         meta = {"grid": "per-image (gh*16, gw*16)", "layer": args.layer,
+                "canvas": [TW, POST_H],
+                "geometry_fix": "掩膜与 tile 网格均按裁剪后画布计算（2026-09-07）",
                 "token_to_pixel": "InternVL2 dynamic_preprocess 的 tile 网格，每 tile 16x16 token",
                 "random_init": "同架构重建 + 递归 reset_parameters()"}
 

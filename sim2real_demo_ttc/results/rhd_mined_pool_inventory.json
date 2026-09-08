@@ -1,0 +1,577 @@
+[
+  {
+    "file": "brake_first_pool.json",
+    "n_events": 18,
+    "n_scenes": 18,
+    "n_logs": 0,
+    "cities": {
+      "None": 18
+    },
+    "splits": {
+      "None": 18
+    },
+    "meta": {
+      "corpus": "nuscenes"
+    }
+  },
+  {
+    "file": "brake_first_pool_final.json",
+    "n_events": 13,
+    "n_scenes": 13,
+    "n_logs": 0,
+    "cities": {
+      "None": 13
+    },
+    "splits": {
+      "None": 13
+    },
+    "meta": {
+      "corpus": "nuScenes v1.0-trainval (G1)",
+      "n_events": 13,
+      "n_scenes": 13
+    }
+  },
+  {
+    "file": "brake_first_pool_ghost_trainval.json",
+    "n_events": 180,
+    "n_scenes": 177,
+    "n_logs": 0,
+    "cities": {
+      "None": 180
+    },
+    "splits": {
+      "None": 180
+    },
+    "meta": {
+      "corpus": "navsim",
+      "scenario": "ghost"
+    }
+  },
+  {
+    "file": "brake_first_pool_isec.json",
+    "n_events": 10,
+    "n_scenes": 10,
+    "n_logs": 0,
+    "cities": {
+      "None": 10
+    },
+    "splits": {
+      "None": 10
+    },
+    "meta": {
+      "corpus": "nuscenes",
+      "scenario": "intersection"
+    }
+  },
+  {
+    "file": "brake_first_pool_isec_final.json",
+    "n_events": 2,
+    "n_scenes": 2,
+    "n_logs": 0,
+    "cities": {
+      "None": 2
+    },
+    "splits": {
+      "None": 2
+    },
+    "meta": {
+      "scenario": "intersection",
+      "corpus": "nuscenes",
+      "n_events": 2,
+      "n_scenes": 2
+    }
+  },
+  {
+    "file": "brake_first_pool_isec_nusc_v2.json",
+    "n_events": 10,
+    "n_scenes": 10,
+    "n_logs": 0,
+    "cities": {
+      "None": 10
+    },
+    "splits": {
+      "None": 10
+    },
+    "meta": {
+      "corpus": "nuscenes",
+      "scenario": "intersection"
+    }
+  },
+  {
+    "file": "brake_first_pool_lead.json",
+    "n_events": 51,
+    "n_scenes": 50,
+    "n_logs": 0,
+    "cities": {
+      "None": 51
+    },
+    "splits": {
+      "None": 51
+    },
+    "meta": {
+      "corpus": "nuscenes",
+      "scenario": "lead"
+    }
+  },
+  {
+    "file": "brake_first_pool_lead_final.json",
+    "n_events": 16,
+    "n_scenes": 16,
+    "n_logs": 0,
+    "cities": {
+      "None": 16
+    },
+    "splits": {
+      "None": 16
+    },
+    "meta": {
+      "scenario": "lead",
+      "corpus": "nuscenes",
+      "n_events": 16,
+      "n_scenes": 16
+    }
+  },
+  {
+    "file": "brake_first_pool_lead_navsim_fx.json",
+    "n_events": 132,
+    "n_scenes": 131,
+    "n_logs": 0,
+    "cities": {
+      "None": 132
+    },
+    "splits": {
+      "None": 132
+    },
+    "meta": {
+      "corpus": "navsim",
+      "scenario": "lead"
+    }
+  },
+  {
+    "file": "brake_first_pool_lead_navsim_fx_final.json",
+    "n_events": 60,
+    "n_scenes": 60,
+    "n_logs": 0,
+    "cities": {
+      "None": 60
+    },
+    "splits": {
+      "None": 60
+    },
+    "meta": {
+      "scenario": "lead",
+      "corpus": "navsim",
+      "n_events": 60,
+      "n_scenes": 60
+    }
+  },
+  {
+    "file": "brake_first_pool_lead_trainval.json",
+    "n_events": 1368,
+    "n_scenes": 1349,
+    "n_logs": 0,
+    "cities": {
+      "None": 1368
+    },
+    "splits": {
+      "None": 1368
+    },
+    "meta": {
+      "corpus": "navsim",
+      "scenario": "lead"
+    }
+  },
+  {
+    "file": "brake_first_pool_leftturn_navsim_fx.json",
+    "n_events": 0,
+    "n_scenes": 0,
+    "n_logs": 0,
+    "cities": {},
+    "splits": {},
+    "meta": {
+      "corpus": "navsim",
+      "scenario": "left_turn"
+    }
+  },
+  {
+    "file": "brake_first_pool_leftturn_nusc_v2.json",
+    "n_events": 2,
+    "n_scenes": 2,
+    "n_logs": 0,
+    "cities": {
+      "None": 2
+    },
+    "splits": {
+      "None": 2
+    },
+    "meta": {
+      "corpus": "nuscenes",
+      "scenario": "left_turn"
+    }
+  },
+  {
+    "file": "brake_first_pool_navsim_fx.json",
+    "n_events": 13,
+    "n_scenes": 13,
+    "n_logs": 0,
+    "cities": {
+      "None": 13
+    },
+    "splits": {
+      "None": 13
+    },
+    "meta": {
+      "corpus": "navsim",
+      "scenario": "ghost"
+    }
+  },
+  {
+    "file": "brake_first_pool_navsim_fx_final.json",
+    "n_events": 6,
+    "n_scenes": 6,
+    "n_logs": 0,
+    "cities": {
+      "None": 6
+    },
+    "splits": {
+      "None": 6
+    },
+    "meta": {
+      "scenario": "ghost",
+      "corpus": "navsim",
+      "n_events": 6,
+      "n_scenes": 6
+    }
+  },
+  {
+    "file": "brake_first_pool_v1_noanimal.json",
+    "n_events": 18,
+    "n_scenes": 18,
+    "n_logs": 0,
+    "cities": {
+      "None": 18
+    },
+    "splits": {
+      "None": 18
+    },
+    "meta": {}
+  },
+  {
+    "file": "brake_first_pool_v2.json",
+    "n_events": 18,
+    "n_scenes": 18,
+    "n_logs": 0,
+    "cities": {
+      "None": 18
+    },
+    "splits": {
+      "None": 18
+    },
+    "meta": {
+      "corpus": "nuscenes"
+    }
+  },
+  {
+    "file": "deploy_pool_ghost_all.json",
+    "n_events": 53,
+    "n_scenes": 53,
+    "n_logs": 49,
+    "cities": {
+      "us-ma-boston": 3,
+      "us-nv-las-vegas-strip": 44,
+      "us-pa-pittsburgh-hazelwood": 5,
+      "sg-one-north": 1
+    },
+    "splits": {
+      "test": 6,
+      "trainval": 47
+    },
+    "meta": {
+      "scenario": "ghost",
+      "tag": "all",
+      "corpus": "navsim",
+      "sources": [
+        "brake_first_pool_navsim_fx_final.json:test",
+        "brake_first_pool_ghost_trainval.json:trainval"
+      ],
+      "n_events": 53,
+      "n_scenes": 53,
+      "n_logs": 49
+    }
+  },
+  {
+    "file": "deploy_pool_ghost_vp.json",
+    "n_events": 49,
+    "n_scenes": 49,
+    "n_logs": 45,
+    "cities": {
+      "us-nv-las-vegas-strip": 44,
+      "us-pa-pittsburgh-hazelwood": 5
+    },
+    "splits": {
+      "test": 4,
+      "trainval": 45
+    },
+    "meta": {
+      "scenario": "ghost",
+      "tag": "vp",
+      "corpus": "navsim",
+      "sources": [
+        "pool_ghost_test_vp.json:test",
+        "pool_ghost_trainval_vp.json:trainval"
+      ],
+      "n_events": 49,
+      "n_scenes": 49,
+      "n_logs": 45
+    }
+  },
+  {
+    "file": "deploy_pool_ghost_vp_r1.json",
+    "n_events": 25,
+    "n_scenes": 25,
+    "n_logs": 25,
+    "cities": {
+      "us-nv-las-vegas-strip": 23,
+      "us-pa-pittsburgh-hazelwood": 2
+    },
+    "splits": {
+      "test": 4,
+      "trainval": 21
+    },
+    "meta": {
+      "scenario": "ghost",
+      "tag": "vp",
+      "corpus": "navsim",
+      "sources": [
+        "pool_ghost_test_vp.json:test",
+        "pool_ghost_trainval_vp.json:trainval"
+      ],
+      "n_events": 25,
+      "n_scenes": 25,
+      "n_logs": 25
+    }
+  },
+  {
+    "file": "deploy_pool_lead_all.json",
+    "n_events": 385,
+    "n_scenes": 384,
+    "n_logs": 280,
+    "cities": {
+      "us-ma-boston": 65,
+      "us-nv-las-vegas-strip": 268,
+      "us-pa-pittsburgh-hazelwood": 49,
+      "sg-one-north": 3
+    },
+    "splits": {
+      "test": 60,
+      "trainval": 325
+    },
+    "meta": {
+      "scenario": "lead",
+      "tag": "all",
+      "corpus": "navsim",
+      "sources": [
+        "brake_first_pool_lead_navsim_fx_final.json:test",
+        "brake_first_pool_lead_trainval.json:trainval"
+      ],
+      "n_events": 385,
+      "n_scenes": 384,
+      "n_logs": 280
+    }
+  },
+  {
+    "file": "deploy_pool_lead_vp.json",
+    "n_events": 317,
+    "n_scenes": 316,
+    "n_logs": 223,
+    "cities": {
+      "us-nv-las-vegas-strip": 268,
+      "us-pa-pittsburgh-hazelwood": 49
+    },
+    "splits": {
+      "test": 33,
+      "trainval": 284
+    },
+    "meta": {
+      "scenario": "lead",
+      "tag": "vp",
+      "corpus": "navsim",
+      "sources": [
+        "pool_lead_test_vp.json:test",
+        "pool_lead_trainval_vp.json:trainval"
+      ],
+      "n_events": 317,
+      "n_scenes": 316,
+      "n_logs": 223
+    }
+  },
+  {
+    "file": "deploy_pool_lead_vp_r1.json",
+    "n_events": 246,
+    "n_scenes": 246,
+    "n_logs": 188,
+    "cities": {
+      "us-nv-las-vegas-strip": 222,
+      "us-pa-pittsburgh-hazelwood": 24
+    },
+    "splits": {
+      "test": 33,
+      "trainval": 213
+    },
+    "meta": {
+      "scenario": "lead",
+      "tag": "vp",
+      "corpus": "navsim",
+      "sources": [
+        "pool_lead_test_vp.json:test",
+        "pool_lead_trainval_vp.json:trainval"
+      ],
+      "n_events": 246,
+      "n_scenes": 246,
+      "n_logs": 188
+    }
+  },
+  {
+    "file": "f3_candidate_pool.json",
+    "n_events": 6,
+    "n_scenes": 0,
+    "n_logs": 0,
+    "cities": {
+      "None": 6
+    },
+    "splits": {
+      "None": 6
+    },
+    "meta": {}
+  },
+  {
+    "file": "pool_ghost_test_vp.json",
+    "n_events": 5,
+    "n_scenes": 5,
+    "n_logs": 0,
+    "cities": {
+      "None": 5
+    },
+    "splits": {
+      "None": 5
+    },
+    "meta": {
+      "corpus": "navsim",
+      "scenario": "ghost"
+    }
+  },
+  {
+    "file": "pool_ghost_trainval_vp.json",
+    "n_events": 160,
+    "n_scenes": 158,
+    "n_logs": 0,
+    "cities": {
+      "None": 160
+    },
+    "splits": {
+      "None": 160
+    },
+    "meta": {
+      "corpus": "navsim",
+      "scenario": "ghost"
+    }
+  },
+  {
+    "file": "pool_lead_test_vp.json",
+    "n_events": 76,
+    "n_scenes": 75,
+    "n_logs": 0,
+    "cities": {
+      "None": 76
+    },
+    "splits": {
+      "None": 76
+    },
+    "meta": {
+      "corpus": "navsim",
+      "scenario": "lead"
+    }
+  },
+  {
+    "file": "pool_lead_trainval_vp.json",
+    "n_events": 1233,
+    "n_scenes": 1216,
+    "n_logs": 0,
+    "cities": {
+      "None": 1233
+    },
+    "splits": {
+      "None": 1233
+    },
+    "meta": {
+      "corpus": "navsim",
+      "scenario": "lead"
+    }
+  },
+  {
+    "file": "simlingo_instruction_probe_newpool.json",
+    "n_events": 13,
+    "n_scenes": 13,
+    "n_logs": 0,
+    "cities": {
+      "None": 13
+    },
+    "splits": {
+      "None": 13
+    },
+    "meta": {
+      "corpus": "nuScenes v1.0-trainval (G1)",
+      "n_events": 13
+    }
+  },
+  {
+    "file": "simlingo_instruction_probe_newpool_analysis.json",
+    "n_events": 0,
+    "n_scenes": 0,
+    "n_logs": 0,
+    "cities": {},
+    "splits": {},
+    "meta": {
+      "corpus": "nuScenes v1.0-trainval (G1)",
+      "n_events": 13,
+      "n_scenes": 13
+    }
+  },
+  {
+    "file": "simlingo_instruction_probe_newpool_exact.json",
+    "n_events": 0,
+    "n_scenes": 0,
+    "n_logs": 0,
+    "cities": {},
+    "splits": {},
+    "meta": {}
+  },
+  {
+    "file": "vla_boxes_deploy_pool_ghost_vp.json",
+    "n_events": 49,
+    "n_scenes": 49,
+    "n_logs": 0,
+    "cities": {
+      "None": 49
+    },
+    "splits": {
+      "test": 4,
+      "trainval": 45
+    },
+    "meta": {}
+  },
+  {
+    "file": "vla_boxes_deploy_pool_lead_vp.json",
+    "n_events": 317,
+    "n_scenes": 316,
+    "n_logs": 0,
+    "cities": {
+      "None": 317
+    },
+    "splits": {
+      "test": 33,
+      "trainval": 284
+    },
+    "meta": {}
+  }
+]

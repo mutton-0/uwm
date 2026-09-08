@@ -31,12 +31,17 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import g1_mine_events as G1                                            # noqa: E402
 from f3_occlusion_necessity import boot_scene                          # noqa: E402
 
-WP_DT = {"simlingo": 0.25, "dd": 0.5, "ltf": 0.5, "ddv2": 0.5}
+WP_DT = {"simlingo": 0.25, "dd": 0.5, "ltf": 0.5, "ddv2": 0.5,
+         "alpa": 0.1, "autovla": 0.5}   # Alpamayo 64x0.1=6.4s；AutoVLA 10x0.5=5s
 # 各候选**原生** commanded_speed 的定义不同，必须逐模型对齐，否则比的是两个量：
 #   simlingo: |wp[0]-wp[2]|*2        窗口 0.25-0.75s（agent_simlingo.py:815）
 #   DD 家族 : |wp[0]| / PRED_DT      窗口 0-0.5s（第一步位移/dt）
 NATIVE = {"simlingo": ("pair02", 0.25, 0.75), "dd": ("first", 0.0, 0.5),
-          "ltf": ("first", 0.0, 0.5), "ddv2": ("first", 0.0, 0.5)}
+          "ltf": ("first", 0.0, 0.5), "ddv2": ("first", 0.0, 0.5),
+          # Alpamayo 原生 v_plan = |p(0.8)-p(0.2)|/0.6（alpamayo_runner.py:55-59）
+          "alpa": ("pair", 0.2, 0.8),
+          # AutoVLA 原生 commanded_speed = |traj[0]|/0.5（autovla_adapter.py:227）
+          "autovla": ("first", 0.0, 0.5)}
 
 
 def model_readouts(wp, dt, native="pair02"):
@@ -45,8 +50,14 @@ def model_readouts(wp, dt, native="pair02"):
     T = len(w) * dt
     seg = np.linalg.norm(np.diff(w, axis=0), axis=1).sum()
     arc = float(np.linalg.norm(w[0]) + seg)          # 含原点->首点那一段
-    cs = (float(np.linalg.norm(w[0] - w[2]) * 2.0) if native == "pair02" and len(w) > 2
-          else float(np.linalg.norm(w[0]) / dt))
+    if native == "pair02" and len(w) > 2:
+        cs = float(np.linalg.norm(w[0] - w[2]) * 2.0)
+    elif native == "pair":            # Alpamayo：|p(0.8)-p(0.2)| / 0.6
+        i0, i1 = int(round(0.2 / dt)) - 1, int(round(0.8 / dt)) - 1
+        cs = (float(np.linalg.norm(w[i1] - w[i0]) / 0.6) if len(w) > i1
+              else float(np.linalg.norm(w[0]) / dt))
+    else:
+        cs = float(np.linalg.norm(w[0]) / dt)
     return {"cs_0.5s": cs,
             "arc_full": arc / T, "chord_full": float(np.linalg.norm(w[-1])) / T,
             "horizon_s": T}
@@ -68,7 +79,8 @@ def gt_readouts(geo, j, T, dt, ta=0.25, tb=0.75):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", default="simlingo")
+    ap.add_argument("--model", default="simlingo",
+                    choices=["simlingo","dd","ltf","ddv2","alpa","autovla"])
     ap.add_argument("--corpus", default="nuscenes", choices=["nuscenes","navsim"])
     ap.add_argument("--split", default="test")
     ap.add_argument("--f3", default="")
@@ -88,7 +100,7 @@ def main():
                         verbose=False)
         scmap = {s["name"]: s for s in nusc.scene}
 
-        def build_geo(n):
+        def build_geo(n, split=None):      # split 仅为签名对齐，nuScenes 不分 split
             return G1.compute_scene_geometry(nusc, scmap[n], cfg)
     else:
         import pickle
@@ -97,19 +109,28 @@ def main():
             OmegaConf.load(ROOT / "configs/navsim_corpus.yaml"), resolve=True)
         _fr = {}
 
-        def build_geo(n):
+        def build_geo(n, split=None):
+            """**必须带 split**：scene_name 跨 split 不唯一（test 的 65.8% 与 trainval
+            重名但指向不同 log）。裸名做键会把两段无关数据拼到一起。"""
+            sp0 = split or (args.split if args.split != "auto" else "test")
             if not _fr:
-                for lf in sorted((NS.NS_ROOT / "navsim_logs" / args.split).glob("*.pkl")):
-                    for f in pickle.load(open(lf, "rb")):
-                        _fr.setdefault(f["scene_name"], []).append(f)
-            return NS.build_geo(sorted(_fr[n], key=lambda z: z["timestamp"]), cfg, args.split)
+                for sp in (["test", "trainval"] if args.split == "auto" else [args.split]):
+                    d0 = NS.NS_ROOT / "navsim_logs" / sp
+                    if not d0.exists():
+                        continue
+                    for lf in sorted(d0.glob("*.pkl")):
+                        for f in pickle.load(open(lf, "rb")):
+                            _fr.setdefault((sp, f["scene_name"]), []).append(f)
+            return NS.build_geo(sorted(_fr[(sp0, n)], key=lambda z: z["timestamp"]),
+                                cfg, sp0)
+
     f3 = json.load(open(f3p)); dt = WP_DT[args.model]
     nat, t_a, t_b = NATIVE[args.model]
     KEYS = ("cs_0.5s", "arc_full", "chord_full")
 
     recs = []
     for r in f3["per_event"]:
-        geo = build_geo(r["scene"])
+        geo = build_geo(r["scene"], r.get("split"))
         j = r["frame_idx"]; v0 = float(geo["ego_speed"][j])
         mo = model_readouts(r["traj_origin"], dt, nat)
         mc = model_readouts(r["traj_clean"], dt, nat)

@@ -1,0 +1,39 @@
+{
+  "design": "刹车优先挖矿：先找人类减速片段，再归因到走廊内 VRU",
+  "corpus": "navsim",
+  "split": "test",
+  "scenario": "left_turn",
+  "hazard_classes": [
+    "human.",
+    "vehicle.",
+    "movable_object.",
+    "static_object.",
+    "animal"
+  ],
+  "static_corridor_m": 1.0,
+  "min_vmin_mps": 0.0,
+  "signal_gate": "signalized",
+  "exclude_red": false,
+  "require_oncoming": true,
+  "left_turn_gate": {
+    "min_deg": 25.0,
+    "max_deg": 135.0,
+    "min_path_m": 5.0,
+    "yaw_source": "ego pose quaternion (unwrapped)"
+  },
+  "intersection_proxy": null,
+  "explained_ratio_bounds": [
+    0.3,
+    10.0
+  ],
+  "n_scenes_scanned": 1880,
+  "n_brake_episodes": 968,
+  "n_candidates_raw": 0,
+  "n_candidates_dedup": 0,
+  "n_scenes_with_candidate": 0,
+  "T1_a_req_ge_0.4": {
+    "n": 0,
+    "n_scenes": 0
+  },
+  "candidates": []
+}

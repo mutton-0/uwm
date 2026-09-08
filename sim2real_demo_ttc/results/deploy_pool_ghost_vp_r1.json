@@ -1,0 +1,1947 @@
+{
+  "scenario": "ghost",
+  "tag": "vp",
+  "corpus": "navsim",
+  "sources": [
+    "pool_ghost_test_vp.json:test",
+    "pool_ghost_trainval_vp.json:trainval"
+  ],
+  "n_events": 25,
+  "n_scenes": 25,
+  "n_logs": 25,
+  "city_counts": {
+    "us-nv-las-vegas-strip": 23,
+    "us-pa-pittsburgh-hazelwood": 2
+  },
+  "split_counts": {
+    "test": 4,
+    "trainval": 21
+  },
+  "dropped": {
+    "图像不在盘上": 34
+  },
+  "candidates": [
+    {
+      "scene": "log-0020-scene-0005",
+      "frame_idx": 0,
+      "t": 1621982542.900222,
+      "ego_v0": 8.09,
+      "ego_vmin": 0.08,
+      "dv": -8.01,
+      "rel_decel": 0.99,
+      "a_obs": 0.843,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 2.753,
+      "a_vru_max": 1.014,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.202,
+      "lead_vru": {
+        "token": "da04f5faa6b95222",
+        "cat": "human.pedestrian.adult",
+        "s_m": 37.2,
+        "lat_m": 0.34
+      },
+      "ttc_s": 4.6,
+      "ego_yaw_change_deg": -1.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.295,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "da04f5faa6b95222",
+          "cat": "human.pedestrian.adult",
+          "s_m": 37.2,
+          "lat_m": 0.34,
+          "a_req": 1.014,
+          "visible": true
+        },
+        {
+          "token": "8e436ff8f06b5cfa",
+          "cat": "human.pedestrian.adult",
+          "s_m": 39.3,
+          "lat_m": 0.79,
+          "a_req": 0.888,
+          "visible": true
+        },
+        {
+          "token": "954a8c6d81415132",
+          "cat": "human.pedestrian.adult",
+          "s_m": 40.3,
+          "lat_m": 1.48,
+          "a_req": 0.851,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.05.25.17.54.41_veh-35_02723_02902",
+      "split": "test",
+      "uid": "test:log-0020-scene-0005:0"
+    },
+    {
+      "scene": "log-0037-scene-0013",
+      "frame_idx": 0,
+      "t": 1622761014.700802,
+      "ego_v0": 2.65,
+      "ego_vmin": 0.0,
+      "dv": -2.65,
+      "rel_decel": 1.0,
+      "a_obs": 0.407,
+      "brake_dur_s": 6.5,
+      "a_vru_sum": 0.415,
+      "a_vru_max": 0.415,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.019,
+      "lead_vru": {
+        "token": "6c5ccbbfd73a512b",
+        "cat": "human.pedestrian.adult",
+        "s_m": 20.6,
+        "lat_m": 1.54
+      },
+      "ttc_s": 7.8,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.998,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "6c5ccbbfd73a512b",
+          "cat": "human.pedestrian.adult",
+          "s_m": 20.6,
+          "lat_m": 1.54,
+          "a_req": 0.415,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.06.03.18.47.39_veh-35_00257_00492",
+      "split": "test",
+      "uid": "test:log-0037-scene-0013:0"
+    },
+    {
+      "scene": "log-0110-scene-0030",
+      "frame_idx": 6,
+      "t": 1631822788.49957,
+      "ego_v0": 5.42,
+      "ego_vmin": 0.01,
+      "dv": -5.4,
+      "rel_decel": 0.997,
+      "a_obs": 0.72,
+      "brake_dur_s": 7.5,
+      "a_vru_sum": 0.95,
+      "a_vru_max": 0.478,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.664,
+      "lead_vru": {
+        "token": "7151cb9ec48a5be0",
+        "cat": "human.pedestrian.adult",
+        "s_m": 32.1,
+        "lat_m": 1.59
+      },
+      "ttc_s": 5.9,
+      "ego_yaw_change_deg": -0.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.055,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "7151cb9ec48a5be0",
+          "cat": "human.pedestrian.adult",
+          "s_m": 32.1,
+          "lat_m": 1.59,
+          "a_req": 0.478,
+          "visible": true
+        },
+        {
+          "token": "4cb160f59099585a",
+          "cat": "human.pedestrian.adult",
+          "s_m": 32.1,
+          "lat_m": 1.62,
+          "a_req": 0.472,
+          "visible": true
+        }
+      ],
+      "city": "us-pa-pittsburgh-hazelwood",
+      "log_name": "2021.09.16.19.27.01_veh-45_01749_03230",
+      "split": "test",
+      "uid": "test:log-0110-scene-0030:6"
+    },
+    {
+      "scene": "log-0111-scene-0024",
+      "frame_idx": 18,
+      "t": 1631823321.500209,
+      "ego_v0": 7.32,
+      "ego_vmin": 2.44,
+      "dv": -4.88,
+      "rel_decel": 0.667,
+      "a_obs": 0.488,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 1.53,
+      "a_vru_max": 0.765,
+      "a_non_vru_max": 0.387,
+      "vru_class_share": 0.72,
+      "explained_ratio": 1.568,
+      "lead_vru": {
+        "token": "44d8ae7e17cf5c12",
+        "cat": "human.pedestrian.adult",
+        "s_m": 33.3,
+        "lat_m": 0.18
+      },
+      "ttc_s": 4.5,
+      "ego_yaw_change_deg": -1.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.313,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "44d8ae7e17cf5c12",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.3,
+          "lat_m": 0.18,
+          "a_req": 0.765,
+          "visible": true
+        },
+        {
+          "token": "4f40da4068e55cc2",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.3,
+          "lat_m": 0.22,
+          "a_req": 0.764,
+          "visible": true
+        }
+      ],
+      "city": "us-pa-pittsburgh-hazelwood",
+      "log_name": "2021.09.16.19.49.00_veh-42_00990_01609",
+      "split": "test",
+      "uid": "test:log-0111-scene-0024:18"
+    },
+    {
+      "scene": "log-0103-scene-0006",
+      "frame_idx": 0,
+      "t": 1623258408.099902,
+      "ego_v0": 3.8,
+      "ego_vmin": 0.0,
+      "dv": -3.8,
+      "rel_decel": 1.0,
+      "a_obs": 0.633,
+      "brake_dur_s": 6.0,
+      "a_vru_sum": 1.333,
+      "a_vru_max": 0.625,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.988,
+      "lead_vru": {
+        "token": "cd6866a2cbf052e5",
+        "cat": "human.pedestrian.adult",
+        "s_m": 18.3,
+        "lat_m": 0.4
+      },
+      "ttc_s": 4.8,
+      "ego_yaw_change_deg": 19.7,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.728,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "cd6866a2cbf052e5",
+          "cat": "human.pedestrian.adult",
+          "s_m": 18.3,
+          "lat_m": 0.4,
+          "a_req": 0.625,
+          "visible": true
+        },
+        {
+          "token": "37f51f4862cc5e7c",
+          "cat": "human.pedestrian.adult",
+          "s_m": 26.7,
+          "lat_m": 1.09,
+          "a_req": 0.473,
+          "visible": true
+        },
+        {
+          "token": "9fa0a0a19aba57a9",
+          "cat": "human.pedestrian.adult",
+          "s_m": 24.6,
+          "lat_m": 1.28,
+          "a_req": 0.235,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.06.09.11.54.15_veh-12_04138_04355",
+      "split": "trainval",
+      "uid": "trainval:log-0103-scene-0006:0"
+    },
+    {
+      "scene": "log-0211-scene-0009",
+      "frame_idx": 20,
+      "t": 1623270254.699184,
+      "ego_v0": 5.4,
+      "ego_vmin": 0.08,
+      "dv": -5.33,
+      "rel_decel": 0.986,
+      "a_obs": 0.561,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 4.411,
+      "a_vru_max": 0.525,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.936,
+      "lead_vru": {
+        "token": "c2ca765297b15f5b",
+        "cat": "human.pedestrian.adult",
+        "s_m": 29.2,
+        "lat_m": 1.94
+      },
+      "ttc_s": 5.4,
+      "ego_yaw_change_deg": 0.7,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 9,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "c2ca765297b15f5b",
+          "cat": "human.pedestrian.adult",
+          "s_m": 29.2,
+          "lat_m": 1.94,
+          "a_req": 0.525,
+          "visible": true
+        },
+        {
+          "token": "6058a9b4b8ea5c2c",
+          "cat": "human.pedestrian.adult",
+          "s_m": 30.3,
+          "lat_m": 0.44,
+          "a_req": 0.513,
+          "visible": true
+        },
+        {
+          "token": "e45d2ccb091b598f",
+          "cat": "human.pedestrian.adult",
+          "s_m": 30.3,
+          "lat_m": 1.34,
+          "a_req": 0.511,
+          "visible": true
+        },
+        {
+          "token": "e23ce8fc2db35234",
+          "cat": "human.pedestrian.adult",
+          "s_m": 30.3,
+          "lat_m": 0.61,
+          "a_req": 0.497,
+          "visible": true
+        },
+        {
+          "token": "4e3f93aa575e56da",
+          "cat": "human.pedestrian.adult",
+          "s_m": 31.3,
+          "lat_m": 1.21,
+          "a_req": 0.488,
+          "visible": true
+        },
+        {
+          "token": "b8e2873768325e08",
+          "cat": "human.pedestrian.adult",
+          "s_m": 31.3,
+          "lat_m": 1.74,
+          "a_req": 0.479,
+          "visible": true
+        },
+        {
+          "token": "a327922beff35199",
+          "cat": "human.pedestrian.adult",
+          "s_m": 32.4,
+          "lat_m": 0.97,
+          "a_req": 0.477,
+          "visible": true
+        },
+        {
+          "token": "37f906d4b06c5dfc",
+          "cat": "human.pedestrian.adult",
+          "s_m": 34.5,
+          "lat_m": 1.08,
+          "a_req": 0.469,
+          "visible": true
+        },
+        {
+          "token": "344e7ce5953753af",
+          "cat": "human.pedestrian.adult",
+          "s_m": 35.5,
+          "lat_m": 1.11,
+          "a_req": 0.451,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.06.09.14.50.36_veh-26_05398_05800",
+      "split": "trainval",
+      "uid": "trainval:log-0211-scene-0009:20"
+    },
+    {
+      "scene": "log-0219-scene-0004",
+      "frame_idx": 0,
+      "t": 1623267301.70126,
+      "ego_v0": 2.83,
+      "ego_vmin": 1.64,
+      "dv": -1.2,
+      "rel_decel": 0.423,
+      "a_obs": 0.399,
+      "brake_dur_s": 3.0,
+      "a_vru_sum": 0.507,
+      "a_vru_max": 0.507,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.269,
+      "lead_vru": {
+        "token": "d4bb121a667a53d5",
+        "cat": "human.pedestrian.adult",
+        "s_m": 18.1,
+        "lat_m": 1.14
+      },
+      "ttc_s": 6.4,
+      "ego_yaw_change_deg": 16.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.517,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "d4bb121a667a53d5",
+          "cat": "human.pedestrian.adult",
+          "s_m": 18.1,
+          "lat_m": 1.14,
+          "a_req": 0.507,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.06.09.14.58.55_veh-35_01894_02311",
+      "split": "trainval",
+      "uid": "trainval:log-0219-scene-0004:0"
+    },
+    {
+      "scene": "log-0228-scene-0005",
+      "frame_idx": 0,
+      "t": 1623268821.701063,
+      "ego_v0": 4.3,
+      "ego_vmin": 0.0,
+      "dv": -4.3,
+      "rel_decel": 1.0,
+      "a_obs": 0.505,
+      "brake_dur_s": 8.5,
+      "a_vru_sum": 1.961,
+      "a_vru_max": 0.423,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.838,
+      "lead_vru": {
+        "token": "e12ba98912455270",
+        "cat": "human.pedestrian.adult",
+        "s_m": 25.7,
+        "lat_m": 0.53
+      },
+      "ttc_s": 6.0,
+      "ego_yaw_change_deg": -0.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.118,
+      "n_mask_group": 5,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "e12ba98912455270",
+          "cat": "human.pedestrian.adult",
+          "s_m": 25.7,
+          "lat_m": 0.53,
+          "a_req": 0.423,
+          "visible": true
+        },
+        {
+          "token": "f305222652e95f83",
+          "cat": "human.pedestrian.adult",
+          "s_m": 22.5,
+          "lat_m": 0.05,
+          "a_req": 0.417,
+          "visible": true
+        },
+        {
+          "token": "19526a56d41759cf",
+          "cat": "human.pedestrian.adult",
+          "s_m": 23.6,
+          "lat_m": 0.19,
+          "a_req": 0.41,
+          "visible": true
+        },
+        {
+          "token": "d6aa4992f42d5131",
+          "cat": "human.pedestrian.adult",
+          "s_m": 25.7,
+          "lat_m": 1.93,
+          "a_req": 0.387,
+          "visible": true
+        },
+        {
+          "token": "2174dd0792855e54",
+          "cat": "vehicle.bicycle",
+          "s_m": 23.6,
+          "lat_m": 1.14,
+          "a_req": 0.323,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.06.09.14.58.55_veh-35_03390_03537",
+      "split": "trainval",
+      "uid": "trainval:log-0228-scene-0005:0"
+    },
+    {
+      "scene": "log-0330-scene-0021",
+      "frame_idx": 0,
+      "t": 1623689339.100231,
+      "ego_v0": 3.41,
+      "ego_vmin": 0.0,
+      "dv": -3.41,
+      "rel_decel": 0.999,
+      "a_obs": 0.682,
+      "brake_dur_s": 5.0,
+      "a_vru_sum": 0.436,
+      "a_vru_max": 0.436,
+      "a_non_vru_max": 0.222,
+      "vru_class_share": 0.662,
+      "explained_ratio": 0.639,
+      "lead_vru": {
+        "token": "dacf1b2fe3795d94",
+        "cat": "human.pedestrian.adult",
+        "s_m": 25.0,
+        "lat_m": 1.63
+      },
+      "ttc_s": 7.3,
+      "ego_yaw_change_deg": 18.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.993,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "dacf1b2fe3795d94",
+          "cat": "human.pedestrian.adult",
+          "s_m": 25.0,
+          "lat_m": 1.63,
+          "a_req": 0.436,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.06.14.11.44.56_veh-35_03389_04017",
+      "split": "trainval",
+      "uid": "trainval:log-0330-scene-0021:0"
+    },
+    {
+      "scene": "log-0482-scene-0032",
+      "frame_idx": 0,
+      "t": 1623708527.699846,
+      "ego_v0": 6.38,
+      "ego_vmin": 0.0,
+      "dv": -6.38,
+      "rel_decel": 1.0,
+      "a_obs": 0.671,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 1.326,
+      "a_vru_max": 0.677,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.008,
+      "lead_vru": {
+        "token": "0d0a91bf0d2a516c",
+        "cat": "human.pedestrian.adult",
+        "s_m": 33.1,
+        "lat_m": 0.73
+      },
+      "ttc_s": 5.2,
+      "ego_yaw_change_deg": -6.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.035,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "0d0a91bf0d2a516c",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.1,
+          "lat_m": 0.73,
+          "a_req": 0.677,
+          "visible": true
+        },
+        {
+          "token": "581a5c860f135e91",
+          "cat": "human.pedestrian.adult",
+          "s_m": 34.2,
+          "lat_m": 0.57,
+          "a_req": 0.649,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.06.14.17.26.26_veh-38_01860_02729",
+      "split": "trainval",
+      "uid": "trainval:log-0482-scene-0032:0"
+    },
+    {
+      "scene": "log-0501-scene-0001",
+      "frame_idx": 27,
+      "t": 1623709476.465922,
+      "ego_v0": 5.67,
+      "ego_vmin": 2.41,
+      "dv": -3.26,
+      "rel_decel": 0.575,
+      "a_obs": 0.816,
+      "brake_dur_s": 3.99,
+      "a_vru_sum": 1.764,
+      "a_vru_max": 0.609,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.746,
+      "lead_vru": {
+        "token": "896a810707165a81",
+        "cat": "human.pedestrian.adult",
+        "s_m": 26.8,
+        "lat_m": 1.99
+      },
+      "ttc_s": 4.7,
+      "ego_yaw_change_deg": 0.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "896a810707165a81",
+          "cat": "human.pedestrian.adult",
+          "s_m": 26.8,
+          "lat_m": 1.99,
+          "a_req": 0.609,
+          "visible": true
+        },
+        {
+          "token": "926c69b6f6b056b6",
+          "cat": "human.pedestrian.adult",
+          "s_m": 28.9,
+          "lat_m": 1.75,
+          "a_req": 0.583,
+          "visible": true
+        },
+        {
+          "token": "a1e41c5ab2da5f8f",
+          "cat": "human.pedestrian.adult",
+          "s_m": 30.0,
+          "lat_m": 1.86,
+          "a_req": 0.573,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.06.14.18.13.35_veh-26_00522_00702",
+      "split": "trainval",
+      "uid": "trainval:log-0501-scene-0001:27"
+    },
+    {
+      "scene": "log-0584-scene-0003",
+      "frame_idx": 0,
+      "t": 1623715526.699744,
+      "ego_v0": 5.44,
+      "ego_vmin": 0.0,
+      "dv": -5.44,
+      "rel_decel": 1.0,
+      "a_obs": 0.605,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 2.393,
+      "a_vru_max": 0.548,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.907,
+      "lead_vru": {
+        "token": "170a8c4b47755d59",
+        "cat": "human.pedestrian.adult",
+        "s_m": 29.0,
+        "lat_m": 1.28
+      },
+      "ttc_s": 5.3,
+      "ego_yaw_change_deg": 0.7,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.013,
+      "n_mask_group": 5,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "170a8c4b47755d59",
+          "cat": "human.pedestrian.adult",
+          "s_m": 29.0,
+          "lat_m": 1.28,
+          "a_req": 0.548,
+          "visible": true
+        },
+        {
+          "token": "93fa44bc659951ab",
+          "cat": "human.pedestrian.adult",
+          "s_m": 31.1,
+          "lat_m": 0.33,
+          "a_req": 0.482,
+          "visible": true
+        },
+        {
+          "token": "598ad18a8c4e502c",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.2,
+          "lat_m": 1.28,
+          "a_req": 0.468,
+          "visible": true
+        },
+        {
+          "token": "ab2c41201d805f8f",
+          "cat": "human.pedestrian.adult",
+          "s_m": 32.2,
+          "lat_m": 0.14,
+          "a_req": 0.466,
+          "visible": true
+        },
+        {
+          "token": "05c8a6d780d45ea7",
+          "cat": "human.pedestrian.adult",
+          "s_m": 34.3,
+          "lat_m": 0.64,
+          "a_req": 0.43,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.06.14.18.42.45_veh-12_04838_04927",
+      "split": "trainval",
+      "uid": "trainval:log-0584-scene-0003:0"
+    },
+    {
+      "scene": "log-0625-scene-0078",
+      "frame_idx": 0,
+      "t": 1624463296.068546,
+      "ego_v0": 4.47,
+      "ego_vmin": 3.06,
+      "dv": -1.41,
+      "rel_decel": 0.315,
+      "a_obs": 0.141,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 1.096,
+      "a_vru_max": 0.402,
+      "a_non_vru_max": 0.193,
+      "vru_class_share": 0.85,
+      "explained_ratio": 2.854,
+      "lead_vru": {
+        "token": "90c18718e5f45525",
+        "cat": "human.pedestrian.adult",
+        "s_m": 33.2,
+        "lat_m": 1.5
+      },
+      "ttc_s": 7.4,
+      "ego_yaw_change_deg": 57.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.388,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "90c18718e5f45525",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.2,
+          "lat_m": 1.5,
+          "a_req": 0.402,
+          "visible": true
+        },
+        {
+          "token": "a98ac09f904f5985",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.2,
+          "lat_m": 0.4,
+          "a_req": 0.366,
+          "visible": true
+        },
+        {
+          "token": "098cf43d822f58a4",
+          "cat": "human.pedestrian.adult",
+          "s_m": 31.4,
+          "lat_m": 1.35,
+          "a_req": 0.327,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.06.23.15.18.10_veh-26_00165_02848",
+      "split": "trainval",
+      "uid": "trainval:log-0625-scene-0078:0"
+    },
+    {
+      "scene": "log-0626-scene-0003",
+      "frame_idx": 0,
+      "t": 1624464186.300582,
+      "ego_v0": 3.93,
+      "ego_vmin": 0.0,
+      "dv": -3.92,
+      "rel_decel": 0.999,
+      "a_obs": 0.392,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.9,
+      "a_vru_max": 0.468,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.192,
+      "lead_vru": {
+        "token": "4fc3bbd3250d5002",
+        "cat": "human.pedestrian.adult",
+        "s_m": 16.7,
+        "lat_m": 0.46
+      },
+      "ttc_s": 4.3,
+      "ego_yaw_change_deg": -2.8,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.199,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "4fc3bbd3250d5002",
+          "cat": "human.pedestrian.adult",
+          "s_m": 16.7,
+          "lat_m": 0.46,
+          "a_req": 0.468,
+          "visible": true
+        },
+        {
+          "token": "e8190111d4de5ae7",
+          "cat": "human.pedestrian.adult",
+          "s_m": 17.7,
+          "lat_m": 0.59,
+          "a_req": 0.432,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.06.23.15.56.12_veh-16_00066_00818",
+      "split": "trainval",
+      "uid": "trainval:log-0626-scene-0003:0"
+    },
+    {
+      "scene": "log-0635-scene-0009",
+      "frame_idx": 18,
+      "t": 1624467548.401253,
+      "ego_v0": 5.75,
+      "ego_vmin": 0.1,
+      "dv": -5.64,
+      "rel_decel": 0.982,
+      "a_obs": 0.564,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 1.762,
+      "a_vru_max": 0.634,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.124,
+      "lead_vru": {
+        "token": "8a7befdfc2195d27",
+        "cat": "human.pedestrian.adult",
+        "s_m": 29.2,
+        "lat_m": 1.76
+      },
+      "ttc_s": 5.1,
+      "ego_yaw_change_deg": -8.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.227,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "8a7befdfc2195d27",
+          "cat": "human.pedestrian.adult",
+          "s_m": 29.2,
+          "lat_m": 1.76,
+          "a_req": 0.634,
+          "visible": true
+        },
+        {
+          "token": "c4a88f8284685514",
+          "cat": "human.pedestrian.adult",
+          "s_m": 30.2,
+          "lat_m": 1.16,
+          "a_req": 0.584,
+          "visible": true
+        },
+        {
+          "token": "22d8df6845a75d97",
+          "cat": "human.pedestrian.adult",
+          "s_m": 31.3,
+          "lat_m": 0.21,
+          "a_req": 0.544,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.06.23.16.54.19_veh-35_00016_00755",
+      "split": "trainval",
+      "uid": "trainval:log-0635-scene-0009:18"
+    },
+    {
+      "scene": "log-0703-scene-0009",
+      "frame_idx": 19,
+      "t": 1625850762.501373,
+      "ego_v0": 3.47,
+      "ego_vmin": 0.0,
+      "dv": -3.47,
+      "rel_decel": 1.0,
+      "a_obs": 0.408,
+      "brake_dur_s": 8.5,
+      "a_vru_sum": 0.491,
+      "a_vru_max": 0.491,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.203,
+      "lead_vru": {
+        "token": "77ce4025752950f9",
+        "cat": "human.pedestrian.adult",
+        "s_m": 16.6,
+        "lat_m": 0.56
+      },
+      "ttc_s": 4.8,
+      "ego_yaw_change_deg": 16.2,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.475,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "77ce4025752950f9",
+          "cat": "human.pedestrian.adult",
+          "s_m": 16.6,
+          "lat_m": 0.56,
+          "a_req": 0.491,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.07.09.17.06.37_veh-35_00049_00237",
+      "split": "trainval",
+      "uid": "trainval:log-0703-scene-0009:19"
+    },
+    {
+      "scene": "log-0709-scene-0020",
+      "frame_idx": 21,
+      "t": 1625862902.600305,
+      "ego_v0": 3.07,
+      "ego_vmin": 2.01,
+      "dv": -1.05,
+      "rel_decel": 0.343,
+      "a_obs": 0.263,
+      "brake_dur_s": 4.0,
+      "a_vru_sum": 0.553,
+      "a_vru_max": 0.553,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 2.105,
+      "lead_vru": {
+        "token": "4b6f30a598a35a16",
+        "cat": "human.pedestrian.adult",
+        "s_m": 20.0,
+        "lat_m": 1.5
+      },
+      "ttc_s": 6.5,
+      "ego_yaw_change_deg": -28.6,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.993,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "4b6f30a598a35a16",
+          "cat": "human.pedestrian.adult",
+          "s_m": 20.0,
+          "lat_m": 1.5,
+          "a_req": 0.553,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.07.09.20.26.06_veh-35_00016_01757",
+      "split": "trainval",
+      "uid": "trainval:log-0709-scene-0020:21"
+    },
+    {
+      "scene": "log-0744-scene-0060",
+      "frame_idx": 29,
+      "t": 1626404172.600012,
+      "ego_v0": 5.2,
+      "ego_vmin": 1.11,
+      "dv": -4.09,
+      "rel_decel": 0.786,
+      "a_obs": 0.818,
+      "brake_dur_s": 5.0,
+      "a_vru_sum": 6.986,
+      "a_vru_max": 0.675,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.825,
+      "lead_vru": {
+        "token": "e6d0c3775ad05b47",
+        "cat": "human.pedestrian.adult",
+        "s_m": 20.0,
+        "lat_m": 1.96
+      },
+      "ttc_s": 3.8,
+      "ego_yaw_change_deg": -0.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.224,
+      "n_mask_group": 12,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "e6d0c3775ad05b47",
+          "cat": "human.pedestrian.adult",
+          "s_m": 20.0,
+          "lat_m": 1.96,
+          "a_req": 0.675,
+          "visible": true
+        },
+        {
+          "token": "12228a5967cb5497",
+          "cat": "human.pedestrian.adult",
+          "s_m": 23.2,
+          "lat_m": 0.58,
+          "a_req": 0.618,
+          "visible": true
+        },
+        {
+          "token": "1ecef4434f9a5ecb",
+          "cat": "human.pedestrian.adult",
+          "s_m": 23.2,
+          "lat_m": 0.74,
+          "a_req": 0.611,
+          "visible": true
+        },
+        {
+          "token": "f356e2755fc55bf2",
+          "cat": "human.pedestrian.adult",
+          "s_m": 24.2,
+          "lat_m": 0.59,
+          "a_req": 0.597,
+          "visible": true
+        },
+        {
+          "token": "94661ca62b34579a",
+          "cat": "human.pedestrian.adult",
+          "s_m": 29.5,
+          "lat_m": 0.75,
+          "a_req": 0.595,
+          "visible": true
+        },
+        {
+          "token": "6eefd14cbac052cc",
+          "cat": "human.pedestrian.adult",
+          "s_m": 25.3,
+          "lat_m": 1.85,
+          "a_req": 0.575,
+          "visible": true
+        },
+        {
+          "token": "7e556f9c1d6355d3",
+          "cat": "human.pedestrian.adult",
+          "s_m": 25.3,
+          "lat_m": 1.5,
+          "a_req": 0.568,
+          "visible": true
+        },
+        {
+          "token": "cdff673d606753d1",
+          "cat": "human.pedestrian.adult",
+          "s_m": 24.2,
+          "lat_m": 1.05,
+          "a_req": 0.567,
+          "visible": true
+        },
+        {
+          "token": "a320281481a751d4",
+          "cat": "human.pedestrian.adult",
+          "s_m": 26.3,
+          "lat_m": 1.61,
+          "a_req": 0.55,
+          "visible": true
+        },
+        {
+          "token": "6455c81c24c05294",
+          "cat": "human.pedestrian.adult",
+          "s_m": 28.4,
+          "lat_m": 0.82,
+          "a_req": 0.548,
+          "visible": true
+        },
+        {
+          "token": "222a2e1d1bc25ef0",
+          "cat": "human.pedestrian.adult",
+          "s_m": 28.4,
+          "lat_m": 1.42,
+          "a_req": 0.542,
+          "visible": true
+        },
+        {
+          "token": "2f50039be3205ce5",
+          "cat": "human.pedestrian.adult",
+          "s_m": 29.5,
+          "lat_m": 1.14,
+          "a_req": 0.54,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.07.16.01.22.41_veh-14_04315_07102",
+      "split": "trainval",
+      "uid": "trainval:log-0744-scene-0060:29"
+    },
+    {
+      "scene": "log-0748-scene-0042",
+      "frame_idx": 3,
+      "t": 1626454982.10045,
+      "ego_v0": 6.58,
+      "ego_vmin": 0.0,
+      "dv": -6.58,
+      "rel_decel": 0.999,
+      "a_obs": 0.658,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 8.585,
+      "a_vru_max": 0.723,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.098,
+      "lead_vru": {
+        "token": "a9eb07c19c925f75",
+        "cat": "human.pedestrian.adult",
+        "s_m": 32.2,
+        "lat_m": 1.99
+      },
+      "ttc_s": 4.9,
+      "ego_yaw_change_deg": 1.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.005,
+      "n_mask_group": 13,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "a9eb07c19c925f75",
+          "cat": "human.pedestrian.adult",
+          "s_m": 32.2,
+          "lat_m": 1.99,
+          "a_req": 0.723,
+          "visible": true
+        },
+        {
+          "token": "33b3cce2e2d657b7",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.2,
+          "lat_m": 1.48,
+          "a_req": 0.705,
+          "visible": true
+        },
+        {
+          "token": "f856cdfdaa0c581c",
+          "cat": "human.pedestrian.adult",
+          "s_m": 35.3,
+          "lat_m": 1.15,
+          "a_req": 0.7,
+          "visible": true
+        },
+        {
+          "token": "ebd0196fadf75b23",
+          "cat": "human.pedestrian.adult",
+          "s_m": 35.3,
+          "lat_m": 1.04,
+          "a_req": 0.699,
+          "visible": true
+        },
+        {
+          "token": "54f7dbc102c851c4",
+          "cat": "human.pedestrian.adult",
+          "s_m": 32.2,
+          "lat_m": 1.87,
+          "a_req": 0.695,
+          "visible": true
+        },
+        {
+          "token": "8511365d5cae5780",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.2,
+          "lat_m": 1.16,
+          "a_req": 0.695,
+          "visible": true
+        },
+        {
+          "token": "7ae76c880ee85937",
+          "cat": "human.pedestrian.adult",
+          "s_m": 34.3,
+          "lat_m": 0.74,
+          "a_req": 0.683,
+          "visible": true
+        },
+        {
+          "token": "5b45524525825282",
+          "cat": "human.pedestrian.adult",
+          "s_m": 34.3,
+          "lat_m": 1.43,
+          "a_req": 0.668,
+          "visible": true
+        },
+        {
+          "token": "0db94e2de85e5344",
+          "cat": "human.pedestrian.adult",
+          "s_m": 35.3,
+          "lat_m": 0.48,
+          "a_req": 0.666,
+          "visible": true
+        },
+        {
+          "token": "b76721b5f0e759d8",
+          "cat": "human.pedestrian.adult",
+          "s_m": 36.4,
+          "lat_m": 0.48,
+          "a_req": 0.633,
+          "visible": true
+        },
+        {
+          "token": "12a3423b5c9056c8",
+          "cat": "human.pedestrian.adult",
+          "s_m": 37.4,
+          "lat_m": 1.5,
+          "a_req": 0.586,
+          "visible": true
+        },
+        {
+          "token": "8e4c02d78e655517",
+          "cat": "human.pedestrian.adult",
+          "s_m": 37.4,
+          "lat_m": 0.21,
+          "a_req": 0.567,
+          "visible": true
+        },
+        {
+          "token": "c63f43e6d2e059ea",
+          "cat": "human.pedestrian.adult",
+          "s_m": 36.4,
+          "lat_m": 1.53,
+          "a_req": 0.566,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.07.16.16.01.30_veh-38_02497_03871",
+      "split": "trainval",
+      "uid": "trainval:log-0748-scene-0042:3"
+    },
+    {
+      "scene": "log-0763-scene-0023",
+      "frame_idx": 0,
+      "t": 1626455696.688733,
+      "ego_v0": 4.72,
+      "ego_vmin": 0.3,
+      "dv": -4.42,
+      "rel_decel": 0.937,
+      "a_obs": 0.465,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 3.63,
+      "a_vru_max": 0.512,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.101,
+      "lead_vru": {
+        "token": "33efd4f82ede5dc7",
+        "cat": "human.pedestrian.adult",
+        "s_m": 21.0,
+        "lat_m": 1.84
+      },
+      "ttc_s": 4.5,
+      "ego_yaw_change_deg": 0.5,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.221,
+      "n_mask_group": 8,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "33efd4f82ede5dc7",
+          "cat": "human.pedestrian.adult",
+          "s_m": 21.0,
+          "lat_m": 1.84,
+          "a_req": 0.512,
+          "visible": true
+        },
+        {
+          "token": "49510f74421f5441",
+          "cat": "human.pedestrian.adult",
+          "s_m": 23.1,
+          "lat_m": 1.83,
+          "a_req": 0.473,
+          "visible": true
+        },
+        {
+          "token": "41418469fde15446",
+          "cat": "human.pedestrian.adult",
+          "s_m": 24.1,
+          "lat_m": 1.48,
+          "a_req": 0.459,
+          "visible": true
+        },
+        {
+          "token": "639dbaffca585ad8",
+          "cat": "human.pedestrian.adult",
+          "s_m": 24.1,
+          "lat_m": 0.22,
+          "a_req": 0.458,
+          "visible": true
+        },
+        {
+          "token": "df24ef50419a5e5a",
+          "cat": "human.pedestrian.adult",
+          "s_m": 26.2,
+          "lat_m": 1.02,
+          "a_req": 0.439,
+          "visible": true
+        },
+        {
+          "token": "4d5b51b6f3775e13",
+          "cat": "human.pedestrian.adult",
+          "s_m": 26.2,
+          "lat_m": 1.23,
+          "a_req": 0.436,
+          "visible": true
+        },
+        {
+          "token": "637fa77de48f574a",
+          "cat": "human.pedestrian.adult",
+          "s_m": 27.3,
+          "lat_m": 0.5,
+          "a_req": 0.435,
+          "visible": true
+        },
+        {
+          "token": "d891ec68b9fc5dcf",
+          "cat": "human.pedestrian.adult",
+          "s_m": 28.3,
+          "lat_m": 0.33,
+          "a_req": 0.419,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.07.16.16.27.22_veh-26_02282_03814",
+      "split": "trainval",
+      "uid": "trainval:log-0763-scene-0023:0"
+    },
+    {
+      "scene": "log-0764-scene-0009",
+      "frame_idx": 35,
+      "t": 1626456974.189837,
+      "ego_v0": 3.47,
+      "ego_vmin": 2.08,
+      "dv": -1.39,
+      "rel_decel": 0.4,
+      "a_obs": 0.693,
+      "brake_dur_s": 2.0,
+      "a_vru_sum": 1.973,
+      "a_vru_max": 0.574,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.829,
+      "lead_vru": {
+        "token": "e5f415f91da0568e",
+        "cat": "human.pedestrian.adult",
+        "s_m": 12.9,
+        "lat_m": 0.9
+      },
+      "ttc_s": 3.7,
+      "ego_yaw_change_deg": -0.5,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.05,
+      "n_mask_group": 5,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "e5f415f91da0568e",
+          "cat": "human.pedestrian.adult",
+          "s_m": 12.9,
+          "lat_m": 0.9,
+          "a_req": 0.574,
+          "visible": true
+        },
+        {
+          "token": "004c9e0a5c44563d",
+          "cat": "human.pedestrian.adult",
+          "s_m": 20.2,
+          "lat_m": 0.28,
+          "a_req": 0.36,
+          "visible": true
+        },
+        {
+          "token": "f7794d7dac025561",
+          "cat": "human.pedestrian.adult",
+          "s_m": 20.2,
+          "lat_m": 1.82,
+          "a_req": 0.358,
+          "visible": true
+        },
+        {
+          "token": "533dd7a5ba195b15",
+          "cat": "human.pedestrian.adult",
+          "s_m": 16.0,
+          "lat_m": 1.63,
+          "a_req": 0.343,
+          "visible": true
+        },
+        {
+          "token": "4b338180b6905742",
+          "cat": "human.pedestrian.adult",
+          "s_m": 21.3,
+          "lat_m": 0.36,
+          "a_req": 0.338,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.07.16.16.27.22_veh-26_03836_05047",
+      "split": "trainval",
+      "uid": "trainval:log-0764-scene-0009:35"
+    },
+    {
+      "scene": "log-0769-scene-0003",
+      "frame_idx": 0,
+      "t": 1626461328.000061,
+      "ego_v0": 5.48,
+      "ego_vmin": 0.0,
+      "dv": -5.47,
+      "rel_decel": 1.0,
+      "a_obs": 0.684,
+      "brake_dur_s": 8.0,
+      "a_vru_sum": 3.241,
+      "a_vru_max": 0.484,
+      "a_non_vru_max": 0.132,
+      "vru_class_share": 0.961,
+      "explained_ratio": 0.708,
+      "lead_vru": {
+        "token": "ae832844a7285a5b",
+        "cat": "human.pedestrian.adult",
+        "s_m": 31.8,
+        "lat_m": 1.22
+      },
+      "ttc_s": 5.8,
+      "ego_yaw_change_deg": -0.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.088,
+      "n_mask_group": 7,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "ae832844a7285a5b",
+          "cat": "human.pedestrian.adult",
+          "s_m": 31.8,
+          "lat_m": 1.22,
+          "a_req": 0.484,
+          "visible": true
+        },
+        {
+          "token": "e34e7a5c24d555bb",
+          "cat": "human.pedestrian.adult",
+          "s_m": 31.8,
+          "lat_m": 0.96,
+          "a_req": 0.482,
+          "visible": true
+        },
+        {
+          "token": "6621670103ef5764",
+          "cat": "human.pedestrian.adult",
+          "s_m": 32.8,
+          "lat_m": 1.2,
+          "a_req": 0.472,
+          "visible": true
+        },
+        {
+          "token": "a711a22f0e0a5bb5",
+          "cat": "human.pedestrian.adult",
+          "s_m": 33.9,
+          "lat_m": 0.87,
+          "a_req": 0.468,
+          "visible": true
+        },
+        {
+          "token": "2ec528cb91ea56ca",
+          "cat": "human.pedestrian.adult",
+          "s_m": 34.9,
+          "lat_m": 0.94,
+          "a_req": 0.451,
+          "visible": true
+        },
+        {
+          "token": "a49371eda7e055ff",
+          "cat": "human.pedestrian.adult",
+          "s_m": 34.9,
+          "lat_m": 1.87,
+          "a_req": 0.443,
+          "visible": true
+        },
+        {
+          "token": "db854f9701d05da9",
+          "cat": "human.pedestrian.adult",
+          "s_m": 34.9,
+          "lat_m": 1.15,
+          "a_req": 0.441,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.07.16.18.06.21_veh-38_01526_02150",
+      "split": "trainval",
+      "uid": "trainval:log-0769-scene-0003:0"
+    },
+    {
+      "scene": "log-0770-scene-0024",
+      "frame_idx": 0,
+      "t": 1626462408.000026,
+      "ego_v0": 4.8,
+      "ego_vmin": 0.0,
+      "dv": -4.8,
+      "rel_decel": 1.0,
+      "a_obs": 0.533,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 8.113,
+      "a_vru_max": 0.668,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.253,
+      "lead_vru": {
+        "token": "424b879ef5e95bfe",
+        "cat": "human.pedestrian.adult",
+        "s_m": 19.5,
+        "lat_m": 1.96
+      },
+      "ttc_s": 4.1,
+      "ego_yaw_change_deg": 0.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.032,
+      "n_mask_group": 15,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "424b879ef5e95bfe",
+          "cat": "human.pedestrian.adult",
+          "s_m": 19.5,
+          "lat_m": 1.96,
+          "a_req": 0.668,
+          "visible": true
+        },
+        {
+          "token": "f4560880ae5c5cf3",
+          "cat": "human.pedestrian.adult",
+          "s_m": 19.5,
+          "lat_m": 0.23,
+          "a_req": 0.64,
+          "visible": true
+        },
+        {
+          "token": "c30f0946a59b57c6",
+          "cat": "human.pedestrian.adult",
+          "s_m": 20.6,
+          "lat_m": 0.47,
+          "a_req": 0.621,
+          "visible": true
+        },
+        {
+          "token": "edb82d0b95bf5a1d",
+          "cat": "human.pedestrian.adult",
+          "s_m": 21.6,
+          "lat_m": 1.51,
+          "a_req": 0.599,
+          "visible": true
+        },
+        {
+          "token": "f9175a58721057c6",
+          "cat": "human.pedestrian.adult",
+          "s_m": 22.7,
+          "lat_m": 0.33,
+          "a_req": 0.585,
+          "visible": true
+        },
+        {
+          "token": "3df2b9cd3165555f",
+          "cat": "human.pedestrian.adult",
+          "s_m": 21.6,
+          "lat_m": 1.13,
+          "a_req": 0.582,
+          "visible": true
+        },
+        {
+          "token": "b008e2195643587c",
+          "cat": "human.pedestrian.adult",
+          "s_m": 22.7,
+          "lat_m": 1.39,
+          "a_req": 0.549,
+          "visible": true
+        },
+        {
+          "token": "6330749f59a35816",
+          "cat": "human.pedestrian.adult",
+          "s_m": 22.7,
+          "lat_m": 0.92,
+          "a_req": 0.535,
+          "visible": true
+        },
+        {
+          "token": "42ccccf9f21a5b74",
+          "cat": "human.pedestrian.adult",
+          "s_m": 24.8,
+          "lat_m": 1.81,
+          "a_req": 0.508,
+          "visible": true
+        },
+        {
+          "token": "8924e9381e6b5d6d",
+          "cat": "human.pedestrian.adult",
+          "s_m": 23.7,
+          "lat_m": 1.12,
+          "a_req": 0.501,
+          "visible": true
+        },
+        {
+          "token": "033f282ce57d5b4e",
+          "cat": "human.pedestrian.adult",
+          "s_m": 24.8,
+          "lat_m": 0.43,
+          "a_req": 0.482,
+          "visible": true
+        },
+        {
+          "token": "35505571d72457e1",
+          "cat": "human.pedestrian.adult",
+          "s_m": 25.8,
+          "lat_m": 0.61,
+          "a_req": 0.473,
+          "visible": true
+        },
+        {
+          "token": "240804ad49d35c60",
+          "cat": "human.pedestrian.adult",
+          "s_m": 24.8,
+          "lat_m": 0.02,
+          "a_req": 0.468,
+          "visible": true
+        },
+        {
+          "token": "58010eca036c5ce2",
+          "cat": "human.pedestrian.adult",
+          "s_m": 26.9,
+          "lat_m": 0.07,
+          "a_req": 0.459,
+          "visible": true
+        },
+        {
+          "token": "e146ba6c0cf2500e",
+          "cat": "human.pedestrian.adult",
+          "s_m": 25.8,
+          "lat_m": 1.98,
+          "a_req": 0.441,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.07.16.18.06.21_veh-38_02197_03220",
+      "split": "trainval",
+      "uid": "trainval:log-0770-scene-0024:0"
+    },
+    {
+      "scene": "log-0783-scene-0066",
+      "frame_idx": 25,
+      "t": 1626463674.486916,
+      "ego_v0": 3.76,
+      "ego_vmin": 1.39,
+      "dv": -2.38,
+      "rel_decel": 0.631,
+      "a_obs": 0.792,
+      "brake_dur_s": 3.0,
+      "a_vru_sum": 0.663,
+      "a_vru_max": 0.663,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.836,
+      "lead_vru": {
+        "token": "20cffac901bd5f07",
+        "cat": "human.pedestrian.adult",
+        "s_m": 18.2,
+        "lat_m": 0.19
+      },
+      "ttc_s": 4.8,
+      "ego_yaw_change_deg": 13.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.805,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "20cffac901bd5f07",
+          "cat": "human.pedestrian.adult",
+          "s_m": 18.2,
+          "lat_m": 0.19,
+          "a_req": 0.663,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.07.16.18.49.56_veh-26_00833_03384",
+      "split": "trainval",
+      "uid": "trainval:log-0783-scene-0066:25"
+    },
+    {
+      "scene": "log-0795-scene-0002",
+      "frame_idx": 29,
+      "t": 1626473766.466234,
+      "ego_v0": 2.89,
+      "ego_vmin": 1.9,
+      "dv": -1.0,
+      "rel_decel": 0.345,
+      "a_obs": 0.249,
+      "brake_dur_s": 4.0,
+      "a_vru_sum": 0.424,
+      "a_vru_max": 0.424,
+      "a_non_vru_max": 0.034,
+      "vru_class_share": 0.926,
+      "explained_ratio": 1.699,
+      "lead_vru": {
+        "token": "37a16554a73f5508",
+        "cat": "vehicle.bicycle",
+        "s_m": 10.2,
+        "lat_m": 1.96
+      },
+      "ttc_s": 3.5,
+      "ego_yaw_change_deg": 16.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.bicycle",
+        "vehicle.motorcycle",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "37a16554a73f5508",
+          "cat": "vehicle.bicycle",
+          "s_m": 10.2,
+          "lat_m": 1.96,
+          "a_req": 0.424,
+          "visible": true
+        }
+      ],
+      "city": "us-nv-las-vegas-strip",
+      "log_name": "2021.07.16.21.17.55_veh-26_03254_03336",
+      "split": "trainval",
+      "uid": "trainval:log-0795-scene-0002:29"
+    }
+  ]
+}

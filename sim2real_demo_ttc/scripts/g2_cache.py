@@ -21,7 +21,8 @@ import sys
 import time
 from pathlib import Path
 
-import h5py
+# h5py 只在磁盘缓存读写时用到；有的环境（simscale）没装它，
+# 而 commanded_speed 是纯函数，不该被这个 import 挡住 —— 改为惰性导入。
 import numpy as np
 from omegaconf import OmegaConf
 from PIL import Image
@@ -111,6 +112,7 @@ def main():
         path = cache_dir / f"{ev['event_id']}.h5"
         if path.exists() and not args.overwrite:
             try:
+                import h5py
                 with h5py.File(path, "r") as f:
                     if all(f"{c}/{m}" in f for c in ("clean", "ghost") for m in pool_modes):
                         skipped += 1
@@ -142,6 +144,7 @@ def main():
             res = {c: run_condition(runner, root, ev[f"x_{c}_frames"], pool_modes,
                                     prompt_speed=anchor, region=region)
                    for c in ("clean", "ghost")}
+            import h5py
             with h5py.File(path, "w") as f:
                 for cond, d in res.items():
                     g = f.create_group(cond)

@@ -108,11 +108,23 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="simlingo", choices=["simlingo", "dd", "ltf", "ddv2"])
     ap.add_argument("--corpus", default="nuscenes", choices=["nuscenes", "navsim"])
-    ap.add_argument("--split", default="test", help="仅 navsim")
+    ap.add_argument("--split", default="test",
+                    help="仅 navsim。填 'auto' 时按每个事件自带的 split 字段取帧 —— "
+                         "deployment 池是 test+trainval 合并的，必须逐事件解析。")
     ap.add_argument("--pool", default="")
     ap.add_argument("--device", default="cuda:0")
     ap.add_argument("--sl-config", default=str(ROOT / "configs" / "n1_d2.yaml"))
     ap.add_argument("--out", default="")
+    ap.add_argument("--mask-mode", default="road_flat", choices=["mean", "road", "road_flat"],
+                    help="**clean 臂**的涂法（ctrl 臂恒为灰斑，不受此项影响）。"
+                         "road_flat=紧邻下方路面中位色、**不加噪声**（P-7 定为默认）；"
+                         "mean=全图均值灰斑（旧默认，数值与 road_flat 等价）；"
+                         "road=路面色**+匹配噪声** —— 保留仅供复现 P-7 的诊断，"
+                         "**不要用它出结果**：注入的高频噪声本身就是强扰动，"
+                         "会把 b 抬高 4–8 倍并污染 ctrl 臂（b_ctrl −0.008 → +0.204）。")
+    ap.add_argument("--lidar-fill", default="none", choices=["none", "ground"],
+                    help="DDv2 点云 **clean 臂**（ctrl 臂恒为只删不补）。none=只删点（留洞）；"
+                         "ground=把删掉的点压到局部地面平面补回，点数密度不变")
     args = ap.parse_args()
     if not args.pool:
         args.pool = str(RES / ("brake_first_pool_final.json" if args.corpus == "nuscenes"
@@ -135,7 +147,7 @@ def main():
         scmap = {s["name"]: s for s in nusc.scene}
         IMG_ROOT = NUSC
 
-        def build_geo(name):
+        def build_geo(name, split=None):   # split 仅为签名对齐，nuScenes 不分 split
             return G1.compute_scene_geometry(nusc, scmap[name], cfg)
     else:
         import pickle
@@ -145,13 +157,22 @@ def main():
         IMG_ROOT = "/data/dataset/navsim/dataset/sensor_blobs"
         _fr = {}
 
-        def build_geo(name):
+        def build_geo(name, split=None):
+            """name 是 scene_name。**必须带 split**：scene_name 跨 split 不唯一
+            （test 的 65.8% 名字在 trainval 里也有，指向不同 log），
+            用裸名做键会把两段无关数据拼到一起。"""
+            sp0 = split or (args.split if args.split != "auto" else "test")
             if not _fr:
-                for lf in sorted((NS.NS_ROOT / "navsim_logs" / args.split).glob("*.pkl")):
-                    for f in pickle.load(open(lf, "rb")):
-                        _fr.setdefault(f["scene_name"], []).append(f)
-            fl = sorted(_fr[name], key=lambda z: z["timestamp"])
-            return NS.build_geo(fl, cfg, args.split)
+                splits = (["test", "trainval"] if args.split == "auto" else [args.split])
+                for sp in splits:
+                    d = NS.NS_ROOT / "navsim_logs" / sp
+                    if not d.exists():
+                        continue
+                    for lf in sorted(d.glob("*.pkl")):
+                        for f in pickle.load(open(lf, "rb")):
+                            _fr.setdefault((sp, f["scene_name"]), []).append(f)
+            fl = sorted(_fr[(sp0, name)], key=lambda z: z["timestamp"])
+            return NS.build_geo(fl, cfg, sp0)
 
     print(f"[F3BF/{args.model}] corpus={args.corpus}  "
           f"{len(cands)} 事件 / {pool['n_scenes']} scene")
@@ -197,10 +218,12 @@ def main():
     rng = np.random.default_rng(0)
     recs, skipped, audit = [], defaultdict(int), []
     for i, c in enumerate(cands):
-        geo = build_geo(c["scene"])
+        geo = build_geo(c["scene"], c.get("split"))
         j = c["frame_idx"]
-        img_o = cv2.cvtColor(cv2.imread(str(Path(IMG_ROOT) / geo["frames"][j]["filename"])),
-                             cv2.COLOR_BGR2RGB)
+        _raw = cv2.imread(str(Path(IMG_ROOT) / geo["frames"][j]["filename"]))
+        if _raw is None:                       # 图不在盘上（传感器未下全）：跳过而非崩溃
+            skipped["no_image"] += 1; continue
+        img_o = cv2.cvtColor(_raw, cv2.COLOR_BGR2RGB)
         boxes = []
         for g in c["f3_mask_group"]:
             o = geo["per_obj"].get(g["token"])
@@ -216,14 +239,19 @@ def main():
             skipped["no_control_box"] += 1; continue     # ctrl 臂会退化成与 origin 相同
         clean_img, ctrl_img = img_o.copy(), img_o.copy()
         for bb in boxes:
-            clean_img = occlude(clean_img, bb)
+            clean_img = occlude(clean_img, bb, mode=args.mask_mode)
         for cb in cboxes:
-            ctrl_img = occlude(ctrl_img, cb)
+            # **ctrl 臂逻辑不变，始终是灰斑**。若 ctrl 也换成路面色+噪声，镜像框常落在
+            # 建筑/植被上，那条带 std 很大，于是在对照位置画出一块高频噪声斑：
+            # 实测 b_ctrl 中位从 -0.002 抬到 +0.070、95 分位 0.49→1.10。
+            # ctrl 保持灰斑，b_ctrl 就是跨实验不动的基线，新旧对比只差 clean 臂一个变量。
+            # 代价：特异性 |b|-|b_ctrl| 比的是两种不同扰动，不再是"同扰动、异位置"。
+            ctrl_img = occlude(ctrl_img, cb, mode="mean")
 
         # ---- DDv2 的点云三臂：origin 原样，clean 删遮挡组 3D 框内的点，
         #      ctrl 删**镜像 3D 框**内的点（体积严格相等、纵向距离相同）----
         pts_o = pts_c = pts_t = None
-        n_del_c = n_del_t = 0
+        n_del_c = n_del_t = n_fill_c = n_fill_t = 0
         if lidar is not None:
             from f3_window_boxes import points_in_box, mirror_box3d
             # geo["frames"][j] 的 sample_data token 键名是 "token"（g1_mine_events.py:71），
@@ -244,8 +272,21 @@ def main():
                     cm, szm, yawm = mirror_box3d(cc, sz, yaw)
                     mt |= points_in_box(pts_o, cm,
                                         tuple(x + 2 * LIDAR_MARGIN for x in szm), yawm)
-                pts_c = pts_o[~mc]; pts_t = pts_o[~mt]
                 n_del_c, n_del_t = int(mc.sum()), int(mt.sum())
+                if args.lidar_fill == "ground":
+                    # 只删点会在地面留一个洞 —— 洞本身就是"这儿刚才有东西"的证据。
+                    # 把删掉的点压到局部地面平面上补回去，点数与密度不变。
+                    from road_fill import fill_to_ground
+                    cen_c = [box3d_from_geo(geo, g["token"], j) for g in c["f3_mask_group"]]
+                    cen_c = [x[0] for x in cen_c if x is not None]
+                    cen_t = [mirror_box3d(*x)[0] for x in
+                             (box3d_from_geo(geo, g["token"], j) for g in c["f3_mask_group"])
+                             if x is not None]
+                    pts_c, nfc = fill_to_ground(pts_o, mc, cen_c)
+                    pts_t = pts_o[~mt]          # ctrl 点云同理：只删不补，逻辑不变
+                    n_fill_c, n_fill_t = nfc, 0
+                else:
+                    pts_c = pts_o[~mc]; pts_t = pts_o[~mt]
 
         spd = float(geo["ego_speed"][j])          # 三臂共用
         v_origin, tj_origin = infer(img_o, spd, pts_o)
@@ -256,7 +297,9 @@ def main():
         audit.append({"scene": c["scene"], "n_mask": len(boxes), "n_ctrl": len(cboxes),
                       "mask_area_px": area(boxes), "ctrl_area_px": area(cboxes),
                       "area_ratio_ctrl_over_mask": round(area(cboxes)/max(area(boxes),1), 3)})
-        recs.append({"scene": c["scene"], "eid": c["scene"], "frame_idx": j,
+        recs.append({"scene": c["scene"], "eid": c.get("uid", c["scene"]),
+                     "split": c.get("split"), "city": c.get("city"),
+                     "log_name": c.get("log_name"), "frame_idx": j,
                      "n_mask": len(boxes), "n_ctrl": len(cboxes),
                      "n_lidar_del_clean": n_del_c, "n_lidar_del_ctrl": n_del_t,
                      "ego_v0": spd, "a_req": c["a_vru_max"],

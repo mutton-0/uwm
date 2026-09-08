@@ -1,0 +1,122 @@
+{
+  "design": "刹车优先挖矿：先找人类减速片段，再归因到走廊内 VRU",
+  "corpus": "nuscenes",
+  "split": null,
+  "scenario": "left_turn",
+  "hazard_classes": [
+    "human.",
+    "vehicle.",
+    "movable_object.",
+    "static_object.",
+    "animal"
+  ],
+  "static_corridor_m": 1.0,
+  "left_turn_gate": {
+    "min_deg": 25.0,
+    "max_deg": 135.0,
+    "min_path_m": 5.0,
+    "yaw_source": "ego pose quaternion (unwrapped)"
+  },
+  "intersection_proxy": null,
+  "explained_ratio_bounds": [
+    0.3,
+    10.0
+  ],
+  "n_scenes_scanned": 850,
+  "n_brake_episodes": 752,
+  "n_candidates_raw": 2,
+  "n_candidates_dedup": 2,
+  "n_scenes_with_candidate": 2,
+  "T1_a_req_ge_0.4": {
+    "n": 0,
+    "n_scenes": 0
+  },
+  "candidates": [
+    {
+      "scene": "scene-0061",
+      "frame_idx": 121,
+      "t": 1532402938.01246,
+      "ego_v0": 4.54,
+      "ego_vmin": 1.95,
+      "dv": -2.59,
+      "rel_decel": 0.571,
+      "a_obs": 0.3,
+      "brake_dur_s": 8.65,
+      "a_vru_sum": 0.11,
+      "a_vru_max": 0.11,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.369,
+      "lead_vru": {
+        "token": "c1958768d48640948f6053d04cffd35b",
+        "cat": "vehicle.car",
+        "s_m": 12.9,
+        "lat_m": 0.3
+      },
+      "ttc_s": 2.8,
+      "ego_yaw_change_deg": 45.0,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.",
+        "movable_object.",
+        "static_object.",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "c1958768d48640948f6053d04cffd35b",
+          "cat": "vehicle.car",
+          "s_m": 12.9,
+          "lat_m": 0.3,
+          "a_req": 0.11,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "scene-0853",
+      "frame_idx": 163,
+      "t": 1538985943.36246,
+      "ego_v0": 3.1,
+      "ego_vmin": 0.91,
+      "dv": -2.19,
+      "rel_decel": 0.706,
+      "a_obs": 0.356,
+      "brake_dur_s": 6.15,
+      "a_vru_sum": 0.225,
+      "a_vru_max": 0.225,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.632,
+      "lead_vru": {
+        "token": "bbe513d2a58b4dcfae314e7e8019ef46",
+        "cat": "vehicle.car",
+        "s_m": 22.9,
+        "lat_m": 1.26
+      },
+      "ttc_s": 7.4,
+      "ego_yaw_change_deg": 29.4,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.",
+        "movable_object.",
+        "static_object.",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "bbe513d2a58b4dcfae314e7e8019ef46",
+          "cat": "vehicle.car",
+          "s_m": 22.9,
+          "lat_m": 1.26,
+          "a_req": 0.225,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

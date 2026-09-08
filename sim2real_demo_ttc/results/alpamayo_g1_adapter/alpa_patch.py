@@ -152,9 +152,13 @@ class AlpaPatchRunner:
         return (plan_speed(traj), traj) if return_traj else plan_speed(traj)
 
     @torch.no_grad()
-    def run(self, scene_name, t_sec, ego_anchor_t=None, seed=None):
-        data = self.r.load(scene_name, t_sec)
-        if ego_anchor_t is not None:
+    def run(self, scene_name, t_sec, ego_anchor_t=None, seed=None, data=None):
+        """data 非 None 时直接用它，跳过 nuScenes devkit（NAVSIM 侧由
+        alpa_navsim_loader.load_navsim() 构造同构字典）。其余路径逐字不变，
+        故返回的 full / seq_len / n_image_tokens 与 nuScenes 侧同义。"""
+        if data is None:
+            data = self.r.load(scene_name, t_sec)
+        if ego_anchor_t is not None and data is None:
             a = self.r.load(scene_name, ego_anchor_t)
             data["ego_history_xyz"] = a["ego_history_xyz"]
             data["ego_history_rot"] = a["ego_history_rot"]
@@ -178,6 +182,10 @@ class AlpaPatchRunner:
         traj = pred_xyz.float().cpu().numpy()[0, 0, 0]
         c = extra.get("cot", [""])[0] if extra else ""
         return {"trajectory": traj, "commanded_speed": plan_speed(traj),
+                # pooled 与 AutoVLA 适配器对齐：F 轴的 v_faith 抽取要读它。
+                # 纯新增字段，C 轴走的是 "full"，行为不变。
+                "pooled": {k: [None if x is None else np.asarray(x, np.float32) for x in v]
+                           for k, v in self.cap.pooled.items()},
                 "cot": c if isinstance(c, str) else str(c),
                 "full": self.cap.full if self.cap.capture_full else None,
                 "seq_len": int(len(ids)), "n_image_tokens": int(self.cap.mask.sum())}

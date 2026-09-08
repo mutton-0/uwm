@@ -1,0 +1,3955 @@
+{
+  "note": "右舵=新加坡；左舵=美国三城",
+  "events": [
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "singapore-hollandvillage",
+      "drive": "右舵",
+      "scene_id": "scene-1055",
+      "frame_idx": 214,
+      "a_req": 2.359,
+      "ego_v0": 9.57
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "singapore-onenorth",
+      "drive": "右舵",
+      "scene_id": "scene-0003",
+      "frame_idx": 196,
+      "a_req": 1.761,
+      "ego_v0": 3.82
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "singapore-onenorth",
+      "drive": "右舵",
+      "scene_id": "scene-0007",
+      "frame_idx": 40,
+      "a_req": 1.04,
+      "ego_v0": 7.15
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "singapore-queenstown",
+      "drive": "右舵",
+      "scene_id": "scene-0862",
+      "frame_idx": 17,
+      "a_req": 0.872,
+      "ego_v0": 4.72
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "singapore-onenorth",
+      "drive": "右舵",
+      "scene_id": "scene-0151",
+      "frame_idx": 19,
+      "a_req": 0.777,
+      "ego_v0": 5.51
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0071",
+      "frame_idx": 148,
+      "a_req": 0.642,
+      "ego_v0": 3.21
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "singapore-hollandvillage",
+      "drive": "右舵",
+      "scene_id": "scene-1088",
+      "frame_idx": 57,
+      "a_req": 0.629,
+      "ego_v0": 6.45
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "singapore-queenstown",
+      "drive": "右舵",
+      "scene_id": "scene-1016",
+      "frame_idx": 136,
+      "a_req": 0.569,
+      "ego_v0": 6.07
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0717",
+      "frame_idx": 162,
+      "a_req": 0.556,
+      "ego_v0": 2.45
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "singapore-queenstown",
+      "drive": "右舵",
+      "scene_id": "scene-0187",
+      "frame_idx": 59,
+      "a_req": 0.491,
+      "ego_v0": 3.74
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "singapore-queenstown",
+      "drive": "右舵",
+      "scene_id": "scene-0427",
+      "frame_idx": 2,
+      "a_req": 0.478,
+      "ego_v0": 5.83
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "singapore-queenstown",
+      "drive": "右舵",
+      "scene_id": "scene-0917",
+      "frame_idx": 32,
+      "a_req": 0.446,
+      "ego_v0": 5.2
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0544",
+      "frame_idx": 208,
+      "a_req": 0.439,
+      "ego_v0": 2.19
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0220",
+      "frame_idx": 189,
+      "a_req": 4.546,
+      "ego_v0": 6.97
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "singapore-onenorth",
+      "drive": "右舵",
+      "scene_id": "scene-0045",
+      "frame_idx": 62,
+      "a_req": 0.754,
+      "ego_v0": 7.11
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "singapore-queenstown",
+      "drive": "右舵",
+      "scene_id": "scene-0853",
+      "frame_idx": 1,
+      "a_req": 0.742,
+      "ego_v0": 6.71
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0515",
+      "frame_idx": 178,
+      "a_req": 0.737,
+      "ego_v0": 5.68
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0388",
+      "frame_idx": 70,
+      "a_req": 0.542,
+      "ego_v0": 5.51
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0688",
+      "frame_idx": 1,
+      "a_req": 0.526,
+      "ego_v0": 5.95
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "singapore-queenstown",
+      "drive": "右舵",
+      "scene_id": "scene-0855",
+      "frame_idx": 31,
+      "a_req": 0.498,
+      "ego_v0": 5.94
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0477",
+      "frame_idx": 121,
+      "a_req": 0.487,
+      "ego_v0": 5.17
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0562",
+      "frame_idx": 201,
+      "a_req": 0.48,
+      "ego_v0": 4.29
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0626",
+      "frame_idx": 125,
+      "a_req": 0.465,
+      "ego_v0": 4.99
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "singapore-queenstown",
+      "drive": "右舵",
+      "scene_id": "scene-1017",
+      "frame_idx": 127,
+      "a_req": 0.46,
+      "ego_v0": 3.61
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0289",
+      "frame_idx": 215,
+      "a_req": 0.459,
+      "ego_v0": 4.22
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "singapore-onenorth",
+      "drive": "右舵",
+      "scene_id": "scene-0955",
+      "frame_idx": 182,
+      "a_req": 0.427,
+      "ego_v0": 5.46
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "singapore-onenorth",
+      "drive": "右舵",
+      "scene_id": "scene-0268",
+      "frame_idx": 141,
+      "a_req": 0.423,
+      "ego_v0": 3.75
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0719",
+      "frame_idx": 121,
+      "a_req": 0.408,
+      "ego_v0": 4.26
+    },
+    {
+      "scenario": "lead",
+      "corpus": "nuScenes",
+      "city": "boston-seaport",
+      "drive": "左舵",
+      "scene_id": "scene-0558",
+      "frame_idx": 129,
+      "a_req": 0.405,
+      "ego_v0": 5.57
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0020-scene-0005",
+      "frame_idx": 0,
+      "a_req": 1.014,
+      "ego_v0": 8.09
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0037-scene-0013",
+      "frame_idx": 0,
+      "a_req": 0.415,
+      "ego_v0": 2.65
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "test:log-0110-scene-0030",
+      "frame_idx": 6,
+      "a_req": 0.478,
+      "ego_v0": 5.42
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "test:log-0111-scene-0024",
+      "frame_idx": 18,
+      "a_req": 0.765,
+      "ego_v0": 7.32
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0044-scene-0009",
+      "frame_idx": 2,
+      "a_req": 0.535,
+      "ego_v0": 4.77
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0103-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.625,
+      "ego_v0": 3.8
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0181-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.463,
+      "ego_v0": 5.25
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0211-scene-0009",
+      "frame_idx": 20,
+      "a_req": 0.525,
+      "ego_v0": 5.4
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0219-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.507,
+      "ego_v0": 2.83
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0228-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.423,
+      "ego_v0": 4.3
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0266-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.429,
+      "ego_v0": 4.91
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0330-scene-0021",
+      "frame_idx": 0,
+      "a_req": 0.436,
+      "ego_v0": 3.41
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0409-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.536,
+      "ego_v0": 5.1
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0482-scene-0032",
+      "frame_idx": 0,
+      "a_req": 0.677,
+      "ego_v0": 6.38
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0501-scene-0001",
+      "frame_idx": 27,
+      "a_req": 0.609,
+      "ego_v0": 5.67
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0535-scene-0002",
+      "frame_idx": 32,
+      "a_req": 0.702,
+      "ego_v0": 5.23
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0535-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.764,
+      "ego_v0": 2.42
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0548-scene-0015",
+      "frame_idx": 0,
+      "a_req": 1.35,
+      "ego_v0": 12.82
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0584-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.548,
+      "ego_v0": 5.44
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0588-scene-0004",
+      "frame_idx": 5,
+      "a_req": 0.406,
+      "ego_v0": 4.76
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0625-scene-0078",
+      "frame_idx": 0,
+      "a_req": 0.402,
+      "ego_v0": 4.47
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0626-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.468,
+      "ego_v0": 3.93
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0628-scene-0051",
+      "frame_idx": 7,
+      "a_req": 0.471,
+      "ego_v0": 10.19
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0628-scene-0106",
+      "frame_idx": 0,
+      "a_req": 0.573,
+      "ego_v0": 4.66
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0628-scene-0133",
+      "frame_idx": 0,
+      "a_req": 0.668,
+      "ego_v0": 6.29
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0635-scene-0009",
+      "frame_idx": 18,
+      "a_req": 0.634,
+      "ego_v0": 5.75
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0645-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.546,
+      "ego_v0": 4.35
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0703-scene-0009",
+      "frame_idx": 19,
+      "a_req": 0.491,
+      "ego_v0": 3.47
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0708-scene-0002",
+      "frame_idx": 5,
+      "a_req": 0.52,
+      "ego_v0": 3.88
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0708-scene-0007",
+      "frame_idx": 21,
+      "a_req": 0.47,
+      "ego_v0": 4.78
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0709-scene-0020",
+      "frame_idx": 21,
+      "a_req": 0.553,
+      "ego_v0": 3.07
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0713-scene-0022",
+      "frame_idx": 8,
+      "a_req": 0.865,
+      "ego_v0": 1.84
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0722-scene-0019",
+      "frame_idx": 15,
+      "a_req": 0.445,
+      "ego_v0": 4.78
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0735-scene-0007",
+      "frame_idx": 0,
+      "a_req": 0.668,
+      "ego_v0": 4.26
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0740-scene-0048",
+      "frame_idx": 4,
+      "a_req": 0.511,
+      "ego_v0": 6.59
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0744-scene-0060",
+      "frame_idx": 29,
+      "a_req": 0.675,
+      "ego_v0": 5.2
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0748-scene-0042",
+      "frame_idx": 3,
+      "a_req": 0.723,
+      "ego_v0": 6.58
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0763-scene-0023",
+      "frame_idx": 0,
+      "a_req": 0.512,
+      "ego_v0": 4.72
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0764-scene-0009",
+      "frame_idx": 35,
+      "a_req": 0.574,
+      "ego_v0": 3.47
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0767-scene-0007",
+      "frame_idx": 0,
+      "a_req": 0.68,
+      "ego_v0": 6.22
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0769-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.484,
+      "ego_v0": 5.48
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0770-scene-0024",
+      "frame_idx": 0,
+      "a_req": 0.668,
+      "ego_v0": 4.8
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0775-scene-0002",
+      "frame_idx": 7,
+      "a_req": 0.55,
+      "ego_v0": 2.61
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0776-scene-0008",
+      "frame_idx": 30,
+      "a_req": 0.454,
+      "ego_v0": 4.36
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0783-scene-0066",
+      "frame_idx": 25,
+      "a_req": 0.663,
+      "ego_v0": 3.76
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0795-scene-0002",
+      "frame_idx": 29,
+      "a_req": 0.424,
+      "ego_v0": 2.89
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0868-scene-0001",
+      "frame_idx": 27,
+      "a_req": 0.908,
+      "ego_v0": 6.92
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0887-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.96,
+      "ego_v0": 3.64
+    },
+    {
+      "scenario": "ghost",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0906-scene-0034",
+      "frame_idx": 0,
+      "a_req": 0.892,
+      "ego_v0": 6.5
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0002-scene-0023",
+      "frame_idx": 0,
+      "a_req": 0.681,
+      "ego_v0": 5.29
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0010-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.768,
+      "ego_v0": 4.97
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0011-scene-0012",
+      "frame_idx": 13,
+      "a_req": 0.431,
+      "ego_v0": 6.81
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0014-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.418,
+      "ego_v0": 4.8
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0017-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.815,
+      "ego_v0": 7.71
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0017-scene-0011",
+      "frame_idx": 26,
+      "a_req": 0.455,
+      "ego_v0": 5.5
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0020-scene-0008",
+      "frame_idx": 17,
+      "a_req": 0.412,
+      "ego_v0": 4.85
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0021-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.439,
+      "ego_v0": 6.5
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0024-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.951,
+      "ego_v0": 9.07
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0029-scene-0005",
+      "frame_idx": 18,
+      "a_req": 0.638,
+      "ego_v0": 5.44
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0031-scene-0017",
+      "frame_idx": 0,
+      "a_req": 0.546,
+      "ego_v0": 5.08
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0036-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.621,
+      "ego_v0": 6.61
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0037-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.575,
+      "ego_v0": 3.62
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0038-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.418,
+      "ego_v0": 4.76
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0039-scene-0004",
+      "frame_idx": 0,
+      "a_req": 1.06,
+      "ego_v0": 10.34
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0039-scene-0010",
+      "frame_idx": 0,
+      "a_req": 0.698,
+      "ego_v0": 6.85
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0042-scene-0017",
+      "frame_idx": 0,
+      "a_req": 1.025,
+      "ego_v0": 9.77
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0044-scene-0024",
+      "frame_idx": 0,
+      "a_req": 0.575,
+      "ego_v0": 3.73
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0045-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.852,
+      "ego_v0": 6.84
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0046-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.814,
+      "ego_v0": 12.06
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0046-scene-0012",
+      "frame_idx": 1,
+      "a_req": 0.59,
+      "ego_v0": 12.51
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0046-scene-0016",
+      "frame_idx": 0,
+      "a_req": 0.472,
+      "ego_v0": 4.54
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0046-scene-0030",
+      "frame_idx": 17,
+      "a_req": 0.59,
+      "ego_v0": 5.77
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0046-scene-0039",
+      "frame_idx": 12,
+      "a_req": 0.529,
+      "ego_v0": 7.08
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0047-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.427,
+      "ego_v0": 10.56
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0049-scene-0006",
+      "frame_idx": 32,
+      "a_req": 0.847,
+      "ego_v0": 7.86
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "test:log-0049-scene-0007",
+      "frame_idx": 0,
+      "a_req": 0.536,
+      "ego_v0": 3.63
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "test:log-0101-scene-0002",
+      "frame_idx": 27,
+      "a_req": 0.588,
+      "ego_v0": 5.03
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "test:log-0104-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.472,
+      "ego_v0": 3.04
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "test:log-0110-scene-0016",
+      "frame_idx": 0,
+      "a_req": 0.462,
+      "ego_v0": 4.94
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "test:log-0110-scene-0056",
+      "frame_idx": 31,
+      "a_req": 0.516,
+      "ego_v0": 5.84
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "test:log-0110-scene-0058",
+      "frame_idx": 0,
+      "a_req": 0.421,
+      "ego_v0": 5.35
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "test:log-0110-scene-0070",
+      "frame_idx": 0,
+      "a_req": 0.567,
+      "ego_v0": 4.9
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0002-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.876,
+      "ego_v0": 6.82
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0004-scene-0025",
+      "frame_idx": 11,
+      "a_req": 0.424,
+      "ego_v0": 5.25
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0004-scene-0027",
+      "frame_idx": 5,
+      "a_req": 0.486,
+      "ego_v0": 10.85
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0010-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.753,
+      "ego_v0": 8.95
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0014-scene-0033",
+      "frame_idx": 0,
+      "a_req": 0.418,
+      "ego_v0": 3.29
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0015-scene-0020",
+      "frame_idx": 0,
+      "a_req": 0.686,
+      "ego_v0": 5.02
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0015-scene-0024",
+      "frame_idx": 0,
+      "a_req": 0.708,
+      "ego_v0": 5.75
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0016-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.41,
+      "ego_v0": 5.15
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0019-scene-0008",
+      "frame_idx": 0,
+      "a_req": 0.4,
+      "ego_v0": 4.16
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0020-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.677,
+      "ego_v0": 5.59
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0020-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.633,
+      "ego_v0": 5.21
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0024-scene-0010",
+      "frame_idx": 22,
+      "a_req": 0.432,
+      "ego_v0": 5.12
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0030-scene-0010",
+      "frame_idx": 0,
+      "a_req": 0.728,
+      "ego_v0": 5.11
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0033-scene-0008",
+      "frame_idx": 0,
+      "a_req": 0.458,
+      "ego_v0": 4.75
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0037-scene-0031",
+      "frame_idx": 0,
+      "a_req": 0.756,
+      "ego_v0": 7.56
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0038-scene-0007",
+      "frame_idx": 0,
+      "a_req": 0.756,
+      "ego_v0": 6.14
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0039-scene-0029",
+      "frame_idx": 0,
+      "a_req": 0.475,
+      "ego_v0": 3.7
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0040-scene-0002",
+      "frame_idx": 28,
+      "a_req": 0.466,
+      "ego_v0": 5.39
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0040-scene-0018",
+      "frame_idx": 0,
+      "a_req": 1.141,
+      "ego_v0": 9.83
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0042-scene-0010",
+      "frame_idx": 30,
+      "a_req": 0.496,
+      "ego_v0": 7.35
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0055-scene-0007",
+      "frame_idx": 32,
+      "a_req": 0.855,
+      "ego_v0": 8.14
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0055-scene-0008",
+      "frame_idx": 0,
+      "a_req": 0.64,
+      "ego_v0": 4.11
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0056-scene-0030",
+      "frame_idx": 14,
+      "a_req": 0.431,
+      "ego_v0": 5.24
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0062-scene-0039",
+      "frame_idx": 0,
+      "a_req": 0.577,
+      "ego_v0": 6.4
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0065-scene-0009",
+      "frame_idx": 0,
+      "a_req": 0.504,
+      "ego_v0": 4.48
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0078-scene-0009",
+      "frame_idx": 0,
+      "a_req": 0.478,
+      "ego_v0": 5.95
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0078-scene-0014",
+      "frame_idx": 0,
+      "a_req": 0.435,
+      "ego_v0": 5.09
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0080-scene-0003",
+      "frame_idx": 0,
+      "a_req": 1.547,
+      "ego_v0": 4.61
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0090-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.464,
+      "ego_v0": 3.29
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0103-scene-0010",
+      "frame_idx": 0,
+      "a_req": 0.968,
+      "ego_v0": 7.41
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0105-scene-0007",
+      "frame_idx": 0,
+      "a_req": 0.414,
+      "ego_v0": 3.48
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0106-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.544,
+      "ego_v0": 3.82
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0109-scene-0011",
+      "frame_idx": 5,
+      "a_req": 0.467,
+      "ego_v0": 5.66
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0117-scene-0010",
+      "frame_idx": 0,
+      "a_req": 0.555,
+      "ego_v0": 4.06
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0135-scene-0015",
+      "frame_idx": 0,
+      "a_req": 0.405,
+      "ego_v0": 4.28
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0137-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.534,
+      "ego_v0": 4.22
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0152-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.664,
+      "ego_v0": 5.79
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0154-scene-0008",
+      "frame_idx": 0,
+      "a_req": 0.474,
+      "ego_v0": 4.23
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0156-scene-0001",
+      "frame_idx": 0,
+      "a_req": 0.773,
+      "ego_v0": 7.28
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0166-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.547,
+      "ego_v0": 6.65
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0174-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.588,
+      "ego_v0": 5.44
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0195-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.663,
+      "ego_v0": 4.92
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0199-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.654,
+      "ego_v0": 6.86
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0200-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.41,
+      "ego_v0": 4.47
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0208-scene-0004",
+      "frame_idx": 31,
+      "a_req": 0.453,
+      "ego_v0": 5.17
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0211-scene-0017",
+      "frame_idx": 0,
+      "a_req": 0.838,
+      "ego_v0": 7.57
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0213-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.884,
+      "ego_v0": 8.35
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0242-scene-0018",
+      "frame_idx": 0,
+      "a_req": 0.488,
+      "ego_v0": 11.28
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0244-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.74,
+      "ego_v0": 5.87
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0249-scene-0011",
+      "frame_idx": 0,
+      "a_req": 0.481,
+      "ego_v0": 5.71
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0261-scene-0007",
+      "frame_idx": 0,
+      "a_req": 0.724,
+      "ego_v0": 7.33
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0269-scene-0007",
+      "frame_idx": 0,
+      "a_req": 0.466,
+      "ego_v0": 4.93
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0279-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.447,
+      "ego_v0": 5.77
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0285-scene-0007",
+      "frame_idx": 0,
+      "a_req": 0.495,
+      "ego_v0": 8.42
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0290-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.975,
+      "ego_v0": 8.07
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0294-scene-0011",
+      "frame_idx": 0,
+      "a_req": 0.507,
+      "ego_v0": 6.9
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0295-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.842,
+      "ego_v0": 7.23
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0297-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.772,
+      "ego_v0": 5.48
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0298-scene-0004",
+      "frame_idx": 32,
+      "a_req": 0.872,
+      "ego_v0": 6.99
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0303-scene-0020",
+      "frame_idx": 0,
+      "a_req": 0.43,
+      "ego_v0": 4.13
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0305-scene-0009",
+      "frame_idx": 0,
+      "a_req": 0.613,
+      "ego_v0": 7.89
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0307-scene-0026",
+      "frame_idx": 12,
+      "a_req": 0.443,
+      "ego_v0": 5.67
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0307-scene-0033",
+      "frame_idx": 0,
+      "a_req": 0.502,
+      "ego_v0": 4.36
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0311-scene-0001",
+      "frame_idx": 14,
+      "a_req": 0.432,
+      "ego_v0": 5.79
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0314-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.536,
+      "ego_v0": 4.36
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0317-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.723,
+      "ego_v0": 5.48
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0329-scene-0009",
+      "frame_idx": 0,
+      "a_req": 0.436,
+      "ego_v0": 3.99
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0329-scene-0019",
+      "frame_idx": 7,
+      "a_req": 0.485,
+      "ego_v0": 4.21
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0330-scene-0032",
+      "frame_idx": 0,
+      "a_req": 0.741,
+      "ego_v0": 5.85
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0331-scene-0023",
+      "frame_idx": 0,
+      "a_req": 0.567,
+      "ego_v0": 4.66
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0373-scene-0015",
+      "frame_idx": 0,
+      "a_req": 0.648,
+      "ego_v0": 4.57
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0387-scene-0009",
+      "frame_idx": 30,
+      "a_req": 0.475,
+      "ego_v0": 5.81
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0395-scene-0047",
+      "frame_idx": 0,
+      "a_req": 0.533,
+      "ego_v0": 5.06
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0399-scene-0004",
+      "frame_idx": 2,
+      "a_req": 0.469,
+      "ego_v0": 5.45
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0409-scene-0003",
+      "frame_idx": 3,
+      "a_req": 0.489,
+      "ego_v0": 5.94
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0414-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.629,
+      "ego_v0": 6.64
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0415-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.589,
+      "ego_v0": 6.15
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0434-scene-0019",
+      "frame_idx": 0,
+      "a_req": 0.421,
+      "ego_v0": 1.58
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0443-scene-0005",
+      "frame_idx": 0,
+      "a_req": 1.01,
+      "ego_v0": 7.23
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0445-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.512,
+      "ego_v0": 4.94
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0445-scene-0008",
+      "frame_idx": 0,
+      "a_req": 0.585,
+      "ego_v0": 3.91
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0462-scene-0004",
+      "frame_idx": 32,
+      "a_req": 0.483,
+      "ego_v0": 6.9
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0469-scene-0005",
+      "frame_idx": 4,
+      "a_req": 0.455,
+      "ego_v0": 6.82
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0472-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.6,
+      "ego_v0": 6.12
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0482-scene-0040",
+      "frame_idx": 7,
+      "a_req": 0.594,
+      "ego_v0": 5.98
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0507-scene-0010",
+      "frame_idx": 0,
+      "a_req": 0.47,
+      "ego_v0": 5.72
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0511-scene-0011",
+      "frame_idx": 15,
+      "a_req": 0.508,
+      "ego_v0": 4.25
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0516-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.66,
+      "ego_v0": 9.09
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0526-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.506,
+      "ego_v0": 3.79
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0548-scene-0041",
+      "frame_idx": 0,
+      "a_req": 0.748,
+      "ego_v0": 7.21
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0549-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.471,
+      "ego_v0": 5.08
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0555-scene-0010",
+      "frame_idx": 0,
+      "a_req": 0.539,
+      "ego_v0": 3.94
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0558-scene-0007",
+      "frame_idx": 0,
+      "a_req": 0.598,
+      "ego_v0": 5.42
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0561-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.47,
+      "ego_v0": 5.16
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0562-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.435,
+      "ego_v0": 12.68
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0568-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.912,
+      "ego_v0": 8.59
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0574-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.835,
+      "ego_v0": 6.64
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0576-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.757,
+      "ego_v0": 6.84
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0580-scene-0006",
+      "frame_idx": 13,
+      "a_req": 0.65,
+      "ego_v0": 5.4
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0585-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.816,
+      "ego_v0": 7.79
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0594-scene-0009",
+      "frame_idx": 0,
+      "a_req": 0.418,
+      "ego_v0": 3.45
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0600-scene-0016",
+      "frame_idx": 0,
+      "a_req": 0.468,
+      "ego_v0": 4.06
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0607-scene-0026",
+      "frame_idx": 0,
+      "a_req": 0.669,
+      "ego_v0": 6.97
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0610-scene-0003",
+      "frame_idx": 0,
+      "a_req": 0.559,
+      "ego_v0": 4.63
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0611-scene-0011",
+      "frame_idx": 1,
+      "a_req": 0.407,
+      "ego_v0": 4.11
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0618-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.741,
+      "ego_v0": 7.13
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0619-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.825,
+      "ego_v0": 7.04
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0623-scene-0058",
+      "frame_idx": 0,
+      "a_req": 0.471,
+      "ego_v0": 3.62
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0623-scene-0123",
+      "frame_idx": 0,
+      "a_req": 0.603,
+      "ego_v0": 11.27
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0625-scene-0029",
+      "frame_idx": 0,
+      "a_req": 0.671,
+      "ego_v0": 5.75
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0625-scene-0119",
+      "frame_idx": 0,
+      "a_req": 0.433,
+      "ego_v0": 3.59
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0625-scene-0124",
+      "frame_idx": 0,
+      "a_req": 0.586,
+      "ego_v0": 5.23
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0625-scene-0127",
+      "frame_idx": 0,
+      "a_req": 0.639,
+      "ego_v0": 7.09
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0628-scene-0042",
+      "frame_idx": 0,
+      "a_req": 0.588,
+      "ego_v0": 5.41
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0628-scene-0118",
+      "frame_idx": 0,
+      "a_req": 0.4,
+      "ego_v0": 3.22
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0630-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.664,
+      "ego_v0": 5.46
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0632-scene-0080",
+      "frame_idx": 0,
+      "a_req": 0.729,
+      "ego_v0": 5.31
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0632-scene-0101",
+      "frame_idx": 0,
+      "a_req": 0.569,
+      "ego_v0": 4.07
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0642-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.476,
+      "ego_v0": 4.55
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0642-scene-0019",
+      "frame_idx": 0,
+      "a_req": 0.587,
+      "ego_v0": 5.13
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0645-scene-0005",
+      "frame_idx": 5,
+      "a_req": 0.478,
+      "ego_v0": 4.37
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0652-scene-0019",
+      "frame_idx": 0,
+      "a_req": 0.475,
+      "ego_v0": 3.86
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0653-scene-0008",
+      "frame_idx": 0,
+      "a_req": 0.589,
+      "ego_v0": 5.69
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0654-scene-0008",
+      "frame_idx": 0,
+      "a_req": 0.639,
+      "ego_v0": 5.43
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0658-scene-0033",
+      "frame_idx": 0,
+      "a_req": 0.736,
+      "ego_v0": 6.5
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0658-scene-0059",
+      "frame_idx": 0,
+      "a_req": 0.403,
+      "ego_v0": 5.17
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0658-scene-0101",
+      "frame_idx": 14,
+      "a_req": 0.519,
+      "ego_v0": 5.27
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0661-scene-0006",
+      "frame_idx": 9,
+      "a_req": 0.582,
+      "ego_v0": 6.03
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0664-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.503,
+      "ego_v0": 6.81
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0664-scene-0038",
+      "frame_idx": 0,
+      "a_req": 0.41,
+      "ego_v0": 6.19
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0672-scene-0027",
+      "frame_idx": 0,
+      "a_req": 1.006,
+      "ego_v0": 6.26
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0687-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.417,
+      "ego_v0": 5.19
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0688-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.456,
+      "ego_v0": 3.44
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0688-scene-0050",
+      "frame_idx": 0,
+      "a_req": 0.55,
+      "ego_v0": 7.86
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0693-scene-0004",
+      "frame_idx": 0,
+      "a_req": 1.05,
+      "ego_v0": 6.81
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0693-scene-0033",
+      "frame_idx": 0,
+      "a_req": 0.645,
+      "ego_v0": 6.47
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0694-scene-0013",
+      "frame_idx": 0,
+      "a_req": 0.759,
+      "ego_v0": 5.73
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0695-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.547,
+      "ego_v0": 4.86
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0703-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.682,
+      "ego_v0": 4.12
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0706-scene-0052",
+      "frame_idx": 0,
+      "a_req": 0.639,
+      "ego_v0": 6.48
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0707-scene-0010",
+      "frame_idx": 0,
+      "a_req": 0.437,
+      "ego_v0": 8.81
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0707-scene-0111",
+      "frame_idx": 0,
+      "a_req": 1.38,
+      "ego_v0": 10.32
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0709-scene-0050",
+      "frame_idx": 0,
+      "a_req": 0.459,
+      "ego_v0": 5.35
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0709-scene-0057",
+      "frame_idx": 0,
+      "a_req": 0.4,
+      "ego_v0": 3.09
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0711-scene-0023",
+      "frame_idx": 0,
+      "a_req": 0.604,
+      "ego_v0": 4.11
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0713-scene-0008",
+      "frame_idx": 0,
+      "a_req": 0.809,
+      "ego_v0": 7.73
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0713-scene-0013",
+      "frame_idx": 0,
+      "a_req": 0.65,
+      "ego_v0": 6.3
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0713-scene-0027",
+      "frame_idx": 3,
+      "a_req": 0.462,
+      "ego_v0": 4.61
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0713-scene-0057",
+      "frame_idx": 0,
+      "a_req": 0.57,
+      "ego_v0": 5.81
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0713-scene-0076",
+      "frame_idx": 0,
+      "a_req": 0.644,
+      "ego_v0": 4.57
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0713-scene-0083",
+      "frame_idx": 26,
+      "a_req": 0.45,
+      "ego_v0": 5.42
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0721-scene-0049",
+      "frame_idx": 0,
+      "a_req": 0.542,
+      "ego_v0": 4.49
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0722-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.458,
+      "ego_v0": 10.72
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0722-scene-0046",
+      "frame_idx": 0,
+      "a_req": 0.517,
+      "ego_v0": 4.84
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0726-scene-0038",
+      "frame_idx": 5,
+      "a_req": 0.555,
+      "ego_v0": 6.49
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0727-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.591,
+      "ego_v0": 6.09
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0728-scene-0034",
+      "frame_idx": 0,
+      "a_req": 0.489,
+      "ego_v0": 4.15
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0729-scene-0049",
+      "frame_idx": 21,
+      "a_req": 0.412,
+      "ego_v0": 4.52
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0729-scene-0052",
+      "frame_idx": 12,
+      "a_req": 0.458,
+      "ego_v0": 4.39
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0729-scene-0104",
+      "frame_idx": 0,
+      "a_req": 0.561,
+      "ego_v0": 9.11
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0730-scene-0069",
+      "frame_idx": 0,
+      "a_req": 0.584,
+      "ego_v0": 3.49
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0730-scene-0078",
+      "frame_idx": 0,
+      "a_req": 1.004,
+      "ego_v0": 8.17
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0733-scene-0012",
+      "frame_idx": 0,
+      "a_req": 0.442,
+      "ego_v0": 4.21
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0735-scene-0001",
+      "frame_idx": 0,
+      "a_req": 0.476,
+      "ego_v0": 2.95
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0735-scene-0019",
+      "frame_idx": 0,
+      "a_req": 0.516,
+      "ego_v0": 4.34
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0736-scene-0024",
+      "frame_idx": 24,
+      "a_req": 0.68,
+      "ego_v0": 6.82
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0737-scene-0052",
+      "frame_idx": 1,
+      "a_req": 0.586,
+      "ego_v0": 5.73
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0737-scene-0056",
+      "frame_idx": 0,
+      "a_req": 0.423,
+      "ego_v0": 4.54
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0738-scene-0039",
+      "frame_idx": 0,
+      "a_req": 0.635,
+      "ego_v0": 6.89
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0740-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.407,
+      "ego_v0": 3.96
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0740-scene-0049",
+      "frame_idx": 23,
+      "a_req": 0.553,
+      "ego_v0": 6.28
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0740-scene-0056",
+      "frame_idx": 0,
+      "a_req": 0.803,
+      "ego_v0": 5.38
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0743-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.664,
+      "ego_v0": 4.31
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0743-scene-0009",
+      "frame_idx": 0,
+      "a_req": 1.03,
+      "ego_v0": 8.59
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0743-scene-0059",
+      "frame_idx": 0,
+      "a_req": 0.566,
+      "ego_v0": 5.59
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0743-scene-0064",
+      "frame_idx": 0,
+      "a_req": 0.521,
+      "ego_v0": 3.29
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0744-scene-0020",
+      "frame_idx": 0,
+      "a_req": 0.403,
+      "ego_v0": 8.48
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0744-scene-0037",
+      "frame_idx": 0,
+      "a_req": 0.863,
+      "ego_v0": 9.42
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0745-scene-0014",
+      "frame_idx": 0,
+      "a_req": 0.634,
+      "ego_v0": 4.58
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0745-scene-0055",
+      "frame_idx": 0,
+      "a_req": 0.436,
+      "ego_v0": 4.67
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0747-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.535,
+      "ego_v0": 11.84
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0747-scene-0031",
+      "frame_idx": 2,
+      "a_req": 0.457,
+      "ego_v0": 3.82
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0748-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.545,
+      "ego_v0": 4.61
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0748-scene-0027",
+      "frame_idx": 0,
+      "a_req": 0.6,
+      "ego_v0": 4.76
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0750-scene-0009",
+      "frame_idx": 0,
+      "a_req": 0.467,
+      "ego_v0": 2.8
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0758-scene-0052",
+      "frame_idx": 0,
+      "a_req": 0.733,
+      "ego_v0": 7.15
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0759-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.51,
+      "ego_v0": 4.22
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0760-scene-0064",
+      "frame_idx": 6,
+      "a_req": 0.436,
+      "ego_v0": 5.58
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0761-scene-0060",
+      "frame_idx": 24,
+      "a_req": 0.483,
+      "ego_v0": 5.11
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0763-scene-0038",
+      "frame_idx": 0,
+      "a_req": 1.196,
+      "ego_v0": 11.14
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0763-scene-0069",
+      "frame_idx": 0,
+      "a_req": 0.445,
+      "ego_v0": 3.32
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0764-scene-0019",
+      "frame_idx": 0,
+      "a_req": 1.197,
+      "ego_v0": 7.34
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0764-scene-0025",
+      "frame_idx": 0,
+      "a_req": 0.455,
+      "ego_v0": 3.93
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0764-scene-0059",
+      "frame_idx": 0,
+      "a_req": 0.473,
+      "ego_v0": 5.19
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0768-scene-0033",
+      "frame_idx": 0,
+      "a_req": 0.685,
+      "ego_v0": 7.86
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0770-scene-0032",
+      "frame_idx": 0,
+      "a_req": 0.889,
+      "ego_v0": 7.8
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0772-scene-0003",
+      "frame_idx": 21,
+      "a_req": 0.518,
+      "ego_v0": 4.5
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0772-scene-0017",
+      "frame_idx": 0,
+      "a_req": 0.489,
+      "ego_v0": 6.23
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0773-scene-0008",
+      "frame_idx": 12,
+      "a_req": 0.638,
+      "ego_v0": 5.69
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0775-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.518,
+      "ego_v0": 5.13
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0775-scene-0013",
+      "frame_idx": 0,
+      "a_req": 0.702,
+      "ego_v0": 5.23
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0776-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.451,
+      "ego_v0": 3.24
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0779-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.407,
+      "ego_v0": 3.33
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0780-scene-0042",
+      "frame_idx": 0,
+      "a_req": 0.411,
+      "ego_v0": 3.56
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0780-scene-0079",
+      "frame_idx": 0,
+      "a_req": 0.637,
+      "ego_v0": 6.29
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0780-scene-0086",
+      "frame_idx": 0,
+      "a_req": 0.642,
+      "ego_v0": 4.96
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0780-scene-0102",
+      "frame_idx": 29,
+      "a_req": 0.42,
+      "ego_v0": 6.73
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0780-scene-0108",
+      "frame_idx": 19,
+      "a_req": 0.586,
+      "ego_v0": 4.87
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0783-scene-0040",
+      "frame_idx": 0,
+      "a_req": 0.415,
+      "ego_v0": 6.39
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0785-scene-0024",
+      "frame_idx": 0,
+      "a_req": 0.743,
+      "ego_v0": 7.51
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0787-scene-0017",
+      "frame_idx": 0,
+      "a_req": 0.494,
+      "ego_v0": 0.54
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0788-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.702,
+      "ego_v0": 7.12
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0788-scene-0040",
+      "frame_idx": 0,
+      "a_req": 1.064,
+      "ego_v0": 9.43
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0789-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.609,
+      "ego_v0": 3.91
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0791-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.673,
+      "ego_v0": 5.99
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0804-scene-0011",
+      "frame_idx": 0,
+      "a_req": 0.864,
+      "ego_v0": 5.16
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0804-scene-0035",
+      "frame_idx": 2,
+      "a_req": 0.442,
+      "ego_v0": 4.75
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0804-scene-0083",
+      "frame_idx": 11,
+      "a_req": 0.512,
+      "ego_v0": 6.25
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0808-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.443,
+      "ego_v0": 6.35
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0808-scene-0023",
+      "frame_idx": 0,
+      "a_req": 0.425,
+      "ego_v0": 4.06
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0808-scene-0033",
+      "frame_idx": 0,
+      "a_req": 0.521,
+      "ego_v0": 4.91
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0808-scene-0038",
+      "frame_idx": 0,
+      "a_req": 0.438,
+      "ego_v0": 3.64
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0808-scene-0078",
+      "frame_idx": 0,
+      "a_req": 0.592,
+      "ego_v0": 4.83
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0808-scene-0081",
+      "frame_idx": 0,
+      "a_req": 0.572,
+      "ego_v0": 8.08
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0809-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.567,
+      "ego_v0": 4.52
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0809-scene-0012",
+      "frame_idx": 0,
+      "a_req": 0.864,
+      "ego_v0": 8.42
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0809-scene-0032",
+      "frame_idx": 17,
+      "a_req": 0.479,
+      "ego_v0": 5.1
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0810-scene-0034",
+      "frame_idx": 0,
+      "a_req": 0.803,
+      "ego_v0": 8.37
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0810-scene-0050",
+      "frame_idx": 0,
+      "a_req": 0.813,
+      "ego_v0": 6.83
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0812-scene-0023",
+      "frame_idx": 25,
+      "a_req": 0.424,
+      "ego_v0": 10.76
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0812-scene-0034",
+      "frame_idx": 14,
+      "a_req": 0.545,
+      "ego_v0": 9.37
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0812-scene-0062",
+      "frame_idx": 0,
+      "a_req": 1.42,
+      "ego_v0": 11.91
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0814-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.667,
+      "ego_v0": 6.18
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0815-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.423,
+      "ego_v0": 5.54
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0816-scene-0009",
+      "frame_idx": 0,
+      "a_req": 0.779,
+      "ego_v0": 7.73
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0817-scene-0002",
+      "frame_idx": 0,
+      "a_req": 1.229,
+      "ego_v0": 7.37
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0817-scene-0012",
+      "frame_idx": 26,
+      "a_req": 0.632,
+      "ego_v0": 6.69
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0817-scene-0016",
+      "frame_idx": 0,
+      "a_req": 0.87,
+      "ego_v0": 4.75
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0817-scene-0023",
+      "frame_idx": 0,
+      "a_req": 0.501,
+      "ego_v0": 3.39
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0817-scene-0036",
+      "frame_idx": 13,
+      "a_req": 0.488,
+      "ego_v0": 7.62
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-nv-las-vegas-strip",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0817-scene-0041",
+      "frame_idx": 16,
+      "a_req": 0.861,
+      "ego_v0": 6.99
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0843-scene-0007",
+      "frame_idx": 0,
+      "a_req": 0.485,
+      "ego_v0": 4.16
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0844-scene-0004",
+      "frame_idx": 0,
+      "a_req": 0.435,
+      "ego_v0": 5.0
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0850-scene-0012",
+      "frame_idx": 0,
+      "a_req": 0.555,
+      "ego_v0": 3.83
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0853-scene-0010",
+      "frame_idx": 0,
+      "a_req": 0.79,
+      "ego_v0": 7.11
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0854-scene-0008",
+      "frame_idx": 0,
+      "a_req": 0.42,
+      "ego_v0": 5.2
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0856-scene-0010",
+      "frame_idx": 0,
+      "a_req": 0.886,
+      "ego_v0": 6.84
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0856-scene-0013",
+      "frame_idx": 0,
+      "a_req": 0.583,
+      "ego_v0": 5.28
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0866-scene-0014",
+      "frame_idx": 0,
+      "a_req": 0.744,
+      "ego_v0": 5.95
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0868-scene-0001",
+      "frame_idx": 0,
+      "a_req": 0.43,
+      "ego_v0": 4.96
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0868-scene-0014",
+      "frame_idx": 0,
+      "a_req": 0.908,
+      "ego_v0": 5.83
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0869-scene-0011",
+      "frame_idx": 0,
+      "a_req": 0.503,
+      "ego_v0": 4.85
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0882-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.427,
+      "ego_v0": 4.87
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0887-scene-0005",
+      "frame_idx": 4,
+      "a_req": 0.457,
+      "ego_v0": 5.19
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0887-scene-0019",
+      "frame_idx": 0,
+      "a_req": 0.409,
+      "ego_v0": 3.5
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0890-scene-0014",
+      "frame_idx": 1,
+      "a_req": 0.405,
+      "ego_v0": 4.35
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0891-scene-0001",
+      "frame_idx": 25,
+      "a_req": 0.411,
+      "ego_v0": 7.09
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0892-scene-0006",
+      "frame_idx": 0,
+      "a_req": 0.824,
+      "ego_v0": 6.02
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0895-scene-0044",
+      "frame_idx": 11,
+      "a_req": 0.554,
+      "ego_v0": 6.43
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0895-scene-0049",
+      "frame_idx": 0,
+      "a_req": 0.526,
+      "ego_v0": 4.45
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0898-scene-0005",
+      "frame_idx": 0,
+      "a_req": 1.95,
+      "ego_v0": 5.2
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0898-scene-0005",
+      "frame_idx": 21,
+      "a_req": 0.426,
+      "ego_v0": 5.37
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0901-scene-0005",
+      "frame_idx": 6,
+      "a_req": 1.083,
+      "ego_v0": 9.46
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0901-scene-0010",
+      "frame_idx": 0,
+      "a_req": 0.604,
+      "ego_v0": 5.69
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0901-scene-0023",
+      "frame_idx": 0,
+      "a_req": 0.461,
+      "ego_v0": 5.8
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0901-scene-0025",
+      "frame_idx": 19,
+      "a_req": 0.686,
+      "ego_v0": 6.86
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0901-scene-0026",
+      "frame_idx": 18,
+      "a_req": 1.014,
+      "ego_v0": 8.48
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0905-scene-0002",
+      "frame_idx": 0,
+      "a_req": 0.481,
+      "ego_v0": 5.86
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0906-scene-0001",
+      "frame_idx": 0,
+      "a_req": 0.469,
+      "ego_v0": 5.65
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0910-scene-0012",
+      "frame_idx": 0,
+      "a_req": 4.19,
+      "ego_v0": 8.11
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0912-scene-0016",
+      "frame_idx": 0,
+      "a_req": 0.913,
+      "ego_v0": 8.67
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0916-scene-0002",
+      "frame_idx": 11,
+      "a_req": 0.907,
+      "ego_v0": 8.53
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0916-scene-0004",
+      "frame_idx": 26,
+      "a_req": 0.45,
+      "ego_v0": 5.37
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0917-scene-0039",
+      "frame_idx": 0,
+      "a_req": 0.599,
+      "ego_v0": 5.25
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0925-scene-0008",
+      "frame_idx": 0,
+      "a_req": 0.438,
+      "ego_v0": 4.28
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0931-scene-0022",
+      "frame_idx": 0,
+      "a_req": 0.92,
+      "ego_v0": 7.2
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0931-scene-0030",
+      "frame_idx": 27,
+      "a_req": 0.868,
+      "ego_v0": 7.58
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-0950-scene-0005",
+      "frame_idx": 0,
+      "a_req": 0.995,
+      "ego_v0": 5.94
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-1016-scene-0017",
+      "frame_idx": 0,
+      "a_req": 1.0,
+      "ego_v0": 7.95
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-1016-scene-0018",
+      "frame_idx": 14,
+      "a_req": 0.662,
+      "ego_v0": 6.56
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-1016-scene-0038",
+      "frame_idx": 0,
+      "a_req": 0.42,
+      "ego_v0": 3.61
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-1017-scene-0008",
+      "frame_idx": 0,
+      "a_req": 0.726,
+      "ego_v0": 7.5
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-1026-scene-0002",
+      "frame_idx": 12,
+      "a_req": 1.034,
+      "ego_v0": 8.12
+    },
+    {
+      "scenario": "lead",
+      "corpus": "NAVSIM",
+      "city": "us-pa-pittsburgh-hazelwood",
+      "drive": "左舵",
+      "scene_id": "trainval:log-1026-scene-0005",
+      "frame_idx": 3,
+      "a_req": 4.718,
+      "ego_v0": 12.55
+    }
+  ]
+}

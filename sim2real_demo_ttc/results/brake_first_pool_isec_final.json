@@ -1,0 +1,561 @@
+{
+  "scenario": "intersection",
+  "corpus": "nuscenes",
+  "hazard_classes": [
+    "human.",
+    "vehicle.",
+    "movable_object.",
+    "static_object.",
+    "animal"
+  ],
+  "static_corridor_m": 1.0,
+  "explained_ratio_bounds": [
+    0.3,
+    10.0
+  ],
+  "scan": {
+    "n_scenes": 850,
+    "n_brake_episodes": 752
+  },
+  "n_events": 2,
+  "n_scenes": 2,
+  "low_speed_stats": {
+    "n_low": 0,
+    "n_total": 2,
+    "frac_low": 0.0
+  },
+  "qa": {
+    "method": "分层抽样目视（按 a_req 分位均匀取）ghost 帧 + 遮挡后并排",
+    "note": "待 QA（样本量不足，仅登记）"
+  },
+  "candidates": [
+    {
+      "scene": "scene-0151",
+      "frame_idx": 19,
+      "t": 1533114328.1624599,
+      "ego_v0": 5.51,
+      "ego_vmin": 3.51,
+      "dv": -2.01,
+      "rel_decel": 0.364,
+      "a_obs": 0.422,
+      "brake_dur_s": 4.75,
+      "a_vru_sum": 0.778,
+      "a_vru_max": 0.777,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.841,
+      "lead_vru": {
+        "token": "31a8227b9a194e099a25cf1b0deac81b",
+        "cat": "vehicle.bicycle",
+        "s_m": 37.7,
+        "lat_m": 0.3
+      },
+      "ttc_s": 6.8,
+      "ego_yaw_change_deg": -40.1,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.",
+        "movable_object.",
+        "static_object.",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "31a8227b9a194e099a25cf1b0deac81b",
+          "cat": "vehicle.bicycle",
+          "s_m": 37.7,
+          "lat_m": 0.3,
+          "a_req": 0.777,
+          "visible": true
+        },
+        {
+          "token": "e99f102efe604ec0b52e02b61e7b3ea7",
+          "cat": "vehicle.car",
+          "s_m": 21.9,
+          "lat_m": 1.22,
+          "a_req": 0.0,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 5.51
+      }
+    },
+    {
+      "scene": "scene-0853",
+      "frame_idx": 1,
+      "t": 1538985929.86246,
+      "ego_v0": 6.71,
+      "ego_vmin": 1.53,
+      "dv": -5.18,
+      "rel_decel": 0.772,
+      "a_obs": 1.138,
+      "brake_dur_s": 4.55,
+      "a_vru_sum": 0.742,
+      "a_vru_max": 0.742,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.652,
+      "lead_vru": {
+        "token": "bbe513d2a58b4dcfae314e7e8019ef46",
+        "cat": "vehicle.car",
+        "s_m": 30.3,
+        "lat_m": 1.39
+      },
+      "ttc_s": 4.5,
+      "ego_yaw_change_deg": 12.7,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.",
+        "movable_object.",
+        "static_object.",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "bbe513d2a58b4dcfae314e7e8019ef46",
+          "cat": "vehicle.car",
+          "s_m": 30.3,
+          "lat_m": 1.39,
+          "a_req": 0.742,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 6.71
+      }
+    }
+  ],
+  "deferred_low_a_req": [
+    {
+      "scene": "scene-0238",
+      "frame_idx": 62,
+      "t": 1532708636.2658908,
+      "ego_v0": 3.76,
+      "ego_vmin": 0.01,
+      "dv": -3.75,
+      "rel_decel": 0.997,
+      "a_obs": 0.375,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.631,
+      "a_vru_max": 0.33,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.879,
+      "lead_vru": {
+        "token": "d901210f24724c3299809cba832dd96f",
+        "cat": "vehicle.car",
+        "s_m": 20.5,
+        "lat_m": 0.67
+      },
+      "ttc_s": 5.4,
+      "ego_yaw_change_deg": -120.8,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.",
+        "movable_object.",
+        "static_object.",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "d901210f24724c3299809cba832dd96f",
+          "cat": "vehicle.car",
+          "s_m": 20.5,
+          "lat_m": 0.67,
+          "a_req": 0.33,
+          "visible": true
+        },
+        {
+          "token": "5080c70b3f47420286769c8f0aa58a2d",
+          "cat": "human.pedestrian.adult",
+          "s_m": 27.8,
+          "lat_m": 0.09,
+          "a_req": 0.301,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 3.76
+      },
+      "status": "deferred: a_req<0.4；不删，保留待定"
+    },
+    {
+      "scene": "scene-0997",
+      "frame_idx": 162,
+      "t": 1542193255.36246,
+      "ego_v0": 3.82,
+      "ego_vmin": 0.21,
+      "dv": -3.61,
+      "rel_decel": 0.946,
+      "a_obs": 0.602,
+      "brake_dur_s": 6.0,
+      "a_vru_sum": 0.319,
+      "a_vru_max": 0.319,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.53,
+      "lead_vru": {
+        "token": "14fa7280497e4078b8db547687019de1",
+        "cat": "vehicle.car",
+        "s_m": 22.1,
+        "lat_m": 0.86
+      },
+      "ttc_s": 5.8,
+      "ego_yaw_change_deg": 5.1,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.",
+        "movable_object.",
+        "static_object.",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "14fa7280497e4078b8db547687019de1",
+          "cat": "vehicle.car",
+          "s_m": 22.1,
+          "lat_m": 0.86,
+          "a_req": 0.319,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 3.82
+      },
+      "status": "deferred: a_req<0.4；不删，保留待定"
+    },
+    {
+      "scene": "scene-0235",
+      "frame_idx": 84,
+      "t": 1532708456.1124039,
+      "ego_v0": 3.8,
+      "ego_vmin": 0.0,
+      "dv": -3.8,
+      "rel_decel": 1.0,
+      "a_obs": 0.38,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.272,
+      "a_vru_max": 0.272,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.714,
+      "lead_vru": {
+        "token": "f212f246f53e4110b7f6a490cc70adaa",
+        "cat": "vehicle.truck",
+        "s_m": 28.6,
+        "lat_m": 1.01
+      },
+      "ttc_s": 7.5,
+      "ego_yaw_change_deg": 81.3,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.",
+        "movable_object.",
+        "static_object.",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "f212f246f53e4110b7f6a490cc70adaa",
+          "cat": "vehicle.truck",
+          "s_m": 28.6,
+          "lat_m": 1.01,
+          "a_req": 0.272,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 3.8
+      },
+      "status": "deferred: a_req<0.4；不删，保留待定"
+    },
+    {
+      "scene": "scene-0479",
+      "frame_idx": 225,
+      "t": 1537290260.1624038,
+      "ego_v0": 2.15,
+      "ego_vmin": 1.47,
+      "dv": -0.69,
+      "rel_decel": 0.32,
+      "a_obs": 0.689,
+      "brake_dur_s": 1.0,
+      "a_vru_sum": 0.249,
+      "a_vru_max": 0.249,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.361,
+      "lead_vru": {
+        "token": "dec3548eed7640c6ad0e8b0f1cf72bfd",
+        "cat": "vehicle.car",
+        "s_m": 11.3,
+        "lat_m": 0.39
+      },
+      "ttc_s": 5.2,
+      "ego_yaw_change_deg": 0.3,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.",
+        "movable_object.",
+        "static_object.",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "dec3548eed7640c6ad0e8b0f1cf72bfd",
+          "cat": "vehicle.car",
+          "s_m": 11.3,
+          "lat_m": 0.39,
+          "a_req": 0.249,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": true,
+        "ego_v0_mps": 2.15
+      },
+      "status": "deferred: a_req<0.4；不删，保留待定"
+    },
+    {
+      "scene": "scene-1079",
+      "frame_idx": 172,
+      "t": 1542800422.4124599,
+      "ego_v0": 2.26,
+      "ego_vmin": 0.0,
+      "dv": -2.25,
+      "rel_decel": 0.998,
+      "a_obs": 0.451,
+      "brake_dur_s": 5.0,
+      "a_vru_sum": 0.36,
+      "a_vru_max": 0.239,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.531,
+      "lead_vru": {
+        "token": "c8baf959030243089dddc685ebfdd3a4",
+        "cat": "vehicle.car",
+        "s_m": 12.1,
+        "lat_m": 0.34
+      },
+      "ttc_s": 5.4,
+      "ego_yaw_change_deg": -89.5,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.",
+        "movable_object.",
+        "static_object.",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "c8baf959030243089dddc685ebfdd3a4",
+          "cat": "vehicle.car",
+          "s_m": 12.1,
+          "lat_m": 0.34,
+          "a_req": 0.239,
+          "visible": true
+        },
+        {
+          "token": "5e3d3c115076433ebaba3bf59ff35062",
+          "cat": "vehicle.car",
+          "s_m": 19.5,
+          "lat_m": 1.0,
+          "a_req": 0.121,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": true,
+        "ego_v0_mps": 2.26
+      },
+      "status": "deferred: a_req<0.4；不删，保留待定"
+    },
+    {
+      "scene": "scene-0731",
+      "frame_idx": 102,
+      "t": 1535573968.4124038,
+      "ego_v0": 1.24,
+      "ego_vmin": 0.0,
+      "dv": -1.24,
+      "rel_decel": 1.0,
+      "a_obs": 0.124,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.377,
+      "a_vru_max": 0.204,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.652,
+      "lead_vru": {
+        "token": "e22b557ae1bc4196a0436be4d3c2e319",
+        "cat": "human.pedestrian.adult",
+        "s_m": 9.3,
+        "lat_m": 1.65
+      },
+      "ttc_s": 7.5,
+      "ego_yaw_change_deg": 89.9,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.",
+        "movable_object.",
+        "static_object.",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "e22b557ae1bc4196a0436be4d3c2e319",
+          "cat": "human.pedestrian.adult",
+          "s_m": 9.3,
+          "lat_m": 1.65,
+          "a_req": 0.204,
+          "visible": true
+        },
+        {
+          "token": "c4b1214213714ac68591b3fa70baadf5",
+          "cat": "human.pedestrian.adult",
+          "s_m": 8.2,
+          "lat_m": 0.39,
+          "a_req": 0.173,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": true,
+        "ego_v0_mps": 1.24
+      },
+      "status": "deferred: a_req<0.4；不删，保留待定"
+    },
+    {
+      "scene": "scene-0594",
+      "frame_idx": 207,
+      "t": 1537292960.762404,
+      "ego_v0": 1.93,
+      "ego_vmin": 0.83,
+      "dv": -1.1,
+      "rel_decel": 0.57,
+      "a_obs": 0.488,
+      "brake_dur_s": 2.25,
+      "a_vru_sum": 0.293,
+      "a_vru_max": 0.195,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.399,
+      "lead_vru": {
+        "token": "b7cf7956f42c476b9eabfb15e2f705e8",
+        "cat": "vehicle.car",
+        "s_m": 11.3,
+        "lat_m": 0.44
+      },
+      "ttc_s": 5.9,
+      "ego_yaw_change_deg": 1.8,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.",
+        "movable_object.",
+        "static_object.",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "b7cf7956f42c476b9eabfb15e2f705e8",
+          "cat": "vehicle.car",
+          "s_m": 11.3,
+          "lat_m": 0.44,
+          "a_req": 0.195,
+          "visible": true
+        },
+        {
+          "token": "bc8b4202c8f1498196ea81e2c8aea997",
+          "cat": "vehicle.truck",
+          "s_m": 20.8,
+          "lat_m": 0.12,
+          "a_req": 0.098,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": true,
+        "ego_v0_mps": 1.93
+      },
+      "status": "deferred: a_req<0.4；不删，保留待定"
+    },
+    {
+      "scene": "scene-0969",
+      "frame_idx": 39,
+      "t": 1537852977.4124599,
+      "ego_v0": 3.01,
+      "ego_vmin": 0.16,
+      "dv": -2.85,
+      "rel_decel": 0.948,
+      "a_obs": 0.352,
+      "brake_dur_s": 8.1,
+      "a_vru_sum": 0.322,
+      "a_vru_max": 0.169,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.481,
+      "lead_vru": {
+        "token": "80d5b85f6cec4cd6803b43f1362101f3",
+        "cat": "vehicle.car",
+        "s_m": 26.0,
+        "lat_m": 1.37
+      },
+      "ttc_s": 8.6,
+      "ego_yaw_change_deg": -2.1,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "human.",
+        "vehicle.",
+        "movable_object.",
+        "static_object.",
+        "animal"
+      ],
+      "f3_mask_group": [
+        {
+          "token": "80d5b85f6cec4cd6803b43f1362101f3",
+          "cat": "vehicle.car",
+          "s_m": 26.0,
+          "lat_m": 1.37,
+          "a_req": 0.169,
+          "visible": true
+        },
+        {
+          "token": "9bbf13fca2a24b98b505a94e2b75b3e7",
+          "cat": "human.pedestrian.adult",
+          "s_m": 26.0,
+          "lat_m": 0.35,
+          "a_req": 0.153,
+          "visible": true
+        }
+      ],
+      "low_speed_v0": {
+        "is_low": false,
+        "ego_v0_mps": 3.01
+      },
+      "status": "deferred: a_req<0.4；不删，保留待定"
+    }
+  ]
+}

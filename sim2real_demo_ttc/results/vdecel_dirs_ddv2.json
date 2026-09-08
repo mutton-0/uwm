@@ -1,0 +1,386 @@
+[
+ {
+  "side": "LHD",
+  "band": "0.5-4",
+  "n_cruise": 65,
+  "n_brake": 170,
+  "layers": [
+   {
+    "layer": 0,
+    "dim": 64,
+    "theta_half": 15.649304389953613,
+    "theta_rand": 89.89739052518406,
+    "theta_vs_vfaith": 94.82415008544922,
+    "norm_ratio": 0.046217747032642365
+   },
+   {
+    "layer": 1,
+    "dim": 64,
+    "theta_half": 18.20942211151123,
+    "theta_rand": 89.9785225868803,
+    "theta_vs_vfaith": 126.24299621582031,
+    "norm_ratio": 0.0035528228618204594
+   },
+   {
+    "layer": 2,
+    "dim": 128,
+    "theta_half": 26.78470802307129,
+    "theta_rand": 90.0076688207447,
+    "theta_vs_vfaith": 78.74195098876953,
+    "norm_ratio": 0.10888016223907471
+   },
+   {
+    "layer": 3,
+    "dim": 128,
+    "theta_half": 38.47854804992676,
+    "theta_rand": 89.93752552208159,
+    "theta_vs_vfaith": 96.35765075683594,
+    "norm_ratio": 0.07453545928001404
+   },
+   {
+    "layer": 4,
+    "dim": 256,
+    "theta_half": 23.07406711578369,
+    "theta_rand": 90.01459467534558,
+    "theta_vs_vfaith": 60.9953498840332,
+    "norm_ratio": 0.12345749139785767
+   },
+   {
+    "layer": 5,
+    "dim": 256,
+    "theta_half": 21.041926383972168,
+    "theta_rand": 90.05909250466728,
+    "theta_vs_vfaith": 61.87007141113281,
+    "norm_ratio": 0.14326104521751404
+   },
+   {
+    "layer": 6,
+    "dim": 512,
+    "theta_half": 13.842528820037842,
+    "theta_rand": 90.03565510663381,
+    "theta_vs_vfaith": 45.92939376831055,
+    "norm_ratio": 0.36718612909317017
+   },
+   {
+    "layer": 7,
+    "dim": 512,
+    "theta_half": 38.882816314697266,
+    "theta_rand": 90.00079978979925,
+    "theta_vs_vfaith": 52.822532653808594,
+    "norm_ratio": 0.17534203827381134
+   }
+  ]
+ },
+ {
+  "side": "LHD",
+  "band": "4-8",
+  "n_cruise": 117,
+  "n_brake": 305,
+  "layers": [
+   {
+    "layer": 0,
+    "dim": 64,
+    "theta_half": 19.21427059173584,
+    "theta_rand": 89.90846763850372,
+    "theta_vs_vfaith": 63.349700927734375,
+    "norm_ratio": 0.028867224231362343
+   },
+   {
+    "layer": 1,
+    "dim": 64,
+    "theta_half": 20.09481430053711,
+    "theta_rand": 90.01987644896533,
+    "theta_vs_vfaith": 96.6845474243164,
+    "norm_ratio": 0.002564504276961088
+   },
+   {
+    "layer": 2,
+    "dim": 128,
+    "theta_half": 26.559139251708984,
+    "theta_rand": 89.90232895634789,
+    "theta_vs_vfaith": 59.19868087768555,
+    "norm_ratio": 0.08802211284637451
+   },
+   {
+    "layer": 3,
+    "dim": 128,
+    "theta_half": 62.10403633117676,
+    "theta_rand": 90.02237612421618,
+    "theta_vs_vfaith": 70.1114501953125,
+    "norm_ratio": 0.03862762078642845
+   },
+   {
+    "layer": 4,
+    "dim": 256,
+    "theta_half": 21.888900756835938,
+    "theta_rand": 89.98950091624448,
+    "theta_vs_vfaith": 55.83535385131836,
+    "norm_ratio": 0.09544136375188828
+   },
+   {
+    "layer": 5,
+    "dim": 256,
+    "theta_half": 16.886701583862305,
+    "theta_rand": 89.86069802814565,
+    "theta_vs_vfaith": 45.631011962890625,
+    "norm_ratio": 0.13312797248363495
+   },
+   {
+    "layer": 6,
+    "dim": 512,
+    "theta_half": 14.38817834854126,
+    "theta_rand": 90.03385617679724,
+    "theta_vs_vfaith": 32.085086822509766,
+    "norm_ratio": 0.32278117537498474
+   },
+   {
+    "layer": 7,
+    "dim": 512,
+    "theta_half": 22.536614418029785,
+    "theta_rand": 89.97787366632946,
+    "theta_vs_vfaith": 34.86503601074219,
+    "norm_ratio": 0.27235114574432373
+   }
+  ]
+ },
+ {
+  "side": "LHD",
+  "band": "8-12",
+  "n_cruise": 175,
+  "n_brake": 40,
+  "layers": [
+   {
+    "layer": 0,
+    "dim": 64,
+    "theta_half": 27.47212505340576,
+    "theta_rand": 90.12578724452496,
+    "theta_vs_vfaith": 68.68719482421875,
+    "norm_ratio": 0.02924209088087082
+   },
+   {
+    "layer": 1,
+    "dim": 64,
+    "theta_half": 27.62503433227539,
+    "theta_rand": 89.8354690875218,
+    "theta_vs_vfaith": 109.3199691772461,
+    "norm_ratio": 0.002728051971644163
+   },
+   {
+    "layer": 2,
+    "dim": 128,
+    "theta_half": 36.18265151977539,
+    "theta_rand": 90.10881004841367,
+    "theta_vs_vfaith": 58.61588668823242,
+    "norm_ratio": 0.0854300856590271
+   },
+   {
+    "layer": 3,
+    "dim": 128,
+    "theta_half": 77.61194610595703,
+    "theta_rand": 89.77846234906174,
+    "theta_vs_vfaith": 63.37509536743164,
+    "norm_ratio": 0.042465779930353165
+   },
+   {
+    "layer": 4,
+    "dim": 256,
+    "theta_half": 32.36296081542969,
+    "theta_rand": 90.00827178766869,
+    "theta_vs_vfaith": 62.49812698364258,
+    "norm_ratio": 0.09351103752851486
+   },
+   {
+    "layer": 5,
+    "dim": 256,
+    "theta_half": 29.2002010345459,
+    "theta_rand": 90.2701351725533,
+    "theta_vs_vfaith": 61.965057373046875,
+    "norm_ratio": 0.1057518869638443
+   },
+   {
+    "layer": 6,
+    "dim": 512,
+    "theta_half": 26.96203327178955,
+    "theta_rand": 89.97030878006935,
+    "theta_vs_vfaith": 36.46018600463867,
+    "norm_ratio": 0.2581768333911896
+   },
+   {
+    "layer": 7,
+    "dim": 512,
+    "theta_half": 47.53412628173828,
+    "theta_rand": 90.04434990379126,
+    "theta_vs_vfaith": 46.88339614868164,
+    "norm_ratio": 0.16991804540157318
+   }
+  ]
+ },
+ {
+  "side": "LHD",
+  "band": "12-30",
+  "n_cruise": 33,
+  "n_brake": 0,
+  "layers": null,
+  "note": "\u6837\u672c\u4e0d\u8db3\uff08\u4efb\u4e00\u7ec4 <5\uff09\uff0c\u4e0d\u53ef\u4f30"
+ },
+ {
+  "side": "RHD",
+  "band": "0.5-4",
+  "n_cruise": 69,
+  "n_brake": 32,
+  "layers": [
+   {
+    "layer": 0,
+    "dim": 64,
+    "theta_half": 66.57552337646484,
+    "theta_rand": 89.8005791443972,
+    "theta_vs_vfaith": 58.336849212646484,
+    "norm_ratio": 0.014707022346556187
+   },
+   {
+    "layer": 1,
+    "dim": 64,
+    "theta_half": 58.640907287597656,
+    "theta_rand": 90.16252566861003,
+    "theta_vs_vfaith": 74.95896911621094,
+    "norm_ratio": 0.0014033879851922393
+   },
+   {
+    "layer": 2,
+    "dim": 128,
+    "theta_half": 55.824079513549805,
+    "theta_rand": 90.0115740222937,
+    "theta_vs_vfaith": 103.24948120117188,
+    "norm_ratio": 0.06502959132194519
+   },
+   {
+    "layer": 3,
+    "dim": 128,
+    "theta_half": 47.957815170288086,
+    "theta_rand": 89.86719631605732,
+    "theta_vs_vfaith": 101.89218139648438,
+    "norm_ratio": 0.05018443614244461
+   },
+   {
+    "layer": 4,
+    "dim": 256,
+    "theta_half": 60.948734283447266,
+    "theta_rand": 90.02738420026999,
+    "theta_vs_vfaith": 80.554443359375,
+    "norm_ratio": 0.051422763615846634
+   },
+   {
+    "layer": 5,
+    "dim": 256,
+    "theta_half": 64.14814376831055,
+    "theta_rand": 90.08306235516174,
+    "theta_vs_vfaith": 68.57571411132812,
+    "norm_ratio": 0.0469919815659523
+   },
+   {
+    "layer": 6,
+    "dim": 512,
+    "theta_half": 59.74601745605469,
+    "theta_rand": 90.02419651892714,
+    "theta_vs_vfaith": 58.1026611328125,
+    "norm_ratio": 0.10028281807899475
+   },
+   {
+    "layer": 7,
+    "dim": 512,
+    "theta_half": 42.04709434509277,
+    "theta_rand": 89.98796191236534,
+    "theta_vs_vfaith": 86.65153503417969,
+    "norm_ratio": 0.2500770688056946
+   }
+  ]
+ },
+ {
+  "side": "RHD",
+  "band": "4-8",
+  "n_cruise": 126,
+  "n_brake": 36,
+  "layers": [
+   {
+    "layer": 0,
+    "dim": 64,
+    "theta_half": 24.162793159484863,
+    "theta_rand": 89.9678820697052,
+    "theta_vs_vfaith": 88.60285186767578,
+    "norm_ratio": 0.029046032577753067
+   },
+   {
+    "layer": 1,
+    "dim": 64,
+    "theta_half": 19.439674377441406,
+    "theta_rand": 90.16460008393194,
+    "theta_vs_vfaith": 111.3344955444336,
+    "norm_ratio": 0.0029939368832856417
+   },
+   {
+    "layer": 2,
+    "dim": 128,
+    "theta_half": 18.395359992980957,
+    "theta_rand": 89.97756611083477,
+    "theta_vs_vfaith": 98.45195770263672,
+    "norm_ratio": 0.1314731389284134
+   },
+   {
+    "layer": 3,
+    "dim": 128,
+    "theta_half": 15.90096378326416,
+    "theta_rand": 89.89195024053731,
+    "theta_vs_vfaith": 109.02203369140625,
+    "norm_ratio": 0.11328740417957306
+   },
+   {
+    "layer": 4,
+    "dim": 256,
+    "theta_half": 29.948261260986328,
+    "theta_rand": 90.03051449996715,
+    "theta_vs_vfaith": 83.70349884033203,
+    "norm_ratio": 0.09232717752456665
+   },
+   {
+    "layer": 5,
+    "dim": 256,
+    "theta_half": 38.0493221282959,
+    "theta_rand": 89.88230101732549,
+    "theta_vs_vfaith": 78.69149017333984,
+    "norm_ratio": 0.07345327734947205
+   },
+   {
+    "layer": 6,
+    "dim": 512,
+    "theta_half": 49.58111572265625,
+    "theta_rand": 90.01763549121591,
+    "theta_vs_vfaith": 59.096214294433594,
+    "norm_ratio": 0.11747043579816818
+   },
+   {
+    "layer": 7,
+    "dim": 512,
+    "theta_half": 72.86252212524414,
+    "theta_rand": 89.98812188839847,
+    "theta_vs_vfaith": 77.22976684570312,
+    "norm_ratio": 0.09219694882631302
+   }
+  ]
+ },
+ {
+  "side": "RHD",
+  "band": "8-12",
+  "n_cruise": 51,
+  "n_brake": 4,
+  "layers": null,
+  "note": "\u6837\u672c\u4e0d\u8db3\uff08\u4efb\u4e00\u7ec4 <5\uff09\uff0c\u4e0d\u53ef\u4f30"
+ },
+ {
+  "side": "RHD",
+  "band": "12-30",
+  "n_cruise": 0,
+  "n_brake": 0,
+  "layers": null,
+  "note": "\u6837\u672c\u4e0d\u8db3\uff08\u4efb\u4e00\u7ec4 <5\uff09\uff0c\u4e0d\u53ef\u4f30"
+ }
+]

@@ -41,6 +41,24 @@ RES = Path("/data/ruolin/uwm/sim2real_demo_ttc/results")
 W = Path("/data/ruolin/uwm/sim2real_demo_ttc/variants/n1_d2")
 
 
+WP_DT = {"simlingo": 0.25, "dd": 0.5, "ltf": 0.5, "ddv2": 0.5,
+         # Alpamayo 64 步 × 0.1s = 6.4s；AutoVLA 10 步 × 0.5s = 5.0s
+         "alpa": 0.1, "autovla": 0.5}
+
+
+def arc_full(wp, dt):
+    """主口径读数：全轨迹弧长 / 时域（见 results/f3_gt_axis_method_v2.md）。
+
+    取代 commanded_speed —— 后者只覆盖规划时域的 1/5 且是弦长不是弧长，
+    已降级为敏感性/控制器自身口径，不适合判断响应是否充分。
+    """
+    w = np.asarray(wp, float)[:, :2]
+    if len(w) == 0:
+        return float("nan")
+    seg = np.linalg.norm(np.diff(w, axis=0), axis=1).sum() if len(w) > 1 else 0.0
+    return float((np.linalg.norm(w[0]) + seg) / (len(w) * dt))
+
+
 def boot(v, n=5000, seed=0):
     v = np.asarray(v, float); v = v[np.isfinite(v)]
     rng = np.random.default_rng(seed)
@@ -63,6 +81,15 @@ def main():
                     help="4:1 裁剪的主点行；NAVSIM 语料用 560（§NS/A46）")
     ap.add_argument("--sl-config", default="/data/ruolin/uwm/sim2real_demo_ttc/configs/n1_d2.yaml")
     ap.add_argument("--min-gap", type=float, default=0.02)
+    ap.add_argument("--readout", default="arc_full", choices=["arc_full", "cs_0.5s"],
+                    help="arc_full = 全轨迹弧长/时域（新主口径）；cs_0.5s = 旧 commanded_speed")
+    ap.add_argument("--limit", type=int, default=0,
+                    help="预算上限：随机（定种）抽 N 个事件。**与实测 gap 无关**，"
+                         "不是 --k 那种按结果预选；n<池容量时只影响精度不引入选择偏倚")
+    ap.add_argument("--limit-seed", type=int, default=0)
+    ap.add_argument("--all-events", action="store_true",
+                    help="取 work 目录里全部事件，不按实测 |gap| 预选前 K。"
+                         "按 gap 预选是**按结果筛样本**；新池规模小（6-60），全用即可。")
     ap.add_argument("--nuscenes-root", default="/data/dataset/nuscenes/v1.0-trainval")
     ap.add_argument("--device", default="cuda:0")
     ap.add_argument("--tokens", default="all", choices=["all", "image"],
@@ -82,9 +109,31 @@ def main():
     if not args.out:
         args.out = str(RES / f"c_axis_hazard_{args.model}.json")
 
-    # 零 GPU 选样：从既有缓存里按 |v_clean − v_ghost| 取退化最狠的 A 类事件
+    def RD(o):
+        """统一读数：主口径 arc_full 从 trajectory 算；cs_0.5s 保留旧行为供敏感性对照。"""
+        if args.readout == "cs_0.5s":
+            return float(o["commanded_speed"])
+        return arc_full(o["trajectory"], WP_DT[args.model])
+
+    # 选样。--all-events：取全部事件，不按实测 |gap| 预选（预选=按结果筛样本）。
     rows = []
-    if IS_SL:
+    if args.all_events:
+        for l_ in open(Path(args.work) / "mining" / "events_all.jsonl"):
+            m = json.loads(l_)
+            if m["event_type"] != args.pos:
+                continue
+            rows.append({"eid": m["event_id"], "scene": m["scene_name"],
+                         "gap": float("nan"), "absgap": float("inf")})
+        sel = rows
+        if args.limit and len(sel) > args.limit:
+            # **抽样与结果无关**：按 event_id 定种随机抽，不看 |gap|。
+            rng = np.random.default_rng(args.limit_seed)
+            idx = sorted(rng.choice(len(sel), args.limit, replace=False).tolist())
+            sel = [sel[i] for i in idx]
+            print(f"[C-haz/{label}] --limit {args.limit}：从 {len(rows)} 个中定种随机抽样"
+                  f"（seed={args.limit_seed}，与实测 gap 无关）")
+        print(f"[C-haz/{label}] --all-events：{len(sel)} 个事件，无按结果预选")
+    if IS_SL and not args.all_events:
         import h5py
         _ev = {json.loads(l)["event_id"]: json.loads(l) for l in open(W / "mining" / "events_all.jsonl")}
         for p in sorted(cache.glob("*.h5")):
@@ -103,7 +152,7 @@ def main():
                 continue
             rows.append({"eid": m["event_id"], "scene": m["scene_name"], "gap": vc - vg,
                          "absgap": abs(vc - vg)})
-    for p in ([] if IS_SL else sorted(cache.glob("*.npz"))):
+    for p in ([] if (IS_SL or args.all_events) else sorted(cache.glob("*.npz"))):
         d = np.load(p, allow_pickle=True); m = json.loads(str(d["meta"]))
         if m["event_type"] != args.pos:
             continue
@@ -115,10 +164,11 @@ def main():
             continue
         rows.append({"eid": m["event_id"], "scene": m["scene_name"], "gap": vc - vg,
                      "absgap": abs(vc - vg)})
-    rows.sort(key=lambda r: -r["absgap"])
-    sel = [r for r in rows if r["absgap"] >= args.min_gap][: args.k]
-    print(f"[C-haz/{label}] {args.pos} 类 {len(rows)} 个，选中 {len(sel)}（|gap| ≥ {args.min_gap}，"
-          f"范围 {sel[-1]['absgap']:.3f} ~ {sel[0]['absgap']:.3f}）")
+    if not args.all_events:
+        rows.sort(key=lambda r: -r["absgap"])
+        sel = [r for r in rows if r["absgap"] >= args.min_gap][: args.k]
+        print(f"[C-haz/{label}] {args.pos} 类 {len(rows)} 个，选中 {len(sel)}（|gap| ≥ {args.min_gap}，"
+              f"范围 {sel[-1]['absgap']:.3f} ~ {sel[0]['absgap']:.3f}）")
 
     if IS_SL:
         # SimLingo 侧：复用它在 C-domain 上已有的 patching 实现（`set_patch` 换 vision token 段）。
@@ -137,7 +187,8 @@ def main():
 
         def sl_run(img, spd):
             r = runner.infer(img, spd, pool_modes=("vision_mean",))
-            return float(commanded_speed(r.waypoints))
+            return (arc_full(r.waypoints, WP_DT["simlingo"]) if args.readout == "arc_full"
+                    else float(commanded_speed(r.waypoints)))
 
         def sl_vis_states():
             hs = runner._layer_outputs[-runner.n_layers:]
@@ -180,11 +231,27 @@ def main():
                 lidar = NuScenesLidar(args.nuscenes_root)
         nL = len(runner.sas)
 
-    def _run(img, spd, tok):
-        return runner.run(img, spd, **({} if lidar is None else {"lidar_xyz": lidar.ego_points(tok)}))
+    def _run(img, spd, tok, del_boxes=None):
+        """del_boxes 非空时删掉这些 3D 框内的点 —— DDv2 的 clean 臂必须删点，
+        否则"危险已移除"只对图像成立、雷达里仍在，patch-ALL 充分割集自检会判负
+        （实测未删点时 patch-ALL = −1.169 / −0.328，逐层占比不可解释）。"""
+        if lidar is None:
+            return runner.run(img, spd)
+        pts = lidar.ego_points(tok)
+        if del_boxes and pts is not None:
+            from f3_window_boxes import points_in_box
+            m = np.zeros(len(pts), bool)
+            for b in del_boxes:
+                m |= points_in_box(pts, np.asarray(b["center"], float),
+                                   tuple(x + 2 * 0.25 for x in b["size"]), b["yaw"])
+            pts = pts[~m]
+        return runner.run(img, spd, lidar_xyz=pts)
 
     def _lidar_key(fr):
-        """NAVSIM 侧点云按 CAM_F0 的 data_path 索引（filename 去掉 split 前缀）。"""
+        """点云索引键。新方法的 work 目录直接写好了 lidar_key（clean 臂的 filename
+        是预渲染遮挡图的绝对路径，不能再从它推导）。"""
+        if fr.get("lidar_key"):
+            return fr["lidar_key"]
         return fr["filename"].split("/", 1)[1] if args.corpus == "navsim" else fr.get("sd_token")
 
     evmap = {json.loads(l)["event_id"]: json.loads(l) for l in open(W / "mining" / "events_all.jsonl")}
@@ -193,11 +260,58 @@ def main():
         global cv2
         if cv2 is None:
             import cv2 as _cv2; cv2 = _cv2
-        img = cv2.imread(str(Path(args.nuscenes_root) / fn))
+        # 遮挡图（新方法的 clean 臂）是预渲染到 work 目录的，路径不在语料根下；
+        # 故先按原样试，再退回"语料根 + 相对路径"。
+        cand = Path(fn)
+        img = cv2.imread(str(cand)) if cand.exists() else None
+        if img is None:
+            img = cv2.imread(str(Path(args.nuscenes_root) / fn))
+        if img is None:
+            raise FileNotFoundError(f"读不到图像：{fn}")
         return cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
+    _VIN = {"v": None}
+
+    def _navsim_in():
+        """惰性建 NAVSIM 输入索引（只在 --corpus navsim 且是 VLA 时用到）。"""
+        if _VIN["v"] is None:
+            sys.path.insert(0, "/data/ruolin/uwm/sim2real_demo_ttc/scripts")
+            from vla_navsim_input import NavsimVLAInput
+            _VIN["v"] = NavsimVLAInput()
+        return _VIN["v"]
+
     def vla_run(ev, cond):
-        """VLA 侧的一次前向：图像取该条件的帧，ego/运动史一律锚到 clean（与缓存口径同构）。"""
+        """VLA 侧的一次前向：图像取该条件的帧，ego/运动史一律锚到 clean。
+
+        NAVSIM 侧不走 nuScenes devkit —— 它在两个 VLA 的推理路径里只做路径/位姿解析，
+        换成同构的 NAVSIM 输入即可（与 F-3 的 f3_vla_navsim.py 同一套做法）。
+        clean 臂的前视当前帧换成预渲染的遮挡图，其余相机与历史帧两臂相同。
+        """
+        if args.corpus == "navsim":
+            vin = _navsim_in()
+            sp = ev.get("split", "test"); scn = ev["scene_name"]; j = ev["query_frame_idx"]
+            patched = (ev["x_clean_frames"][0]["filename"] if cond == "clean" else None)
+            if args.model == "autovla":
+                im = vin.images(sp, scn, j)
+                if im is None:            # 某相机/历史帧的图不在盘上 -> 该事件不可用
+                    return None
+                if patched is not None:
+                    im = dict(im); im["front_camera"] = list(im["front_camera"])
+                    im["front_camera"][-1] = patched
+                spd, acc = vin.ego(sp, scn, j)
+                return runner.run(None, spd, acc, images=im)
+            from alpa_navsim_loader import load_navsim
+            d = load_navsim(vin, sp, scn, j)
+            if d is None:
+                return None
+            if patched is not None:
+                import torch
+                from PIL import Image
+                arr = np.array(Image.open(patched).convert("RGB"))
+                sl = int((d["camera_indices"] == 1).nonzero()[0][0])
+                d["image_frames"][sl, -1] = torch.from_numpy(arr).permute(2, 0, 1)
+            # 复用 run() 的 data= 入口：它已组装好 C 轴需要的 full / seq_len
+            return runner.run(scn, 0.0, data=d)
         if args.model == "alpa":
             return runner.run(ev["scene_name"], ev[f"x_{cond}_frames"][0]["t"],
                               ego_anchor_t=ev["x_clean_frames"][0]["t"])
@@ -240,11 +354,19 @@ def main():
             vg = sl_run(ig, anchor)
         elif IS_VLA:
             runner.set_capture_full(True)
-            oc = vla_run(ev, "clean"); vc = oc["commanded_speed"]
+            oc = vla_run(ev, "clean")
+            if oc is None:
+                dropped.append({"eid": r["eid"], "reason": "输入缺失（图像不在盘上）"})
+                continue
+            vc = RD(oc)
             V = [np.asarray(x, np.float32) for x in oc["full"]]
             Sc = V[0].shape[0]
             runner.set_capture_full(False)
-            og = vla_run(ev, "ghost"); vg = og["commanded_speed"]
+            og = vla_run(ev, "ghost")
+            if og is None:
+                dropped.append({"eid": r["eid"], "reason": "输入缺失（图像不在盘上）"})
+                continue
+            vg = RD(og)
             if og["seq_len"] != Sc:
                 dropped.append({"eid": r["eid"], "reason": "seq_len mismatch",
                                 "clean_seq_len": Sc, "ghost_seq_len": og["seq_len"]})
@@ -256,12 +378,13 @@ def main():
             ig = read(ev["x_ghost_frames"][0]["filename"])
             runner.set_steering(None)
             tc = _lidar_key(ev["x_clean_frames"][0]); tg = _lidar_key(ev["x_ghost_frames"][0])
-            oc = _run(ic, anchor, tc); vc = oc["commanded_speed"]
+            oc = _run(ic, anchor, tc,
+                      ev["x_clean_frames"][0].get("delete_boxes3d")); vc = RD(oc)
             # 参考侧（clean）逐层图像 token 激活
             # patch **全部 320 个融合 token**（256 图像 + 64 BEV latent），与既有 C-domain 实现一致。
             # 只 patch 图像段时 patch-ALL 充分割集自检不通过（DD +0.52 / LTF −0.03），见 amendments §CE/A32。
             V = [runner._buf[l].cpu().numpy() for l in range(nL)]
-            og = _run(ig, anchor, tg); vg = og["commanded_speed"]
+            og = _run(ig, anchor, tg); vg = RD(og)
         den = vc - vg
         # **运行时分母守卫**：选样用的是缓存里 2 帧平均的 gap，而 patching 只跑 frame[0]，
         # 两者可能相差很多。分母接近 0 时 recovery 会爆炸（实测出现过 −439 的单点，
@@ -274,9 +397,9 @@ def main():
         if IS_SL:
             ghost_again = lambda: sl_run(ig, anchor)                      # noqa: E731
         elif IS_VLA:
-            ghost_again = lambda: vla_run(ev, "ghost")["commanded_speed"]  # noqa: E731
+            ghost_again = lambda: RD(vla_run(ev, "ghost"))                  # noqa: E731
         else:
-            ghost_again = lambda: _run(ig, anchor, tg)["commanded_speed"]  # noqa: E731
+            ghost_again = lambda: RD(_run(ig, anchor, tg))                 # noqa: E731
         setp = (lambda d: runner.set_patch(d)) if IS_SL else \
             (lambda d: runner.set_patch(d, tokens=args.tokens))            # noqa: E731
         for l in range(nL):
@@ -323,7 +446,12 @@ def main():
     out = {"model": label, "pairing": "G1 clean↔ghost（配对真实输入互换）",
            "patch_tokens": ("vision（沿用 SimLingo C-domain 约定）" if IS_SL else args.tokens),
            "construct": "C-hazard：危险引起的行为变化从哪一层进入",
-           "metric": "recovery(L) = (v_patch − v_ghost)/(v_clean − v_ghost)，v = commanded_speed",
+           "metric": ("recovery(L) = (v_patch − v_ghost)/(v_clean − v_ghost)，"
+                      f"v = {args.readout}；配对 = 同帧 origin↔遮挡（clean 为预渲染遮挡图）"),
+           "readout": args.readout, "all_events": bool(args.all_events),
+           "limit": (args.limit or None), "limit_seed": args.limit_seed,
+           "sampling": ("全池" if not args.limit else
+                        f"定种随机抽 {args.limit}（与结果无关，非按 |gap| 预选）"),
            "n_events": len(recs), "n_dropped_small_gap": len(dropped), "dropped": dropped,
            "n_layers": nL, "diffuse_baseline_top2_share": base,
            "patch_all_recovery": {"mean": float(np.nanmean(allv)), "median": float(np.nanmedian(allv)),

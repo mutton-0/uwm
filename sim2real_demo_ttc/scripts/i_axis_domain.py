@@ -26,6 +26,10 @@ MODELS = {
     "simlingo":  {"pools": ["vision_mean", "query_mean", "last_token"], "n_layers": 24, "primary": "vision_mean"},
     "dd":        {"pools": ["vision_mean", "all_mean"],                 "n_layers": 8,  "primary": "vision_mean"},
     "ltf":       {"pools": ["vision_mean", "all_mean"],                 "n_layers": 8,  "primary": "vision_mean"},
+    # DDv2 与 DD/LTF 同为 TransFuser 系（8 层）。域配对刺激是渲染帧、无点云，
+    # 两臂一律喂空点云 —— D_L 是配对量，干预仍是纯 do(appearance)；
+    # 但它在此处运行于「无雷达」的非常规输入分布，绝对值不宜与吃全模态者直接比。
+    "ddv2":      {"pools": ["vision_mean", "all_mean"],                 "n_layers": 8,  "primary": "vision_mean"},
 }
 
 
@@ -97,16 +101,19 @@ def main():
                 continue
             scenes = [p["scene"] for p in pairs]
             DL, dl_boot, vdom, evr = [], [], [], []
+            per_pair = []          # 逐 pair 的 D，供收敛曲线按 scene 子采样重算
             for l in range(spec["n_layers"]):
                 dn = np.array([np.linalg.norm(p["real"][l] - p["sim"][l]) for p in pairs])
                 zn = np.array([np.linalg.norm(p["real"][l]) for p in pairs] +
                               [np.linalg.norm(p["sim"][l]) for p in pairs])
                 DL.append(float(dn.mean() / (zn.mean() + 1e-12)))
                 dl_boot.append(boot_scene(dn / (zn.mean() + 1e-12), scenes, n=1000))
+                per_pair.append((dn / (zn.mean() + 1e-12)).tolist())
                 D = np.stack([p["real"][l] - p["sim"][l] for p in pairs])
                 w, e = pc1(D); vdom.append(w); evr.append(e)
             M["pools"][pool] = {"D_L": DL, "D_L_bootstrap": dl_boot, "EVR1_by_layer": evr,
-                                "n_pairs": len(pairs), "n_scenes": len(set(scenes))}
+                                "n_pairs": len(pairs), "n_scenes": len(set(scenes)),
+                                "pair_scenes": scenes, "D_per_pair": per_pair}
             print(f"[T-I/{mkey}/{pool}] n_pair={len(pairs)} ({len(set(scenes))} scene)  "
                   f"D_L = " + " ".join(f"{x:.3f}" for x in DL))
 
@@ -164,7 +171,10 @@ def main():
     peaks = {}
     for nm, fn, key in (("simlingo", "b1_v_hazard_clean.json", "frozen_direction"),
                         ("dd", "g_positive_calibration_diffusiondrive.json", None),
-                        ("ltf", "g_axis_ltf.json", None)):
+                        ("ltf", "g_axis_ltf.json", None),
+                        # DDv2 的预登记峰层同样取自它自己的 G 轴（独立刺激），
+                        # 不用 I 轴 D_L 的经验 argmax —— 那是按结果选层。
+                        ("ddv2", "g_axis_ddv2.json", None)):
         p = RES / fn
         if not p.exists():
             continue

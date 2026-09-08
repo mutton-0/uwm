@@ -33,3 +33,14 @@ variants/navsim_corpus/ddv2_cache/
 variants/*/sam_gt/
 variants/*/gvs/
 variants/*/gvs_tokens_*.npz
+
+# F/I 轴的逐事件激活（体量大，均可由对应 extract 脚本重建）
+results/vfaith_acts_*.npz
+results/vbright_acts_*.npz
+results/vdecel_acts_*.npz
+results/harsh_acts_*.npz
+results/v_domain*.np[yz]
+results/vspeed_*.npy
+# 遮挡渲染图（可由 pool_to_c_work.py / vla_export_boxes.py 重建）
+work_c_*/
+work_gvs_*/

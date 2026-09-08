@@ -1,0 +1,7105 @@
+{
+  "design": "刹车优先挖矿：先找人类减速片段，再归因到走廊内 VRU",
+  "corpus": "navsim",
+  "split": "test",
+  "scenario": "lead",
+  "hazard_classes": [
+    "vehicle.car",
+    "vehicle.truck",
+    "vehicle.bus",
+    "vehicle.trailer",
+    "vehicle.construction",
+    "vehicle.emergency",
+    "movable_object."
+  ],
+  "static_corridor_m": 1.0,
+  "min_vmin_mps": 0.0,
+  "signal_gate": "any",
+  "exclude_red": false,
+  "require_oncoming": false,
+  "left_turn_gate": null,
+  "intersection_proxy": null,
+  "explained_ratio_bounds": [
+    0.3,
+    10.0
+  ],
+  "n_scenes_scanned": 1880,
+  "n_brake_episodes": 968,
+  "n_candidates_raw": 134,
+  "n_candidates_dedup": 132,
+  "n_scenes_with_candidate": 131,
+  "T1_a_req_ge_0.4": {
+    "n": 60,
+    "n_scenes": 60
+  },
+  "candidates": [
+    {
+      "scene": "log-0001-scene-0005",
+      "frame_idx": 0,
+      "t": 1621966791.500908,
+      "ego_v0": 6.63,
+      "ego_vmin": 4.03,
+      "dv": -2.6,
+      "rel_decel": 0.392,
+      "a_obs": 0.578,
+      "brake_dur_s": 4.5,
+      "a_vru_sum": 0.209,
+      "a_vru_max": 0.209,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.361,
+      "lead_vru": {
+        "token": "9c67db51639155b7",
+        "cat": "vehicle.car",
+        "s_m": 17.7,
+        "lat_m": 0.28
+      },
+      "ttc_s": 2.7,
+      "ego_yaw_change_deg": 0.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "9c67db51639155b7",
+          "cat": "vehicle.car",
+          "s_m": 17.7,
+          "lat_m": 0.28,
+          "a_req": 0.209,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0002-scene-0015",
+      "frame_idx": 0,
+      "t": 1621968011.500729,
+      "ego_v0": 3.05,
+      "ego_vmin": 0.0,
+      "dv": -3.05,
+      "rel_decel": 0.999,
+      "a_obs": 0.609,
+      "brake_dur_s": 5.0,
+      "a_vru_sum": 0.33,
+      "a_vru_max": 0.214,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.351,
+      "lead_vru": {
+        "token": "7d445bf0510b52b7",
+        "cat": "vehicle.car",
+        "s_m": 23.8,
+        "lat_m": 0.07
+      },
+      "ttc_s": 7.8,
+      "ego_yaw_change_deg": -0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "7d445bf0510b52b7",
+          "cat": "vehicle.car",
+          "s_m": 23.8,
+          "lat_m": 0.07,
+          "a_req": 0.214,
+          "visible": true
+        },
+        {
+          "token": "2c024e4ac9cc5f5e",
+          "cat": "vehicle.car",
+          "s_m": 14.3,
+          "lat_m": 0.27,
+          "a_req": 0.117,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0002-scene-0023",
+      "frame_idx": 0,
+      "t": 1621968171.4995,
+      "ego_v0": 5.29,
+      "ego_vmin": 0.0,
+      "dv": -5.29,
+      "rel_decel": 1.0,
+      "a_obs": 0.622,
+      "brake_dur_s": 8.5,
+      "a_vru_sum": 1.183,
+      "a_vru_max": 0.681,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.094,
+      "lead_vru": {
+        "token": "c04bdae1091b57a8",
+        "cat": "vehicle.car",
+        "s_m": 22.6,
+        "lat_m": 0.18
+      },
+      "ttc_s": 4.3,
+      "ego_yaw_change_deg": 0.2,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "c04bdae1091b57a8",
+          "cat": "vehicle.car",
+          "s_m": 22.6,
+          "lat_m": 0.18,
+          "a_req": 0.681,
+          "visible": true
+        },
+        {
+          "token": "f2106849255b5495",
+          "cat": "vehicle.car",
+          "s_m": 29.9,
+          "lat_m": 0.43,
+          "a_req": 0.501,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0003-scene-0024",
+      "frame_idx": 0,
+      "t": 1621968771.500837,
+      "ego_v0": 1.84,
+      "ego_vmin": 0.0,
+      "dv": -1.84,
+      "rel_decel": 1.0,
+      "a_obs": 0.245,
+      "brake_dur_s": 7.5,
+      "a_vru_sum": 0.142,
+      "a_vru_max": 0.098,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.4,
+      "lead_vru": {
+        "token": "cc268498efc85fac",
+        "cat": "vehicle.car",
+        "s_m": 19.2,
+        "lat_m": 0.14
+      },
+      "ttc_s": 10.5,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "cc268498efc85fac",
+          "cat": "vehicle.car",
+          "s_m": 19.2,
+          "lat_m": 0.14,
+          "a_req": 0.098,
+          "visible": true
+        },
+        {
+          "token": "59cefd9507625b0a",
+          "cat": "vehicle.car",
+          "s_m": 10.8,
+          "lat_m": 0.38,
+          "a_req": 0.044,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0006-scene-0006",
+      "frame_idx": 11,
+      "t": 1621970817.000646,
+      "ego_v0": 5.9,
+      "ego_vmin": 0.0,
+      "dv": -5.89,
+      "rel_decel": 1.0,
+      "a_obs": 0.655,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.556,
+      "a_vru_max": 0.286,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.436,
+      "lead_vru": {
+        "token": "7b951bd37a955963",
+        "cat": "vehicle.car",
+        "s_m": 34.4,
+        "lat_m": 1.71
+      },
+      "ttc_s": 5.8,
+      "ego_yaw_change_deg": -0.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.965,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "7b951bd37a955963",
+          "cat": "vehicle.car",
+          "s_m": 34.4,
+          "lat_m": 1.71,
+          "a_req": 0.286,
+          "visible": true
+        },
+        {
+          "token": "5d134e90789252c6",
+          "cat": "vehicle.car",
+          "s_m": 16.6,
+          "lat_m": 0.08,
+          "a_req": 0.182,
+          "visible": true
+        },
+        {
+          "token": "babbe09278d65432",
+          "cat": "vehicle.car",
+          "s_m": 30.2,
+          "lat_m": 0.69,
+          "a_req": 0.089,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0009-scene-0005",
+      "frame_idx": 6,
+      "t": 1621971233.000101,
+      "ego_v0": 6.05,
+      "ego_vmin": 1.45,
+      "dv": -4.6,
+      "rel_decel": 0.76,
+      "a_obs": 0.484,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.535,
+      "a_vru_max": 0.275,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.568,
+      "lead_vru": {
+        "token": "12fa1423d40c5291",
+        "cat": "vehicle.car",
+        "s_m": 39.3,
+        "lat_m": 0.32
+      },
+      "ttc_s": 6.5,
+      "ego_yaw_change_deg": 0.7,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.999,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "12fa1423d40c5291",
+          "cat": "vehicle.car",
+          "s_m": 39.3,
+          "lat_m": 0.32,
+          "a_req": 0.275,
+          "visible": true
+        },
+        {
+          "token": "b4e614e4a3a754f6",
+          "cat": "vehicle.car",
+          "s_m": 43.2,
+          "lat_m": 0.29,
+          "a_req": 0.261,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0009-scene-0007",
+      "frame_idx": 8,
+      "t": 1621971274.00001,
+      "ego_v0": 6.25,
+      "ego_vmin": 1.86,
+      "dv": -4.39,
+      "rel_decel": 0.702,
+      "a_obs": 0.462,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.294,
+      "a_vru_max": 0.166,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.359,
+      "lead_vru": {
+        "token": "12fa1423d40c5291",
+        "cat": "vehicle.car",
+        "s_m": 30.1,
+        "lat_m": 0.1
+      },
+      "ttc_s": 4.8,
+      "ego_yaw_change_deg": -1.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "12fa1423d40c5291",
+          "cat": "vehicle.car",
+          "s_m": 30.1,
+          "lat_m": 0.1,
+          "a_req": 0.166,
+          "visible": true
+        },
+        {
+          "token": "83a605e99a765761",
+          "cat": "vehicle.car",
+          "s_m": 34.7,
+          "lat_m": 0.0,
+          "a_req": 0.128,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0010-scene-0006",
+      "frame_idx": 0,
+      "t": 1621971535.39955,
+      "ego_v0": 4.97,
+      "ego_vmin": 1.68,
+      "dv": -3.29,
+      "rel_decel": 0.663,
+      "a_obs": 0.941,
+      "brake_dur_s": 3.5,
+      "a_vru_sum": 1.187,
+      "a_vru_max": 0.768,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.817,
+      "lead_vru": {
+        "token": "de851791da5359e1",
+        "cat": "vehicle.car",
+        "s_m": 18.1,
+        "lat_m": 0.29
+      },
+      "ttc_s": 3.6,
+      "ego_yaw_change_deg": -0.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "de851791da5359e1",
+          "cat": "vehicle.car",
+          "s_m": 18.1,
+          "lat_m": 0.29,
+          "a_req": 0.768,
+          "visible": true
+        },
+        {
+          "token": "0b8a84248cbd5d7a",
+          "cat": "vehicle.car",
+          "s_m": 26.5,
+          "lat_m": 0.07,
+          "a_req": 0.418,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0011-scene-0004",
+      "frame_idx": 0,
+      "t": 1621973484.599657,
+      "ego_v0": 3.39,
+      "ego_vmin": 0.0,
+      "dv": -3.39,
+      "rel_decel": 1.0,
+      "a_obs": 0.484,
+      "brake_dur_s": 7.0,
+      "a_vru_sum": 0.359,
+      "a_vru_max": 0.267,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.552,
+      "lead_vru": {
+        "token": "822bac1bde4c5f30",
+        "cat": "vehicle.car",
+        "s_m": 23.5,
+        "lat_m": 0.29
+      },
+      "ttc_s": 6.9,
+      "ego_yaw_change_deg": 0.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "822bac1bde4c5f30",
+          "cat": "vehicle.car",
+          "s_m": 23.5,
+          "lat_m": 0.29,
+          "a_req": 0.267,
+          "visible": true
+        },
+        {
+          "token": "ef287e5a60865789",
+          "cat": "vehicle.car",
+          "s_m": 14.0,
+          "lat_m": 0.26,
+          "a_req": 0.092,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0011-scene-0011",
+      "frame_idx": 22,
+      "t": 1621973635.600209,
+      "ego_v0": 6.09,
+      "ego_vmin": 1.44,
+      "dv": -4.65,
+      "rel_decel": 0.763,
+      "a_obs": 0.547,
+      "brake_dur_s": 8.5,
+      "a_vru_sum": 0.209,
+      "a_vru_max": 0.209,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.382,
+      "lead_vru": {
+        "token": "ef287e5a60865789",
+        "cat": "vehicle.car",
+        "s_m": 35.1,
+        "lat_m": 0.22
+      },
+      "ttc_s": 5.8,
+      "ego_yaw_change_deg": -1.5,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "ef287e5a60865789",
+          "cat": "vehicle.car",
+          "s_m": 35.1,
+          "lat_m": 0.22,
+          "a_req": 0.209,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0011-scene-0012",
+      "frame_idx": 13,
+      "t": 1621973651.100336,
+      "ego_v0": 6.81,
+      "ego_vmin": 0.04,
+      "dv": -6.77,
+      "rel_decel": 0.995,
+      "a_obs": 0.846,
+      "brake_dur_s": 8.0,
+      "a_vru_sum": 0.431,
+      "a_vru_max": 0.431,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.509,
+      "lead_vru": {
+        "token": "ef287e5a60865789",
+        "cat": "vehicle.car",
+        "s_m": 30.6,
+        "lat_m": 0.07
+      },
+      "ttc_s": 4.5,
+      "ego_yaw_change_deg": -7.8,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.994,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "ef287e5a60865789",
+          "cat": "vehicle.car",
+          "s_m": 30.6,
+          "lat_m": 0.07,
+          "a_req": 0.431,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0013-scene-0002",
+      "frame_idx": 11,
+      "t": 1621976310.099753,
+      "ego_v0": 2.4,
+      "ego_vmin": 0.0,
+      "dv": -2.4,
+      "rel_decel": 1.0,
+      "a_obs": 0.266,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.111,
+      "a_vru_max": 0.111,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.417,
+      "lead_vru": {
+        "token": "2aad1a2e4a125f37",
+        "cat": "vehicle.car",
+        "s_m": 20.1,
+        "lat_m": 1.74
+      },
+      "ttc_s": 8.4,
+      "ego_yaw_change_deg": 13.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.397,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "2aad1a2e4a125f37",
+          "cat": "vehicle.car",
+          "s_m": 20.1,
+          "lat_m": 1.74,
+          "a_req": 0.111,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0013-scene-0003",
+      "frame_idx": 28,
+      "t": 1621976338.599199,
+      "ego_v0": 4.7,
+      "ego_vmin": 2.13,
+      "dv": -2.57,
+      "rel_decel": 0.547,
+      "a_obs": 0.467,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 0.367,
+      "a_vru_max": 0.367,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.785,
+      "lead_vru": {
+        "token": "247cf6dd3b00544b",
+        "cat": "vehicle.car",
+        "s_m": 32.1,
+        "lat_m": 0.09
+      },
+      "ttc_s": 6.8,
+      "ego_yaw_change_deg": -15.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "247cf6dd3b00544b",
+          "cat": "vehicle.car",
+          "s_m": 32.1,
+          "lat_m": 0.09,
+          "a_req": 0.367,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0014-scene-0003",
+      "frame_idx": 0,
+      "t": 1621976864.599657,
+      "ego_v0": 4.8,
+      "ego_vmin": 1.02,
+      "dv": -3.78,
+      "rel_decel": 0.787,
+      "a_obs": 0.755,
+      "brake_dur_s": 5.0,
+      "a_vru_sum": 0.418,
+      "a_vru_max": 0.418,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.554,
+      "lead_vru": {
+        "token": "60d91019e97c53a0",
+        "cat": "vehicle.car",
+        "s_m": 14.1,
+        "lat_m": 0.24
+      },
+      "ttc_s": 2.9,
+      "ego_yaw_change_deg": -0.5,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "60d91019e97c53a0",
+          "cat": "vehicle.car",
+          "s_m": 14.1,
+          "lat_m": 0.24,
+          "a_req": 0.418,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0014-scene-0004",
+      "frame_idx": 0,
+      "t": 1621976884.599729,
+      "ego_v0": 1.29,
+      "ego_vmin": 0.0,
+      "dv": -1.29,
+      "rel_decel": 1.0,
+      "a_obs": 0.287,
+      "brake_dur_s": 4.5,
+      "a_vru_sum": 0.088,
+      "a_vru_max": 0.088,
+      "a_non_vru_max": 0.031,
+      "vru_class_share": 0.738,
+      "explained_ratio": 0.305,
+      "lead_vru": {
+        "token": "60d91019e97c53a0",
+        "cat": "vehicle.car",
+        "s_m": 11.6,
+        "lat_m": 0.15
+      },
+      "ttc_s": 9.0,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "60d91019e97c53a0",
+          "cat": "vehicle.car",
+          "s_m": 11.6,
+          "lat_m": 0.15,
+          "a_req": 0.088,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0014-scene-0007",
+      "frame_idx": 0,
+      "t": 1621976944.599562,
+      "ego_v0": 4.08,
+      "ego_vmin": 0.0,
+      "dv": -4.08,
+      "rel_decel": 1.0,
+      "a_obs": 0.454,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.363,
+      "a_vru_max": 0.363,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.801,
+      "lead_vru": {
+        "token": "ce4d38ea4c7556b1",
+        "cat": "vehicle.car",
+        "s_m": 25.0,
+        "lat_m": 0.54
+      },
+      "ttc_s": 6.1,
+      "ego_yaw_change_deg": 37.7,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "ce4d38ea4c7556b1",
+          "cat": "vehicle.car",
+          "s_m": 25.0,
+          "lat_m": 0.54,
+          "a_req": 0.363,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0015-scene-0007",
+      "frame_idx": 9,
+      "t": 1621977389.099844,
+      "ego_v0": 4.11,
+      "ego_vmin": 0.92,
+      "dv": -3.19,
+      "rel_decel": 0.776,
+      "a_obs": 0.336,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.479,
+      "a_vru_max": 0.247,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.736,
+      "lead_vru": {
+        "token": "4d2afaf8adcf5013",
+        "cat": "vehicle.car",
+        "s_m": 36.2,
+        "lat_m": 1.5
+      },
+      "ttc_s": 8.8,
+      "ego_yaw_change_deg": 42.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "4d2afaf8adcf5013",
+          "cat": "vehicle.car",
+          "s_m": 36.2,
+          "lat_m": 1.5,
+          "a_req": 0.247,
+          "visible": true
+        },
+        {
+          "token": "76971e97589c5fba",
+          "cat": "vehicle.car",
+          "s_m": 38.3,
+          "lat_m": 1.16,
+          "a_req": 0.233,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0017-scene-0002",
+      "frame_idx": 0,
+      "t": 1621978425.100002,
+      "ego_v0": 7.71,
+      "ego_vmin": 0.0,
+      "dv": -7.71,
+      "rel_decel": 1.0,
+      "a_obs": 0.811,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.815,
+      "a_vru_max": 0.815,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.004,
+      "lead_vru": {
+        "token": "cabde0101f465d6c",
+        "cat": "vehicle.car",
+        "s_m": 38.5,
+        "lat_m": 0.13
+      },
+      "ttc_s": 5.0,
+      "ego_yaw_change_deg": -0.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "cabde0101f465d6c",
+          "cat": "vehicle.car",
+          "s_m": 38.5,
+          "lat_m": 0.13,
+          "a_req": 0.815,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0017-scene-0011",
+      "frame_idx": 26,
+      "t": 1621978618.099976,
+      "ego_v0": 5.5,
+      "ego_vmin": 0.07,
+      "dv": -5.43,
+      "rel_decel": 0.987,
+      "a_obs": 0.835,
+      "brake_dur_s": 6.5,
+      "a_vru_sum": 0.837,
+      "a_vru_max": 0.455,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.545,
+      "lead_vru": {
+        "token": "856083b5ffab575c",
+        "cat": "vehicle.car",
+        "s_m": 35.2,
+        "lat_m": 0.1
+      },
+      "ttc_s": 6.4,
+      "ego_yaw_change_deg": -0.2,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "856083b5ffab575c",
+          "cat": "vehicle.car",
+          "s_m": 35.2,
+          "lat_m": 0.1,
+          "a_req": 0.455,
+          "visible": true
+        },
+        {
+          "token": "cf67712ec9525b20",
+          "cat": "vehicle.car",
+          "s_m": 26.8,
+          "lat_m": 0.11,
+          "a_req": 0.382,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0020-scene-0008",
+      "frame_idx": 17,
+      "t": 1621982611.40111,
+      "ego_v0": 4.85,
+      "ego_vmin": 0.0,
+      "dv": -4.85,
+      "rel_decel": 1.0,
+      "a_obs": 0.485,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.792,
+      "a_vru_max": 0.412,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.849,
+      "lead_vru": {
+        "token": "3a61beec395b5348",
+        "cat": "vehicle.car",
+        "s_m": 30.1,
+        "lat_m": 1.43
+      },
+      "ttc_s": 6.2,
+      "ego_yaw_change_deg": -6.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.105,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "3a61beec395b5348",
+          "cat": "vehicle.car",
+          "s_m": 30.1,
+          "lat_m": 1.43,
+          "a_req": 0.412,
+          "visible": true
+        },
+        {
+          "token": "3b02aabfa6675a55",
+          "cat": "vehicle.car",
+          "s_m": 33.2,
+          "lat_m": 1.76,
+          "a_req": 0.381,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0021-scene-0002",
+      "frame_idx": 0,
+      "t": 1621983862.901263,
+      "ego_v0": 6.5,
+      "ego_vmin": 1.73,
+      "dv": -4.77,
+      "rel_decel": 0.733,
+      "a_obs": 0.867,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 0.8,
+      "a_vru_max": 0.439,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.506,
+      "lead_vru": {
+        "token": "9836e98c2e3f5322",
+        "cat": "vehicle.car",
+        "s_m": 24.5,
+        "lat_m": 0.15
+      },
+      "ttc_s": 3.8,
+      "ego_yaw_change_deg": -0.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "9836e98c2e3f5322",
+          "cat": "vehicle.car",
+          "s_m": 24.5,
+          "lat_m": 0.15,
+          "a_req": 0.439,
+          "visible": true
+        },
+        {
+          "token": "899d68fd06a356b0",
+          "cat": "vehicle.car",
+          "s_m": 34.0,
+          "lat_m": 0.61,
+          "a_req": 0.361,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0021-scene-0005",
+      "frame_idx": 0,
+      "t": 1621983922.900351,
+      "ego_v0": 0.84,
+      "ego_vmin": 0.0,
+      "dv": -0.84,
+      "rel_decel": 1.0,
+      "a_obs": 0.088,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.037,
+      "a_vru_max": 0.037,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.418,
+      "lead_vru": {
+        "token": "ab5c4e22b3e255e7",
+        "cat": "vehicle.car",
+        "s_m": 11.5,
+        "lat_m": 0.01
+      },
+      "ttc_s": 13.7,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "ab5c4e22b3e255e7",
+          "cat": "vehicle.car",
+          "s_m": 11.5,
+          "lat_m": 0.01,
+          "a_req": 0.037,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0021-scene-0007",
+      "frame_idx": 0,
+      "t": 1621983962.900783,
+      "ego_v0": 6.78,
+      "ego_vmin": 3.91,
+      "dv": -2.86,
+      "rel_decel": 0.423,
+      "a_obs": 0.287,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.301,
+      "a_vru_max": 0.301,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.051,
+      "lead_vru": {
+        "token": "ab04a74c3a1a5842",
+        "cat": "vehicle.car",
+        "s_m": 25.0,
+        "lat_m": 0.05
+      },
+      "ttc_s": 3.7,
+      "ego_yaw_change_deg": -8.6,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.99,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "ab04a74c3a1a5842",
+          "cat": "vehicle.car",
+          "s_m": 25.0,
+          "lat_m": 0.05,
+          "a_req": 0.301,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0021-scene-0008",
+      "frame_idx": 0,
+      "t": 1621983982.900549,
+      "ego_v0": 5.99,
+      "ego_vmin": 0.0,
+      "dv": -5.99,
+      "rel_decel": 1.0,
+      "a_obs": 0.705,
+      "brake_dur_s": 8.5,
+      "a_vru_sum": 0.445,
+      "a_vru_max": 0.247,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.351,
+      "lead_vru": {
+        "token": "9836e98c2e3f5322",
+        "cat": "vehicle.car",
+        "s_m": 21.6,
+        "lat_m": 0.07
+      },
+      "ttc_s": 3.6,
+      "ego_yaw_change_deg": 10.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.986,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "9836e98c2e3f5322",
+          "cat": "vehicle.car",
+          "s_m": 21.6,
+          "lat_m": 0.07,
+          "a_req": 0.247,
+          "visible": true
+        },
+        {
+          "token": "ab04a74c3a1a5842",
+          "cat": "vehicle.car",
+          "s_m": 31.0,
+          "lat_m": 0.03,
+          "a_req": 0.198,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0024-scene-0006",
+      "frame_idx": 0,
+      "t": 1622736548.500971,
+      "ego_v0": 9.07,
+      "ego_vmin": 0.0,
+      "dv": -9.07,
+      "rel_decel": 1.0,
+      "a_obs": 0.907,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.951,
+      "a_vru_max": 0.951,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.048,
+      "lead_vru": {
+        "token": "596e69d69804590c",
+        "cat": "vehicle.car",
+        "s_m": 45.3,
+        "lat_m": 0.4
+      },
+      "ttc_s": 5.0,
+      "ego_yaw_change_deg": -0.2,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "596e69d69804590c",
+          "cat": "vehicle.car",
+          "s_m": 45.3,
+          "lat_m": 0.4,
+          "a_req": 0.951,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0024-scene-0019",
+      "frame_idx": 0,
+      "t": 1622736808.501387,
+      "ego_v0": 5.92,
+      "ego_vmin": 3.88,
+      "dv": -2.05,
+      "rel_decel": 0.346,
+      "a_obs": 0.205,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.064,
+      "a_vru_max": 0.064,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.313,
+      "lead_vru": {
+        "token": "212c869a740c5354",
+        "cat": "vehicle.car",
+        "s_m": 17.0,
+        "lat_m": 1.3
+      },
+      "ttc_s": 2.9,
+      "ego_yaw_change_deg": -24.6,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.996,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "212c869a740c5354",
+          "cat": "vehicle.car",
+          "s_m": 17.0,
+          "lat_m": 1.3,
+          "a_req": 0.064,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0027-scene-0002",
+      "frame_idx": 0,
+      "t": 1622743078.601236,
+      "ego_v0": 3.16,
+      "ego_vmin": 0.0,
+      "dv": -3.16,
+      "rel_decel": 1.0,
+      "a_obs": 0.527,
+      "brake_dur_s": 6.0,
+      "a_vru_sum": 0.228,
+      "a_vru_max": 0.228,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.433,
+      "lead_vru": {
+        "token": "e72d567bf1d15e62",
+        "cat": "vehicle.car",
+        "s_m": 23.9,
+        "lat_m": 1.76
+      },
+      "ttc_s": 7.6,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "e72d567bf1d15e62",
+          "cat": "vehicle.car",
+          "s_m": 23.9,
+          "lat_m": 1.76,
+          "a_req": 0.228,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0027-scene-0014",
+      "frame_idx": 0,
+      "t": 1622743318.600784,
+      "ego_v0": 0.72,
+      "ego_vmin": 0.0,
+      "dv": -0.72,
+      "rel_decel": 1.0,
+      "a_obs": 0.097,
+      "brake_dur_s": 7.5,
+      "a_vru_sum": 0.05,
+      "a_vru_max": 0.034,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.351,
+      "lead_vru": {
+        "token": "c76fcb3c6d0a59d6",
+        "cat": "vehicle.car",
+        "s_m": 9.8,
+        "lat_m": 0.12
+      },
+      "ttc_s": 13.5,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "c76fcb3c6d0a59d6",
+          "cat": "vehicle.car",
+          "s_m": 9.8,
+          "lat_m": 0.12,
+          "a_req": 0.034,
+          "visible": true
+        },
+        {
+          "token": "918591112bec506b",
+          "cat": "vehicle.car",
+          "s_m": 18.2,
+          "lat_m": 0.21,
+          "a_req": 0.016,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0029-scene-0005",
+      "frame_idx": 18,
+      "t": 1622745487.60122,
+      "ego_v0": 5.44,
+      "ego_vmin": 0.0,
+      "dv": -5.44,
+      "rel_decel": 1.0,
+      "a_obs": 0.604,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 1.624,
+      "a_vru_max": 0.638,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.056,
+      "lead_vru": {
+        "token": "e84c8b4f44ed5072",
+        "cat": "vehicle.car",
+        "s_m": 25.2,
+        "lat_m": 0.55
+      },
+      "ttc_s": 4.6,
+      "ego_yaw_change_deg": -3.8,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "e84c8b4f44ed5072",
+          "cat": "vehicle.car",
+          "s_m": 25.2,
+          "lat_m": 0.55,
+          "a_req": 0.638,
+          "visible": true
+        },
+        {
+          "token": "70937350cb8e5d76",
+          "cat": "vehicle.car",
+          "s_m": 31.5,
+          "lat_m": 1.23,
+          "a_req": 0.502,
+          "visible": true
+        },
+        {
+          "token": "d5a1200331435b2a",
+          "cat": "vehicle.car",
+          "s_m": 32.5,
+          "lat_m": 1.6,
+          "a_req": 0.484,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0031-scene-0017",
+      "frame_idx": 0,
+      "t": 1622746178.60071,
+      "ego_v0": 5.08,
+      "ego_vmin": 0.0,
+      "dv": -5.08,
+      "rel_decel": 1.0,
+      "a_obs": 0.923,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 0.735,
+      "a_vru_max": 0.546,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.591,
+      "lead_vru": {
+        "token": "98c0eb097695585c",
+        "cat": "vehicle.car",
+        "s_m": 25.6,
+        "lat_m": 0.17
+      },
+      "ttc_s": 5.0,
+      "ego_yaw_change_deg": 0.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "98c0eb097695585c",
+          "cat": "vehicle.car",
+          "s_m": 25.6,
+          "lat_m": 0.17,
+          "a_req": 0.546,
+          "visible": true
+        },
+        {
+          "token": "b1cb9a2761d15bf0",
+          "cat": "vehicle.car",
+          "s_m": 17.2,
+          "lat_m": 1.99,
+          "a_req": 0.19,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0031-scene-0018",
+      "frame_idx": 26,
+      "t": 1622746211.601262,
+      "ego_v0": 1.19,
+      "ego_vmin": 0.0,
+      "dv": -1.19,
+      "rel_decel": 1.0,
+      "a_obs": 0.217,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 0.069,
+      "a_vru_max": 0.069,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.319,
+      "lead_vru": {
+        "token": "98c0eb097695585c",
+        "cat": "vehicle.car",
+        "s_m": 12.3,
+        "lat_m": 0.08
+      },
+      "ttc_s": 10.3,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "98c0eb097695585c",
+          "cat": "vehicle.car",
+          "s_m": 12.3,
+          "lat_m": 0.08,
+          "a_req": 0.069,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0031-scene-0029",
+      "frame_idx": 17,
+      "t": 1622746427.100449,
+      "ego_v0": 1.86,
+      "ego_vmin": 0.0,
+      "dv": -1.86,
+      "rel_decel": 1.0,
+      "a_obs": 0.207,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.148,
+      "a_vru_max": 0.094,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.455,
+      "lead_vru": {
+        "token": "7688d59f404f540c",
+        "cat": "vehicle.car",
+        "s_m": 20.4,
+        "lat_m": 0.22
+      },
+      "ttc_s": 10.9,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "7688d59f404f540c",
+          "cat": "vehicle.car",
+          "s_m": 20.4,
+          "lat_m": 0.22,
+          "a_req": 0.094,
+          "visible": true
+        },
+        {
+          "token": "e98ed44cf97a5c56",
+          "cat": "vehicle.car",
+          "s_m": 12.0,
+          "lat_m": 0.1,
+          "a_req": 0.054,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0031-scene-0033",
+      "frame_idx": 1,
+      "t": 1622746499.100419,
+      "ego_v0": 1.45,
+      "ego_vmin": 0.0,
+      "dv": -1.45,
+      "rel_decel": 1.0,
+      "a_obs": 0.171,
+      "brake_dur_s": 8.5,
+      "a_vru_sum": 0.103,
+      "a_vru_max": 0.055,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.322,
+      "lead_vru": {
+        "token": "7688d59f404f540c",
+        "cat": "vehicle.car",
+        "s_m": 21.2,
+        "lat_m": 0.22
+      },
+      "ttc_s": 14.6,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "7688d59f404f540c",
+          "cat": "vehicle.car",
+          "s_m": 21.2,
+          "lat_m": 0.22,
+          "a_req": 0.055,
+          "visible": true
+        },
+        {
+          "token": "e98ed44cf97a5c56",
+          "cat": "vehicle.car",
+          "s_m": 13.8,
+          "lat_m": 0.27,
+          "a_req": 0.048,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0036-scene-0003",
+      "frame_idx": 0,
+      "t": 1622760694.701401,
+      "ego_v0": 6.61,
+      "ego_vmin": 0.0,
+      "dv": -6.61,
+      "rel_decel": 1.0,
+      "a_obs": 0.661,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.621,
+      "a_vru_max": 0.621,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.94,
+      "lead_vru": {
+        "token": "a57577d148a65d59",
+        "cat": "vehicle.car",
+        "s_m": 29.2,
+        "lat_m": 0.29
+      },
+      "ttc_s": 4.4,
+      "ego_yaw_change_deg": 1.6,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "a57577d148a65d59",
+          "cat": "vehicle.car",
+          "s_m": 29.2,
+          "lat_m": 0.29,
+          "a_req": 0.621,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0037-scene-0006",
+      "frame_idx": 0,
+      "t": 1622760874.701459,
+      "ego_v0": 3.62,
+      "ego_vmin": 0.0,
+      "dv": -3.62,
+      "rel_decel": 0.999,
+      "a_obs": 0.904,
+      "brake_dur_s": 4.0,
+      "a_vru_sum": 0.725,
+      "a_vru_max": 0.575,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.636,
+      "lead_vru": {
+        "token": "ad35e8a82fd05220",
+        "cat": "vehicle.car",
+        "s_m": 13.4,
+        "lat_m": 0.43
+      },
+      "ttc_s": 3.7,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "ad35e8a82fd05220",
+          "cat": "vehicle.car",
+          "s_m": 13.4,
+          "lat_m": 0.43,
+          "a_req": 0.575,
+          "visible": true
+        },
+        {
+          "token": "faf1b9fe3b1253f2",
+          "cat": "vehicle.car",
+          "s_m": 23.9,
+          "lat_m": 0.88,
+          "a_req": 0.15,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0037-scene-0006",
+      "frame_idx": 19,
+      "t": 1622760884.200723,
+      "ego_v0": 1.57,
+      "ego_vmin": 0.0,
+      "dv": -1.57,
+      "rel_decel": 1.0,
+      "a_obs": 0.224,
+      "brake_dur_s": 7.0,
+      "a_vru_sum": 0.204,
+      "a_vru_max": 0.14,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.627,
+      "lead_vru": {
+        "token": "ad35e8a82fd05220",
+        "cat": "vehicle.car",
+        "s_m": 10.8,
+        "lat_m": 0.28
+      },
+      "ttc_s": 6.9,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "ad35e8a82fd05220",
+          "cat": "vehicle.car",
+          "s_m": 10.8,
+          "lat_m": 0.28,
+          "a_req": 0.14,
+          "visible": true
+        },
+        {
+          "token": "93784a5b0e8350ca",
+          "cat": "vehicle.car",
+          "s_m": 21.3,
+          "lat_m": 1.45,
+          "a_req": 0.064,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0038-scene-0003",
+      "frame_idx": 0,
+      "t": 1622761074.700657,
+      "ego_v0": 4.76,
+      "ego_vmin": 1.33,
+      "dv": -3.43,
+      "rel_decel": 0.721,
+      "a_obs": 0.361,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.655,
+      "a_vru_max": 0.418,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.156,
+      "lead_vru": {
+        "token": "be466cb87e8f5684",
+        "cat": "vehicle.car",
+        "s_m": 29.2,
+        "lat_m": 0.58
+      },
+      "ttc_s": 6.1,
+      "ego_yaw_change_deg": -31.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "be466cb87e8f5684",
+          "cat": "vehicle.car",
+          "s_m": 29.2,
+          "lat_m": 0.58,
+          "a_req": 0.418,
+          "visible": true
+        },
+        {
+          "token": "444451db9e485338",
+          "cat": "vehicle.car",
+          "s_m": 41.7,
+          "lat_m": 0.31,
+          "a_req": 0.163,
+          "visible": true
+        },
+        {
+          "token": "389bfb3bcd0351b9",
+          "cat": "vehicle.car",
+          "s_m": 51.2,
+          "lat_m": 0.83,
+          "a_req": 0.074,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0038-scene-0007",
+      "frame_idx": 0,
+      "t": 1622761154.700967,
+      "ego_v0": 2.96,
+      "ego_vmin": 0.0,
+      "dv": -2.96,
+      "rel_decel": 1.0,
+      "a_obs": 0.329,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.383,
+      "a_vru_max": 0.383,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.164,
+      "lead_vru": {
+        "token": "444451db9e485338",
+        "cat": "vehicle.car",
+        "s_m": 13.5,
+        "lat_m": 0.38
+      },
+      "ttc_s": 4.6,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "444451db9e485338",
+          "cat": "vehicle.car",
+          "s_m": 13.5,
+          "lat_m": 0.38,
+          "a_req": 0.383,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0038-scene-0011",
+      "frame_idx": 0,
+      "t": 1622761234.700869,
+      "ego_v0": 2.64,
+      "ego_vmin": 0.0,
+      "dv": -2.64,
+      "rel_decel": 1.0,
+      "a_obs": 0.31,
+      "brake_dur_s": 8.5,
+      "a_vru_sum": 0.303,
+      "a_vru_max": 0.167,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.538,
+      "lead_vru": {
+        "token": "c48b59bbc55b577c",
+        "cat": "vehicle.car",
+        "s_m": 22.9,
+        "lat_m": 0.14
+      },
+      "ttc_s": 8.7,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "c48b59bbc55b577c",
+          "cat": "vehicle.car",
+          "s_m": 22.9,
+          "lat_m": 0.14,
+          "a_req": 0.167,
+          "visible": true
+        },
+        {
+          "token": "444451db9e485338",
+          "cat": "vehicle.car",
+          "s_m": 13.4,
+          "lat_m": 0.11,
+          "a_req": 0.136,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0039-scene-0004",
+      "frame_idx": 0,
+      "t": 1624889056.201879,
+      "ego_v0": 10.34,
+      "ego_vmin": 6.63,
+      "dv": -3.71,
+      "rel_decel": 0.359,
+      "a_obs": 0.927,
+      "brake_dur_s": 4.0,
+      "a_vru_sum": 1.06,
+      "a_vru_max": 1.06,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.144,
+      "lead_vru": {
+        "token": "b98c27af3b2a5661",
+        "cat": "vehicle.car",
+        "s_m": 31.9,
+        "lat_m": 0.43
+      },
+      "ttc_s": 3.1,
+      "ego_yaw_change_deg": -0.7,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.999,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "b98c27af3b2a5661",
+          "cat": "vehicle.car",
+          "s_m": 31.9,
+          "lat_m": 0.43,
+          "a_req": 1.06,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0039-scene-0010",
+      "frame_idx": 0,
+      "t": 1624889176.201311,
+      "ego_v0": 6.85,
+      "ego_vmin": 0.0,
+      "dv": -6.84,
+      "rel_decel": 1.0,
+      "a_obs": 0.721,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.698,
+      "a_vru_max": 0.698,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.969,
+      "lead_vru": {
+        "token": "b3a0a5b629eb532e",
+        "cat": "vehicle.car",
+        "s_m": 35.6,
+        "lat_m": 0.33
+      },
+      "ttc_s": 5.2,
+      "ego_yaw_change_deg": 0.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "b3a0a5b629eb532e",
+          "cat": "vehicle.car",
+          "s_m": 35.6,
+          "lat_m": 0.33,
+          "a_req": 0.698,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0042-scene-0017",
+      "frame_idx": 0,
+      "t": 1624898288.299576,
+      "ego_v0": 9.77,
+      "ego_vmin": 0.0,
+      "dv": -9.76,
+      "rel_decel": 1.0,
+      "a_obs": 1.028,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 1.027,
+      "a_vru_max": 1.025,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.998,
+      "lead_vru": {
+        "token": "bf64cdc1ec3d5613",
+        "cat": "vehicle.car",
+        "s_m": 48.5,
+        "lat_m": 0.3
+      },
+      "ttc_s": 5.0,
+      "ego_yaw_change_deg": 0.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "bf64cdc1ec3d5613",
+          "cat": "vehicle.car",
+          "s_m": 48.5,
+          "lat_m": 0.3,
+          "a_req": 1.025,
+          "visible": true
+        },
+        {
+          "token": "a0e796ca904051e6",
+          "cat": "vehicle.car",
+          "s_m": 12.7,
+          "lat_m": 1.39,
+          "a_req": 0.002,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0043-scene-0013",
+      "frame_idx": 0,
+      "t": 1624899588.3003,
+      "ego_v0": 5.25,
+      "ego_vmin": 0.0,
+      "dv": -5.25,
+      "rel_decel": 1.0,
+      "a_obs": 0.553,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.725,
+      "a_vru_max": 0.367,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.664,
+      "lead_vru": {
+        "token": "03c8991d51af55bb",
+        "cat": "vehicle.car",
+        "s_m": 22.1,
+        "lat_m": 0.14
+      },
+      "ttc_s": 4.2,
+      "ego_yaw_change_deg": -0.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "03c8991d51af55bb",
+          "cat": "vehicle.car",
+          "s_m": 22.1,
+          "lat_m": 0.14,
+          "a_req": 0.367,
+          "visible": true
+        },
+        {
+          "token": "02677a8ce4ed5405",
+          "cat": "vehicle.car",
+          "s_m": 33.7,
+          "lat_m": 0.41,
+          "a_req": 0.358,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0044-scene-0017",
+      "frame_idx": 16,
+      "t": 1624901536.299374,
+      "ego_v0": 4.02,
+      "ego_vmin": 0.0,
+      "dv": -4.02,
+      "rel_decel": 1.0,
+      "a_obs": 0.423,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.363,
+      "a_vru_max": 0.363,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.857,
+      "lead_vru": {
+        "token": "aa115a4c04445496",
+        "cat": "vehicle.car",
+        "s_m": 24.3,
+        "lat_m": 1.01
+      },
+      "ttc_s": 6.0,
+      "ego_yaw_change_deg": 22.5,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "aa115a4c04445496",
+          "cat": "vehicle.car",
+          "s_m": 24.3,
+          "lat_m": 1.01,
+          "a_req": 0.363,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0044-scene-0024",
+      "frame_idx": 0,
+      "t": 1624901668.299446,
+      "ego_v0": 3.73,
+      "ego_vmin": 0.0,
+      "dv": -3.73,
+      "rel_decel": 1.0,
+      "a_obs": 0.533,
+      "brake_dur_s": 7.0,
+      "a_vru_sum": 0.575,
+      "a_vru_max": 0.575,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.08,
+      "lead_vru": {
+        "token": "aa115a4c04445496",
+        "cat": "vehicle.car",
+        "s_m": 14.1,
+        "lat_m": 0.28
+      },
+      "ttc_s": 3.8,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "aa115a4c04445496",
+          "cat": "vehicle.car",
+          "s_m": 14.1,
+          "lat_m": 0.28,
+          "a_req": 0.575,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0045-scene-0006",
+      "frame_idx": 0,
+      "t": 1624899674.997009,
+      "ego_v0": 6.84,
+      "ego_vmin": 0.0,
+      "dv": -6.84,
+      "rel_decel": 1.0,
+      "a_obs": 0.76,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.852,
+      "a_vru_max": 0.852,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.121,
+      "lead_vru": {
+        "token": "426f5a6893f55c1d",
+        "cat": "vehicle.car",
+        "s_m": 29.5,
+        "lat_m": 0.01
+      },
+      "ttc_s": 4.3,
+      "ego_yaw_change_deg": -12.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "426f5a6893f55c1d",
+          "cat": "vehicle.car",
+          "s_m": 29.5,
+          "lat_m": 0.01,
+          "a_req": 0.852,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0045-scene-0024",
+      "frame_idx": 0,
+      "t": 1624900034.99849,
+      "ego_v0": 2.72,
+      "ego_vmin": 0.0,
+      "dv": -2.72,
+      "rel_decel": 0.999,
+      "a_obs": 0.286,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.139,
+      "a_vru_max": 0.139,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.487,
+      "lead_vru": {
+        "token": "426f5a6893f55c1d",
+        "cat": "vehicle.car",
+        "s_m": 13.8,
+        "lat_m": 0.05
+      },
+      "ttc_s": 5.1,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "426f5a6893f55c1d",
+          "cat": "vehicle.car",
+          "s_m": 13.8,
+          "lat_m": 0.05,
+          "a_req": 0.139,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0046-scene-0005",
+      "frame_idx": 0,
+      "t": 1624904174.700009,
+      "ego_v0": 12.06,
+      "ego_vmin": 0.0,
+      "dv": -12.06,
+      "rel_decel": 1.0,
+      "a_obs": 1.206,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.814,
+      "a_vru_max": 0.814,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.674,
+      "lead_vru": {
+        "token": "d0036d9ef87d591d",
+        "cat": "vehicle.car",
+        "s_m": 46.6,
+        "lat_m": 1.23
+      },
+      "ttc_s": 3.9,
+      "ego_yaw_change_deg": -0.5,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.993,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "d0036d9ef87d591d",
+          "cat": "vehicle.car",
+          "s_m": 46.6,
+          "lat_m": 1.23,
+          "a_req": 0.814,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0046-scene-0012",
+      "frame_idx": 1,
+      "t": 1624904315.199296,
+      "ego_v0": 12.51,
+      "ego_vmin": 6.69,
+      "dv": -5.82,
+      "rel_decel": 0.465,
+      "a_obs": 1.164,
+      "brake_dur_s": 5.0,
+      "a_vru_sum": 0.59,
+      "a_vru_max": 0.59,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.507,
+      "lead_vru": {
+        "token": "392b16076f595931",
+        "cat": "vehicle.car",
+        "s_m": 57.0,
+        "lat_m": 0.73
+      },
+      "ttc_s": 4.6,
+      "ego_yaw_change_deg": -3.5,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.999,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "392b16076f595931",
+          "cat": "vehicle.car",
+          "s_m": 57.0,
+          "lat_m": 0.73,
+          "a_req": 0.59,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0046-scene-0016",
+      "frame_idx": 0,
+      "t": 1624904394.699371,
+      "ego_v0": 4.54,
+      "ego_vmin": 0.0,
+      "dv": -4.54,
+      "rel_decel": 1.0,
+      "a_obs": 0.534,
+      "brake_dur_s": 8.5,
+      "a_vru_sum": 0.472,
+      "a_vru_max": 0.472,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.884,
+      "lead_vru": {
+        "token": "d7f5c1cd403252c9",
+        "cat": "vehicle.car",
+        "s_m": 16.0,
+        "lat_m": 1.21
+      },
+      "ttc_s": 3.5,
+      "ego_yaw_change_deg": -0.5,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.974,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "d7f5c1cd403252c9",
+          "cat": "vehicle.car",
+          "s_m": 16.0,
+          "lat_m": 1.21,
+          "a_req": 0.472,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0046-scene-0030",
+      "frame_idx": 17,
+      "t": 1624904683.199424,
+      "ego_v0": 5.77,
+      "ego_vmin": 2.03,
+      "dv": -3.74,
+      "rel_decel": 0.649,
+      "a_obs": 0.832,
+      "brake_dur_s": 4.5,
+      "a_vru_sum": 0.596,
+      "a_vru_max": 0.59,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.709,
+      "lead_vru": {
+        "token": "c85be50769ea59a6",
+        "cat": "vehicle.car",
+        "s_m": 30.2,
+        "lat_m": 0.09
+      },
+      "ttc_s": 5.2,
+      "ego_yaw_change_deg": 3.8,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "c85be50769ea59a6",
+          "cat": "vehicle.car",
+          "s_m": 30.2,
+          "lat_m": 0.09,
+          "a_req": 0.59,
+          "visible": true
+        },
+        {
+          "token": "491bba37e05950ee",
+          "cat": "vehicle.car",
+          "s_m": 12.6,
+          "lat_m": 0.39,
+          "a_req": 0.007,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0046-scene-0039",
+      "frame_idx": 12,
+      "t": 1624904860.69958,
+      "ego_v0": 7.08,
+      "ego_vmin": 0.12,
+      "dv": -6.96,
+      "rel_decel": 0.983,
+      "a_obs": 0.732,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.529,
+      "a_vru_max": 0.529,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.723,
+      "lead_vru": {
+        "token": "57ca57c61cfe5c36",
+        "cat": "vehicle.car",
+        "s_m": 36.4,
+        "lat_m": 0.36
+      },
+      "ttc_s": 5.1,
+      "ego_yaw_change_deg": -0.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.997,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "57ca57c61cfe5c36",
+          "cat": "vehicle.car",
+          "s_m": 36.4,
+          "lat_m": 0.36,
+          "a_req": 0.529,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0046-scene-0046",
+      "frame_idx": 25,
+      "t": 1624905007.200031,
+      "ego_v0": 3.09,
+      "ego_vmin": 1.67,
+      "dv": -1.41,
+      "rel_decel": 0.458,
+      "a_obs": 0.202,
+      "brake_dur_s": 7.0,
+      "a_vru_sum": 0.401,
+      "a_vru_max": 0.218,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.078,
+      "lead_vru": {
+        "token": "d093b1914bb85788",
+        "cat": "vehicle.car",
+        "s_m": 18.5,
+        "lat_m": 0.59
+      },
+      "ttc_s": 6.0,
+      "ego_yaw_change_deg": 1.5,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "d093b1914bb85788",
+          "cat": "vehicle.car",
+          "s_m": 18.5,
+          "lat_m": 0.59,
+          "a_req": 0.218,
+          "visible": true
+        },
+        {
+          "token": "ad7de73e43af5ae4",
+          "cat": "vehicle.car",
+          "s_m": 28.0,
+          "lat_m": 0.27,
+          "a_req": 0.183,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0046-scene-0047",
+      "frame_idx": 0,
+      "t": 1624905014.699972,
+      "ego_v0": 1.34,
+      "ego_vmin": 0.0,
+      "dv": -1.34,
+      "rel_decel": 1.0,
+      "a_obs": 0.168,
+      "brake_dur_s": 8.0,
+      "a_vru_sum": 0.109,
+      "a_vru_max": 0.109,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.649,
+      "lead_vru": {
+        "token": "ad7de73e43af5ae4",
+        "cat": "vehicle.car",
+        "s_m": 10.3,
+        "lat_m": 0.22
+      },
+      "ttc_s": 7.7,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "ad7de73e43af5ae4",
+          "cat": "vehicle.car",
+          "s_m": 10.3,
+          "lat_m": 0.22,
+          "a_req": 0.109,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0047-scene-0006",
+      "frame_idx": 0,
+      "t": 1624912454.099927,
+      "ego_v0": 10.56,
+      "ego_vmin": 0.26,
+      "dv": -10.3,
+      "rel_decel": 0.976,
+      "a_obs": 1.03,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.427,
+      "a_vru_max": 0.427,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.414,
+      "lead_vru": {
+        "token": "9d5dbeb74dbd57f4",
+        "cat": "vehicle.car",
+        "s_m": 46.1,
+        "lat_m": 0.22
+      },
+      "ttc_s": 4.4,
+      "ego_yaw_change_deg": -0.6,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "9d5dbeb74dbd57f4",
+          "cat": "vehicle.car",
+          "s_m": 46.1,
+          "lat_m": 0.22,
+          "a_req": 0.427,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0048-scene-0020",
+      "frame_idx": 25,
+      "t": 1624915766.600251,
+      "ego_v0": 1.56,
+      "ego_vmin": 0.0,
+      "dv": -1.56,
+      "rel_decel": 1.0,
+      "a_obs": 0.26,
+      "brake_dur_s": 6.0,
+      "a_vru_sum": 0.177,
+      "a_vru_max": 0.11,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.426,
+      "lead_vru": {
+        "token": "17c60cb65b645a2d",
+        "cat": "vehicle.car",
+        "s_m": 13.0,
+        "lat_m": 0.15
+      },
+      "ttc_s": 8.3,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "17c60cb65b645a2d",
+          "cat": "vehicle.car",
+          "s_m": 13.0,
+          "lat_m": 0.15,
+          "a_req": 0.11,
+          "visible": true
+        },
+        {
+          "token": "bf2be96a10ab544d",
+          "cat": "vehicle.car",
+          "s_m": 20.3,
+          "lat_m": 0.02,
+          "a_req": 0.066,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0048-scene-0024",
+      "frame_idx": 0,
+      "t": 1624915834.100264,
+      "ego_v0": 6.81,
+      "ego_vmin": 3.28,
+      "dv": -3.53,
+      "rel_decel": 0.518,
+      "a_obs": 0.588,
+      "brake_dur_s": 6.0,
+      "a_vru_sum": 0.37,
+      "a_vru_max": 0.185,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.315,
+      "lead_vru": {
+        "token": "17c60cb65b645a2d",
+        "cat": "vehicle.car",
+        "s_m": 27.1,
+        "lat_m": 0.39
+      },
+      "ttc_s": 4.0,
+      "ego_yaw_change_deg": -0.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "17c60cb65b645a2d",
+          "cat": "vehicle.car",
+          "s_m": 27.1,
+          "lat_m": 0.39,
+          "a_req": 0.185,
+          "visible": true
+        },
+        {
+          "token": "bf2be96a10ab544d",
+          "cat": "vehicle.car",
+          "s_m": 37.6,
+          "lat_m": 0.13,
+          "a_req": 0.184,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0048-scene-0044",
+      "frame_idx": 0,
+      "t": 1624916234.099125,
+      "ego_v0": 3.5,
+      "ego_vmin": 0.0,
+      "dv": -3.5,
+      "rel_decel": 0.999,
+      "a_obs": 0.539,
+      "brake_dur_s": 6.5,
+      "a_vru_sum": 0.421,
+      "a_vru_max": 0.247,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.458,
+      "lead_vru": {
+        "token": "558cfe26921259b6",
+        "cat": "vehicle.car",
+        "s_m": 26.9,
+        "lat_m": 0.38
+      },
+      "ttc_s": 7.7,
+      "ego_yaw_change_deg": 0.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "558cfe26921259b6",
+          "cat": "vehicle.car",
+          "s_m": 26.9,
+          "lat_m": 0.38,
+          "a_req": 0.247,
+          "visible": true
+        },
+        {
+          "token": "bcb628ced1725f06",
+          "cat": "vehicle.car",
+          "s_m": 17.4,
+          "lat_m": 0.1,
+          "a_req": 0.174,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0049-scene-0006",
+      "frame_idx": 32,
+      "t": 1624916236.99962,
+      "ego_v0": 7.86,
+      "ego_vmin": 4.56,
+      "dv": -3.29,
+      "rel_decel": 0.419,
+      "a_obs": 0.941,
+      "brake_dur_s": 3.5,
+      "a_vru_sum": 0.847,
+      "a_vru_max": 0.847,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.9,
+      "lead_vru": {
+        "token": "ca48080830e552c1",
+        "cat": "vehicle.car",
+        "s_m": 38.5,
+        "lat_m": 0.23
+      },
+      "ttc_s": 4.9,
+      "ego_yaw_change_deg": 0.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "ca48080830e552c1",
+          "cat": "vehicle.car",
+          "s_m": 38.5,
+          "lat_m": 0.23,
+          "a_req": 0.847,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0049-scene-0007",
+      "frame_idx": 0,
+      "t": 1624916240.999642,
+      "ego_v0": 3.63,
+      "ego_vmin": 0.0,
+      "dv": -3.63,
+      "rel_decel": 1.0,
+      "a_obs": 0.518,
+      "brake_dur_s": 7.0,
+      "a_vru_sum": 0.536,
+      "a_vru_max": 0.536,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.033,
+      "lead_vru": {
+        "token": "ca48080830e552c1",
+        "cat": "vehicle.car",
+        "s_m": 14.3,
+        "lat_m": 0.16
+      },
+      "ttc_s": 3.9,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "ca48080830e552c1",
+          "cat": "vehicle.car",
+          "s_m": 14.3,
+          "lat_m": 0.16,
+          "a_req": 0.536,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0055-scene-0007",
+      "frame_idx": 0,
+      "t": 1630332155.500463,
+      "ego_v0": 1.01,
+      "ego_vmin": 0.0,
+      "dv": -1.01,
+      "rel_decel": 1.0,
+      "a_obs": 0.184,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 0.09,
+      "a_vru_max": 0.09,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.487,
+      "lead_vru": {
+        "token": "31fc257c8d665120",
+        "cat": "vehicle.car",
+        "s_m": 7.7,
+        "lat_m": 0.04
+      },
+      "ttc_s": 7.6,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "31fc257c8d665120",
+          "cat": "vehicle.car",
+          "s_m": 7.7,
+          "lat_m": 0.04,
+          "a_req": 0.09,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0056-scene-0003",
+      "frame_idx": 0,
+      "t": 1630332315.500205,
+      "ego_v0": 7.2,
+      "ego_vmin": 3.27,
+      "dv": -3.94,
+      "rel_decel": 0.547,
+      "a_obs": 0.415,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.191,
+      "a_vru_max": 0.191,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.46,
+      "lead_vru": {
+        "token": "d5600e8de1f5558c",
+        "cat": "vehicle.car",
+        "s_m": 35.7,
+        "lat_m": 0.06
+      },
+      "ttc_s": 5.0,
+      "ego_yaw_change_deg": 43.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.992,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "d5600e8de1f5558c",
+          "cat": "vehicle.car",
+          "s_m": 35.7,
+          "lat_m": 0.06,
+          "a_req": 0.191,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0056-scene-0004",
+      "frame_idx": 13,
+      "t": 1630332342.000214,
+      "ego_v0": 5.87,
+      "ego_vmin": 0.0,
+      "dv": -5.87,
+      "rel_decel": 1.0,
+      "a_obs": 0.587,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.596,
+      "a_vru_max": 0.596,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.015,
+      "lead_vru": {
+        "token": "d5600e8de1f5558c",
+        "cat": "vehicle.car",
+        "s_m": 30.9,
+        "lat_m": 0.06
+      },
+      "ttc_s": 5.3,
+      "ego_yaw_change_deg": -1.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "d5600e8de1f5558c",
+          "cat": "vehicle.car",
+          "s_m": 30.9,
+          "lat_m": 0.06,
+          "a_req": 0.596,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0057-scene-0003",
+      "frame_idx": 0,
+      "t": 1630335686.000564,
+      "ego_v0": 8.43,
+      "ego_vmin": 0.01,
+      "dv": -8.42,
+      "rel_decel": 0.999,
+      "a_obs": 1.296,
+      "brake_dur_s": 6.5,
+      "a_vru_sum": 2.068,
+      "a_vru_max": 1.159,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.894,
+      "lead_vru": {
+        "token": "4423aa0406f356bd",
+        "cat": "vehicle.car",
+        "s_m": 32.7,
+        "lat_m": 0.07
+      },
+      "ttc_s": 3.9,
+      "ego_yaw_change_deg": 0.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "4423aa0406f356bd",
+          "cat": "vehicle.car",
+          "s_m": 32.7,
+          "lat_m": 0.07,
+          "a_req": 1.159,
+          "visible": true
+        },
+        {
+          "token": "29e03c1275ee5733",
+          "cat": "vehicle.car",
+          "s_m": 41.1,
+          "lat_m": 0.23,
+          "a_req": 0.909,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0058-scene-0003",
+      "frame_idx": 20,
+      "t": 1630335796.000497,
+      "ego_v0": 0.96,
+      "ego_vmin": 0.0,
+      "dv": -0.96,
+      "rel_decel": 0.999,
+      "a_obs": 0.107,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.061,
+      "a_vru_max": 0.061,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.572,
+      "lead_vru": {
+        "token": "5344f27c377c57b2",
+        "cat": "vehicle.car",
+        "s_m": 9.6,
+        "lat_m": 0.1
+      },
+      "ttc_s": 10.0,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "5344f27c377c57b2",
+          "cat": "vehicle.car",
+          "s_m": 9.6,
+          "lat_m": 0.1,
+          "a_req": 0.061,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0058-scene-0010",
+      "frame_idx": 18,
+      "t": 1630335935.000194,
+      "ego_v0": 1.74,
+      "ego_vmin": 0.0,
+      "dv": -1.74,
+      "rel_decel": 0.999,
+      "a_obs": 0.194,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.094,
+      "a_vru_max": 0.094,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.486,
+      "lead_vru": {
+        "token": "53576127ce1a5daa",
+        "cat": "vehicle.car",
+        "s_m": 18.2,
+        "lat_m": 1.22
+      },
+      "ttc_s": 10.4,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "53576127ce1a5daa",
+          "cat": "vehicle.car",
+          "s_m": 18.2,
+          "lat_m": 1.22,
+          "a_req": 0.094,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0058-scene-0012",
+      "frame_idx": 1,
+      "t": 1630335966.499659,
+      "ego_v0": 6.1,
+      "ego_vmin": 2.24,
+      "dv": -3.85,
+      "rel_decel": 0.632,
+      "a_obs": 0.405,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.583,
+      "a_vru_max": 0.583,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.44,
+      "lead_vru": {
+        "token": "974a07d695f253bc",
+        "cat": "vehicle.car",
+        "s_m": 37.2,
+        "lat_m": 1.9
+      },
+      "ttc_s": 6.1,
+      "ego_yaw_change_deg": 5.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "974a07d695f253bc",
+          "cat": "vehicle.car",
+          "s_m": 37.2,
+          "lat_m": 1.9,
+          "a_req": 0.583,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0058-scene-0020",
+      "frame_idx": 11,
+      "t": 1630336131.500127,
+      "ego_v0": 1.41,
+      "ego_vmin": 0.0,
+      "dv": -1.41,
+      "rel_decel": 1.0,
+      "a_obs": 0.176,
+      "brake_dur_s": 8.0,
+      "a_vru_sum": 0.19,
+      "a_vru_max": 0.125,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.712,
+      "lead_vru": {
+        "token": "f960c97c26d05f58",
+        "cat": "vehicle.car",
+        "s_m": 9.9,
+        "lat_m": 0.36
+      },
+      "ttc_s": 7.0,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "f960c97c26d05f58",
+          "cat": "vehicle.car",
+          "s_m": 9.9,
+          "lat_m": 0.36,
+          "a_req": 0.125,
+          "visible": true
+        },
+        {
+          "token": "e56a8b63a029586c",
+          "cat": "vehicle.car",
+          "s_m": 17.3,
+          "lat_m": 0.75,
+          "a_req": 0.065,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0061-scene-0007",
+      "frame_idx": 4,
+      "t": 1630341136.500005,
+      "ego_v0": 5.68,
+      "ego_vmin": 0.16,
+      "dv": -5.52,
+      "rel_decel": 0.971,
+      "a_obs": 0.581,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.792,
+      "a_vru_max": 0.431,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.743,
+      "lead_vru": {
+        "token": "e94e20e5701a5720",
+        "cat": "vehicle.car",
+        "s_m": 39.4,
+        "lat_m": 0.33
+      },
+      "ttc_s": 6.9,
+      "ego_yaw_change_deg": 1.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "e94e20e5701a5720",
+          "cat": "vehicle.car",
+          "s_m": 39.4,
+          "lat_m": 0.33,
+          "a_req": 0.431,
+          "visible": true
+        },
+        {
+          "token": "a275a880c00b524d",
+          "cat": "vehicle.car",
+          "s_m": 46.8,
+          "lat_m": 0.05,
+          "a_req": 0.36,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0061-scene-0012",
+      "frame_idx": 0,
+      "t": 1630341234.500232,
+      "ego_v0": 3.85,
+      "ego_vmin": 0.0,
+      "dv": -3.85,
+      "rel_decel": 1.0,
+      "a_obs": 0.453,
+      "brake_dur_s": 8.5,
+      "a_vru_sum": 0.272,
+      "a_vru_max": 0.141,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.311,
+      "lead_vru": {
+        "token": "dd78eb85afec5cf2",
+        "cat": "vehicle.car",
+        "s_m": 20.8,
+        "lat_m": 0.13
+      },
+      "ttc_s": 5.4,
+      "ego_yaw_change_deg": -0.8,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "dd78eb85afec5cf2",
+          "cat": "vehicle.car",
+          "s_m": 20.8,
+          "lat_m": 0.13,
+          "a_req": 0.141,
+          "visible": true
+        },
+        {
+          "token": "1f97f32f21c054bb",
+          "cat": "vehicle.car",
+          "s_m": 28.2,
+          "lat_m": 0.2,
+          "a_req": 0.131,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0062-scene-0006",
+      "frame_idx": 19,
+      "t": 1630341444.000135,
+      "ego_v0": 5.52,
+      "ego_vmin": 0.91,
+      "dv": -4.61,
+      "rel_decel": 0.835,
+      "a_obs": 0.658,
+      "brake_dur_s": 7.0,
+      "a_vru_sum": 0.508,
+      "a_vru_max": 0.508,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.772,
+      "lead_vru": {
+        "token": "b3624ffd3be65170",
+        "cat": "vehicle.car",
+        "s_m": 32.0,
+        "lat_m": 0.13
+      },
+      "ttc_s": 5.8,
+      "ego_yaw_change_deg": -4.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "b3624ffd3be65170",
+          "cat": "vehicle.car",
+          "s_m": 32.0,
+          "lat_m": 0.13,
+          "a_req": 0.508,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0063-scene-0003",
+      "frame_idx": 0,
+      "t": 1631197562.500312,
+      "ego_v0": 1.07,
+      "ego_vmin": 0.0,
+      "dv": -1.07,
+      "rel_decel": 0.998,
+      "a_obs": 0.213,
+      "brake_dur_s": 5.0,
+      "a_vru_sum": 0.076,
+      "a_vru_max": 0.076,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.358,
+      "lead_vru": {
+        "token": "aa474a7320555afa",
+        "cat": "vehicle.car",
+        "s_m": 9.5,
+        "lat_m": 0.47
+      },
+      "ttc_s": 8.9,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "aa474a7320555afa",
+          "cat": "vehicle.car",
+          "s_m": 9.5,
+          "lat_m": 0.47,
+          "a_req": 0.076,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0064-scene-0003",
+      "frame_idx": 0,
+      "t": 1631197662.500278,
+      "ego_v0": 0.96,
+      "ego_vmin": 0.0,
+      "dv": -0.96,
+      "rel_decel": 0.998,
+      "a_obs": 0.107,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.066,
+      "a_vru_max": 0.066,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.619,
+      "lead_vru": {
+        "token": "e48bcadb583950dc",
+        "cat": "vehicle.car",
+        "s_m": 9.0,
+        "lat_m": 0.12
+      },
+      "ttc_s": 9.3,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "e48bcadb583950dc",
+          "cat": "vehicle.car",
+          "s_m": 9.0,
+          "lat_m": 0.12,
+          "a_req": 0.066,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0064-scene-0011",
+      "frame_idx": 0,
+      "t": 1631197822.500113,
+      "ego_v0": 5.17,
+      "ego_vmin": 0.01,
+      "dv": -5.16,
+      "rel_decel": 0.999,
+      "a_obs": 0.939,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 1.347,
+      "a_vru_max": 0.794,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.846,
+      "lead_vru": {
+        "token": "89e1e2eb67bd53c2",
+        "cat": "vehicle.car",
+        "s_m": 18.8,
+        "lat_m": 0.39
+      },
+      "ttc_s": 3.6,
+      "ego_yaw_change_deg": 0.2,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "89e1e2eb67bd53c2",
+          "cat": "vehicle.car",
+          "s_m": 18.8,
+          "lat_m": 0.39,
+          "a_req": 0.794,
+          "visible": true
+        },
+        {
+          "token": "f5e6666b55ea504f",
+          "cat": "vehicle.car",
+          "s_m": 26.2,
+          "lat_m": 0.82,
+          "a_req": 0.552,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0064-scene-0024",
+      "frame_idx": 0,
+      "t": 1631198082.500343,
+      "ego_v0": 3.36,
+      "ego_vmin": 0.66,
+      "dv": -2.7,
+      "rel_decel": 0.804,
+      "a_obs": 0.27,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.207,
+      "a_vru_max": 0.123,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.456,
+      "lead_vru": {
+        "token": "1473c60bbd8d5a51",
+        "cat": "vehicle.car",
+        "s_m": 39.5,
+        "lat_m": 1.3
+      },
+      "ttc_s": 11.8,
+      "ego_yaw_change_deg": -9.6,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "1473c60bbd8d5a51",
+          "cat": "vehicle.car",
+          "s_m": 39.5,
+          "lat_m": 1.3,
+          "a_req": 0.123,
+          "visible": true
+        },
+        {
+          "token": "fa424b2b36115f9a",
+          "cat": "vehicle.car",
+          "s_m": 21.6,
+          "lat_m": 0.62,
+          "a_req": 0.085,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0065-scene-0004",
+      "frame_idx": 0,
+      "t": 1631198322.500125,
+      "ego_v0": 5.06,
+      "ego_vmin": 0.0,
+      "dv": -5.06,
+      "rel_decel": 1.0,
+      "a_obs": 0.533,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.617,
+      "a_vru_max": 0.617,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.158,
+      "lead_vru": {
+        "token": "b5576d5e5f805170",
+        "cat": "vehicle.car",
+        "s_m": 22.8,
+        "lat_m": 0.63
+      },
+      "ttc_s": 4.5,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "b5576d5e5f805170",
+          "cat": "vehicle.car",
+          "s_m": 22.8,
+          "lat_m": 0.63,
+          "a_req": 0.617,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0067-scene-0002",
+      "frame_idx": 0,
+      "t": 1631198822.499829,
+      "ego_v0": 5.57,
+      "ego_vmin": 0.0,
+      "dv": -5.57,
+      "rel_decel": 1.0,
+      "a_obs": 0.586,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 1.235,
+      "a_vru_max": 0.648,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.106,
+      "lead_vru": {
+        "token": "6755eb265d0a5698",
+        "cat": "vehicle.car",
+        "s_m": 19.0,
+        "lat_m": 0.63
+      },
+      "ttc_s": 3.4,
+      "ego_yaw_change_deg": 2.7,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.97,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "6755eb265d0a5698",
+          "cat": "vehicle.car",
+          "s_m": 19.0,
+          "lat_m": 0.63,
+          "a_req": 0.648,
+          "visible": true
+        },
+        {
+          "token": "74dc5ae609bd5384",
+          "cat": "vehicle.car",
+          "s_m": 28.4,
+          "lat_m": 1.01,
+          "a_req": 0.587,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0069-scene-0012",
+      "frame_idx": 4,
+      "t": 1631208380.499486,
+      "ego_v0": 2.07,
+      "ego_vmin": 0.0,
+      "dv": -2.07,
+      "rel_decel": 0.999,
+      "a_obs": 0.259,
+      "brake_dur_s": 8.0,
+      "a_vru_sum": 0.403,
+      "a_vru_max": 0.156,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.604,
+      "lead_vru": {
+        "token": "97ece4901d805ac2",
+        "cat": "vehicle.car",
+        "s_m": 15.7,
+        "lat_m": 0.38
+      },
+      "ttc_s": 7.6,
+      "ego_yaw_change_deg": -10.5,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "97ece4901d805ac2",
+          "cat": "vehicle.car",
+          "s_m": 15.7,
+          "lat_m": 0.38,
+          "a_req": 0.156,
+          "visible": true
+        },
+        {
+          "token": "e757390f7c7054b4",
+          "cat": "vehicle.car",
+          "s_m": 16.8,
+          "lat_m": 0.39,
+          "a_req": 0.145,
+          "visible": true
+        },
+        {
+          "token": "a5afe0929ee7584c",
+          "cat": "vehicle.car",
+          "s_m": 23.1,
+          "lat_m": 0.07,
+          "a_req": 0.102,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0070-scene-0002",
+      "frame_idx": 0,
+      "t": 1631208658.499939,
+      "ego_v0": 5.02,
+      "ego_vmin": 0.75,
+      "dv": -4.28,
+      "rel_decel": 0.851,
+      "a_obs": 0.45,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.806,
+      "a_vru_max": 0.622,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.381,
+      "lead_vru": {
+        "token": "f90fffc440f4543d",
+        "cat": "vehicle.car",
+        "s_m": 22.3,
+        "lat_m": 0.91
+      },
+      "ttc_s": 4.4,
+      "ego_yaw_change_deg": -0.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "f90fffc440f4543d",
+          "cat": "vehicle.car",
+          "s_m": 22.3,
+          "lat_m": 0.91,
+          "a_req": 0.622,
+          "visible": true
+        },
+        {
+          "token": "a2612c14ad575f09",
+          "cat": "vehicle.car",
+          "s_m": 33.9,
+          "lat_m": 0.57,
+          "a_req": 0.184,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0071-scene-0006",
+      "frame_idx": 0,
+      "t": 1631208818.499092,
+      "ego_v0": 6.64,
+      "ego_vmin": 0.0,
+      "dv": -6.64,
+      "rel_decel": 1.0,
+      "a_obs": 0.738,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 1.35,
+      "a_vru_max": 0.75,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.017,
+      "lead_vru": {
+        "token": "f9cad65a62e75af0",
+        "cat": "vehicle.car",
+        "s_m": 31.4,
+        "lat_m": 0.45
+      },
+      "ttc_s": 4.7,
+      "ego_yaw_change_deg": 0.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "f9cad65a62e75af0",
+          "cat": "vehicle.car",
+          "s_m": 31.4,
+          "lat_m": 0.45,
+          "a_req": 0.75,
+          "visible": true
+        },
+        {
+          "token": "a001f34bd7245684",
+          "cat": "vehicle.car",
+          "s_m": 38.8,
+          "lat_m": 0.79,
+          "a_req": 0.6,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0071-scene-0007",
+      "frame_idx": 14,
+      "t": 1631208845.499795,
+      "ego_v0": 0.63,
+      "ego_vmin": 0.0,
+      "dv": -0.63,
+      "rel_decel": 0.998,
+      "a_obs": 0.078,
+      "brake_dur_s": 8.0,
+      "a_vru_sum": 0.046,
+      "a_vru_max": 0.032,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.41,
+      "lead_vru": {
+        "token": "f9cad65a62e75af0",
+        "cat": "vehicle.car",
+        "s_m": 8.1,
+        "lat_m": 0.21
+      },
+      "ttc_s": 12.9,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "f9cad65a62e75af0",
+          "cat": "vehicle.car",
+          "s_m": 8.1,
+          "lat_m": 0.21,
+          "a_req": 0.032,
+          "visible": true
+        },
+        {
+          "token": "a001f34bd7245684",
+          "cat": "vehicle.car",
+          "s_m": 16.6,
+          "lat_m": 0.02,
+          "a_req": 0.014,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0072-scene-0002",
+      "frame_idx": 0,
+      "t": 1631208978.499777,
+      "ego_v0": 1.32,
+      "ego_vmin": 0.0,
+      "dv": -1.32,
+      "rel_decel": 0.999,
+      "a_obs": 0.24,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 0.114,
+      "a_vru_max": 0.114,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.474,
+      "lead_vru": {
+        "token": "6c36191dd1fa5dae",
+        "cat": "vehicle.car",
+        "s_m": 9.7,
+        "lat_m": 0.15
+      },
+      "ttc_s": 7.3,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "6c36191dd1fa5dae",
+          "cat": "vehicle.car",
+          "s_m": 9.7,
+          "lat_m": 0.15,
+          "a_req": 0.114,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0074-scene-0003",
+      "frame_idx": 0,
+      "t": 1631209358.499756,
+      "ego_v0": 1.84,
+      "ego_vmin": 0.0,
+      "dv": -1.84,
+      "rel_decel": 1.0,
+      "a_obs": 0.283,
+      "brake_dur_s": 6.5,
+      "a_vru_sum": 0.185,
+      "a_vru_max": 0.185,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.656,
+      "lead_vru": {
+        "token": "2f615f6152885cf2",
+        "cat": "vehicle.car",
+        "s_m": 11.1,
+        "lat_m": 0.49
+      },
+      "ttc_s": 6.0,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "2f615f6152885cf2",
+          "cat": "vehicle.car",
+          "s_m": 11.1,
+          "lat_m": 0.49,
+          "a_req": 0.185,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0077-scene-0003",
+      "frame_idx": 0,
+      "t": 1631211541.200422,
+      "ego_v0": 1.16,
+      "ego_vmin": 0.0,
+      "dv": -1.16,
+      "rel_decel": 0.999,
+      "a_obs": 0.21,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 0.125,
+      "a_vru_max": 0.079,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.377,
+      "lead_vru": {
+        "token": "ac411c4ab1b854e3",
+        "cat": "vehicle.car",
+        "s_m": 10.4,
+        "lat_m": 0.66
+      },
+      "ttc_s": 9.0,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "ac411c4ab1b854e3",
+          "cat": "vehicle.car",
+          "s_m": 10.4,
+          "lat_m": 0.66,
+          "a_req": 0.079,
+          "visible": true
+        },
+        {
+          "token": "6f578a1032975958",
+          "cat": "vehicle.car",
+          "s_m": 16.8,
+          "lat_m": 0.03,
+          "a_req": 0.045,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0081-scene-0007",
+      "frame_idx": 0,
+      "t": 1631213381.000076,
+      "ego_v0": 6.06,
+      "ego_vmin": 0.08,
+      "dv": -5.98,
+      "rel_decel": 0.987,
+      "a_obs": 0.598,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.752,
+      "a_vru_max": 0.519,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.868,
+      "lead_vru": {
+        "token": "07c3bad6e4ef5336",
+        "cat": "vehicle.car",
+        "s_m": 37.3,
+        "lat_m": 0.2
+      },
+      "ttc_s": 6.2,
+      "ego_yaw_change_deg": 0.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "07c3bad6e4ef5336",
+          "cat": "vehicle.car",
+          "s_m": 37.3,
+          "lat_m": 0.2,
+          "a_req": 0.519,
+          "visible": true
+        },
+        {
+          "token": "1a2911ec03425eb5",
+          "cat": "vehicle.car",
+          "s_m": 24.3,
+          "lat_m": 0.45,
+          "a_req": 0.233,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0087-scene-0005",
+      "frame_idx": 0,
+      "t": 1631215346.40017,
+      "ego_v0": 5.11,
+      "ego_vmin": 0.0,
+      "dv": -5.11,
+      "rel_decel": 1.0,
+      "a_obs": 0.929,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 0.699,
+      "a_vru_max": 0.699,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.752,
+      "lead_vru": {
+        "token": "60b9f9235a3e55a2",
+        "cat": "vehicle.car",
+        "s_m": 20.7,
+        "lat_m": 1.89
+      },
+      "ttc_s": 4.1,
+      "ego_yaw_change_deg": -24.8,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "60b9f9235a3e55a2",
+          "cat": "vehicle.car",
+          "s_m": 20.7,
+          "lat_m": 1.89,
+          "a_req": 0.699,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0088-scene-0002",
+      "frame_idx": 0,
+      "t": 1631215466.400034,
+      "ego_v0": 5.23,
+      "ego_vmin": 0.8,
+      "dv": -4.43,
+      "rel_decel": 0.848,
+      "a_obs": 1.107,
+      "brake_dur_s": 4.0,
+      "a_vru_sum": 0.733,
+      "a_vru_max": 0.733,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.662,
+      "lead_vru": {
+        "token": "c2594562450b5b10",
+        "cat": "vehicle.car",
+        "s_m": 20.6,
+        "lat_m": 0.53
+      },
+      "ttc_s": 3.9,
+      "ego_yaw_change_deg": -3.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "c2594562450b5b10",
+          "cat": "vehicle.car",
+          "s_m": 20.6,
+          "lat_m": 0.53,
+          "a_req": 0.733,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0089-scene-0001",
+      "frame_idx": 1,
+      "t": 1631215912.399816,
+      "ego_v0": 3.94,
+      "ego_vmin": 0.0,
+      "dv": -3.94,
+      "rel_decel": 1.0,
+      "a_obs": 0.394,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.31,
+      "a_vru_max": 0.177,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.448,
+      "lead_vru": {
+        "token": "8264cec2d2a75c20",
+        "cat": "vehicle.car",
+        "s_m": 19.9,
+        "lat_m": 0.14
+      },
+      "ttc_s": 5.0,
+      "ego_yaw_change_deg": 3.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.998,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "8264cec2d2a75c20",
+          "cat": "vehicle.car",
+          "s_m": 19.9,
+          "lat_m": 0.14,
+          "a_req": 0.177,
+          "visible": true
+        },
+        {
+          "token": "361865c85ee757a0",
+          "cat": "vehicle.car",
+          "s_m": 30.4,
+          "lat_m": 0.77,
+          "a_req": 0.134,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0089-scene-0008",
+      "frame_idx": 0,
+      "t": 1631216046.399954,
+      "ego_v0": 3.39,
+      "ego_vmin": 0.0,
+      "dv": -3.39,
+      "rel_decel": 1.0,
+      "a_obs": 0.484,
+      "brake_dur_s": 7.0,
+      "a_vru_sum": 0.404,
+      "a_vru_max": 0.404,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.836,
+      "lead_vru": {
+        "token": "29781b7b26a757b4",
+        "cat": "vehicle.car",
+        "s_m": 16.2,
+        "lat_m": 0.28
+      },
+      "ttc_s": 4.8,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "29781b7b26a757b4",
+          "cat": "vehicle.car",
+          "s_m": 16.2,
+          "lat_m": 0.28,
+          "a_req": 0.404,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0095-scene-0004",
+      "frame_idx": 0,
+      "t": 1631801386.89928,
+      "ego_v0": 2.39,
+      "ego_vmin": 0.49,
+      "dv": -1.9,
+      "rel_decel": 0.795,
+      "a_obs": 0.2,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.309,
+      "a_vru_max": 0.198,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.992,
+      "lead_vru": {
+        "token": "1e8fc647947755d9",
+        "cat": "vehicle.car",
+        "s_m": 16.4,
+        "lat_m": 0.0
+      },
+      "ttc_s": 6.9,
+      "ego_yaw_change_deg": 19.7,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "1e8fc647947755d9",
+          "cat": "vehicle.car",
+          "s_m": 16.4,
+          "lat_m": 0.0,
+          "a_req": 0.198,
+          "visible": true
+        },
+        {
+          "token": "a70cf9c1d1fa59aa",
+          "cat": "vehicle.car",
+          "s_m": 28.0,
+          "lat_m": 0.39,
+          "a_req": 0.11,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0098-scene-0026",
+      "frame_idx": 0,
+      "t": 1631804002.199783,
+      "ego_v0": 1.5,
+      "ego_vmin": 0.0,
+      "dv": -1.5,
+      "rel_decel": 0.999,
+      "a_obs": 0.231,
+      "brake_dur_s": 6.5,
+      "a_vru_sum": 0.111,
+      "a_vru_max": 0.111,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.479,
+      "lead_vru": {
+        "token": "5efb6d9acfc25f81",
+        "cat": "vehicle.car",
+        "s_m": 12.2,
+        "lat_m": 0.08
+      },
+      "ttc_s": 8.1,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "5efb6d9acfc25f81",
+          "cat": "vehicle.car",
+          "s_m": 12.2,
+          "lat_m": 0.08,
+          "a_req": 0.111,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0101-scene-0002",
+      "frame_idx": 27,
+      "t": 1631806292.499856,
+      "ego_v0": 5.03,
+      "ego_vmin": 0.1,
+      "dv": -4.93,
+      "rel_decel": 0.98,
+      "a_obs": 0.821,
+      "brake_dur_s": 6.0,
+      "a_vru_sum": 0.588,
+      "a_vru_max": 0.588,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.716,
+      "lead_vru": {
+        "token": "724c77e32bd95ab4",
+        "cat": "vehicle.car",
+        "s_m": 23.5,
+        "lat_m": 1.62
+      },
+      "ttc_s": 4.7,
+      "ego_yaw_change_deg": 0.8,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "724c77e32bd95ab4",
+          "cat": "vehicle.car",
+          "s_m": 23.5,
+          "lat_m": 1.62,
+          "a_req": 0.588,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0101-scene-0006",
+      "frame_idx": 0,
+      "t": 1631806358.999083,
+      "ego_v0": 2.14,
+      "ego_vmin": 0.0,
+      "dv": -2.14,
+      "rel_decel": 0.998,
+      "a_obs": 0.225,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.265,
+      "a_vru_max": 0.156,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.692,
+      "lead_vru": {
+        "token": "e6873f8659265a7d",
+        "cat": "vehicle.car",
+        "s_m": 16.8,
+        "lat_m": 0.15
+      },
+      "ttc_s": 7.8,
+      "ego_yaw_change_deg": 18.6,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "e6873f8659265a7d",
+          "cat": "vehicle.car",
+          "s_m": 16.8,
+          "lat_m": 0.15,
+          "a_req": 0.156,
+          "visible": true
+        },
+        {
+          "token": "14e8faa263835584",
+          "cat": "vehicle.car",
+          "s_m": 23.1,
+          "lat_m": 0.01,
+          "a_req": 0.109,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0104-scene-0004",
+      "frame_idx": 0,
+      "t": 1631816668.400483,
+      "ego_v0": 3.04,
+      "ego_vmin": 0.0,
+      "dv": -3.04,
+      "rel_decel": 1.0,
+      "a_obs": 0.304,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.759,
+      "a_vru_max": 0.472,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.554,
+      "lead_vru": {
+        "token": "0deda54459fe5c31",
+        "cat": "vehicle.car",
+        "s_m": 11.8,
+        "lat_m": 0.71
+      },
+      "ttc_s": 3.9,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "0deda54459fe5c31",
+          "cat": "vehicle.car",
+          "s_m": 11.8,
+          "lat_m": 0.71,
+          "a_req": 0.472,
+          "visible": true
+        },
+        {
+          "token": "e10f5de9d5f955c4",
+          "cat": "vehicle.car",
+          "s_m": 18.1,
+          "lat_m": 0.76,
+          "a_req": 0.287,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0104-scene-0011",
+      "frame_idx": 17,
+      "t": 1631816816.899785,
+      "ego_v0": 7.07,
+      "ego_vmin": 2.76,
+      "dv": -4.3,
+      "rel_decel": 0.609,
+      "a_obs": 0.453,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.242,
+      "a_vru_max": 0.242,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.534,
+      "lead_vru": {
+        "token": "5de62ccefbbb5a6c",
+        "cat": "vehicle.car",
+        "s_m": 34.1,
+        "lat_m": 0.98
+      },
+      "ttc_s": 4.8,
+      "ego_yaw_change_deg": -0.8,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.931,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "5de62ccefbbb5a6c",
+          "cat": "vehicle.car",
+          "s_m": 34.1,
+          "lat_m": 0.98,
+          "a_req": 0.242,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0107-scene-0008",
+      "frame_idx": 18,
+      "t": 1631821222.999928,
+      "ego_v0": 4.8,
+      "ego_vmin": 0.0,
+      "dv": -4.8,
+      "rel_decel": 1.0,
+      "a_obs": 0.533,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.175,
+      "a_vru_max": 0.175,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.327,
+      "lead_vru": {
+        "token": "647780696b815700",
+        "cat": "vehicle.car",
+        "s_m": 20.5,
+        "lat_m": 0.41
+      },
+      "ttc_s": 4.3,
+      "ego_yaw_change_deg": -6.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "647780696b815700",
+          "cat": "vehicle.car",
+          "s_m": 20.5,
+          "lat_m": 0.41,
+          "a_req": 0.175,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0110-scene-0016",
+      "frame_idx": 0,
+      "t": 1631822505.500334,
+      "ego_v0": 4.94,
+      "ego_vmin": 0.0,
+      "dv": -4.94,
+      "rel_decel": 1.0,
+      "a_obs": 0.52,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.462,
+      "a_vru_max": 0.462,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.889,
+      "lead_vru": {
+        "token": "0ab2f08c57e0565b",
+        "cat": "vehicle.car",
+        "s_m": 28.4,
+        "lat_m": 0.76
+      },
+      "ttc_s": 5.7,
+      "ego_yaw_change_deg": 4.7,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "0ab2f08c57e0565b",
+          "cat": "vehicle.car",
+          "s_m": 28.4,
+          "lat_m": 0.76,
+          "a_req": 0.462,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0110-scene-0056",
+      "frame_idx": 31,
+      "t": 1631823321.000008,
+      "ego_v0": 5.84,
+      "ego_vmin": 3.79,
+      "dv": -2.06,
+      "rel_decel": 0.352,
+      "a_obs": 0.515,
+      "brake_dur_s": 4.0,
+      "a_vru_sum": 0.516,
+      "a_vru_max": 0.516,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.003,
+      "lead_vru": {
+        "token": "4e10a2e6574f53d4",
+        "cat": "vehicle.car",
+        "s_m": 39.1,
+        "lat_m": 1.42
+      },
+      "ttc_s": 6.7,
+      "ego_yaw_change_deg": -4.7,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.03,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "4e10a2e6574f53d4",
+          "cat": "vehicle.car",
+          "s_m": 39.1,
+          "lat_m": 1.42,
+          "a_req": 0.516,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0110-scene-0057",
+      "frame_idx": 0,
+      "t": 1631823325.499928,
+      "ego_v0": 3.1,
+      "ego_vmin": 0.01,
+      "dv": -3.09,
+      "rel_decel": 0.998,
+      "a_obs": 0.884,
+      "brake_dur_s": 3.5,
+      "a_vru_sum": 0.299,
+      "a_vru_max": 0.299,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.338,
+      "lead_vru": {
+        "token": "cb62536241375909",
+        "cat": "vehicle.car",
+        "s_m": 20.9,
+        "lat_m": 1.95
+      },
+      "ttc_s": 6.7,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.048,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "cb62536241375909",
+          "cat": "vehicle.car",
+          "s_m": 20.9,
+          "lat_m": 1.95,
+          "a_req": 0.299,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0110-scene-0058",
+      "frame_idx": 0,
+      "t": 1631823345.500346,
+      "ego_v0": 5.35,
+      "ego_vmin": 2.34,
+      "dv": -3.0,
+      "rel_decel": 0.562,
+      "a_obs": 0.3,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.802,
+      "a_vru_max": 0.421,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.402,
+      "lead_vru": {
+        "token": "6af81a10e1ab5152",
+        "cat": "vehicle.car",
+        "s_m": 35.9,
+        "lat_m": 1.98
+      },
+      "ttc_s": 6.7,
+      "ego_yaw_change_deg": 0.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "6af81a10e1ab5152",
+          "cat": "vehicle.car",
+          "s_m": 35.9,
+          "lat_m": 1.98,
+          "a_req": 0.421,
+          "visible": true
+        },
+        {
+          "token": "3a74449fd0b35ac3",
+          "cat": "vehicle.car",
+          "s_m": 20.6,
+          "lat_m": 0.06,
+          "a_req": 0.381,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0110-scene-0070",
+      "frame_idx": 0,
+      "t": 1631823585.500032,
+      "ego_v0": 4.9,
+      "ego_vmin": 0.0,
+      "dv": -4.9,
+      "rel_decel": 1.0,
+      "a_obs": 0.515,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 1.043,
+      "a_vru_max": 0.567,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.099,
+      "lead_vru": {
+        "token": "699ab8e42d2752d2",
+        "cat": "vehicle.car",
+        "s_m": 19.8,
+        "lat_m": 0.07
+      },
+      "ttc_s": 4.0,
+      "ego_yaw_change_deg": 0.7,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "699ab8e42d2752d2",
+          "cat": "vehicle.car",
+          "s_m": 19.8,
+          "lat_m": 0.07,
+          "a_req": 0.567,
+          "visible": true
+        },
+        {
+          "token": "f6d5af3c554853f1",
+          "cat": "vehicle.car",
+          "s_m": 27.2,
+          "lat_m": 0.23,
+          "a_req": 0.476,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0110-scene-0073",
+      "frame_idx": 0,
+      "t": 1631823645.500084,
+      "ego_v0": 2.66,
+      "ego_vmin": 0.0,
+      "dv": -2.66,
+      "rel_decel": 1.0,
+      "a_obs": 0.313,
+      "brake_dur_s": 8.5,
+      "a_vru_sum": 0.318,
+      "a_vru_max": 0.318,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.016,
+      "lead_vru": {
+        "token": "04f4f17b0d865512",
+        "cat": "vehicle.car",
+        "s_m": 13.1,
+        "lat_m": 0.2
+      },
+      "ttc_s": 4.9,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "04f4f17b0d865512",
+          "cat": "vehicle.car",
+          "s_m": 13.1,
+          "lat_m": 0.2,
+          "a_req": 0.318,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0111-scene-0003",
+      "frame_idx": 13,
+      "t": 1631822899.000105,
+      "ego_v0": 4.12,
+      "ego_vmin": 1.49,
+      "dv": -2.63,
+      "rel_decel": 0.638,
+      "a_obs": 0.263,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.111,
+      "a_vru_max": 0.096,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.366,
+      "lead_vru": {
+        "token": "c32011a866315f52",
+        "cat": "vehicle.car",
+        "s_m": 34.8,
+        "lat_m": 0.79
+      },
+      "ttc_s": 8.4,
+      "ego_yaw_change_deg": -3.7,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.991,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "c32011a866315f52",
+          "cat": "vehicle.car",
+          "s_m": 34.8,
+          "lat_m": 0.79,
+          "a_req": 0.096,
+          "visible": true
+        },
+        {
+          "token": "5a8c9edb162c50be",
+          "cat": "vehicle.car",
+          "s_m": 20.5,
+          "lat_m": 0.25,
+          "a_req": 0.015,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0111-scene-0019",
+      "frame_idx": 3,
+      "t": 1631823213.999964,
+      "ego_v0": 1.4,
+      "ego_vmin": 0.0,
+      "dv": -1.4,
+      "rel_decel": 0.999,
+      "a_obs": 0.234,
+      "brake_dur_s": 6.0,
+      "a_vru_sum": 0.151,
+      "a_vru_max": 0.151,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.647,
+      "lead_vru": {
+        "token": "60e80f59649e5292",
+        "cat": "vehicle.car",
+        "s_m": 8.5,
+        "lat_m": 0.27
+      },
+      "ttc_s": 6.1,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "60e80f59649e5292",
+          "cat": "vehicle.car",
+          "s_m": 8.5,
+          "lat_m": 0.27,
+          "a_req": 0.151,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0111-scene-0022",
+      "frame_idx": 6,
+      "t": 1631823275.500492,
+      "ego_v0": 0.63,
+      "ego_vmin": 0.0,
+      "dv": -0.63,
+      "rel_decel": 0.998,
+      "a_obs": 0.066,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.035,
+      "a_vru_max": 0.023,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.355,
+      "lead_vru": {
+        "token": "60e80f59649e5292",
+        "cat": "vehicle.car",
+        "s_m": 10.4,
+        "lat_m": 0.29
+      },
+      "ttc_s": 16.5,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "60e80f59649e5292",
+          "cat": "vehicle.car",
+          "s_m": 10.4,
+          "lat_m": 0.29,
+          "a_req": 0.023,
+          "visible": true
+        },
+        {
+          "token": "df5a3c0b551e523c",
+          "cat": "vehicle.car",
+          "s_m": 18.8,
+          "lat_m": 0.24,
+          "a_req": 0.012,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0115-scene-0001",
+      "frame_idx": 0,
+      "t": 1632927244.799564,
+      "ego_v0": 2.82,
+      "ego_vmin": 1.36,
+      "dv": -1.46,
+      "rel_decel": 0.518,
+      "a_obs": 0.731,
+      "brake_dur_s": 2.0,
+      "a_vru_sum": 0.473,
+      "a_vru_max": 0.444,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.608,
+      "lead_vru": {
+        "token": "c037ea21570452c5",
+        "cat": "vehicle.car",
+        "s_m": 11.0,
+        "lat_m": 0.25
+      },
+      "ttc_s": 3.9,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "c037ea21570452c5",
+          "cat": "vehicle.car",
+          "s_m": 11.0,
+          "lat_m": 0.25,
+          "a_req": 0.444,
+          "visible": true
+        },
+        {
+          "token": "0208ccb768585454",
+          "cat": "vehicle.car",
+          "s_m": 20.4,
+          "lat_m": 0.6,
+          "a_req": 0.028,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0115-scene-0016",
+      "frame_idx": 0,
+      "t": 1632927536.29981,
+      "ego_v0": 5.38,
+      "ego_vmin": 0.0,
+      "dv": -5.38,
+      "rel_decel": 1.0,
+      "a_obs": 0.673,
+      "brake_dur_s": 8.0,
+      "a_vru_sum": 1.452,
+      "a_vru_max": 0.906,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.346,
+      "lead_vru": {
+        "token": "b79467957bc3511e",
+        "cat": "vehicle.car",
+        "s_m": 18.0,
+        "lat_m": 0.13
+      },
+      "ttc_s": 3.3,
+      "ego_yaw_change_deg": -0.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "b79467957bc3511e",
+          "cat": "vehicle.car",
+          "s_m": 18.0,
+          "lat_m": 0.13,
+          "a_req": 0.906,
+          "visible": true
+        },
+        {
+          "token": "c4c47ee4212d5344",
+          "cat": "vehicle.car",
+          "s_m": 28.5,
+          "lat_m": 1.95,
+          "a_req": 0.546,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0117-scene-0001",
+      "frame_idx": 0,
+      "t": 1632927918.799834,
+      "ego_v0": 5.5,
+      "ego_vmin": 0.5,
+      "dv": -5.0,
+      "rel_decel": 0.909,
+      "a_obs": 1.0,
+      "brake_dur_s": 5.0,
+      "a_vru_sum": 1.333,
+      "a_vru_max": 0.772,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.773,
+      "lead_vru": {
+        "token": "5f68c862f3ea5c65",
+        "cat": "vehicle.car",
+        "s_m": 21.6,
+        "lat_m": 0.25
+      },
+      "ttc_s": 3.9,
+      "ego_yaw_change_deg": -0.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "5f68c862f3ea5c65",
+          "cat": "vehicle.car",
+          "s_m": 21.6,
+          "lat_m": 0.25,
+          "a_req": 0.772,
+          "visible": true
+        },
+        {
+          "token": "cc82c57e2d735d06",
+          "cat": "vehicle.car",
+          "s_m": 28.9,
+          "lat_m": 0.23,
+          "a_req": 0.561,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0118-scene-0003",
+      "frame_idx": 0,
+      "t": 1632928076.299795,
+      "ego_v0": 3.04,
+      "ego_vmin": 0.0,
+      "dv": -3.04,
+      "rel_decel": 1.0,
+      "a_obs": 0.32,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.675,
+      "a_vru_max": 0.422,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.318,
+      "lead_vru": {
+        "token": "51906d8e258d5d03",
+        "cat": "vehicle.car",
+        "s_m": 13.0,
+        "lat_m": 0.33
+      },
+      "ttc_s": 4.3,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "51906d8e258d5d03",
+          "cat": "vehicle.car",
+          "s_m": 13.0,
+          "lat_m": 0.33,
+          "a_req": 0.422,
+          "visible": true
+        },
+        {
+          "token": "675053aed3f85d26",
+          "cat": "vehicle.car",
+          "s_m": 20.3,
+          "lat_m": 0.1,
+          "a_req": 0.253,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0122-scene-0006",
+      "frame_idx": 9,
+      "t": 1632930058.299579,
+      "ego_v0": 1.62,
+      "ego_vmin": 0.0,
+      "dv": -1.62,
+      "rel_decel": 0.998,
+      "a_obs": 0.19,
+      "brake_dur_s": 8.5,
+      "a_vru_sum": 0.158,
+      "a_vru_max": 0.096,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.504,
+      "lead_vru": {
+        "token": "fa4fa6b011745533",
+        "cat": "vehicle.car",
+        "s_m": 15.7,
+        "lat_m": 0.57
+      },
+      "ttc_s": 9.7,
+      "ego_yaw_change_deg": 0.6,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "fa4fa6b011745533",
+          "cat": "vehicle.car",
+          "s_m": 15.7,
+          "lat_m": 0.57,
+          "a_req": 0.096,
+          "visible": true
+        },
+        {
+          "token": "85caf0c6fb215a1b",
+          "cat": "vehicle.car",
+          "s_m": 23.1,
+          "lat_m": 0.46,
+          "a_req": 0.062,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0122-scene-0015",
+      "frame_idx": 2,
+      "t": 1632930234.799593,
+      "ego_v0": 5.0,
+      "ego_vmin": 0.96,
+      "dv": -4.05,
+      "rel_decel": 0.809,
+      "a_obs": 0.578,
+      "brake_dur_s": 7.0,
+      "a_vru_sum": 0.524,
+      "a_vru_max": 0.274,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.474,
+      "lead_vru": {
+        "token": "dc15f87a08e65082",
+        "cat": "vehicle.car",
+        "s_m": 26.9,
+        "lat_m": 0.03
+      },
+      "ttc_s": 5.4,
+      "ego_yaw_change_deg": -0.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "dc15f87a08e65082",
+          "cat": "vehicle.car",
+          "s_m": 26.9,
+          "lat_m": 0.03,
+          "a_req": 0.274,
+          "visible": true
+        },
+        {
+          "token": "7b25ed22e36b546a",
+          "cat": "vehicle.car",
+          "s_m": 36.3,
+          "lat_m": 0.45,
+          "a_req": 0.25,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0124-scene-0003",
+      "frame_idx": 0,
+      "t": 1632940090.599608,
+      "ego_v0": 4.68,
+      "ego_vmin": 0.0,
+      "dv": -4.68,
+      "rel_decel": 1.0,
+      "a_obs": 0.551,
+      "brake_dur_s": 8.5,
+      "a_vru_sum": 1.105,
+      "a_vru_max": 0.665,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.207,
+      "lead_vru": {
+        "token": "091c0ee77bc55cd6",
+        "cat": "vehicle.car",
+        "s_m": 18.5,
+        "lat_m": 0.23
+      },
+      "ttc_s": 3.9,
+      "ego_yaw_change_deg": 1.2,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "091c0ee77bc55cd6",
+          "cat": "vehicle.car",
+          "s_m": 18.5,
+          "lat_m": 0.23,
+          "a_req": 0.665,
+          "visible": true
+        },
+        {
+          "token": "5cfdcd06004352a0",
+          "cat": "vehicle.car",
+          "s_m": 26.9,
+          "lat_m": 0.06,
+          "a_req": 0.44,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0124-scene-0008",
+      "frame_idx": 23,
+      "t": 1632940202.099614,
+      "ego_v0": 2.69,
+      "ego_vmin": 0.94,
+      "dv": -1.75,
+      "rel_decel": 0.651,
+      "a_obs": 0.219,
+      "brake_dur_s": 8.0,
+      "a_vru_sum": 0.267,
+      "a_vru_max": 0.111,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.508,
+      "lead_vru": {
+        "token": "971bfcdecb1f5761",
+        "cat": "vehicle.car",
+        "s_m": 34.6,
+        "lat_m": 1.68
+      },
+      "ttc_s": 12.8,
+      "ego_yaw_change_deg": 4.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "971bfcdecb1f5761",
+          "cat": "vehicle.car",
+          "s_m": 34.6,
+          "lat_m": 1.68,
+          "a_req": 0.111,
+          "visible": true
+        },
+        {
+          "token": "013e04d8fa4f5859",
+          "cat": "vehicle.car",
+          "s_m": 34.6,
+          "lat_m": 1.89,
+          "a_req": 0.111,
+          "visible": true
+        },
+        {
+          "token": "5b9d6e3dc97f5302",
+          "cat": "vehicle.car",
+          "s_m": 21.9,
+          "lat_m": 0.22,
+          "a_req": 0.044,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0124-scene-0009",
+      "frame_idx": 0,
+      "t": 1632940210.599869,
+      "ego_v0": 0.79,
+      "ego_vmin": 0.0,
+      "dv": -0.79,
+      "rel_decel": 0.999,
+      "a_obs": 0.083,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.063,
+      "a_vru_max": 0.043,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.517,
+      "lead_vru": {
+        "token": "5b9d6e3dc97f5302",
+        "cat": "vehicle.car",
+        "s_m": 9.2,
+        "lat_m": 0.27
+      },
+      "ttc_s": 11.7,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "5b9d6e3dc97f5302",
+          "cat": "vehicle.car",
+          "s_m": 9.2,
+          "lat_m": 0.27,
+          "a_req": 0.043,
+          "visible": true
+        },
+        {
+          "token": "971bfcdecb1f5761",
+          "cat": "vehicle.car",
+          "s_m": 17.7,
+          "lat_m": 1.1,
+          "a_req": 0.02,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0124-scene-0015",
+      "frame_idx": 0,
+      "t": 1632940330.599744,
+      "ego_v0": 4.75,
+      "ego_vmin": 0.0,
+      "dv": -4.75,
+      "rel_decel": 1.0,
+      "a_obs": 0.475,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 1.27,
+      "a_vru_max": 0.744,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.566,
+      "lead_vru": {
+        "token": "def4c948101a5350",
+        "cat": "vehicle.car",
+        "s_m": 17.2,
+        "lat_m": 0.6
+      },
+      "ttc_s": 3.6,
+      "ego_yaw_change_deg": -0.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "def4c948101a5350",
+          "cat": "vehicle.car",
+          "s_m": 17.2,
+          "lat_m": 0.6,
+          "a_req": 0.744,
+          "visible": true
+        },
+        {
+          "token": "2edc99f50dd65a0d",
+          "cat": "vehicle.car",
+          "s_m": 23.5,
+          "lat_m": 0.48,
+          "a_req": 0.526,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0124-scene-0016",
+      "frame_idx": 1,
+      "t": 1632940351.099602,
+      "ego_v0": 3.15,
+      "ego_vmin": 0.0,
+      "dv": -3.15,
+      "rel_decel": 1.0,
+      "a_obs": 0.393,
+      "brake_dur_s": 8.0,
+      "a_vru_sum": 0.303,
+      "a_vru_max": 0.241,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.613,
+      "lead_vru": {
+        "token": "2edc99f50dd65a0d",
+        "cat": "vehicle.car",
+        "s_m": 22.5,
+        "lat_m": 0.33
+      },
+      "ttc_s": 7.1,
+      "ego_yaw_change_deg": -0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "2edc99f50dd65a0d",
+          "cat": "vehicle.car",
+          "s_m": 22.5,
+          "lat_m": 0.33,
+          "a_req": 0.241,
+          "visible": true
+        },
+        {
+          "token": "def4c948101a5350",
+          "cat": "vehicle.car",
+          "s_m": 14.1,
+          "lat_m": 0.57,
+          "a_req": 0.062,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0124-scene-0019",
+      "frame_idx": 17,
+      "t": 1632940419.099604,
+      "ego_v0": 1.1,
+      "ego_vmin": 0.0,
+      "dv": -1.1,
+      "rel_decel": 0.999,
+      "a_obs": 0.147,
+      "brake_dur_s": 7.5,
+      "a_vru_sum": 0.123,
+      "a_vru_max": 0.08,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.543,
+      "lead_vru": {
+        "token": "def4c948101a5350",
+        "cat": "vehicle.car",
+        "s_m": 9.6,
+        "lat_m": 0.61
+      },
+      "ttc_s": 8.7,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "def4c948101a5350",
+          "cat": "vehicle.car",
+          "s_m": 9.6,
+          "lat_m": 0.61,
+          "a_req": 0.08,
+          "visible": true
+        },
+        {
+          "token": "2edc99f50dd65a0d",
+          "cat": "vehicle.car",
+          "s_m": 15.9,
+          "lat_m": 0.37,
+          "a_req": 0.043,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0124-scene-0020",
+      "frame_idx": 5,
+      "t": 1632940433.099664,
+      "ego_v0": 2.11,
+      "ego_vmin": 0.12,
+      "dv": -1.99,
+      "rel_decel": 0.943,
+      "a_obs": 0.209,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.316,
+      "a_vru_max": 0.148,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.709,
+      "lead_vru": {
+        "token": "def4c948101a5350",
+        "cat": "vehicle.car",
+        "s_m": 12.4,
+        "lat_m": 0.74
+      },
+      "ttc_s": 5.9,
+      "ego_yaw_change_deg": -0.5,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "def4c948101a5350",
+          "cat": "vehicle.car",
+          "s_m": 12.4,
+          "lat_m": 0.74,
+          "a_req": 0.148,
+          "visible": true
+        },
+        {
+          "token": "2edc99f50dd65a0d",
+          "cat": "vehicle.car",
+          "s_m": 18.7,
+          "lat_m": 0.45,
+          "a_req": 0.133,
+          "visible": true
+        },
+        {
+          "token": "afd5046180bb5fdf",
+          "cat": "vehicle.car",
+          "s_m": 26.1,
+          "lat_m": 0.34,
+          "a_req": 0.035,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0125-scene-0003",
+      "frame_idx": 19,
+      "t": 1632940520.099645,
+      "ego_v0": 1.35,
+      "ego_vmin": 0.0,
+      "dv": -1.35,
+      "rel_decel": 1.0,
+      "a_obs": 0.142,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.156,
+      "a_vru_max": 0.1,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.705,
+      "lead_vru": {
+        "token": "45910e05652d5fce",
+        "cat": "vehicle.car",
+        "s_m": 11.1,
+        "lat_m": 0.08
+      },
+      "ttc_s": 8.2,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "45910e05652d5fce",
+          "cat": "vehicle.car",
+          "s_m": 11.1,
+          "lat_m": 0.08,
+          "a_req": 0.1,
+          "visible": true
+        },
+        {
+          "token": "4dd8cfd2dc215f43",
+          "cat": "vehicle.car",
+          "s_m": 18.5,
+          "lat_m": 0.54,
+          "a_req": 0.055,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0125-scene-0012",
+      "frame_idx": 1,
+      "t": 1632940691.099601,
+      "ego_v0": 5.27,
+      "ego_vmin": 0.01,
+      "dv": -5.26,
+      "rel_decel": 0.999,
+      "a_obs": 0.554,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.416,
+      "a_vru_max": 0.416,
+      "a_non_vru_max": 0.055,
+      "vru_class_share": 0.883,
+      "explained_ratio": 0.751,
+      "lead_vru": {
+        "token": "1644de30256851a9",
+        "cat": "vehicle.car",
+        "s_m": 35.4,
+        "lat_m": 0.16
+      },
+      "ttc_s": 6.7,
+      "ego_yaw_change_deg": -0.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "1644de30256851a9",
+          "cat": "vehicle.car",
+          "s_m": 35.4,
+          "lat_m": 0.16,
+          "a_req": 0.416,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0125-scene-0016",
+      "frame_idx": 27,
+      "t": 1632940784.099902,
+      "ego_v0": 0.96,
+      "ego_vmin": 0.0,
+      "dv": -0.96,
+      "rel_decel": 0.999,
+      "a_obs": 0.175,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 0.274,
+      "a_vru_max": 0.274,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.568,
+      "lead_vru": {
+        "token": "5bcd698ce8a053c5",
+        "cat": "vehicle.car",
+        "s_m": 20.1,
+        "lat_m": 1.22
+      },
+      "ttc_s": 20.9,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": -0.379,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "5bcd698ce8a053c5",
+          "cat": "vehicle.car",
+          "s_m": 20.1,
+          "lat_m": 1.22,
+          "a_req": 0.274,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0128-scene-0005",
+      "frame_idx": 5,
+      "t": 1632942583.799689,
+      "ego_v0": 9.02,
+      "ego_vmin": 6.04,
+      "dv": -2.98,
+      "rel_decel": 0.33,
+      "a_obs": 0.298,
+      "brake_dur_s": 10.0,
+      "a_vru_sum": 0.433,
+      "a_vru_max": 0.319,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.072,
+      "lead_vru": {
+        "token": "7b758cd56fa95efa",
+        "cat": "vehicle.car",
+        "s_m": 29.0,
+        "lat_m": 0.47
+      },
+      "ttc_s": 3.2,
+      "ego_yaw_change_deg": 2.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "7b758cd56fa95efa",
+          "cat": "vehicle.car",
+          "s_m": 29.0,
+          "lat_m": 0.47,
+          "a_req": 0.319,
+          "visible": true
+        },
+        {
+          "token": "9725fb2066b85ffb",
+          "cat": "vehicle.car",
+          "s_m": 40.1,
+          "lat_m": 0.06,
+          "a_req": 0.114,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0129-scene-0002",
+      "frame_idx": 23,
+      "t": 1632942812.79961,
+      "ego_v0": 6.22,
+      "ego_vmin": 2.27,
+      "dv": -3.95,
+      "rel_decel": 0.635,
+      "a_obs": 0.494,
+      "brake_dur_s": 8.0,
+      "a_vru_sum": 0.635,
+      "a_vru_max": 0.635,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.286,
+      "lead_vru": {
+        "token": "f7ab15e4bccc587b",
+        "cat": "vehicle.car",
+        "s_m": 32.4,
+        "lat_m": 1.15
+      },
+      "ttc_s": 5.2,
+      "ego_yaw_change_deg": 71.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "f7ab15e4bccc587b",
+          "cat": "vehicle.car",
+          "s_m": 32.4,
+          "lat_m": 1.15,
+          "a_req": 0.635,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0129-scene-0006",
+      "frame_idx": 0,
+      "t": 1632942881.299504,
+      "ego_v0": 5.76,
+      "ego_vmin": 0.0,
+      "dv": -5.76,
+      "rel_decel": 1.0,
+      "a_obs": 0.64,
+      "brake_dur_s": 9.0,
+      "a_vru_sum": 0.735,
+      "a_vru_max": 0.735,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.149,
+      "lead_vru": {
+        "token": "6f7f4092946b523c",
+        "cat": "vehicle.car",
+        "s_m": 24.6,
+        "lat_m": 0.01
+      },
+      "ttc_s": 4.3,
+      "ego_yaw_change_deg": -4.3,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "6f7f4092946b523c",
+          "cat": "vehicle.car",
+          "s_m": 24.6,
+          "lat_m": 0.01,
+          "a_req": 0.735,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0129-scene-0008",
+      "frame_idx": 0,
+      "t": 1632942921.299885,
+      "ego_v0": 6.62,
+      "ego_vmin": 1.0,
+      "dv": -5.62,
+      "rel_decel": 0.849,
+      "a_obs": 1.022,
+      "brake_dur_s": 5.5,
+      "a_vru_sum": 0.409,
+      "a_vru_max": 0.409,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.4,
+      "lead_vru": {
+        "token": "6f7f4092946b523c",
+        "cat": "vehicle.car",
+        "s_m": 24.8,
+        "lat_m": 0.16
+      },
+      "ttc_s": 3.7,
+      "ego_yaw_change_deg": -0.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "6f7f4092946b523c",
+          "cat": "vehicle.car",
+          "s_m": 24.8,
+          "lat_m": 0.16,
+          "a_req": 0.409,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0129-scene-0009",
+      "frame_idx": 0,
+      "t": 1632942941.299617,
+      "ego_v0": 6.49,
+      "ego_vmin": 0.25,
+      "dv": -6.24,
+      "rel_decel": 0.961,
+      "a_obs": 0.657,
+      "brake_dur_s": 9.5,
+      "a_vru_sum": 0.57,
+      "a_vru_max": 0.244,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.371,
+      "lead_vru": {
+        "token": "6f7f4092946b523c",
+        "cat": "vehicle.car",
+        "s_m": 21.7,
+        "lat_m": 0.26
+      },
+      "ttc_s": 3.3,
+      "ego_yaw_change_deg": 0.1,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 1.0,
+      "n_mask_group": 3,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "6f7f4092946b523c",
+          "cat": "vehicle.car",
+          "s_m": 21.7,
+          "lat_m": 0.26,
+          "a_req": 0.244,
+          "visible": true
+        },
+        {
+          "token": "24033c405ada5e0c",
+          "cat": "vehicle.car",
+          "s_m": 48.6,
+          "lat_m": 0.4,
+          "a_req": 0.189,
+          "visible": true
+        },
+        {
+          "token": "ea366aef4616540d",
+          "cat": "vehicle.car",
+          "s_m": 33.8,
+          "lat_m": 0.02,
+          "a_req": 0.137,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0129-scene-0013",
+      "frame_idx": 30,
+      "t": 1632943036.299596,
+      "ego_v0": 6.44,
+      "ego_vmin": 3.8,
+      "dv": -2.65,
+      "rel_decel": 0.411,
+      "a_obs": 0.588,
+      "brake_dur_s": 4.5,
+      "a_vru_sum": 0.371,
+      "a_vru_max": 0.371,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.631,
+      "lead_vru": {
+        "token": "6f7f4092946b523c",
+        "cat": "vehicle.car",
+        "s_m": 38.2,
+        "lat_m": 0.26
+      },
+      "ttc_s": 5.9,
+      "ego_yaw_change_deg": 1.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": 0.999,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "6f7f4092946b523c",
+          "cat": "vehicle.car",
+          "s_m": 38.2,
+          "lat_m": 0.26,
+          "a_req": 0.371,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0129-scene-0014",
+      "frame_idx": 0,
+      "t": 1632943041.299651,
+      "ego_v0": 3.34,
+      "ego_vmin": 0.0,
+      "dv": -3.34,
+      "rel_decel": 1.0,
+      "a_obs": 0.669,
+      "brake_dur_s": 5.0,
+      "a_vru_sum": 0.725,
+      "a_vru_max": 0.445,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.665,
+      "lead_vru": {
+        "token": "6f7f4092946b523c",
+        "cat": "vehicle.car",
+        "s_m": 14.6,
+        "lat_m": 0.1
+      },
+      "ttc_s": 4.4,
+      "ego_yaw_change_deg": -0.9,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "6f7f4092946b523c",
+          "cat": "vehicle.car",
+          "s_m": 14.6,
+          "lat_m": 0.1,
+          "a_req": 0.445,
+          "visible": true
+        },
+        {
+          "token": "fe0094c82f4556fb",
+          "cat": "vehicle.car",
+          "s_m": 21.9,
+          "lat_m": 0.01,
+          "a_req": 0.28,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0130-scene-0007",
+      "frame_idx": 0,
+      "t": 1632943321.299608,
+      "ego_v0": 4.49,
+      "ego_vmin": 0.0,
+      "dv": -4.48,
+      "rel_decel": 1.0,
+      "a_obs": 0.598,
+      "brake_dur_s": 7.5,
+      "a_vru_sum": 0.836,
+      "a_vru_max": 0.836,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 1.398,
+      "lead_vru": {
+        "token": "8843c8f4468a5b9f",
+        "cat": "vehicle.car",
+        "s_m": 14.0,
+        "lat_m": 0.85
+      },
+      "ttc_s": 3.1,
+      "ego_yaw_change_deg": 0.2,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "8843c8f4468a5b9f",
+          "cat": "vehicle.car",
+          "s_m": 14.0,
+          "lat_m": 0.85,
+          "a_req": 0.836,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0130-scene-0021",
+      "frame_idx": 0,
+      "t": 1632943601.299627,
+      "ego_v0": 0.94,
+      "ego_vmin": 0.0,
+      "dv": -0.94,
+      "rel_decel": 0.999,
+      "a_obs": 0.145,
+      "brake_dur_s": 6.5,
+      "a_vru_sum": 0.057,
+      "a_vru_max": 0.057,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.391,
+      "lead_vru": {
+        "token": "67119c2d48b65939",
+        "cat": "vehicle.car",
+        "s_m": 9.8,
+        "lat_m": 0.96
+      },
+      "ttc_s": 10.4,
+      "ego_yaw_change_deg": 0.0,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "67119c2d48b65939",
+          "cat": "vehicle.car",
+          "s_m": 9.8,
+          "lat_m": 0.96,
+          "a_req": 0.057,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0130-scene-0026",
+      "frame_idx": 0,
+      "t": 1632943701.299901,
+      "ego_v0": 3.65,
+      "ego_vmin": 0.0,
+      "dv": -3.65,
+      "rel_decel": 1.0,
+      "a_obs": 0.521,
+      "brake_dur_s": 7.0,
+      "a_vru_sum": 0.486,
+      "a_vru_max": 0.313,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.601,
+      "lead_vru": {
+        "token": "0441547181075216",
+        "cat": "vehicle.car",
+        "s_m": 23.2,
+        "lat_m": 0.1
+      },
+      "ttc_s": 6.4,
+      "ego_yaw_change_deg": 0.2,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 2,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "0441547181075216",
+          "cat": "vehicle.car",
+          "s_m": 23.2,
+          "lat_m": 0.1,
+          "a_req": 0.313,
+          "visible": true
+        },
+        {
+          "token": "e5a911c67b5b5c16",
+          "cat": "vehicle.car",
+          "s_m": 13.8,
+          "lat_m": 0.21,
+          "a_req": 0.173,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "scene": "log-0136-scene-0002",
+      "frame_idx": 0,
+      "t": 1633505662.699743,
+      "ego_v0": 4.61,
+      "ego_vmin": 0.9,
+      "dv": -3.71,
+      "rel_decel": 0.805,
+      "a_obs": 0.619,
+      "brake_dur_s": 6.0,
+      "a_vru_sum": 0.523,
+      "a_vru_max": 0.523,
+      "a_non_vru_max": 0.0,
+      "vru_class_share": 1.0,
+      "explained_ratio": 0.846,
+      "lead_vru": {
+        "token": "4a90763069ba51c7",
+        "cat": "vehicle.car",
+        "s_m": 22.3,
+        "lat_m": 0.07
+      },
+      "ttc_s": 4.8,
+      "ego_yaw_change_deg": -0.4,
+      "signalized": null,
+      "signal_color": null,
+      "n_oncoming": 0,
+      "lead_cos": NaN,
+      "n_mask_group": 1,
+      "n_animal_in_mask": 0,
+      "hazard_classes": [
+        "vehicle.car",
+        "vehicle.truck",
+        "vehicle.bus",
+        "vehicle.trailer",
+        "vehicle.construction",
+        "vehicle.emergency",
+        "movable_object."
+      ],
+      "f3_mask_group": [
+        {
+          "token": "4a90763069ba51c7",
+          "cat": "vehicle.car",
+          "s_m": 22.3,
+          "lat_m": 0.07,
+          "a_req": 0.523,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

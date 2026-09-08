@@ -1,0 +1,459 @@
+{
+  "nuscenes_locations": {
+    "singapore-onenorth": 183,
+    "boston-seaport": 467,
+    "singapore-queenstown": 115,
+    "singapore-hollandvillage": 85
+  },
+  "pools": [
+    {
+      "file": "brake_first_pool.json",
+      "corpus": "nuscenes",
+      "scenario": null,
+      "n_events": 18,
+      "matched": 18,
+      "unmatched": 0,
+      "cities": {
+        "singapore-onenorth": 3,
+        "boston-seaport": 7,
+        "singapore-queenstown": 6,
+        "singapore-hollandvillage": 2
+      },
+      "RHD": 11,
+      "LHD": 7
+    },
+    {
+      "file": "brake_first_pool_final.json",
+      "corpus": "nuScenes v1.0-trainval (G1)",
+      "scenario": null,
+      "n_events": 13,
+      "matched": 13,
+      "unmatched": 0,
+      "cities": {
+        "singapore-hollandvillage": 2,
+        "singapore-onenorth": 3,
+        "singapore-queenstown": 5,
+        "boston-seaport": 3
+      },
+      "RHD": 10,
+      "LHD": 3
+    },
+    {
+      "file": "brake_first_pool_ghost_trainval.json",
+      "corpus": "navsim",
+      "scenario": "ghost",
+      "n_events": 180,
+      "matched": 180,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 155,
+        "us-ma-boston": 14,
+        "us-pa-pittsburgh-hazelwood": 5,
+        "sg-one-north": 6
+      },
+      "RHD": 6,
+      "LHD": 174
+    },
+    {
+      "file": "brake_first_pool_isec.json",
+      "corpus": "nuscenes",
+      "scenario": "intersection",
+      "n_events": 10,
+      "matched": 10,
+      "unmatched": 0,
+      "cities": {
+        "singapore-onenorth": 2,
+        "boston-seaport": 5,
+        "singapore-queenstown": 2,
+        "singapore-hollandvillage": 1
+      },
+      "RHD": 5,
+      "LHD": 5
+    },
+    {
+      "file": "brake_first_pool_isec_final.json",
+      "corpus": "nuscenes",
+      "scenario": "intersection",
+      "n_events": 2,
+      "matched": 2,
+      "unmatched": 0,
+      "cities": {
+        "singapore-onenorth": 1,
+        "singapore-queenstown": 1
+      },
+      "RHD": 2,
+      "LHD": 0
+    },
+    {
+      "file": "brake_first_pool_isec_nusc_v2.json",
+      "corpus": "nuscenes",
+      "scenario": "intersection",
+      "n_events": 10,
+      "matched": 10,
+      "unmatched": 0,
+      "cities": {
+        "singapore-onenorth": 2,
+        "boston-seaport": 5,
+        "singapore-queenstown": 2,
+        "singapore-hollandvillage": 1
+      },
+      "RHD": 5,
+      "LHD": 5
+    },
+    {
+      "file": "brake_first_pool_lead.json",
+      "corpus": "nuscenes",
+      "scenario": "lead",
+      "n_events": 51,
+      "matched": 51,
+      "unmatched": 0,
+      "cities": {
+        "singapore-onenorth": 10,
+        "boston-seaport": 23,
+        "singapore-hollandvillage": 11,
+        "singapore-queenstown": 7
+      },
+      "RHD": 28,
+      "LHD": 23
+    },
+    {
+      "file": "brake_first_pool_lead_final.json",
+      "corpus": "nuscenes",
+      "scenario": "lead",
+      "n_events": 16,
+      "matched": 16,
+      "unmatched": 0,
+      "cities": {
+        "boston-seaport": 10,
+        "singapore-onenorth": 3,
+        "singapore-queenstown": 3
+      },
+      "RHD": 6,
+      "LHD": 10
+    },
+    {
+      "file": "brake_first_pool_lead_navsim_fx.json",
+      "corpus": "navsim",
+      "scenario": "lead",
+      "n_events": 132,
+      "matched": 132,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 60,
+        "us-ma-boston": 55,
+        "us-pa-pittsburgh-hazelwood": 16,
+        "sg-one-north": 1
+      },
+      "RHD": 1,
+      "LHD": 131
+    },
+    {
+      "file": "brake_first_pool_lead_navsim_fx_final.json",
+      "corpus": "navsim",
+      "scenario": "lead",
+      "n_events": 60,
+      "matched": 60,
+      "unmatched": 0,
+      "cities": {
+        "us-ma-boston": 26,
+        "us-nv-las-vegas-strip": 27,
+        "us-pa-pittsburgh-hazelwood": 6,
+        "sg-one-north": 1
+      },
+      "RHD": 1,
+      "LHD": 59
+    },
+    {
+      "file": "brake_first_pool_lead_trainval.json",
+      "corpus": "navsim",
+      "scenario": "lead",
+      "n_events": 1368,
+      "matched": 1368,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 1110,
+        "us-ma-boston": 118,
+        "us-pa-pittsburgh-hazelwood": 123,
+        "sg-one-north": 17
+      },
+      "RHD": 17,
+      "LHD": 1351
+    },
+    {
+      "file": "brake_first_pool_leftturn_nusc_v2.json",
+      "corpus": "nuscenes",
+      "scenario": "left_turn",
+      "n_events": 2,
+      "matched": 2,
+      "unmatched": 0,
+      "cities": {
+        "singapore-onenorth": 1,
+        "singapore-queenstown": 1
+      },
+      "RHD": 2,
+      "LHD": 0
+    },
+    {
+      "file": "brake_first_pool_navsim_fx.json",
+      "corpus": "navsim",
+      "scenario": "ghost",
+      "n_events": 13,
+      "matched": 13,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 3,
+        "us-ma-boston": 6,
+        "us-pa-pittsburgh-hazelwood": 2,
+        "sg-one-north": 2
+      },
+      "RHD": 2,
+      "LHD": 11
+    },
+    {
+      "file": "brake_first_pool_navsim_fx_final.json",
+      "corpus": "navsim",
+      "scenario": "ghost",
+      "n_events": 6,
+      "matched": 6,
+      "unmatched": 0,
+      "cities": {
+        "us-ma-boston": 2,
+        "us-nv-las-vegas-strip": 2,
+        "us-pa-pittsburgh-hazelwood": 2
+      },
+      "RHD": 0,
+      "LHD": 6
+    },
+    {
+      "file": "brake_first_pool_v1_noanimal.json",
+      "corpus": null,
+      "scenario": null,
+      "n_events": 18,
+      "matched": 18,
+      "unmatched": 0,
+      "cities": {
+        "singapore-onenorth": 3,
+        "boston-seaport": 7,
+        "singapore-queenstown": 6,
+        "singapore-hollandvillage": 2
+      },
+      "RHD": 11,
+      "LHD": 7
+    },
+    {
+      "file": "brake_first_pool_v2.json",
+      "corpus": "nuscenes",
+      "scenario": null,
+      "n_events": 18,
+      "matched": 18,
+      "unmatched": 0,
+      "cities": {
+        "singapore-onenorth": 3,
+        "boston-seaport": 7,
+        "singapore-queenstown": 6,
+        "singapore-hollandvillage": 2
+      },
+      "RHD": 11,
+      "LHD": 7
+    },
+    {
+      "file": "deploy_pool_ghost_all.json",
+      "corpus": "navsim",
+      "scenario": "ghost",
+      "n_events": 53,
+      "matched": 53,
+      "unmatched": 0,
+      "cities": {
+        "us-ma-boston": 3,
+        "us-nv-las-vegas-strip": 44,
+        "us-pa-pittsburgh-hazelwood": 5,
+        "sg-one-north": 1
+      },
+      "RHD": 1,
+      "LHD": 52
+    },
+    {
+      "file": "deploy_pool_ghost_vp.json",
+      "corpus": "navsim",
+      "scenario": "ghost",
+      "n_events": 49,
+      "matched": 49,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 44,
+        "us-pa-pittsburgh-hazelwood": 5
+      },
+      "RHD": 0,
+      "LHD": 49
+    },
+    {
+      "file": "deploy_pool_ghost_vp_r1.json",
+      "corpus": "navsim",
+      "scenario": "ghost",
+      "n_events": 25,
+      "matched": 25,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 23,
+        "us-pa-pittsburgh-hazelwood": 2
+      },
+      "RHD": 0,
+      "LHD": 25
+    },
+    {
+      "file": "deploy_pool_lead_all.json",
+      "corpus": "navsim",
+      "scenario": "lead",
+      "n_events": 385,
+      "matched": 385,
+      "unmatched": 0,
+      "cities": {
+        "us-ma-boston": 65,
+        "us-nv-las-vegas-strip": 268,
+        "us-pa-pittsburgh-hazelwood": 49,
+        "sg-one-north": 3
+      },
+      "RHD": 3,
+      "LHD": 382
+    },
+    {
+      "file": "deploy_pool_lead_vp.json",
+      "corpus": "navsim",
+      "scenario": "lead",
+      "n_events": 317,
+      "matched": 317,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 268,
+        "us-pa-pittsburgh-hazelwood": 49
+      },
+      "RHD": 0,
+      "LHD": 317
+    },
+    {
+      "file": "deploy_pool_lead_vp_r1.json",
+      "corpus": "navsim",
+      "scenario": "lead",
+      "n_events": 246,
+      "matched": 246,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 222,
+        "us-pa-pittsburgh-hazelwood": 24
+      },
+      "RHD": 0,
+      "LHD": 246
+    },
+    {
+      "file": "f3_candidate_pool.json",
+      "corpus": null,
+      "scenario": null,
+      "n_events": 6,
+      "matched": 0,
+      "unmatched": 6,
+      "cities": {},
+      "RHD": 0,
+      "LHD": 0
+    },
+    {
+      "file": "pool_ghost_test_vp.json",
+      "corpus": "navsim",
+      "scenario": "ghost",
+      "n_events": 5,
+      "matched": 5,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 3,
+        "us-pa-pittsburgh-hazelwood": 2
+      },
+      "RHD": 0,
+      "LHD": 5
+    },
+    {
+      "file": "pool_ghost_trainval_vp.json",
+      "corpus": "navsim",
+      "scenario": "ghost",
+      "n_events": 160,
+      "matched": 160,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 155,
+        "us-pa-pittsburgh-hazelwood": 5
+      },
+      "RHD": 0,
+      "LHD": 160
+    },
+    {
+      "file": "pool_lead_test_vp.json",
+      "corpus": "navsim",
+      "scenario": "lead",
+      "n_events": 76,
+      "matched": 76,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 60,
+        "us-pa-pittsburgh-hazelwood": 16
+      },
+      "RHD": 0,
+      "LHD": 76
+    },
+    {
+      "file": "pool_lead_trainval_vp.json",
+      "corpus": "navsim",
+      "scenario": "lead",
+      "n_events": 1233,
+      "matched": 1233,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 1110,
+        "us-pa-pittsburgh-hazelwood": 123
+      },
+      "RHD": 0,
+      "LHD": 1233
+    },
+    {
+      "file": "simlingo_instruction_probe_newpool.json",
+      "corpus": "nuScenes v1.0-trainval (G1)",
+      "scenario": null,
+      "n_events": 13,
+      "matched": 13,
+      "unmatched": 0,
+      "cities": {
+        "singapore-hollandvillage": 2,
+        "singapore-onenorth": 3,
+        "singapore-queenstown": 5,
+        "boston-seaport": 3
+      },
+      "RHD": 10,
+      "LHD": 3
+    },
+    {
+      "file": "vla_boxes_deploy_pool_ghost_vp.json",
+      "corpus": null,
+      "scenario": null,
+      "n_events": 49,
+      "matched": 49,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 44,
+        "us-pa-pittsburgh-hazelwood": 5
+      },
+      "RHD": 0,
+      "LHD": 49
+    },
+    {
+      "file": "vla_boxes_deploy_pool_lead_vp.json",
+      "corpus": null,
+      "scenario": null,
+      "n_events": 317,
+      "matched": 317,
+      "unmatched": 0,
+      "cities": {
+        "us-nv-las-vegas-strip": 268,
+        "us-pa-pittsburgh-hazelwood": 49
+      },
+      "RHD": 0,
+      "LHD": 317
+    }
+  ]
+}

@@ -1,0 +1,4062 @@
+{
+  "cross_domain": {
+    "n": 216,
+    "mean": 0.9065874694497998,
+    "sd": 0.05777717578820485,
+    "med": 0.9076194241642952,
+    "ci": [
+      0.801414716988802,
+      1.0145838448079303
+    ]
+  },
+  "within_domain": {
+    "n": 288,
+    "mean": 0.7228561300998106,
+    "sd": 0.278443734222868,
+    "med": 0.8212275207042694,
+    "ci": [
+      0.09560026824474335,
+      1.006231553480029
+    ]
+  },
+  "lum_cross": 0.19892203016206622,
+  "lum_within": 0.060490548269525685,
+  "ratio_struct": 1.25417414572471,
+  "perm_p": 0.0,
+  "obs_diff": 0.1837313393499892,
+  "verdict": "structure differs MORE across domains than across adjacent frames (p=0, ratio 1.25x) -> the pair differs by more than appearance",
+  "rows": [
+    {
+      "tag": "gh_001000__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8037279546260834,
+      "lum": 0.1858333945274353,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8333549499511719,
+      "lum": 0.1762550324201584,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8281122595071793,
+      "lum": 0.17563585937023163,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.5268086194992065,
+      "lum": 0.04128492623567581,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.5874675214290619,
+      "lum": 0.035902220755815506,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.1799173355102539,
+      "lum": 0.015151634812355042,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.23154640197753906,
+      "lum": 0.012722527608275414,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8291416168212891,
+      "lum": 0.21458153426647186,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.828959509730339,
+      "lum": 0.21305078268051147,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8292945474386215,
+      "lum": 0.21355529129505157,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.7273620665073395,
+      "lum": 0.03889808431267738,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.7197028398513794,
+      "lum": 0.03684697300195694,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7455745041370392,
+      "lum": 0.031590718775987625,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.7908239215612411,
+      "lum": 0.03128122165799141,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9272516742348671,
+      "lum": 0.15898941457271576,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8284931629896164,
+      "lum": 0.2173028439283371,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.870684489607811,
+      "lum": 0.2092674970626831,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9556554146111012,
+      "lum": 0.0870659202337265,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9878776278346777,
+      "lum": 0.1751805692911148,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7600924223661423,
+      "lum": 0.028844792395830154,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001000__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8188430964946747,
+      "lum": 0.04317355155944824,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9165166988968849,
+      "lum": 0.1841316819190979,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9258938208222389,
+      "lum": 0.1773647516965866,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9260761216282845,
+      "lum": 0.18071533739566803,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.6805124282836914,
+      "lum": 0.011832069605588913,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.5583079755306244,
+      "lum": 0.026638736948370934,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.4392261505126953,
+      "lum": 0.0030876253731548786,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.09906035661697388,
+      "lum": 0.004423398524522781,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9022852629423141,
+      "lum": 0.16073919832706451,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.895617812871933,
+      "lum": 0.14177602529525757,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9072341620922089,
+      "lum": 0.13514359295368195,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.8273803740739822,
+      "lum": 0.018520522862672806,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.719427227973938,
+      "lum": 0.0487850084900856,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8568608611822128,
+      "lum": 0.013976078480482101,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.7604610472917557,
+      "lum": 0.0305852722376585,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9683393687009811,
+      "lum": 0.12074475735425949,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9047037735581398,
+      "lum": 0.11208807677030563,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9036523625254631,
+      "lum": 0.1292581856250763,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9815358724445105,
+      "lum": 0.057647716253995895,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9237255305051804,
+      "lum": 0.08522021770477295,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8672742992639542,
+      "lum": 0.018588844686746597,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001001__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.6975047588348389,
+      "lum": 0.043564874678850174,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9331298619508743,
+      "lum": 0.2969909906387329,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9383386969566345,
+      "lum": 0.29509565234184265,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9372509270906448,
+      "lum": 0.29430246353149414,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.13035959005355835,
+      "lum": 0.003974161110818386,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.15439999103546143,
+      "lum": 0.004237603396177292,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.08553111553192139,
+      "lum": 0.0031304138246923685,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.1393224596977234,
+      "lum": 0.00430906331166625,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8844595104455948,
+      "lum": 0.3233851492404938,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9191950410604477,
+      "lum": 0.3473544716835022,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9298137277364731,
+      "lum": 0.35337650775909424,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.8239923119544983,
+      "lum": 0.07470879703760147,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.6561322808265686,
+      "lum": 0.05173403397202492,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8212094306945801,
+      "lum": 0.04675542563199997,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.6297965943813324,
+      "lum": 0.03777804225683212,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9328738376498222,
+      "lum": 0.30601462721824646,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9189281687140465,
+      "lum": 0.31017738580703735,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8786665052175522,
+      "lum": 0.29550889134407043,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9807060193270445,
+      "lum": 0.09823188930749893,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 1.0095143411308527,
+      "lum": 0.12557129561901093,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7993013262748718,
+      "lum": 0.04199734330177307,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001002__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.6380589604377747,
+      "lum": 0.02262531779706478,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.7939408421516418,
+      "lum": 0.2792099416255951,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8384682387113571,
+      "lum": 0.2910178303718567,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8406377732753754,
+      "lum": 0.29010799527168274,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.43840402364730835,
+      "lum": 0.10481695085763931,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.45694810152053833,
+      "lum": 0.05337037146091461,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.02928924560546875,
+      "lum": 0.002715032547712326,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.04386717081069946,
+      "lum": 0.006450108718127012,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8094366788864136,
+      "lum": 0.2866656184196472,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8000267744064331,
+      "lum": 0.3167680501937866,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.914448693394661,
+      "lum": 0.3129223883152008,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9006224051117897,
+      "lum": 0.11085434257984161,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8796805217862129,
+      "lum": 0.07786387950181961,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8695017993450165,
+      "lum": 0.0712985247373581,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8302443474531174,
+      "lum": 0.07066841423511505,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9646146483719349,
+      "lum": 0.28663405776023865,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 1.0667415484786034,
+      "lum": 0.32341113686561584,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9546999670565128,
+      "lum": 0.30255886912345886,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9947469565086067,
+      "lum": 0.14492838084697723,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 1.036312099546194,
+      "lum": 0.16867011785507202,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8786050081253052,
+      "lum": 0.0688820406794548,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001003__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8069478571414948,
+      "lum": 0.07970423251390457,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.919979952275753,
+      "lum": 0.3169284164905548,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9246793761849403,
+      "lum": 0.3098130524158478,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.955368883907795,
+      "lum": 0.301303505897522,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.27682697772979736,
+      "lum": 0.03986065462231636,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.27503901720046997,
+      "lum": 0.018287930637598038,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.2397419810295105,
+      "lum": 0.060201358050107956,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.30312639474868774,
+      "lum": 0.02724074199795723,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9335007220506668,
+      "lum": 0.2953187823295593,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9507216960191727,
+      "lum": 0.3026241362094879,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8550737798213959,
+      "lum": 0.29645976424217224,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9962400293443352,
+      "lum": 0.10344231873750687,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9922790382988751,
+      "lum": 0.14294323325157166,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9764429144561291,
+      "lum": 0.09372178465127945,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.9970915412995964,
+      "lum": 0.12304319441318512,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9256031438708305,
+      "lum": 0.23772282898426056,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.832868292927742,
+      "lum": 0.26706695556640625,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8638419508934021,
+      "lum": 0.2457549273967743,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9948014128021896,
+      "lum": 0.23233678936958313,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 1.0022557694464922,
+      "lum": 0.20338256657123566,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9612565375864506,
+      "lum": 0.13445468246936798,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001004__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 1.0091623039916158,
+      "lum": 0.1448747217655182,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9242462888360023,
+      "lum": 0.19866035878658295,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9164673313498497,
+      "lum": 0.16815626621246338,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9105239585042,
+      "lum": 0.1874990463256836,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9452473782002926,
+      "lum": 0.027605317533016205,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8230853527784348,
+      "lum": 0.07780562341213226,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.6770272552967072,
+      "lum": 0.00800466351211071,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.48480355739593506,
+      "lum": 0.03700461611151695,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9677137210965157,
+      "lum": 0.2282150387763977,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9080046862363815,
+      "lum": 0.15874919295310974,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9050718545913696,
+      "lum": 0.19957008957862854,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.959164422005415,
+      "lum": 0.030248327180743217,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9729050416499376,
+      "lum": 0.08574945479631424,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8571606576442719,
+      "lum": 0.015594509430229664,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.7669260650873184,
+      "lum": 0.06266989558935165,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9561471976339817,
+      "lum": 0.18465739488601685,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9279226139187813,
+      "lum": 0.1437252312898636,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9358532875776291,
+      "lum": 0.1782272756099701,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9671894423663616,
+      "lum": 0.02990034408867359,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9975562507752329,
+      "lum": 0.11546805500984192,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8268013894557953,
+      "lum": 0.022188059985637665,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001005__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.5595139861106873,
+      "lum": 0.057205405086278915,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8381612449884415,
+      "lum": 0.15957146883010864,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8536472469568253,
+      "lum": 0.15822458267211914,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.852433055639267,
+      "lum": 0.16090235114097595,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.7300009727478027,
+      "lum": 0.010986710898578167,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.6285055875778198,
+      "lum": 0.03346038982272148,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.4678610563278198,
+      "lum": 0.00286566442809999,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.11035066843032837,
+      "lum": 0.0056649246253073215,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8576410710811615,
+      "lum": 0.09275560081005096,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8997462242841721,
+      "lum": 0.08441873639822006,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8783919736742973,
+      "lum": 0.0817975178360939,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.8935926780104637,
+      "lum": 0.01986875757575035,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8049212396144867,
+      "lum": 0.03951786458492279,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9291182160377502,
+      "lum": 0.014437646605074406,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8596149682998657,
+      "lum": 0.028287192806601524,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.946244802325964,
+      "lum": 0.13777652382850647,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9006052911281586,
+      "lum": 0.13141542673110962,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9158476740121841,
+      "lum": 0.13964195549488068,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9923001038841903,
+      "lum": 0.061331942677497864,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.962101686745882,
+      "lum": 0.08390313386917114,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9298522248864174,
+      "lum": 0.01817437820136547,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001006__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8660065978765488,
+      "lum": 0.05206644907593727,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8782104179263115,
+      "lum": 0.19696690142154694,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8956213518977165,
+      "lum": 0.19340454041957855,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8990693241357803,
+      "lum": 0.19314433634281158,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.5470599234104156,
+      "lum": 0.04086775705218315,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.625380128622055,
+      "lum": 0.037255123257637024,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.14965403079986572,
+      "lum": 0.0042746406979858875,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.11870110034942627,
+      "lum": 0.0052115898579359055,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.888476736843586,
+      "lum": 0.17884543538093567,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9546099863946438,
+      "lum": 0.1838463395833969,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9912997279316187,
+      "lum": 0.18502292037010193,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.7282854914665222,
+      "lum": 0.055532507598400116,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.7100246846675873,
+      "lum": 0.049213726073503494,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7351361215114594,
+      "lum": 0.027892809361219406,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.7677883952856064,
+      "lum": 0.03351891040802002,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9425965175032616,
+      "lum": 0.1362767219543457,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9791915975511074,
+      "lum": 0.16462649405002594,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9865135252475739,
+      "lum": 0.18199659883975983,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9703514967113733,
+      "lum": 0.08389490842819214,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9721557907760143,
+      "lum": 0.17690269649028778,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8162930905818939,
+      "lum": 0.030378514900803566,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001007__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8691829293966293,
+      "lum": 0.058557599782943726,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9127343967556953,
+      "lum": 0.14910785853862762,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9398449249565601,
+      "lum": 0.14749987423419952,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9365949258208275,
+      "lum": 0.14651800692081451,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.601953774690628,
+      "lum": 0.03868091478943825,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.670707494020462,
+      "lum": 0.0221808273345232,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.09541040658950806,
+      "lum": 0.004928278736770153,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.15914702415466309,
+      "lum": 0.005221175961196423,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9409320838749409,
+      "lum": 0.16577182710170746,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.966147169470787,
+      "lum": 0.16956228017807007,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9433974362909794,
+      "lum": 0.14367517828941345,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.8271060138940811,
+      "lum": 0.07909324765205383,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.7817904949188232,
+      "lum": 0.0481097586452961,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7461933195590973,
+      "lum": 0.07422326505184174,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.6535664200782776,
+      "lum": 0.058169715106487274,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9697910286486149,
+      "lum": 0.17832888662815094,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9680638276040554,
+      "lum": 0.18364672362804413,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9511488638818264,
+      "lum": 0.15371914207935333,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9741771500557661,
+      "lum": 0.12271136045455933,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 1.0015785405412316,
+      "lum": 0.19949360191822052,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7912335097789764,
+      "lum": 0.07865486294031143,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001008__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.7512560933828354,
+      "lum": 0.0680416151881218,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8314389437437057,
+      "lum": 0.18603143095970154,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.7988910228013992,
+      "lum": 0.17474247515201569,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.7992459684610367,
+      "lum": 0.1740109771490097,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.4325619339942932,
+      "lum": 0.0957111120223999,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.5246413052082062,
+      "lum": 0.07152928411960602,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.04045385122299194,
+      "lum": 0.0030030065681785345,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.05363941192626953,
+      "lum": 0.0038427449762821198,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8461241275072098,
+      "lum": 0.19382929801940918,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8058506995439529,
+      "lum": 0.20487990975379944,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9045209512114525,
+      "lum": 0.19413958489894867,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.8567750304937363,
+      "lum": 0.08769595623016357,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8220744282007217,
+      "lum": 0.06064026057720184,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8242111504077911,
+      "lum": 0.05721694976091385,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8469009548425674,
+      "lum": 0.0633583515882492,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9994437993154861,
+      "lum": 0.18005090951919556,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8374882340431213,
+      "lum": 0.19080466032028198,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9365599304437637,
+      "lum": 0.17594261467456818,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 1.0321980565786362,
+      "lum": 0.14531877636909485,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 1.0000437554299424,
+      "lum": 0.26020288467407227,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8480262160301208,
+      "lum": 0.06136322766542435,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001009__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8666242808103561,
+      "lum": 0.06777098029851913,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8802742883563042,
+      "lum": 0.18717335164546967,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8881487771868706,
+      "lum": 0.18032118678092957,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8891343846917152,
+      "lum": 0.18906094133853912,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.2929553985595703,
+      "lum": 0.03014945425093174,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.23014682531356812,
+      "lum": 0.038539912551641464,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.2993152141571045,
+      "lum": 0.038652025163173676,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.2522686719894409,
+      "lum": 0.05188143998384476,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.85300612449646,
+      "lum": 0.12576988339424133,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8978358507156372,
+      "lum": 0.13219983875751495,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8794446811079979,
+      "lum": 0.12767352163791656,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9694660939276218,
+      "lum": 0.08788125216960907,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 1.0056442427448928,
+      "lum": 0.11980157345533371,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9623305052518845,
+      "lum": 0.06487978249788284,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.9798716697841883,
+      "lum": 0.08962946385145187,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9455951526761055,
+      "lum": 0.13775014877319336,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8901335597038269,
+      "lum": 0.1615394800901413,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8686622679233551,
+      "lum": 0.16579654812812805,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9858878497034311,
+      "lum": 0.16543346643447876,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 1.0051942961290479,
+      "lum": 0.1581173539161682,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9568289443850517,
+      "lum": 0.07539607584476471,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001010__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.9562835171818733,
+      "lum": 0.1276502013206482,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9101685509085655,
+      "lum": 0.12020258605480194,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8992551863193512,
+      "lum": 0.08341730386018753,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8756203129887581,
+      "lum": 0.12324601411819458,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9342971965670586,
+      "lum": 0.0241631381213665,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9090308770537376,
+      "lum": 0.07785481959581375,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7690796405076981,
+      "lum": 0.012887842953205109,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.692787379026413,
+      "lum": 0.06477311998605728,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9378699362277985,
+      "lum": 0.1633327305316925,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8810246661305428,
+      "lum": 0.10317032039165497,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9189032390713692,
+      "lum": 0.12610070407390594,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9682459309697151,
+      "lum": 0.026685185730457306,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8574254959821701,
+      "lum": 0.08349952846765518,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9247850254178047,
+      "lum": 0.020409850403666496,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.7288860380649567,
+      "lum": 0.05065072327852249,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8916899412870407,
+      "lum": 0.1646082103252411,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8847688734531403,
+      "lum": 0.10667670518159866,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8888813853263855,
+      "lum": 0.14520180225372314,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9988209336297587,
+      "lum": 0.03437886759638786,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8985983356833458,
+      "lum": 0.06707899272441864,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8735546618700027,
+      "lum": 0.030195076018571854,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001011__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.6629368364810944,
+      "lum": 0.053831376135349274,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8627677410840988,
+      "lum": 0.10167273133993149,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8549094796180725,
+      "lum": 0.09715594351291656,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8553535342216492,
+      "lum": 0.09783203154802322,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.7845944613218307,
+      "lum": 0.014183835126459599,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.6606381833553314,
+      "lum": 0.038229066878557205,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.41515856981277466,
+      "lum": 0.004925272427499294,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.13368409872055054,
+      "lum": 0.005214074160903692,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8913895934820175,
+      "lum": 0.10372668504714966,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8816930055618286,
+      "lum": 0.09737216681241989,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8593179285526276,
+      "lum": 0.09207182377576828,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.8999771699309349,
+      "lum": 0.024356599897146225,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8274207413196564,
+      "lum": 0.046479128301143646,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9266314208507538,
+      "lum": 0.017071807757019997,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8455334007740021,
+      "lum": 0.038084227591753006,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9792868830263615,
+      "lum": 0.11106584221124649,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9111512899398804,
+      "lum": 0.1151600033044815,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9040699601173401,
+      "lum": 0.1155693382024765,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 1.006356134545058,
+      "lum": 0.05598174408078194,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9718718063086271,
+      "lum": 0.06105159595608711,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9203381016850471,
+      "lum": 0.019887493923306465,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001012__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.9026898518204689,
+      "lum": 0.03718143701553345,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8782436549663544,
+      "lum": 0.2976614534854889,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8760407418012619,
+      "lum": 0.2957572340965271,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8758318796753883,
+      "lum": 0.28214526176452637,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.7004601955413818,
+      "lum": 0.014782963320612907,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.6596706509590149,
+      "lum": 0.022473245859146118,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.3467540740966797,
+      "lum": 0.022930370643734932,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.3858186602592468,
+      "lum": 0.02305568754673004,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8955869674682617,
+      "lum": 0.30088791251182556,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8479044586420059,
+      "lum": 0.2929757237434387,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8464889228343964,
+      "lum": 0.29632002115249634,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.7889246642589569,
+      "lum": 0.04078644886612892,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8830738961696625,
+      "lum": 0.05695546790957451,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7026941776275635,
+      "lum": 0.027231939136981964,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8991646021604538,
+      "lum": 0.04812544584274292,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9520850963890553,
+      "lum": 0.256489634513855,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9043146297335625,
+      "lum": 0.2762150466442108,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8649266511201859,
+      "lum": 0.2734631597995758,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.932190328836441,
+      "lum": 0.06260950118303299,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9911765335127711,
+      "lum": 0.1325227916240692,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8080200105905533,
+      "lum": 0.038900479674339294,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001013__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.84556545317173,
+      "lum": 0.05615098029375076,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8465078771114349,
+      "lum": 0.19622577726840973,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8154803067445755,
+      "lum": 0.19199597835540771,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8111108839511871,
+      "lum": 0.19115681946277618,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.5969786643981934,
+      "lum": 0.04652152955532074,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.5279000997543335,
+      "lum": 0.019978171214461327,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.052981019020080566,
+      "lum": 0.003059041453525424,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.10061776638031006,
+      "lum": 0.003934989217668772,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9004535526037216,
+      "lum": 0.1751413345336914,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9786197170615196,
+      "lum": 0.1880568563938141,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9163591265678406,
+      "lum": 0.18940067291259766,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.7654964029788971,
+      "lum": 0.047768283635377884,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.7614562958478928,
+      "lum": 0.0375203974545002,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.6889199912548065,
+      "lum": 0.04340239614248276,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.6939783096313477,
+      "lum": 0.031817253679037094,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9654275625944138,
+      "lum": 0.14853543043136597,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9060588181018829,
+      "lum": 0.2071465700864792,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.880599744617939,
+      "lum": 0.2176421880722046,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9772423412650824,
+      "lum": 0.157041996717453,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9917735224589705,
+      "lum": 0.1768038421869278,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.777806282043457,
+      "lum": 0.0804024413228035,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001014__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.7759589999914169,
+      "lum": 0.079889677464962,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8307219296693802,
+      "lum": 0.13842572271823883,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8608110249042511,
+      "lum": 0.13887573778629303,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8626217544078827,
+      "lum": 0.140318363904953,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.5586652457714081,
+      "lum": 0.052236299961805344,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.5107710361480713,
+      "lum": 0.0575411356985569,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.19023573398590088,
+      "lum": 0.003163878107443452,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.06650704145431519,
+      "lum": 0.003963790368288755,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8561955690383911,
+      "lum": 0.10326715558767319,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8613826632499695,
+      "lum": 0.10079486668109894,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9214150980114937,
+      "lum": 0.09851247072219849,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9218650981783867,
+      "lum": 0.06823695451021194,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8806832954287529,
+      "lum": 0.061908625066280365,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9376904740929604,
+      "lum": 0.05843529850244522,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8753145933151245,
+      "lum": 0.047392457723617554,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 1.0365517809987068,
+      "lum": 0.229290172457695,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8349010348320007,
+      "lum": 0.1010354682803154,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9107581451535225,
+      "lum": 0.1111254096031189,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9688979610800743,
+      "lum": 0.063716821372509,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9916784185916185,
+      "lum": 0.14232105016708374,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9208805188536644,
+      "lum": 0.05735255032777786,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001015__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8823926672339439,
+      "lum": 0.05346975848078728,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9117648676037788,
+      "lum": 0.20990557968616486,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9148976504802704,
+      "lum": 0.21119049191474915,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9337286576628685,
+      "lum": 0.21040692925453186,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.18515712022781372,
+      "lum": 0.009324881248176098,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.2330329418182373,
+      "lum": 0.012623660266399384,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.2385914921760559,
+      "lum": 0.027661742642521858,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.32723718881607056,
+      "lum": 0.029804622754454613,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8980287238955498,
+      "lum": 0.1490035206079483,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8981533497571945,
+      "lum": 0.13963155448436737,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8448747843503952,
+      "lum": 0.13446404039859772,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9682988859713078,
+      "lum": 0.09703106433153152,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 1.007480759639293,
+      "lum": 0.14312854409217834,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9593219421803951,
+      "lum": 0.08841032534837723,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.9871589029207826,
+      "lum": 0.11918113380670547,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9258501455187798,
+      "lum": 0.13536785542964935,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8556928783655167,
+      "lum": 0.11375569552183151,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8456598073244095,
+      "lum": 0.12800492346286774,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9818907529115677,
+      "lum": 0.17212779819965363,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 1.0054089366458356,
+      "lum": 0.18135032057762146,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9907981334254146,
+      "lum": 0.10875106602907181,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001016__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.9721633195877075,
+      "lum": 0.14205138385295868,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9769517201930285,
+      "lum": 0.24266593158245087,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9633233286440372,
+      "lum": 0.24817267060279846,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.954079169780016,
+      "lum": 0.24321657419204712,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.8662060499191284,
+      "lum": 0.03556610271334648,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8239871263504028,
+      "lum": 0.04862391948699951,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.4184942841529846,
+      "lum": 0.01136719062924385,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.36776983737945557,
+      "lum": 0.01585150510072708,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9894895683974028,
+      "lum": 0.2394293248653412,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9753823541104794,
+      "lum": 0.23671507835388184,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9535951688885689,
+      "lum": 0.23385392129421234,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.8989255800843239,
+      "lum": 0.038274336606264114,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9339914098381996,
+      "lum": 0.04858317971229553,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8306471556425095,
+      "lum": 0.03212810680270195,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.7032972872257233,
+      "lum": 0.04373734071850777,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9087151512503624,
+      "lum": 0.22384265065193176,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9487947784364223,
+      "lum": 0.2259962260723114,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9061862751841545,
+      "lum": 0.21506279706954956,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9847509590908885,
+      "lum": 0.053586844354867935,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9584183767437935,
+      "lum": 0.11164820194244385,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7802232950925827,
+      "lum": 0.034033991396427155,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001017__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.6338386535644531,
+      "lum": 0.04843546450138092,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8753582611680031,
+      "lum": 0.19093528389930725,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8957569226622581,
+      "lum": 0.195867657661438,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9157590717077255,
+      "lum": 0.18710097670555115,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.4412904977798462,
+      "lum": 0.02785433828830719,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.4174298644065857,
+      "lum": 0.03368222340941429,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.259863018989563,
+      "lum": 0.03488941118121147,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.23587822914123535,
+      "lum": 0.036517299711704254,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9363161101937294,
+      "lum": 0.21814270317554474,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.994133269879967,
+      "lum": 0.21849578619003296,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9484311230480671,
+      "lum": 0.22762645781040192,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.7738876640796661,
+      "lum": 0.06565795093774796,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.7952829301357269,
+      "lum": 0.07006558030843735,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7369661927223206,
+      "lum": 0.05069437995553017,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8212456107139587,
+      "lum": 0.06156858056783676,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9746181797236204,
+      "lum": 0.1574416607618332,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9612401686608791,
+      "lum": 0.22391940653324127,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9320944398641586,
+      "lum": 0.2074451446533203,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9726168345659971,
+      "lum": 0.11800483614206314,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9863172369077802,
+      "lum": 0.22443526983261108,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7848557829856873,
+      "lum": 0.05414348840713501,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001018__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.827769935131073,
+      "lum": 0.06986173987388611,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9104694873094559,
+      "lum": 0.29363688826560974,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.901480033993721,
+      "lum": 0.2829279899597168,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9011561498045921,
+      "lum": 0.2803194522857666,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.6013012230396271,
+      "lum": 0.0943828746676445,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.6160722970962524,
+      "lum": 0.062592513859272,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.09649533033370972,
+      "lum": 0.0033375166822224855,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.12005937099456787,
+      "lum": 0.00433172145858407,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9130617678165436,
+      "lum": 0.3004162907600403,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8692957758903503,
+      "lum": 0.31772881746292114,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8642910420894623,
+      "lum": 0.32402071356773376,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.7102006077766418,
+      "lum": 0.04299337789416313,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.7729697823524475,
+      "lum": 0.04128178581595421,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7517710328102112,
+      "lum": 0.018243007361888885,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.7721517831087112,
+      "lum": 0.03074745088815689,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9493414908647537,
+      "lum": 0.2651505470275879,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9540468938648701,
+      "lum": 0.28893160820007324,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9695193897932768,
+      "lum": 0.2878926396369934,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9961441732011735,
+      "lum": 0.09468170255422592,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9790952410548925,
+      "lum": 0.3463084101676941,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8456598222255707,
+      "lum": 0.02257133089005947,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001019__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8922799080610275,
+      "lum": 0.04666518047451973,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 1.0278386529535055,
+      "lum": 0.1385781615972519,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 1.0325717739760876,
+      "lum": 0.13217277824878693,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 1.030512623488903,
+      "lum": 0.13183021545410156,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.7449831962585449,
+      "lum": 0.013774117454886436,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.5854079723358154,
+      "lum": 0.03221028298139572,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.21940463781356812,
+      "lum": 0.002877472899854183,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.1045418381690979,
+      "lum": 0.006113377399742603,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9649588242173195,
+      "lum": 0.0764525905251503,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9565749913454056,
+      "lum": 0.062335509806871414,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9958877731114626,
+      "lum": 0.07608414441347122,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.8889001682400703,
+      "lum": 0.06656862795352936,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8501514047384262,
+      "lum": 0.05460858345031738,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7795974761247635,
+      "lum": 0.04371063411235809,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.6523880362510681,
+      "lum": 0.03177403286099434,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9785610064864159,
+      "lum": 0.20831459760665894,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9874074459075928,
+      "lum": 0.12887464463710785,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9787575490772724,
+      "lum": 0.13060231506824493,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 1.0104393819347024,
+      "lum": 0.06289250403642654,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9540458507835865,
+      "lum": 0.11726126074790955,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8458326756954193,
+      "lum": 0.039889153093099594,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001020__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.7635915130376816,
+      "lum": 0.06468453258275986,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.864372655749321,
+      "lum": 0.3006831109523773,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.844350278377533,
+      "lum": 0.3158701956272125,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8494051545858383,
+      "lum": 0.3111867606639862,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.679549366235733,
+      "lum": 0.07809607684612274,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.702925056219101,
+      "lum": 0.05554889142513275,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.1292809247970581,
+      "lum": 0.013795075006783009,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.13550221920013428,
+      "lum": 0.01803145930171013,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9138027876615524,
+      "lum": 0.3055887222290039,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9958694279193878,
+      "lum": 0.32336652278900146,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.9446299485862255,
+      "lum": 0.31020769476890564,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9424810819327831,
+      "lum": 0.0852288007736206,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8999479413032532,
+      "lum": 0.05324222519993782,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9180584102869034,
+      "lum": 0.06431546807289124,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8760621100664139,
+      "lum": 0.055136729031801224,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9001026228070259,
+      "lum": 0.293285608291626,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9229849353432655,
+      "lum": 0.3307551145553589,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.964603528380394,
+      "lum": 0.3118438720703125,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9767584875226021,
+      "lum": 0.09709913283586502,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 1.0094964923337102,
+      "lum": 0.15305130183696747,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9317945167422295,
+      "lum": 0.0599854476749897,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001021__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.8457727581262589,
+      "lum": 0.07591769844293594,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8127138912677765,
+      "lum": 0.1384151130914688,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8044625967741013,
+      "lum": 0.13762104511260986,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8357984274625778,
+      "lum": 0.13832736015319824,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.3608790636062622,
+      "lum": 0.04652653634548187,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.3406255841255188,
+      "lum": 0.03181472793221474,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.2273414134979248,
+      "lum": 0.0309002622961998,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.2536807656288147,
+      "lum": 0.021344881504774094,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.8045250028371811,
+      "lum": 0.16316893696784973,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.8109842240810394,
+      "lum": 0.1770811378955841,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.7287412881851196,
+      "lum": 0.17160436511039734,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9884795127436519,
+      "lum": 0.09788855165243149,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9943098751828074,
+      "lum": 0.1247938722372055,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9755459595471621,
+      "lum": 0.08680693060159683,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.9718231149017811,
+      "lum": 0.09507298469543457,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9012843295931816,
+      "lum": 0.23182927072048187,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.739164412021637,
+      "lum": 0.16110706329345703,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.8161235004663467,
+      "lum": 0.15464985370635986,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9895474864169955,
+      "lum": 0.21790893375873566,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9741267710924149,
+      "lum": 0.17202793061733246,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.9634379483759403,
+      "lum": 0.1276719719171524,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001022__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.976666159927845,
+      "lum": 0.13045163452625275,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__brake",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9763264991343021,
+      "lum": 0.22096799314022064,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__brake",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9691706355661154,
+      "lum": 0.22680698335170746,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__brake",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.971670413389802,
+      "lum": 0.2285136878490448,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9015812277793884,
+      "lum": 0.0534733347594738,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.8297524899244308,
+      "lum": 0.0723622590303421,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__brake",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7596844881772995,
+      "lum": 0.04114104434847832,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__brake",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.664721816778183,
+      "lum": 0.05452844873070717,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__none",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9790116753429174,
+      "lum": 0.2363816350698471,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__none",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 0.9829540569335222,
+      "lum": 0.2324724644422531,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__none",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 0.974208626896143,
+      "lum": 0.22207333147525787,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9335974529385567,
+      "lum": 0.04805486276745796,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__none",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.953267827630043,
+      "lum": 0.06914898753166199,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__none",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.8687164485454559,
+      "lum": 0.03028715029358864,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__none",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.6745668351650238,
+      "lum": 0.050679564476013184,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 1,
+      "struct": 0.9997571799467551,
+      "lum": 0.20180611312389374,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 2,
+      "struct": 1.015758352354169,
+      "lum": 0.20327499508857727,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__swerve",
+      "kind": "cross_domain_same_t",
+      "t": 3,
+      "struct": 1.012626332230866,
+      "lum": 0.19932489097118378,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 1,
+      "struct": 0.9791915714740753,
+      "lum": 0.044381920248270035,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 1,
+      "struct": 0.9205059036612511,
+      "lum": 0.08874091506004333,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__swerve",
+      "kind": "within_sim_adjacent_t",
+      "t": 2,
+      "struct": 0.7911500036716461,
+      "lum": 0.02993965335190296,
+      "n_edge": 90000.0
+    },
+    {
+      "tag": "gh_001023__swerve",
+      "kind": "within_real_adjacent_t",
+      "t": 2,
+      "struct": 0.683419793844223,
+      "lum": 0.0387006551027298,
+      "n_edge": 90000.0
+    }
+  ]
+}

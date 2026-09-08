@@ -1,0 +1,1890 @@
+[
+ {
+  "scene": "scene-0042",
+  "side": "RHD",
+  "peak_frame": 121,
+  "peak_decel": 3.61,
+  "v_at_peak": 13.0,
+  "filename": "sweeps/CAM_FRONT/n015-2018-07-24-11-03-52+0800__CAM_FRONT__1532401562862460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "7847c38bed1546939aba36917afb7529",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0051",
+  "side": "RHD",
+  "peak_frame": 134,
+  "peak_decel": 3.07,
+  "v_at_peak": 2.7,
+  "filename": "sweeps/CAM_FRONT/n015-2018-07-24-11-13-19+0800__CAM_FRONT__1532402317362460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "380b98f4906b4d8b9d32cccb7960ccc1",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0052",
+  "side": "RHD",
+  "peak_frame": 149,
+  "peak_decel": 5.36,
+  "v_at_peak": 8.1,
+  "filename": "sweeps/CAM_FRONT/n015-2018-07-24-11-13-19+0800__CAM_FRONT__1532402338912460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "5a722a5c127e4899bfdaf5a3d59c97e8",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0062",
+  "side": "LHD",
+  "peak_frame": 23,
+  "peak_decel": 3.49,
+  "v_at_peak": 8.7,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-01-15-52-19-0400__CAM_FRONT__1533153247162404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "87b441ec03314c7995765dd72b7a1fd1",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0103",
+  "side": "LHD",
+  "peak_frame": 72,
+  "peak_decel": 3.46,
+  "v_at_peak": 5.7,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151609612404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "fb3562c03fc344dd8d1d783928fe6430",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0124",
+  "side": "RHD",
+  "peak_frame": 30,
+  "peak_decel": 3.39,
+  "v_at_peak": 11.6,
+  "filename": "sweeps/CAM_FRONT/n015-2018-08-01-16-32-59+0800__CAM_FRONT__1533112722862460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "ea303705472140dabc2f50b405a4d966",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0165",
+  "side": "LHD",
+  "peak_frame": 110,
+  "peak_decel": 3.2,
+  "v_at_peak": 5.7,
+  "filename": "sweeps/CAM_FRONT/n008-2018-05-21-11-06-59-0400__CAM_FRONT__1526915364162476.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "f3de1955fb5641ac8d968a0cb91715e8",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0171",
+  "side": "LHD",
+  "peak_frame": 95,
+  "peak_decel": 3.58,
+  "v_at_peak": 6.4,
+  "filename": "sweeps/CAM_FRONT/n008-2018-05-21-11-06-59-0400__CAM_FRONT__1526915645012465.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "6f6763e284f64153b5d81fc2c636f21f",
+   "cat": "vehicle.truck",
+   "d": 57.4,
+   "lat": 0.96
+  },
+  "sd_token": "e9bea363e05c4ec7b49acb81360ee541",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0172",
+  "side": "LHD",
+  "peak_frame": 73,
+  "peak_decel": 4.29,
+  "v_at_peak": 2.1,
+  "filename": "sweeps/CAM_FRONT/n008-2018-05-21-11-06-59-0400__CAM_FRONT__1526915663112465.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "ca7ff90ec20643f298f18097129d0ecf",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0175",
+  "side": "LHD",
+  "peak_frame": 43,
+  "peak_decel": 4.03,
+  "v_at_peak": 7.6,
+  "filename": "sweeps/CAM_FRONT/n008-2018-05-21-11-06-59-0400__CAM_FRONT__1526915722612465.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "d599dcbe538842bfbfdb4b2df6f4de25",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0177",
+  "side": "RHD",
+  "peak_frame": 72,
+  "peak_decel": 3.2,
+  "v_at_peak": 3.3,
+  "filename": "sweeps/CAM_FRONT/n015-2018-07-27-11-36-48+0800__CAM_FRONT__1532662674912460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "cca7d3528f614ab6bdad992ee47725ea",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0183",
+  "side": "RHD",
+  "peak_frame": 187,
+  "peak_decel": 3.03,
+  "v_at_peak": 6.8,
+  "filename": "sweeps/CAM_FRONT/n015-2018-07-27-11-36-48+0800__CAM_FRONT__1532662898612460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "f81af1d1620543fc8591faa8b60d215d",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0184",
+  "side": "RHD",
+  "peak_frame": 69,
+  "peak_decel": 4.73,
+  "v_at_peak": 3.6,
+  "filename": "sweeps/CAM_FRONT/n015-2018-07-27-11-36-48+0800__CAM_FRONT__1532662954662460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "ff1dc81ca94c435983d9a75aaf07b49d",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0203",
+  "side": "LHD",
+  "peak_frame": 58,
+  "peak_decel": 5.18,
+  "v_at_peak": 2.5,
+  "filename": "samples/CAM_FRONT/n008-2018-07-26-12-13-50-0400__CAM_FRONT__1532621813412404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "2706cc4eb61844a1a5c7a5cb766ffc2e",
+   "cat": "vehicle.car",
+   "d": 24.5,
+   "lat": 0.7
+  },
+  "sd_token": "489ab8ddc5484d058653084ef3faab74",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0209",
+  "side": "LHD",
+  "peak_frame": 215,
+  "peak_decel": 3.4,
+  "v_at_peak": 7.9,
+  "filename": "samples/CAM_FRONT/n008-2018-07-26-12-13-50-0400__CAM_FRONT__1532621992662404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "02c9f781ed3841fb99237b96aa1f8055",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0211",
+  "side": "LHD",
+  "peak_frame": 95,
+  "peak_decel": 3.83,
+  "v_at_peak": 2.1,
+  "filename": "sweeps/CAM_FRONT/n008-2018-07-26-12-13-50-0400__CAM_FRONT__1532622022612404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "71d09291084b47bf8cfab2925699b41f",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0212",
+  "side": "LHD",
+  "peak_frame": 80,
+  "peak_decel": 3.85,
+  "v_at_peak": 2.8,
+  "filename": "sweeps/CAM_FRONT/n008-2018-07-26-12-13-50-0400__CAM_FRONT__1532622068412404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "97fe15c0693b4fd0b5cbc75b4fd89447",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0220",
+  "side": "LHD",
+  "peak_frame": 202,
+  "peak_decel": 4.86,
+  "v_at_peak": 4.6,
+  "filename": "sweeps/CAM_FRONT/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707828162404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "94b6a68fe6ec4a768a85debbf8ffa278",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0230",
+  "side": "LHD",
+  "peak_frame": 47,
+  "peak_decel": 3.34,
+  "v_at_peak": 4.8,
+  "filename": "sweeps/CAM_FRONT/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532708209912404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "141bd599ecf84223a156224595261f5f",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0262",
+  "side": "LHD",
+  "peak_frame": 3,
+  "peak_decel": 3.76,
+  "v_at_peak": 2.0,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-06-15-06-32-0400__CAM_FRONT__1533583258412419.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "45cb8c5b98e64434adab333df6b4d137",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0278",
+  "side": "RHD",
+  "peak_frame": 30,
+  "peak_decel": 4.24,
+  "v_at_peak": 6.4,
+  "filename": "sweeps/CAM_FRONT/n015-2018-07-11-11-54-16+0800__CAM_FRONT__1531281964412460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "ca951b574cc141e6bf847a03fd0bd937",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0294",
+  "side": "LHD",
+  "peak_frame": 120,
+  "peak_decel": 3.01,
+  "v_at_peak": 4.1,
+  "filename": "samples/CAM_FRONT/n008-2018-08-31-11-19-57-0400__CAM_FRONT__1535729172662404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "5decb84d05f04afd9907e841e3b06d71",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0305",
+  "side": "LHD",
+  "peak_frame": 52,
+  "peak_decel": 3.09,
+  "v_at_peak": 6.9,
+  "filename": "samples/CAM_FRONT/n008-2018-08-31-11-19-57-0400__CAM_FRONT__1535729532912404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "b40b550991ea4aa3bbee66c091ad6911",
+   "cat": "vehicle.car",
+   "d": 59.8,
+   "lat": 1.01
+  },
+  "sd_token": "569e5205e1b44cd290566bbc45bd8243",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0321",
+  "side": "LHD",
+  "peak_frame": 208,
+  "peak_decel": 3.13,
+  "v_at_peak": 9.4,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-28-16-16-48-0400__CAM_FRONT__1535487902612404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "1c41842170074ce4923ea02fe1fbbe45",
+   "cat": "vehicle.car",
+   "d": 23.7,
+   "lat": 2.4
+  },
+  "sd_token": "fed9bcc7758248ebb0f3b1ded1a0bfa0",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0347",
+  "side": "RHD",
+  "peak_frame": 145,
+  "peak_decel": 3.32,
+  "v_at_peak": 5.8,
+  "filename": "samples/CAM_FRONT/n015-2018-08-02-17-28-51+0800__CAM_FRONT__1533202213662460.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "8ba49648e29b4fc2849621ab964d0650",
+   "cat": "vehicle.car",
+   "d": 15.6,
+   "lat": 1.67
+  },
+  "sd_token": "0fbef469061c4103b444030fd09f59da",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0359",
+  "side": "RHD",
+  "peak_frame": 131,
+  "peak_decel": 3.41,
+  "v_at_peak": 8.2,
+  "filename": "sweeps/CAM_FRONT/n015-2018-08-02-17-28-51+0800__CAM_FRONT__1533202761862460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "3f294a32ef3643aab8a5da578a27a75b",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0376",
+  "side": "RHD",
+  "peak_frame": 55,
+  "peak_decel": 4.13,
+  "v_at_peak": 9.4,
+  "filename": "sweeps/CAM_FRONT/n015-2018-08-03-15-21-40+0800__CAM_FRONT__1533280924362460.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "0e4fba7dadcb4566a9ec98e3778c9739",
+   "cat": "human.pedestrian.adult",
+   "d": 51.9,
+   "lat": 1.45
+  },
+  "sd_token": "a80b514edad84d8488b0bc130bc29cbb",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0391",
+  "side": "LHD",
+  "peak_frame": 189,
+  "peak_decel": 3.07,
+  "v_at_peak": 7.5,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-31-11-56-46-0400__CAM_FRONT__1535731158412404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "6f42f9c2e04d4b2cad5b70c193d6ffea",
+   "cat": "vehicle.car",
+   "d": 46.2,
+   "lat": 0.18
+  },
+  "sd_token": "a0b9cb39588c45ff91b96f38c56c774e",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0394",
+  "side": "LHD",
+  "peak_frame": 130,
+  "peak_decel": 3.37,
+  "v_at_peak": 7.6,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-31-11-56-46-0400__CAM_FRONT__1535731289662404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "a787d1da75c94696990c55494f217a8e",
+   "cat": "human.pedestrian.adult",
+   "d": 55.3,
+   "lat": 0.93
+  },
+  "sd_token": "916e2b905d4547b5b8598bd5ccece688",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0398",
+  "side": "LHD",
+  "peak_frame": 136,
+  "peak_decel": 3.21,
+  "v_at_peak": 5.9,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-31-11-56-46-0400__CAM_FRONT__1535731413162404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "b9a55896191b4cd9a2af9e9e2e6b3c8c",
+   "cat": "vehicle.truck",
+   "d": 25.2,
+   "lat": 0.9
+  },
+  "sd_token": "5928afee8cbb4dbc9c5bbee1cff573ea",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0419",
+  "side": "RHD",
+  "peak_frame": 199,
+  "peak_decel": 3.2,
+  "v_at_peak": 2.7,
+  "filename": "sweeps/CAM_FRONT/n015-2018-09-27-15-33-17+0800__CAM_FRONT__1538034060362460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "e04184f52f31451ba15e5b29541411b4",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0424",
+  "side": "RHD",
+  "peak_frame": 24,
+  "peak_decel": 3.35,
+  "v_at_peak": 4.0,
+  "filename": "sweeps/CAM_FRONT/n015-2018-10-08-15-52-24+0800__CAM_FRONT__1538985232362460.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "290d0982caf84fc0b36cf9a0aa9bdb3c",
+   "cat": "human.pedestrian.adult",
+   "d": 35.0,
+   "lat": 1.96
+  },
+  "sd_token": "1cf61667209c473bbdd134d794e9a1e5",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0527",
+  "side": "LHD",
+  "peak_frame": 51,
+  "peak_decel": 3.08,
+  "v_at_peak": 7.5,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-30-15-52-26-0400__CAM_FRONT__1535658891412404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "35e2d5f65e8c4d32acb0fc7b22054e80",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0532",
+  "side": "LHD",
+  "peak_frame": 62,
+  "peak_decel": 5.04,
+  "v_at_peak": 2.8,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-30-15-52-26-0400__CAM_FRONT__1535659009412404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "78e1c034256c47b899a8d3c4c954ea13",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0533",
+  "side": "LHD",
+  "peak_frame": 211,
+  "peak_decel": 4.43,
+  "v_at_peak": 2.9,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-30-15-52-26-0400__CAM_FRONT__1535659125662404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "7498fe101d014d7d8d8707c323517a27",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0534",
+  "side": "LHD",
+  "peak_frame": 76,
+  "peak_decel": 4.91,
+  "v_at_peak": 4.0,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-30-15-52-26-0400__CAM_FRONT__1535659140362404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "06f5ddbac9fd46bfae142ec306150e18",
+   "cat": "vehicle.car",
+   "d": 29.8,
+   "lat": 1.75
+  },
+  "sd_token": "2df640d6ca56418ab5ded00e81e292cd",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0543",
+  "side": "LHD",
+  "peak_frame": 34,
+  "peak_decel": 3.61,
+  "v_at_peak": 7.9,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-30-15-52-26-0400__CAM_FRONT__1535659469862404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "5f0b1bf80d034dbbb38f417f1c5795c9",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0555",
+  "side": "LHD",
+  "peak_frame": 106,
+  "peak_decel": 3.21,
+  "v_at_peak": 3.6,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-28-16-43-51-0400__CAM_FRONT__1535489344912404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "2a2cb02c6c01407abbc938371e3f7ef5",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0566",
+  "side": "LHD",
+  "peak_frame": 160,
+  "peak_decel": 3.45,
+  "v_at_peak": 5.5,
+  "filename": "sweeps/CAM_FRONT/n008-2018-09-18-13-10-39-0400__CAM_FRONT__1537290679612404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "a6610e416a594108895c3c88fb2e30d0",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0574",
+  "side": "LHD",
+  "peak_frame": 184,
+  "peak_decel": 3.06,
+  "v_at_peak": 2.2,
+  "filename": "sweeps/CAM_FRONT/n008-2018-09-18-13-10-39-0400__CAM_FRONT__1537290871612404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "66b3b2d594f141308f4fc86dab2b0214",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0584",
+  "side": "LHD",
+  "peak_frame": 99,
+  "peak_decel": 3.16,
+  "v_at_peak": 2.1,
+  "filename": "sweeps/CAM_FRONT/n008-2018-09-18-13-41-50-0400__CAM_FRONT__1537292619612404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "3e2a4b228cf14df189966006d605613b",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0599",
+  "side": "LHD",
+  "peak_frame": 180,
+  "peak_decel": 3.18,
+  "v_at_peak": 8.5,
+  "filename": "sweeps/CAM_FRONT/n008-2018-09-18-13-41-50-0400__CAM_FRONT__1537293311412404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "4d28d1dbe55f4285983f18eddffdad05",
+   "cat": "vehicle.bicycle",
+   "d": 33.2,
+   "lat": 2.14
+  },
+  "sd_token": "e3d1f8ba3cca4cce8f3d1aa8b4066d7b",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0630",
+  "side": "LHD",
+  "peak_frame": 86,
+  "peak_decel": 3.23,
+  "v_at_peak": 3.5,
+  "filename": "sweeps/CAM_FRONT/n008-2018-09-18-14-35-12-0400__CAM_FRONT__1537295954112404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "6269846cccb74bc2bd4c594411437000",
+   "cat": "vehicle.car",
+   "d": 46.0,
+   "lat": 1.71
+  },
+  "sd_token": "5d575ee70b0d4fb1948a6cf301a20635",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0653",
+  "side": "LHD",
+  "peak_frame": 80,
+  "peak_decel": 3.56,
+  "v_at_peak": 5.4,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-27-11-48-51-0400__CAM_FRONT__1535385038862404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "07beec2ddd5b4608b7c415674c340b1b",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0656",
+  "side": "LHD",
+  "peak_frame": 3,
+  "peak_decel": 4.48,
+  "v_at_peak": 7.1,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-27-11-48-51-0400__CAM_FRONT__1535385112362404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "f89853b79e744e8782b33f239ef158d5",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0664",
+  "side": "LHD",
+  "peak_frame": 211,
+  "peak_decel": 3.09,
+  "v_at_peak": 7.0,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-27-11-48-51-0400__CAM_FRONT__1535385329862404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "412fd8fab87743b7b693df9539656b0d",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0674",
+  "side": "LHD",
+  "peak_frame": 170,
+  "peak_decel": 3.11,
+  "v_at_peak": 7.5,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-28-16-16-48-0400__CAM_FRONT__1535487936912404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "eb1bed5ae2f3467992e88fbcb50105e7",
+   "cat": "human.pedestrian.wheelchair",
+   "d": 25.7,
+   "lat": 1.99
+  },
+  "sd_token": "8f2662f168444c299951d23068244d6d",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0695",
+  "side": "LHD",
+  "peak_frame": 142,
+  "peak_decel": 5.18,
+  "v_at_peak": 7.1,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-29-16-04-13-0400__CAM_FRONT__1535573067112404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "0b613b08560a4d8d865e617e9738fb9a",
+   "cat": "vehicle.car",
+   "d": 19.2,
+   "lat": 0.2
+  },
+  "sd_token": "8c897d68e0854287b9736639a30ed2ce",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0696",
+  "side": "LHD",
+  "peak_frame": 178,
+  "peak_decel": 5.59,
+  "v_at_peak": 8.5,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-29-16-04-13-0400__CAM_FRONT__1535573089662404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "59e66df84d6b41ad87f442eed3fcc860",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0698",
+  "side": "LHD",
+  "peak_frame": 151,
+  "peak_decel": 3.06,
+  "v_at_peak": 7.8,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-29-16-04-13-0400__CAM_FRONT__1535573127612404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "ddf283c1a8cb440cbe66781377ea8de7",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0707",
+  "side": "LHD",
+  "peak_frame": 195,
+  "peak_decel": 3.53,
+  "v_at_peak": 9.6,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-29-16-04-13-0400__CAM_FRONT__1535573357412404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "ca22ff0b2f514c90a8244eed0c7d6021",
+   "cat": "vehicle.car",
+   "d": 53.8,
+   "lat": 2.17
+  },
+  "sd_token": "5af248a565cb415581d1de99696bedbc",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0711",
+  "side": "LHD",
+  "peak_frame": 179,
+  "peak_decel": 4.4,
+  "v_at_peak": 2.1,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-29-16-04-13-0400__CAM_FRONT__1535573484912404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "e9177554e42242c6b2c904708e8fd89e",
+   "cat": "vehicle.car",
+   "d": 52.8,
+   "lat": 0.14
+  },
+  "sd_token": "f55e5be125464e8f99debc67bc30b341",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0712",
+  "side": "LHD",
+  "peak_frame": 16,
+  "peak_decel": 3.34,
+  "v_at_peak": 2.5,
+  "filename": "samples/CAM_FRONT/n008-2018-08-29-16-04-13-0400__CAM_FRONT__1535573491412404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "220c6be6724e44c681a6d73e3524607f",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0719",
+  "side": "LHD",
+  "peak_frame": 136,
+  "peak_decel": 3.15,
+  "v_at_peak": 2.7,
+  "filename": "samples/CAM_FRONT/n008-2018-08-29-16-04-13-0400__CAM_FRONT__1535573641662404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "10c508c54bb54cf0ad3c427ef53085a8",
+   "cat": "human.pedestrian.adult",
+   "d": 22.4,
+   "lat": 0.28
+  },
+  "sd_token": "6af8f9ae7e054d488442152f36b3e72c",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0730",
+  "side": "LHD",
+  "peak_frame": 164,
+  "peak_decel": 6.89,
+  "v_at_peak": 5.5,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-29-16-04-13-0400__CAM_FRONT__1535573953662404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "68e0a9bc77a14eac93535300a4d1289e",
+   "cat": "vehicle.car",
+   "d": 20.4,
+   "lat": 0.32
+  },
+  "sd_token": "a48b11a75b7e4e86a6c28d8c6000c4bc",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0741",
+  "side": "LHD",
+  "peak_frame": 60,
+  "peak_decel": 5.17,
+  "v_at_peak": 4.6,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-30-15-16-55-0400__CAM_FRONT__1535656660362404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "56f38dc6d4154e279f44deeea7b3ed53",
+   "cat": "vehicle.car",
+   "d": 52.1,
+   "lat": 2.28
+  },
+  "sd_token": "0cafdc7b90674f13a53a85a704618461",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0746",
+  "side": "LHD",
+  "peak_frame": 176,
+  "peak_decel": 6.51,
+  "v_at_peak": 2.7,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-30-15-16-55-0400__CAM_FRONT__1535656809912404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "1024cba1b14c4056bcecf91c17220b1e",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0760",
+  "side": "LHD",
+  "peak_frame": 172,
+  "peak_decel": 3.65,
+  "v_at_peak": 2.2,
+  "filename": "samples/CAM_FRONT/n008-2018-08-30-15-16-55-0400__CAM_FRONT__1535657182612404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "f2edce3322754473be47aee0bbf31eaa",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0783",
+  "side": "LHD",
+  "peak_frame": 224,
+  "peak_decel": 3.32,
+  "v_at_peak": 2.4,
+  "filename": "sweeps/CAM_FRONT/n008-2018-08-30-15-31-50-0400__CAM_FRONT__1535657850912404.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "49c0fa21cdfc4bc4b8726f0c213764bc",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0787",
+  "side": "RHD",
+  "peak_frame": 165,
+  "peak_decel": 3.97,
+  "v_at_peak": 8.6,
+  "filename": "sweeps/CAM_FRONT/n015-2018-10-02-10-56-37+0800__CAM_FRONT__1538449192162460.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "e83d97b98386426287f395854218b5e3",
+   "cat": "human.pedestrian.adult",
+   "d": 53.1,
+   "lat": 1.84
+  },
+  "sd_token": "b5794b3203c54566b0caefae8041cc69",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0817",
+  "side": "LHD",
+  "peak_frame": 231,
+  "peak_decel": 3.53,
+  "v_at_peak": 2.8,
+  "filename": "sweeps/CAM_FRONT/n008-2018-09-18-15-26-58-0400__CAM_FRONT__1537299279662404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "c40192ddb7fa470ba9a9c88220e3f40b",
+   "cat": "vehicle.trailer",
+   "d": 24.3,
+   "lat": 1.91
+  },
+  "sd_token": "8f52e18f0825470cb5f0e60492deb352",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0862",
+  "side": "RHD",
+  "peak_frame": 33,
+  "peak_decel": 3.12,
+  "v_at_peak": 2.2,
+  "filename": "sweeps/CAM_FRONT/n015-2018-10-08-16-03-24+0800__CAM_FRONT__1538986200612460.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "f726cc58ae044b009041ec2fd69f67a4",
+   "cat": "human.pedestrian.adult",
+   "d": 9.5,
+   "lat": 0.23
+  },
+  "sd_token": "0136386addc945b6aae2fc3dd7705dd0",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0902",
+  "side": "LHD",
+  "peak_frame": 148,
+  "peak_decel": 3.1,
+  "v_at_peak": 2.0,
+  "filename": "sweeps/CAM_FRONT/n008-2018-09-18-14-54-39-0400__CAM_FRONT__1537297850162404.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "9d8c3dae8f3840089986e9606217948c",
+   "cat": "vehicle.bus.rigid",
+   "d": 21.3,
+   "lat": 2.34
+  },
+  "sd_token": "c0f921f2734c4ab5a2aadf16eb1c5aeb",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0920",
+  "side": "RHD",
+  "peak_frame": 130,
+  "peak_decel": 3.47,
+  "v_at_peak": 4.0,
+  "filename": "samples/CAM_FRONT/n015-2018-10-08-15-36-50+0800__CAM_FRONT__1538984464362460.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "d687b7c8bd1b48549a8993c913d1b501",
+   "cat": "human.pedestrian.adult",
+   "d": 22.8,
+   "lat": 2.38
+  },
+  "sd_token": "b4970bad404e4222b825d4b4aa1f8af5",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-0959",
+  "side": "RHD",
+  "peak_frame": 107,
+  "peak_decel": 5.38,
+  "v_at_peak": 3.9,
+  "filename": "sweeps/CAM_FRONT/n015-2018-09-26-11-17-24+0800__CAM_FRONT__1537932288412460.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "dc675b6f068143dda037d912f6a57d47",
+   "cat": "vehicle.motorcycle",
+   "d": 32.5,
+   "lat": 0.14
+  },
+  "sd_token": "257958bfe75342bda1c6488438fcec9b",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1051",
+  "side": "RHD",
+  "peak_frame": 191,
+  "peak_decel": 3.01,
+  "v_at_peak": 12.3,
+  "filename": "samples/CAM_FRONT/n015-2018-11-21-19-11-29+0800__CAM_FRONT__1542798867662460.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "f418c24ed4484b269e9db410726a9e34",
+   "cat": "vehicle.car",
+   "d": 16.8,
+   "lat": 0.21
+  },
+  "sd_token": "29e3ff97a77048d8a876e9dcc3659239",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1052",
+  "side": "RHD",
+  "peak_frame": 58,
+  "peak_decel": 3.45,
+  "v_at_peak": 5.6,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-11-29+0800__CAM_FRONT__1542798936412460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "b2610cf653ba477e8af1be559e7f8749",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1054",
+  "side": "RHD",
+  "peak_frame": 76,
+  "peak_decel": 3.35,
+  "v_at_peak": 7.1,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-11-29+0800__CAM_FRONT__1542798997912460.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "d3877c2270aa4d5b97c27f9cad606f51",
+   "cat": "vehicle.car",
+   "d": 43.3,
+   "lat": 2.43
+  },
+  "sd_token": "f53791c8c6ec447a829c5c463eebd6e1",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1055",
+  "side": "RHD",
+  "peak_frame": 233,
+  "peak_decel": 3.43,
+  "v_at_peak": 7.2,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-11-29+0800__CAM_FRONT__1542799051162460.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "5673a13d2f3b4004bac590be1e4b7cc9",
+   "cat": "human.pedestrian.adult",
+   "d": 16.7,
+   "lat": 1.72
+  },
+  "sd_token": "f82d7dd45c6346eba1868afe88386be2",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1056",
+  "side": "RHD",
+  "peak_frame": 222,
+  "peak_decel": 3.16,
+  "v_at_peak": 8.8,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-11-29+0800__CAM_FRONT__1542799070362460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "944f73c3a81d400baa8419c5e1cd17cb",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1057",
+  "side": "RHD",
+  "peak_frame": 86,
+  "peak_decel": 3.74,
+  "v_at_peak": 7.2,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-11-29+0800__CAM_FRONT__1542799138912460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "7a2619c78b224b8eafa133c3e607bf16",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1061",
+  "side": "RHD",
+  "peak_frame": 228,
+  "peak_decel": 3.1,
+  "v_at_peak": 6.5,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-21-35+0800__CAM_FRONT__1542799421162460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "fccafe77d85a42c6b7b5aa52e15bd576",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1063",
+  "side": "RHD",
+  "peak_frame": 171,
+  "peak_decel": 3.28,
+  "v_at_peak": 5.7,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-21-35+0800__CAM_FRONT__1542799496362460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "64b6233e512e4b7b8e403e6b63cb4b4b",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1064",
+  "side": "RHD",
+  "peak_frame": 64,
+  "peak_decel": 3.1,
+  "v_at_peak": 5.1,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-21-35+0800__CAM_FRONT__1542799527662460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "5d6a70fa4b3244c980c1b2c583659b95",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1065",
+  "side": "RHD",
+  "peak_frame": 4,
+  "peak_decel": 3.35,
+  "v_at_peak": 7.6,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-21-35+0800__CAM_FRONT__1542799542412460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "87392b2aa7934bc28020af85db903283",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1079",
+  "side": "RHD",
+  "peak_frame": 98,
+  "peak_decel": 3.06,
+  "v_at_peak": 11.1,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-38-26+0800__CAM_FRONT__1542800416162460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "b1eb5764f055421baa457feba9a11c17",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1084",
+  "side": "RHD",
+  "peak_frame": 108,
+  "peak_decel": 5.79,
+  "v_at_peak": 6.0,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-38-26+0800__CAM_FRONT__1542800536912460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "641c061ab8564bb8859e4bb980b4d0f5",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1095",
+  "side": "RHD",
+  "peak_frame": 210,
+  "peak_decel": 4.48,
+  "v_at_peak": 4.4,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-38-26+0800__CAM_FRONT__1542800885612460.jpg",
+  "group": "no_hazard",
+  "front": null,
+  "sd_token": "6ef01e1c2164427ab4823120b83e3116",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ },
+ {
+  "scene": "scene-1104",
+  "side": "RHD",
+  "peak_frame": 17,
+  "peak_decel": 3.16,
+  "v_at_peak": 5.5,
+  "filename": "sweeps/CAM_FRONT/n015-2018-11-21-19-38-26+0800__CAM_FRONT__1542801289362460.jpg",
+  "group": "hazard",
+  "front": {
+   "token": "f3d083005dc743e6b3635652903b2c84",
+   "cat": "vehicle.car",
+   "d": 11.1,
+   "lat": 0.12
+  },
+  "sd_token": "403be2694912467baecb5d26940d7182",
+  "frame_keys": [
+   "token",
+   "t",
+   "filename",
+   "is_key_frame",
+   "ego_t",
+   "ego_q",
+   "calib_token",
+   "width",
+   "height"
+  ]
+ }
+]

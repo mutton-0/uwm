@@ -108,7 +108,8 @@ class AlpamayoRunner:
     @torch.no_grad()
     def infer(self, scene_name: str, t_sec: float, num_traj_samples: int = 1,
               max_generation_length: int = 256, capture_hidden: bool = False,
-              ego_anchor_t: Optional[float] = None) -> AlpaResult:
+              ego_anchor_t: Optional[float] = None,
+              data: Optional[dict] = None) -> AlpaResult:
         """ego_anchor_t 非 None 时，自车运动史取自该时刻，图像仍取 t_sec。
 
         与 SimLingo 的 prompt_anchor 同构：clean/ghost 两条件本就相隔 ~1.5 s，
@@ -116,7 +117,11 @@ class AlpamayoRunner:
         SimLingo 侧把 prompt 的 Current speed 锚到 clean（commit 5c1366d），
         这里把 ego_history 锚到 clean，是**同一处理**，不是更友好的设定。
         """
-        data = self.load(scene_name, t_sec)
+        # data 非 None 时直接用它，跳过 nuScenes devkit —— `load_nuscenes()` 在这里
+        # 只是把 nuScenes 的表结构解析成 image_frames / ego_history_*，模型本身
+        # 不依赖 nuScenes。NAVSIM 侧由 alpa_navsim_loader.load_navsim() 构造同构字典。
+        if data is None:
+            data = self.load(scene_name, t_sec)
         if ego_anchor_t is not None:
             anchor = self.load(scene_name, ego_anchor_t)
             data["ego_history_xyz"] = anchor["ego_history_xyz"]

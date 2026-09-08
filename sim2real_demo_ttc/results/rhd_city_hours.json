@@ -1,0 +1,115 @@
+{
+ "basis": "log 时长 = 文件名尾部 end−start（秒），实测与 db 内 lidar_pc 时间跨度逐秒吻合",
+ "splits": {
+  "train": {
+   "sg-one-north": {
+    "n_logs": 2396,
+    "hours": 146.66833333333338,
+    "n_logs_with_sensor": 45,
+    "hours_with_sensor": 2.6586111111111115
+   },
+   "us-ma-boston": {
+    "n_logs": 1647,
+    "hours": 79.23722222222217,
+    "n_logs_with_sensor": 186,
+    "hours_with_sensor": 8.921666666666665
+   },
+   "us-pa-pittsburgh-hazelwood": {
+    "n_logs": 1560,
+    "hours": 107.76888888888884,
+    "n_logs_with_sensor": 97,
+    "hours_with_sensor": 7.351388888888889
+   },
+   "las_vegas": {
+    "n_logs": 7577,
+    "hours": 646.8672222222215,
+    "n_logs_with_sensor": 757,
+    "hours_with_sensor": 67.54166666666663
+   }
+  },
+  "val": {
+   "las_vegas": {
+    "n_logs": 760,
+    "hours": 59.51777777777778,
+    "n_logs_with_sensor": 61,
+    "hours_with_sensor": 5.252222222222222
+   },
+   "us-pa-pittsburgh-hazelwood": {
+    "n_logs": 174,
+    "hours": 10.136666666666672,
+    "n_logs_with_sensor": 43,
+    "hours_with_sensor": 2.3447222222222224
+   },
+   "sg-one-north": {
+    "n_logs": 255,
+    "hours": 15.560555555555558,
+    "n_logs_with_sensor": 52,
+    "hours_with_sensor": 3.1763888888888894
+   },
+   "us-ma-boston": {
+    "n_logs": 192,
+    "hours": 8.81361111111111,
+    "n_logs_with_sensor": 69,
+    "hours_with_sensor": 3.2583333333333337
+   }
+  },
+  "test": {
+   "las_vegas": {
+    "n_logs": 740,
+    "hours": 64.11888888888886,
+    "n_logs_with_sensor": 50,
+    "hours_with_sensor": 4.030833333333333
+   },
+   "us-ma-boston": {
+    "n_logs": 175,
+    "hours": 8.629444444444445,
+    "n_logs_with_sensor": 62,
+    "hours_with_sensor": 3.633611111111111
+   },
+   "us-pa-pittsburgh-hazelwood": {
+    "n_logs": 176,
+    "hours": 11.900833333333333,
+    "n_logs_with_sensor": 22,
+    "hours_with_sensor": 1.6805555555555558
+   },
+   "sg-one-north": {
+    "n_logs": 258,
+    "hours": 15.04944444444444,
+    "n_logs_with_sensor": 13,
+    "hours_with_sensor": 1.0922222222222222
+   }
+  }
+ },
+ "train_zip_bytes": {
+  "sg-one-north": 34959594178,
+  "us-ma-boston": 38161149300,
+  "us-pa-pittsburgh-hazelwood": 30620248893,
+  "las_vegas": 913537093503
+ },
+ "total_by_city": {
+  "las_vegas": {
+   "n_logs": 9077,
+   "hours": 770.5038888888881,
+   "n_logs_with_sensor": 868,
+   "hours_with_sensor": 76.82472222222218
+  },
+  "sg-one-north": {
+   "n_logs": 2909,
+   "hours": 177.2783333333334,
+   "n_logs_with_sensor": 110,
+   "hours_with_sensor": 6.927222222222223
+  },
+  "us-pa-pittsburgh-hazelwood": {
+   "n_logs": 1910,
+   "hours": 129.80638888888885,
+   "n_logs_with_sensor": 162,
+   "hours_with_sensor": 11.376666666666667
+  },
+  "us-ma-boston": {
+   "n_logs": 2014,
+   "hours": 96.68027777777773,
+   "n_logs_with_sensor": 317,
+   "hours_with_sensor": 15.813611111111111
+  }
+ }
+}

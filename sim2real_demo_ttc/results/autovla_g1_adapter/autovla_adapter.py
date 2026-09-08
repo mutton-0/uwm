@@ -169,9 +169,18 @@ class AutoVLARunner:
         self.model = self.model.to(device).eval()
         self.device = device
         self.cap = PooledCapture(self.model)
-        from nuscenes.nuscenes import NuScenes
-        self.nusc = NuScenes(version="v1.0-trainval", dataroot=nuscenes_root, verbose=False)
+        # **devkit 延迟加载**：只有 nuScenes 语料才需要它解析时序窗口；
+        # navsim 语料是把图直接传进 run(images=...)，此时 --nuscenes-root 指向
+        # sensor_blobs（没有 v1.0-trainval 表），提前构造会直接 assert 失败。
+        self._nusc = None
         self.root = nuscenes_root
+
+    @property
+    def nusc(self):
+        if self._nusc is None:
+            from nuscenes.nuscenes import NuScenes
+            self._nusc = NuScenes(version="v1.0-trainval", dataroot=self.root, verbose=False)
+        return self._nusc
 
     def temporal_paths(self, cam_sd_token):
         """由 CAM_FRONT 的 sd_token 取 3 路相机各 4 帧（时序窗口以目标帧结尾）的绝对路径。"""
@@ -196,8 +205,15 @@ class AutoVLARunner:
         self.cap.capture_full = bool(flag)
 
     @torch.no_grad()
-    def run(self, cam_sd_token, speed_mps, accel=0.0):
-        feats = {"images": self.temporal_paths(cam_sd_token), "sensor_data_path": None,
+    def run(self, cam_sd_token, speed_mps, accel=0.0, images=None):
+        """images 非 None 时直接用它，跳过 nuScenes devkit 解析。
+
+        devkit 在这里只负责把 sd_token 变成「3 相机 × 4 帧的绝对路径」；
+        给定同构的路径字典（如 NAVSIM 侧由 vla_navsim_input.py 构造）即可跨语料运行。
+        模型本身不依赖 nuScenes。
+        """
+        feats = {"images": images if images is not None else self.temporal_paths(cam_sd_token),
+                 "sensor_data_path": None,
                  "vehicle_velocity": [float(speed_mps), 0.0],
                  "vehicle_acceleration": [float(accel), 0.0],
                  # 与其余候选一致的"直行"默认指令：DiffusionDrive/LTF/DDV2 用直行 one-hot，

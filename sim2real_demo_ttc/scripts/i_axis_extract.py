@@ -31,7 +31,7 @@ def ego_speed(scene_dir, fi):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", required=True, choices=["dd", "simlingo", "ltf"])
+    ap.add_argument("--model", required=True, choices=["dd", "simlingo", "ltf", "ddv2"])
     ap.add_argument("--frames", default="/data/ruolin/uwm/sim2real_demo_ttc/variants/i_domain/frames")
     ap.add_argument("--out", default="/data/ruolin/uwm/sim2real_demo_ttc/variants/i_domain")
     ap.add_argument("--device", default="cuda:0")
@@ -50,16 +50,26 @@ def main():
     print(f"[T-I/{args.model}] {len(recs)} 帧, {len(set(r['scene'] for r in recs))} 场景")
 
     store, meta = {}, []
-    if args.model in ("dd", "ltf"):
+    if args.model in ("dd", "ltf", "ddv2"):
         sys.path.insert(0, "/data/ruolin/uwm/sim2real_demo_ttc/results/diffusiondrive_g1_adapter")
         if args.model == "dd":
             from dd_adapter import DDRunner
             runner = DDRunner(device=args.device)
         else:
-            # LTF 是 latent=True，不吃 lidar，故域配对渲染帧可直接送入（DDv2 则不行，见 §CE/A33）
+            # LTF 是 latent=True，不吃 lidar，域配对渲染帧可直接送入。
+            # DDv2 吃点云，而域配对刺激是渲染帧、没有对应点云 —— 两臂**同样喂空点云**
+            # （适配器内部把 None 转成 0 点直方图，已实测两种写法输出逐位相同）。
+            # D_L 是配对量，两臂的点云输入完全一致 ⇒ do(appearance) 干预仍然干净；
+            # 代价是 DDv2 在此处运行于「无雷达」这一非常规输入分布上，
+            # 故其 I_m 只可与自身跨条件比较，不宜与吃全模态的候选做绝对值比较。
             sys.path.insert(0, "/data/ruolin/uwm/sim2real_demo_ttc/results/ltf_g1_adapter")
-            from ltf_adapter import LTFRunner
-            runner = LTFRunner(device=args.device)
+            sys.path.insert(0, "/data/ruolin/uwm/sim2real_demo_ttc/results/ddv2_g1_adapter")
+            if args.model == "ltf":
+                from ltf_adapter import LTFRunner
+                runner = LTFRunner(device=args.device)
+            else:
+                from ddv2_adapter import DDV2Runner
+                runner = DDV2Runner(device=args.device)
         for i, r in enumerate(recs):
             img = cv2.cvtColor(cv2.imread(r["path"]), cv2.COLOR_BGR2RGB)
             v = ego_speed(f"{DATA_ROOT}/renders/{r['scene']}", int(round(r["sec"] * FPS)))

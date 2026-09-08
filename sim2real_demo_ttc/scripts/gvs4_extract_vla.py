@@ -40,6 +40,9 @@ def main():
     ap.add_argument("--layer", type=int, default=20, help="语言塔取第几层（AutoVLA 的 G 轴峰层是 L20）")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--device", default="cuda:1")
+    ap.add_argument("--corpus", default="nuscenes", choices=["nuscenes", "navsim"],
+                    help="navsim 时不走 nuScenes devkit —— devkit 在两个 VLA 的推理路径里"
+                         "只做路径/位姿解析，换成同构的 NAVSIM 输入即可（与 F-3、C 轴同一套）")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
     work = Path(args.work); gt_dir = work / "sam_gt"
@@ -63,11 +66,29 @@ def main():
             m.reset_parameters()
     print(f"[GVS-EX/autovla] {len(evs)} 个事件有伪 GT")
 
+    _VIN = {"v": None}
+
+    def _vin():
+        if _VIN["v"] is None:
+            sys.path.insert(0, "/data/ruolin/uwm/sim2real_demo_ttc/scripts")
+            from vla_navsim_input import NavsimVLAInput
+            _VIN["v"] = NavsimVLAInput()
+        return _VIN["v"]
+
     def tok(rn, ev):
         """返回前视相机最后一个时间组的 token 特征 [144, C] 与 (rows, cols)。"""
         fr = ev["x_ghost_frames"][0]
         spd = float(np.mean([f["ego_speed_mps"] for f in ev["x_clean_frames"]]))
-        out = rn.run(fr["sd_token"], spd)
+        if args.corpus == "navsim":
+            v = _vin()
+            sp = ev.get("split", "test")
+            im = v.images(sp, ev["scene_name"], ev["query_frame_idx"])
+            if im is None:
+                return None, None, None
+            spd2, acc = v.ego(sp, ev["scene_name"], ev["query_frame_idx"])
+            out = rn.run(None, spd2, acc, images=im)
+        else:
+            out = rn.run(fr["sd_token"], spd)
         h = rn.cap.full[args.layer] if rn.cap.capture_full else None
         mask = rn.cap.mask
         idx = np.nonzero(mask)[0]                        # 图像 token 在序列里的绝对位置
@@ -98,6 +119,8 @@ def main():
                 fr_, _, _ = tok(rnd, ev)
         except Exception as exc:                                       # noqa: BLE001
             print(f"[GVS-EX/autovla] FAIL {ev['event_id']}: {exc}"); continue
+        if f is None:                    # NAVSIM 侧某相机/历史帧缺图 -> 跳过该事件
+            continue
         g = gt_to_grid(gt, R_, C_)
         if g is None or f.shape[0] != R_ * C_:
             continue

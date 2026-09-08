@@ -1,0 +1,84 @@
+{
+  "model": "new_ghost_navsim_simlingo_FIX",
+  "task": "G-VS 二类物体性分割探针（SAM 伪 GT）",
+  "primary": "held-out mIoU（scene 级 4 折 CV + scene 级 bootstrap）",
+  "selectivity": {
+    "mean": 0.044260350070089244,
+    "ci95": [
+      0.008507560489129937,
+      0.07540379585707001
+    ],
+    "n_scenes": 6
+  },
+  "meta": {
+    "grid": "per-image (gh*16, gw*16)",
+    "layer": 6,
+    "canvas": [
+      1024,
+      359
+    ],
+    "geometry_fix": "掩膜与 tile 网格均按裁剪后画布计算（2026-09-07）",
+    "token_to_pixel": "InternVL2 dynamic_preprocess 的 tile 网格，每 tile 16x16 token",
+    "random_init": "同架构重建 + 递归 reset_parameters()"
+  },
+  "n_tokens": 41984,
+  "feat_dim": 896,
+  "object_token_frac": 0.2952315167682927,
+  "arms": {
+    "trained": {
+      "per_scene_miou": {
+        "log-0020-scene-0005": 0.45214763447267936,
+        "log-0110-scene-0030": 0.40664090458134483,
+        "log-0037-scene-0013": 0.4363544171643336,
+        "log-0061-scene-0003": 0.3807014186922154,
+        "log-0126-scene-0010": 0.4239821048396423,
+        "log-0111-scene-0024": 0.37156482523058176
+      },
+      "bootstrap": {
+        "mean": 0.41189855083013294,
+        "ci95": [
+          0.3884480266335637,
+          0.4346045187825022
+        ],
+        "n_scenes": 6
+      }
+    },
+    "random_init": {
+      "per_scene_miou": {
+        "log-0020-scene-0005": 0.39135238999862754,
+        "log-0110-scene-0030": 0.40529592423106864,
+        "log-0037-scene-0013": 0.37203760225168925,
+        "log-0061-scene-0003": 0.2957433107949615,
+        "log-0126-scene-0010": 0.34352406963973803,
+        "log-0111-scene-0024": 0.39787590764417685
+      },
+      "bootstrap": {
+        "mean": 0.36763820076004367,
+        "ci95": [
+          0.3346812547512301,
+          0.39480992825549976
+        ],
+        "n_scenes": 6
+      }
+    },
+    "position_only": {
+      "per_scene_miou": {
+        "log-0020-scene-0005": 0.29756011405613314,
+        "log-0110-scene-0030": 0.37488605287146765,
+        "log-0037-scene-0013": 0.26795222205893526,
+        "log-0061-scene-0003": 0.3245388210724068,
+        "log-0126-scene-0010": 0.36744254809442667,
+        "log-0111-scene-0024": 0.3830175593472877
+      },
+      "bootstrap": {
+        "mean": 0.33589955291677626,
+        "ci95": [
+          0.3014955267754389,
+          0.36796476560072405
+        ],
+        "n_scenes": 6
+      }
+    }
+  },
+  "verdict": "PASS：表征里确有物体性信息（selectivity 的 scene 级 CI 下界 > 0）"
+}
