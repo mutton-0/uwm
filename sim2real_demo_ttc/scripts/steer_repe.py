@@ -42,6 +42,11 @@ def main():
     ap.add_argument("--model",required=True,choices=list(LABEL))
     ap.add_argument("--n",type=int,default=60); ap.add_argument("--n-rand",type=int,default=30)
     ap.add_argument("--mode",default="add",choices=["add","piecewise"])
+    ap.add_argument("--axis",default="speed",choices=["speed","decel","bright"],
+                    help="speed = −ŝ（巡航样本对 v0 回归，阳性对照）；"
+                         "decel = v_decel（刹车组−巡航组）；"
+                         "bright = v_bright（I 轴：原图→变夜的表征差）。"
+                         "**三者的方向一律只在左舵学**，--stim-side 只换被注入的场景。")
     ap.add_argument("--stim-side",default="LHD",choices=["LHD","RHD"],
                     help="**刺激**的舵位。方向与层权重一律只在左舵巡航样本上学；"
                          "此项只换被注入的场景。用于检验注入效应是否跨域保持。")
@@ -102,8 +107,29 @@ def main():
         return arc_full(t,WP_DT[A.model]),float(np.abs(t[:,1]).max())
 
     D0={}
-    for l in keep:
-        X=z[f"h__L{l}"][tr].astype(float); d=fit(X,v0[tr]); D0[l]=d/max(np.linalg.norm(d),1e-12)
+    if A.axis=="speed":
+        for l in keep:
+            X=z[f"h__L{l}"][tr].astype(float); d=fit(X,v0[tr])
+            D0[l]=d/max(np.linalg.norm(d),1e-12)          # 注入时取负号 = 速度降低方向
+    elif A.axis=="decel":
+        H=z[f"h__L0"]  # 占位
+        for l in keep:
+            X=z[f"h__L{l}"].astype(float); sl=(z["side"]=="LHD")
+            d=X[sl&(z["kind"]=="brake")].mean(0)-X[sl&(z["kind"]=="cruise")].mean(0)
+            # 注入时脚本统一取负，故这里存 **−v_decel**，使 −(−v_decel)=v_decel 指向刹车
+            D0[l]=-d/max(np.linalg.norm(d),1e-12)
+    else:                                                  # bright：I 轴
+        import sys as _s; _s.path.insert(0,str(ROOT/"scripts"))
+        from i_ortho import side_of as _so
+        zb=np.load(RES/f"vbright_acts_navsim_lead_{A.model}_night_global.npz",allow_pickle=True)
+        sc=np.array([str(x) for x in zb["scene"]]); kk=np.array([_so(x)=="LHD" for x in sc])
+        nb=sum(1 for k_ in zb.files if k_.startswith("h_orig__L"))
+        keep=[l for l in keep if l<nb]
+        for l in keep:
+            d=(zb[f"h_alt__L{l}"]-zb[f"h_orig__L{l}"])[kk].mean(0)
+            # 同上：脚本注入时取负，这里存 −v_bright，使实际注入的是 +v_bright
+            D0[l]=-d/max(np.linalg.norm(d),1e-12)
+        print(f"  I 轴方向来自 {int(kk.sum())} 个左舵 lead 事件的 原图→变夜 表征差",flush=True)
     rands=[]
     for _ in range(A.n_rand):
         rd={}
@@ -130,7 +156,8 @@ def main():
     pos=slope([a for a in ALPHAS if a>=0],[y for a,y in zip(ALPHAS,ys) if a>=0])
     neg=slope([a for a in ALPHAS if a<=0],[y for a,y in zip(ALPHAS,ys) if a<=0])
     sl=slope(ALPHAS,lat)
-    print(f"\n[{LABEL[A.model]}] **RepE 注入 −ŝ**（{A.mode}，刺激={A.stim_side}），"
+    AX={"speed":"−ŝ（速度降低方向）","decel":"v_decel（刹车方向）","bright":"v_bright（I 轴）"}
+    print(f"\n[{LABEL[A.model]}] 注入 {AX[A.axis]}（{A.mode}，刺激={A.stim_side}），"
           f"α 阶梯上的规划速度：")
     print("  α    "+"".join(f"{a:>8.1f}" for a in ALPHAS))
     print("  速度 "+"".join(f"{y:>8.3f}" for y in ys))
@@ -141,10 +168,11 @@ def main():
     C3=abs(sl)<=abs(s)/3
     print(f"  C1 {'✓' if C1 else '✗'}  C2 {'✓' if C2 else '✗'}  C3 {'✓' if C3 else '✗'}"
           f"   ⇒ {'**证实**' if (C1 and C2 and C3) else '未证实'}")
-    json.dump({"model":A.model,"mode":A.mode,"layers":keep,"alphas":ALPHAS,"arc":ys,"lat":lat,
+    json.dump({"model":A.model,"axis":A.axis,"stim_side":A.stim_side,
+               "mode":A.mode,"layers":keep,"alphas":ALPHAS,"arc":ys,"lat":lat,
                "slope":s,"p":p,"slope_pos":pos,"slope_neg":neg,"slope_lat":sl,
                "rand_slopes":sr,"n":len(Y[0])},
-              open(RES/f"steer_repe_{A.model}_{A.mode}_{A.stim_side}.json","w"),
+              open(RES/f"steer_repe_{A.model}_{A.axis}_{A.mode}_{A.stim_side}.json","w"),
               ensure_ascii=False,indent=1)
 if __name__=="__main__":
     main()
