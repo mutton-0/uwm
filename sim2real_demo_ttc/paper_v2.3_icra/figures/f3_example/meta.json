@@ -1,0 +1,16 @@
+{
+  "event_id": "scene-0862_000_A",
+  "object_class": "human.pedestrian.adult",
+  "scene_name": "scene-0862",
+  "d_long_at_emergence": 12.235028819976312,
+  "bbox_xyxy": [
+    915.6227116559305,
+    419.3643163676283,
+    1070.7571003576793,
+    666.7554343076623
+  ],
+  "clean_frame": "sweeps/CAM_FRONT/n015-2018-10-08-16-03-24+0800__CAM_FRONT__1538986198412460.jpg",
+  "ghost_frame": "sweeps/CAM_FRONT/n015-2018-10-08-16-03-24+0800__CAM_FRONT__1538986199912460.jpg",
+  "occlusion": "F-3 原样：bbox 区域填充为该帧的图像均值色",
+  "sam": "vit_b, points_per_side=32；取与 bbox 重合评分最高的单个掩码，45% 红色半透明叠加 + 白色轮廓"
+}

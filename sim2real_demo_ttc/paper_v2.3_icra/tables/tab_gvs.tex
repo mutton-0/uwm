@@ -1,0 +1,19 @@
+\begin{table*}[!tb]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Grounding: probe selectivity against a random-initialisation control. Bold = CI excludes $0$. All six policies sit within $0.016$ of one another, which is why the axis supports values but not a ranking (Table~\ref{tab:samplesize}).}
+\label{tab:gvs}
+\begin{tabular}{lcccc}
+\toprule
+Policy & nuScenes\,ghost & nuScenes\,lead & NAVSIM\,ghost & NAVSIM\,lead\\
+\midrule
+SimLingo & +0.035\,{\scriptsize[-0.014,+0.090]} & \textbf{+0.044}\,{\scriptsize[+0.011,+0.082]} & +0.025\,{\scriptsize[-0.000,+0.053]} & \textbf{+0.038}\,{\scriptsize[+0.031,+0.046]}\\
+DiffusionDrive & -0.009\,{\scriptsize[-0.058,+0.040]} & \textbf{+0.091}\,{\scriptsize[+0.029,+0.154]} & \textbf{+0.051}\,{\scriptsize[+0.020,+0.084]} & \textbf{+0.030}\,{\scriptsize[+0.019,+0.039]}\\
+LTF & +0.007\,{\scriptsize[-0.050,+0.058]} & \textbf{+0.107}\,{\scriptsize[+0.059,+0.156]} & +0.014\,{\scriptsize[-0.011,+0.040]} & \textbf{+0.022}\,{\scriptsize[+0.012,+0.032]}\\
+DiffusionDriveV2 & +0.053\,{\scriptsize[-0.039,+0.144]} & +0.048\,{\scriptsize[-0.007,+0.102]} & \textbf{+0.036}\,{\scriptsize[+0.007,+0.067]} & \textbf{+0.023}\,{\scriptsize[+0.012,+0.033]}\\
+Alpamayo-R1 & -- & -- & -- & --\\
+AutoVLA & -- & -- & -- & --\\
+\bottomrule
+\end{tabular}
+\end{table*}

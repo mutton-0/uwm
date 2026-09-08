@@ -1,0 +1,47 @@
+\begin{figure*}[t]
+\centering
+\footnotesize
+\begin{tikzpicture}[
+  node distance=3mm,
+  box/.style={draw, rounded corners=2pt, align=center, inner sep=3pt, minimum height=7mm},
+  dbox/.style={box, fill=black!5},
+  proc/.style={box, fill=blue!8},
+  abox/.style={box, fill=green!10, minimum width=20mm},
+  ar/.style={-{Latex[length=2mm]}, thick}]
+
+\node[dbox] (logs) {Log metadata\\{\scriptsize ego pose, 3D boxes}};
+\node[proc, right=6mm of logs] (ep) {Deceleration\\episodes~\eqref{eq:episode}};
+\node[proc, right=6mm of ep] (attr) {Attribution\\$a_i$~\eqref{eq:areq}};
+\node[proc, right=6mm of attr] (sel) {Dominance +\\explanation~\eqref{eq:share}--\eqref{eq:areqmin}};
+\node[dbox, right=6mm of sel] (pool) {Event pool\\{\scriptsize + mask group}};
+
+\draw[ar] (logs) -- (ep);
+\draw[ar] (ep) -- (attr);
+\draw[ar] (attr) -- (sel);
+\draw[ar] (sel) -- (pool);
+
+\node[dbox, below=9mm of logs] (sens) {Sensors\\{\scriptsize image + LiDAR}};
+\node[proc, below=9mm of attr, minimum width=34mm] (arms)
+  {Three same-frame arms\\{\scriptsize origin / clean / ctrl}};
+\draw[ar] (sens) -- (arms);
+\draw[ar] (pool.south) -- ++(0,-4mm) -| (arms.east);
+
+\node[abox, below left=9mm and -14mm of arms] (F) {\textbf{F} response ratio~\eqref{eq:ratio}};
+\node[abox, right=3mm of F] (C) {\textbf{C} $C_m$~\eqref{eq:recovery}};
+\node[abox, right=3mm of C] (G) {\textbf{G} selectivity};
+\node[abox, right=3mm of G] (I) {\textbf{I} $I_m$};
+\draw[ar] (arms) -- (F);
+\draw[ar] (arms) -- (C);
+\draw[ar] (arms.south) -- ++(0,-3mm) -| (G.north);
+
+\node[dbox, right=8mm of I, fill=orange!12] (dep) {Deployment\\{\scriptsize PDM / TTC / jerk}};
+\draw[ar] (sens.south) -- ++(0,-14mm) -| (dep.south);
+\end{tikzpicture}
+\caption{The protocol. Mining (top) runs on log metadata alone, so the entire
+available corpus can be scanned before any sensor data is fetched; only the surviving
+events need pixels. The three same-frame arms (middle) feed all four axes, so the
+hazard class, the attribution class and the mask class are one object throughout.
+Deployment quality is measured with the official scorer on an independent random
+sample of the same domain.}
+\label{fig:pipeline}
+\end{figure*}

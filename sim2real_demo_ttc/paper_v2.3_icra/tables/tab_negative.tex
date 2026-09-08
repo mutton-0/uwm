@@ -1,0 +1,26 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Pre-registered tests of the projection as a behavioural proxy, and
+their outcomes.} Every prediction was written to a timestamped file before the
+relevant numbers existed (\texttt{results/PREREG\_*.md}). Four of five are rejected;
+the fifth holds for two of four policies. We report these because direction readouts
+are routinely used as behavioural proxies without such checks.}
+\label{tab:negative}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{0.34\columnwidth}@{\,}c@{\,}p{0.40\columnwidth}@{}}
+\toprule
+Pre-registered hypothesis & $n$ & Outcome \\
+\midrule
+Occlusion-scenario angle predicts the official closed-loop rank & 6 policies & \textbf{rejected}: $\rho$ falls from $+1.00$ ($n{=}4$, the set that generated the hypothesis) to $+0.03$ \\
+\addlinespace
+$v_{\mathrm{faith}}$ separates hazard-caused from red-light hard braking & 30/49 & \textbf{rejected} for 2/4; the other 2 reach $\delta{=}0.28,0.30$ against a pre-set bar of $0.33$ \\
+\addlinespace
+Representational deviation on the deployment side implies more aggressive behaviour & 48/31 & \textbf{rejected}: 0/4 policies; three are \emph{more} conservative \\
+\addlinespace
+An axis fit on benchmark hard-braking transfers to deployment & 19/29 $\to$ 11/20 & \textbf{rejected}; the axis fails on its own training split ($\delta{=}0.02$--$0.28$), so no direction exists to transfer \\
+\addlinespace
+Per-event projection predicts per-event response & 325 & holds for SimLingo ($\rho{=}{+}0.51$) and DDv2 ($+0.25$); null for DD, LTF \\
+\bottomrule
+\end{tabular}
+\end{table}

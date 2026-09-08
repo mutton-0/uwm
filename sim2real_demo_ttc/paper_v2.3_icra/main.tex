@@ -1,0 +1,51 @@
+% ICRA 2027 submission — GFIC 诊断协议
+% 模板：IEEEtran conference（ICRA/IROS 用），不是 CVPR。
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{numprint}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalize]{cleveref}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,fit,backgrounds,calc}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\newcommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
+\newcommand{\arcfull}{\ensuremath{v^{\mathrm{arc}}}}
+\newcommand{\breq}{\ensuremath{b^{\mathrm{GT}}}}
+
+\begin{document}
+
+\title{Darkness Reads as Safety:\\
+A Consistent Appearance-Induced Failure Mode in End-to-End Driving Policies}
+
+\author{\IEEEauthorblockN{Anonymous Submission}
+\IEEEauthorblockA{Paper ID ---}}
+
+\maketitle
+
+\nocite{*}
+\input{sec/0_abstract}
+\input{sec/1_intro}
+\input{sec/2_related}
+\input{sec/3_method}
+\input{sec/4_experiments}
+\input{sec/5_conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{main}
+
+\appendix
+\input{sec/6_appendix}
+
+\end{document}

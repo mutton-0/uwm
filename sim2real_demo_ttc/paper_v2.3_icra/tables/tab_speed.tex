@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{What \emph{does} transfer: a multi-layer speed axis.} Layer weights
+and per-layer directions are fit on benchmark cruising samples only; the deployment
+side is held out entirely. Spearman $\rho$ between the projection and true ego speed.
+The weighted axis beats the best single layer on held-out data, and the advantage
+survives the domain shift.}
+\label{tab:speed}
+\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+& \multicolumn{2}{c}{$n$} & \multicolumn{3}{c}{bench (CV)} & depl. \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-6}\cmidrule(lr){7-7}
+Policy & b. & d. & best-$L$ & wtd. & shuf. & wtd. \\
+\midrule
+DD & 390 & 246 & +0.65 & \textbf{+0.69} & +0.11 & \textbf{+0.62} \\
+LTF & 390 & 246 & +0.67 & \textbf{+0.72} & +0.20 & \textbf{+0.66} \\
+DDv2 & 390 & 246 & +0.57 & \textbf{+0.58} & +0.05 & \textbf{+0.52} \\
+\bottomrule
+\end{tabular}
+\end{table}

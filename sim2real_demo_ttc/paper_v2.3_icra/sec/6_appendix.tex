@@ -1,0 +1,78 @@
+\section*{Appendix}
+
+\subsection*{A. Method Changes Relative to the Earlier Protocol}
+This appendix records superseded definitions so that numbers reported in earlier
+versions of this work can be located and not confused with the present ones. None of
+the quantities below appear in the main text.
+
+\paragraph{A.1 Event corpus.}
+The earlier corpus was assembled by a geometric hazard predicate followed by a check
+that the human braked. Its corridor criterion admitted events in which the entity was
+already visible in the designated ``clean'' frame, so the contrast measured a closer
+approach rather than an appearance. It is fully replaced by the brake-first
+construction of \cref{sec:mining}.
+
+\paragraph{A.2 Readout.}
+The earlier readout was the policy's native \texttt{commanded\_speed}, covering
+$0.25$--$0.75$\,s of a $2.5$--$4.0$\,s plan. On identical events the ground-truth
+hazard-direction magnitude reads $0.332$ under that window and $1.232$ over the full
+horizon, a factor of $3.7$. \texttt{commanded\_speed} is retained only as a
+sensitivity readout.
+
+\paragraph{A.3 Verdict system.}
+The earlier three-state PASS / FAIL / indeterminate adjudication is replaced by the
+continuous response ratio of \cref{eq:ratio} with an interval, which does not require
+a threshold on a quantity whose scale differs across policies.
+
+\subsection*{A.4 Deployment metrics, written out}
+The official aggregate combines four multiplicative terms with a weighted sum of four
+others:
+\begin{equation}
+\mathrm{PDM} \;=\;
+\Big(\!\!\prod_{k\in\mathcal{M}}\! m_k\Big)\cdot
+\frac{\sum_{j\in\mathcal{W}} w_j\,s_j}{\sum_{j\in\mathcal{W}} w_j},
+\label{eq:pdm}
+\end{equation}
+with $\mathcal{M}=\{$no at-fault collision, drivable area, driving direction, traffic
+light$\}$ and $\mathcal{W}=\{$progress, TTC, lane keeping, comfort$\}$. The progress
+term is normalised \emph{within the proposal batch},
+\begin{equation}
+s_{\mathrm{progress}}^{(i)}=\mathrm{clip}\!\left(
+\frac{p_i}{\max_{i'} \big(p_{i'}\!\cdot\!\prod_k m_k^{(i')}\big)},\,0,\,1\right),
+\label{eq:progress}
+\end{equation}
+which is identically $1$ when a single proposal is scored alone --- the degeneracy
+reported in \cref{sec:validity}. We therefore score all candidates as one batch, which
+makes progress \emph{relative} to the batch and not comparable with published absolute
+figures.
+
+Our own comfort readouts are taken from the planned path resampled at
+$\delta=0.5$\,s, with $u_k$ the speed sequence of \cref{eq:onset}:
+\begin{equation}
+a_k=\frac{u_{k+1}-u_k}{\delta},\quad
+j_k=\frac{a_{k+1}-a_k}{\delta},\quad
+J=\sqrt{\tfrac{1}{n}\textstyle\sum_k j_k^{2}} .
+\label{eq:jerk}
+\end{equation}
+
+\subsection*{B. Corrections Made During This Study}
+\paragraph{B.1 Velocity frame (deployment corpus).}
+Object velocities in the deployment logs are expressed in the ego frame, not the
+global frame; an earlier version applied a further rotation, which made every object
+appear stationary to the attribution of \cref{eq:areq} and inflated the lead-vehicle
+pool by $3.7\times$. The benchmark corpus derives velocity by differencing global
+positions and was unaffected (verified: pool sizes unchanged).
+
+\paragraph{B.2 Turn gate.}
+A heading-change gate estimated from path tangents produced spurious $\sim180^{\circ}$
+turns whenever the ego came to a full stop, because the trailing path points coincide.
+Replacing it with the unwrapped ego-pose yaw plus a $5$\,m displacement gate removed
+$33$ of $38$ events from the affected pool.
+
+\paragraph{B.3 Scene identifiers.}
+Scene names are not unique across dataset splits: $65.8\%$ of the deployment test
+split's scene names also occur in the trainval split, referring to different logs.
+All merged pools are keyed by (split, scene, frame).
+
+\paragraph{B.4 Sufficiency of the patched set.}
+See \cref{sec:validity}.

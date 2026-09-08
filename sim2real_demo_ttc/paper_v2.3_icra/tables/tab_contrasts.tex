@@ -1,0 +1,34 @@
+\begin{table*}[!tb]
+\centering
+\setlength{\tabcolsep}{4pt}
+\footnotesize
+\caption{Pre-registered contrasts on the response ratio, scene-level bootstrap. With 18 tests the Bonferroni threshold is $\alpha=0.0028$; $\star$ marks the contrasts that clear it. The two vision--language policies have deployment-side data only, so the cross-corpus rows omit them rather than substituting a value. Corpora share no city.}
+\label{tab:contrasts}
+\begin{tabular}{llrcr}
+\toprule
+Contrast & Policy & $\Delta r$ & 95\% CI & $p$\\
+\midrule
+Benchmark $-$ deployment, lead & SimLingo & +0.633 & [-0.799,+2.483] & 0.4744\\
+ & DiffusionDrive & +0.000 & [-0.214,+0.221] & 0.9848\\
+ & LTF & +0.319$^\star$ & [+0.165,+0.493] & $<$0.0001\\
+ & DiffusionDriveV2 & -0.149 & [-0.280,+0.002] & 0.0512\\
+\midrule
+Benchmark $-$ deployment, ghost & SimLingo & -0.222 & [-0.846,+0.465] & 0.4920\\
+ & DiffusionDrive & -0.067 & [-0.172,+0.023] & 0.1640\\
+ & LTF & +0.156 & [+0.005,+0.354] & 0.0404\\
+ & DiffusionDriveV2 & -0.089 & [-0.512,+0.338] & 0.6524\\
+\midrule
+ghost $-$ lead, benchmark & SimLingo & -1.965 & [-3.940,-0.444] & 0.0088\\
+ & DiffusionDrive & -0.096 & [-0.325,+0.122] & 0.3760\\
+ & LTF & -0.150 & [-0.347,+0.072] & 0.1572\\
+ & DiffusionDriveV2 & +0.012 & [-0.383,+0.415] & 0.9520\\
+\midrule
+ghost $-$ lead, deployment & SimLingo & -1.120$^\star$ & [-1.583,-0.647] & $<$0.0001\\
+ & DiffusionDrive & -0.028 & [-0.119,+0.080] & 0.5584\\
+ & LTF & +0.012 & [-0.114,+0.130] & 0.8260\\
+ & DiffusionDriveV2 & -0.049 & [-0.264,+0.165] & 0.6376\\
+ & Alpamayo-R1 & -0.022 & [-0.114,+0.056] & 0.6228\\
+ & AutoVLA & -0.107 & [-0.344,+0.081] & 0.3108\\
+\bottomrule
+\end{tabular}
+\end{table*}

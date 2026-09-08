@@ -1,0 +1,152 @@
+\section{Experiments}
+\label{sec:exp}
+
+\subsection{Setup}
+
+Four end-to-end policies: SimLingo (vision--language, $10\times0.25$\,s plans), and the
+TransFuser family DiffusionDrive, LTF and DiffusionDriveV2 ($8\times0.5$\,s; V2 additionally
+consumes LiDAR). Two further vision--language policies, Alpamayo-R1 and AutoVLA, enter only the
+pre-registered rank test of \Cref{sec:negative}; their multi-camera, multi-frame input makes the
+occlusion intervention cover $1/12$ to $1/16$ of the visual input rather than all of it, an
+asymmetry we correct by masking every camera and history frame in which the object projects,
+and report alongside every number derived from them.
+
+Events come from nuScenes and from the OpenScene/nuPlan data underlying NAVSIM, pooled and then
+split by \emph{driving side}: left-hand drive is the benchmark side, right-hand drive the
+deployment side. The results in \Cref{sec:geometry,sec:behaviour,sec:controls} are established
+on the benchmark side ($n{=}312$ lead events); the deployment side holds $8$--$10$ hazard events
+and is used only where we say so. \Cref{sec:limits} explains why that number is a property of
+the available data rather than of our mining.
+
+\subsection{The three directions form two families}
+\label{sec:geometry}
+
+\input{tables/tab_geometry}
+
+\Cref{tab:geometry} reports the pairwise angles at each policy's deepest gated layer.
+$v_{\mathrm{faith}}$ and $v_{\mathrm{decel}}$ lie $34$--$46^\circ$ apart. Against a split-half
+floor of $7^\circ$ this is a real separation, and against the $90^\circ$ random baseline it is a
+strong association: the two are near but distinct members of one family. This is consistent
+with what we find in \Cref{sec:negative}---that $v_{\mathrm{faith}}$ carries mostly a
+\emph{braking-tendency} component and only weakly a \emph{hazard} component.
+
+$v_{\mathrm{bright}}$ behaves differently. Its angle to both action directions is
+$93$--$115^\circ$, i.e.\ past the random line, with a mean cosine of $-0.54$ to
+$v_{\mathrm{faith}}$ across all gated layers and all four policies (39 of 41 layer-cells
+negative). SimLingo is the cleanest case: its cosine sits between $-0.67$ and $-0.76$ across all
+24 layers, essentially flat with depth.
+
+The sign is what matters. Since
+$v_{\mathrm{faith}} = h(\text{hazard present}) - h(\text{hazard removed})$, a negative
+projection says the appearance change moves the representation \emph{toward} the
+hazard-removed state. In plain terms, the policy encodes ``it got dark'' the way it encodes
+``the hazard is gone.''
+
+\subsection{And the behaviour agrees}
+\label{sec:behaviour}
+
+\input{tables/tab_deltab}
+
+\Cref{tab:deltab} gives the behavioural consequence. Under a full-image night rendering with
+noise, DiffusionDrive plans $2.05$\,m/s faster, LTF $1.25$, SimLingo $1.57$. For scale:
+\emph{deleting the lead vehicle from the image} raises DiffusionDrive's planned speed by
+$0.23$\,m/s. The appearance perturbation is therefore roughly nine times more effective at
+making this policy accelerate than the removal of the object it is supposed to be reacting to.
+
+Two independent readouts---the negative cosine of \Cref{sec:geometry} and the positive
+$\Delta b$ here---agree on direction, in every policy where both are measurable. DiffusionDriveV2
+is the informative exception: it is the only LiDAR-consuming policy, and the only one whose
+$\Delta b$ is negative ($-0.94$). Its representation is also the most tightly coupled
+($\cos = -0.84$ at the output layer). Coupling and behavioural sign are separable; the geometry
+says the appearance axis presses on the action axis, not which way.
+
+\paragraph{A single event.} In \texttt{scene-1055}, a Singapore night scene, a pedestrian stands
+$34$\,m ahead at the edge of oncoming headlight glare; the human brakes from $9.6$ to
+$3.8$\,m/s. LTF plans $9.10$\,m/s and DiffusionDrive $8.58$---essentially no deceleration---and
+removing the pedestrian from the image changes neither ($b = -0.02$ and $+0.02$). The
+representational and behavioural failures we quantify in aggregate are visible in single frames.
+
+\subsection{Noise, not darkness; global, not local}
+\label{sec:controls}
+
+Two controls separate the mechanism.
+
+\paragraph{Luminance versus noise.} Columns 1 and 3 of \Cref{tab:deltab} apply the photometric
+transform with the noise term set to zero. For DiffusionDrive, sky-only darkening gives
+$\Delta b = -0.013$ (marginally \emph{slower}, the safe direction); adding noise flips it to
+$+0.045$. Whole-image: $+0.084$ without noise, $+2.054$ with. Darkening is a smooth monotone
+map that preserves edge structure up to a scale factor, and a normalised encoder largely undoes
+it. Noise adds energy at exactly the spatial frequency where small distant objects live: after
+darkening, the frame's own local gradients have $\mathrm{sd}\approx 1.9$, and the injected grain
+has $\mathrm{sd}\approx 7$. The evidence is not that darkness is harmless but that the operative
+variable is sensor noise---which is precisely what a real high-ISO night camera produces.
+SimLingo is again a partial exception: its whole-image response is large ($+1.49$) even without
+noise, so for that policy luminance alone suffices.
+
+\paragraph{Sky-only.} The sky mask covers $17.9\%$ of the frame. We verified that the
+perturbation stays inside it: high-frequency energy rises from $4.29$ to $5.85$ within the mask
+and from $6.33$ to $6.34$ outside, with the with- and without-noise conditions differing by
+$10^{-4}$ outside---the residual is feathering, not leakage. The lead vehicle, the road surface
+and the lane markings are untouched to the pixel. Yet $\Delta b$ is still $+0.045$ for
+DiffusionDrive, $19\%$ of the effect of deleting the hazard entirely. The dependence on
+appearance is therefore global---plausibly through a pooled or distributional statistic---rather
+than mediated by any cue in the region that carries the driving decision.
+
+\paragraph{Fill colour.} A three-way comparison (grey blob / road colour $+$ noise / road colour
+only) on 304 deployment lead events shows the road-colour-only condition reproduces the grey
+blob almost digit for digit (DD $+0.234$ vs $+0.214$; LTF $-0.153$ vs $-0.152$), while adding
+noise inflates $b$ four- to eight-fold and drives the control arm from $-0.008$ to $+0.204$.
+All results here use the noiseless road-colour fill.
+
+\subsection{Projections are not a behavioural proxy}
+\label{sec:negative}
+
+\input{tables/tab_negative}
+
+\Cref{tab:negative} lists five pre-registered hypotheses and their outcomes. The pattern is
+consistent: the projection onto $v_{\mathrm{faith}}$ carries some hazard information under
+favourable conditions---the lead scenario, large-response policies, quartile-level grouping at
+$n{=}325$---and none at the level of individual events, individual policies, or across the
+domain shift.
+
+Two of the rejections are worth stating precisely, because the manner of failure is
+informative. The rank hypothesis produced a perfect Spearman correlation on the four policies
+that generated it and $+0.03$ once Alpamayo-R1 and AutoVLA were added; AutoVLA has the largest
+angle and the best closed-loop score, exactly inverted. And the benchmark-to-deployment transfer
+failed on its own \emph{training} split (leave-one-out $\delta = 0.02$--$0.28$), so the correct
+reading is not that a direction failed to transfer but that at $n{=}19$ versus $29$ in
+$256$--$2048$ dimensions there was no direction to begin with.
+
+\input{tables/tab_speed}
+
+\Cref{tab:speed} shows the one readout that does transfer. Fitting per-layer regression
+directions against ego speed on benchmark cruising samples, and weighting layers by their
+held-out agreement with that target, gives $\rho = +0.58$ to $+0.72$ under 5-fold
+cross-validation and $+0.52$ to $+0.66$ on the held-out deployment side, in every case beating
+the best single layer and far above a label-shuffled null ($+0.05$ to $+0.20$). The contrast
+with the failures above is instructive: this target variable is \emph{external} (measured ego
+speed), whereas $v_{\mathrm{faith}}$'s target is the policy's own output.
+
+\subsection{Limits}
+\label{sec:limits}
+
+\paragraph{Deployment-side hazard events top out in the low tens.} Four independent criteria
+converge: brake-first mining yields 74 right-hand-drive events but none with time-to-collision
+below $2.3$\,s; direct TTC screening yields zero below $1.5$\,s once roadside furniture and
+cross-traffic are excluded (both verified by inspecting frames); harsh braking
+($\ge 3$\,m/s$^2$) yields 31, of which 11 have a visible object ahead; and the entire NAVSIM
+right-hand-drive split---1{,}354 scenes---contains no event above $2$\,m/s$^2$. With $8$--$10$
+usable events, a bootstrap over the deployment side gives rank probabilities near chance
+(27\%/40\%/33\% for one policy across three positions), so we report no deployment-side ranking.
+
+\paragraph{The public sensor release is the bottleneck, not the recording.} Deriving per-city
+hours from log durations---nuPlan publishes no city breakdown---the right-hand-drive city
+holds $177.3$ hours of recorded logs but only $6.9$ hours with sensors released ($3.9\%$),
+against $16.4\%$, $10.0\%$ and $8.8\%$ for the three left-hand-drive cities.
+
+\paragraph{Scope.} \Cref{sec:geometry,sec:behaviour,sec:controls} are established on the
+benchmark side. The night transform is closed-form and its noise magnitude is a chosen
+parameter, so the magnitude of $\Delta b$ is parameter-dependent; the ordering (noise
+$\gg$ luminance) and the sign are not. Whether the effect replicates on the deployment side, and
+whether it is calibrated by real night imagery rather than synthesis, are the two open questions
+we consider most important.

@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\setlength{\tabcolsep}{4pt}
+\footnotesize
+\caption{Built-in checks and what each ruled out. The last two fired during this study and forced corrections rather than confirming a result.}
+\label{tab:validity}
+\begin{tabular}{p{0.30\linewidth}p{0.62\linewidth}}
+\toprule
+Check & Outcome\\
+\midrule
+Control arm $b_{\mathrm{ctrl}}$ & An equal-area patch elsewhere in the frame does not move the plan the way erasing the attributed group does; without this, any response could be a reaction to grey pixels.\\
+Position-only probe floor & Token coordinates alone reach a large fraction of the raw probe mIoU, so only the trained$-$random difference is reported.\\
+Readout window & The ground-truth hazard magnitude reads $0.332$ over $0.25$--$0.75$\,s and $1.232$ over the full horizon; the short window is demoted to a sensitivity readout.\\
+Common timeliness grid & The same human trajectory yields onset $0.38$\,s at $0.25$\,s spacing and $1.61$\,s at $0.5$\,s spacing, so all policies are read on one grid.\\
+\midrule
+\textbf{Patch-all sufficiency} & \textbf{Failed} at $-1.169$ for the LiDAR-consuming policy: the clean arm had erased the hazard from the image but not from the point cloud. After deleting the points inside the mask group's 3D boxes it reads $+0.932$ and the per-layer shares become interpretable.\\
+\textbf{Progress normalisation} & \textbf{Failed} silently: the official progress term is normalised by a maximum over the proposal batch, so a single trajectory always scores $1.000$. Scoring all candidates as one batch restores the separation and lowers every absolute score.\\
+\bottomrule
+\end{tabular}
+\end{table}

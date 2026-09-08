@@ -1,0 +1,22 @@
+\begin{table*}[!tb]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Timeliness of the planned braking response, on a common $0.25$\,s grid and horizon. `Plans a slowdown' is the fraction of events in which the policy's own plan ever drops $1$\,m/s below the current speed; the delay is computed only on events where both the policy and the human do, so it must be read together with that fraction.}
+\label{tab:timeliness}
+\begin{tabular}{llcc}
+\toprule
+Scenario & Policy & Plans a slowdown & Onset delay vs.\ human (s)\\
+\midrule
+ghost & SimLingo & 53.1\% & +0.38\,[+0.22,+0.56]\\
+ghost & DiffusionDrive & 95.9\% & +0.52\,[+0.43,+0.61]\\
+ghost & LTF & 77.6\% & +0.76\,[+0.61,+0.93]\\
+ghost & DiffusionDriveV2 & 67.3\% & +0.16\,[-0.03,+0.39]\\
+\midrule
+lead & SimLingo & 67.4\% & +0.41\,[+0.34,+0.48]\\
+lead & DiffusionDrive & 98.0\% & +0.47\,[+0.44,+0.51]\\
+lead & LTF & 87.2\% & +0.83\,[+0.77,+0.89]\\
+lead & DiffusionDriveV2 & 88.5\% & +0.19\,[+0.13,+0.27]\\
+\bottomrule
+\end{tabular}
+\end{table*}

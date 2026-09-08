@@ -1,0 +1,52 @@
+\section{Introduction}
+\label{sec:intro}
+
+Driving benchmarks are built from clear, well-lit imagery. A policy that scores well on them
+has been asked, almost exclusively, to act on scenes whose appearance is easy. What its
+internal representation does when only appearance changes---and whether that change reaches
+the planned trajectory---is not something a leaderboard number reports.
+
+We study this directly. Starting from mined human braking events, we extract three directions
+in each policy's intermediate representation: the \emph{hazard-response} direction
+$v_{\mathrm{faith}}$, obtained from paired frames that differ only in whether the hazard is
+present; the \emph{braking} direction $v_{\mathrm{decel}}$, obtained by contrasting cruising
+and braking populations at matched speed; and the \emph{appearance} direction
+$v_{\mathrm{bright}}$, obtained by re-rendering the same frame as night. We then ask how these
+sit relative to one another, and what happens to the planned trajectory.
+
+\paragraph{Finding.} The three directions do not spread out evenly. $v_{\mathrm{faith}}$ and
+$v_{\mathrm{decel}}$ cluster ($34$--$46^\circ$; \Cref{tab:geometry}); $v_{\mathrm{bright}}$
+sits on the opposite side of the random baseline from both. Because
+$v_{\mathrm{faith}} = h(\text{hazard present}) - h(\text{hazard removed})$, a negative
+projection means the model reads ``it got dark'' the way it reads ``the hazard went away.''
+The behavioural readout agrees: synthetic night raises planned speed by up to $2.05$\,m/s,
+where deleting the lead vehicle from the image raises it by $0.23$\,m/s. Two independent
+readouts---representation geometry and output trajectory---point to the same mechanism, in
+four architectures.
+
+\paragraph{What carries it.} Darkness alone is nearly inert; the effect is carried by sensor
+noise. Perturbing only the sky, with the driving corridor untouched, still recovers a fifth of
+the hazard-removal effect. The dependence is therefore global, not mediated by a local cue in
+the region that matters for driving.
+
+\paragraph{What we could not show.} A natural next step is to use the projection onto these
+directions as a cheap behavioural proxy---to rank policies, or to flag individual events,
+without closed-loop simulation. We pre-registered five such tests. Four are rejected, and the
+fifth holds for only two of four policies (\Cref{tab:negative}). We report this in full: the
+practice of treating a representation-space projection as a behavioural proxy is common, and
+our evidence says it does not hold up here. One readout does transfer across the domain
+shift---a multi-layer speed axis (\Cref{tab:speed})---and it is instructive that the one that
+works has an \emph{external} target variable.
+
+\paragraph{Contributions.}
+\begin{enumerate}\itemsep2pt
+\item An appearance-induced failure mode, consistent across four end-to-end policies, in which
+      a night rendering moves the representation opposite to the policy's own hazard direction
+      and raises planned speed (\Cref{sec:geometry,sec:behaviour}).
+\item Isolation of its cause: sensor noise rather than luminance, and a global rather than
+      local dependence---established by controls that hold the driving corridor fixed
+      (\Cref{sec:controls}).
+\item Five pre-registered tests of direction projections as behavioural proxies, four
+      rejected, with the discipline that made the rejections interpretable
+      (\Cref{sec:negative}).
+\end{enumerate}

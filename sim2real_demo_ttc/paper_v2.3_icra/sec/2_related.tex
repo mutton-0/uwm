@@ -1,0 +1,38 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Open-loop benchmarks and their discontents.}
+nuScenes~\cite{caesar2020nuscenes} and the nuPlan-derived NAVSIM
+protocol~\cite{dauner2024navsim} score a policy by comparing its plan against logged
+human behaviour, the latter through a non-reactive simulation with map-based
+compliance terms. Both are displacement- or compliance-centric: a policy that never
+reacts to a hazard can score well as long as its trajectory stays close to the
+recorded one and inside the drivable area. Our Faithfulness axis is designed to be
+insensitive to exactly the thing these scores reward, and we quantify the disagreement
+directly rather than asserting it.
+
+\paragraph{Causal confusion in imitation learning.}
+Policies trained by behaviour cloning routinely latch onto correlates of the expert's
+action rather than its causes~\cite{dehaan2019causalconfusion}. The standard remedy is
+intervention at the input; the standard difficulty is constructing an intervention
+that removes the cause without also removing everything correlated with it. Our
+three-arm same-frame design, with an equal-area control patch and (for LiDAR
+consumers) a mirrored-box point deletion, is our answer to that difficulty.
+
+\paragraph{Probing and control tasks.}
+Reading structure out of frozen representations is only meaningful against a control
+that shares the probe's capacity~\cite{hewitt2019designing}. We adopt the
+random-initialisation control and additionally report a position-only floor, which in
+our setting accounts for the majority of the raw probe score.
+
+\paragraph{Localisation by activation patching.}
+Replacing an activation with its counterpart from a paired input localises which
+component carries a behavioural difference. The construction is only interpretable
+when the patched set is a sufficient cut for that pairing; we enforce this with an
+explicit patch-all self-check, which in our experiments rejected one policy--corpus
+cell outright and forced a correction to the intervention itself.
+
+\paragraph{Segmentation supervision without labels.}
+We use class-agnostic masks from SAM~\cite{kirillov2023sam} as an objective,
+task-independent probe target, avoiding any human judgement about which objects count
+as hazards.

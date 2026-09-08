@@ -1,0 +1,72 @@
+\section{Method}
+\label{sec:method}
+
+\subsection{Stimuli}
+\label{sec:stimuli}
+
+All directions are extracted from the same event pool, mined \emph{brake-first}: we first
+locate human decelerations ($\Delta v < -0.5$\,m/s with $|\Delta v|/v_0 > 0.3$) and only then
+attribute them to a front object, so that the presence of a hazard is established by the
+driver's behaviour rather than by our own detector. The query frame is the onset of
+deceleration. Attribution uses a required-deceleration term
+$a_i = \max(v_0 - v_{\parallel}, 0)^2 / (2\max(s_i - 2,\,0.5))$ inside a $2$\,m corridor, with
+four gates (share $>0.6$, $1.5\times$ dominance, explained ratio in $(0.3,10]$,
+$a_{\mathrm{req}} \ge 0.4$).
+
+Each event yields three same-frame arms: \textsc{origin} (hazard present), \textsc{clean}
+(hazard region filled with the median colour of the road surface immediately below it), and
+\textsc{ctrl} (an equal-area patch elsewhere). The fill is deliberately noiseless: injecting
+noise matched to the local texture inflates the measured response four- to eight-fold and
+contaminates the control arm, which we verified with a three-way comparison and report in
+\Cref{sec:controls}.
+
+\subsection{Three directions}
+\label{sec:directions}
+
+Write $h_\ell(x)$ for the vision-token-mean activation at layer $\ell$.
+
+\begin{align}
+v_{\mathrm{faith}}(\ell) &= \textstyle\frac{1}{n}\sum_i\big[h_\ell(x_i^{\mathrm{orig}}) - h_\ell(x_i^{\mathrm{clean}})\big] \\
+v_{\mathrm{decel}}(\ell) &= \mathbb{E}[h_\ell \mid \text{brake}] - \mathbb{E}[h_\ell \mid \text{cruise}] \\
+v_{\mathrm{bright}}(\ell) &= \textstyle\frac{1}{n}\sum_i\big[h_\ell(T(x_i)) - h_\ell(x_i)\big]
+\end{align}
+
+$v_{\mathrm{faith}}$ is paired: both arms are the same frame at the same ego speed, so any
+common speed component cancels. $v_{\mathrm{decel}}$ is a population contrast, stratified into
+four speed bands so that speed is not confounded with braking. $T$ is a closed-form photometric
+night transform (gamma $2.2$, gain $0.45$, saturation $0.45$, blue tint, optional Gaussian
+noise), applied either to the whole image or to a heuristic sky mask; we avoid generative
+re-rendering because its own artefacts would become a second, uncontrolled domain shift.
+
+\subsection{Reading an angle}
+\label{sec:angles}
+
+In $d$ dimensions two unrelated directions are $\approx 90^\circ$ apart with small variance, so
+a bare angle is uninterpretable. Every angle we report carries two references: a
+\emph{split-half floor}, the median angle between directions fit on two halves of the same
+data, which is the best agreement the sample size permits; and the random baseline itself. We
+additionally gate layers on \emph{effective dimensionality}
+$\mathrm{PR} = (\sum_k\lambda_k)^2/\sum_k\lambda_k^2$ of the per-event differences: where
+$\mathrm{PR}\approx 1$ all perturbations lie on one axis and any angle is forced to $0^\circ$ or
+$180^\circ$ regardless of content. In the policies we study $\mathrm{PR}$ rises monotonically
+with depth ($1.1 \to 14.5$ for DiffusionDrive), so this gate, together with the floor, selects
+mid-to-late layers without our having assumed that.
+
+\subsection{Behavioural readout}
+\label{sec:readout}
+
+We read planned speed as full arc length over the horizon,
+$\arcfull = \big(\|w_1\| + \sum_k\|w_{k+1}-w_k\|\big)/(N\Delta t)$, rather than a chord: a
+policy that swerves around a hazard would otherwise be scored as not responding. The
+appearance effect is $\Delta b = \arcfull(T(x)) - \arcfull(x)$, positive when the policy plans
+to go \emph{faster} after the perturbation. For reference, the hazard-removal response
+$b = \arcfull(x^{\mathrm{clean}}) - \arcfull(x^{\mathrm{orig}})$ uses the same sign convention.
+
+\subsection{Pre-registration}
+\label{sec:prereg}
+
+Every hypothesis in \Cref{sec:negative} was written to a timestamped file, with its decision
+rule and effect-size threshold, before the relevant quantities were computed. This was not
+ceremony: our first estimate of the leading hypothesis showed a perfect rank correlation on
+four policies, and it fell to $\rho = +0.03$ once two further policies were added. The files
+are released with the code.

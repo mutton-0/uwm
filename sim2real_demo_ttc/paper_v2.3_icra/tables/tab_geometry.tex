@@ -1,0 +1,25 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Three directions form two families.}
+Angles between the hazard-response direction $v_{\mathrm{faith}}$, the braking direction
+$v_{\mathrm{decel}}$, and the appearance direction $v_{\mathrm{bright}}$, at each model's
+deepest gated layer ($n{=}312$ left-hand-drive lead events). Read every angle against
+the split-half floor (what the same data can reproduce) and against $90^\circ$ (two
+unrelated directions in high dimensions). $v_{\mathrm{faith}}$ and $v_{\mathrm{decel}}$
+cluster; $v_{\mathrm{bright}}$ sits past the random line on the opposite side.}
+\label{tab:geometry}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccccc}
+\toprule
+& & \multicolumn{3}{c}{angle (deg)} & \multicolumn{2}{c}{floor} & \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-7}
+Policy & $L^*$ & f--d & b--f & b--d & $v_{\mathrm{f}}$ & $v_{\mathrm{b}}$ & rand \\
+\midrule
+SimLingo & 12 & \textbf{--} & \textbf{133} & \textbf{--} & 9 & 10 & 90 \\
+DD & 5 & \textbf{44} & \textbf{96} & \textbf{93} & 5 & 4 & 90 \\
+LTF & 6 & \textbf{46} & \textbf{111} & \textbf{93} & 5 & 4 & 90 \\
+DDv2 & 6 & \textbf{34} & \textbf{111} & \textbf{115} & 5 & 5 & 90 \\
+\bottomrule
+\end{tabular}
+\end{table}

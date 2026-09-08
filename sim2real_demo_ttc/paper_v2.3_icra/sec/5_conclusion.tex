@@ -1,0 +1,22 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+Four end-to-end driving policies share a failure mode we did not set out to find: when a scene
+is re-rendered as night, the representation moves in a direction systematically opposed to the
+policy's own hazard-response direction, and the planned speed rises. The effect is carried by
+sensor noise rather than by low luminance, and it survives when the perturbation is confined to
+the sky---a region that contains nothing a driver needs. Two independent readouts, one
+geometric and one behavioural, agree on this in every policy we tested.
+
+We are less able to say what to \emph{do} with the directions themselves. Of five
+pre-registered attempts to use their projections as a behavioural proxy---to rank policies, to
+flag individual events, to transfer an axis from benchmark to deployment---four are rejected
+outright, and the one readout that does transfer has an external target variable rather than a
+model-internal one. The direction that is easiest to extract is not the direction that predicts
+what the policy will do.
+
+The most severe practical limit is data, not method. Deployment-side hazard events top out in
+the low tens under four independent mining criteria, and the public sensor release for the
+right-hand-drive city we studied covers $3.9\%$ of its recorded hours. Any claim that a handful
+of deployment scenes suffices to estimate a policy's real behaviour has to contend with that
+number first.

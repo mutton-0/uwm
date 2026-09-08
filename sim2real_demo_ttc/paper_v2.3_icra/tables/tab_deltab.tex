@@ -1,0 +1,23 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Synthetic night makes policies drive \emph{faster}, and the driver is
+sensor noise rather than darkness.} $\Delta b$ is the change in planned speed
+(m/s, $\arcfull$) when the same frame is re-rendered as night; positive means faster.
+``sky'' perturbs only the sky region ($17.9\%$ of the frame, containing no
+driving-relevant content); the driving corridor is untouched to the pixel.
+$n{=}312$ left-hand-drive lead events.}
+\label{tab:deltab}
+\small
+\begin{tabular}{lcccc}
+\toprule
+& \multicolumn{2}{c}{sky only} & \multicolumn{2}{c}{whole image} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Policy & luminance & \;$+$noise & luminance & \;$+$noise \\
+\midrule
+SimLingo & $-0.126$ & $-0.131$ & $+1.485$ & $+1.572$ \\
+DD & $-0.013$ & $+0.045$ & $+0.084$ & $+2.054$ \\
+LTF & $-0.103$ & $+0.091$ & $-0.856$ & $+1.245$ \\
+DDv2 & $-0.031$ & $-0.020$ & $-0.116$ & $-0.943$ \\
+\bottomrule
+\end{tabular}
+\end{table}

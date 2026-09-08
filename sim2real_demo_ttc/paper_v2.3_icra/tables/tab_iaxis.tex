@@ -1,0 +1,19 @@
+\begin{table*}[!tb]
+\centering
+\setlength{\tabcolsep}{4pt}
+\footnotesize
+\caption{Invariance under $\mathrm{do}(\text{appearance})$: the same scene and geometry rendered by a game engine versus repainted photorealistically. $I_m=1-D_{L^\ast}$ is read at a layer fixed in advance by an independent analysis, never at the empirical argmax. The representational and behavioural readouts order the policies \emph{oppositely}. $\ddagger$: DiffusionDriveV2 consumes LiDAR, but the paired stimuli are rendered frames with no point cloud, so both arms receive the same empty cloud --- the intervention stays a pure $\mathrm{do}(\text{appearance})$ because $D_L$ is a paired quantity, but the policy runs out of its normal input distribution and its pre-registered layer happens to sit on a dip in its own profile ($D_L=0.02$ against $0.21$ and $0.36$ at the neighbouring layers), so its $I_m$ should not be read as evidence of invariance.}
+\label{tab:iaxis}
+\begin{tabular}{lccc}
+\toprule
+Policy & Peak layer & $I_m$ (repr., higher $=$ invariant) & Behav.\ sensitivity (lower $=$ invariant)\\
+\midrule
+SimLingo & 9 & 0.606 & 0.346\\
+DiffusionDrive & 5 & 0.203 & 0.115\\
+LTF & 6 & 0.583 & 0.160\\
+DiffusionDriveV2$^\ddagger$ & 1 & 0.980$^\ddagger$ & 0.379\\
+\midrule
+\multicolumn{4}{l}{\footnotesize DiffusionDriveV2 $D_L$ profile: 0.209, 0.020, 0.359, 0.285, 0.274, 0.209, 0.448, 0.616}\\
+\bottomrule
+\end{tabular}
+\end{table*}

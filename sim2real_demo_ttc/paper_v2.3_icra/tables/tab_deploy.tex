@@ -1,0 +1,22 @@
+\begin{table*}[!tb]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Deployment quality on a common NAVSIM stimulus set ($n=200$ scenes), official PDM scorer, all four candidates scored as one proposal batch. Progress is normalised within the batch (no PDM-Closed baseline available), so these are \emph{relative} scores, comparable across the four rows here but not with published absolute PDM numbers.}
+\label{tab:deploy}
+\begin{tabular}{lcccc}
+\toprule
+Metric & SimLingo & DiffusionDrive & LTF & DiffusionDriveV2\\
+\midrule
+PDM score & 0.636 & 0.725 & \textbf{0.762} & 0.462\\
+No at-fault collision & 0.838 & \textbf{0.940} & 0.922 & 0.618\\
+TTC within bound & 0.805 & \textbf{0.915} & 0.890 & 0.595\\
+Drivable area & 0.820 & 0.900 & \textbf{0.925} & 0.870\\
+Driving direction & 0.863 & \textbf{0.973} & 0.965 & 0.902\\
+Ego progress & 0.839 & 0.705 & 0.802 & \textbf{0.928}\\
+Lane keeping & 0.805 & \textbf{0.895} & 0.880 & 0.805\\
+Jerk RMS (m/s$^3$) & 3.295 & 2.490 & \textbf{0.516} & 12.533\\
+Max decel (m/s$^2$) & 2.269 & 1.723 & \textbf{0.870} & 4.792\\
+\bottomrule
+\end{tabular}
+\end{table*}
