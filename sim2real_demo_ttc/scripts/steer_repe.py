@@ -42,6 +42,9 @@ def main():
     ap.add_argument("--model",required=True,choices=list(LABEL))
     ap.add_argument("--n",type=int,default=60); ap.add_argument("--n-rand",type=int,default=30)
     ap.add_argument("--mode",default="add",choices=["add","piecewise"])
+    ap.add_argument("--stim-side",default="LHD",choices=["LHD","RHD"],
+                    help="**刺激**的舵位。方向与层权重一律只在左舵巡航样本上学；"
+                         "此项只换被注入的场景。用于检验注入效应是否跨域保持。")
     ap.add_argument("--device",default="cuda:1")
     A=ap.parse_args()
     from PIL import Image
@@ -72,11 +75,11 @@ def main():
     pool=[]
     for sp in ("test","trainval"):
         p=RES/f"cruise_pool_navsim_{sp}.json"
-        if p.exists(): pool+=[c for c in json.load(open(p))["cruise"] if c.get("side")=="LHD"]
+        if p.exists(): pool+=[c for c in json.load(open(p))["cruise"] if c.get("side")==A.stim_side]
     pool=[c for c in pool if (Path(NSB)/c["filename"]).exists()]
     rng=np.random.default_rng(0)
     pool=[pool[i] for i in rng.choice(len(pool),min(A.n,len(pool)),replace=False)]
-    print(f"  刺激集 {len(pool)} 个巡航空场景",flush=True)
+    print(f"  刺激集 {len(pool)} 个巡航空场景（{A.stim_side}；轴与权重仍来自左舵）",flush=True)
 
     def cascade(img,spd,key,dirs,alpha):
         """一次前向完成多层注入。
@@ -127,7 +130,8 @@ def main():
     pos=slope([a for a in ALPHAS if a>=0],[y for a,y in zip(ALPHAS,ys) if a>=0])
     neg=slope([a for a in ALPHAS if a<=0],[y for a,y in zip(ALPHAS,ys) if a<=0])
     sl=slope(ALPHAS,lat)
-    print(f"\n[{LABEL[A.model]}] **RepE 级联注入 −ŝ**（{A.mode}），α 阶梯上的规划速度：")
+    print(f"\n[{LABEL[A.model]}] **RepE 注入 −ŝ**（{A.mode}，刺激={A.stim_side}），"
+          f"α 阶梯上的规划速度：")
     print("  α    "+"".join(f"{a:>8.1f}" for a in ALPHAS))
     print("  速度 "+"".join(f"{y:>8.3f}" for y in ys))
     print("  横偏 "+"".join(f"{x:>8.3f}" for x in lat))
@@ -140,6 +144,7 @@ def main():
     json.dump({"model":A.model,"mode":A.mode,"layers":keep,"alphas":ALPHAS,"arc":ys,"lat":lat,
                "slope":s,"p":p,"slope_pos":pos,"slope_neg":neg,"slope_lat":sl,
                "rand_slopes":sr,"n":len(Y[0])},
-              open(RES/f"steer_repe_{A.model}_{A.mode}.json","w"),ensure_ascii=False,indent=1)
+              open(RES/f"steer_repe_{A.model}_{A.mode}_{A.stim_side}.json","w"),
+              ensure_ascii=False,indent=1)
 if __name__=="__main__":
     main()

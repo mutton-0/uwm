@@ -61,8 +61,20 @@ $\Delta b$ is negative ($-0.94$). Its representation is also the most tightly co
 ($\cos = -0.84$ at the output layer). Coupling and behavioural sign are separable; the geometry
 says the appearance axis presses on the action axis, not which way.
 
-\paragraph{The mean is representative for only two of the four.} The last two columns of
-\Cref{tab:deltab} are there because a mean alone would mislead. For DiffusionDrive the mean
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/deltab_box.pdf}
+\caption{\textbf{Why we do not report a mean alone.} Distribution of $\Delta b$ under the
+full-image night rendering, one point per event ($n{=}312$). DiffusionDrive and LTF show a
+concentrated shift---narrow box, mean on top of median. SimLingo's interquartile range is three
+times wider, its mean (diamond) sits well above its median (bar), and the points separate into
+a group near zero and a group above $+3$; DiffusionDriveV2's box straddles zero. The effect
+size $|\mu|/\sigma$ below each box is the number to read.}
+\label{fig:deltabox}
+\end{figure}
+
+\paragraph{The mean is representative for only two of the four.} \Cref{fig:deltabox} and the
+last two columns of \Cref{tab:deltab} are there because a mean alone would mislead. For DiffusionDrive the mean
 ($+2.05$) and median ($+2.12$) coincide, the effect size is $|\mu|/\sigma = 2.12$, and $98\%$
 of events share the sign: a concentrated shift. LTF is similar ($1.34$, $94\%$). SimLingo and
 DiffusionDriveV2 are not. SimLingo's mean of $+1.57$ sits well above its median of $+0.98$, its
