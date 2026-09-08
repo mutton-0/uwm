@@ -1,38 +1,46 @@
 \section{Related Work}
 \label{sec:related}
 
-\paragraph{Open-loop benchmarks and their discontents.}
+\paragraph{Reading and steering directions in representations.}
+Representation engineering extracts a direction for a concept by contrasting paired
+stimuli, then validates it by injecting it back and watching behaviour
+change~\cite{zou2023repe}. The recipe has been applied to honesty, refusal and
+sentiment in language models, and the injection step is what separates a direction
+that \emph{describes} a state from one that \emph{drives} it. We adopt both halves:
+the paired-difference reading and the injection control, including the operator forms
+and the caution that a perturbation applied early is attenuated downstream. What we
+add is the discipline of reporting the injection result when it comes out null---in
+our setting the projection reads well and drives poorly, and we say so.
+
+\paragraph{Robustness to appearance in driving.}
+Corruption benchmarks perturb driving inputs with weather, blur and noise and report
+the drop in a task metric~\cite{kong2023robodepth}. That tells you \emph{that} a policy
+degrades; it does not say whether the degradation is safe or unsafe, nor what moved
+inside. Our question is narrower and, we think, more diagnostic: does an appearance
+change move the representation along the same axis the policy uses to represent
+hazards, and in which direction? A drop in displacement error is compatible with both
+excessive caution and excessive speed; the sign of $\Delta b$ is not.
+
+\paragraph{Closed-loop and open-loop scoring.}
 nuScenes~\cite{caesar2020nuscenes} and the nuPlan-derived NAVSIM
-protocol~\cite{dauner2024navsim} score a policy by comparing its plan against logged
-human behaviour, the latter through a non-reactive simulation with map-based
-compliance terms. Both are displacement- or compliance-centric: a policy that never
-reacts to a hazard can score well as long as its trajectory stays close to the
-recorded one and inside the drivable area. Our Faithfulness axis is designed to be
-insensitive to exactly the thing these scores reward, and we quantify the disagreement
-directly rather than asserting it.
+protocol~\cite{dauner2024navsim} score a policy against logged human behaviour, the
+latter through a non-reactive simulation with map-based compliance terms. Both are
+displacement- or compliance-centric, and a policy that never reacts to a hazard can
+score well while staying close to the recorded trajectory. We use the official score
+only as an external reference for one pre-registered test (\Cref{tab:negative}); the
+rest of our evidence does not depend on it.
 
-\paragraph{Causal confusion in imitation learning.}
-Policies trained by behaviour cloning routinely latch onto correlates of the expert's
-action rather than its causes~\cite{dehaan2019causalconfusion}. The standard remedy is
-intervention at the input; the standard difficulty is constructing an intervention
-that removes the cause without also removing everything correlated with it. Our
-three-arm same-frame design, with an equal-area control patch and (for LiDAR
-consumers) a mirrored-box point deletion, is our answer to that difficulty.
+\paragraph{Counterfactual object removal.}
+Removing an object and measuring the change in the plan is the standard way to ask
+whether a policy is responding to it. The measurement is more fragile than it looks:
+we find that filling the removed region with noise---rather than with the colour of
+the surface behind it---inflates the measured response four- to eight-fold and
+contaminates the control arm (\Cref{sec:controls}). We report the fill rule explicitly
+for this reason.
 
-\paragraph{Probing and control tasks.}
-Reading structure out of frozen representations is only meaningful against a control
-that shares the probe's capacity~\cite{hewitt2019designing}. We adopt the
-random-initialisation control and additionally report a position-only floor, which in
-our setting accounts for the majority of the raw probe score.
-
-\paragraph{Localisation by activation patching.}
-Replacing an activation with its counterpart from a paired input localises which
-component carries a behavioural difference. The construction is only interpretable
-when the patched set is a sufficient cut for that pairing; we enforce this with an
-explicit patch-all self-check, which in our experiments rejected one policy--corpus
-cell outright and forced a correction to the intervention itself.
-
-\paragraph{Segmentation supervision without labels.}
-We use class-agnostic masks from SAM~\cite{kirillov2023sam} as an objective,
-task-independent probe target, avoiding any human judgement about which objects count
-as hazards.
+\paragraph{Pre-registration in empirical ML.}
+Pre-specifying hypotheses and decision rules is standard in the sciences and rare in
+our field. It earned its place here: our leading hypothesis showed a perfect rank
+correlation on the four policies that generated it, and $\rho = +0.03$ once two more
+were added. Without the timestamped prediction we would have reported the first
+number.

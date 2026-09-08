@@ -1,78 +1,101 @@
 \section*{Appendix}
 
-\subsection*{A. Method Changes Relative to the Earlier Protocol}
-This appendix records superseded definitions so that numbers reported in earlier
-versions of this work can be located and not confused with the present ones. None of
-the quantities below appear in the main text.
+\subsection*{A. Measurement decisions that changed the numbers}
 
-\paragraph{A.1 Event corpus.}
-The earlier corpus was assembled by a geometric hazard predicate followed by a check
-that the human braked. Its corridor criterion admitted events in which the entity was
-already visible in the designated ``clean'' frame, so the contrast measured a closer
-approach rather than an appearance. It is fully replaced by the brake-first
-construction of \cref{sec:mining}.
+We record four decisions whose alternatives we tried and rejected, because each moved a
+headline number by more than the effect it was measuring.
 
-\paragraph{A.2 Readout.}
-The earlier readout was the policy's native \texttt{commanded\_speed}, covering
-$0.25$--$0.75$\,s of a $2.5$--$4.0$\,s plan. On identical events the ground-truth
-hazard-direction magnitude reads $0.332$ under that window and $1.232$ over the full
-horizon, a factor of $3.7$. \texttt{commanded\_speed} is retained only as a
-sensitivity readout.
+\paragraph{A.1 Fill rule for object removal.}
+Three fills on 304 deployment lead events: a grey blob (the frame's mean colour), the median
+colour of the road surface immediately below the box, and that colour plus Gaussian noise
+matched to the local texture.
 
-\paragraph{A.3 Verdict system.}
-The earlier three-state PASS / FAIL / indeterminate adjudication is replaced by the
-continuous response ratio of \cref{eq:ratio} with an interval, which does not require
-a threshold on a quantity whose scale differs across policies.
+\begin{center}\small
+\begin{tabular}{lccc}
+\toprule
+Fill & DD & LTF & DDv2 \\
+\midrule
+grey blob            & $+0.214$ & $-0.152$ & $+0.244$ \\
+road colour $+$ noise & $+0.880$ & $+1.309$ & $+0.287$ \\
+road colour only     & $+0.234$ & $-0.153$ & $+0.240$ \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-\subsection*{A.4 Deployment metrics, written out}
-The official aggregate combines four multiplicative terms with a weighted sum of four
-others:
-\begin{equation}
-\mathrm{PDM} \;=\;
-\Big(\!\!\prod_{k\in\mathcal{M}}\! m_k\Big)\cdot
-\frac{\sum_{j\in\mathcal{W}} w_j\,s_j}{\sum_{j\in\mathcal{W}} w_j},
-\label{eq:pdm}
-\end{equation}
-with $\mathcal{M}=\{$no at-fault collision, drivable area, driving direction, traffic
-light$\}$ and $\mathcal{W}=\{$progress, TTC, lane keeping, comfort$\}$. The progress
-term is normalised \emph{within the proposal batch},
-\begin{equation}
-s_{\mathrm{progress}}^{(i)}=\mathrm{clip}\!\left(
-\frac{p_i}{\max_{i'} \big(p_{i'}\!\cdot\!\prod_k m_k^{(i')}\big)},\,0,\,1\right),
-\label{eq:progress}
-\end{equation}
-which is identically $1$ when a single proposal is scored alone --- the degeneracy
-reported in \cref{sec:validity}. We therefore score all candidates as one batch, which
-makes progress \emph{relative} to the batch and not comparable with published absolute
-figures.
+The noiseless road colour reproduces the grey blob almost digit for digit; the noise inflates
+$b$ four- to eight-fold and moves the control arm from $-0.008$ to $+0.204$. All results use
+the noiseless road fill. DiffusionDriveV2, the only LiDAR consumer, is the least affected,
+which is consistent with its response being dominated by the point cloud.
 
-Our own comfort readouts are taken from the planned path resampled at
-$\delta=0.5$\,s, with $u_k$ the speed sequence of \cref{eq:onset}:
-\begin{equation}
-a_k=\frac{u_{k+1}-u_k}{\delta},\quad
-j_k=\frac{a_{k+1}-a_k}{\delta},\quad
-J=\sqrt{\tfrac{1}{n}\textstyle\sum_k j_k^{2}} .
-\label{eq:jerk}
-\end{equation}
+\paragraph{A.2 Chord versus arc.}
+Planned speed is read as full arc length over the horizon rather than the chord to the final
+waypoint. A policy that swerves around a hazard rather than braking would otherwise score as
+not responding. On identical events the ground-truth magnitude reads $0.332$ under a
+chord-based $0.25$--$0.75$\,s window and $1.232$ over the full horizon.
 
-\subsection*{B. Corrections Made During This Study}
-\paragraph{B.1 Velocity frame (deployment corpus).}
-Object velocities in the deployment logs are expressed in the ego frame, not the
-global frame; an earlier version applied a further rotation, which made every object
-appear stationary to the attribution of \cref{eq:areq} and inflated the lead-vehicle
-pool by $3.7\times$. The benchmark corpus derives velocity by differencing global
-positions and was unaffected (verified: pool sizes unchanged).
+\paragraph{A.3 Layer selection is not one criterion but three.}
+Selecting layers by \emph{reading} quality, by \emph{predictive} value, and by \emph{causal}
+reach gives nearly disjoint answers. For DiffusionDrive the reading-quality gate selects $L_5$;
+$L_5$'s causal reach ($|\Delta y|/\alpha$ under random-direction injection) is $1/10$ of $L_6$'s
+and $1/34$ of $L_0$'s; and $L_7$'s reach is exactly zero---the trajectory head does not consume
+it---although it passes the reading gate. Weighting layers by held-out agreement with the target
+raises the projection--response correlation from $-0.036$ to $+0.154$ (DD) and $-0.111$ to
+$+0.179$ (LTF) under 5-fold cross-validation, against a label-shuffled null of $+0.076$ and
+$-0.028$. Behavioural information is present but not in the layer the reading criterion picks.
 
-\paragraph{B.2 Turn gate.}
-A heading-change gate estimated from path tangents produced spurious $\sim180^{\circ}$
-turns whenever the ego came to a full stop, because the trailing path points coincide.
-Replacing it with the unwrapped ego-pose yaw plus a $5$\,m displacement gate removed
-$33$ of $38$ events from the affected pool.
+\paragraph{A.4 Multi-camera policies need every view masked.}
+The two vision--language policies consume 3--4 cameras $\times$ 4 frames. Masking only the
+front camera's current frame covers $1/12$ to $1/16$ of the visual input; on 49 events the
+object remained visible in the front camera's three history frames in 47 cases, and
+Alpamayo-R1 has \emph{two} front slots (120$^\circ$ and 30$^\circ$) of which the earlier
+implementation masked one. Correcting this moves AutoVLA's $b$ from $-0.007$ (indistinguishable
+from zero) to $+0.123$.
 
-\paragraph{B.3 Scene identifiers.}
-Scene names are not unique across dataset splits: $65.8\%$ of the deployment test
-split's scene names also occur in the trainval split, referring to different logs.
-All merged pools are keyed by (split, scene, frame).
+\subsection*{B. Why the deployment side is small}
 
-\paragraph{B.4 Sufficiency of the patched set.}
-See \cref{sec:validity}.
+Four independent criteria, applied to the same right-hand-drive data:
+
+\begin{center}\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Criterion & yield & of which dangerous \\
+\midrule
+brake-first mining              & 74 ev. & 0 (min.\ TTC $2.3$\,s) \\
+TTC screening, gated            & 330 sc. & 0 below $1.5$\,s \\
+harsh braking $\ge 3$\,m/s$^2$  & 31 ev. & 11 with object ahead \\
+NAVSIM RHD split                & 1{,}354 sc. & 0 above $2$\,m/s$^2$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The TTC row needs three gates to be usable: excluding roadside furniture, requiring the object
+to be genuinely ahead ($d_{\mathrm{long}} \ge 5$\,m, $|{\rm lat}| \le 1.2$\,m), and excluding
+cross-traffic (object longitudinal velocity $\ge -2$\,m/s). Without them the screen returns 55
+``dangerous'' scenes, all of which are barriers and cones passed at $0.1$--$0.6$\,m or vehicles
+crossing an intersection; we verified this by inspecting frames.
+
+\subsection*{C. Per-city hours}
+
+nuPlan publishes no per-city breakdown. The final two integers of a log's filename are its
+start and end second offsets, so their difference is the log's exact duration; we verified this
+against \texttt{lidar\_pc} timestamp spans on four databases (agreement to the second). Reading
+only the zip central directories:
+
+\begin{center}\small
+\begin{tabular}{lccc}
+\toprule
+City & logs & hours & with sensors \\
+\midrule
+Las Vegas        & 9{,}077 & $770.5$ & $76.8$ (10.0\%) \\
+Singapore (RHD)  & 2{,}909 & $177.3$ & $\phantom{0}6.9$ (\phantom{0}3.9\%) \\
+Pittsburgh       & 1{,}910 & $129.8$ & $11.4$ (\phantom{0}8.8\%) \\
+Boston           & 2{,}014 & $\phantom{0}96.7$ & $15.8$ (16.4\%) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Train-split log counts sum to $13{,}180$, matching the published figure. Our total of
+$1{,}174$ hours is $22\%$ below the $1{,}500$ stated in the dataset paper; per-log durations are
+exact, so the gap is either rounding or material not publicly released, and we could not
+determine which.

@@ -23,7 +23,19 @@ the available data rather than of our mining.
 
 \input{tables/tab_geometry}
 
-\Cref{tab:geometry} reports the pairwise angles at each policy's deepest gated layer.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/axes_geometry.pdf}
+\caption{\textbf{Two families.} The three directions at each policy's deepest gated layer,
+drawn on a half-circle with $v_{\mathrm{faith}}$ fixed at $0^\circ$. Shaded wedges are the
+split-half floor---the angular precision the sample supports. $v_{\mathrm{decel}}$ falls close
+to $v_{\mathrm{faith}}$, well outside the floor but far from random; $v_{\mathrm{bright}}$
+crosses the $90^\circ$ line in every policy.}
+\label{fig:geometry}
+\end{figure}
+
+\Cref{fig:geometry} and \Cref{tab:geometry} report the pairwise angles at each policy's
+deepest gated layer.
 $v_{\mathrm{faith}}$ and $v_{\mathrm{decel}}$ lie $34$--$46^\circ$ apart. Against a split-half
 floor of $7^\circ$ this is a real separation, and against the $90^\circ$ random baseline it is a
 strong association: the two are near but distinct members of one family. This is consistent
