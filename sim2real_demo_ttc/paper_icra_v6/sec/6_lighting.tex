@@ -30,7 +30,13 @@ because most pedestrians remain beyond the 2.5\,s plan. DiffusionDriveV2, the on
 reads LiDAR, is the one that slows at night ($\NumNightDDv\%$) and keeps a larger distance.
 AutoVLA and Alpamayo-1.5 are unaffected. In representation space the night direction opposes the
 hazard direction (mean cosine $-0.54$ in four policies), so the policies encode ``it got dark''
-as they encode ``the hazard is gone''.
+as they encode ``the hazard is gone''. We refer to these two directions as the \textbf{F-axis}
+(\emph{faithfulness}: response to the pedestrian, $Q{-}P$) and the \textbf{I-axis}
+(\emph{interference}: response to a change that carries no driving-relevant information, $N{-}P$).
+A high F-axis reading is desirable --- it means the policy reacts to the hazard that is actually
+there --- while a high I-axis reading is not: it means the policy reacts to something that should not
+move its plan at all. The two are not merely uncorrelated, they trend opposite one another in
+aggregate, which is a stronger and more concerning relationship than independence would be.
 
 \paragraph{Orthogonality as a trait}
 We hypothesised that policies whose lighting effect is orthogonal to their pedestrian

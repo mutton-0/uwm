@@ -1,19 +1,19 @@
 % 手写：检查项一览。
 \begin{table}[t]
 \centering
-\caption{\textbf{The check-up.} Each exam, the question an investor would ask, the counterfactual that answers it, and the normal range of a driver that yields.}
+\caption{\textbf{The check-up.} Each exam, the question it asks, the counterfactual that answers it, and the normal range of a driver that yields.}
 \label{tab:exams}
 \footnotesize
 \setlength{\tabcolsep}{2.4pt}
 \begin{tabular}{@{}L{1.6cm}L{1.8cm}L{3.2cm}L{1.45cm}@{}}
 \toprule
-Exam & Investor's question & Measurement & Normal \\
+Exam & Question & Measurement & Normal \\
 \midrule
-Exposure & Position size & planned / logged distance, 2.5\,s & $\approx$1 \\
-Hazard sensitivity $\HS$ & Risk management & safety gained by seeing the pedestrian, when needed & rises to 1 with hazard \\
-Scaling & Procyclicality & rank corr.\ of $\HS$ with hazard & $>0$ \\
-Specificity $\SP$ & Over-reaction & plan change when no reaction is needed & $\approx$1 \\
-Lighting $\CFR$, align & Reaction to noise & night vs.\ removal, same frame & $\CFR\gg1$, align $\approx0$ \\
+Exposure & How far ahead the plan commits & planned / logged distance, 2.5\,s & $\approx$1 \\
+Hazard sensitivity $\HS$ & Does it react to danger & safety gained by seeing the pedestrian, when needed & rises to 1 with hazard \\
+Scaling & Does caution scale with danger & rank corr.\ of $\HS$ with hazard & $>0$ \\
+Specificity $\SP$ & Does it over-react & plan change when no reaction is needed & $\approx$1 \\
+Lighting $\CFR$, align & Does it react to noise & night vs.\ removal, same frame & $\CFR\gg1$, align $\approx0$ \\
 \bottomrule
 \end{tabular}
 \end{table}

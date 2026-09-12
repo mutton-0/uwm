@@ -1,6 +1,12 @@
 \begin{abstract}
-A benchmark score says what a driving policy's trajectories achieved on logged scenes. It does not say
-whether a vulnerable road user in the corridor had anything to do with that result. We propose a
+Choosing which policy to deploy usually starts from its rank on a public leaderboard, narrowed where
+possible to the scenario type the deployment site cares about --- here, scenes where a pedestrian
+appears. We ask whether that rank is enough to make the choice, and find that it is not: a policy's
+rank on nuScenes' open-loop metrics or on NAVSIM's leaderboard score, computed on near-pedestrian
+scenes, predicts its rank at a new deployment site only as well as a coin flip
+($\rho=-0.54$--$+0.49$). The reason is that a benchmark score says what a driving policy's
+trajectories achieved on logged scenes; it does not say whether a vulnerable road user in the
+corridor had anything to do with that result, and that is why the rank does not travel. We propose a
 \emph{check-up}: a short list of counterfactual exams that read a policy's behaviour around
 pedestrians from a few hundred logged frames, without a simulator, a fleet test, or retraining. Each
 exam edits real frames---removing the pedestrian from the ego corridor, or re-rendering the frame at
@@ -14,7 +20,8 @@ evidence of avoidance: of the cells in which the plan moved, \NumMoveFar{} incre
 \NumMoveNear{} decreased it, and only \NumRealPct\% of all cells meet all three conditions for genuine
 avoidance. Across two cities, what transfers is not how strongly a policy reacts but how steadily it
 drives: the specificity exam predicts the new city's rate of sub-1.5\,s time-to-proximity at
-$\rho={\NumSpBeh}$, the only significant predictor among the exams and the standard scores alike. We
+$\rho={\NumSpBeh}$, beating both the other exams and the leaderboard score computed on the new
+city's own scenes. We
 fit how each verdict's uncertainty shrinks with sample size, so that a check-up can be priced before
 it is run: the lighting verdict is settled in \NumNstarCFRhi{} frames and exposure in
 \NumNstarExpHi, while hazard sensitivity needs hundreds. A pre-registered Boston-to-Singapore test
