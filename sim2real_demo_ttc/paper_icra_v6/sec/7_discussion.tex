@@ -1,0 +1,42 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Using the report}
+Read one exam at a time, the report answers separate questions that a single score merges. Whether a
+policy is safe because it yields or because it stays short is answered by exposure together with
+hazard sensitivity: DiffusionDrive keeps its distance by planning short trajectories, which holds only
+as long as the trajectories stay short, whereas AutoVLA and Alpamayo-1.5 cover a human-like distance
+without the response to match. Whether a plan that moves is a plan that yields is answered by the
+decomposition of \cref{sec:axes}: across \NumSGscenes{} scenes and six policies, only \NumRealPct\% of
+cells meet all three conditions, and displacement alone would have ranked the least safe policy first.
+The exam that no current benchmark reports is scaling: whether the response grows when the hazard
+does. Five policies fail it, and the one that passes, DiffusionDriveV2, does so at a sensitivity below
+0.15.
+
+\paragraph{Limitations}
+The exams are open-loop. The approach sequences are replayed from logs and re-anchored to the logged
+pose. The night is a synthetic rendering that also halves the number of other pedestrians the detector
+finds. The counterfactual pairs are constructed by editing, not captured, and so carry noise: 8.5\% of
+removals leave a detectable residue, the inpainting artefact is 5--17\% of the effect, and the VLA
+models can be edited only through their front camera. Alpamayo-1.5 covers 170 of the 236 frames. SimLingo plans 2.5\,s; for NAVSIM's 4\,s we extrapolate at constant velocity (holding position instead gives EPDMS 0.47, still the lowest).
+Cross-policy correlations rest on six policies.
+
+\paragraph{Future work}
+The check-up is designed as the first half of a benchmark-to-deployment pairing. The next step is to
+\emph{collect} paired data rather than construct it: the same scene with and without a pedestrian, by
+day and by night. We then plan to validate the diagnoses against the same policies' behaviour on a real
+vehicle. The sample-size laws above tell us how large that collection must be. A few dozen pairs
+suffice for planned distance, over-reaction and lighting; hundreds of pairs with a genuine need to
+react are needed for hazard sensitivity.
+
+\section{Conclusion}
+A benchmark score reports an outcome, not a cause. We read the behaviour that a deployment decision
+needs from a few hundred logged frames, using counterfactual exams that an independent detector
+verifies. Three results are worth carrying forward. A near-zero counterfactual response is a reliable
+certificate that the pedestrian did not enter the decision, while a large response certifies nothing:
+of the plans that moved, as many moved towards the pedestrian as away from it. What transfers between
+cities is how steadily a policy drives rather than how strongly it reacts, and that exam is the only
+one---among ours and the standard scores alike---that predicts the new city's behaviour at
+significance. And each verdict can be priced in advance: some are settled in a dozen frames, others
+need hundreds, which is what a small check-up must know about itself before it is used to decide
+anything.

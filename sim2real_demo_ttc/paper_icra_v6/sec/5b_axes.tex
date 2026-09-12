@@ -1,0 +1,98 @@
+\section{Re-measuring the Axes in the New Domain}
+\label{sec:axes}
+
+\input{tables/tab_axes}
+
+The transfer test of \cref{sec:sample} moved a \emph{diagnosis} between cities. A more useful question
+for deployment is whether the \emph{method} moves: can a handful of counterfactual cases in the new
+domain characterise how the policies behave there? We repeat both interventions on the Singapore
+near-pedestrian scenes, on the original images used by the benchmark, and read the two axes per scene:
+$F$, the plan displacement caused by removing the target pedestrian, and $I$, the displacement caused
+by the night rendering.
+
+\paragraph{What the axes say per scene}
+Across the ten detailed cases and six policies (\NumCaseCells{} cells), the median $F$ is \NumAxF\,m
+and the median $I$ is \NumAxI\,m; the lighting moves the plan more in \NumAxShare\% of cells. Two rules
+follow directly from the axes. We state each in both directions, so that every cell receives a
+prediction rather than only those whose premise happens to hold:
+\begin{itemize}
+\item \textbf{P-F}: if $F<0.5$\,m, removing the pedestrian should leave the clearance and the contact
+      outcome unchanged; if $F\ge0.5$\,m, it should change them.
+\item \textbf{P-I}: if $\CFR<1$, the night rendering should move the outcome at least as much as the
+      removal; if $\CFR\ge1$, the removal should move it at least as much as the night.
+\end{itemize}
+The two directions do not fare equally. On the detailed cases, P-F holds in \NumPFsmall/\NumPFsmallN{}
+cells in the forward direction but only \NumPFrev/\NumPFrevN{} in the reverse; P-I holds in
+\NumPIsmall/\NumPIsmallN{} and \NumPIrev/\NumPIrevN. Scaling both interventions to the \NumComN{}
+Singapore scenes that all six policies share reproduces the asymmetry exactly (\cref{tab:axes}): P-F
+holds in \NumPFbig\% of scenes forward against \NumPFbigRev\% reversed, while P-I holds in \NumPIbig\%
+and \NumPIbigRev\%. A near-zero $F$ axis is therefore a reliable certificate that the pedestrian is not
+being used, but a large $F$ is not a promise of safer behaviour.
+
+\paragraph{When the plan does move, which way does it move?}
+The reverse direction fails for a specific and instructive reason. $F$ measures how far a plan moves,
+not where it moves to, so we decompose it (\cref{tab:decomp}). Alongside $F$ we read $I$, the
+displacement the same policy produces under an edit that has nothing to do with the pedestrian, which
+serves as its own jitter floor, and $\Delta S$, the change in clearance to the pedestrian's logged
+future. A response deserves to be called avoidance only if it satisfies all three conditions: the plan
+moved ($F\ge0.5$\,m), it moved more than the policy's own jitter ($F>I$), and the movement bought
+distance ($\Delta S\ge0.5$\,m).
+
+\input{tables/tab_decomp}
+
+Three readings follow. First, the pedestrian outweighs the irrelevant edit in only
+\NumFgtIlo--\NumFgtIhi\% of scenes, so most of what $F$ registers sits inside the policy's own
+variability. Second, of the \NumRealTot{} policy--scene cells, \NumRealN{} (\NumRealPct\%) are genuine
+avoidance by the definition above. Third, the displacement that does occur is not aimed: of the
+\NumMoveN{} cells in which the plan moved, \NumMoveFar{} increased the clearance, \NumMoveNear{}
+decreased it, and \NumMoveFlat{} left it unchanged. Per policy the split is sharply different.
+DiffusionDrive reacts in few scenes but in the right direction (\NumDDfar{} away against
+\NumDDnear{} towards, median $\Delta S=\NumDDmed$\,m). SimLingo moves in more scenes than the other
+five combined and moves \emph{towards} the pedestrian more often than away (\NumSLnear{} against
+\NumSLfar, median $\NumSLmed$\,m); it is also the policy with the highest rate of sub-1.5\,s
+time-to-proximity (\cref{tab:axes}). Finally, the clearance a policy yields does not grow with the
+hazard: the rank correlation between $\Delta S$ and the deceleration the scene demands is
+\NumRhoLo--\NumRhoHi{} across the six policies.
+
+An exam that rewarded responsiveness alone would therefore rank the least safe policy first. This is
+the asymmetry we want from a check-up: it can clear a policy of using the pedestrian, and it refuses to
+credit a policy merely for reacting.
+
+\paragraph{A small sample in the new domain ranks; it does not calibrate}
+We can now ask what a handful of new-domain cases actually buys. We draw $k$ scenes at random from the
+shared pool, re-measure both axes on them, and compare the resulting estimate to the large-sample
+values, 200 draws per $k$. Two things behave very differently. The \emph{ordering} of how dangerously
+the policies behave---the share of scenes whose minimum time-to-proximity falls below
+$1.5$\,s---is recovered almost immediately: $\rho={\NumBehRhoTen}$ at $k=10$ and $\rho={\NumBehRhoTwenty}$
+at $k=20$ (with $\rho\ge0.6$ in \NumBehHitTwenty\% of draws), rising to $\rho={\NumBehRhoForty}$ at $k=40$.
+The \emph{level} is not: the same $k=20$ sample still misstates the violation rate by \NumBehErrTwenty{}
+points on average, and $\CFR$ by $\NumCfrErrTwenty$. The rule hit-rates sit in between; $k=20$ estimates
+them to \NumPFErrTwenty{} points. A small check-up in a new domain therefore supports a ranking and a
+verdict, not a calibrated number---which is exactly the use we propose for it.
+
+\paragraph{Re-measuring beats importing}
+Importing the Boston $\CFR$ values misstates the Singapore ones by $\NumLhdCfrErr$ on average, about
+what re-measuring $k=40$ fresh scenes achieves ($\NumCfrErrForty$); doubling that to 80 scenes halves
+the error again ($\NumCfrErrBig$ against $\NumLhdCfrErrBig$ for the imported values).
+
+\paragraph{Which exam travels}
+Of the exams in the report, the one that predicts the new domain's behaviour is not the one that
+measures how \emph{much} a policy reacts, but the one that measures how \emph{steadily} it drives.
+Correlating each Boston exam against the Singapore rate of sub-1.5\,s time-to-proximity over the six
+policies, specificity gives $\rho={\NumSpBeh}$---the only value significant at the two-sided 5\% level
+for $n{=}6$---against ${\NumExpBeh}$ for exposure and ${\NumCfrBeh}$ for $\CFR$. Specificity is the
+exam that asks how far a plan moves when an \emph{irrelevant} part of the scene is edited; a policy
+that answers ``not at all'' is one whose trajectory is stable, and stability is what carries across
+cities. The ordering used here is the one measured on the counterfactual pool, whose readout excludes
+the scenes that carry no removal edit; on the larger original-image set of \cref{sec:bench} exposure
+reaches $0.94$ against this same target. Exposure therefore travels on both pools, but specificity is
+the stronger predictor and the only one that clears significance here. This is consistent with the decomposition above: displacement that is not aimed away from the
+pedestrian is not protection, and a policy that produces a lot of it is dangerous in both cities.
+
+\paragraph{What transfers and what must be re-measured}
+The verdict $\CFR<1$ holds on both driving sides for every policy, but the value drifts by a factor of
+$0.6$ to $1.7$, and the across-policy ordering of $\CFR$ barely agrees between sides ($\rho={+}0.37$,
+against ${+}0.83$ for specificity). A single scene is weaker still: the per-scene medians
+(\cref{tab:axes}) sit well below either aggregate. The practical reading is that the \emph{instrument}
+transfers while its \emph{readings} do not: entering a new domain, one re-measures the axes there with
+a few dozen scenes rather than importing numbers measured elsewhere.

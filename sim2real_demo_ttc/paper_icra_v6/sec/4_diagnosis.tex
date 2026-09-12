@@ -1,0 +1,99 @@
+\section{Diagnosis of Six Policies}
+\label{sec:diagnosis}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/teaser.pdf}
+\caption{\textbf{One frame, two edits, six policies, and the resulting curve.} (a)~A worker in a
+high-visibility vest stands at the edge of the ego corridor 9.6\,m ahead; the ego vehicle moves at
+7.6\,m/s. The detector finds the worker in the night image but not in the removed one. (b)~Plans over
+2.5\,s: original (solid), pedestrian removed (dashed), night (dotted); the star marks the worker.
+(c)~Hazard-sensitivity curves over all near-pedestrian units that need a reaction (mean, 95\% CI,
+bins with $\ge8$ units). A policy that yields would rise toward 1 as hazard grows; all six stay near
+zero.}
+\label{fig:teaser}
+\end{figure*}
+
+\input{tables/tab_report}
+
+\subsection{The report}
+\Cref{tab:report} and \cref{fig:teaser}c give the six profiles.
+
+\paragraph{How far they plan to drive}
+Exposure spans a factor of four. DiffusionDrive plans half the human's distance; SimLingo plans more
+than twice it; AutoVLA and Alpamayo-1.5 plan about as far as the human.
+
+\paragraph{Whether they yield}
+No policy manages the pedestrian risk. On units that need a reaction, seeing the pedestrian buys
+\NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale. The benefit does not grow with the hazard: its rank
+correlation with $a_{\mathrm{req}}$ is negative for five policies, down to $-0.51$ for Alpamayo-1.5.
+DiffusionDriveV2 is the only exception ($+0.29$), and its benefit stays below 0.15. The time-based
+hazard axis gives the same picture (\cref{fig:reach}c). Counting only cases that change outcome, seeing the pedestrian
+turns a collision into a clean pass about as often as it does the reverse:
+\begin{itemize}
+\item DiffusionDrive: 9 passes vs.\ 5 collisions;
+\item SimLingo: 18 vs.\ 30;
+\item the other four policies: at most 5 either way;
+\item all McNemar $p\ge0.11$.
+\end{itemize}
+
+\paragraph{Over-reaction}
+SimLingo's plan moves most when nothing requires it ($\SP=0.42$). The other policies stay at
+0.67--0.79.
+
+\paragraph{Outcome}
+Collisions with the pedestrian's logged future follow how far a policy plans to drive, not what it perceives. At the logged
+speed, the visible and removed rates differ by at most \NumCollGap{} points for every policy, and at
+8\,m/s by at most \NumCollGapEight. SimLingo, which plans the longest trajectories, collides most. The low-exposure
+policies almost never reach the pedestrian. DiffusionDrive is safe because it stays short, AutoVLA and Alpamayo-1.5 cover a human-like distance
+without yielding, and SimLingo covers the most ground with the least stable plan.
+
+\subsection{Looking inside: why the risk goes unmanaged}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/reach.pdf}
+\caption{\textbf{Why the risk goes unmanaged, and what it costs.} (a)~Plan change when the pedestrian is removed, by distance,
+across all 850 nuScenes scenes (974 pedestrian records; median, 95\% CI). LTF responds to corridor pedestrians (filled) once they are
+within reach of its plan; off-road pedestrians (open) evoke nothing; DiffusionDrive is flat throughout. (b)~Collision with the
+pedestrian's logged future along the plan, at the logged speed and at counterfactual input speeds; solid: pedestrian visible,
+dashed: removed. Each pair of curves nearly coincides, and every curve rises with speed. (c)~Hazard sensitivity against the
+time-based hazard axis $\mathrm{TTC}_0$ (bins with $\ge8$ units); colours as in (b).}
+\label{fig:reach}
+\end{figure*}
+
+\input{tables/tab_mech}
+
+The check-up only diagnoses; the following explains the diagnosis for the three BEV planners
+(\cref{tab:mech}, \cref{fig:reach}).
+
+\paragraph{The pedestrian leaves a trace but is not decoded}
+The planners' own BEV semantic heads do not localise the pedestrian. On 520 NAVSIM near-pedestrian
+scenes, the pedestrian channel is no brighter at the pedestrian than at a mirrored empty location
+(\cref{tab:mech}, top). It is 20--55 times weaker than the vehicle channel and never wins the argmax
+inside a pedestrian's box. The pedestrian does leave a trace in the features, however. The direction
+between SimLingo's representations with and without the pedestrian is steerable: it shortens the plan
+by 2.9\,m at the largest dose, while random directions lengthen it. Location-specific information also
+survives in the 1\,m side branch, as shown next.
+
+\paragraph{The planner cannot locate it}
+The trajectory head reads an $8\times8$ grid at 8\,m per cell. In 73\% of 94 pairs of corridor and
+off-road pedestrians, the two fall in the same or an adjacent cell. A corridor-minus-off-road direction
+injected there does not beat random directions ($p=0.27$). At the 1\,m side branch it does (52-fold,
+$p=0.007$), but with $\sim$1/460 of the effect on the trajectory; in LTF that branch does not reach
+the trajectory at all.
+
+\paragraph{The plan does not reach the pedestrian}
+Plans end 5--9\,m ahead, while the median corridor pedestrian stands 20\,m away; only 5--11\% of
+pedestrians are within reach. When a distance sweep over all 850 nuScenes scenes brings the pedestrian
+within 12\,m, LTF begins to respond (\cref{fig:reach}a). At 8--12\,m its
+plan changes by 0.23\,m ($p=5\times10^{-7}$), which separates corridor from off-road pedestrians after
+mask area is regressed out (AUC 0.65; 0.67 on an independent draw). Raising the input speed removes
+that response again, and collisions then rise identically with and without the pedestrian in view
+(\cref{fig:reach}b). DiffusionDrive never responds.
+
+\subsection{What the benchmark sees}
+On 783 NAVSIM scenes scored identically, \NumMapShare\% of the between-policy variance of EPDMS comes
+from the two map-compliance gates (drivable area \NumDacShare\%, driving direction \NumDdcShare\%); the
+no-collision gate contributes \NumNCshare\% (\cref{tab:report}). The benchmark ranks these policies by map compliance, and none of the
+exams above is visible in it.

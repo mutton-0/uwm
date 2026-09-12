@@ -1,0 +1,22 @@
+\begin{abstract}
+A benchmark score says what a driving policy's trajectories achieved on logged scenes. It does not say
+whether a vulnerable road user in the corridor had anything to do with that result. We propose a
+\emph{check-up}: a short list of counterfactual exams that read a policy's behaviour around
+pedestrians from a few hundred logged frames, without a simulator, a fleet test, or retraining. Each
+exam edits real frames---removing the pedestrian from the ego corridor, or re-rendering the frame at
+night---pairs the edit with a control, and has an independent detector verify it. The central reading
+is not how far the plan moves but how far it moves \emph{away}: we decompose the response into its
+magnitude, the policy's own jitter under an irrelevant edit, and the separation it actually buys from
+the pedestrian's logged future. On \NumSGscenes{} near-pedestrian scenes across six end-to-end
+policies, a near-zero response is a reliable certificate that the pedestrian did not enter the
+decision (it predicts an unchanged outcome in \NumPFbig\% of scenes), while a large response is not
+evidence of avoidance: of the cells in which the plan moved, \NumMoveFar{} increased the clearance and
+\NumMoveNear{} decreased it, and only \NumRealPct\% of all cells meet all three conditions for genuine
+avoidance. Across two cities, what transfers is not how strongly a policy reacts but how steadily it
+drives: the specificity exam predicts the new city's rate of sub-1.5\,s time-to-proximity at
+$\rho={\NumSpBeh}$, the only significant predictor among the exams and the standard scores alike. We
+fit how each verdict's uncertainty shrinks with sample size, so that a check-up can be priced before
+it is run: the lighting verdict is settled in \NumNstarCFRhi{} frames and exposure in
+\NumNstarExpHi, while hazard sensitivity needs hundreds. A pre-registered Boston-to-Singapore test
+confirms the operating range: orderings and verdicts carry over, point values do not.
+\end{abstract}

@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Pre-registered transfer test.} Diagnoses made on 88 left-hand-drive frames (Boston) predict the near-pedestrian units of 148 right-hand-drive frames (Singapore). Predictions and decision rules were fixed before any right-hand statistic was computed. Evaluated on the five policies whose registration the Alpamayo-1.5 replacement leaves intact (\cref{sec:sample}); retaining the replaced policy changes no verdict.}
+\label{tab:prereg}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lp{4.45cm}cl@{}}
+\toprule
+ & Prediction & Holds & Evidence \\
+\midrule
+P1 & Lighting outweighs the pedestrian (CFR $<1$) for every policy & yes & max upper CI 0.70 \\
+P3 & Exposure ordering transfers ($\rho\ge0.6$; SimLingo top, DD bottom) & yes & $\rho=0.90$ \\
+P4 & Over-reaction ordering transfers ($\rho\ge0.6$; SimLingo lowest SP) & yes & $\rho=0.90$ \\
+P7 & SimLingo collides most; visible vs.\ removed within 3\,pts & yes & gap 2.7\,pts \\
+P2 & Hazard sensitivity stays below 0.15 (upper CI) & \textbf{no} & fails for DD, DDv2 \\
+P5 & Point values stay within the left-hand CI ($\ge$70\% of 15 cells) & \textbf{no} & 60\% \\
+P6 & Purer policies (lower $|$align$|$) shift less & \textbf{no} & $\rho=-0.90$ (opposite) \\
+\bottomrule
+\end{tabular}
+\end{table}

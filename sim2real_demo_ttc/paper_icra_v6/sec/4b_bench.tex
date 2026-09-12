@@ -1,0 +1,56 @@
+\section{Against the Standard Evaluations}
+\label{sec:bench}
+
+\input{tables/tab_bench}
+
+How does the check-up relate to the evaluations these policies are usually judged by? We ran both on
+the same six policies (\cref{tab:bench}).
+
+\paragraph{nuScenes open-loop metrics}
+On our 236 near-pedestrian frames, removing the pedestrian changes the L2 error by at most
+\NumMaxdLtwo\,m, frontal collisions by at most \NumMaxdCol{} points and pedestrian collisions by at
+most \NumMaxdPed. The metric cannot tell whether a policy saw the pedestrian. Its ordering follows how
+far a policy's planned distance departs from the human's (rank correlation \NumRhoLtwoExp{} with
+$|\text{exposure}-1|$): L2 rewards driving at the human's speed. We exclude rear-end contacts from the
+collision count. The logged traffic does not react, so a policy that plans to drive slower than the
+human is scored as being hit from behind.
+
+\paragraph{NAVSIM, sliced to near pedestrians}
+On all 783 Singapore scenes, AutoVLA, Alpamayo-1.5 and DiffusionDriveV2 score highest. On the
+\NumNclose{} scenes with a pedestrian near the ego corridor, the ordering is unrelated to that one
+($\rho=\NumRhoAllClose$): the leaderboard's first (AutoVLA) falls to fifth and its third
+(DiffusionDriveV2) to last, while its fourth and fifth (DiffusionDrive, LTF) rise to second and third.
+In these scenes the no-collision gate carries \NumNCshareClose\% of the spread, against 1\% over all
+scenes. The cause is a trait the check-up had not examined: 63\% of these
+scenes show a human driver \emph{waiting}. DiffusionDriveV2 and AutoVLA plan to move off and run into
+the stopped traffic. On our own frames where the human waits, DiffusionDriveV2 plans to move off in
+81\% of cases, against 3\% for DiffusionDrive and 0\% for Alpamayo-1.5. This agrees with NAVSIM for the
+extremes but not for AutoVLA. Of our exams, specificity predicts the near-pedestrian ordering
+($\rho=+0.66$), while hazard sensitivity does not ($+0.14$), because no policy has any.
+
+\paragraph{Pedestrian TTC across driving sides}
+Following the plan against the pedestrian's logged future, we count the moving-ego scenes in which the
+minimum time to collision falls below 1.5\,s. Near-pedestrian scenes from the left-hand-drive cities
+(nuScenes Boston and NAVSIM Las Vegas, Boston, Pittsburgh) and from Singapore give orderings that agree
+at $\rho=\NumRhoTTC$. Both orderings coincide with planned distance ($\rho=\NumRhoTTCExpL$ and $\NumRhoTTCExpR$ with exposure).
+They agree only partly with hazard sensitivity ($\NumRhoTTCHSL$, $\NumRhoTTCHSR$), which is near zero for
+every policy, and not with lighting invariance ($\NumRhoTTCCFRL$, $\NumRhoTTCCFRR$). NAVSIM's own TTC
+term, which counts all objects over 4\,s, agrees only weakly ($0.31$--$0.54$).
+
+\input{tables/tab_rank}
+
+\paragraph{Which evaluation predicts behaviour in another domain?}
+This is the question a deployment decision has to answer, so we pose it directly in \cref{tab:rank}.
+The target is the ordering of the six policies on the Singapore near-pedestrian scenes (original images),
+by TTC violations, clearance to the pedestrian, pedestrian collisions and EPDMS. Each predictor is an
+ordering obtained without that data. The standard evaluations do not predict it: nuScenes L2 and
+collision rates, and the NAVSIM leaderboard score, correlate with it at $-0.54$ to $+0.49$. The same
+pedestrian-centred readouts taken on Boston or on the US cities do predict it ($0.83$--$1.00$), and so
+does the check-up's exposure exam ($0.94$). Near-pedestrian EPDMS is predicted best by near-pedestrian
+EPDMS elsewhere ($0.89$) and by specificity ($0.77$). Hazard sensitivity and lighting invariance measure
+something else, and they do not predict these orderings.
+
+\paragraph{Reading}
+Where a standard metric measures what an exam measures, they agree (pedestrian collisions: $\rho=+0.94$;
+TTC and exposure). None shows whether the pedestrian changed the plan, and the full-set score hides the
+near-pedestrian scenes.

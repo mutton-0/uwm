@@ -1,0 +1,66 @@
+\section{Introduction}
+\label{sec:intro}
+
+End-to-end driving policies are compared by benchmark scores. A score summarises what a policy's
+planned trajectories achieved on logged scenes: no collision, staying in the drivable area, making
+progress~\cite{dauner2024navsim,cao2025pseudosim}. A score of this kind is an outcome measure, and an
+outcome can be right for the wrong reason. A policy that never approaches a pedestrian because it
+plans short trajectories scores as well as one that sees the pedestrian and yields, and the two
+behave very differently the first time the scene changes. Deciding whether to deploy a policy in a new
+city requires knowing which of the two it is, and it usually has to be decided from little data:
+a closed-loop simulator for the target domain, or a fleet test, is exactly what the decision is
+meant to save.
+
+We propose a \emph{check-up}: a short list of exams, each with a control and a known normal range,
+whose results are read as a diagnosis rather than a ranking (\cref{tab:exams}). Every exam is a
+counterfactual edit of real frames. We remove the pedestrian from the ego corridor, or re-render the
+frame at night, and read the change in the planned trajectory; an independent detector verifies every
+edit. The central exam is a \emph{hazard-sensitivity curve}, measuring how much farther the whole
+planned trajectory stays from the pedestrian's logged future because the policy can see the
+pedestrian, against a model-independent hazard level. A specificity term applies a minimal-change
+principle: when no reaction is needed, the plan should not move.
+
+\paragraph{Displacement is not avoidance}
+The quantity an edit yields most directly---how far the plan moves when the pedestrian is
+removed---is a poor safety signal on its own, and treating it as one inverts the ranking. We
+therefore decompose it into three parts: the magnitude of the response, the displacement the same
+policy produces under an edit that has nothing to do with the pedestrian (its own jitter floor), and
+the separation the response actually buys. On \NumSGscenes{} near-pedestrian scenes, the pedestrian
+outweighs the irrelevant edit in only \NumFgtIlo--\NumFgtIhi\% of scenes; among the cells where the
+plan did move, \NumMoveFar{} moved away from the pedestrian and \NumMoveNear{} moved towards it. The
+asymmetry that survives is one-directional and useful: a near-zero response certifies that the
+pedestrian did not enter the decision (\NumPFbig\% of scenes), while a large response certifies
+nothing.
+
+\paragraph{What the six policies do}
+Applied to six end-to-end policies, the check-up separates quantities a benchmark score merges
+(\cref{tab:report}). Their plans cover \NumExpLo--\NumExpHi{} times the distance the human drove.
+Seeing the pedestrian improves the plan by \NumHSlo--\NumHShi{} on a $[-1,1]$ scale, and in five of
+six policies the improvement does not grow with the hazard. Collisions with the pedestrian's logged
+future therefore follow how far a policy plans to drive, not what it perceives. A night rendering
+moves every policy more than the pedestrian does. We look inside the policies to explain this,
+although we do not attempt a repair: the pedestrian leaves a trace in the features but is not decoded
+by the policies' own semantic heads, the planner reads a grid too coarse to locate it, and its plan
+ends before the pedestrian.
+
+\paragraph{What a small check-up can support}
+A check-up is only useful if it is cheap and if its operating range is known. We fit how each
+estimate's spread shrinks with the number of frames: the lighting verdict is settled within
+\NumNstarCFRhi{} frames and exposure within \NumNstarExpHi, while hazard sensitivity and the
+direction of the lighting effect need hundreds. We then pre-registered seven predictions from a
+diagnosis made on 88 Boston frames and tested them on Singapore. Orderings and verdicts transfer;
+point values do not (\cref{tab:prereg}). Re-measuring the exams in the new city, the exam that
+predicts behaviour there is not the one measuring how strongly a policy reacts but the one measuring
+how steadily it drives ($\rho={\NumSpBeh}$ for specificity).
+
+\paragraph{Contributions}
+\begin{enumerate}\itemsep2pt
+\item A small-sample check-up for driving policies: verified counterfactual edits, a hazard-sensitivity
+      curve built on whole-trajectory separation, time to proximity and a minimal-change principle.
+\item A decomposition of the counterfactual response into magnitude, jitter and separation, which
+      turns a two-sided quantity into a one-sided certificate, together with a diagnosis of six
+      policies and an explanation from inside the networks.
+\item An account of what small data can and cannot establish: sample-size laws for every exam, a
+      pre-registered cross-city transfer test, and a measurement of which exam predicts behaviour in
+      a new city.
+\end{enumerate}
