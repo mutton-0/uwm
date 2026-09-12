@@ -1,0 +1,86 @@
+\section{The Check-Up}
+\label{sec:checkup}
+
+\input{tables/tab_exams}
+
+\subsection{Counterfactual units}
+A unit is a logged frame together with an input ego speed. We use the logged speed for every frame,
+and for frames from approach sequences also counterfactual speeds of 2--8\,m/s. For each unit we query
+the policy three times. The query uses its full input (all cameras, history frames, LiDAR, ego
+status), edited in one of three ways: unchanged ($P$), with the target pedestrian removed ($Q$), or
+re-rendered at night ($N$). All policies are read on their common horizon of 2.5\,s. Plans and the
+pedestrian's \emph{logged} future positions are interpolated to 0.1\,s.
+
+\paragraph{Removal}
+We project the pedestrian's annotated 3D box into the camera; dataset 2D boxes proved misassociated
+in an earlier corpus. We then segment the pedestrian with SAM~\cite{kirillov2023sam} (box and torso
+prompts, clipped to the box, dilated by 9\,px) and fill the mask with LaMa~\cite{suvorov2022lama}. For
+the LiDAR policy we also delete the points inside the box. The VLA models see several cameras, of
+which we edit the front one, so we keep only frames in which the target is visible in no other camera.
+
+\paragraph{Night}
+A closed-form photometric transform (gamma 2.2, gain 0.45, saturation 0.45, blue tint, sensor noise
+$\sigma=7$) is applied to every image the policy consumes. The noise seed is fixed per frame.
+
+\paragraph{Validity}
+An independent detector (Faster R-CNN~\cite{ren2015faster}, COCO, score $\ge0.5$) finds the target in
+the original image of \NumDetN{} front-only frames. After removal it still finds the target in
+\NumDetStill\% of them (IoU $\ge0.5$); these failures are residual legs, bags, or companions who
+overlap the target. After the night rendering it finds the target in \NumDetNight\%. The inpainting
+artefact, calibrated by pasting patches on empty road, is 5--17\% of the removal effect at pedestrian
+scale. Removing \emph{off-road} pedestrians, which should not matter causally, serves as a same-type
+control.
+
+\subsection{Readouts: the whole trajectory against the pedestrian}
+Let $c_t(X)=\|X_t-F_t\|-1.0-0.4$ be the clearance at time $t$ between plan $X$ and the pedestrian's
+logged position $F_t$, net of the ego half-width and a pedestrian radius. We read four properties of a
+plan:
+\begin{itemize}
+\item its \emph{separation} $S(X)=\mathrm{mean}_t\min(c_t,10\,\mathrm{m})$, i.e., how far the whole
+      trajectory stays from the pedestrian;
+\item \emph{contact} $A(X)=\mathbb{1}[\min_t c_t>0]$;
+\item \emph{safety distance} $C(X)=\mathrm{clip}(\min_t c_t/1\,\mathrm{m},0,1)$;
+\item \emph{time to proximity} $T(X)$, the first time $c_t<1$\,m, divided by 2.5\,s (1 if it never
+      happens).
+\end{itemize}
+Speed changes are deliberately not a readout. The safety of a plan is judged by where it goes relative
+to the pedestrian, not by how it decelerates.
+
+\subsection{Exams}
+\paragraph{Exposure}
+The ratio of planned to logged distance over 2.5\,s, on frames where the human moved at least 0.5\,m.
+
+\paragraph{Hazard sensitivity}
+A unit \emph{needs} a reaction if the pedestrian-blind plan comes within 1\,m of the pedestrian,
+$C(Q)<1$. On such units,
+\begin{equation}
+\HS=\tfrac14\big[\Delta A+\Delta C+\Delta T+\tanh(\Delta S/1\,\mathrm{m})\big]\in[-1,1],
+\end{equation}
+with $\Delta=(\cdot)(P)-(\cdot)(Q)$: the safety that seeing the pedestrian buys. We plot $\HS$
+against the model-independent hazard level $a_{\mathrm{req}}=v^2/2\max(d-2,0.5)$, the deceleration
+needed to stop before a pedestrian at distance $d$, and alternatively against $\mathrm{TTC}_0=(d-2)/v$.
+Units with input speed below 1\,m/s are excluded, because a stationary ego cannot move toward or away
+from anyone.
+
+\paragraph{Scaling and specificity}
+\emph{Scaling} is the rank correlation of $\HS$ with $a_{\mathrm{req}}$ across needed units.
+\emph{Specificity} applies the minimal-change principle to the units that need no reaction:
+$\SP=\exp(-\bar D(P,Q)/0.5\,\mathrm{m})$, where $\bar D$ is the mean displacement between the two
+plans.
+
+\paragraph{Lighting}
+For the same frames, $\CFR=\mathbb{E}\|P-Q\|/\mathbb{E}\|P-N\|$ compares the plan change caused by
+removing the pedestrian with that caused by the night rendering. Alignment is the median cosine between
+$N-P$ and $Q-P$. A pure policy has $\CFR\gg1$ and alignment near zero. Positive alignment means the
+night pushes the plan the way removing the pedestrian does.
+
+\subsection{Policies and frames}
+We examine LTF and DiffusionDrive (front camera and ego status), DiffusionDriveV2 (camera and LiDAR),
+SimLingo (InternVL2-1B), AutoVLA (Qwen2.5-VL-3B; three cameras $\times$ four frames) and Alpamayo-1.5
+(four cameras; a diffusion head over the VLM cache). All use released weights. The frames are
+nuScenes~\cite{caesar2020nuscenes} keyframes. They cover corridor pedestrians (lateral clearance to the
+ego corridor $\le1$\,m) at 5--12\,m, their off-road counterparts, and 30 approach sequences at
+5.8--14.6\,m with logged pedestrian futures. The near-pedestrian units come from 236 front-only
+frames, 88 in Boston (left-hand drive) and 148 in Singapore (right-hand drive). Alpamayo-1.5 covers
+170 of the 236, since it needs 1.6\,s of history and 6.4\,s of future within the scene. We fix
+DiffusionDrive's diffusion seed so that paired queries share their noise.

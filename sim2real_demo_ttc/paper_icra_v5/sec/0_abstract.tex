@@ -1,0 +1,22 @@
+\begin{abstract}
+A benchmark score tells us how well a driving policy performed on logged scenes, much as a return
+figure tells us how a fund performed. Before deploying either, one wants a risk profile. How much does
+it put at stake? Does it manage risk when risk appears? Does it grow more careful or more reckless as
+conditions heat up? How much does noise move it? We propose a check-up that reads such a profile from
+a few hundred logged frames, without a simulator and without retraining. Each exam edits the frames
+counterfactually, removing a pedestrian from the ego corridor or re-rendering the scene at night, and
+pairs the edit with a control. An independent detector verifies every edit. The central exam is a
+hazard-sensitivity curve: how much farther the whole planned trajectory stays from the pedestrian's
+logged future because the policy can see the pedestrian, as a function of hazard. We examine six
+end-to-end policies. Their exposure varies fourfold (\NumExpLo--\NumExpHi{} times the human's
+distance), yet their hazard sensitivity is \NumHSlo--\NumHShi{} on a $[-1,1]$ scale and does not rise
+with hazard. Collisions follow exposure, not perception. A night rendering moves every policy more
+than the pedestrian does ($\CFR=\NumCFRlo$--$\NumCFRhi$), and three of them plan up to
+\NumNightDD\% faster in the dark. Fitting estimator spread against sample
+size shows that exposure, over-reaction and the lighting verdict are settled within about 50 frames,
+while hazard sensitivity needs hundreds. In a pre-registered test, the orderings and verdicts
+diagnosed on Boston frames carry over to Singapore, but the point values do not. Against the standard
+evaluations, the check-up agrees where they measure the same thing and shows what they miss: nuScenes
+open-loop metrics do not change when the pedestrian is removed, and NAVSIM's ranking reverses on
+scenes with a pedestrian nearby.
+\end{abstract}

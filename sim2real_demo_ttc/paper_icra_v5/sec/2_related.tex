@@ -1,0 +1,27 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Driving policies and their benchmarks}
+We examine BEV planners of the TransFuser lineage~\cite{chitta2023transfuser} (LTF,
+DiffusionDrive~\cite{liao2025diffusiondrive}, DiffusionDriveV2~\cite{diffusiondrivev2}) and
+vision--language--action models (SimLingo~\cite{renz2025simlingo}, AutoVLA~\cite{zhou2025autovla},
+Alpamayo-1.5~\cite{nvidia2025alpamayo,nvidia2026alpamayo15}). NAVSIM~\cite{dauner2024navsim,cao2025pseudosim} scores their
+plans by multiplying hard gates with a weighted average of soft terms. Open-loop scores are known to
+reward proxies~\cite{li2024egostatus}. We show that the six-policy spread is carried by a single gate.
+
+\paragraph{Behavioural testing}
+Checklists of targeted behavioural tests~\cite{ribeiro2020checklist} and corruption
+benchmarks~\cite{hendrycks2019benchmarking,kong2023robo3d,xie2023robobev} probe models beyond aggregate
+accuracy. A metric drop, however, does not say whether a policy became more cautious or more reckless.
+Our exams read signed plan changes against a counterfactual and state how many frames each needs.
+
+\paragraph{Causal confusion}
+Imitation learners can respond to correlates of the expert's action rather than to its
+causes~\cite{dehaan2019causal,wen2020copycat,codevilla2019exploring,geirhos2020shortcut}. Our exams
+apply this idea to trained policies: a cause (a pedestrian) and a nuisance (lighting) are intervened
+on directly.
+
+\paragraph{Counterfactual editing and internal representations}
+Counterfactual explanations edit the scene~\cite{jacob2022steex,zemni2023octet}; we verify every edit
+with a detector. Steering directions~\cite{zou2023repe} can show that a network encodes what it does not
+act on~\cite{azaria2023internal}; we use them to explain a diagnosis, not as the diagnosis.

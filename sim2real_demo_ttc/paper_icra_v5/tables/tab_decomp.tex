@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{A plan that moves is not a plan that yields.} For each policy and each of the 246 Singapore near-pedestrian scenes we measure $F$ (displacement caused by removing the pedestrian), $I$ (displacement caused by the night rendering, the policy's own jitter under an irrelevant edit) and $\Delta S$, the resulting change in clearance to the pedestrian's logged future ($\Delta S>0$: seeing the pedestrian keeps the plan farther away). $\eta=\Delta S/F$ is the share of the displacement that becomes separation, taken over the scenes in which the plan actually moved. Genuine avoidance requires all three: $F\ge0.5$\,m, $F>I$, and $\Delta S\ge0.5$\,m.}
+\label{tab:decomp}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Policy & $F>I$ & $F\ge0.5$ & median $\eta$ & genuine & $\rho(\Delta S,a_{\mathrm{req}})$ \\
+\midrule
+DD & 12\% & 23 & +1.92 & 12 (5\%) & $-$0.05 \\
+LTF & 4\% & 1 & +2.70 & 1 (0\%) & $-$0.37 \\
+DDv2 & 18\% & 27 & +0.62 & 11 (4\%) & $-$0.15 \\
+SimLingo & 23\% & 62 & $-$0.59 & 10 (4\%) & $-$0.00 \\
+AutoVLA & 11\% & 5 & +0.00 & 1 (0\%) & $-$0.01 \\
+Alpamayo 1.5 & 12\% & 3 & +0.53 & 0 (0\%) & +0.07 \\
+\bottomrule
+\end{tabular}
+\end{table}

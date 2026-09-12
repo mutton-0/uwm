@@ -1,0 +1,52 @@
+\section{Introduction}
+\label{sec:intro}
+
+End-to-end driving policies are compared by benchmark scores. A score summarises what the policy's
+planned trajectories achieved on logged scenes: no collision, staying in the drivable area, making
+progress~\cite{dauner2024navsim,cao2025pseudosim}. An investor reads a fund's return figure the same
+way, and no investor allocates capital on the return figure alone. They also ask how large a position
+the fund takes, whether it manages risk when risk appears, whether it becomes more careful or more
+reckless as the market heats up, and how much it is moved by noise. A deployment decision about a
+driving policy needs the same four answers. It usually has to reach them from little data, because a
+closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to
+save.
+
+We propose a \emph{check-up} that answers these four questions from a few hundred logged frames. Like
+a clinical examination it consists of a short list of exams (\cref{tab:exams}). Each exam has a known
+normal range and a control, and each result is read as a diagnosis rather than a ranking. Every exam is
+a counterfactual edit of real frames. We remove a pedestrian from the ego corridor, or we re-render the
+frame at night, and read the change in the policy's planned trajectory. An independent detector
+verifies every edit. The central exam is a \emph{hazard-sensitivity curve}. It measures how much safer
+the whole planned trajectory is because the policy can see the pedestrian (in separation, contact and
+time to proximity), against a model-independent hazard level. A specificity term applies a
+minimal-change principle: when no reaction is needed, the plan should not move.
+
+\paragraph{Diagnosis}
+Applied to six end-to-end policies, the check-up separates quantities that a benchmark score merges
+(\cref{tab:report}). The policies take very different position sizes: their plans cover
+\NumExpLo--\NumExpHi{} times the distance the human drove. Yet none of them manages the pedestrian
+risk. Seeing the pedestrian makes the plan safer by \NumHSlo--\NumHShi{} on a $[-1,1]$ scale, and in
+five of six policies this benefit does not grow with the hazard. Collisions with the pedestrian's
+logged future therefore follow position size and not perception. A night rendering moves every policy
+more than the pedestrian does. We look inside the policies to explain the diagnosis, although this
+paper does not attempt a repair. The pedestrian leaves a trace in the features but is not decoded by the policies' own semantic
+heads; the planner reads a grid too coarse to locate it; and its plan ends before the pedestrian.
+
+\paragraph{How much data}
+A check-up is only useful if it is cheap. We fit how each estimate's spread shrinks with the number of
+frames. Exposure, over-reaction and the lighting verdict follow the $1/\sqrt{n}$ law closely and are
+settled within about 50 frames. Hazard sensitivity and the direction of the lighting effect need
+hundreds of frames. We then pre-registered seven predictions from a diagnosis made on 88 Boston frames
+and tested them on Singapore. Orderings and verdicts transfer; point values do not
+(\cref{tab:prereg}).
+
+\paragraph{Contributions}
+\begin{enumerate}\itemsep2pt
+\item A small-sample check-up for driving policies. It consists of verified counterfactual edits, a
+      hazard-sensitivity curve built on whole-trajectory separation, time to proximity and a
+      minimal-change principle, and a reading of the results as a risk profile.
+\item A diagnosis of six end-to-end policies, with an explanation from inside the networks of why none
+      of them manages pedestrian risk.
+\item An account of what small data can and cannot establish: sample-size laws for every exam and a
+      pre-registered cross-city transfer test.
+\end{enumerate}

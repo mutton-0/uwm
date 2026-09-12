@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Re-measuring the two axes in the new domain.} $\CFR$ measured on Boston frames, on Singapore frames, and per scene on the ten Singapore cases (median). The verdict $\CFR<1$ holds on both sides for every policy, while the value drifts by $0.6$--$1.7\times$; the across-policy ordering of $\CFR$ agrees between sides only at $\rho={+}0.37$ (specificity: $\rho={+}0.83$). Right: share of near-pedestrian scenes in which each rule holds (P-F: a near-zero F axis implies removing the pedestrian leaves clearance and contact unchanged; P-I: $\CFR<1$ implies the night rendering moves the outcome at least as much as the removal). Both rules are two-sided: each cell gives the hit rate when the premise holds / when it is reversed (fwd/rev), so every scene receives a prediction. and the share of scenes whose minimum time-to-proximity to the pedestrian's logged future falls below 1.5\,s. The large-sample columns use the \NumComN{} Singapore scenes all six policies share.}
+\label{tab:axes}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+ & \multicolumn{3}{c}{$\CFR$} & TTC & \multicolumn{2}{c}{rule holds \%} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-5}\cmidrule(l){6-7}
+Policy & Bos. & Sing. & scene & $<$1.5\,s & P-F & P-I \\
+\midrule
+DD & 0.17 & 0.24 & 0.03 & 13\% & 95/74 & 95/97 \\
+LTF & 0.34 & 0.19 & 0.12 & 16\% & 96/100 & 97/100 \\
+DDv2 & 0.39 & 0.52 & 0.13 & 22\% & 96/67 & 96/87 \\
+SimLingo & 0.32 & 0.19 & 0.06 & 56\% & 93/73 & 95/91 \\
+AutoVLA & 0.41 & 0.46 & 0.00 & 21\% & 95/60 & 98/86 \\
+Alpamayo 1.5 & 0.15 & 0.26 & 0.13 & 20\% & 99/33 & 94/93 \\
+\bottomrule
+\end{tabular}
+\end{table}

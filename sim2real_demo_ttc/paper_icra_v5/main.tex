@@ -1,0 +1,38 @@
+% ICRA submission (IEEEtran conference template) — v5: small-sample check-up of driving policies
+% 所有数字由 scripts/ 下脚本从 JSON 直读（tables/*.tex、tables/numbers.tex 由 make_tables.py 写出）。
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalize]{cleveref}
+\newcommand{\CFR}{\mathrm{CFR}}
+\newcommand{\HS}{\mathrm{HS}}
+\newcommand{\SP}{\mathrm{SP}}
+\input{tables/numbers}
+\begin{document}
+\title{A Check-Up for Driving Policies:\\ Reading the Risk Profile of End-to-End Planners\\ from a Few Hundred Frames}
+\author{\IEEEauthorblockN{Anonymous Submission}
+\IEEEauthorblockA{Paper ID ---}}
+\maketitle
+\input{sec/0_abstract}
+\input{sec/1_intro}
+\input{sec/2_related}
+\input{sec/3_checkup}
+\input{sec/4_diagnosis}
+\input{sec/4b_bench}
+\input{sec/5_sample}
+\input{sec/5b_axes}
+\input{sec/6_lighting}
+\input{sec/7_discussion}
+\bibliographystyle{IEEEtran}
+\bibliography{main}
+\end{document}

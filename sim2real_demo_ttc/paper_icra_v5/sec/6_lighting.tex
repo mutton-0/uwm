@@ -1,0 +1,41 @@
+\section{Lighting: Magnitude, Direction, and the Pedestrian}
+\label{sec:lighting}
+
+\input{tables/tab_light}
+
+Lighting should not change what a driver does, so this exam asks how far a policy is moved by an
+irrelevant change. We analyse it last. It is the most robust result in the check-up and also the one
+whose direction is least stable.
+
+\paragraph{Magnitude}
+On the same frames, removing a pedestrian from the corridor moves every policy's plan only
+\NumCFRlo--\NumCFRhi{} times as far as the night rendering does (\cref{tab:light}). Every 95\%
+interval lies below one. The result holds on detector-verified edits ($\CFR=0.30$--$0.64$), where only Alpamayo-1.5's interval
+(45 frames) reaches above one. Tracing the rendering on a separate pool of 312 lead-vehicle events
+shows that the effect is carried by sensor noise rather than darkness. For DiffusionDrive, darkening
+alone raises the planned speed by $+0.08$\,m/s and darkening with noise by $+2.05$\,m/s. The effect is
+also global: perturbing only the sky, with the corridor untouched, recovers 19\% of the effect of
+deleting the lead vehicle.
+
+\paragraph{Direction: faster, and therefore closer}
+Darkness reduces visibility, so a policy that slows at night is doing something defensible; one that
+speeds up is not. On frames where the ego moves, three policies plan to go faster under the night
+rendering (\cref{tab:light}): DiffusionDrive by \NumNightDD\%, SimLingo by \NumNightSL\% and LTF by
+\NumNightLTF\%. The gain grows along the horizon; for DiffusionDrive it rises from $+0.12$\,m/s in the
+first half-second to $+1.03$\,m/s in the last. As a result, their whole plans pass 0.24--0.47\,m closer
+to the pedestrian. The approach is longitudinal. The more the plan's endpoint moves forward, the closer
+it gets (rank correlation $-0.73$ to $-0.96$), whereas the endpoint shifts toward the pedestrian's side
+in no more than 47\% of frames, which is no more often than chance. Contacts barely change,
+because most pedestrians remain beyond the 2.5\,s plan. DiffusionDriveV2, the only policy that also
+reads LiDAR, is the one that slows at night ($\NumNightDDv\%$) and keeps a larger distance.
+AutoVLA and Alpamayo-1.5 are unaffected. In representation space the night direction opposes the
+hazard direction (mean cosine $-0.54$ in four policies), so the policies encode ``it got dark''
+as they encode ``the hazard is gone''.
+
+\paragraph{Orthogonality as a trait}
+We hypothesised that policies whose lighting effect is orthogonal to their pedestrian
+response would be more stable across domains. The data do not support this. Alignment changes between cities for most policies
+(DiffusionDrive $+0.56\to+0.09$, DiffusionDriveV2 $+0.63\to+0.16$). Only AutoVLA keeps it
+($+0.65\to+0.62$). The purer policies shifted \emph{more}, not less (\cref{tab:prereg}, P6). The
+magnitude of the lighting effect is a trait that a small check-up can measure. Its direction is not,
+until hundreds of frames are available (\cref{sec:sample}).

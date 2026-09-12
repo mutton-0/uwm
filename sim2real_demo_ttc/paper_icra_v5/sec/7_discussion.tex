@@ -1,0 +1,34 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Using the report}
+Read one exam at a time, the report works like a risk profile. A
+policy with a small position and no risk management, such as DiffusionDrive, is safe only for as long
+as it stays small. A policy with a human-sized position and no risk management, such as AutoVLA and
+Alpamayo-1.5, carries the pedestrian risk at full exposure. The exam that no current benchmark reports is scaling: whether the response grows when the hazard
+does. Five policies fail it, and the one that passes, DiffusionDriveV2, does so at a sensitivity below
+0.15.
+
+\paragraph{Limitations}
+The exams are open-loop. The approach sequences are replayed from logs and re-anchored to the logged
+pose. The night is a synthetic rendering that also halves the number of other pedestrians the detector
+finds. The counterfactual pairs are constructed by editing, not captured, and so carry noise: 8.5\% of
+removals leave a detectable residue, the inpainting artefact is 5--17\% of the effect, and the VLA
+models can be edited only through their front camera. Alpamayo-1.5 covers 170 of the 236 frames. SimLingo plans 2.5\,s; for NAVSIM's 4\,s we extrapolate at constant velocity (holding position instead gives EPDMS 0.47, still the lowest).
+Cross-policy correlations rest on six policies.
+
+\paragraph{Future work}
+The check-up is designed as the first half of a benchmark-to-deployment pairing. The next step is to
+\emph{collect} paired data rather than construct it: the same scene with and without a pedestrian, by
+day and by night. We then plan to validate the diagnoses against the same policies' behaviour on a real
+vehicle. The sample-size laws above tell us how large that collection must be. A few dozen pairs
+suffice for position size, over-reaction and lighting; hundreds of pairs with a genuine need to react
+are needed for hazard sensitivity.
+
+\section{Conclusion}
+A benchmark score is a return figure. We read the risk profile that deployment needs from a few
+hundred logged frames, with counterfactual exams that an independent detector verifies. Six end-to-end
+policies take very different positions, yet none manages pedestrian risk, and all of them are moved
+more by lighting than by a pedestrian in their path; three even plan faster in the dark. Orderings and verdicts survive a move to another
+city; point values do not. These results say which conclusions a small check-up can support, and how
+much data the rest will need.

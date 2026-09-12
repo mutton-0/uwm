@@ -1,0 +1,31 @@
+% 手写。上块出处：bev_ped_metrics.json（NAVSIM 近行人 520 场景，BEV 几何按 navsim 源码：第 r 行 = x = r·0.25 m）。
+% 旧版 PED_CHANNEL.md 的 0.66/0.40/0.53 用了前后颠倒的几何、且只有 10 个成群行人的例子，作废。
+% 8 m / 1 m 注入 —— vdiff_{dd,ltf}_{bev,up}.json、upscale_spec_*.json（NOTES round2 §2.1）；同格比例 —— §2.1（94 对）；
+% 规划长度/行人距离/在视距内比例 —— NOTES round2 §2.3。DDv2 没有做差之差注入（—）。
+\begin{table}[t]
+\centering
+\caption{\textbf{Not decoded, not transmitted, and out of reach} (BEV planners). Top: the policy's own BEV
+semantic head on 520 NAVSIM near-pedestrian scenes (in parentheses: the same readout at a mirrored empty location). Middle: difference-of-differences injection (corridor minus off-road pedestrian direction),
+reported as effect over the median of random directions, with permutation $p$. Bottom: planning reach.}
+\label{tab:mech}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}p{3.35cm}ccc@{}}
+\toprule
+ & DD & LTF & DDv2 \\
+\midrule
+Ped.\ peak at pedestrian / global & 0.07 (0.11) & 0.07 (0.07) & 0.09 (0.15) \\
+Ped.-box px won by ped. & 0\% & 0\% & 0\% \\
+Pedestrian / vehicle peak & 0.018 & 0.023 & 0.052 \\
+\midrule
+Injection, 8\,m grid (planner) & 2.9$\times$ ($p{=}.27$) & $p{=}1.0$ & -- \\
+Injection, 1\,m grid (branch) & 52$\times$ ($p{=}.007$) & $\equiv0$ (14/14) & -- \\
+\quad effect vs.\ 8\,m grid & $\sim$1/460 & -- & -- \\
+\midrule
+Median plan length (m) & 5.3 & 7.1 & 8.9 \\
+Median pedestrian distance (m) & 20.8 & 20.8 & 20.6 \\
+Pedestrian within plan reach & 5\% & 11\% & 10\% \\
+\bottomrule
+\end{tabular}
+\end{table}
