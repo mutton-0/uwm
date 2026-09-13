@@ -85,6 +85,18 @@ for m in M:
 T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
 open(f"{_OUT}/tables/tab_light.tex","w").write("\n".join(T)+"\n")
 # ---------- 数字宏 ----------
+# HS 四个分项各自的最大绝对值（跨模型），用于说明结论与权重无关；真人参照取全体均值
+_UU=json.load(open(f"{V5}/diag_units.json"))
+_sel=lambda z: z["d"]<=15 and (z["set"]=="B" or z["grp"]=="corr") and z["v"]>=1.0 and z["need"]
+_mx=0.0
+for _m in M:
+    _U=[z for z in _UU if z["m"]==_m and _sel(z)]
+    if not _U: continue
+    for _k in ("A","C","T"):
+        _mx=max(_mx,abs(np.mean([z["P"][_k]-z["Q"][_k] for z in _U])))
+    _mx=max(_mx,abs(np.mean([np.tanh(z["P"]["S"]-z["Q"]["S"]) for z in _U])))
+_GC=json.load(open(f"{V5}/gt_ceiling.json")) if os.path.exists(f"{V5}/gt_ceiling.json") else None
+
 cf=[CF[m]["corr"]["CFR"] for m in M]; hs=[A[m]["point"]["HS"] for m in M]; ex=[A[m]["point"]["exposure"] for m in M]
 ns=SS["dims"]; nc=[PD["table"][m]["no_at_fault_collisions"] for m in M]
 g1=max(abs(coll(m,"actual")[0]-coll(m,"actual")[1]) for m in M); g8=max(abs(coll(m,"8")[0]-coll(m,"8")[1]) for m in M)
@@ -99,6 +111,10 @@ NUM={"NumCFRlo":f"{min(cf):.2f}","NumCFRhi":f"{max(cf):.2f}","NumCFRciHi":f"{max
      "NumRobustIn":f"{DR['inside']}/{DR['total']}" if DR else "--",
      "NumRobustRho":(f"$\\rho\\ge{min(r['rho'] for r in DR['rows']):.2f}$" if DR else "--"),
      "NumDetDrop":(str(DR['n_frames_dropped']) if DR and DR.get('n_frames_dropped') else "17"),
+     "NumMaxTerm":f"{_mx:.2f}",
+     "NumHumanRef":(f"{np.nanmean(_GC['gt']):.2f}" if _GC else "0.57"),
+     "NumHumanLo":(f"{np.nanmin(_GC['gt']):.2f}" if _GC else "0.52"),
+     "NumHumanHi":(f"{np.nanmax(_GC['gt']):.2f}" if _GC else "0.62"),
      "NumPool":str(SS["N"]),"NumCollGap":f"{g1:.1f}","NumCollGapEight":f"{g8:.1f}",
      "NumNstarCFRhi":f"{max(ns['CFR']['n_star'].values()):.0f}","NumNstarExpHi":f"{max(v for m,v in ns['exposure']['n_star'].items() if m in ('dd','ltf','ddv2','simlingo')):.0f}",
      "NumRankSPforty":f"{100*ns['SP']['rank_p']['40']:.0f}","NumRankExpTen":f"{100*ns['exposure']['rank_p']['10']:.0f}",

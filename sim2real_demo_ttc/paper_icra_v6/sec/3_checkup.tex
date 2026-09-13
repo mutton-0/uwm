@@ -46,8 +46,20 @@ plan:
 \item \emph{time to proximity} $T(X)$, the first time $c_t<1$\,m, divided by 2.5\,s (1 if it never
       happens).
 \end{itemize}
-Speed changes are deliberately not a readout. The safety of a plan is judged by where it goes relative
-to the pedestrian, not by how it decelerates.
+Every constant above is a physical length or the horizon, not a tuned parameter: the subtracted
+$1.0$\,m is the half-width of the nuScenes ego box ($4.08\times1.85$\,m), rounded up from $0.93$\,m,
+and $0.4$\,m is the disc a standing adult occupies; the $1$\,m in $C$ and $T$ is the outer edge of
+personal space; $2.5$\,s is the horizon all six policies share; and the $10$\,m cap keeps scenes where
+the pedestrian is far away from dominating the mean in $S$.
+
+These four follow existing conventions rather than new ones. Contact and minimum clearance are the
+collision and margin measures of the surrogate-safety literature, and time to proximity is an
+encroachment-time variant of the same family~\cite{gettman2003surrogate,hayward1972near}; reading
+\emph{distance to a person} over the whole trajectory, rather than the ego's own speed, is how
+navigation near people is evaluated in robotics~\cite{kruse2013human}, and the 1\,m threshold in $C$
+and $T$ is the outer edge of personal space~\cite{hall1966hidden}. Speed changes are deliberately not
+a readout: a plan is judged by where it goes relative to the pedestrian, not by how it decelerates,
+since the same deceleration is safe or unsafe depending on where the person is.
 
 \subsection{Exams}
 \paragraph{Exposure}
@@ -66,7 +78,11 @@ separation~\cite{gettman2003surrogate,hayward1972near}---and averaging normalise
 index is how the benchmark we compare against builds EPDMS~\cite{dauner2024navsim}, so the two remain
 commensurable. What the check-up adds is the paired query: each sub-score is read as a difference
 between the same policy with and without the pedestrian, which is the ablation form used to attribute
-behaviour to an input in interpretability work~\cite{zou2023repe,hase2023localization}. We plot $\HS$
+behaviour to an input in interpretability work~\cite{zou2023repe,hase2023localization}. Each term is
+bounded in $[0,1]$, so their mean is bounded in $[-1,1]$; $\tanh$ squashes the one unbounded term at a
+1\,m scale, and we weight the four equally, having no principled basis to prefer one. Nothing below
+depends on that choice: taken one at a time, no term exceeds \NumMaxTerm{} for any policy, against
+\NumHumanRef{} for the human reference of \cref{fig:teaser}c. We plot $\HS$
 against the model-independent hazard level $a_{\mathrm{req}}=v^2/2\max(d-2,0.5)$, the deceleration
 needed to stop before a pedestrian at distance $d$---the deceleration-rate-to-avoid-the-crash of the
 surrogate-safety literature~\cite{gettman2003surrogate}---and alternatively against the time-based
