@@ -14,9 +14,9 @@ def med_ci(v):
     i=rng.integers(0,len(v),(2000,len(v))); m=np.median(v[i],1); return np.median(v),np.percentile(m,2.5),np.percentile(m,97.5)
 def mean_ci(v):
     i=rng.integers(0,len(v),(2000,len(v))); m=v[i].mean(1); return v.mean(),np.percentile(m,2.5),np.percentile(m,97.5)
-fig,ax=plt.subplots(1,2,figsize=(7.16,1.9),gridspec_kw={"wspace":0.30})
+fig,ax=plt.subplots(1,1,figsize=(3.45,2.0))
 # (b)
-rows=json.load(open(f"{V5}/diag_units.json")); b=ax[0]
+rows=json.load(open(f"{V5}/diag_units.json")); b=ax
 B=[z for z in rows if z["set"]=="B"]
 vact=float(np.median([z["v"] for z in B if z["sv"]=="actual"]))
 for m in M:
@@ -30,21 +30,6 @@ for m in M:
     b.plot(p[:,0],p[:,2],color=COL[m],lw=0.9,ls=(0,(2,1.5)),marker="o",ms=2.6,mfc="white")
 b.plot([],[],color="#52514e",lw=1.2,label="visible"); b.plot([],[],color="#52514e",lw=0.9,ls=(0,(2,1.5)),label="removed")
 b.set_xlabel("input ego speed (m/s)"); b.set_ylabel("collision with logged pedestrian (%)"); b.set_xticks([2,4,6,8])
-b.legend(frameon=False,fontsize=5.4,loc="upper left",ncol=1,handlelength=1.8,labelspacing=0.2)
-b.set_title("(a) collisions vs. speed",fontsize=7,loc="left",pad=2)
-# (c)
-c=ax[1]; sel=lambda z: z["d"]<=15 and (z["set"]=="B" or z["grp"]=="corr") and z["v"]>=1.0 and z["need"]
-TB=[(2,99),(1.5,2),(1,1.5),(0,1)]; TL=[">2","1.5–2","1–1.5","<1"]
-for k,m in enumerate(M):
-    need=[z for z in rows if z["m"]==m and sel(z)]; x=[];y=[];e0=[];e1=[]
-    for i,(lo,hi) in enumerate(TB):
-        v=np.array([z["HS"] for z in need if lo<=z["ttc0"]<hi])
-        if len(v)>=8: mu,l,h=mean_ci(v); x.append(i+(k-2.5)*0.07); y.append(mu); e0.append(mu-l); e1.append(h-mu)
-    c.errorbar(x,y,yerr=[e0,e1],color=COL[m],marker="o",ms=2.6,lw=1.1,elinewidth=0.6,capsize=0)
-GC=json.load(open(f"{V5}/gt_ceiling.json"))
-c.plot(range(len(TB)),GC["gt_ttc"],color="#52514e",ls=(0,(3,2)),lw=1.1)
-c.text(0.45,0.70,"human driving vs.\nthe same blind plan",fontsize=5.4,color="#52514e",ha="center")
-c.axhline(0,color="#c3c2b7",lw=0.5); c.set_xticks(range(len(TB))); c.set_xticklabels(TL,fontsize=6.3); c.set_ylim(-0.3,1.05)
-c.set_xlabel(r"TTC$_0$ (s), more hazardous $\rightarrow$"); c.set_ylabel("hazard sensitivity HS")
-c.set_title("(b) HS against time to collision",fontsize=7,loc="left",pad=2)
+b.legend(frameon=False,fontsize=5.6,loc="upper left",ncol=1,handlelength=1.6,labelspacing=0.18,borderpad=0.1)
+b.set_title("collision vs. input speed",fontsize=7,loc="left",pad=2)
 fig.savefig(f"{V5}/figures/reach.pdf",bbox_inches="tight"); fig.savefig(f"{V5}/figures/reach.png",dpi=220,bbox_inches="tight"); print("ok")

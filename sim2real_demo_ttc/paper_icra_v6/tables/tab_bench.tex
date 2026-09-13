@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering
-\caption{\textbf{The same six policies under the standard evaluations.} Left: nuScenes open-loop metrics on the same 236 near-pedestrian frames, original\,/\,pedestrian removed (L2 to the human trajectory averaged over 0.5--2.5\,s; collisions with objects ahead of the ego, rear-end contacts by non-reactive logged agents excluded). Middle: NAVSIM EPDMS on all 783 Singapore scenes and on 260 Singapore scenes with a pedestrian within 1\,m of the ego corridor and 20\,m ahead; the leaderboard ordering does not survive the slice. Right: pedestrian TTC along the plan (share of moving-ego scenes with minimum TTC $<1.5$\,s, lower is better) on left-hand-drive near-pedestrian scenes (nuScenes Boston + NAVSIM Las Vegas/Boston/Pittsburgh) and right-hand-drive ones (NAVSIM Singapore), with the resulting rank.}
+\caption{\textbf{The same six policies under the standard evaluations.} Left: nuScenes open-loop on the 236 near-pedestrian frames, original\,/\,pedestrian removed (rear-end contacts excluded). Middle: NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} with a pedestrian near the corridor. Right: share of moving-ego scenes with minimum pedestrian TTC $<1.5$\,s, by driving side. Bold: best in column.}
 \label{tab:bench}
 \small
 \setlength{\tabcolsep}{3pt}

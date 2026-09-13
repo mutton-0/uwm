@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{The check-up report.} Normal range in brackets (\cref{tab:exams}); $\downarrow$/$\uparrow$ = outside it, bold = best in column. Collision: contact with the pedestrian's logged future at 8\,m/s input speed, visible\,/\,removed.}
+\label{tab:report}
+\scriptsize
+\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{@{}lccccc c@{}}
+\toprule
+Policy & exposure & HS & scaling & SP & CFR & coll.\ 8\,m/s \\
+ & [0.8,\,1.2] & [$\ge$0.15] & [$>$0] & [$\ge$0.8] & [$>$1] & vis.\,/\,rm. \\
+\midrule
+DiffusionDrive & 0.50$\downarrow$ & \textbf{0.07$\downarrow$} & -0.25$\downarrow$ & 0.78$\downarrow$ & 0.23$\downarrow$ & 7.6\,/\,9.2 \\
+LTF & 0.79$\downarrow$ & 0.02$\downarrow$ & -0.03$\downarrow$ & 0.79$\downarrow$ & 0.23$\downarrow$ & 9.9\,/\,10.7 \\
+DiffusionDriveV2 & 0.88 & 0.06$\downarrow$ & \textbf{+0.29} & 0.67$\downarrow$ & \textbf{0.47$\downarrow$} & \textbf{3.1\,/\,6.1} \\
+SimLingo & 2.19$\uparrow$ & 0.01$\downarrow$ & -0.19$\downarrow$ & 0.42$\downarrow$ & 0.23$\downarrow$ & 40.5\,/\,36.6 \\
+AutoVLA & \textbf{1.01} & 0.02$\downarrow$ & -0.18$\downarrow$ & 0.76$\downarrow$ & 0.44$\downarrow$ & 32.1\,/\,29.8 \\
+Alpamayo 1.5 & 1.13 & 0.01$\downarrow$ & -0.23$\downarrow$ & \textbf{0.84} & 0.25$\downarrow$ & 11.2\,/\,11.2 \\
+\bottomrule
+\end{tabular}
+\end{table}

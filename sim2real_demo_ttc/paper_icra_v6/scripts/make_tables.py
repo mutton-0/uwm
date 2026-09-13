@@ -19,23 +19,35 @@ def coll(m,sv):
     return (100*np.mean([z["P"]["A"]==0 for z in U]),100*np.mean([z["Q"]["A"]==0 for z in U]),len(U)) if U else (np.nan,np.nan,0)
 def ci(d,k,f="{:.2f}"): return f"{{\\scriptsize[{f.format(d['ci'][k][0])},{f.format(d['ci'][k][1])}]}}"
 def sgn(x,f="{:+.2f}"): return "$"+f.format(x).replace("+","{+}").replace("-","{-}")+"$"
-# ---------- Table II：诊断书 ----------
-T=[r"\begin{table*}[t]",r"\centering",
- r"\caption{\textbf{The check-up report of six policies} (pooled near-pedestrian units, both driving sides; 95\% bootstrap intervals over frames). "
- r"Exposure: planned / logged distance over 2.5\,s ("+_W("","position size; ")+r"1 = human). HS: safety gained by seeing the pedestrian when it matters, on $[-1,1]$ "
- r"("+_W("a yielding driver approaches 1","risk management; a yielding driver approaches 1")+r"). Scaling: rank correlation of HS with hazard level $a_{\mathrm{req}}$ (does it respond more when risk is higher). "
- r"SP: how little the plan moves when no reaction is needed (over-reaction; 1 = unmoved). Collision: contact with the pedestrian's logged future, pedestrian visible\,/\,removed, "
- r"at the logged speed and at 8\,m/s. Right: the NAVSIM benchmark on 783 Singapore scenes.}",
- r"\label{tab:report}",r"\small",r"\setlength{\tabcolsep}{2.0pt}",
- r"\begin{tabular}{@{}lcccccccc@{}}",r"\toprule",
- r" & exposure & HS & scaling & SP & \multicolumn{2}{c}{collision (\%), visible\,/\,removed} & \multicolumn{2}{c}{NAVSIM} \\",
- r"\cmidrule(lr){6-7}\cmidrule(l){8-9}",
- r"Policy & ("+_W("distance","position")+r") & ("+_W("yielding","risk mgmt.")+r") & ("+_W("scaling","procyclicality")+r") & (over-reaction) & logged $v$ & 8\,m/s & EPDMS & DAC \\",r"\midrule"]
+# ---------- Table II：诊断书（化验单样式：表头给正常范围，超界标箭头，列内最优加粗） ----------
+# 正常范围取自表 I：暴露度≈1、HS 随危险升到 1、缩放>0、SP≈1、CFR≫1
+NORM={"exposure":(0.8,1.2),"HS":(0.15,1.01),"HS_slope":(0.0,1.01),"SP":(0.8,1.01),"CFR":(1.0,1e9)}
+def flag(v,k):
+    lo,hi=NORM[k]
+    return r"$\downarrow$" if v<lo else (r"$\uparrow$" if v>hi else "")
+def cell(v,k,best,fmt="%.2f"):
+    t=(fmt%v)+flag(v,k)
+    return (r"\textbf{"+t+"}") if best else t
+_bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
+      "HS":max(M,key=lambda m:A[m]["point"]["HS"]),
+      "HS_slope":max(M,key=lambda m:A[m]["point"]["HS_slope"]),
+      "SP":max(M,key=lambda m:A[m]["point"]["SP"]),
+      "CFR":max(M,key=lambda m:A[m]["point"]["CFR"])}
+_bc8=min(M,key=lambda m:coll(m,"8")[0])
+T=[r"\begin{table}[t]",r"\centering",
+ r"\caption{\textbf{The check-up report.} Normal range in brackets (\cref{tab:exams}); $\downarrow$/$\uparrow$ = outside it, bold = best in column. Collision: contact with the pedestrian's logged future at 8\,m/s input speed, visible\,/\,removed.}",
+ r"\label{tab:report}",r"\scriptsize",r"\setlength{\tabcolsep}{2.0pt}",
+ r"\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
+ r"Policy & exposure & HS & scaling & SP & CFR & coll.\ 8\,m/s \\",
+ r" & [0.8,\,1.2] & [$\ge$0.15] & [$>$0] & [$\ge$0.8] & [$>$1] & vis.\,/\,rm. \\",r"\midrule"]
 for m in M:
-    p=A[m]["point"]; c1=coll(m,"actual"); c8=coll(m,"8")
-    T.append(f"{NAME[m]} & {p['exposure']:.2f} {ci(A[m],'exposure')} & {sgn(p['HS'])} {ci(A[m],'HS')} & {sgn(p['HS_slope'])} & {p['SP']:.2f} {ci(A[m],'SP')} & "
-             f"{c1[0]:.1f}\\,/\\,{c1[1]:.1f} & {c8[0]:.1f}\\,/\\,{c8[1]:.1f} & {PD['table'][m]['pdms']:.3f} & {PD['table'][m]['drivable_area_compliance']:.3f} \\\\")
-T+=[r"\bottomrule",r"\end{tabular}",r"\end{table*}"]
+    p=A[m]["point"]; c8=coll(m,"8")
+    cc=f"{c8[0]:.1f}\\,/\\,{c8[1]:.1f}"
+    if m==_bc8: cc=r"\textbf{"+cc+"}"
+    T.append(f"{NAME[m]} & {cell(p['exposure'],'exposure',m==_bst['exposure'])} & "
+             f"{cell(p['HS'],'HS',m==_bst['HS'])} & {cell(p['HS_slope'],'HS_slope',m==_bst['HS_slope'],'%+.2f')} & "
+             f"{cell(p['SP'],'SP',m==_bst['SP'])} & {cell(p['CFR'],'CFR',m==_bst['CFR'])} & {cc} \\\\")
+T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
 open(f"{_OUT}/tables/tab_report.tex","w").write("\n".join(T)+"\n")
 # ---------- Table III：跨舵位预注册 ----------
 lab={"P1":"Lighting outweighs the pedestrian (CFR $<1$) for every policy",
@@ -55,9 +67,7 @@ def det(k):
     if k=="P6": return f"$\\rho={d['rho']:+.2f}$ (opposite)"
     if k=="P7": return f"gap {100*d['max_gap']:.1f}\\,pts"
 T=[r"\begin{table}[t]",r"\centering",
-   r"\caption{\textbf{Pre-registered transfer test.} Diagnoses made on 88 left-hand-drive frames (Boston) predict the near-pedestrian units of 148 right-hand-drive frames (Singapore). "
-   r"Predictions and decision rules were fixed before any right-hand statistic was computed. Evaluated on the five policies whose registration the "
-   r"Alpamayo-1.5 replacement leaves intact (\cref{sec:sample}); retaining the replaced policy changes no verdict.}",
+   r"\caption{\textbf{Pre-registered transfer test.} Predictions fixed on 88 Boston frames before any Singapore statistic was computed, then tested on 148 Singapore frames. Five policies; keeping the replaced sixth changes no verdict (\cref{sec:sample}).}",
    r"\label{tab:prereg}",r"\footnotesize",r"\setlength{\tabcolsep}{2.5pt}",
    r"\begin{tabular}{@{}lp{4.45cm}cl@{}}",r"\toprule",r" & Prediction & Holds & Evidence \\",r"\midrule"]
 for k in ["P1","P3","P4","P7","P2","P5","P6"]:
@@ -69,10 +79,7 @@ open(f"{_OUT}/tables/tab_prereg.tex","w").write("\n".join(T)+"\n")
 NS=json.load(open(f"{V5}/night_speed.json"))
 def bold(txt,cond): return f"\\textbf{{\\boldmath {txt}}}" if cond else txt
 T=[r"\begin{table}[t]",r"\centering",
-   r"\caption{\textbf{What the night rendering does to the plan.} CFR: plan change from removing the pedestrian over plan change from the night "
-   r"rendering, same frames (corridor pedestrians 5--12\,m, 95\% CI; ideal $\gg1$). Speed: change of planned mean speed over 2.5\,s under the night rendering. "
-   r"$\Delta S$: change of whole-plan separation from the pedestrian (negative = closer). Both on frames where the ego moves ($\ge$1\,m/s). "
-   r"Align: direction of the night-induced change relative to the removal-induced one, Boston\,$\to$\,Singapore (0 = orthogonal). Bold: $p<0.01$.}",
+ r"\caption{\textbf{What the night rendering does to the plan.} $\CFR$: plan change from removing the pedestrian over that from the night rendering, same frames (95\% CI; ideal $\gg1$). Speed: change of planned mean speed under the night rendering. $\Delta S$: change of whole-plan separation from the pedestrian (negative = closer). Align: direction of the night-induced change relative to the removal-induced one. Bold: $p<0.01$.}",
    r"\label{tab:light}",r"\footnotesize",r"\setlength{\tabcolsep}{3pt}",
    r"\begin{tabular}{@{}lcccc@{}}",r"\toprule",
    r"Policy & CFR [95\% CI] & speed & $\Delta S$ (m) & align \\",r"\midrule"]
@@ -142,11 +149,7 @@ if os.path.exists(f"{V5}/bench_compare.json") and os.path.exists(f"{V5}/ttc_rank
     BC=json.load(open(f"{V5}/bench_compare.json")); TR=json.load(open(f"{V5}/ttc_rank.json"))
     NUo=BC["nusc"]; CV=BC["navsim_close"]; AL=BC["navsim_all"]
     T=[r"\begin{table*}[t]",r"\centering",
-       r"\caption{\textbf{The same six policies under the standard evaluations.} Left: nuScenes open-loop metrics on the same 236 near-pedestrian frames, "
-       r"original\,/\,pedestrian removed (L2 to the human trajectory averaged over 0.5--2.5\,s; collisions with objects ahead of the ego, rear-end contacts by non-reactive logged agents excluded). "
-       r"Middle: NAVSIM EPDMS on all 783 Singapore scenes and on 260 Singapore scenes with a pedestrian within 1\,m of the ego corridor and 20\,m ahead; the leaderboard ordering does not survive the slice. "
-       r"Right: pedestrian TTC along the plan (share of moving-ego scenes with minimum TTC $<1.5$\,s, lower is better) on left-hand-drive near-pedestrian scenes "
-       r"(nuScenes Boston + NAVSIM Las Vegas/Boston/Pittsburgh) and right-hand-drive ones (NAVSIM Singapore), with the resulting rank.}",
+       r"\caption{\textbf{The same six policies under the standard evaluations.} Left: nuScenes open-loop on the 236 near-pedestrian frames, original\,/\,pedestrian removed (rear-end contacts excluded). Middle: NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} with a pedestrian near the corridor. Right: share of moving-ego scenes with minimum pedestrian TTC $<1.5$\,s, by driving side. Bold: best in column.}",
        r"\label{tab:bench}",r"\small",r"\setlength{\tabcolsep}{3pt}",
        r"\begin{tabular}{@{}lccc cc cc@{}}",r"\toprule",
        r" & \multicolumn{3}{c}{nuScenes open-loop (orig.\,/\,removed)} & \multicolumn{2}{c}{NAVSIM EPDMS (rank)} & \multicolumn{2}{c}{pedestrian TTC $<1.5$\,s (rank)} \\",
@@ -210,12 +213,7 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
     SD=json.load(open(f"{V5}/side_deviation.json")); CA=json.load(open(f"{V5}/case10_axes.json"))
     DT=json.load(open(f"{V5}/domain_transfer.json")) if os.path.exists(f"{V5}/domain_transfer.json") else None
     T=[r"\begin{table}[t]",r"\centering",
-       r"\caption{\textbf{Re-measuring the two axes in the new domain.} $\CFR$ measured on Boston frames, on Singapore frames, and per scene on the ten Singapore cases "
-       r"(median). The verdict $\CFR<1$ holds on both sides for every policy, while the value drifts by $0.6$--$1.7\times$; the across-policy ordering of $\CFR$ agrees between "
-       r"sides only at $\rho={+}0.37$ (specificity: $\rho={+}0.83$). Right: share of near-pedestrian scenes in which each rule holds "
-       r"(P-F: a near-zero F axis implies removing the pedestrian leaves clearance and contact unchanged; P-I: $\CFR<1$ implies the night rendering moves the outcome at least as much as the removal). "
-       r"Both rules are two-sided: each cell gives the hit rate when the premise holds / when it is reversed (fwd/rev), so every scene receives a prediction. "
-       r"and the share of scenes whose minimum time-to-proximity to the pedestrian's logged future falls below 1.5\,s. The large-sample columns use the \NumComN{} NAVSIM Singapore scenes all six policies share; the Boston column is measured on the nuScenes frames of \cref{tab:report}.}",
+       r"\caption{\textbf{$\CFR$ and the two rules across driving sides.} $\CFR$ on Boston frames, on Singapore scenes, and per scene on the ten cases (median). Right: share of scenes where each rule holds, forward\,/\,reversed, and the share with minimum time-to-proximity below 1.5\,s. Large-sample columns: the \NumComN{} NAVSIM Singapore scenes all six policies share; the Boston column: the nuScenes frames of \cref{tab:report}.}",
        r"\label{tab:axes}",r"\scriptsize",r"\setlength{\tabcolsep}{2.5pt}",
        r"\begin{tabular}{@{}lcccccc@{}}",r"\toprule",
        r" & \multicolumn{3}{c}{$\CFR$} & TTC & \multicolumn{2}{c}{rule holds \%} \\",r"\cmidrule(lr){2-4}\cmidrule(lr){5-5}\cmidrule(l){6-7}",

@@ -13,27 +13,14 @@ the worker. (c)~Hazard-sensitivity curves over all near-pedestrian units that ne
 not overlap, and a policy appears only where it has enough units, which is why the curves start at
 different hazard levels). $\HS$ is a dimensionless index in $[-1,1]$. The dashed line scores the logged human trajectory
 against each policy's own pedestrian-blind plan on the same four readouts, averaged over policies; the
-band is the range across the six. Real driving is $0.5$--$0.6$ safer than the blind plans these
-policies produce, and seeing the pedestrian recovers almost none of that gap.}
+band is the range across the six.}
 \label{fig:teaser}
 \end{figure*}
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/report.pdf}
-\caption{\textbf{The check-up report of six policies}, read as a lab slip. Each panel is one exam; the
-shaded band is the range a driver who yields would fall in (\cref{tab:exams}); dots are the measured
-values over the pooled near-pedestrian units of both driving sides, with 95\% bootstrap intervals over
-frames, and a red ring marks a value outside the normal range. The last panel pairs the rate of
-collision with the pedestrian's logged future at an input speed of 8\,m/s when the pedestrian is
-visible (filled) and when it is removed (open): for every policy the two nearly coincide. Only
-DiffusionDriveV2 is inside the normal range on scaling, and no policy is inside it on hazard
-sensitivity or on lighting.}
-\label{fig:report}
-\end{figure*}
+\input{tables/tab_report}
 
 \subsection{The report}
-\Cref{fig:report} and \cref{fig:teaser}c give the six profiles.
+\Cref{tab:report} and \cref{fig:teaser}c give the six profiles.
 
 \paragraph{Exposure}
 The six policies do not even agree on how far to plan, and this alone will turn out to explain more of
@@ -45,11 +32,11 @@ human's own.
 No policy manages the pedestrian risk. On units that need a reaction, seeing the pedestrian buys
 \NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale. The benefit does not grow with the hazard: its rank
 correlation with $a_{\mathrm{req}}$ is negative for five policies, down to $-0.51$ for Alpamayo-1.5.
-DiffusionDriveV2 is the only exception ($+0.29$), and its benefit stays below 0.15. The time-based hazard axis gives the same picture (\cref{fig:reach}b). The benefit is also unreliable in direction:
+DiffusionDriveV2 is the only exception ($+0.29$), and its benefit stays below 0.15. Ranking against the time-based axis $\mathrm{TTC}_0$ instead of $a_{\mathrm{req}}$ leaves this unchanged ($-0.31$ to $+0.17$, against $-0.25$ to $+0.29$). The benefit is also unreliable in direction:
 counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
 pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
 SimLingo 18 vs.\ 30, the rest at most 5 either way; all McNemar $p\ge0.11$) --- what reads as a safety
-margin in \cref{fig:report} is, case by case, close to a coin flip.
+margin in \cref{tab:report} is, case by case, close to a coin flip.
 
 \paragraph{Specificity}
 A policy that moves when nothing requires it is not merely cautious, it is unpredictable, and
@@ -65,15 +52,14 @@ without yielding, and SimLingo covers the most ground with the least stable plan
 
 \subsection{Looking inside: why the risk goes unmanaged}
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/reach.pdf}
-\caption{\textbf{What the unmanaged risk costs.} (a)~Collision with the pedestrian's logged future along the plan, at the logged
-speed and at counterfactual input speeds; solid: pedestrian visible, dashed: removed. Each pair of curves nearly coincides, and every
-curve rises with speed. (b)~Hazard sensitivity against the time-based hazard axis $\mathrm{TTC}_0$ (bins with $\ge8$ units); colours
-as in (a), dashed: the same logged-human comparison as \cref{fig:teaser}c.}
+\includegraphics[width=\columnwidth]{figures/reach.pdf}
+\caption{\textbf{Collision against input speed.} Contact between the plan and the pedestrian's logged
+future, at the logged speed and at counterfactual input speeds; solid: pedestrian visible, dashed:
+removed.}
 \label{fig:reach}
-\end{figure*}
+\end{figure}
 
 \input{tables/tab_mech}
 

@@ -4,12 +4,12 @@
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/sample_size.pdf}
-\caption{\textbf{How much data a verdict costs.} (a)~Standard deviation of each exam's estimate over
-400 subsamples of $n$ frames drawn without replacement from the \NumPool{} frames all six policies
-share (dots), with the fitted finite-population law $a\sqrt{1/n-1/N}$ (lines); one line per policy,
-coloured by exam. (b)~Frames needed to place the estimate two standard deviations from the verdict
-threshold, extrapolated from the fit, one dot per policy. The lighting verdict is cheap and hazard
-sensitivity is not; SimLingo's $\HS$ sits on the threshold, so no sample size settles it.}
+\caption{\textbf{How much driving a verdict costs.} Frames are shown as minutes: a 20\,s scene yields
+about \NumFrPerScene{} usable near-pedestrian frames, so one frame is 5\,s of such driving.
+(a)~Standard deviation of each exam's estimate over 400 subsamples drawn without replacement from the
+\NumPool{} frames all six policies share, with the fitted law $a\sqrt{1/n-1/N}$; one line per policy,
+coloured by exam. (b)~Driving needed to place the estimate two standard deviations from the verdict
+threshold, one dot per policy; values beyond the axis are marked off scale.}
 \label{fig:sample}
 \end{figure}
 
