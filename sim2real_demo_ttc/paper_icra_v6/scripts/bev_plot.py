@@ -12,7 +12,7 @@ S="/tmp/claude-1001/-home-boyuewang-120-uwm/cd9145da-d85c-41bc-8d71-909dc71f6020
 OUT=_os.environ.get("BEV_OUT",f"{R5}/fill_examples/bev_navsim") if (_os:=__import__("os")) else None; os.makedirs(f"{OUT}/right_hand_SG",exist_ok=True); os.makedirs(f"{OUT}/left_hand_US",exist_ok=True)
 ONLY=set(sys.argv[1].split(",")) if len(sys.argv)>1 else None
 M=["dd","ltf","ddv2","simlingo","autovla","alpamayo15"]
-COL={"dd":"#2a78d6","ltf":"#eb6834","ddv2":"#1baf7a","simlingo":"#eda100","autovla":"#e87ba4","alpamayo15":"#008300"}
+COL={"dd":"#2a78d6","ltf":"#eb6834","ddv2":"#1baf7a","simlingo":"#eda100","autovla":"#e87ba4","alpamayo15":"#6a3d9a"}
 NAME={"dd":"DiffusionDrive","ltf":"LTF","ddv2":"DiffusionDriveV2","simlingo":"SimLingo","autovla":"AutoVLA","alpamayo15":"Alpamayo 1.5"}
 SEMC=ListedColormap(["#ffffff","#d9d9d9","#efe3c8","#8c8c8c","#a0785a","#6fa8dc","#e34948"])
 SEMN=["background","road","walkway","centerline","static","vehicle","pedestrian"]
