@@ -151,13 +151,13 @@ import os
 if os.path.exists(f"{V5}/bench_compare.json") and os.path.exists(f"{V5}/ttc_rank.json"):
     BC=json.load(open(f"{V5}/bench_compare.json")); TR=json.load(open(f"{V5}/ttc_rank.json"))
     NUo=BC["nusc"]; CV=BC["navsim_close"]; AL=BC["navsim_all"]
-    T=[r"\begin{table*}[t]",r"\centering",
-       r"\caption{\textbf{The same six policies under the standard scores.} Left: nuScenes open-loop on the 236 near-pedestrian frames, original\,/\,pedestrian removed (rear-end contacts excluded). Middle: NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} with a pedestrian near the corridor. Right: share of moving-ego scenes with minimum pedestrian TTC $<1.5$\,s, by driving side. Bold: best in column.}",
-       r"\label{tab:bench}",r"\small",r"\setlength{\tabcolsep}{3pt}",
-       r"\begin{tabular}{@{}lccc cc cc@{}}",r"\toprule",
-       r" & \multicolumn{3}{c}{nuScenes open-loop (orig.\,/\,removed)} & \multicolumn{2}{c}{NAVSIM EPDMS (rank)} & \multicolumn{2}{c}{pedestrian TTC $<1.5$\,s (rank)} \\",
-       r"\cmidrule(lr){2-4}\cmidrule(lr){5-6}\cmidrule(l){7-8}",
-       r"Policy & L2 (m) & collision (\%) & ped.\ coll.\ (\%) & all & near ped. & left-hand & right-hand \\",r"\midrule"]
+    T=[r"\begin{table}[t]",r"\centering",
+       r"\caption{\textbf{The same six policies under the standard scores.} Left: nuScenes open-loop L2 on the 236 near-pedestrian frames, original\,/\,pedestrian removed. Middle: NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} with a pedestrian near the corridor. Right: share of moving-ego scenes with minimum pedestrian TTC $<1.5$\,s, by driving side, with the rank in parentheses. Bold: best in column.}",
+       r"\label{tab:bench}",r"\scriptsize",r"\setlength{\tabcolsep}{2.0pt}",
+       r"\begin{tabular}{@{}lc cc cc@{}}",r"\toprule",
+       r" & L2 (m) & \multicolumn{2}{c}{EPDMS} & \multicolumn{2}{c}{TTC$<$1.5\,s} \\",
+       r"\cmidrule(lr){2-2}\cmidrule(lr){3-4}\cmidrule(l){5-6}",
+       r"Policy & orig.\,/\,rm. & all & near & LHD & RHD \\",r"\midrule"]
     # EPDMS 两列各自排名（高分为 1），让"榜单第一跌到第五"在表里直接看得见
     _rk=lambda d: {m:i+1 for i,m in enumerate(sorted(M,key=lambda x:-d[x]["epdms"]))}
     RKA=_rk(AL); RKC=_rk(CV)
@@ -170,11 +170,9 @@ if os.path.exists(f"{V5}/bench_compare.json") and os.path.exists(f"{V5}/ttc_rank
         cA="%.3f (%d)"%(AL[m]["epdms"],RKA[m]); cC="%.3f (%d)"%(CV[m]["epdms"],RKC[m])
         cL="%.1f (%d)"%(L_["viol"],TR["ranks"]["LHD TTC"][m]); cR="%.1f (%d)"%(R_["viol"],TR["ranks"]["RHD TTC"][m])
         cells=[_bf(cA,m==_bA),_bf(cC,m==_bC),_bf(cL,m==_bL),_bf(cR,m==_bR)]
-        T.append(f"{NAME[m]} & {n['clean']['L2_avg']:.2f}\\,/\\,{n['rm']['L2_avg']:.2f} & "
-                 f"{n['clean']['col_front']:.1f}\\,/\\,{n['rm']['col_front']:.1f} & "
-                 f"{n['clean']['col_ped']:.1f}\\,/\\,{n['rm']['col_ped']:.1f} & "
+        T.append(f"{SH[m]} & {n['clean']['L2_avg']:.2f}\\,/\\,{n['rm']['L2_avg']:.2f} & "
                  + " & ".join(cells) + " \\\\")
-    T+=[r"\bottomrule",r"\end{tabular}",r"\end{table*}"]
+    T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
     open(f"{_OUT}/tables/tab_bench.tex","w").write("\n".join(T)+"\n")
     sp=TR["spearman"]; rs=BC["removal_sensitivity"]
     NUM2={"NumRhoTTC":f"{sp['LHD TTC']['RHD TTC']:+.2f}","NumRhoTTCHSL":f"{sp['LHD TTC']['HS (ours)']:+.2f}","NumRhoTTCHSR":f"{sp['RHD TTC']['HS (ours)']:+.2f}",

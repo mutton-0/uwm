@@ -8,9 +8,10 @@ and the check-up on the same six policies (\cref{tab:bench}) lets us ask what ea
 other does not, and which of them predicts behaviour at a site it has not seen.
 
 \paragraph{nuScenes open-loop metrics}
-On our 236 near-pedestrian frames, removing the pedestrian changes the L2 error by at most
-\NumMaxdLtwo\,m, frontal collisions by at most \NumMaxdCol{} points and pedestrian collisions by at
-most \NumMaxdPed. The metric cannot tell whether a policy saw the pedestrian. Its ordering follows how
+On our 236 near-pedestrian frames, removing the pedestrian from the image changes none of the standard
+open-loop numbers: the L2 error by at most \NumMaxdLtwo\,m, the frontal collision rate by at most
+\NumMaxdCol{} points and the pedestrian collision rate by at most \NumMaxdPed{} (\cref{tab:bench}
+shows the L2 pairs; the two collision rates behave the same way and are omitted). The metric cannot tell whether a policy saw the pedestrian. Its ordering follows how
 far a policy's planned distance departs from the human's (rank correlation \NumRhoLtwoExp{} with
 $|\text{exposure}-1|$): L2 rewards driving at the human's speed. We exclude rear-end contacts from the
 collision count. The logged traffic does not react, so a policy that plans to drive slower than the
