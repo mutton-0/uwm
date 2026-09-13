@@ -18,6 +18,8 @@ def readouts(X,F):
 sel=lambda z: z["d"]<=15 and (z["set"]=="B" or z["grp"]=="corr") and z["v"]>=1.0 and z["need"]
 BINS=[(0,0.5),(0.5,1),(1,2),(2,4),(4,99)]; XL=["<0.5","0.5-1","1-2","2-4",">4"]
 gt={b:[] for b in range(len(BINS))}; ideal={b:[] for b in range(len(BINS))}
+MS=["dd","ltf","ddv2","simlingo","autovla","alpamayo15"]
+per={m:{b:[] for b in range(len(BINS))} for m in MS}
 for z in rows:
     if not sel(z): continue
     u=z["uid"]; x=IDX.get(u); h=HP.get(u)
@@ -29,7 +31,9 @@ for z in rows:
     v=0.25*((A-q["A"])+(C-q["C"])+(T-q["T"])+np.tanh(S-q["S"]))
     w=0.25*((1-q["A"])+(1-q["C"])+(1-q["T"])+np.tanh(10-q["S"]))
     for b,(a_,b_) in enumerate(BINS):
-        if a_<=z["a_req"]<b_: gt[b].append(v); ideal[b].append(w)
+        if a_<=z["a_req"]<b_:
+            gt[b].append(v); ideal[b].append(w)
+            if z["m"] in per: per[z["m"]][b].append(v)
 res={"bins":XL,"gt":[],"ideal":[],"n":[]}
 print(f"{'危险等级':10s} {'n':>5s} {'真人参照':>9s} {'构造上限':>9s}")
 for b,lab in enumerate(XL):
@@ -56,4 +60,9 @@ res["ttc_bins"]=TL; res["gt_ttc"]=[float(np.mean(g2[b])) if len(g2[b])>=8 else f
 res["n_ttc"]=[len(g2[b]) for b in range(len(TB))]
 print("\n按 TTC0 分箱的真人参照:")
 for lab,v,n in zip(TL,res["gt_ttc"],res["n_ttc"]): print(f"  {lab:8s} n={n:4d}  {v:.2f}")
+res["gt_lo"]=[];res["gt_hi"]=[]
+for b in range(len(BINS)):
+    vals=[float(np.mean(per[m][b])) for m in MS if len(per[m][b])>=8]
+    res["gt_lo"].append(min(vals) if vals else float("nan")); res["gt_hi"].append(max(vals) if vals else float("nan"))
+print("\n逐模型差的范围:", [f"{a:.2f}-{b:.2f}" if a==a else "—" for a,b in zip(res["gt_lo"],res["gt_hi"])])
 json.dump(res,open(f"{V5}/gt_ceiling.json","w"),indent=1)

@@ -11,11 +11,10 @@ high-visibility vest stands at the edge of the ego corridor 9.6\,m ahead; the eg
 the worker. (c)~Hazard-sensitivity curves over all near-pedestrian units that need a reaction (mean,
 95\% CI, bins with $\ge8$ units; points are dodged horizontally within each bin so the intervals do
 not overlap, and a policy appears only where it has enough units, which is why the curves start at
-different hazard levels). $\HS$ is a dimensionless index in $[-1,1]$. The dashed line scores the trajectory the human
-actually drove against the \emph{same} pedestrian-blind plan, on the same four readouts; the shaded
-strip extends it to a plan that keeps full distance. It is a gap, not a human $\HS$: the logged driver
-has no ablated counterpart, so no subtrahend of its own. Real driving is $0.5$--$0.6$ safer than the
-blind plans these policies produce, and seeing the pedestrian recovers almost none of that gap.}
+different hazard levels). $\HS$ is a dimensionless index in $[-1,1]$. The dashed line scores the logged human trajectory
+against each policy's own pedestrian-blind plan on the same four readouts, averaged over policies; the
+band is the range across the six. Real driving is $0.5$--$0.6$ safer than the blind plans these
+policies produce, and seeing the pedestrian recovers almost none of that gap.}
 \label{fig:teaser}
 \end{figure*}
 
@@ -60,7 +59,7 @@ without yielding, and SimLingo covers the most ground with the least stable plan
 \caption{\textbf{What the unmanaged risk costs.} (a)~Collision with the pedestrian's logged future along the plan, at the logged
 speed and at counterfactual input speeds; solid: pedestrian visible, dashed: removed. Each pair of curves nearly coincides, and every
 curve rises with speed. (b)~Hazard sensitivity against the time-based hazard axis $\mathrm{TTC}_0$ (bins with $\ge8$ units); colours
-as in (a), dashed: the same human reference as \cref{fig:teaser}c.}
+as in (a), dashed: the same logged-human comparison as \cref{fig:teaser}c.}
 \label{fig:reach}
 \end{figure*}
 
