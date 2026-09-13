@@ -22,9 +22,9 @@ NIGHT={m:{**load(f"{R5}/card_night_{m}.json"),**load(f"{R5}/card_night_{m}_*.jso
 MAN=json.load(open(f"{R5}/risk_card_manifest.json")); IDX={x["uid"]:x for k in ("A","B") for x in MAN[k]}
 DV={o["uid"]:o for o in json.load(open(f"{P}/det_validate.json"))}
 x=IDX[UID]
-fig=plt.figure(figsize=(7.16,2.35))
-G=GridSpec(1,4,figure=fig,width_ratios=[1.5,1.6,0.28,1.4],wspace=0.12,left=0.005,right=0.985,top=0.88,bottom=0.14)
-gA=G[0].subgridspec(3,1,hspace=0.12); gB=G[1].subgridspec(2,1,hspace=0.1,height_ratios=[0.02,1])
+fig=plt.figure(figsize=(7.16,2.55))
+G=GridSpec(1,4,figure=fig,width_ratios=[1.42,1.95,0.16,1.42],wspace=0.12,left=0.005,right=0.985,top=0.88,bottom=0.14)
+gA=G[0].subgridspec(3,1,hspace=0.12); gB=G[1].subgridspec(3,3,wspace=0.16,hspace=0.42,height_ratios=[0.02,1,1])
 # (a) 三张图
 a=np.asarray(Image.open(x["img"]).convert("RGB")); r=np.asarray(Image.open(f"/data/dataset/risk_card/{x['rm_name']}").convert("RGB"))
 n=transform(a,kind="night",scope="global",seed=zlib.crc32(UID.encode())%(2**31))
@@ -41,30 +41,32 @@ cen=np.mean(np.asarray(x["corners_ego"])[:,:2],0)
 def _d(u,v):
     u=np.asarray(u,float)[:,:2]; v=np.asarray(v,float)[:,:2]; n=min(len(u),len(v))
     return float(np.mean(np.linalg.norm(u[:n]-v[:n],axis=1)))
-FI={}
-for m in M:
+# (b) 六个模型各一格：原图 / 移除行人 / 夜化 三条规划，用三种颜色而非三种线型区分
+cen=np.mean(np.asarray(x["corners_ego"])[:,:2],0)
+CC={"clean":"#2a5db0","rm":"#c0392b","night":"#8a8a84"}
+for k,m in enumerate(M):
+    ax=fig.add_subplot(gB[1+k//3,k%3])
+    ax.set_xlim(-3.2,3.2); ax.set_ylim(-1,21); ax.set_xticks([])
+    ax.set_yticks([0,10,20] if k%3==0 else []); ax.tick_params(labelsize=5.4,length=2)
+    ax.axvspan(-1.0,1.0,color="#eef1f6",lw=0,zorder=0)
+    ax.plot(-cen[1],cen[0],marker="*",ms=6,color="#e34948",zorder=5,mec="white",mew=0.4)
+    ax.plot(0,0,marker="^",ms=4,color="#0b0b0b")
+    ax.set_title(NAME[m],fontsize=6.1,pad=1.5,color="#0b0b0b")
     c=CARD[m].get(UID); nn=NIGHT[m].get(UID)
-    if not c or "actual" not in c: continue
-    FI[m]=(_d(c["actual"]["clean"],c["actual"]["rm"]), _d(c["actual"]["clean"],nn["night"]) if nn else np.nan)
-# 下：F / I 棒棒糖
-bx=fig.add_subplot(gB[1,:]); yy=np.arange(len(M))[::-1]
-for k,m in enumerate(M):
-    if m not in FI: continue
-    F_,I_=max(FI[m][0],3e-3),max(FI[m][1],3e-3)
-    bx.plot([F_,I_],[yy[k],yy[k]],color="#c9c8c0",lw=1.0,zorder=1)
-    bx.scatter([F_],[yy[k]],s=20,color=COL[m],zorder=3)
-    bx.scatter([I_],[yy[k]],s=20,facecolor="white",edgecolor=COL[m],lw=1.1,zorder=3)
-bx.set_yticks([]); bx.set_ylim(-1.9,len(M)-0.25)
-SHT={"dd":"DD","ltf":"LTF","ddv2":"DDv2","simlingo":"SimLingo","autovla":"AutoVLA","alpamayo15":"Alpamayo"}
-for k,m in enumerate(M):
-    if m in FI: bx.annotate(SHT[m],(max(FI[m]),yy[k]),xytext=(6,0),textcoords="offset points",fontsize=6.2,va="center",color="#52514e")
-bx.set_xscale("log"); bx.set_xlim(2.4e-3,None); bx.set_xlabel("plan displacement (m)",fontsize=6,labelpad=1); bx.tick_params(labelsize=5.5,length=2)
-bx.scatter([],[],s=14,color="#52514e",label=r"$F$: pedestrian removed")
-bx.scatter([],[],s=14,facecolor="white",edgecolor="#52514e",lw=1.0,label=r"$I$: night")
-bx.legend(frameon=False,fontsize=6.2,loc="lower right",handletextpad=0.3,labelspacing=0.25,borderpad=0.1)
-for s_ in ("top","right","left"): bx.spines[s_].set_visible(False)
-bx.tick_params(axis="y",length=0)
-tb=fig.add_subplot(gB[0,:]); tb.axis("off"); tb.set_title("(b) how far the plan moves under each edit",fontsize=7.5,loc="left",pad=3)
+    if not c or "actual" not in c:
+        ax.text(0,10,"n/a",ha="center",color="#9a998f"); continue
+    for key,lw in (("clean",1.5),("rm",1.2)):
+        w=np.vstack([[0,0],np.asarray(c["actual"][key])]); ax.plot(-w[:,1],w[:,0],color=CC[key],lw=lw,zorder=3 if key=="clean" else 4)
+    if nn:
+        w=np.vstack([[0,0],np.asarray(nn["night"])]); ax.plot(-w[:,1],w[:,0],color=CC["night"],lw=1.2,zorder=4)
+    for s_ in ("top","right"): ax.spines[s_].set_visible(False)
+hh=[plt.Line2D([],[],color=CC["clean"],lw=1.5,label="original"),
+    plt.Line2D([],[],color=CC["rm"],lw=1.2,label="pedestrian removed"),
+    plt.Line2D([],[],color=CC["night"],lw=1.2,label="night"),
+    plt.Line2D([],[],color="#e34948",marker="*",ms=6,lw=0,label="pedestrian")]
+tb=fig.add_subplot(gB[0,:]); tb.axis("off")
+tb.set_title("(b) plans over 2.5 s under each edit",fontsize=7.5,loc="left",pad=3)
+fig.legend(handles=hh,frameon=False,fontsize=5.9,ncol=4,loc="lower center",bbox_to_anchor=(0.455,-0.035),handlelength=1.5,columnspacing=1.1)
 # (c) 危险敏感度曲线（v2 口径，左右舵合并，近距有干涉单位）
 rng=np.random.default_rng(0)
 ax=fig.add_subplot(G[3])
@@ -80,7 +82,17 @@ for m in M:
             bb=[rng.choice(v,len(v)).mean() for _ in range(1000)]
             xs.append(i+(M.index(m)-2.5)*0.07); ys.append(v.mean()); lo.append(v.mean()-np.percentile(bb,2.5)); hi.append(np.percentile(bb,97.5)-v.mean())
     ax.errorbar(xs,ys,yerr=[lo,hi],color=COL[m],marker="o",ms=3,lw=1.1,elinewidth=0.6,capsize=0,label=NAME[m])
-ax.plot(range(len(BINS)),[0.1,0.3,0.5,0.7,0.9],color="#9a998f",ls=(0,(3,2)),lw=0.9,label="illustrative yielding driver")
+# 可达上限：把同一批单位的「看不见行人」读数保持不变，只把「看得见」那一侧换成
+# 一条完全让开的规划（无接触 A=1、安全距离 C=1、不接近 T=1、分离度取上限 10 m），
+# 逐单位算 HS 再按危险分箱取均值。这是数据本身决定的天花板，不是画出来的示意线。
+def _ceil(z):
+    q=z["Q"]; return 0.25*((1-q["A"])+(1-q["C"])+(1-q["T"])+np.tanh(10-q["S"]))
+base=[z for z in rows if sel(z)]   # 六家的 need 单位全池化
+cy=[]
+for a_,b_ in BINS:
+    v=[_ceil(z) for z in base if a_<=z["a_req"]<b_]
+    cy.append(np.mean(v) if len(v)>=8 else np.nan)
+ax.plot(range(len(BINS)),cy,color="#6b6a62",ls=(0,(3,2)),lw=1.0,label="attainable ceiling")
 ax.axhline(0,color="#c3c2b7",lw=0.6)
 ax.set_xticks(range(len(BINS))); ax.set_xticklabels(XL); ax.set_xlabel(r"hazard level $a_{\rm req}=v^2/2d$ (m/s$^2$)")
 ax.set_ylabel("hazard sensitivity HS",labelpad=1); ax.set_ylim(-0.25,1.0)
