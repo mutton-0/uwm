@@ -1,29 +1,14 @@
 \begin{abstract}
-Choosing which policy to deploy usually starts from its rank on a public leaderboard, narrowed where
-possible to the scenario type the deployment site cares about --- here, scenes where a pedestrian
-appears. We ask whether that rank is enough to make the choice, and find that it is not: a policy's
-rank on nuScenes' open-loop metrics or on NAVSIM's leaderboard score, computed on near-pedestrian
-scenes, predicts its rank at a new deployment site only as well as a coin flip
-($\rho=-0.54$--$+0.49$). The reason is that a benchmark score says what a driving policy's
-trajectories achieved on logged scenes; it does not say whether a vulnerable road user in the
-corridor had anything to do with that result, and that is why the rank does not travel. We propose a
-\emph{check-up}: a short list of counterfactual exams that read a policy's behaviour around
-pedestrians from a few hundred logged frames, without a simulator, a fleet test, or retraining. Each
-exam edits real frames---removing the pedestrian from the ego corridor, or re-rendering the frame at
-night---pairs the edit with a control, and has an independent detector verify it. The central reading
-is not how far the plan moves but how far it moves \emph{away}: we decompose the response into its
-magnitude, the policy's own jitter under an irrelevant edit, and the separation it actually buys from
-the pedestrian's logged future. On \NumSGscenes{} near-pedestrian scenes of a second corpus
-(NAVSIM, Singapore) across six end-to-end policies, a near-zero response is a reliable certificate that the pedestrian did not enter the
-decision (it predicts an unchanged outcome in \NumPFbig\% of scenes), while a large response is not
-evidence of avoidance: of the cells in which the plan moved, \NumMoveFar{} increased the clearance and
-\NumMoveNear{} decreased it, and only \NumRealPct\% of all cells meet all three conditions for genuine
-avoidance. Moving from left-hand to right-hand drive, what transfers is not how strongly a policy
-reacts but how steadily it drives: the specificity exam predicts the right-hand-drive rate of
-sub-1.5\,s time-to-proximity at $\rho={\NumSpBeh}$, beating both the other exams and the leaderboard
-score computed on that side's own scenes. We
-fit how each verdict's uncertainty shrinks with sample size, so that a check-up can be priced before
-it is run: the lighting verdict is settled in \NumNstarCFRhi{} frames and exposure in
-\NumNstarExpHi, while hazard sensitivity needs hundreds. A pre-registered Boston-to-Singapore test
-confirms the operating range: orderings and verdicts carry over, point values do not.
+A policy's rank on nuScenes' open-loop metrics or NAVSIM's leaderboard score predicts its rank at a
+new deployment site only as well as a coin flip ($\rho=-0.54$--$+0.49$ on near-pedestrian scenes): a
+benchmark score reports an outcome, not whether a vulnerable road user had anything to do with it. We
+propose a \emph{check-up} --- a few hundred verified, pixel-level counterfactual edits (removing the
+pedestrian, re-rendering the scene at night) read as a diagnosis rather than a ranking. Raw response
+magnitude is a poor safety signal: across \NumSGscenes{} near-pedestrian scenes and six policies, only
+\NumRealPct\% of responses are genuine avoidance by a three-part test, though a near-zero response
+still reliably certifies that the pedestrian was ignored (\NumPFbig\% of scenes). Moving from
+left-hand to right-hand drive, what transfers is not how strongly a policy reacts but how steadily it
+drives, and that exam beats the leaderboard score itself at predicting the new side's behaviour
+($\rho={\NumSpBeh}$). A pre-registered, sample-size-priced transfer test confirms the operating range:
+orderings and verdicts carry over, point values do not.
 \end{abstract}
