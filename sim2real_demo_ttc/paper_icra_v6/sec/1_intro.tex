@@ -1,6 +1,16 @@
 \section{Introduction}
 \label{sec:intro}
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/method.pdf}
+\caption{\textbf{The check-up.} (a)~A logged frame and its two counterfactual edits, each checked by a
+detector no policy shares. (b)~The same policy is queried on all three inputs; the three plans are read
+against the pedestrian's logged future through the clearance $c_t$. (c)~Four readouts taken on the
+three plans over the common 2.5\,s horizon combine into the five exams of \cref{tab:exams}.}
+\label{fig:method}
+\end{figure*}
+
 End-to-end driving policies are compared by benchmark scores, and a deployment decision is,
 implicitly, a bet that the rank those scores produce will still hold once the policy is driving at
 the new site, not just on someone else's roads. Taking that bet blindly is a bad idea: on scenes

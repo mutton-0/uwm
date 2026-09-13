@@ -4,6 +4,8 @@
 数据：case10.json（读数）+ nv_ped_future.json（行人真实未来）+ nvtraj_<m>_*_nav.json（规划）。"""
 import json,os,numpy as np,matplotlib
 matplotlib.use("Agg"); import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+from matplotlib.patches import Patch
 R5="/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090"; V5=f"{R5}/paper_icra_v5"
 M=["dd","ltf","ddv2","simlingo","autovla","alpamayo15"]
 SH={"dd":"DD","ltf":"LTF","ddv2":"DDv2","simlingo":"SimLingo","autovla":"AutoVLA","alpamayo15":"Alpamayo"}
@@ -15,6 +17,10 @@ def _pick(m):
     return json.load(open(a if os.path.exists(a) else b))
 TR={m:_pick(m) for m in M}
 PF=json.load(open(f"{V5}/nv_ped_future.json")); C={r["token"]:r for r in json.load(open(f"{V5}/case10.json"))}
+# DDv2 自己的 BEV 语义头（几何按 navsim 源码，与 bev_plot 一致）：铺在轨迹底下，看它有没有把行人解码出来
+SEMC=ListedColormap(["#ffffff","#e6e6e6","#f2ead6","#b5b5b5","#c2a389","#a8c8e8","#e34948"])
+SEMN=["background","road","walkway","centerline","static","vehicle","pedestrian"]
+_B=np.load(f"{V5}/bev_ddv2.npz"); _BI={t:i for i,t in enumerate(_B["tokens"])}
 CASES=[("b6cce8f28e405742","(a) group"),
        ("93a208914ea85781","(b) cyclist"),
        ("3346273c90155b64","(c) waiting"),
@@ -24,7 +30,11 @@ gs=fig.add_gridspec(2,4,height_ratios=[1.05,1.0],hspace=0.78,wspace=0.12)
 ax=[fig.add_subplot(gs[0,i]) for i in range(4)]
 for k,(tok,title) in enumerate(CASES):
     a=ax[k]; p=PF[tok]; r=C[tok]
-    a.axvspan(-1,1,color="#eef1f6",lw=0,zorder=0)
+    i_=_BI.get(tok)
+    if i_ is not None:
+        a.imshow(_B["sem"][i_][:,::-1],cmap=SEMC,vmin=0,vmax=6,extent=[-32,32,0,32],origin="lower",
+                 interpolation="nearest",alpha=0.55,zorder=0)
+    a.axvspan(-1,1,color="#eef1f6",lw=0,alpha=0.35,zorder=1)
     fut=np.array([p["p0"]]+[z for z in p["fut"] if z is not None],float)
     a.plot(-fut[:,1],fut[:,0],color="#e34948",ls=(0,(1.6,1.2)),lw=1.2,marker=".",ms=2.6,zorder=5)
     a.plot(-p["p0"][1],p["p0"][0],marker="*",ms=8,color="#e34948",mec="white",mew=0.5,zorder=6)
@@ -46,7 +56,8 @@ for k,(tok,title) in enumerate(CASES):
     if k==0: a.set_xlabel("lateral (m)",fontsize=5.6,labelpad=0.5)
     for s_ in ("top","right"): a.spines[s_].set_visible(False)
 h=[plt.Line2D([],[],color=COL[m],lw=1.4,label=SH[m]) for m in M]+[plt.Line2D([],[],color="#e34948",ls=(0,(1.6,1.2)),lw=1.2,marker="*",ms=6,label="VRU logged future")]
-fig.legend(handles=h,frameon=False,fontsize=4.7,ncol=4,loc="upper center",bbox_to_anchor=(0.5,0.50),handlelength=1.0,columnspacing=0.7,labelspacing=0.15)
+h+=[Patch(facecolor=SEMC(i),edgecolor="none",label=SEMN[i]) for i in (1,2,5,6)]
+fig.legend(handles=h,frameon=False,fontsize=4.4,ncol=6,loc="upper center",bbox_to_anchor=(0.5,0.505),handlelength=0.9,columnspacing=0.55,labelspacing=0.12)
 # ---- 右半：逐场景 F 与 ΔS
 P=json.load(open(f"{V5}/f_decomp_per_scene.json")); EPS=3e-3
 MM=["dd","ltf","ddv2","simlingo","autovla","alpamayo15"]

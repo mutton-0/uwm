@@ -67,7 +67,9 @@ The check-up only diagnoses; the following explains the diagnosis for the three 
 The planners' own BEV semantic heads do not localise the pedestrian. On 520 NAVSIM near-pedestrian
 scenes, the pedestrian channel is no brighter at the pedestrian than at a mirrored empty location
 (\cref{tab:mech}, top). It is 20--55 times weaker than the vehicle channel and never wins the argmax
-inside a pedestrian's box. The pedestrian does leave a trace in the features, however. The direction
+inside a pedestrian's box. The class is not merely inert: DiffusionDriveV2 does assign pixels to it in
+3 of the 520 scenes, but those pixels sit about 5\,m from the pedestrian, and DiffusionDrive and LTF
+never assign it a pixel anywhere. The pedestrian does leave a trace in the features, however. The direction
 between SimLingo's representations with and without the pedestrian is steerable: it shortens the plan
 by 2.9\,m at the largest dose, while random directions lengthen it. Location-specific information also
 survives in the 1\,m side branch, as shown next.
