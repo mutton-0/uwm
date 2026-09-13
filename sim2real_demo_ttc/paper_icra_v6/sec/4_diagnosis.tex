@@ -53,9 +53,11 @@ without yielding, and SimLingo covers the most ground with the least stable plan
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/reach.pdf}
-\caption{\textbf{Why the risk goes unmanaged, and what it costs.} (a)~Plan change when the pedestrian is removed, by distance,
-across all 850 nuScenes scenes (974 pedestrian records; median, 95\% CI). LTF responds to corridor pedestrians (filled) once they are
-within reach of its plan; off-road pedestrians (open) evoke nothing; DiffusionDrive is flat throughout. (b)~Collision with the
+\caption{\textbf{Why the risk goes unmanaged, and what it costs.} (a)~\emph{Reach}: plan change when the pedestrian is removed,
+by distance, on a corpus-wide sweep of 850 nuScenes scenes (974 pedestrian records; median, 95\% CI). This sweep re-renders every scene and
+is run for the two camera-only planners; the other four policies are read on the check-up units instead, where the pedestrian is always
+within 15\,m (\cref{tab:report}). LTF responds to corridor pedestrians (filled) once they are within reach of its plan; off-road
+pedestrians (open) evoke nothing; DiffusionDrive is flat throughout. (b)~Collision with the
 pedestrian's logged future along the plan, at the logged speed and at counterfactual input speeds; solid: pedestrian visible,
 dashed: removed. Each pair of curves nearly coincides, and every curve rises with speed. (c)~Hazard sensitivity against the
 time-based hazard axis $\mathrm{TTC}_0$ (bins with $\ge8$ units); colours as in (b).}
