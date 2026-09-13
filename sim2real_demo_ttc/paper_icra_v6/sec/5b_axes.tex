@@ -51,6 +51,12 @@ pedestrian's logged future. A response counts as avoidance only if all three hol
 ($F\ge0.5$\,m), it moved more than the policy's own jitter ($F>I$), and the movement bought distance
 ($\Delta S\ge0.5$\,m).
 
+Removing one pedestrian while others remain could understate the response, so we split the scenes by
+whether the target is the only road user within 3\,m of the corridor. It is in 37\% of them, and there
+$F$ is two to nine times larger (medians $0.05$--$0.46$ against $0.01$--$0.10$ for the four policies
+that respond at all) while $\Delta S$ stays at zero. The near-zero separation is therefore not an
+artefact of the other pedestrians left in the frame.
+
 Three readings follow. First, the pedestrian outweighs the irrelevant edit in only
 \NumFgtIlo--\NumFgtIhi\% of scenes, so most of what $F$ registers sits inside the policy's own
 variability---the pinched band of \cref{fig:cases}e. Second, only \NumRealN{} of \NumRealTot{} cells
