@@ -18,9 +18,7 @@ partially occluded pedestrians these scenes contain. It is segmented with SAM~\c
 (box and torso prompts, clipped to the box, dilated by 9\,px) and the mask is filled with
 LaMa~\cite{suvorov2022lama}; for the LiDAR policy the points inside the box are deleted as well. The
 VLA policies read several cameras and we edit only the front one, so we retain only frames in which
-the target appears in no other view. Only the target is removed; other road users, including other
-pedestrians, stay in the image, so the exam asks what \emph{this} pedestrian contributes rather than
-what pedestrians in general do.
+the target appears in no other view.
 
 \paragraph{Night}
 A closed-form photometric transform (gamma 2.2, gain 0.45, saturation 0.45, blue tint, sensor noise
