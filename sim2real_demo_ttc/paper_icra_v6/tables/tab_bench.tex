@@ -1,21 +1,21 @@
 \begin{table*}[t]
 \centering
-\caption{\textbf{The same six policies under the standard evaluations.} Left: nuScenes open-loop metrics on the same 236 near-pedestrian frames, original\,/\,pedestrian removed (L2 to the human trajectory averaged over 0.5--2.5\,s; collisions with objects ahead of the ego, rear-end contacts by non-reactive logged agents excluded). Middle: NAVSIM EPDMS on all 783 Singapore scenes and on 260 Singapore scenes with a pedestrian within 1\,m of the ego corridor and 20\,m ahead. Right: pedestrian TTC along the plan (share of moving-ego scenes with minimum TTC $<1.5$\,s, lower is better) on left-hand-drive near-pedestrian scenes (nuScenes Boston + NAVSIM Las Vegas/Boston/Pittsburgh) and right-hand-drive ones (NAVSIM Singapore), with the resulting rank.}
+\caption{\textbf{The same six policies under the standard evaluations.} Left: nuScenes open-loop metrics on the same 236 near-pedestrian frames, original\,/\,pedestrian removed (L2 to the human trajectory averaged over 0.5--2.5\,s; collisions with objects ahead of the ego, rear-end contacts by non-reactive logged agents excluded). Middle: NAVSIM EPDMS on all 783 Singapore scenes and on 260 Singapore scenes with a pedestrian within 1\,m of the ego corridor and 20\,m ahead; the leaderboard ordering does not survive the slice. Right: pedestrian TTC along the plan (share of moving-ego scenes with minimum TTC $<1.5$\,s, lower is better) on left-hand-drive near-pedestrian scenes (nuScenes Boston + NAVSIM Las Vegas/Boston/Pittsburgh) and right-hand-drive ones (NAVSIM Singapore), with the resulting rank.}
 \label{tab:bench}
 \small
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lccc cc cc@{}}
 \toprule
- & \multicolumn{3}{c}{nuScenes open-loop (orig.\,/\,removed)} & \multicolumn{2}{c}{NAVSIM EPDMS} & \multicolumn{2}{c}{pedestrian TTC $<1.5$\,s (rank)} \\
+ & \multicolumn{3}{c}{nuScenes open-loop (orig.\,/\,removed)} & \multicolumn{2}{c}{NAVSIM EPDMS (rank)} & \multicolumn{2}{c}{pedestrian TTC $<1.5$\,s (rank)} \\
 \cmidrule(lr){2-4}\cmidrule(lr){5-6}\cmidrule(l){7-8}
 Policy & L2 (m) & collision (\%) & ped.\ coll.\ (\%) & all & near ped. & left-hand & right-hand \\
 \midrule
-DiffusionDrive & 0.98\,/\,0.99 & 14.0\,/\,14.8 & 1.3\,/\,1.7 & 0.535 & 0.744 & 3.2 (1) & 14.1 (1) \\
-LTF & 0.88\,/\,0.91 & 4.2\,/\,3.8 & 2.5\,/\,1.7 & 0.509 & 0.735 & 5.4 (2) & 16.5 (2) \\
-DiffusionDriveV2 & 1.35\,/\,1.31 & 6.4\,/\,7.2 & 3.8\,/\,3.8 & 0.652 & 0.367 & 18.3 (3) & 22.4 (5) \\
-SimLingo & 3.28\,/\,3.35 & 37.3\,/\,35.6 & 22.5\,/\,19.5 & 0.359 & 0.583 & 61.3 (6) & 56.5 (6) \\
-AutoVLA & 0.68\,/\,0.66 & 6.4\,/\,5.9 & 3.8\,/\,3.4 & 0.683 & 0.413 & 19.4 (4) & 21.2 (4) \\
-Alpamayo 1.5 & 0.77\,/\,0.72 & 2.4\,/\,2.4 & 0.6\,/\,0.6 & 0.663 & 0.760 & 25.4 (5) & 20.0 (3) \\
+DiffusionDrive & 0.98\,/\,0.99 & 14.0\,/\,14.8 & 1.3\,/\,1.7 & 0.535 (4) & 0.744 (2) & 3.2 (1) & 14.1 (1) \\
+LTF & 0.88\,/\,0.91 & 4.2\,/\,3.8 & 2.5\,/\,1.7 & 0.509 (5) & 0.735 (3) & 5.4 (2) & 16.5 (2) \\
+DiffusionDriveV2 & 1.35\,/\,1.31 & 6.4\,/\,7.2 & 3.8\,/\,3.8 & 0.652 (3) & 0.367 (6) & 18.3 (3) & 22.4 (5) \\
+SimLingo & 3.28\,/\,3.35 & 37.3\,/\,35.6 & 22.5\,/\,19.5 & 0.359 (6) & 0.583 (4) & 61.3 (6) & 56.5 (6) \\
+AutoVLA & 0.68\,/\,0.66 & 6.4\,/\,5.9 & 3.8\,/\,3.4 & 0.683 (1) & 0.413 (5) & 19.4 (4) & 21.2 (4) \\
+Alpamayo 1.5 & 0.77\,/\,0.72 & 2.4\,/\,2.4 & 0.6\,/\,0.6 & 0.663 (2) & 0.760 (1) & 25.4 (5) & 20.0 (3) \\
 \bottomrule
 \end{tabular}
 \end{table*}
