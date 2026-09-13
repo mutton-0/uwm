@@ -2,6 +2,8 @@
 import json,numpy as np,os
 # 表头措辞随论文版本切换：v6（默认）用工程说法，v5 保留投资类比的原始措辞
 _ST=os.environ.get("PAPER_STYLE","v6"); _W=(lambda a,b: b if _ST=="v5" else a)
+# 数据仍读 paper_icra_v5（json/npz 都在那里），但表与数字宏默认写到当前论文目录 v6
+_OUT=os.environ.get("PAPER_OUT","/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090/paper_icra_v6")
 R5="/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090"; V5=f"{R5}/paper_icra_v5"; V4=f"{R5}/paper_icra_v4"
 M=["dd","ltf","ddv2","simlingo","autovla","alpamayo15"]
 NAME={"dd":"DiffusionDrive","ltf":"LTF","ddv2":"DiffusionDriveV2","simlingo":"SimLingo","autovla":"AutoVLA","alpamayo15":"Alpamayo 1.5"}
@@ -34,7 +36,7 @@ for m in M:
     T.append(f"{NAME[m]} & {p['exposure']:.2f} {ci(A[m],'exposure')} & {sgn(p['HS'])} {ci(A[m],'HS')} & {sgn(p['HS_slope'])} & {p['SP']:.2f} {ci(A[m],'SP')} & "
              f"{c1[0]:.1f}\\,/\\,{c1[1]:.1f} & {c8[0]:.1f}\\,/\\,{c8[1]:.1f} & {PD['table'][m]['pdms']:.3f} & {PD['table'][m]['drivable_area_compliance']:.3f} \\\\")
 T+=[r"\bottomrule",r"\end{tabular}",r"\end{table*}"]
-open(f"{V5}/tables/tab_report.tex","w").write("\n".join(T)+"\n")
+open(f"{_OUT}/tables/tab_report.tex","w").write("\n".join(T)+"\n")
 # ---------- Table III：跨舵位预注册 ----------
 lab={"P1":"Lighting outweighs the pedestrian (CFR $<1$) for every policy",
      "P2":"Hazard sensitivity stays below 0.15 (upper CI)",
@@ -62,7 +64,7 @@ for k in ["P1","P3","P4","P7","P2","P5","P6"]:
     yn="yes" if PR[k]["pass_"] else r"\textbf{no}"
     T.append(f"{k} & {lab[k]} & {yn} & {det(k)} \\\\")
 T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
-open(f"{V5}/tables/tab_prereg.tex","w").write("\n".join(T)+"\n")
+open(f"{_OUT}/tables/tab_prereg.tex","w").write("\n".join(T)+"\n")
 # ---------- Table IV：光照（精简：不列 p，显著者加粗） ----------
 NS=json.load(open(f"{V5}/night_speed.json"))
 def bold(txt,cond): return f"\\textbf{{\\boldmath {txt}}}" if cond else txt
@@ -81,7 +83,7 @@ for m in M:
     T.append(f"{SH[m]} & {c['CFR']:.2f} {{\\scriptsize[{c['CFR_ci'][0]:.2f},{c['CFR_ci'][1]:.2f}]}} & {sp} & {ds} & "
              f"${L[m]['point']['align']:+.2f}\\to{R[m]['point']['align']:+.2f}$ \\\\")
 T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
-open(f"{V5}/tables/tab_light.tex","w").write("\n".join(T)+"\n")
+open(f"{_OUT}/tables/tab_light.tex","w").write("\n".join(T)+"\n")
 # ---------- 数字宏 ----------
 cf=[CF[m]["corr"]["CFR"] for m in M]; hs=[A[m]["point"]["HS"] for m in M]; ex=[A[m]["point"]["exposure"] for m in M]
 ns=SS["dims"]; nc=[PD["table"][m]["no_at_fault_collisions"] for m in M]
@@ -104,7 +106,7 @@ NUM={"NumCFRlo":f"{min(cf):.2f}","NumCFRhi":f"{max(cf):.2f}","NumCFRciHi":f"{max
      "NumPass":str(sum(PR[k]['pass_'] for k in ['P1','P2','P3','P4','P5','P6','P7'])),
      "NumNightDD":f"{100*NS['dd']['dv_rel']:.0f}","NumNightLTF":f"{100*NS['ltf']['dv_rel']:.0f}","NumNightSL":f"{100*NS['simlingo']['dv_rel']:.0f}",
      "NumNightDDv":f"{100*NS['ddv2']['dv_rel']:.0f}"}
-open(f"{V5}/tables/numbers.tex","w").write("\n".join(f"\\newcommand{{\\{k}}}{{{v}}}" for k,v in NUM.items())+"\n")
+open(f"{_OUT}/tables/numbers.tex","w").write("\n".join(f"\\newcommand{{\\{k}}}{{{v}}}" for k,v in NUM.items())+"\n")
 print(json.dumps(NUM,indent=0))
 print({m:(coll(m,'actual'),coll(m,'8')) for m in M})
 # ---------- Table VI：与两套标准评测对比 + TTC 排名 ----------
@@ -129,7 +131,7 @@ if os.path.exists(f"{V5}/bench_compare.json") and os.path.exists(f"{V5}/ttc_rank
                  f"{n['clean']['col_ped']:.1f}\\,/\\,{n['rm']['col_ped']:.1f} & {AL[m]['epdms']:.3f} & {CV[m]['epdms']:.3f} & "
                  f"{L_['viol']:.1f} ({TR['ranks']['LHD TTC'][m]}) & {R_['viol']:.1f} ({TR['ranks']['RHD TTC'][m]}) \\\\")
     T+=[r"\bottomrule",r"\end{tabular}",r"\end{table*}"]
-    open(f"{V5}/tables/tab_bench.tex","w").write("\n".join(T)+"\n")
+    open(f"{_OUT}/tables/tab_bench.tex","w").write("\n".join(T)+"\n")
     sp=TR["spearman"]; rs=BC["removal_sensitivity"]
     NUM2={"NumRhoTTC":f"{sp['LHD TTC']['RHD TTC']:+.2f}","NumRhoTTCHSL":f"{sp['LHD TTC']['HS (ours)']:+.2f}","NumRhoTTCHSR":f"{sp['RHD TTC']['HS (ours)']:+.2f}",
           "NumRhoTTCCFRL":f"{sp['LHD TTC']['lighting CFR (ours)']:+.2f}","NumRhoTTCCFRR":f"{sp['RHD TTC']['lighting CFR (ours)']:+.2f}",
@@ -140,7 +142,7 @@ if os.path.exists(f"{V5}/bench_compare.json") and os.path.exists(f"{V5}/ttc_rank
           "NumRhoLtwoExp":f"{BC['spearman']['|exposure-1|~nusc_L2avg']:+.2f}","NumRhoAllClose":f"{BC['spearman']['navsim_all_EPDMS~navsim_close_EPDMS']:+.2f}",
           "NumNCshareClose":f"{100*BC['shapley_close']['NC']:.0f}","NumDACshareClose":f"{100*BC['shapley_close']['DAC']:.0f}",
           "NumNclose":str(BC["n"]["close"])}
-    with open(f"{V5}/tables/numbers.tex","a") as fh: fh.write("\n".join(f"\\newcommand{{\\{k}}}{{{v}}}" for k,v in NUM2.items())+"\n")
+    with open(f"{_OUT}/tables/numbers.tex","a") as fh: fh.write("\n".join(f"\\newcommand{{\\{k}}}{{{v}}}" for k,v in NUM2.items())+"\n")
     print(json.dumps(NUM2,indent=0,ensure_ascii=False))
 # ---------- Table VII：哪种评测能预测右舵近行人表现（排名一致性） ----------
 if os.path.exists(f"{V5}/rank_consistency.json"):
@@ -164,7 +166,7 @@ if os.path.exists(f"{V5}/rank_consistency.json"):
         T.append(f"\\multicolumn{{5}}{{@{{}}l}}{{\\emph{{{g}}}}} \\\\")
         for lab,key in items: T.append(f"\\quad {lab} & "+" & ".join(fm(SPR[key][t]) for t in TG)+" \\\\")
     T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
-    open(f"{V5}/tables/tab_rank.tex","w").write("\n".join(T)+"\n")
+    open(f"{_OUT}/tables/tab_rank.tex","w").write("\n".join(T)+"\n")
 # ---------- Table VIII：轴在新域重新量（逐例 F/I、两条通式、左右舵偏差） ----------
 if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_axes.json"):
     SD=json.load(open(f"{V5}/side_deviation.json")); CA=json.load(open(f"{V5}/case10_axes.json"))
@@ -193,7 +195,7 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
         tv=f"{t['ttc_viol']:.0f}\\%" if t.get("ttc_viol")==t.get("ttc_viol") and t else "--"
         T.append(f"{SH[m]} & {d['cfr_l']:.2f} & {d['cfr_r']:.2f} & {d['case_cfr']:.2f} & {tv} & {pf} & {pi} \\\\")
     T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
-    open(f"{V5}/tables/tab_axes.tex","w").write("\n".join(T)+"\n")
+    open(f"{_OUT}/tables/tab_axes.tex","w").write("\n".join(T)+"\n")
     import statistics as _st
     _fs=[d["D_ped"] for c in CA["cases"] for d in c["models"].values()]
     _is=[d["D_I"]   for c in CA["cases"] for d in c["models"].values()]
@@ -234,7 +236,7 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
                 rr=f"{v['rho_dS_areq']:+.2f}".replace("-","$-$")
                 T2.append(f"{SH[m]} & {v['share_F_gt_I']:.0f}\\% & {v['n_big']} & {et} & {v['n_real']} ({v['real_rate']:.0f}\\%) & {rr} \\\\")
             T2+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
-            open(f"{V5}/tables/tab_decomp.tex","w").write("\n".join(T2)+"\n")
+            open(f"{_OUT}/tables/tab_decomp.tex","w").write("\n".join(T2)+"\n")
         if os.path.exists(f"{V5}/avoid_sign.json"):
             AV=json.load(open(f"{V5}/avoid_sign.json"))
             NUM3["NumMoveN"]=str(sum(v["n_big"] for v in AV.values()))
@@ -258,6 +260,7 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
             NUM3[f"NumCfrErr{W[k]}"]=f"{DT['sweep6'][str(k)]['err']:.3f}"
             NUM3[f"NumPFErr{W[k]}"]=f"{DT['sweep6'][str(k)]['pf_err']:.1f}"
         NUM3["NumLhdCfrErr"]=f"{DT['lhd6']['err']:.3f}"
-        NUM3["NumCfrErrBig"]=f"{DT['sweep4']['80']['err']:.3f}"
-        NUM3["NumLhdCfrErrBig"]=f"{DT['lhd4']['err']:.3f}"
-    with open(f"{V5}/tables/numbers.tex","a") as fh: fh.write("\n".join(f"\\newcommand{{\\{k}}}{{{v}}}" for k,v in NUM3.items())+"\n")
+        NUM3["NumCfrErrHuge"]=f"{DT['sweep6']['160']['err']:.3f}"
+        NUM3["NumCfrErrBig"]=f"{DT['sweep6']['80']['err']:.3f}"      # 与前文同一个六家池子
+        NUM3["NumLhdCfrErrBig"]=f"{DT['lhd6']['err']:.3f}"
+    with open(f"{_OUT}/tables/numbers.tex","a") as fh: fh.write("\n".join(f"\\newcommand{{\\{k}}}{{{v}}}" for k,v in NUM3.items())+"\n")

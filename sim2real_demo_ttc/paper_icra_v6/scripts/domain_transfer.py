@@ -82,7 +82,7 @@ def sweep(models,pool,truthG,KS,tag,rng):
     return out,le,lr
 
 rng=np.random.default_rng(0)
-r6,le6,lr6=sweep(M,COM,GC,[5,10,20,40],"A. 六家 / 共有场景",rng)
+r6,le6,lr6=sweep(M,COM,GC,[5,10,20,40,80,160],"A. 六家 / 共有场景",rng)
 M4=["dd","ltf","ddv2","simlingo"]; POOL4=sorted(set.intersection(*[{r["tok"] for r in U[m]} for m in M4]))
 r4,le4,lr4=sweep(M4,POOL4,G,[5,10,20,40,80,160],"B. 四家 / 全部 254 场景（小样本→大体量）",rng)
 json.dump({"truth_full":G,"truth_common":GC,"n_common":len(COM),
@@ -101,7 +101,7 @@ print("  右舵自身 CFR → 右舵 TTC 违规率  ρ=%+.2f"%spearmanr([GC[m]["
 print("  右舵自身 F 中位 → 右舵 TTC 违规率  ρ=%+.2f"%spearmanr([GC[m]["F_med"] for m in M],bt)[0])
 print("  右舵自身 I 中位 → 右舵 TTC 违规率  ρ=%+.2f"%spearmanr([GC[m]["I_med"] for m in M],bt)[0])
 beh={}
-print(f"\nC. 小样本能否排出右舵的行为次序（真值 = 79 场景的 TTC 违规率）:")
+print(f"\nC. 小样本能否排出右舵的行为次序（真值 = {len(COM)} 个共有场景的 TTC 违规率）:")
 for k in [5,10,20,40]:
     rho=[];err=[]
     for _ in range(200):

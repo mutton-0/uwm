@@ -26,16 +26,13 @@ $\sigma=7$) is applied to every image the policy consumes. The noise seed is fix
 
 \paragraph{Validity}
 Every edit is checked by a detector that no policy shares (Faster R-CNN~\cite{ren2015faster}, COCO,
-score $\ge0.5$). It recovers the target in \NumDetOrig\% of the \NumDetN{} original front-only frames
-and in \NumDetNight\% after the night rendering, confirming that the night edit leaves the pedestrian
-visible and therefore changes the lighting rather than the scene. Removal is not always complete: in
-\NumDetStill\% of frames the detector still recovers the target (IoU $\ge0.5$). We therefore repeat
-the entire diagnosis with those \NumDetDrop{} frames excluded. All \NumRobustIn{} model--exam point
-estimates remain inside their full-sample confidence intervals and every ordering is preserved
-(\NumRobustRho), so the incomplete removals bound the edit and not the conclusions. Two controls bound
-the remaining artefacts: pasting inpainting patches on empty road puts the artefact at 5--17\% of the
-removal effect at pedestrian scale, and removing \emph{off-road} pedestrians, which should not matter
-causally, provides a same-type control.
+score $\ge0.5$) on the \NumDetN{} front-only frames. It recovers the target in \NumDetOrig\% of the
+original images, in \NumDetStill\% after removal and in \NumDetNight\% after the night rendering
+(IoU $\ge0.5$). The removal therefore suppresses the pedestrian for an observer outside the policy,
+while the night rendering leaves it visible and so changes the lighting rather than the scene. Two
+controls bound the residual artefacts: pasting inpainting patches on empty road puts the artefact at
+5--17\% of the removal effect at pedestrian scale, and removing \emph{off-road} pedestrians, which
+should not matter causally, provides a same-type control.
 
 \subsection{Readouts: the whole trajectory against the pedestrian}
 Let $c_t(X)=\|X_t-F_t\|-1.0-0.4$ be the clearance at time $t$ between plan $X$ and the pedestrian's
