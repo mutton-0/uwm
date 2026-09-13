@@ -22,8 +22,10 @@ On all 783 Singapore scenes, AutoVLA, Alpamayo-1.5 and DiffusionDriveV2 score hi
 leaderboard's first (AutoVLA) falls to fifth and its third (DiffusionDriveV2) to last, while its
 fourth and fifth (DiffusionDrive, LTF) rise to second and third. Whichever policy a leaderboard reader
 would have picked, the near-pedestrian scenes would have picked another.
-In these scenes the no-collision gate carries \NumNCshareClose\% of the spread, against 1\% over all
-scenes. The cause is a trait the check-up had not examined: 63\% of these
+In these scenes the no-collision gate carries \NumNCshareClose\% of the spread, while over all 783
+scenes it carries \NumNCshare\% and the two map-compliance gates carry \NumMapShare\% (drivable area
+\NumDacShare\%, driving direction \NumDdcShare\%): the leaderboard ranks these policies by map
+compliance, and none of the exams above is visible in it. The cause is a trait the check-up had not examined: 63\% of these
 scenes show a human driver \emph{waiting}. DiffusionDriveV2 and AutoVLA plan to move off and run into
 the stopped traffic. On our own frames where the human waits, DiffusionDriveV2 plans to move off in
 81\% of cases, against 3\% for DiffusionDrive and 0\% for Alpamayo-1.5. This agrees with NAVSIM for the

@@ -18,10 +18,22 @@ policies produce, and seeing the pedestrian recovers almost none of that gap.}
 \label{fig:teaser}
 \end{figure*}
 
-\input{tables/tab_report}
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/report.pdf}
+\caption{\textbf{The check-up report of six policies}, read as a lab slip. Each panel is one exam; the
+shaded band is the range a driver who yields would fall in (\cref{tab:exams}); dots are the measured
+values over the pooled near-pedestrian units of both driving sides, with 95\% bootstrap intervals over
+frames, and a red ring marks a value outside the normal range. The last panel pairs the rate of
+collision with the pedestrian's logged future at an input speed of 8\,m/s when the pedestrian is
+visible (filled) and when it is removed (open): for every policy the two nearly coincide. Only
+DiffusionDriveV2 is inside the normal range on scaling, and no policy is inside it on hazard
+sensitivity or on lighting.}
+\label{fig:report}
+\end{figure*}
 
 \subsection{The report}
-\Cref{tab:report} and \cref{fig:teaser}c give the six profiles.
+\Cref{fig:report} and \cref{fig:teaser}c give the six profiles.
 
 \paragraph{Exposure}
 The six policies do not even agree on how far to plan, and this alone will turn out to explain more of
@@ -37,7 +49,7 @@ DiffusionDriveV2 is the only exception ($+0.29$), and its benefit stays below 0.
 counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
 pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
 SimLingo 18 vs.\ 30, the rest at most 5 either way; all McNemar $p\ge0.11$) --- what reads as a safety
-margin in \cref{tab:report} is, case by case, close to a coin flip.
+margin in \cref{fig:report} is, case by case, close to a coin flip.
 
 \paragraph{Specificity}
 A policy that moves when nothing requires it is not merely cautious, it is unpredictable, and
@@ -93,9 +105,3 @@ separates corridor from off-road pedestrians after mask area is regressed out (A
 independent draw). Raising the input speed removes that response again, and collisions then rise
 identically with and without the pedestrian in view (\cref{fig:reach}a). DiffusionDrive never responds
 at any distance.
-
-\subsection{What the benchmark sees}
-On 783 NAVSIM scenes scored identically, \NumMapShare\% of the between-policy variance of EPDMS comes
-from the two map-compliance gates (drivable area \NumDacShare\%, driving direction \NumDdcShare\%); the
-no-collision gate contributes \NumNCshare\% (\cref{tab:report}). The benchmark ranks these policies by map compliance, and none of the
-exams above is visible in it.

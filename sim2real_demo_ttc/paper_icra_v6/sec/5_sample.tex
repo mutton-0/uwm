@@ -1,18 +1,17 @@
 \section{How Much Data Does a Check-Up Need?}
 \label{sec:sample}
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/sample_size.pdf}
-\caption{\textbf{Fitting estimator spread against sample size.} (a--d)~Points: standard deviation of
-each exam's estimate over 400 subsamples of $n$ frames, drawn without replacement from the
-\NumPool{} frames all six policies share. Lines: the fitted finite-population law
-$a\sqrt{1/n-1/N}$. Exposure, lighting and specificity follow it closely. Hazard sensitivity fits
-poorly for policies with few units that need a reaction. (e)~Frames needed to place the estimate two
-standard deviations from the verdict threshold, extrapolated from the fit. For AutoVLA and Alpamayo-1.5,
-exposure is indistinguishable from the human's.}
+\includegraphics[width=\columnwidth]{figures/sample_size.pdf}
+\caption{\textbf{How much data a verdict costs.} (a)~Standard deviation of each exam's estimate over
+400 subsamples of $n$ frames drawn without replacement from the \NumPool{} frames all six policies
+share (dots), with the fitted finite-population law $a\sqrt{1/n-1/N}$ (lines); one line per policy,
+coloured by exam. (b)~Frames needed to place the estimate two standard deviations from the verdict
+threshold, extrapolated from the fit, one dot per policy. The lighting verdict is cheap and hazard
+sensitivity is not; SimLingo's $\HS$ sits on the threshold, so no sample size settles it.}
 \label{fig:sample}
-\end{figure*}
+\end{figure}
 
 \subsection{Fitting}
 For every exam and policy we subsample $n$ of the \NumPool{} frames that all six policies share, 400
@@ -35,7 +34,7 @@ converts directly into the number of frames a verdict needs.
 \paragraph{Poorly fitting exams}
 Hazard sensitivity and the direction of the lighting effect behave differently. Their fits are poor
 ($R^2$ as low as 0.26 and $-0.09$) wherever few units need a reaction. Deciding that $\HS\neq0$ needs
-57--1{,}072 frames, and the ordering reaches \NumRankHSninety\% stability only at 90 frames. The
+57--1{,}326 frames, except for SimLingo, whose estimate sits on the threshold, and the ordering reaches \NumRankHSninety\% stability only at 90 frames. The
 ordering by alignment is unstable even at 130 (\NumRankAlignOneThirty\%).
 
 The division is therefore clear. A few dozen frames diagnose planned distance, over-reaction and
