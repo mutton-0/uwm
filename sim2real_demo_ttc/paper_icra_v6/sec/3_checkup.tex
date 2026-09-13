@@ -59,7 +59,14 @@ $C(Q)<1$. On such units,
 \begin{equation}
 \HS=\tfrac14\big[\Delta A+\Delta C+\Delta T+\tanh(\Delta S/1\,\mathrm{m})\big]\in[-1,1],
 \end{equation}
-with $\Delta=(\cdot)(P)-(\cdot)(Q)$: the safety that seeing the pedestrian buys. We plot $\HS$
+with $\Delta=(\cdot)(P)-(\cdot)(Q)$: the safety that seeing the pedestrian buys. The composite is
+ours, but neither of its two ingredients is new. Its four terms are the standard surrogate safety
+measures---contact, minimum clearance, time to proximity and
+separation~\cite{gettman2003surrogate,hayward1972near}---and averaging normalised sub-scores into one
+index is how the benchmark we compare against builds EPDMS~\cite{dauner2024navsim}, so the two remain
+commensurable. What the check-up adds is the paired query: each sub-score is read as a difference
+between the same policy with and without the pedestrian, which is the ablation form used to attribute
+behaviour to an input in interpretability work~\cite{zou2023repe,hase2023localization}. We plot $\HS$
 against the model-independent hazard level $a_{\mathrm{req}}=v^2/2\max(d-2,0.5)$, the deceleration
 needed to stop before a pedestrian at distance $d$---the deceleration-rate-to-avoid-the-crash of the
 surrogate-safety literature~\cite{gettman2003surrogate}---and alternatively against the time-based

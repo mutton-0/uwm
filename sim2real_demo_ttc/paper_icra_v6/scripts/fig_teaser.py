@@ -82,17 +82,11 @@ for m in M:
             bb=[rng.choice(v,len(v)).mean() for _ in range(1000)]
             xs.append(i+(M.index(m)-2.5)*0.07); ys.append(v.mean()); lo.append(v.mean()-np.percentile(bb,2.5)); hi.append(np.percentile(bb,97.5)-v.mean())
     ax.errorbar(xs,ys,yerr=[lo,hi],color=COL[m],marker="o",ms=3,lw=1.1,elinewidth=0.6,capsize=0,label=NAME[m])
-# 可达上限：把同一批单位的「看不见行人」读数保持不变，只把「看得见」那一侧换成
-# 一条完全让开的规划（无接触 A=1、安全距离 C=1、不接近 T=1、分离度取上限 10 m），
-# 逐单位算 HS 再按危险分箱取均值。这是数据本身决定的天花板，不是画出来的示意线。
-def _ceil(z):
-    q=z["Q"]; return 0.25*((1-q["A"])+(1-q["C"])+(1-q["T"])+np.tanh(10-q["S"]))
-base=[z for z in rows if sel(z)]   # 六家的 need 单位全池化
-cy=[]
-for a_,b_ in BINS:
-    v=[_ceil(z) for z in base if a_<=z["a_req"]<b_]
-    cy.append(np.mean(v) if len(v)>=8 else np.nan)
-ax.plot(range(len(BINS)),cy,color="#6b6a62",ls=(0,(3,2)),lw=1.0,label="attainable ceiling")
+# 真值参照：把"看得见行人"那一侧换成真人当时实际开出来的轨迹（gt_ceiling.py），
+# 对同一个盲规划算 HS。虚线 = 真人，浅灰带 = 完美让开的构造上限，两者基本重合。
+GC=json.load(open(f"{V5}/gt_ceiling.json"))
+ax.plot(range(len(BINS)),GC["gt"],color="#52514e",ls=(0,(3,2)),lw=1.1,label="human driver (logged)")
+ax.fill_between(range(len(BINS)),GC["gt"],GC["ideal"],color="#9a998f",alpha=0.18,lw=0)
 ax.axhline(0,color="#c3c2b7",lw=0.6)
 ax.set_xticks(range(len(BINS))); ax.set_xticklabels(XL); ax.set_xlabel(r"hazard level $a_{\rm req}=v^2/2d$ (m/s$^2$)")
 ax.set_ylabel("hazard sensitivity HS",labelpad=1); ax.set_ylim(-0.25,1.0)
