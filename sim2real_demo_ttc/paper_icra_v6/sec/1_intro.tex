@@ -42,8 +42,9 @@ Applied to six end-to-end policies, the check-up separates quantities a benchmar
 Seeing the pedestrian improves the plan by \NumHSlo--\NumHShi{} on a $[-1,1]$ scale, and in five of
 six policies the improvement does not grow with the hazard. Collisions with the pedestrian's logged
 future therefore follow how far a policy plans to drive, not what it perceives. A night rendering
-moves every policy more than the pedestrian does, and it does so along a direction --- the I-axis ---
-that opposes the F-axis governing the pedestrian response (\cref{sec:lighting}). We look inside the policies to explain this,
+moves every policy more than the pedestrian does, and it does so along the interference direction
+$\hat v_I$, which opposes the faithfulness direction $\hat v_F$ governing the pedestrian response
+(\cref{sec:lighting}). We look inside the policies to explain this,
 although we do not attempt a repair: the pedestrian leaves a trace in the features but is not decoded
 by the policies' own semantic heads, the planner reads a grid too coarse to locate it, and its plan
 ends before the pedestrian.
@@ -77,9 +78,9 @@ leaderboard rank, but by running a check-up whose predictive exams are known in 
       magnitude is a poor safety signal, and decomposing it into magnitude, jitter and separation turns
       a two-sided quantity into a one-sided certificate. We use it to diagnose six policies, with an
       explanation from inside the networks.
-\item Evidence, in a new domain, for the linear representation hypothesis: the F-axis (faithfulness,
-      the response to the pedestrian) and the I-axis (interference, the response to a change with no
-      driving-relevant information) are geometrically opposed in aggregate (mean cosine $-0.54$ across
+\item Evidence, in a new domain, for the linear representation hypothesis: the faithfulness direction
+      $\hat v_F$ (response to the pedestrian) and the interference direction $\hat v_I$ (response to a
+      change with no driving-relevant information) are geometrically opposed in aggregate (mean cosine $-0.54$ across
       four policies), and this opposition is mirrored behaviourally, not just in the representation.
       The relationship is a property of the pooled data, not a stable per-policy trait
       (\cref{sec:lighting}), and we report it as such.

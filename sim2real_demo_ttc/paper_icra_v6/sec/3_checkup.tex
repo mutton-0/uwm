@@ -76,9 +76,9 @@ For the same frames, $\CFR=\mathbb{E}\|P-Q\|/\mathbb{E}\|P-N\|$ compares the pla
 removing the pedestrian with that caused by the night rendering. Alignment is the median cosine between
 $N-P$ and $Q-P$. A pure policy has $\CFR\gg1$ and alignment near zero. Positive alignment means the
 night pushes the plan the way removing the pedestrian does. In \cref{sec:lighting} we read $Q-P$ and
-$N-P$ as two representation-space directions, the \textbf{F-axis} (faithfulness, the pedestrian
-response) and the \textbf{I-axis} (interference, the response to a change with no driving-relevant
-information); alignment is their cosine.
+$N-P$ as two representation-space directions, $\hat v_F$ (the \emph{faithfulness} direction, the
+pedestrian response) and $\hat v_I$ (the \emph{interference} direction, the response to a change with
+no driving-relevant information); alignment is their cosine.
 
 \subsection{Policies and frames}
 We examine LTF and DiffusionDrive (front camera and ego status), DiffusionDriveV2 (camera and LiDAR),
