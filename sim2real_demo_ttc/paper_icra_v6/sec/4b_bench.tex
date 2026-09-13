@@ -1,10 +1,11 @@
-\section{What Benchmark Scores Predict}
+\section{Beyond the Leaderboard: What the Check-Up Predicts}
 \label{sec:bench}
 
 \input{tables/tab_bench}
 
-These policies are usually compared by a leaderboard rank or an open-loop error. We ran those scores
-and the check-up on the same six policies (\cref{tab:bench}) and ask what each of them predicts.
+These policies are usually compared by a leaderboard rank or an open-loop error. Running those scores
+and the check-up on the same six policies (\cref{tab:bench}) lets us ask what each recovers that the
+other does not, and which of them predicts behaviour at a site it has not seen.
 
 \paragraph{nuScenes open-loop metrics}
 On our 236 near-pedestrian frames, removing the pedestrian changes the L2 error by at most
