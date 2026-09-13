@@ -13,8 +13,8 @@ exam edits real frames---removing the pedestrian from the ego corridor, or re-re
 night---pairs the edit with a control, and has an independent detector verify it. The central reading
 is not how far the plan moves but how far it moves \emph{away}: we decompose the response into its
 magnitude, the policy's own jitter under an irrelevant edit, and the separation it actually buys from
-the pedestrian's logged future. On \NumSGscenes{} near-pedestrian scenes across six end-to-end
-policies, a near-zero response is a reliable certificate that the pedestrian did not enter the
+the pedestrian's logged future. On \NumSGscenes{} near-pedestrian scenes of a second corpus
+(NAVSIM, Singapore) across six end-to-end policies, a near-zero response is a reliable certificate that the pedestrian did not enter the
 decision (it predicts an unchanged outcome in \NumPFbig\% of scenes), while a large response is not
 evidence of avoidance: of the cells in which the plan moved, \NumMoveFar{} increased the clearance and
 \NumMoveNear{} decreased it, and only \NumRealPct\% of all cells meet all three conditions for genuine

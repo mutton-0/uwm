@@ -5,8 +5,9 @@
 
 The transfer test of \cref{sec:sample} moved a \emph{diagnosis} between cities. A more useful question
 for deployment is whether the \emph{method} moves: can a handful of counterfactual cases in the new
-domain characterise how the policies behave there? We repeat both interventions on the Singapore
-near-pedestrian scenes, on the original images used by the benchmark, and read the two axes per scene:
+domain characterise how the policies behave there? We repeat both interventions on the
+\NumSGscenes{} NAVSIM Singapore near-pedestrian scenes, on the original benchmark images, and read the
+two axes per scene:
 $F$, the plan displacement caused by removing the target pedestrian, and $I$, the displacement caused
 by the night rendering.
 
@@ -23,8 +24,8 @@ prediction rather than only those whose premise happens to hold:
 \end{itemize}
 The two directions do not fare equally. On the detailed cases, P-F holds in \NumPFsmall/\NumPFsmallN{}
 cells in the forward direction but only \NumPFrev/\NumPFrevN{} in the reverse; P-I holds in
-\NumPIsmall/\NumPIsmallN{} and \NumPIrev/\NumPIrevN. Scaling both interventions to the \NumComN{}
-Singapore scenes that all six policies share reproduces the asymmetry exactly (\cref{tab:axes}): P-F
+\NumPIsmall/\NumPIsmallN{} and \NumPIrev/\NumPIrevN. Scaling both interventions to the full pool,
+which all six policies cover, reproduces the asymmetry exactly (\cref{tab:axes}): P-F
 holds in \NumPFbig\% of scenes forward against \NumPFbigRev\% reversed, while P-I holds in \NumPIbig\%
 and \NumPIbigRev\%. A near-zero $F$ axis is therefore a reliable certificate that the pedestrian is not
 being used, but a large $F$ is not a promise of safer behaviour.
@@ -80,7 +81,8 @@ about forty scenes measured here.
 Of the exams in the report, the one that predicts the new domain's behaviour is not the one that
 measures how \emph{much} a policy reacts, but the one that measures how \emph{steadily} it drives.
 Correlating each Boston exam against the Singapore rate of sub-1.5\,s time-to-proximity over the six
-policies, specificity gives $\rho={\NumSpBeh}$---the only value significant at the two-sided 5\% level
+policies---a comparison that crosses both the city and the corpus, and is therefore a harder test than
+a change of city alone---specificity gives $\rho={\NumSpBeh}$---the only value significant at the two-sided 5\% level
 for $n{=}6$---against ${\NumExpBeh}$ for exposure and ${\NumCfrBeh}$ for $\CFR$. Specificity is the
 exam that asks how far a plan moves when an \emph{irrelevant} part of the scene is edited; a policy
 that answers ``not at all'' is one whose trajectory is stable, and stability is what carries across

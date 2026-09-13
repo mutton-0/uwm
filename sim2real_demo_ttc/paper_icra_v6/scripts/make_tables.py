@@ -177,7 +177,7 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
        r"sides only at $\rho={+}0.37$ (specificity: $\rho={+}0.83$). Right: share of near-pedestrian scenes in which each rule holds "
        r"(P-F: a near-zero F axis implies removing the pedestrian leaves clearance and contact unchanged; P-I: $\CFR<1$ implies the night rendering moves the outcome at least as much as the removal). "
        r"Both rules are two-sided: each cell gives the hit rate when the premise holds / when it is reversed (fwd/rev), so every scene receives a prediction. "
-       r"and the share of scenes whose minimum time-to-proximity to the pedestrian's logged future falls below 1.5\,s. The large-sample columns use the \NumComN{} Singapore scenes all six policies share.}",
+       r"and the share of scenes whose minimum time-to-proximity to the pedestrian's logged future falls below 1.5\,s. The large-sample columns use the \NumComN{} NAVSIM Singapore scenes all six policies share; the Boston column is measured on the nuScenes frames of \cref{tab:report}.}",
        r"\label{tab:axes}",r"\scriptsize",r"\setlength{\tabcolsep}{2.5pt}",
        r"\begin{tabular}{@{}lcccccc@{}}",r"\toprule",
        r" & \multicolumn{3}{c}{$\CFR$} & TTC & \multicolumn{2}{c}{rule holds \%} \\",r"\cmidrule(lr){2-4}\cmidrule(lr){5-5}\cmidrule(l){6-7}",
