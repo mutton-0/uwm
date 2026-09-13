@@ -1,0 +1,7 @@
+build/
+build_preview/
+main.synctex.gz
+main.aux
+main.log
+main.out
+*.zip

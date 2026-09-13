@@ -1,15 +1,6 @@
+% !TEX root = ../main.tex
 \section{Introduction}
 \label{sec:intro}
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/method.pdf}
-\caption{\textbf{The check-up.} (a)~A logged frame and its two counterfactual edits, each checked by a
-detector no policy shares. (b)~The same policy is queried on all three inputs; the three plans are read
-against the pedestrian's logged future through the clearance $c_t$. (c)~Four readouts taken on the
-three plans over the common 2.5\,s horizon combine into the five exams of \cref{tab:exams}.}
-\label{fig:method}
-\end{figure*}
 
 End-to-end driving policies are compared by benchmark scores, and a deployment decision is,
 implicitly, a bet that the rank those scores produce will still hold once the policy is driving at
@@ -32,6 +23,17 @@ edit. The central exam is a \emph{hazard-sensitivity curve}, measuring how much 
 planned trajectory stays from the pedestrian's logged future because the policy can see the
 pedestrian, against a model-independent hazard level. A specificity term applies a minimal-change
 principle: when no reaction is needed, the plan should not move.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/frame1c.pdf}
+\caption{\textbf{The check-up, on one worked example.} (a)~A logged frame $O$ and its two edits,
+pedestrian removed $R$ and re-lit $N$, each checked by a detector no policy shares. (b)~The policy is
+queried on all three; joining the plans at equal times gives two numbers, the displacement $F$ the
+pedestrian causes and the displacement $I$ the lighting causes, and the right panel places the
+policies on those axes. (c)~These and the remaining readouts form the five exams of \cref{tab:exams}.}
+\label{fig:method}
+\end{figure}
 
 \paragraph{Displacement is not avoidance}
 What an edit yields most directly---how far the plan moves when the pedestrian is removed---is a poor

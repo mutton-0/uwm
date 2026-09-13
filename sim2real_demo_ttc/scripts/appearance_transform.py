@@ -19,6 +19,8 @@ import numpy as np
 
 # 夜：压亮度 + 降饱和 + 偏蓝 + 加噪；雨：降对比 + 灰蓝 + 轻微模糊 + 雨条
 NIGHT = dict(gamma=2.2, sat=0.45, tint=(0.85, 0.92, 1.15), noise=7.0, gain=0.45)
+# 黄昏：比夜温和得多 —— 只压一档亮度、保留大部分饱和、暖色偏移、几乎不加噪
+DUSK = dict(gamma=1.45, sat=0.80, tint=(1.06, 0.97, 0.92), noise=2.0, gain=0.70)
 RAIN = dict(gamma=1.15, sat=0.55, tint=(0.94, 0.97, 1.06), noise=3.0, gain=0.80,
             contrast=0.72, blur=1.2, streaks=True)
 
@@ -68,7 +70,7 @@ def transform(img, kind="night", scope="global", seed=0, mask=None,
     —— 硬边本身是高频结构，会变成模型可以抓住的伪线索。
     """
     import cv2
-    p = dict({"night": NIGHT, "rain": RAIN}[kind])
+    p = dict({"night": NIGHT, "dusk": DUSK, "rain": RAIN}[kind])
     if noise_override is not None:
         # 见 P-7：注入的高频噪声本身就是个强扰动，会盖过"光照变了"这个效应。
         p["noise"] = float(noise_override)

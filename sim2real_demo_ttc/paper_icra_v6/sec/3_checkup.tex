@@ -1,3 +1,4 @@
+% !TEX root = ../main.tex
 \section{The Check-Up}
 \label{sec:checkup}
 
@@ -7,7 +8,7 @@
 A unit is a logged frame together with an input ego speed. We use the logged speed for every frame,
 and for frames from approach sequences also counterfactual speeds of 2--8\,m/s. For each unit we query
 the policy three times. The query uses its full input (all cameras, history frames, LiDAR, ego
-status), edited in one of three ways: unchanged ($P$), with the target pedestrian removed ($Q$), or
+status), edited in one of three ways: unchanged ($O$, original), with the target pedestrian removed ($R$), or
 re-rendered at night ($N$). All policies are read on their common horizon of 2.5\,s. Plans and the
 pedestrian's \emph{logged} future positions are interpolated to 0.1\,s.
 
@@ -67,11 +68,11 @@ The ratio of planned to logged distance over 2.5\,s, on frames where the human m
 
 \paragraph{Hazard sensitivity}
 A unit \emph{needs} a reaction if the pedestrian-blind plan comes within 1\,m of the pedestrian,
-$C(Q)<1$. On such units,
+$C(R)<1$. On such units,
 \begin{equation}
 \HS=\tfrac14\big[\Delta A+\Delta C+\Delta T+\tanh(\Delta S/1\,\mathrm{m})\big]\in[-1,1],
 \end{equation}
-with $\Delta=(\cdot)(P)-(\cdot)(Q)$: the safety that seeing the pedestrian buys. The composite is
+with $\Delta=(\cdot)(O)-(\cdot)(R)$: the safety that seeing the pedestrian buys. The composite is
 ours, but neither of its two ingredients is new. Its four terms are the standard surrogate safety
 measures---contact, minimum clearance, time to proximity and
 separation~\cite{gettman2003surrogate,hayward1972near}---and averaging normalised sub-scores into one
