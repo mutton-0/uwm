@@ -144,11 +144,19 @@ if os.path.exists(f"{V5}/bench_compare.json") and os.path.exists(f"{V5}/ttc_rank
     # EPDMS 两列各自排名（高分为 1），让"榜单第一跌到第五"在表里直接看得见
     _rk=lambda d: {m:i+1 for i,m in enumerate(sorted(M,key=lambda x:-d[x]["epdms"]))}
     RKA=_rk(AL); RKC=_rk(CV)
+    # 列内最优加粗（CVPR/ICRA 惯例）：EPDMS 越高越好，TTC 违规率越低越好
+    _bA=max(M,key=lambda m: AL[m]["epdms"]); _bC=max(M,key=lambda m: CV[m]["epdms"])
+    _bL=min(M,key=lambda m: TR["LHD"][m]["moving"]["viol"]); _bR=min(M,key=lambda m: TR["RHD"][m]["moving"]["viol"])
+    _bf=lambda t,on: (r"\textbf{"+t+"}") if on else t
     for m in M:
         n=NUo[m]; L_=TR["LHD"][m]["moving"]; R_=TR["RHD"][m]["moving"]
-        T.append(f"{NAME[m]} & {n['clean']['L2_avg']:.2f}\\,/\\,{n['rm']['L2_avg']:.2f} & {n['clean']['col_front']:.1f}\\,/\\,{n['rm']['col_front']:.1f} & "
-                 f"{n['clean']['col_ped']:.1f}\\,/\\,{n['rm']['col_ped']:.1f} & {AL[m]['epdms']:.3f} ({RKA[m]}) & {CV[m]['epdms']:.3f} ({RKC[m]}) & "
-                 f"{L_['viol']:.1f} ({TR['ranks']['LHD TTC'][m]}) & {R_['viol']:.1f} ({TR['ranks']['RHD TTC'][m]}) \\\\")
+        cA="%.3f (%d)"%(AL[m]["epdms"],RKA[m]); cC="%.3f (%d)"%(CV[m]["epdms"],RKC[m])
+        cL="%.1f (%d)"%(L_["viol"],TR["ranks"]["LHD TTC"][m]); cR="%.1f (%d)"%(R_["viol"],TR["ranks"]["RHD TTC"][m])
+        cells=[_bf(cA,m==_bA),_bf(cC,m==_bC),_bf(cL,m==_bL),_bf(cR,m==_bR)]
+        T.append(f"{NAME[m]} & {n['clean']['L2_avg']:.2f}\\,/\\,{n['rm']['L2_avg']:.2f} & "
+                 f"{n['clean']['col_front']:.1f}\\,/\\,{n['rm']['col_front']:.1f} & "
+                 f"{n['clean']['col_ped']:.1f}\\,/\\,{n['rm']['col_ped']:.1f} & "
+                 + " & ".join(cells) + " \\\\")
     T+=[r"\bottomrule",r"\end{tabular}",r"\end{table*}"]
     open(f"{_OUT}/tables/tab_bench.tex","w").write("\n".join(T)+"\n")
     sp=TR["spearman"]; rs=BC["removal_sensitivity"]
