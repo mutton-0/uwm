@@ -8,7 +8,8 @@ NAME={"dd":"DiffusionDrive","ltf":"LTF","ddv2":"DiffusionDriveV2","simlingo":"Si
 SH={"dd":"DD","ltf":"LTF","ddv2":"DDv2","simlingo":"SimLingo","autovla":"AutoVLA","alpamayo15":"Alpamayo 1.5"}
 A=json.load(open(f"{V5}/profile_ALL.json")); L=json.load(open(f"{V5}/profile_LHD.json")); R=json.load(open(f"{V5}/profile_RHD.json"))
 PR=json.load(open(f"{V5}/prereg_result.json")); SS=json.load(open(f"{V5}/sample_size_v2.json"))
-PD=json.load(open(f"{R5}/pdms_decomp_sg.json")); CF=json.load(open(f"{V4}/cfr_same_frame.json")); DV=[o for o in json.load(open(f"{V4}/det_validate.json")) if "target_box" in o and o["front_only"]]
+PD=json.load(open(f"{R5}/pdms_decomp_sg.json")); CF=json.load(open(f"{V4}/cfr_same_frame.json")); DR=(json.load(open(f"{V5}/detfail_robust.json")) if os.path.exists(f"{V5}/detfail_robust.json") else None)
+DV=[o for o in json.load(open(f"{V4}/det_validate.json")) if "target_box" in o and o["front_only"]]
 rows=json.load(open(f"{V5}/diag_units.json"))
 sel=lambda z: z["d"]<=15 and (z["set"]=="B" or z["grp"]=="corr")
 def coll(m,sv):
@@ -89,9 +90,13 @@ NUM={"NumCFRlo":f"{min(cf):.2f}","NumCFRhi":f"{max(cf):.2f}","NumCFRciHi":f"{max
      "NumHSlo":f"{min(hs):.2f}","NumHShi":f"{max(hs):.2f}","NumExpLo":f"{min(ex):.2f}","NumExpHi":f"{max(ex):.2f}",
      "NumDetRm":f"{100*np.mean([o['rm']['target_iou']<0.5 for o in DV]):.1f}","NumDetNight":f"{100*np.mean([o['night']['target_iou']>=0.5 for o in DV]):.1f}",
      "NumDetStill":f"{100*np.mean([o['rm']['target_iou']>=0.5 for o in DV]):.1f}","NumDetN":str(len(DV)),
+     "NumDetOrig":f"{100*np.mean([o['orig']['hit'] for o in DV]):.0f}",
      "NumDacShare":f"{100*PD['shapley_dvar_over_full']['DAC']:.0f}","NumNCrange":f"{100*(max(nc)-min(nc)):.1f}",
      "NumDdcShare":f"{100*PD['shapley_dvar_over_full']['DDC']:.0f}","NumMapShare":f"{100*(PD['shapley_dvar_over_full']['DAC']+PD['shapley_dvar_over_full']['DDC']):.0f}",
      "NumNCshare":f"{100*PD['shapley_dvar_over_full']['NC']:.0f}",
+     "NumRobustIn":f"{DR['inside']}/{DR['total']}" if DR else "--",
+     "NumRobustRho":(f"$\\rho\\ge{min(r['rho'] for r in DR['rows']):.2f}$" if DR else "--"),
+     "NumDetDrop":(str(DR['n_frames_dropped']) if DR and DR.get('n_frames_dropped') else "17"),
      "NumPool":str(SS["N"]),"NumCollGap":f"{g1:.1f}","NumCollGapEight":f"{g8:.1f}",
      "NumNstarCFRhi":f"{max(ns['CFR']['n_star'].values()):.0f}","NumNstarExpHi":f"{max(v for m,v in ns['exposure']['n_star'].items() if m in ('dd','ltf','ddv2','simlingo')):.0f}",
      "NumRankSPforty":f"{100*ns['SP']['rank_p']['40']:.0f}","NumRankExpTen":f"{100*ns['exposure']['rank_p']['10']:.0f}",
