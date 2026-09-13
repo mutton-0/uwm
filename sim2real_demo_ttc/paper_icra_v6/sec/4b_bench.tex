@@ -18,8 +18,10 @@ human is scored as being hit from behind.
 \paragraph{NAVSIM, sliced to near pedestrians}
 On all 783 Singapore scenes, AutoVLA, Alpamayo-1.5 and DiffusionDriveV2 score highest. On the
 \NumNclose{} scenes with a pedestrian near the ego corridor, the ordering is unrelated to that one
-($\rho=\NumRhoAllClose$): the leaderboard's first (AutoVLA) falls to fifth and its third
-(DiffusionDriveV2) to last, while its fourth and fifth (DiffusionDrive, LTF) rise to second and third.
+($\rho=\NumRhoAllClose$). The two rank columns of \cref{tab:bench} can be read side by side: the
+leaderboard's first (AutoVLA) falls to fifth and its third (DiffusionDriveV2) to last, while its
+fourth and fifth (DiffusionDrive, LTF) rise to second and third. Whichever policy a leaderboard reader
+would have picked, the near-pedestrian scenes would have picked another.
 In these scenes the no-collision gate carries \NumNCshareClose\% of the spread, against 1\% over all
 scenes. The cause is a trait the check-up had not examined: 63\% of these
 scenes show a human driver \emph{waiting}. DiffusionDriveV2 and AutoVLA plan to move off and run into

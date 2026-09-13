@@ -29,8 +29,7 @@ human's own.
 No policy manages the pedestrian risk. On units that need a reaction, seeing the pedestrian buys
 \NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale. The benefit does not grow with the hazard: its rank
 correlation with $a_{\mathrm{req}}$ is negative for five policies, down to $-0.51$ for Alpamayo-1.5.
-DiffusionDriveV2 is the only exception ($+0.29$), and its benefit stays below 0.15. The time-based
-hazard axis gives the same picture (\cref{fig:reach}c). The benefit is also unreliable in direction:
+DiffusionDriveV2 is the only exception ($+0.29$), and its benefit stays below 0.15. hazard axis gives the same picture (\cref{fig:reach}b). The benefit is also unreliable in direction:
 counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
 pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
 SimLingo 18 vs.\ 30, the rest at most 5 either way; all McNemar $p\ge0.11$) --- what reads as a safety
@@ -53,12 +52,10 @@ without yielding, and SimLingo covers the most ground with the least stable plan
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/reach.pdf}
-\caption{\textbf{Why the risk goes unmanaged, and what it costs.} (a)~Plan change when the pedestrian is removed, by distance,
-across all 850 nuScenes scenes (974 pedestrian records; median, 95\% CI). LTF responds to corridor pedestrians (filled) once they are
-within reach of its plan; off-road pedestrians (open) evoke nothing; DiffusionDrive is flat throughout. (b)~Collision with the
-pedestrian's logged future along the plan, at the logged speed and at counterfactual input speeds; solid: pedestrian visible,
-dashed: removed. Each pair of curves nearly coincides, and every curve rises with speed. (c)~Hazard sensitivity against the
-time-based hazard axis $\mathrm{TTC}_0$ (bins with $\ge8$ units); colours as in (b).}
+\caption{\textbf{What the unmanaged risk costs.} (a)~Collision with the pedestrian's logged future along the plan, at the logged
+speed and at counterfactual input speeds; solid: pedestrian visible, dashed: removed. Each pair of curves nearly coincides, and every
+curve rises with speed. (b)~Hazard sensitivity against the time-based hazard axis $\mathrm{TTC}_0$ (bins with $\ge8$ units); colours
+as in (a).}
 \label{fig:reach}
 \end{figure*}
 
@@ -85,12 +82,13 @@ the trajectory at all.
 
 \paragraph{The plan does not reach the pedestrian}
 Plans end 5--9\,m ahead, while the median corridor pedestrian stands 20\,m away; only 5--11\% of
-pedestrians are within reach. When a distance sweep over all 850 nuScenes scenes brings the pedestrian
-within 12\,m, LTF begins to respond (\cref{fig:reach}a). At 8--12\,m its
-plan changes by 0.23\,m ($p=5\times10^{-7}$), which separates corridor from off-road pedestrians after
-mask area is regressed out (AUC 0.65; 0.67 on an independent draw). Raising the input speed removes
-that response again, and collisions then rise identically with and without the pedestrian in view
-(\cref{fig:reach}b). DiffusionDrive never responds.
+pedestrians are within reach. A distance sweep over 850 nuScenes scenes (974 pedestrian
+records) confirms that the limit is geometric rather than perceptual: once the pedestrian is within
+12\,m, LTF begins to respond, and at 8--12\,m its plan changes by 0.23\,m ($p=5\times10^{-7}$), which
+separates corridor from off-road pedestrians after mask area is regressed out (AUC 0.65; 0.67 on an
+independent draw). Raising the input speed removes that response again, and collisions then rise
+identically with and without the pedestrian in view (\cref{fig:reach}a). DiffusionDrive never responds
+at any distance.
 
 \subsection{What the benchmark sees}
 On 783 NAVSIM scenes scored identically, \NumMapShare\% of the between-policy variance of EPDMS comes

@@ -117,18 +117,21 @@ if os.path.exists(f"{V5}/bench_compare.json") and os.path.exists(f"{V5}/ttc_rank
     T=[r"\begin{table*}[t]",r"\centering",
        r"\caption{\textbf{The same six policies under the standard evaluations.} Left: nuScenes open-loop metrics on the same 236 near-pedestrian frames, "
        r"original\,/\,pedestrian removed (L2 to the human trajectory averaged over 0.5--2.5\,s; collisions with objects ahead of the ego, rear-end contacts by non-reactive logged agents excluded). "
-       r"Middle: NAVSIM EPDMS on all 783 Singapore scenes and on 260 Singapore scenes with a pedestrian within 1\,m of the ego corridor and 20\,m ahead. "
+       r"Middle: NAVSIM EPDMS on all 783 Singapore scenes and on 260 Singapore scenes with a pedestrian within 1\,m of the ego corridor and 20\,m ahead; the leaderboard ordering does not survive the slice. "
        r"Right: pedestrian TTC along the plan (share of moving-ego scenes with minimum TTC $<1.5$\,s, lower is better) on left-hand-drive near-pedestrian scenes "
        r"(nuScenes Boston + NAVSIM Las Vegas/Boston/Pittsburgh) and right-hand-drive ones (NAVSIM Singapore), with the resulting rank.}",
        r"\label{tab:bench}",r"\small",r"\setlength{\tabcolsep}{3pt}",
        r"\begin{tabular}{@{}lccc cc cc@{}}",r"\toprule",
-       r" & \multicolumn{3}{c}{nuScenes open-loop (orig.\,/\,removed)} & \multicolumn{2}{c}{NAVSIM EPDMS} & \multicolumn{2}{c}{pedestrian TTC $<1.5$\,s (rank)} \\",
+       r" & \multicolumn{3}{c}{nuScenes open-loop (orig.\,/\,removed)} & \multicolumn{2}{c}{NAVSIM EPDMS (rank)} & \multicolumn{2}{c}{pedestrian TTC $<1.5$\,s (rank)} \\",
        r"\cmidrule(lr){2-4}\cmidrule(lr){5-6}\cmidrule(l){7-8}",
        r"Policy & L2 (m) & collision (\%) & ped.\ coll.\ (\%) & all & near ped. & left-hand & right-hand \\",r"\midrule"]
+    # EPDMS 两列各自排名（高分为 1），让"榜单第一跌到第五"在表里直接看得见
+    _rk=lambda d: {m:i+1 for i,m in enumerate(sorted(M,key=lambda x:-d[x]["epdms"]))}
+    RKA=_rk(AL); RKC=_rk(CV)
     for m in M:
         n=NUo[m]; L_=TR["LHD"][m]["moving"]; R_=TR["RHD"][m]["moving"]
         T.append(f"{NAME[m]} & {n['clean']['L2_avg']:.2f}\\,/\\,{n['rm']['L2_avg']:.2f} & {n['clean']['col_front']:.1f}\\,/\\,{n['rm']['col_front']:.1f} & "
-                 f"{n['clean']['col_ped']:.1f}\\,/\\,{n['rm']['col_ped']:.1f} & {AL[m]['epdms']:.3f} & {CV[m]['epdms']:.3f} & "
+                 f"{n['clean']['col_ped']:.1f}\\,/\\,{n['rm']['col_ped']:.1f} & {AL[m]['epdms']:.3f} ({RKA[m]}) & {CV[m]['epdms']:.3f} ({RKC[m]}) & "
                  f"{L_['viol']:.1f} ({TR['ranks']['LHD TTC'][m]}) & {R_['viol']:.1f} ({TR['ranks']['RHD TTC'][m]}) \\\\")
     T+=[r"\bottomrule",r"\end{tabular}",r"\end{table*}"]
     open(f"{_OUT}/tables/tab_bench.tex","w").write("\n".join(T)+"\n")
