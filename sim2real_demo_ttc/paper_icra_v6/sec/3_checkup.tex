@@ -36,7 +36,7 @@ should not matter causally, provides a same-type control.
 
 \subsection{Readouts: the whole trajectory against the pedestrian}
 Let $c_t(X)=\|X_t-F_t\|-1.0-0.4$ be the clearance at time $t$ between plan $X$ and the pedestrian's
-logged position $F_t$, net of the ego half-width and a pedestrian radius. We read four properties of a
+logged position $F_t$, net of a 1.0\,m ego half-width and a 0.4\,m pedestrian radius. We read four properties of a
 plan:
 \begin{itemize}
 \item its \emph{separation} $S(X)=\mathrm{mean}_t\min(c_t,10\,\mathrm{m})$, i.e., how far the whole
@@ -75,7 +75,10 @@ plans.
 For the same frames, $\CFR=\mathbb{E}\|P-Q\|/\mathbb{E}\|P-N\|$ compares the plan change caused by
 removing the pedestrian with that caused by the night rendering. Alignment is the median cosine between
 $N-P$ and $Q-P$. A pure policy has $\CFR\gg1$ and alignment near zero. Positive alignment means the
-night pushes the plan the way removing the pedestrian does.
+night pushes the plan the way removing the pedestrian does. In \cref{sec:lighting} we read $Q-P$ and
+$N-P$ as two representation-space directions, the \textbf{F-axis} (faithfulness, the pedestrian
+response) and the \textbf{I-axis} (interference, the response to a change with no driving-relevant
+information); alignment is their cosine.
 
 \subsection{Policies and frames}
 We examine LTF and DiffusionDrive (front camera and ego status), DiffusionDriveV2 (camera and LiDAR),
