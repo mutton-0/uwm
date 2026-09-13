@@ -10,16 +10,19 @@ the new domain characterise how the policies behave there? We repeat both interv
 displacements that correspond to $\hat v_F$ and $\hat v_I$ at the output: $F$, the plan displacement
 caused by removing the target pedestrian, and $I$, that caused by the night rendering.
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
-\includegraphics[width=\columnwidth]{figures/cases.pdf}
-\caption{\textbf{Four right-hand-drive cases.} Ego at the origin, its corridor shaded, the VRU's
-logged future dashed from the star. (a)~Group at the lane edge, clearances $0.3$--$0.9$\,m.
-(b)~Cyclist at a left turn; SimLingo passes at $3.2$\,m, the other five at $6.7$--$10$\,m.
-(c,~d)~Human waiting; the departing policies and their planned distances are named in the panel.
-Boston departure rates: DiffusionDriveV2 81\%, AutoVLA 9\%, DiffusionDrive 2.8\%.}
+\includegraphics[width=\textwidth]{figures/cases.pdf}
+\caption{\textbf{Four right-hand-drive cases, and displacement against the separation it buys.}
+(a--d)~Ego at the origin, its corridor shaded, the VRU's logged future dashed from the star; every
+policy receives the frame's logged navigation, so the turns are commanded. (a)~Clearances
+$0.3$--$0.9$\,m. (b)~SimLingo passes at $3.2$\,m, the other five at $6.7$--$10$\,m. (c,~d)~The
+departing policies and their planned distances are named in the panel; Boston departure rates are
+DiffusionDriveV2 81\%, AutoVLA 9\%, DiffusionDrive 2.8\%. (e)~Every policy--scene cell of the
+\NumSGscenes{} Singapore scenes: $F$ against $\Delta S$; band: the 10--90\% spread of $\Delta S$ per
+$F$ bin; dashed line: $F=0.5$\,m.}
 \label{fig:cases}
-\end{figure}
+\end{figure*}
 
 \paragraph{What $F$ and $I$ say per scene}
 Across the ten detailed cases and six policies (\NumCaseCells{} cells), the median $F$ is \NumAxF\,m
@@ -41,27 +44,15 @@ used, but a large $F$ is not a promise of safer behaviour.
 
 \paragraph{When the plan does move, which way does it move?}
 The reverse direction fails for an instructive reason: $F$ measures how far a plan moves, not where it
-moves to. We therefore decompose it (\cref{fig:decomp}), reading $F$ against $I$---the same policy's
+moves to. We therefore decompose it (\cref{fig:cases}e), reading $F$ against $I$---the same policy's
 jitter floor under an unrelated edit---and against $\Delta S$, the change in clearance to the
 pedestrian's logged future. A response counts as avoidance only if all three hold: the plan moved
 ($F\ge0.5$\,m), it moved more than the policy's own jitter ($F>I$), and the movement bought distance
 ($\Delta S\ge0.5$\,m).
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/decomp.pdf}
-\caption{\textbf{Plan displacement against the separation it buys.} Every policy--scene cell of the
-\NumSGscenes{} Singapore scenes: displacement caused by removing the pedestrian ($F$, log scale)
-against the change in clearance to the pedestrian's logged future ($\Delta S$). Band: the 10--90\%
-spread of $\Delta S$ per $F$ bin. Dashed line: the $F=0.5$\,m threshold. Circled: cells meeting all
-three conditions for genuine avoidance (green), and cells whose plan moved towards the pedestrian
-(red).}
-\label{fig:decomp}
-\end{figure}
-
 Three readings follow. First, the pedestrian outweighs the irrelevant edit in only
 \NumFgtIlo--\NumFgtIhi\% of scenes, so most of what $F$ registers sits inside the policy's own
-variability---the pinched band of \cref{fig:decomp}. Second, only \NumRealN{} of \NumRealTot{} cells
+variability---the pinched band of \cref{fig:cases}e. Second, only \NumRealN{} of \NumRealTot{} cells
 (\NumRealPct\%) are genuine avoidance. Third, the displacement that does occur is not aimed: of the
 \NumMoveN{} cells in which the plan moved, \NumMoveFar{} increased the clearance and \NumMoveNear{}
 decreased it. Per policy the split differs sharply: DiffusionDrive reacts in few
