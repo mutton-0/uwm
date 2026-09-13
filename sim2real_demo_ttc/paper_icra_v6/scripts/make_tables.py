@@ -85,6 +85,12 @@ for m in M:
 T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
 open(f"{_OUT}/tables/tab_light.tex","w").write("\n".join(T)+"\n")
 # ---------- 数字宏 ----------
+# 帧 → 场景换算：体检帧来自多少个 nuScenes 场景（一场景 20 s，关键帧 2 Hz）
+from collections import Counter as _Ctr
+_MAN=json.load(open(f"{R5}/risk_card_manifest.json")); _IDX={x["uid"]:x for k in ("A","B") for x in _MAN[k]}
+_uu=sorted({z["uid"] for z in json.load(open(f"{V5}/diag_units.json"))
+            if z["d"]<=15 and (z["set"]=="B" or z["grp"]=="corr")})
+_fps=len(_uu)/len(_Ctr(_IDX[u]["scene"] for u in _uu if u in _IDX))
 # HS 四个分项各自的最大绝对值（跨模型），用于说明结论与权重无关；真人参照取全体均值
 _UU=json.load(open(f"{V5}/diag_units.json"))
 _sel=lambda z: z["d"]<=15 and (z["set"]=="B" or z["grp"]=="corr") and z["v"]>=1.0 and z["need"]
@@ -115,6 +121,11 @@ NUM={"NumCFRlo":f"{min(cf):.2f}","NumCFRhi":f"{max(cf):.2f}","NumCFRciHi":f"{max
      "NumHumanRef":(f"{np.nanmean(_GC['gt']):.2f}" if _GC else "0.57"),
      "NumHumanLo":(f"{np.nanmin(_GC['gt']):.2f}" if _GC else "0.52"),
      "NumHumanHi":(f"{np.nanmax(_GC['gt']):.2f}" if _GC else "0.62"),
+     "NumFrPerScene":"%.0f"%_fps,
+     "NumScCFR":"%.0f"%(max(ns["CFR"]["n_star"].values())/_fps),
+     "NumScExp":"%.0f"%(max(v for m,v in ns["exposure"]["n_star"].items() if m in ("dd","ltf","ddv2","simlingo"))/_fps),
+     "NumScHS":"%.0f"%(max(v for m,v in ns["HS"]["n_star"].items() if v and v<1e5)/_fps),
+     "NumMinHS":"%.0f"%(max(v for m,v in ns["HS"]["n_star"].items() if v and v<1e5)/_fps*20/60),
      "NumPool":str(SS["N"]),"NumCollGap":f"{g1:.1f}","NumCollGapEight":f"{g8:.1f}",
      "NumNstarCFRhi":f"{max(ns['CFR']['n_star'].values()):.0f}","NumNstarExpHi":f"{max(v for m,v in ns['exposure']['n_star'].items() if m in ('dd','ltf','ddv2','simlingo')):.0f}",
      "NumRankSPforty":f"{100*ns['SP']['rank_p']['40']:.0f}","NumRankExpTen":f"{100*ns['exposure']['rank_p']['10']:.0f}",

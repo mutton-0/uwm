@@ -37,6 +37,11 @@ Hazard sensitivity and the direction of the lighting effect behave differently. 
 57--1{,}326 frames, except for SimLingo, whose estimate sits on the threshold, and the ordering reaches \NumRankHSninety\% stability only at 90 frames. The
 ordering by alignment is unstable even at 130 (\NumRankAlignOneThirty\%).
 
+In wall-clock terms, a 20\,s scene in this corpus yields about \NumFrPerScene{} usable
+near-pedestrian frames, so the lighting verdict costs roughly \NumScCFR{} scenes and the exposure
+verdict \NumScExp; deciding that hazard sensitivity differs from zero costs \NumScHS---about
+\NumMinHS{} minutes of logged driving that actually contains a pedestrian near the corridor.
+
 The division is therefore clear. A few dozen frames diagnose planned distance, over-reaction and
 sensitivity to lighting. Whether a policy manages hazard, and in which direction lighting pushes it,
 needs hundreds of frames that contain a genuine need to react.
