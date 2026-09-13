@@ -149,7 +149,7 @@ if os.path.exists(f"{V5}/bench_compare.json") and os.path.exists(f"{V5}/ttc_rank
     BC=json.load(open(f"{V5}/bench_compare.json")); TR=json.load(open(f"{V5}/ttc_rank.json"))
     NUo=BC["nusc"]; CV=BC["navsim_close"]; AL=BC["navsim_all"]
     T=[r"\begin{table*}[t]",r"\centering",
-       r"\caption{\textbf{The same six policies under the standard evaluations.} Left: nuScenes open-loop on the 236 near-pedestrian frames, original\,/\,pedestrian removed (rear-end contacts excluded). Middle: NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} with a pedestrian near the corridor. Right: share of moving-ego scenes with minimum pedestrian TTC $<1.5$\,s, by driving side. Bold: best in column.}",
+       r"\caption{\textbf{The same six policies under the standard scores.} Left: nuScenes open-loop on the 236 near-pedestrian frames, original\,/\,pedestrian removed (rear-end contacts excluded). Middle: NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} with a pedestrian near the corridor. Right: share of moving-ego scenes with minimum pedestrian TTC $<1.5$\,s, by driving side. Bold: best in column.}",
        r"\label{tab:bench}",r"\small",r"\setlength{\tabcolsep}{3pt}",
        r"\begin{tabular}{@{}lccc cc cc@{}}",r"\toprule",
        r" & \multicolumn{3}{c}{nuScenes open-loop (orig.\,/\,removed)} & \multicolumn{2}{c}{NAVSIM EPDMS (rank)} & \multicolumn{2}{c}{pedestrian TTC $<1.5$\,s (rank)} \\",
