@@ -43,7 +43,7 @@ for k,m in enumerate(M):
     c.errorbar(x,y,yerr=[e0,e1],color=COL[m],marker="o",ms=2.6,lw=1.1,elinewidth=0.6,capsize=0)
 GC=json.load(open(f"{V5}/gt_ceiling.json"))
 c.plot(range(len(TB)),GC["gt_ttc"],color="#52514e",ls=(0,(3,2)),lw=1.1)
-c.text(0.35,0.70,"human driver\n(logged)",fontsize=5.8,color="#52514e",ha="center")
+c.text(0.45,0.70,"human driving vs.\nthe same blind plan",fontsize=5.4,color="#52514e",ha="center")
 c.axhline(0,color="#c3c2b7",lw=0.5); c.set_xticks(range(len(TB))); c.set_xticklabels(TL,fontsize=6.3); c.set_ylim(-0.3,1.05)
 c.set_xlabel(r"TTC$_0$ (s), more hazardous $\rightarrow$"); c.set_ylabel("hazard sensitivity HS")
 c.set_title("(b) HS against time to collision",fontsize=7,loc="left",pad=2)

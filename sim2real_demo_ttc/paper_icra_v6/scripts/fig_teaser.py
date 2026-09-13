@@ -85,7 +85,7 @@ for m in M:
 # 真值参照：把"看得见行人"那一侧换成真人当时实际开出来的轨迹（gt_ceiling.py），
 # 对同一个盲规划算 HS。虚线 = 真人，浅灰带 = 完美让开的构造上限，两者基本重合。
 GC=json.load(open(f"{V5}/gt_ceiling.json"))
-ax.plot(range(len(BINS)),GC["gt"],color="#52514e",ls=(0,(3,2)),lw=1.1,label="human driver (logged)")
+ax.plot(range(len(BINS)),GC["gt"],color="#52514e",ls=(0,(3,2)),lw=1.1,label="human driving vs.\nthe same blind plan")
 ax.fill_between(range(len(BINS)),GC["gt"],GC["ideal"],color="#9a998f",alpha=0.18,lw=0)
 ax.axhline(0,color="#c3c2b7",lw=0.6)
 ax.set_xticks(range(len(BINS))); ax.set_xticklabels(XL); ax.set_xlabel(r"hazard level $a_{\rm req}=v^2/2d$ (m/s$^2$)")
