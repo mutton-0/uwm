@@ -30,27 +30,35 @@ used, but a large $F$ is not a promise of safer behaviour.
 
 \paragraph{When the plan does move, which way does it move?}
 The reverse direction fails for an instructive reason: $F$ measures how far a plan moves, not where it
-moves to. We therefore decompose it (\cref{tab:decomp}), reading $F$ against $I$---the same policy's
+moves to. We therefore decompose it (\cref{fig:decomp}), reading $F$ against $I$---the same policy's
 jitter floor under an unrelated edit---and against $\Delta S$, the change in clearance to the
 pedestrian's logged future. A response counts as avoidance only if all three hold: the plan moved
 ($F\ge0.5$\,m), it moved more than the policy's own jitter ($F>I$), and the movement bought distance
 ($\Delta S\ge0.5$\,m).
 
-\input{tables/tab_decomp}
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/decomp.pdf}
+\caption{\textbf{Displacement is not avoidance.} (a)~Every policy--scene cell of the \NumSGscenes{} NAVSIM Singapore scenes: the plan
+displacement caused by removing the pedestrian ($F$, log scale) against the clearance it buys against the pedestrian's logged future
+($\Delta S$). Below the $F=0.5$\,m threshold the cloud is pinned to $\Delta S=0$; above it the points fan out almost symmetrically.
+Circled: cells meeting all three conditions for genuine avoidance (green) and cells whose plan moved \emph{towards} the pedestrian (red).
+(b)~Among the cells where the plan moved, where the displacement went.}
+\label{fig:decomp}
+\end{figure*}
 
 Three readings follow. First, the pedestrian outweighs the irrelevant edit in only
 \NumFgtIlo--\NumFgtIhi\% of scenes, so most of what $F$ registers sits inside the policy's own
-variability. Second, of the \NumRealTot{} policy--scene cells, \NumRealN{} (\NumRealPct\%) are genuine
-avoidance by the definition above. Third, the displacement that does occur is not aimed: of the
-\NumMoveN{} cells in which the plan moved, \NumMoveFar{} increased the clearance, \NumMoveNear{}
-decreased it, and \NumMoveFlat{} left it unchanged. Per policy the split is sharply different.
-DiffusionDrive reacts in few scenes but in the right direction (\NumDDfar{} away against
-\NumDDnear{} towards, median $\Delta S=\NumDDmed$\,m). SimLingo moves in more scenes than the other
-five combined and moves \emph{towards} the pedestrian more often than away (\NumSLnear{} against
-\NumSLfar, median $\NumSLmed$\,m); it is also the policy with the highest rate of sub-1.5\,s
-time-to-proximity (\cref{tab:axes}). Finally, the clearance a policy yields does not grow with the
-hazard: the rank correlation between $\Delta S$ and the deceleration the scene demands is
-\NumRhoLo--\NumRhoHi{} across the six policies.
+variability---the flat band of \cref{fig:decomp}a. Second, only \NumRealN{} of \NumRealTot{} cells
+(\NumRealPct\%) are genuine avoidance. Third, the displacement that does occur is not aimed: of the
+\NumMoveN{} cells in which the plan moved, \NumMoveFar{} increased the clearance and \NumMoveNear{}
+decreased it. Per policy the split differs sharply (\cref{fig:decomp}b): DiffusionDrive reacts in few
+scenes but in the right direction (median $\Delta S=\NumDDmed$\,m), while SimLingo moves in more
+scenes than the other five combined and moves \emph{towards} the pedestrian more often than away
+(\NumSLnear{} against \NumSLfar, median $\NumSLmed$\,m); it also has the highest rate of sub-1.5\,s
+time-to-proximity (\cref{tab:axes}). Finally, what a policy yields does not grow with the hazard: the
+rank correlation between $\Delta S$ and the deceleration the scene demands is
+\NumRhoLo--\NumRhoHi{}.
 
 An exam that rewarded responsiveness alone would therefore rank the least safe policy first.
 

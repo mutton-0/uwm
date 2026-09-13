@@ -24,6 +24,7 @@ def clr(w,F):
 def D(a,b):
     A=lin(T8,np.vstack([[0,0],np.asarray(a)[:,:2]])); B=lin(T8,np.vstack([[0,0],np.asarray(b)[:,:2]]))
     return float(np.mean(np.linalg.norm(A-B,axis=1)))
+PER={}
 out={}
 print(f"{'模型':12s} {'n':>4s} {'F>I占比':>8s} {'F≥0.5':>6s} {'η中位':>7s} {'真避让':>7s} {'ΔS~危险 ρ':>10s}")
 for m in M:
@@ -46,6 +47,7 @@ for m in M:
     eta=dS[big]/F[big] if big.any() else np.array([])
     real=big&(F>I)&(dS>=0.5)
     rho=spearmanr(areq[mv],dS[mv])[0] if mv.sum()>2 else float("nan")
+    PER[m]=[{k:r[k] for k in ("F","I","dS","areq","v")} for r in R]
     out[m]=dict(n=len(R),share_F_gt_I=float(100*np.mean(F>I)),n_big=int(big.sum()),
                 eta_med=float(np.median(eta)) if len(eta) else None,
                 real_rate=float(100*np.mean(real)),n_real=int(real.sum()),
@@ -55,5 +57,6 @@ for m in M:
           f"{(g['eta_med'] if g['eta_med'] is not None else float('nan')):7.2f} "
           f"{g['n_real']:3d}({g['real_rate']:.0f}%) {g['rho_dS_areq']:+10.2f}")
 json.dump(out,open(f"{V5}/f_decomp.json","w"),indent=1)
+json.dump(PER,open(f"{V5}/f_decomp_per_scene.json","w"))   # 逐场景 (F, I, ΔS, a_req) 供画图
 tot=sum(v["n_real"] for v in out.values()); tn=sum(v["n"] for v in out.values())
 print(f"\n六家合计：{tn} 个模型-场景里，同时满足「动了(F≥0.5) + 强于自身抖动(F>I) + 真的让开(ΔS≥0.5m)」的只有 {tot} 个（{100*tot/tn:.1f}%）")
