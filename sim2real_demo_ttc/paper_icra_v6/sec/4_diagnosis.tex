@@ -1,26 +1,20 @@
 \section{Diagnosis of Six Policies}
 \label{sec:diagnosis}
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/teaser.pdf}
-\caption{\textbf{One frame, two edits, six policies, and the resulting curve.} (a)~A worker in a
-high-visibility vest stands at the edge of the ego corridor 9.6\,m ahead; the ego vehicle moves at
-7.6\,m/s. The detector finds the worker in the night image but not in the removed one. (b)~Plans over
-2.5\,s under each input: original (blue), pedestrian removed (red), night (grey); the star marks
-the worker. (c)~Hazard-sensitivity curves over all near-pedestrian units that need a reaction (mean,
-95\% CI, bins with $\ge8$ units; points are dodged horizontally within each bin so the intervals do
-not overlap, and a policy appears only where it has enough units, which is why the curves start at
-different hazard levels). $\HS$ is a dimensionless index in $[-1,1]$. The dashed line scores the logged human trajectory
-against each policy's own pedestrian-blind plan on the same four readouts, averaged over policies; the
-band is the range across the six.}
+\includegraphics[width=\columnwidth]{figures/teaser.pdf}
+\caption{\textbf{One frame, two edits, six policies.} (a)~A worker in a high-visibility vest at the
+edge of the ego corridor, 9.6\,m ahead, ego speed 7.6\,m/s; the detector finds the worker in the night
+image but not in the removed one. (b)~Plans over 2.5\,s under each input: original (blue), pedestrian
+removed (red), night (grey); the star marks the worker.}
 \label{fig:teaser}
-\end{figure*}
+\end{figure}
 
 \input{tables/tab_report}
 
 \subsection{The report}
-\Cref{tab:report} and \cref{fig:teaser}c give the six profiles.
+\Cref{tab:report} and \cref{fig:reach}b give the six profiles.
 
 \paragraph{Exposure}
 The six policies do not even agree on how far to plan, and this alone will turn out to explain more of
@@ -55,9 +49,12 @@ without yielding, and SimLingo covers the most ground with the least stable plan
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/reach.pdf}
-\caption{\textbf{Collision against input speed.} Contact between the plan and the pedestrian's logged
-future, at the logged speed and at counterfactual input speeds; solid: pedestrian visible, dashed:
-removed.}
+\caption{\textbf{Collision and hazard sensitivity.} (a)~Contact between the plan and the pedestrian's
+logged future, at the logged speed and at counterfactual input speeds; solid: pedestrian visible,
+dashed: removed. (b)~$\HS$ against the hazard level $a_{\mathrm{req}}$ (mean, 95\% CI, bins with
+$\ge8$ units; points dodged within a bin, and a policy appears only where it has enough units).
+Dashed: the logged human trajectory scored against each policy's own blind plan, averaged over
+policies; band: the range across the six.}
 \label{fig:reach}
 \end{figure}
 
