@@ -85,8 +85,11 @@ T=[r"\begin{table}[t]",r"\centering",
    r"Policy & CFR [95\% CI] & speed & $\Delta S$ (m) & align \\",r"\midrule"]
 for m in M:
     c=CF[m]["corr"]; n=NS[m]
-    pm=lambda x,f: "$0$" if abs(x)<(0.005 if f=="{:+.2f}" else 0.5) else "$"+f.format(x).replace("-","-")+"$"
-    sp=bold(pm(100*n['dv_rel'],"{:+.0f}")[:-1]+"\\%$" if abs(100*n['dv_rel'])>=0.5 else "$0\\%$",n["p"]<0.01); ds=bold(pm(n['dS'],"{:+.2f}"),n["dS_p"]<0.01)
+    pm=lambda x,f: "$"+f.format(x)+"$"   # 不再把小值压成 "0"：真值很小就多给一位小数，见下
+    # 小数位按数量级给：不足 1% 的速度变化保留一位小数，避免四舍五入成 "0%" 看着像缺数据
+    _f="{:+.0f}" if abs(100*n['dv_rel'])>=1 else "{:+.1f}"
+    sp=bold(pm(100*n['dv_rel'],_f)[:-1]+"\\%$",n["p"]<0.01)
+    ds=bold(pm(n['dS'],"{:+.2f}" if abs(n['dS'])>=0.01 else "{:+.3f}"),n["dS_p"]<0.01)
     T.append(f"{SH[m]} & {c['CFR']:.2f} {{\\scriptsize[{c['CFR_ci'][0]:.2f},{c['CFR_ci'][1]:.2f}]}} & {sp} & {ds} & "
              f"${L[m]['point']['align']:+.2f}\\to{R[m]['point']['align']:+.2f}$ \\\\")
 T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
