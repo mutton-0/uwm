@@ -1,15 +1,18 @@
 % !TEX root = ../main.tex
 \begin{abstract}
 A policy's rank on nuScenes' open-loop metrics or NAVSIM's leaderboard score predicts its rank at a
-new deployment site only as well as a coin flip ($\rho=-0.54$--$+0.49$ on near-pedestrian scenes): a
-benchmark score reports an outcome, not whether a vulnerable road user had anything to do with it. We
-propose a \emph{check-up} --- a few hundred verified, pixel-level counterfactual edits (removing the
-pedestrian, re-rendering the scene at night) read as a diagnosis rather than a ranking. Raw response
-magnitude is a poor safety signal: across \NumSGscenes{} near-pedestrian scenes and six policies, only
-\NumRealPct\% of responses are genuine avoidance by a three-part test, though a near-zero response
-still reliably certifies that the pedestrian was ignored (\NumPFbig\% of scenes). Moving from
-left-hand to right-hand drive, what transfers is not how strongly a policy reacts but how steadily it
-drives, and that exam beats the leaderboard score itself at predicting the new side's behaviour
-($\rho={\NumSpBeh}$). A pre-registered, sample-size-priced transfer test confirms the operating range:
-orderings and verdicts carry over, point values do not.
+new deployment site only about as well as a coin flip ($\rho=-0.54$--$+0.49$ on near-pedestrian
+scenes): a benchmark score reports an outcome, not the behaviour behind it. When a vulnerable road
+user calls for a reaction, the score does not say whether that road user had any part in the outcome,
+so a ranking cannot separate a policy that yields from one that merely never gets close. We propose a \emph{check-up} --- a few hundred verified, pixel-level counterfactual edits
+(removing the pedestrian, re-rendering the scene at night) read as a diagnosis rather than a ranking.
+The edits reduce each scene to two axes: the displacement the pedestrian causes, and the displacement
+an irrelevant edit causes. Raw magnitude is then a poor safety signal: across \NumSGscenes{}
+right-hand-drive near-pedestrian scenes and six end-to-end policies, only \NumRealPct\% of responses
+are genuine avoidance on a three-part test, though a near-zero response still certifies that the
+pedestrian was ignored (\NumPFbig\% of scenes). We pre-register a diagnosis made on 88 left-hand-drive
+frames and test it after the switch to right-hand drive: orderings transfer while point values do not,
+and the exam measuring how \emph{steadily} a policy drives predicts the new side's near-miss rate at
+$\rho={\NumSpBeh}$ --- a target none of the standard evaluations predicts. A check-up therefore prices
+a deployment verdict in tens of frames rather than in a new benchmark.
 \end{abstract}
