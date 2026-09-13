@@ -85,5 +85,10 @@ nuScenes~\cite{caesar2020nuscenes} keyframes. They cover corridor pedestrians (l
 ego corridor $\le1$\,m) at 5--12\,m, their off-road counterparts, and 30 approach sequences at
 5.8--14.6\,m with logged pedestrian futures. The near-pedestrian units come from 236 front-only
 frames, 88 in Boston (left-hand drive) and 148 in Singapore (right-hand drive). Alpamayo-1.5 covers
-170 of the 236, since it needs 1.6\,s of history and 6.4\,s of future within the scene. We fix
+170 of the 236, since it needs 1.6\,s of history and 6.4\,s of future within the scene.
+\Cref{sec:axes} repeats the same two interventions on a \emph{second} corpus, the NAVSIM test
+split~\cite{dauner2024navsim}: 254 Singapore scenes place a pedestrian near the ego corridor and
+\NumSGscenes{} of these also carry a complete logged pedestrian future. That corpus is used only for
+the transfer and decomposition results; the report of \cref{tab:report} is measured on the nuScenes
+frames alone. We fix
 DiffusionDrive's diffusion seed so that paired queries share their noise.
