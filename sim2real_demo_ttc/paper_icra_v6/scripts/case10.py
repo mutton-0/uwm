@@ -88,3 +88,5 @@ for r in out:
 print("\n逐例预测命中（仓位档位 8 例 + 耐心 2 例）:")
 for m in M: print(f"  {m:11s} {hit[m]}/{tot[m]}")
 print(f"  合计 {sum(hit.values())}/{sum(tot.values())}")
+json.dump({"hit":sum(hit.values()),"tot":sum(tot.values()),"per":{m:[hit[m],tot[m]] for m in M}},
+          open(f"{V5}/case10_tally.json","w"),indent=1)

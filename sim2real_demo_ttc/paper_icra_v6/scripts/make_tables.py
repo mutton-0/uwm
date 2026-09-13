@@ -219,6 +219,9 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
             FD=json.load(open(f"{V5}/f_decomp.json"))
             NUM3["NumRealN"]=str(sum(v["n_real"] for v in FD.values()))
             NUM3["NumRealTot"]=str(sum(v["n"] for v in FD.values()))
+            if os.path.exists(f"{V5}/case10_tally.json"):
+                TY=json.load(open(f"{V5}/case10_tally.json"))
+                NUM3["NumCaseHit"]=str(TY["hit"]); NUM3["NumCaseTot"]=str(TY["tot"])
             NUM3["NumSGscenes"]=str(max(v["n"] for v in FD.values()))
             NUM3["NumRealPct"]=f"{100*sum(v['n_real'] for v in FD.values())/sum(v['n'] for v in FD.values()):.1f}"
             NUM3["NumFgtIlo"]=f"{min(v['share_F_gt_I'] for v in FD.values()):.0f}"
