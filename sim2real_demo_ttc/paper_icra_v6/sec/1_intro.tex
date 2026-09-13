@@ -6,12 +6,12 @@ implicitly, a bet that the rank those scores produce will still hold once the po
 the new site, not just on someone else's roads. Taking that bet blindly is a bad idea: on scenes
 where a pedestrian is near the ego corridor, a policy's rank on
 nuScenes' open-loop metrics or on NAVSIM's leaderboard score predicts its rank at the deployment site
-only about as well as a coin flip ($\rho=-0.54$--$+0.49$; \cref{sec:bench}). The reason is not noise but mechanism. A score of this kind
-is an outcome measure, and an outcome can be right for the wrong reason. A policy that never
-approaches a pedestrian because it plans short trajectories scores as well as one that sees the
-pedestrian and yields, and the two behave very differently the first time the scene changes. Knowing
-which of the two a policy is requires looking at \emph{why} it produced its score, and doing so
-usually has to happen from little data: a closed-loop simulator for the target domain, or a fleet
+only about as well as a coin flip ($\rho=-0.54$--$+0.49$; \cref{sec:bench}). The reason is not noise
+but mechanism: a score is an outcome measure, and an outcome can be right for the wrong reason. A
+policy that never approaches a pedestrian because it plans short trajectories scores as well as one
+that sees the pedestrian and yields, and the two behave very differently the first time the scene
+changes. Telling them apart means asking \emph{why} the score came out as it did, usually from little
+data: a closed-loop simulator for the target domain, or a fleet
 test, is exactly what the decision is meant to save.
 
 We propose a \emph{check-up}: a short list of exams, each with a control and a known normal range,
@@ -24,11 +24,10 @@ pedestrian, against a model-independent hazard level. A specificity term applies
 principle: when no reaction is needed, the plan should not move.
 
 \paragraph{Displacement is not avoidance}
-The quantity an edit yields most directly---how far the plan moves when the pedestrian is
-removed---is a poor safety signal on its own, and treating it as one inverts the ranking. We
-therefore decompose it into three parts: the magnitude of the response, the displacement the same
-policy produces under an edit that has nothing to do with the pedestrian (its own jitter floor), and
-the separation the response actually buys. On \NumSGscenes{} NAVSIM Singapore near-pedestrian scenes,
+What an edit yields most directly---how far the plan moves when the pedestrian is removed---is a poor
+safety signal on its own, and treating it as one inverts the ranking. We decompose it into the
+magnitude of the response, the displacement the same policy produces under an edit unrelated to the
+pedestrian (its own jitter floor), and the separation the response actually buys. On \NumSGscenes{} NAVSIM Singapore near-pedestrian scenes,
 the pedestrian
 outweighs the irrelevant edit in only \NumFgtIlo--\NumFgtIhi\% of scenes; among the cells where the
 plan did move, \NumMoveFar{} moved away from the pedestrian and \NumMoveNear{} moved towards it. The
@@ -54,20 +53,15 @@ A check-up is only useful if it is cheap and if its operating range is known. We
 estimate's spread shrinks with the number of frames: the lighting verdict is settled within
 \NumNstarCFRhi{} frames and exposure within \NumNstarExpHi, while hazard sensitivity and the
 direction of the lighting effect need hundreds. We then pre-registered seven predictions from a
-diagnosis made on 88 Boston frames and tested them on Singapore. What a check-up can promise is which
-policy ranks where and how its behaviour changes, not its exact operating point, and the test
-confirms exactly that scope: the ordering predictions transfer robustly ($\rho=0.90$, against a
-pre-registered bar of $0.6$). We also pre-registered a stronger, point-value version of the same
-claim, and it falls short (\cref{tab:prereg}) --- rankings and verdicts, not point values, are the
-unit that survives the domain gap. For the decision this paper is about --- which policy to deploy
---- that is enough: choosing among candidates needs to know how they rank and how their behaviour
-changes, not their exact operating point, so we do not pursue point-value calibration further here. Re-measuring the exams after the switch to right-hand
-drive, the exam that predicts behaviour there is not the one measuring how strongly a policy reacts
-but the one measuring how steadily it drives ($\rho={\NumSpBeh}$ for specificity) --- and it predicts
-the right-hand-drive ranking better than the leaderboard score computed on that side's own full scene
-set does
-(\cref{sec:bench}). The bet named in the opening paragraph, then, is answerable: not by trusting the
-leaderboard rank, but by running a check-up whose predictive exams are known in advance.
+diagnosis made on 88 Boston frames and tested them after the switch to right-hand drive. The ordering
+predictions transfer ($\rho=0.90$, against a pre-registered bar of $0.6$); the stronger, point-value
+version of the same claim falls short (\cref{tab:prereg}). Rankings and verdicts, not point values,
+are the unit that survives the domain gap, and for choosing among candidate policies that is enough,
+so we do not pursue calibration further. Re-measuring the exams on the new side, the one that predicts
+behaviour there is not the exam measuring how strongly a policy reacts but the one measuring how
+steadily it drives ($\rho={\NumSpBeh}$ for specificity); it beats the leaderboard score computed on
+that side's own full scene set (\cref{sec:bench}). The bet named above is therefore answerable: not by
+trusting a leaderboard rank, but by running a check-up whose predictive exams are known in advance.
 
 \paragraph{Contributions}
 \begin{enumerate}\itemsep2pt
