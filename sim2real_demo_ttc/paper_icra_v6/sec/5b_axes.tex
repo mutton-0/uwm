@@ -3,7 +3,7 @@
 
 \input{tables/tab_axes}
 
-The transfer test of \cref{sec:sample} moved a \emph{diagnosis} between cities. A more useful question
+The transfer test of \cref{sec:sample} moved a \emph{diagnosis} from one driving side to the other. A more useful question
 for deployment is whether the \emph{method} moves: can a handful of counterfactual cases in the new
 domain characterise how the policies behave there? We repeat both interventions on the
 \NumSGscenes{} NAVSIM Singapore near-pedestrian scenes, on the original benchmark images, and read the
@@ -73,7 +73,7 @@ verdict, not a calibrated number---which is exactly the use we propose for it.
 
 \paragraph{Re-measuring beats importing}
 Importing the Boston $\CFR$ values misstates the Singapore ones by $\NumLhdCfrErr$ on average, which
-is already worse than re-measuring $k=40$ fresh scenes in the new city ($\NumCfrErrForty$); 80 scenes
+is already worse than re-measuring $k=40$ fresh scenes on the new side ($\NumCfrErrForty$); 80 scenes
 bring the error to $\NumCfrErrBig$ and 160 to $\NumCfrErrHuge$. Values measured elsewhere are worth
 about forty scenes measured here.
 
@@ -84,12 +84,12 @@ Correlating each Boston exam against the Singapore rate of sub-1.5\,s time-to-pr
 policies, specificity gives $\rho={\NumSpBeh}$---the only value significant at the two-sided 5\% level
 for $n{=}6$---against ${\NumExpBeh}$ for exposure and ${\NumCfrBeh}$ for $\CFR$. Specificity is the
 exam that asks how far a plan moves when an \emph{irrelevant} part of the scene is edited; a policy
-that answers ``not at all'' is one whose trajectory is stable, and stability is what carries across
-cities. The ordering used here is the one measured on the counterfactual pool, whose readout excludes
+that answers ``not at all'' is one whose trajectory is stable, and stability is what survives the
+change of driving side. The ordering used here is the one measured on the counterfactual pool, whose readout excludes
 the scenes that carry no removal edit; on the larger original-image set of \cref{sec:bench} exposure
 reaches $0.94$ against this same target. Exposure therefore travels on both pools, but specificity is
 the stronger predictor and the only one that clears significance here. This is consistent with the decomposition above: displacement that is not aimed away from the
-pedestrian is not protection, and a policy that produces a lot of it is dangerous in both cities.
+pedestrian is not protection, and a policy that produces a lot of it is dangerous on both sides.
 
 \paragraph{What transfers and what must be re-measured}
 The verdict $\CFR<1$ holds on both driving sides for every policy, but the value drifts by a factor of

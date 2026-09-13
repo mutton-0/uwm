@@ -43,7 +43,7 @@ sensitivity to lighting. Whether a policy manages hazard, and in which direction
 needs hundreds of frames that contain a genuine need to react.
 
 \subsection{A pre-registered transfer test}
-Does a diagnosis made in one city describe the same policy in another? Before computing any
+Does a diagnosis made on one driving side describe the same policy on the other? Before computing any
 right-hand-drive statistic, we fixed seven predictions and their decision rules. They were derived from the profile of the 88 Boston
 frames, and we tested them on the near-pedestrian units of the 148 Singapore frames
 (\cref{tab:prereg}). The registration covered the six policies public at that time. NVIDIA
@@ -67,8 +67,8 @@ Three predictions fail.
 \item In Singapore, DiffusionDrive and DiffusionDriveV2 show a small but non-zero hazard sensitivity
       ($\HS=0.09$ and $0.08$).
 \item The ``purity'' hypothesis is reversed. We had predicted that policies whose lighting effect is
-      more orthogonal to their pedestrian response would shift less between cities; the observed rank
-      correlation is $-0.90$. Alignment is itself unstable between the two cities (\cref{sec:lighting}).
+      more orthogonal to their pedestrian response would shift less between sides; the observed rank
+      correlation is $-0.90$. Alignment is itself unstable between the two sides (\cref{sec:lighting}).
 \end{itemize}
 
 \paragraph{Reading}

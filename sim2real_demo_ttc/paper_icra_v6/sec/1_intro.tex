@@ -60,10 +60,11 @@ pre-registered bar of $0.6$). We also pre-registered a stronger, point-value ver
 claim, and it falls short (\cref{tab:prereg}) --- rankings and verdicts, not point values, are the
 unit that survives the domain gap. For the decision this paper is about --- which policy to deploy
 --- that is enough: choosing among candidates needs to know how they rank and how their behaviour
-changes, not their exact operating point, so we do not pursue point-value calibration further here. Re-measuring the exams in the new city, the exam that
-predicts behaviour there is not the one measuring how strongly a policy reacts but the one measuring
-how steadily it drives ($\rho={\NumSpBeh}$ for specificity) --- and it predicts the new city's ranking
-better than the leaderboard score computed on the new city's own full scene set does
+changes, not their exact operating point, so we do not pursue point-value calibration further here. Re-measuring the exams after the switch to right-hand
+drive, the exam that predicts behaviour there is not the one measuring how strongly a policy reacts
+but the one measuring how steadily it drives ($\rho={\NumSpBeh}$ for specificity) --- and it predicts
+the right-hand-drive ranking better than the leaderboard score computed on that side's own full scene
+set does
 (\cref{sec:bench}). The bet named in the opening paragraph, then, is answerable: not by trusting the
 leaderboard rank, but by running a check-up whose predictive exams are known in advance.
 
@@ -83,6 +84,6 @@ leaderboard rank, but by running a check-up whose predictive exams are known in 
       The relationship is a property of the pooled data, not a stable per-policy trait
       (\cref{sec:lighting}), and we report it as such.
 \item An account of what small data can and cannot establish: sample-size laws for every exam and a
-      pre-registered cross-city transfer test. The exam that transfers predicts the new city's
-      behaviour better than that city's own leaderboard score does.
+      pre-registered left- to right-hand-drive transfer test. The exam that transfers predicts
+      behaviour on the new side better than that side's own leaderboard score does.
 \end{enumerate}
