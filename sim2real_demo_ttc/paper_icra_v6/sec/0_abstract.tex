@@ -7,10 +7,11 @@ user calls for a reaction, the score does not say whether that road user had any
 so a ranking cannot separate a policy that yields from one that merely never gets close. We propose a \emph{check-up} --- a few hundred verified, pixel-level counterfactual edits
 (removing the pedestrian, re-rendering the scene at night) read as a diagnosis rather than a ranking.
 The edits reduce each scene to two axes: the displacement the pedestrian causes, and the displacement
-an irrelevant edit causes. Raw magnitude is then a poor safety signal: across \NumSGscenes{}
-right-hand-drive near-pedestrian scenes and six end-to-end policies, only \NumRealPct\% of responses
-are genuine avoidance on a three-part test, though a near-zero response still certifies that the
-pedestrian was ignored (\NumPFbig\% of scenes). We pre-register a diagnosis made on 88 left-hand-drive
+an irrelevant edit causes. Raw magnitude is then a poor safety signal. Replaying \NumSGscenes{}
+right-hand-drive scenes at input speeds of 2--8\,m/s, so that the pedestrian does lie on the planned
+path, only \NumCfRealPct\% of the responses that are called for qualify as genuine avoidance on a
+three-part test; on those cells neither the clearance to the pedestrian nor the planned distance
+moves. We pre-register a diagnosis made on 88 left-hand-drive
 frames and test it after the switch to right-hand drive: orderings transfer while point values do not,
 and the exam measuring how \emph{steadily} a policy drives predicts the new side's near-miss rate at
 $\rho={\NumSpBeh}$ --- a target none of the standard evaluations predicts. A check-up therefore prices

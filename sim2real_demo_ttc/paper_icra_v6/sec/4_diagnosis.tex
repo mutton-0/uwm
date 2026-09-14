@@ -26,8 +26,11 @@ human's own.
 \paragraph{Hazard sensitivity}
 No policy manages the pedestrian risk. On units that need a reaction, seeing the pedestrian buys
 \NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale. The benefit does not grow with the hazard: its rank
-correlation with $a_{\mathrm{req}}$ is negative for five policies, down to $-0.51$ for Alpamayo-1.5.
-DiffusionDriveV2 is the only exception ($+0.29$), and its benefit stays below 0.15. Ranking against the time-based axis $\mathrm{TTC}_0$ instead of $a_{\mathrm{req}}$ leaves this unchanged ($-0.31$ to $+0.17$, against $-0.25$ to $+0.29$). The benefit is also unreliable in direction:
+correlation with $a_{\mathrm{req}}$ is negative for \NumScalNeg{} policies, down to \NumScalLo{} for
+\NumScalWorst; DiffusionDriveV2 is the only exception (\NumScalHi), and its benefit stays below
+$0.15$. Replacing the hazard axis by the time-based $\mathrm{TTC}_0$, whose sign is reversed by
+construction, leaves the picture unchanged (\NumScalTtcLo{} to \NumScalTtcHi, against \NumScalLo{} to
+\NumScalHi). The benefit is also unreliable in direction:
 counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
 pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
 SimLingo 18 vs.\ 30, the rest at most 5 either way; all McNemar $p\ge0.11$) --- what reads as a safety
@@ -36,7 +39,8 @@ margin in \cref{tab:report} is, case by case, close to a coin flip.
 \paragraph{Specificity}
 A policy that moves when nothing requires it is not merely cautious, it is unpredictable, and
 unpredictability is what turns out to travel across a domain shift (\cref{sec:sample}). SimLingo's
-plan moves most when nothing requires it ($\SP=0.42$); the other five stay steadier, at 0.67--0.79.
+plan moves most when nothing requires it ($\SP=\NumSpSL$); the other five stay steadier, at
+\NumSpOtherLo--\NumSpOtherHi.
 
 \paragraph{Collisions}
 Collisions with the pedestrian's logged future follow how far a policy plans to drive, not what it perceives. At the logged

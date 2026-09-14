@@ -303,6 +303,36 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
         NUM3["NumCfrErrHuge"]=f"{DT['sweep6']['160']['err']:.3f}"
         NUM3["NumCfrErrBig"]=f"{DT['sweep6']['80']['err']:.3f}"      # 与前文同一个六家池子
         NUM3["NumLhdCfrErrBig"]=f"{DT['lhd6']['err']:.3f}"
+    # 特异度：SimLingo 与其余五家的值域（走宏，避免正文写死）
+    _sp={m:A[m]["point"]["SP"] for m in M if m in A and A[m]["point"].get("SP") is not None}
+    if _sp:
+        _o=[v for k,v in _sp.items() if k!="simlingo"]
+        NUM3["NumSpSL"]=f"{_sp.get('simlingo',float('nan')):.2f}"
+        NUM3["NumSpOtherLo"]=f"{min(_o):.2f}"; NUM3["NumSpOtherHi"]=f"{max(_o):.2f}"
+    # 风险标度：ρ(HS, a_req) 与换成时间轴 TTC0 的对照，六家取值域（走宏，避免正文写死）
+    _sl=[A[m]["point"]["HS_slope"] for m in M if m in A and A[m]["point"].get("HS_slope") is not None]
+    _st=[A[m]["point"].get("HS_slope_ttc") for m in M if m in A and A[m]["point"].get("HS_slope_ttc") is not None]
+    _f=lambda x: f"{x:+.2f}".replace("-","$-$")
+    if _sl:
+        _lo=min(_sl); NUM3["NumScalLo"]=_f(_lo); NUM3["NumScalHi"]=_f(max(_sl))
+        NUM3["NumScalNeg"]=str(sum(1 for x in _sl if x<0))
+        NUM3["NumScalWorst"]=NAME[[m for m in M if m in A and A[m]["point"].get("HS_slope")==_lo][0]]
+    if _st: NUM3["NumScalTtcLo"]=_f(min(_st)); NUM3["NumScalTtcHi"]=_f(max(_st))
+    # 反事实速度下的 need 集（cf_need.py）：注入 2--8 m/s 造出危险，只在盲规划真会撞上的 cell 上读数
+    if os.path.exists(f"{V5}/cf_need.json"):
+        _CN=json.load(open(f"{V5}/cf_need.json")); _a=_CN["_all"]
+        _mm=[k for k in _CN if k!="_all"]
+        NUM3["NumCfScenes"]=str(_a["n_scene"]); NUM3["NumCfModels"]=str(len(_a["models"]))
+        NUM3["NumCfCells"]=str(_a["n_scene"]*_a["n_speed"]*len(_a["models"]))
+        NUM3["NumCfNeed"]=str(_a["n_need"]); NUM3["NumCfReal"]=str(_a["n_real"])
+        NUM3["NumCfRealPct"]=f"{_a['real_pct']:.1f}"
+        NUM3["NumCfNeedPct"]=f"{100*_a['n_need']/(_a['n_scene']*_a['n_speed']*len(_a['models'])):.0f}"
+        NUM3["NumCfNeedLo"]=f"{min(_CN[m]['need_pct'] for m in _mm):.0f}"
+        NUM3["NumCfNeedHi"]=f"{max(_CN[m]['need_pct'] for m in _mm):.0f}"
+        _ds=[_CN[m]["dS_med"] for m in _mm]; _ar=[_CN[m]["dArc_med"] for m in _mm]
+        f2=lambda x: f"{x:+.2f}".replace("-","$-$")
+        NUM3["NumCfDsLo"]=f2(min(_ds)); NUM3["NumCfDsHi"]=f2(max(_ds))
+        NUM3["NumCfArcLo"]=f2(min(_ar)); NUM3["NumCfArcHi"]=f2(max(_ar))
     # 黄昏对照（同一批 NAVSIM 右舵场景、同进程四条件）：检出率来自 dusk_check.json，CFR 来自 dusk_cfr.json
     if os.path.exists(f"{V5}/dusk_cfr.json") and os.path.exists(f"{V5}/dusk_check.json"):
         _DC=json.load(open(f"{V5}/dusk_cfr.json")); _DK=json.load(open(f"{V5}/dusk_check.json"))

@@ -14,7 +14,11 @@ if _os.environ.get("DROP_DETFAIL"):
     _BAD={o["uid"] for o in json.load(open(f"{R5}/paper_icra_v4/det_validate.json"))
           if "target_box" in o and o["front_only"] and o["rm"]["target_iou"]>=0.5}
     print(f"剔除移除失败的帧 {len(_BAD)} 个")
-sel=lambda z: (SIDE=="ALL" or z["side"]==SIDE) and z["d"]<=15 and (z["set"]=="B" or z["grp"]=="corr") and z["uid"] not in _BAD
+# 档位对齐：AutoVLA / Alpamayo 在 Set B 上只跑了 4 和 8 两档，其余四家跑了 2/4/6/8。
+# 六家并排比较必须用同一个单位池，故一律限制到 {actual,4,8}；置 CF_SPEEDS=all 可复现旧口径。
+_SV={"actual","4","8"} if _os.environ.get("CF_SPEEDS","aligned")!="all" else None
+sel=lambda z: (SIDE=="ALL" or z["side"]==SIDE) and z["d"]<=15 and (z["set"]=="B" or z["grp"]=="corr") \
+              and z["uid"] not in _BAD and (_SV is None or str(z.get("sv")) in _SV)
 out={}
 for m in ["dd","ltf","ddv2","simlingo","autovla","alpamayo","alpamayo15"]:
     U=[z for z in rows if z["m"]==m and sel(z)]

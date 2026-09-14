@@ -20,6 +20,8 @@ def dims(units, man_idx, card_arc=None):
     need=[z for z in u1 if z["need"]]; free=[z for z in u1 if not z["need"]]
     out["HS"]=np.mean([z["HS"] for z in need]) if len(need)>=5 else np.nan
     out["HS_slope"]=spearmanr([z["a_req"] for z in need],[z["HS"] for z in need])[0] if len(need)>=8 else np.nan
+    # 同一批 need 单位上换成时间轴 TTC0：危险方向相反，故符号应当翻转，用于检验结论不依赖危险轴的选取
+    out["HS_slope_ttc"]=spearmanr([z["ttc0"] for z in need],[z["HS"] for z in need])[0] if len(need)>=8 else np.nan
     out["SP"]=np.mean([z["SP"] for z in free]) if free else np.nan
     out["sep_gain"]=np.mean([np.tanh(z["P"]["S"]-z["Q"]["S"]) for z in u1]) if u1 else np.nan
     act=[z for z in units if z["sv"]=="actual" and "dI" in z]

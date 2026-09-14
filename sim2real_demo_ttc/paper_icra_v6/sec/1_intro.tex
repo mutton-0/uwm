@@ -2,20 +2,16 @@
 \section{Introduction}
 \label{sec:intro}
 
-End-to-end driving policies are compared by benchmark scores, and a deployment decision is,
-implicitly, a bet that the rank those scores produce will still hold once the policy is driving at
-the new site, not just on someone else's roads. Taking that bet blindly is a bad idea: on scenes
-where a pedestrian is near the ego corridor, a policy's rank on
-nuScenes' open-loop metrics or on NAVSIM's leaderboard score predicts its rank at the deployment site
-only about as well as a coin flip ($\rho=-0.54$--$+0.49$; \cref{sec:bench}). The reason is not noise
-but mechanism: a score is an outcome measure, and an outcome can be right for the wrong reason. A
+A deployment decision is, implicitly, a bet that a benchmark rank still holds at the new site. The
+bet fails for a reason that is mechanical rather than statistical: a score is an outcome measure, and
+an outcome can be right for the wrong reason. A
 policy that never approaches a pedestrian because it plans short trajectories scores as well as one
 that sees the pedestrian and yields, and the two behave very differently the first time the scene
 changes. Telling them apart means asking \emph{why} the score came out as it did, usually from little
 data: a closed-loop simulator for the target domain, or a fleet
 test, is exactly what the decision is meant to save.
 
-We propose a \emph{check-up}: a short list of exams, each with a control and a known normal range,
+We propose a \emph{check-up}:其中我们设计了迁移不变检测的数据对 a short list of exams, each with a control and a known normal range,
 whose results are read as a diagnosis rather than a ranking (\cref{tab:exams}). Every exam is a
 counterfactual edit of real frames. We remove the pedestrian from the ego corridor, or re-render the
 frame at night, and read the change in the planned trajectory; an independent detector verifies every
