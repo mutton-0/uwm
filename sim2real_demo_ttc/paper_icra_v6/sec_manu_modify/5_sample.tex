@@ -1,0 +1,78 @@
+% !TEX root = ../main.tex
+\section{How Much Data Does a Check-Up Need?}
+\label{sec:sample}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/sample_size.pdf}
+\caption{\textbf{How much driving a verdict costs.} One frame is 5\,s of near-pedestrian driving.
+(a)~Spread of each exam's estimate against sample size, with its fitted law; one line per policy.
+(b)~Driving needed to settle each verdict, one dot per policy; values beyond the axis are off scale.}
+\label{fig:sample}
+\end{figure}
+
+\subsection{Fitting}
+For every exam and policy we subsample $n$ of the \NumPool{} frames that all six policies share, 400
+times, and fit the spread of the estimate with $\sigma(n)=a\sqrt{1/n-1/N}$ (\cref{fig:sample}).
+
+\paragraph{Well-fitting exams}
+Exposure, the lighting ratio and specificity obey this law ($R^2=0.97$--$1.00$). The fitted $a$
+converts directly into the number of frames a verdict needs.
+\begin{itemize}
+\item \emph{Lighting outweighs the pedestrian} ($\CFR<1$) is settled for every policy within
+      \NumNstarCFRhi{} frames.
+\item \emph{Exposure differs from the human's} is settled within \NumNstarExpHi{} frames for the four
+      policies whose exposure is far from one. For AutoVLA and Alpamayo-1.5 it would take hundreds to
+      thousands of frames; this is itself a finding, since they plan a human-like distance.
+\item \emph{Orderings} of the six policies stabilise quickly: exposure with 10 frames
+      (\NumRankExpTen\% of subsamples reach $\rho\ge0.6$ with the full ordering) and specificity with
+      40 (\NumRankSPforty\%).
+\end{itemize}
+
+\paragraph{Poorly fitting exams}
+Hazard sensitivity and the direction of the lighting effect behave differently. Their fits are poor
+($R^2$ as low as 0.26 and $-0.09$) wherever few units need a reaction. Deciding that $\HS\neq0$ needs
+57--1{,}326 frames, except for SimLingo, whose estimate sits on the threshold, and the ordering reaches \NumRankHSninety\% stability only at 90 frames. The
+ordering by alignment is unstable even at 130 (\NumRankAlignOneThirty\%).
+
+In wall-clock terms, a 20\,s scene in this corpus yields about \NumFrPerScene{} usable
+near-pedestrian frames, so the lighting verdict costs roughly \NumScCFR{} scenes and the exposure
+verdict \NumScExp; deciding that hazard sensitivity differs from zero costs \NumScHS---about
+\NumMinHS{} minutes of logged driving that actually contains a pedestrian near the corridor.
+
+The division is therefore clear. A few dozen frames diagnose planned distance, over-reaction and
+sensitivity to lighting. Whether a policy manages hazard, and in which direction lighting pushes it,
+needs hundreds of frames that contain a genuine need to react.
+
+\subsection{A pre-registered transfer test}
+Does a diagnosis made on one driving side describe the same policy on the other? Before computing any
+right-hand-drive statistic, we fixed seven predictions and their decision rules. They were derived from the profile of the 88 Boston
+frames, and we tested them on the near-pedestrian units of the 148 Singapore frames
+(\cref{tab:prereg}). The registration covered the six policies public at that time. NVIDIA
+subsequently released Alpamayo~1.5, which accepts navigation instructions, and we use it in place of
+Alpamayo-R1 throughout this paper; because both driving sides of Alpamayo~1.5 were measured together,
+its numbers do not satisfy the registration discipline, so the table is evaluated on the five policies
+that do. Retaining the replaced policy changes none of the seven verdicts.
+
+\input{tables/tab_prereg}
+
+\paragraph{What transferred}
+\NumPass{} of the seven predictions hold, and they are the orderings and verdicts. The night rendering
+outweighs the pedestrian in every policy. Exposure keeps its order ($\rho=0.90$), and so does
+over-reaction, with SimLingo the most unstable. SimLingo collides most, with the visible and removed
+rates within 3 points of each other.
+
+\paragraph{What did not}
+Three predictions fail.
+\begin{itemize}
+\item Point values drift: only 60\% of the model--exam cells stay inside their Boston interval.
+\item In Singapore, DiffusionDrive and DiffusionDriveV2 show a small but non-zero hazard sensitivity
+      ($\HS=0.09$ and $0.08$).
+\item The ``purity'' hypothesis is reversed. We had predicted that policies whose lighting effect is
+      more orthogonal to their pedestrian response would shift less between sides; the observed rank
+      correlation is $-0.90$. Alignment is itself unstable between the two sides (\cref{sec:lighting}).
+\end{itemize}
+
+\paragraph{Reading}
+A small check-up can therefore report an ordering and a verdict for use in a new domain, but not a
+calibrated value.

@@ -1,0 +1,97 @@
+% !TEX root = ../main.tex
+\section{Diagnosis of Six Policies}
+\label{sec:diagnosis}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/teaser.pdf}
+\caption{\textbf{One frame, two edits, six policies.} (a)~A worker in a high-visibility vest at the
+edge of the ego corridor, 9.6\,m ahead, ego speed 7.6\,m/s; the detector finds the worker in the night
+image but not in the removed one. (b)~Plans over 2.5\,s under each input: original (blue), pedestrian
+removed (red), night (grey); the star marks the worker.}
+\label{fig:teaser}
+\end{figure}
+
+\input{tables/tab_report}
+
+\subsection{The report}
+\Cref{tab:report} and \cref{fig:reach}b give the six profiles.
+
+\paragraph{Exposure}
+The six policies do not even agree on how far to plan, and this alone will turn out to explain more of
+the collision picture below than perception does: exposure spans a factor of four, from DiffusionDrive
+at half the human's distance to SimLingo at more than twice it, with AutoVLA and Alpamayo-1.5 near the
+human's own.
+
+\paragraph{Hazard sensitivity}
+No policy manages the pedestrian risk. On units that need a reaction, seeing the pedestrian buys
+\NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale. The benefit does not grow with the hazard: its rank
+correlation with $a_{\mathrm{req}}$ is negative for \NumScalNeg{} policies, down to \NumScalLo{} for
+\NumScalWorst; DiffusionDriveV2 is the only exception (\NumScalHi), and its benefit stays below
+$0.15$. Replacing the hazard axis by the time-based $\mathrm{TTC}_0$, whose sign is reversed by
+construction, leaves the picture unchanged (\NumScalTtcLo{} to \NumScalTtcHi, against \NumScalLo{} to
+\NumScalHi). The benefit is also unreliable in direction:
+counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
+pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
+SimLingo 18 vs.\ 30, the rest at most 5 either way; all McNemar $p\ge0.11$) --- what reads as a safety
+margin in \cref{tab:report} is, case by case, close to a coin flip.
+
+\paragraph{Specificity}
+A policy that moves when nothing requires it is not merely cautious, it is unpredictable, and
+unpredictability is what turns out to travel across a domain shift (\cref{sec:sample}). SimLingo's
+plan moves most when nothing requires it ($\SP=\NumSpSL$); the other five stay steadier, at
+\NumSpOtherLo--\NumSpOtherHi.
+
+\paragraph{Collisions}
+Collisions with the pedestrian's logged future follow how far a policy plans to drive, not what it perceives. At the logged
+speed, the visible and removed rates differ by at most \NumCollGap{} points for every policy, and at
+8\,m/s by at most \NumCollGapEight. SimLingo, which plans the longest trajectories, collides most. The low-exposure
+policies almost never reach the pedestrian. DiffusionDrive is safe because it stays short, AutoVLA and Alpamayo-1.5 cover a human-like distance
+without yielding, and SimLingo covers the most ground with the least stable plan.
+
+\subsection{Looking inside: why the risk goes unmanaged}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/reach.pdf}
+\caption{\textbf{Collision and hazard sensitivity.} (a)~Contact between the plan and the pedestrian's
+logged future, at the logged speed and at counterfactual input speeds; solid: pedestrian visible,
+dashed: removed. (b)~$\HS$ against the hazard level $a_{\mathrm{req}}$ (mean, 95\% CI, bins with
+$\ge8$ units; points dodged within a bin, and a policy appears only where it has enough units).
+Dashed: the logged human trajectory scored against each policy's own blind plan, averaged over
+policies; band: the range across the six.}
+\label{fig:reach}
+\end{figure}
+
+\input{tables/tab_mech}
+
+The check-up only diagnoses; the following explains the diagnosis for the three BEV planners
+(\cref{tab:mech}, \cref{fig:reach}).
+
+\paragraph{The pedestrian leaves a trace but is not decoded}
+The planners' own BEV semantic heads do not localise the pedestrian. On 520 NAVSIM near-pedestrian
+scenes, the pedestrian channel is no brighter at the pedestrian than at a mirrored empty location
+(\cref{tab:mech}, top). It is 20--55 times weaker than the vehicle channel and never wins the argmax
+inside a pedestrian's box. The class is not merely inert: DiffusionDriveV2 does assign pixels to it in
+3 of the 520 scenes, but those pixels sit about 5\,m from the pedestrian, and DiffusionDrive and LTF
+never assign it a pixel anywhere. The pedestrian does leave a trace in the features, however. The direction
+between SimLingo's representations with and without the pedestrian is steerable: it shortens the plan
+by 2.9\,m at the largest dose, while random directions lengthen it. Location-specific information also
+survives in the 1\,m side branch, as shown next.
+
+\paragraph{The planner cannot locate it}
+The trajectory head reads an $8\times8$ grid at 8\,m per cell. In 73\% of 94 pairs of corridor and
+off-road pedestrians, the two fall in the same or an adjacent cell. A corridor-minus-off-road direction
+injected there does not beat random directions ($p=0.27$). At the 1\,m side branch it does (52-fold,
+$p=0.007$), but with $\sim$1/460 of the effect on the trajectory; in LTF that branch does not reach
+the trajectory at all.
+
+\paragraph{The plan does not reach the pedestrian}
+Plans end 5--9\,m ahead, while the median corridor pedestrian stands 20\,m away; only 5--11\% of
+pedestrians are within reach. A distance sweep over 850 nuScenes scenes (974 pedestrian
+records) confirms that the limit is geometric rather than perceptual: once the pedestrian is within
+12\,m, LTF begins to respond, and at 8--12\,m its plan changes by 0.23\,m ($p=5\times10^{-7}$), which
+separates corridor from off-road pedestrians after mask area is regressed out (area under the receiver-operating-characteristic curve (AUC) $0.65$; $0.67$ on an
+independent draw). Raising the input speed removes that response again, and collisions then rise
+identically with and without the pedestrian in view (\cref{fig:reach}a). DiffusionDrive never responds
+at any distance.

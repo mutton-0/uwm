@@ -1,0 +1,106 @@
+% !TEX root = ../main.tex
+\section{Re-measuring $F$ and $I$ in the New Domain}
+\label{sec:axes}
+
+\input{tables/tab_axes}
+
+\Cref{sec:sample} moved a \emph{diagnosis} from one driving side to the other. The more useful
+question for deployment is whether the \emph{method} moves: can a handful of counterfactual cases in
+the new domain characterise how the policies behave there? We repeat both interventions on the
+\NumSGscenes{} NAVSIM Singapore near-pedestrian scenes and read, per scene, the two behavioural
+displacements that correspond to $\hat v_F$ and $\hat v_I$ at the output: $F$, the plan displacement
+caused by removing the target pedestrian, and $I$, that caused by the night rendering.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/cases.pdf}
+\caption{\textbf{Four right-hand-drive cases, and displacement against the separation it buys.}
+(a--d)~Ego at the origin, the vulnerable road user's (VRU) logged future dashed from the star, and DiffusionDriveV2's own BEV
+semantic head as the background; every policy receives the frame's logged navigation, so the turns are
+commanded. (a)~Clearances
+$0.3$--$0.9$\,m. (b)~SimLingo passes at $3.2$\,m, the other five at $6.7$--$10$\,m. (c,~d)~The
+departing policies and their planned distances are named in the panel; Boston departure rates are
+DiffusionDriveV2 81\%, AutoVLA 9\%, DiffusionDrive 2.8\%. (e)~Every policy--scene cell of the
+\NumSGscenes{} Singapore scenes: $F$ against $\Delta S$; band: the 10--90\% spread of $\Delta S$ per
+$F$ bin; dashed line: $F=0.5$\,m.}
+\label{fig:cases}
+\end{figure}
+
+\paragraph{What $F$ and $I$ say per scene}
+Across the ten detailed cases and six policies (\NumCaseCells{} cells), the median $F$ is \NumAxF\,m
+and the median $I$ is \NumAxI\,m; the lighting moves the plan more in \NumAxShare\% of cells. Two rules follow from the axes. We state each in both
+directions, so that every cell receives a prediction:
+\begin{itemize}
+\item \textbf{P-F}: if $F<0.5$\,m, removing the pedestrian should leave the clearance and the contact
+      outcome unchanged; if $F\ge0.5$\,m, it should change them.
+\item \textbf{P-I}: if $\CFR<1$, the night rendering should move the outcome at least as much as the
+      removal; if $\CFR\ge1$, the removal should move it at least as much as the night.
+\end{itemize}
+The two directions do not fare equally. On the detailed cases, P-F holds in \NumPFsmall/\NumPFsmallN{}
+cells in the forward direction but only \NumPFrev/\NumPFrevN{} in the reverse; P-I holds in
+\NumPIsmall/\NumPIsmallN{} and \NumPIrev/\NumPIrevN. Scaling both interventions to the full pool,
+which all six policies cover, reproduces the asymmetry exactly (\cref{tab:axes}): P-F
+holds in \NumPFbig\% of scenes forward against \NumPFbigRev\% reversed, while P-I holds in \NumPIbig\%
+and \NumPIbigRev\%. A near-zero $F$ is therefore a reliable certificate that the pedestrian is not being
+used, but a large $F$ is not a promise of safer behaviour.
+
+\paragraph{When the plan does move, which way does it move?}
+The reverse direction fails for an instructive reason: $F$ measures how far a plan moves, not where it
+moves to. We therefore decompose it (\cref{fig:cases}e), reading $F$ against $I$ of
+\eqref{eq:FI}---the same policy's jitter floor under an unrelated edit---and against $\Delta S$, the
+change in clearance to the pedestrian's logged future. A response counts as avoidance only if all three hold: the plan moved
+($F\ge0.5$\,m), it moved more than the policy's own jitter ($F>I$), and the movement bought distance
+($\Delta S\ge0.5$\,m).
+
+Three readings follow. First, the pedestrian outweighs the irrelevant edit in only
+\NumFgtIlo--\NumFgtIhi\% of scenes, so most of what $F$ registers sits inside the policy's own
+variability---the pinched band of \cref{fig:cases}e. Second, avoidance is rare where it is called for. The logged ego is
+stationary through most of this corpus, so a plan that does not move is usually the correct one; we
+therefore replay every scene at input speeds of 2--8\,m/s, as in \cref{sec:checkup}, and read only the
+cells in which the pedestrian-blind plan does come within 1\,m of the pedestrian's logged future.
+Across \NumCfModels{} policies that is \NumCfNeed{} of \NumCfCells{} cells (\NumCfNeedLo--\NumCfNeedHi\%
+per policy), and \NumCfReal{} of them---\NumCfRealPct\%---are genuine avoidance. On those cells the
+median clearance changes by \NumCfDsLo--\NumCfDsHi\,m and the median planned distance by
+\NumCfArcLo--\NumCfArcHi\,m: facing a pedestrian it would otherwise reach, no policy diverts and none
+slows. Third, the displacement that does occur is not aimed: of the
+\NumMoveN{} cells in which the plan moved, \NumMoveFar{} increased the clearance and \NumMoveNear{}
+decreased it. Per policy the split differs sharply: DiffusionDrive reacts in few
+scenes but in the right direction (median $\Delta S=\NumDDmed$\,m), while SimLingo moves in more
+scenes than the other five combined and moves \emph{towards} the pedestrian more often than away
+(\NumSLnear{} against \NumSLfar, median $\NumSLmed$\,m); it also has the highest rate of sub-1.5\,s
+time-to-proximity (\cref{tab:axes}). Finally, what a policy yields does not grow with the hazard: the
+rank correlation between $\Delta S$ and the deceleration the scene demands is
+\NumRhoLo--\NumRhoHi{}.
+
+An exam that rewarded responsiveness alone would therefore rank the least safe policy first.
+
+\paragraph{What a small sample in the new domain buys}
+We draw $k$ scenes at random from the pool, re-measure $F$ and $I$ on them and compare against the
+large-sample values, 200 draws per $k$. Ordering and level behave very differently. The ordering of
+how dangerously the policies behave---the share of scenes whose minimum time-to-proximity falls below
+$1.5$\,s---is recovered almost immediately: $\rho={\NumBehRhoTen}$ at $k=10$ and $\rho={\NumBehRhoTwenty}$
+at $k=20$ ($\rho\ge0.6$ in \NumBehHitTwenty\% of draws), rising to $\rho={\NumBehRhoForty}$ at $k=40$.
+The level is not: the same $k=20$ sample misstates the violation rate by \NumBehErrTwenty{} points and
+$\CFR$ by $\NumCfrErrTwenty$; the rule hit-rates sit in between, at \NumPFErrTwenty{} points. Importing
+the Boston $\CFR$ values instead misstates the Singapore ones by $\NumLhdCfrErr$, already worse than
+re-measuring $k=40$ fresh scenes ($\NumCfrErrForty$), while 80 scenes reach $\NumCfrErrBig$ and 160
+$\NumCfrErrHuge$. Values measured elsewhere are worth about forty scenes measured here.
+
+\paragraph{Which exam travels}
+Of the exams in the report, the one that predicts the new domain's behaviour is not the one that
+measures how \emph{much} a policy reacts, but the one that measures how \emph{steadily} it drives.
+Correlating each Boston exam against the Singapore rate of sub-1.5\,s time-to-proximity over the six
+policies, specificity gives $\rho={\NumSpBeh}$---the only value significant at the two-sided 5\% level
+for $n{=}6$---against ${\NumExpBeh}$ for exposure and ${\NumCfrBeh}$ for $\CFR$. Specificity asks how far a plan moves when an
+\emph{irrelevant} part of the scene is edited; a policy that answers ``not at all'' drives steadily,
+and steadiness is what survives the change of side. (Exposure travels too: on the larger
+original-image set of \cref{sec:bench} it reaches $0.94$ against the same target. Specificity is the
+stronger predictor and the only one that clears significance here.) The decomposition above says why:
+displacement that is not aimed away from the pedestrian is not protection, and a policy producing a
+lot of it is dangerous on both sides.
+
+\paragraph{What transfers and what must be re-measured}
+The verdict $\CFR<1$ holds on both sides for every policy, but the value drifts by a factor of $0.6$
+to $1.7$ and its across-policy ordering barely agrees between sides ($\rho={+}0.37$, against
+${+}0.83$ for specificity); per-scene medians are weaker still (\cref{tab:axes}). The
+\emph{instrument} transfers while its \emph{readings} do not.

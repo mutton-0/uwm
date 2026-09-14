@@ -1,0 +1,162 @@
+% !TEX root = ../main.tex
+\section{The Check-Up}
+\label{sec:checkup}
+
+\input{tables/tab_exams}
+
+\subsection{Units, interventions and plans}
+Write a policy as a map $\pi$ from a sensory-and-state input to a planned trajectory
+$X=(X_t)_{t\in[0,2.5]}$, $X_t\in\mathbb{R}^2$ in the ego frame, sampled at $0.1$\,s. A \emph{unit} is a
+pair $u=(f,v)$: a logged frame $f$ and an input ego speed $v$. We take $v$ from the log for every
+frame and, wherever the pedestrian's logged future is available, additionally
+$v\in\{4,8\}\,\mathrm{m/s}$, which places the pedestrian on the planned path in scenes where the logged
+ego was stationary. The same grid is used on both corpora so that all six policies are read on one
+unit pool; the readouts are insensitive to it (widening the grid to $\{2,4,6,8\}$ leaves the
+specificity and scaling orderings identical, $\rho=1.00$).
+
+Three interventions act on the input, leaving the policy untouched:
+\begin{equation}
+\mathcal{E}_O=\mathrm{id},\quad
+\mathcal{E}_R:\ \text{delete the pedestrian},\quad
+\mathcal{E}_N:\ \text{re-light},
+\label{eq:interventions}
+\end{equation}
+and yield the paired plans $X^{O}=\pi(\mathcal{E}_O u)$, $X^{R}=\pi(\mathcal{E}_R u)$,
+$X^{N}=\pi(\mathcal{E}_N u)$. All quantities below are functionals of this triple and of the
+pedestrian's \emph{logged} future $F_t$. The horizon $2.5$\,s is the one all six policies share.
+
+The displacement between two plans is
+\begin{equation}
+\bar D(X,Y)=\tfrac{1}{|\mathcal{T}|}\textstyle\sum_{t\in\mathcal{T}}\|X_t-Y_t\|,\qquad
+\mathcal{T}=\{0,0.1,\dots,2.5\},
+\label{eq:disp}
+\end{equation}
+and the two quantities the rest of the paper is written in are
+\begin{equation}
+F=\bar D(X^{O},X^{R}),\qquad I=\bar D(X^{O},X^{N}).
+\label{eq:FI}
+\end{equation}
+We call $F$ the \emph{faithfulness} displacement---the plan change attributable to the pedestrian
+itself---and $I$ the \emph{interference} displacement---the change the same policy produces under an
+edit that carries no driving-relevant information, and therefore its own jitter floor. A policy that
+uses the pedestrian and ignores the lighting has $F\gg I$; the reverse ordering means the plan is
+driven by something the road does not care about. \Cref{sec:lighting} reads the same two contrasts in
+representation space, as unit directions $\hat v_F$ and $\hat v_I$.
+
+\paragraph{Realising $\mathcal{E}_R$}
+The target is localised by projecting its annotated 3D box into the camera rather than by taking the
+dataset's 2D boxes, whose association to the tracked object is unreliable for the short-range,
+partially occluded pedestrians of these scenes. It is segmented with SAM~\cite{kirillov2023sam} (box
+and torso prompts, clipped to the box, dilated by $9$\,px) and inpainted with
+LaMa~\cite{suvorov2022lama}; for the LiDAR policy the points inside the box are deleted. Vision--language--action (VLA) policies read several cameras and only the front one is edited, so we retain only frames in which the target
+appears in no other view.
+
+\paragraph{Realising $\mathcal{E}_N$}
+Each image $\mathbf{I}\in[0,1]^{H\times W\times3}$ the policy consumes is mapped by a closed-form
+photometric transform
+\begin{equation}
+\mathcal{E}_N(\mathbf{I})=\mathrm{clip}\!\left[\,g\,\big(\mathrm{sat}_{s}\mathbf{I}\big)^{\gamma}\odot\boldsymbol\tau+\sigma\boldsymbol\epsilon\,\right],
+\quad \boldsymbol\epsilon\sim\mathcal{N}(0,1),
+\label{eq:relight}
+\end{equation}
+with $\mathrm{sat}_s$ the saturation scaling, $\boldsymbol\tau$ a per-channel tint and the noise seed
+fixed per frame. Two levels are used: \emph{night} $(\gamma,g,s,\sigma)=(2.2,0.45,0.45,7/255)$ with a
+blue tint, and the milder \emph{dusk} $(1.45,0.70,0.80,2/255)$ with a warm tint, the latter chosen to
+keep the pedestrian visible (\cref{sec:lighting}).
+
+\paragraph{Validity of the interventions}
+An independent detector (Faster R-CNN~\cite{ren2015faster}, COCO, score $\ge0.5$) is run on the
+\NumDetN{} front-only frames. It recovers the target in \NumDetOrig\% of the original images, in
+\NumDetStill\% under $\mathcal{E}_R$ and in \NumDetNight\% under $\mathcal{E}_N$ (IoU $\ge0.5$):
+$\mathcal{E}_R$ suppresses the pedestrian for an observer outside the policy, while $\mathcal{E}_N$
+leaves it visible and therefore changes the lighting rather than the scene. Two controls bound the
+residual artefact: pasting inpainting patches on empty road puts it at $5$--$17\%$ of the removal
+effect at pedestrian scale, and removing \emph{off-road} pedestrians, which should not matter
+causally, gives a same-type null.
+
+\subsection{Readouts}
+With $c_t(X)=\|X_t-F_t\|-r_e-r_p$ the clearance net of the ego half-width $r_e=1.0$\,m and the
+pedestrian radius $r_p=0.4$\,m, a plan is summarised by four functionals,
+\begin{align}
+S(X)&=\mathrm{mean}_t\min(c_t,\bar c), &
+A(X)&=\mathbb{1}[\min_t c_t>0],\label{eq:SA}\\
+C(X)&=\mathrm{clip}(\min_t c_t/d_0,0,1), &
+T(X)&=\tfrac{1}{2.5}\inf\{t\!:c_t<d_0\},\label{eq:CT}
+\end{align}
+with $T=1$ if the set is empty. The constants are physical, not tuned: $r_e$ is the half-width of the
+nuScenes ego box ($4.08\times1.85$\,m), $r_p$ the disc a standing adult occupies, $d_0=1$\,m the outer
+edge of personal space~\cite{hall1966hidden}, and $\bar c=10$\,m caps the contribution of scenes in
+which the pedestrian is far away. Equations~\eqref{eq:SA}--\eqref{eq:CT} instantiate the standard
+surrogate-safety measures---contact, minimum clearance and an encroachment-time
+variant~\cite{gettman2003surrogate,hayward1972near}---read as distance to a person over the whole
+trajectory, as is conventional for navigation near people~\cite{kruse2013human}. Speed is deliberately
+not a readout: the same deceleration is safe or unsafe depending on where the person is.
+
+\subsection{Exams}
+Let $L(X)=\sum_t\|X_{t+\delta}-X_t\|$ denote arc length and $H$ the logged human trajectory.
+
+\paragraph{Exposure}
+$\mathrm{Exp}=\mathrm{med}\,L(X^{O})/L(H)$ over frames with $L(H)\ge0.5$\,m.
+
+\paragraph{Hazard sensitivity}
+A unit \emph{needs} a reaction when the pedestrian-blind plan enters personal space, $C(X^{R})<1$. On
+those units, writing $\Delta(\cdot)=(\cdot)(X^{O})-(\cdot)(X^{R})$,
+\begin{equation}
+\HS=\tfrac14\big[\Delta A+\Delta C+\Delta T+\tanh(\Delta S/d_0)\big]\in[-1,1].
+\label{eq:hs}
+\end{equation}
+Each term lies in $[-1,1]$ by construction and $\tanh$ squashes the single unbounded one at the $d_0$
+scale. The composite is ours; its ingredients are not. Its four terms are the surrogate-safety
+measures of \eqref{eq:SA}--\eqref{eq:CT}, and averaging normalised sub-scores into one index is how
+the benchmark we compare against forms its extended predictive driver model score (EPDMS)~\cite{dauner2024navsim}, keeping the two commensurable.
+What the check-up adds is that every sub-score is a \emph{paired difference} across
+$\mathcal{E}_R$---the ablation form used to attribute behaviour to an input in interpretability
+work~\cite{zou2023repe,hase2023localization}. $\HS$ is read against the model-independent hazard
+\begin{equation}
+a_{\mathrm{req}}=\frac{v^{2}}{2\max(d-2,\,0.5)},\qquad \mathrm{TTC}_0=\frac{d-2}{v},
+\label{eq:hazard}
+\end{equation}
+the deceleration required to stop short of a pedestrian at distance $d$ and the corresponding
+time to collision (TTC)~\cite{gettman2003surrogate,hayward1972near}. Units with $v<1$\,m/s are excluded: a
+stationary ego can move neither toward nor away from anyone.
+
+\paragraph{Scaling and specificity}
+$\mathrm{Sc}=\rho\big(\HS,\,a_{\mathrm{req}}\big)$ over needed units, with $\rho$ Spearman's rank
+correlation. On units needing no reaction, the minimal-change principle gives
+\begin{equation}
+\SP=\exp\!\big(-\bar D(X^{O},X^{R})/0.5\,\mathrm{m}\big)\in(0,1],
+\label{eq:sp}
+\end{equation}
+so $\SP\to1$ iff an irrelevant edit leaves the plan where it was.
+
+\paragraph{Lighting}
+The \emph{causal faithfulness ratio} weighs the two displacements of \eqref{eq:FI} against
+each other,
+\begin{equation}
+\CFR=\frac{\mathbb{E}\,\bar D(X^{O},X^{R})}{\mathbb{E}\,\bar D(X^{O},X^{N})}=\frac{\mathbb{E}F}{\mathbb{E}I},
+\label{eq:cfr}
+\end{equation}
+\begin{equation}
+\mathrm{align}=\mathrm{med}\,\cos\!\big(X^{N}\!-X^{O},\,X^{R}\!-X^{O}\big).
+\label{eq:align}
+\end{equation}
+A policy for which lighting is irrelevant has $\CFR\gg1$ and $\mathrm{align}\approx0$; positive
+alignment means the re-lighting pushes the plan the way deleting the pedestrian does, and
+$\mathrm{align}$ is the cosine of the two representation-space directions of \cref{sec:lighting}.
+
+\subsection{Policies and corpora}
+We examine LTF and DiffusionDrive (front camera and ego status), DiffusionDriveV2 (camera and LiDAR),
+SimLingo (InternVL2-1B), AutoVLA (Qwen2.5-VL-3B; three cameras $\times$ four frames) and Alpamayo-1.5
+(four cameras; a diffusion head over the vision--language model (VLM) cache), all with released weights. DiffusionDrive's
+diffusion seed is fixed so that paired queries share their noise.
+
+The primary corpus is nuScenes~\cite{caesar2020nuscenes} keyframes: corridor pedestrians (lateral
+clearance to the ego corridor $\le1$\,m) at $5$--$12$\,m, their off-road counterparts, and $30$
+approach sequences at $5.8$--$14.6$\,m with logged pedestrian futures. The near-pedestrian units come
+from $236$ front-only frames, $88$ in Boston (left-hand drive) and $148$ in Singapore (right-hand
+drive); Alpamayo-1.5 covers $170$ of the $236$, needing $1.6$\,s of history and $6.4$\,s of future
+within the scene. \Cref{sec:axes} repeats $\mathcal{E}_R$ and $\mathcal{E}_N$ on a second,
+right-hand-drive corpus---the NAVSIM test split~\cite{dauner2024navsim}, $254$ Singapore scenes with a
+pedestrian near the ego corridor, of which \NumSGscenes{} carry a complete logged pedestrian
+future---used only for the transfer and decomposition results; \cref{tab:report} is measured on the
+nuScenes frames alone.
