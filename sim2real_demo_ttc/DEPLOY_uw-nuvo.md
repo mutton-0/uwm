@@ -73,6 +73,17 @@ exx 上的源路径（适配器里写死的）：
 搬运路线：exx（局域网）→ 本机（`/tmp/.../scratchpad/relay`）→ 实车 T7（Tailscale）。
 车与 exx 之间不互通，必须本机中转。
 
+**09-14 已搬到 T7**（`/media/uw/T7 Shield/120models/`）：`ltf_sim_navtest.ckpt` 215 M、
+`diffusiondrivev2_sel.ckpt` 364 M、`simlingo/`（含 pytorch_model.pt 与 .hydra）2.4 G、
+`models--OpenGVLab--InternVL2-1B` 1.8 G。AutoVLA 的 16 G 未搬。
+
+**两个搬运期的坑**：
+1. **T7 是 exFAT，不支持软链**。HF 缓存目录靠 `snapshots/ → ../../blobs/` 软链组织，
+   rsync 到 T7 会报 `symlink ... Operation not permitted`，InternVL 那份是这么进去的、
+   软链没建成。用 `rsync -L`（把软链解成实体文件）重传，或者干脆放 ext4 的 `/home/uw/120`。
+2. **Tailscale 链路只有 0.6–1.3 MB/s**。2.4 G 花了约一小时；**AutoVLA 16 G 预计 5–6 小时**。
+   要么提前挂后台，要么找个 U 盘直接拷。
+
 ## 下一步（从这里接上）
 
 1. **建环境**。`/home/uw/miniconda3` 有 conda 但没有我们的环境；根分区放不下，必须重定向：
