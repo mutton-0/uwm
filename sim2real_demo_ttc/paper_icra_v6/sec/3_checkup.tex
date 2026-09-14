@@ -31,17 +31,24 @@ The displacement between two plans is
 \mathcal{T}=\{0,0.1,\dots,2.5\},
 \label{eq:disp}
 \end{equation}
-from which $F=\bar D(X^{O},X^{R})$ and $I=\bar D(X^{O},X^{N})$ follow: the plan change attributable to
-the pedestrian and the change the same policy produces under an edit that carries no
-driving-relevant information.
+and the two quantities the rest of the paper is written in are
+\begin{equation}
+F=\bar D(X^{O},X^{R}),\qquad I=\bar D(X^{O},X^{N}).
+\label{eq:FI}
+\end{equation}
+We call $F$ the \emph{faithfulness} displacement---the plan change attributable to the pedestrian
+itself---and $I$ the \emph{interference} displacement---the change the same policy produces under an
+edit that carries no driving-relevant information, and therefore its own jitter floor. A policy that
+uses the pedestrian and ignores the lighting has $F\gg I$; the reverse ordering means the plan is
+driven by something the road does not care about. \Cref{sec:lighting} reads the same two contrasts in
+representation space, as unit directions $\hat v_F$ and $\hat v_I$.
 
 \paragraph{Realising $\mathcal{E}_R$}
 The target is localised by projecting its annotated 3D box into the camera rather than by taking the
 dataset's 2D boxes, whose association to the tracked object is unreliable for the short-range,
 partially occluded pedestrians of these scenes. It is segmented with SAM~\cite{kirillov2023sam} (box
 and torso prompts, clipped to the box, dilated by $9$\,px) and inpainted with
-LaMa~\cite{suvorov2022lama}; for the LiDAR policy the points inside the box are deleted. VLA policies
-read several cameras and only the front one is edited, so we retain only frames in which the target
+LaMa~\cite{suvorov2022lama}; for the LiDAR policy the points inside the box are deleted. Vision--language--action (VLA) policies read several cameras and only the front one is edited, so we retain only frames in which the target
 appears in no other view.
 
 \paragraph{Realising $\mathcal{E}_N$}
@@ -101,7 +108,7 @@ those units, writing $\Delta(\cdot)=(\cdot)(X^{O})-(\cdot)(X^{R})$,
 Each term lies in $[-1,1]$ by construction and $\tanh$ squashes the single unbounded one at the $d_0$
 scale. The composite is ours; its ingredients are not. Its four terms are the surrogate-safety
 measures of \eqref{eq:SA}--\eqref{eq:CT}, and averaging normalised sub-scores into one index is how
-the benchmark we compare against forms EPDMS~\cite{dauner2024navsim}, keeping the two commensurable.
+the benchmark we compare against forms its extended predictive driver model score (EPDMS)~\cite{dauner2024navsim}, keeping the two commensurable.
 What the check-up adds is that every sub-score is a \emph{paired difference} across
 $\mathcal{E}_R$---the ablation form used to attribute behaviour to an input in interpretability
 work~\cite{zou2023repe,hase2023localization}. $\HS$ is read against the model-independent hazard
@@ -109,8 +116,8 @@ work~\cite{zou2023repe,hase2023localization}. $\HS$ is read against the model-in
 a_{\mathrm{req}}=\frac{v^{2}}{2\max(d-2,\,0.5)},\qquad \mathrm{TTC}_0=\frac{d-2}{v},
 \label{eq:hazard}
 \end{equation}
-the deceleration to stop short of a pedestrian at distance $d$ and its time-based
-counterpart~\cite{gettman2003surrogate,hayward1972near}. Units with $v<1$\,m/s are excluded: a
+the deceleration required to stop short of a pedestrian at distance $d$ and the corresponding
+time to collision (TTC)~\cite{gettman2003surrogate,hayward1972near}. Units with $v<1$\,m/s are excluded: a
 stationary ego can move neither toward nor away from anyone.
 
 \paragraph{Scaling and specificity}
@@ -123,6 +130,8 @@ correlation. On units needing no reaction, the minimal-change principle gives
 so $\SP\to1$ iff an irrelevant edit leaves the plan where it was.
 
 \paragraph{Lighting}
+The \emph{causal faithfulness ratio} weighs the two displacements of \eqref{eq:FI} against
+each other,
 \begin{equation}
 \CFR=\frac{\mathbb{E}\,\bar D(X^{O},X^{R})}{\mathbb{E}\,\bar D(X^{O},X^{N})}=\frac{\mathbb{E}F}{\mathbb{E}I},
 \label{eq:cfr}
@@ -132,14 +141,13 @@ so $\SP\to1$ iff an irrelevant edit leaves the plan where it was.
 \label{eq:align}
 \end{equation}
 A policy for which lighting is irrelevant has $\CFR\gg1$ and $\mathrm{align}\approx0$; positive
-alignment means the re-lighting pushes the plan the way deleting the pedestrian does. In
-\cref{sec:lighting} the same two contrasts are read in representation space as unit directions
-$\hat v_F$ (faithfulness) and $\hat v_I$ (interference), and $\mathrm{align}$ is their cosine.
+alignment means the re-lighting pushes the plan the way deleting the pedestrian does, and
+$\mathrm{align}$ is the cosine of the two representation-space directions of \cref{sec:lighting}.
 
 \subsection{Policies and corpora}
 We examine LTF and DiffusionDrive (front camera and ego status), DiffusionDriveV2 (camera and LiDAR),
 SimLingo (InternVL2-1B), AutoVLA (Qwen2.5-VL-3B; three cameras $\times$ four frames) and Alpamayo-1.5
-(four cameras; a diffusion head over the VLM cache), all with released weights. DiffusionDrive's
+(four cameras; a diffusion head over the vision--language model (VLM) cache), all with released weights. DiffusionDrive's
 diffusion seed is fixed so that paired queries share their noise.
 
 The primary corpus is nuScenes~\cite{caesar2020nuscenes} keyframes: corridor pedestrians (lateral

@@ -91,7 +91,7 @@ Plans end 5--9\,m ahead, while the median corridor pedestrian stands 20\,m away;
 pedestrians are within reach. A distance sweep over 850 nuScenes scenes (974 pedestrian
 records) confirms that the limit is geometric rather than perceptual: once the pedestrian is within
 12\,m, LTF begins to respond, and at 8--12\,m its plan changes by 0.23\,m ($p=5\times10^{-7}$), which
-separates corridor from off-road pedestrians after mask area is regressed out (AUC 0.65; 0.67 on an
+separates corridor from off-road pedestrians after mask area is regressed out (area under the receiver-operating-characteristic curve (AUC) $0.65$; $0.67$ on an
 independent draw). Raising the input speed removes that response again, and collisions then rise
 identically with and without the pedestrian in view (\cref{fig:reach}a). DiffusionDrive never responds
 at any distance.

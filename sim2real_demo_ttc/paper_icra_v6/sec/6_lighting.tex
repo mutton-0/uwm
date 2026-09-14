@@ -37,7 +37,7 @@ more often than chance. DiffusionDriveV2, the only policy that also reads LiDAR,
 We write $\hat v_F$ for the \emph{faithfulness} direction ($R{-}O$, the response to the pedestrian) and
 $\hat v_I$ for the \emph{interference} direction ($N{-}O$, the response to a change carrying no
 driving-relevant information); these are unit vectors in representation space, the activation-side
-counterparts of the behavioural $F$ and $I$ of \cref{sec:axes}. The two are not merely uncorrelated:
+counterparts of the behavioural $F$ and $I$ of \eqref{eq:FI}. The two are not merely uncorrelated:
 in aggregate they oppose one another (mean cosine $-0.54$ over four policies), so a policy encodes
 ``it got dark'' as it encodes ``the hazard is gone''. We had expected policies with more orthogonal
 directions to shift less between domains; they shifted \emph{more} (\cref{tab:prereg}, P6), and

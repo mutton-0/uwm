@@ -11,7 +11,9 @@ changes. Telling them apart means asking \emph{why} the score came out as it did
 data: a closed-loop simulator for the target domain, or a fleet
 test, is exactly what the decision is meant to save.
 
-We propose a \emph{check-up}:其中我们设计了迁移不变检测的数据对 a short list of exams, each with a control and a known normal range,
+We propose a \emph{check-up}:
+% 其中我们设计了像素级别的配对数据，设计捕捉faithfulness displacement F轴和 interference displacement I轴。
+a short list of exams, each with a control and a known normal range,
 whose results are read as a diagnosis rather than a ranking (\cref{tab:exams}). Every exam is a
 counterfactual edit of real frames. We remove the pedestrian from the ego corridor, or re-render the
 frame at night, and read the change in the planned trajectory; an independent detector verifies every
