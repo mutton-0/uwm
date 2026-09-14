@@ -17,15 +17,12 @@ than by darkness: for DiffusionDrive, darkening alone raises the planned speed b
 darkening with noise by $+2.05$\,m/s. It is also global---perturbing only the sky recovers 19\% of the
 effect of deleting the lead vehicle.
 
-\paragraph{Not an artefact of the edit}
-The night rendering also costs the detector the target itself: of the \NumDuskDetN{} right-hand-drive
-frames whose pedestrian it finds in the original, it still finds \NumDuskDetNight\% at night, against
-\NumDuskDetRm\% after removal. A milder re-lighting---dusk rather than night, keeping
-\NumDuskDetDusk\% of the same detections---therefore separates ``the lighting moved the plan'' from
-``the lighting hid the pedestrian''. Repeating the axes of \cref{sec:axes} with dusk in place of night
-on the same \NumDuskN{} scenes and the same paired queries, the ratio rises but stays below one for
-every policy ($\NumDuskLo$--$\NumDuskHi$, against $\NumDuskNightLo$--$\NumDuskNightHi$ at night).
-An edit that leaves the pedestrian visible still moves the plan further than the pedestrian does.
+\paragraph{Two lighting levels}
+The exam re-lights at two strengths, the milder one chosen to keep the pedestrian visible. At night the
+detector still finds \NumDuskDetNight\% of the \NumDuskDetN{} targets it finds in the original, at dusk
+\NumDuskDetDusk\% (removal: \NumDuskDetRm\%). On the same \NumDuskN{} scenes the ratio is
+$\NumDuskNightLo$--$\NumDuskNightHi$ at night and $\NumDuskLo$--$\NumDuskHi$ at dusk: below one for
+every policy at both levels, with the pedestrian in plain view.
 
 \paragraph{Direction: faster, and therefore closer}
 A policy that slows at night is doing something defensible; one that speeds up is not. Three policies

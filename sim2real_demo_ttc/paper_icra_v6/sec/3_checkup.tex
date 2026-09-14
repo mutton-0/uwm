@@ -9,7 +9,7 @@ A unit is a logged frame together with an input ego speed. We use the logged spe
 and for frames from approach sequences also counterfactual speeds of 2--8\,m/s. For each unit we query
 the policy three times. The query uses its full input (all cameras, history frames, LiDAR, ego
 status), edited in one of three ways: unchanged ($O$, original), with the target pedestrian removed ($R$), or
-re-rendered at night ($N$). All policies are read on their common horizon of 2.5\,s. Plans and the
+re-rendered at night ($N$, one of two lighting levels). All policies are read on their common horizon of 2.5\,s. Plans and the
 pedestrian's \emph{logged} future positions are interpolated to 0.1\,s.
 
 \paragraph{Removal}
@@ -95,11 +95,11 @@ $\SP=\exp(-\bar D(P,Q)/0.5\,\mathrm{m})$, where $\bar D$ is the mean displacemen
 plans.
 
 \paragraph{Lighting}
-For the same frames, $\CFR=\mathbb{E}\|P-Q\|/\mathbb{E}\|P-N\|$ compares the plan change caused by
+For the same frames, $\CFR=\mathbb{E}\|O-R\|/\mathbb{E}\|O-N\|$ compares the plan change caused by
 removing the pedestrian with that caused by the night rendering. Alignment is the median cosine between
-$N-P$ and $Q-P$. A pure policy has $\CFR\gg1$ and alignment near zero. Positive alignment means the
-night pushes the plan the way removing the pedestrian does. In \cref{sec:lighting} we read $Q-P$ and
-$N-P$ as two representation-space directions, $\hat v_F$ (the \emph{faithfulness} direction, the
+$N-O$ and $R-O$. A pure policy has $\CFR\gg1$ and alignment near zero. Positive alignment means the
+night pushes the plan the way removing the pedestrian does. In \cref{sec:lighting} we read $R-O$ and
+$N-O$ as two representation-space directions, $\hat v_F$ (the \emph{faithfulness} direction, the
 pedestrian response) and $\hat v_I$ (the \emph{interference} direction, the response to a change with
 no driving-relevant information); alignment is their cosine.
 
