@@ -19,7 +19,7 @@ We propose a \emph{check-up}: a short list of exams, each with a control and a k
 whose results are read as a diagnosis rather than a ranking (\cref{tab:exams}). Every exam is a
 counterfactual edit of real frames. We remove the pedestrian from the ego corridor, or re-render the
 frame at night, and read the change in the planned trajectory; an independent detector verifies every
-edit. The central exam is a \emph{hazard-sensitivity curve}, measuring how much farther the whole
+edit (\cref{fig:method}). The central exam is a \emph{hazard-sensitivity curve}, measuring how much farther the whole
 planned trajectory stays from the pedestrian's logged future because the policy can see the
 pedestrian, against a model-independent hazard level. A specificity term applies a minimal-change
 principle: when no reaction is needed, the plan should not move.

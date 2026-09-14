@@ -17,6 +17,16 @@ than by darkness: for DiffusionDrive, darkening alone raises the planned speed b
 darkening with noise by $+2.05$\,m/s. It is also global---perturbing only the sky recovers 19\% of the
 effect of deleting the lead vehicle.
 
+\paragraph{Not an artefact of the edit}
+The night rendering also costs the detector the target itself: of the \NumDuskDetN{} right-hand-drive
+frames whose pedestrian it finds in the original, it still finds \NumDuskDetNight\% at night, against
+\NumDuskDetRm\% after removal. A milder re-lighting---dusk rather than night, keeping
+\NumDuskDetDusk\% of the same detections---therefore separates ``the lighting moved the plan'' from
+``the lighting hid the pedestrian''. Repeating the axes of \cref{sec:axes} with dusk in place of night
+on the same \NumDuskN{} scenes and the same paired queries, the ratio rises but stays below one for
+every policy ($\NumDuskLo$--$\NumDuskHi$, against $\NumDuskNightLo$--$\NumDuskNightHi$ at night).
+An edit that leaves the pedestrian visible still moves the plan further than the pedestrian does.
+
 \paragraph{Direction: faster, and therefore closer}
 A policy that slows at night is doing something defensible; one that speeds up is not. Three policies
 plan to go faster under the night rendering: DiffusionDrive by \NumNightDD\%, SimLingo by
@@ -27,8 +37,8 @@ more often than chance. DiffusionDriveV2, the only policy that also reads LiDAR,
 ($\NumNightDDv\%$) and keeps more distance; AutoVLA and Alpamayo-1.5 are unaffected.
 
 \paragraph{The two directions in representation space}
-We write $\hat v_F$ for the \emph{faithfulness} direction ($Q{-}P$, the response to the pedestrian) and
-$\hat v_I$ for the \emph{interference} direction ($N{-}P$, the response to a change carrying no
+We write $\hat v_F$ for the \emph{faithfulness} direction ($R{-}O$, the response to the pedestrian) and
+$\hat v_I$ for the \emph{interference} direction ($N{-}O$, the response to a change carrying no
 driving-relevant information); these are unit vectors in representation space, the activation-side
 counterparts of the behavioural $F$ and $I$ of \cref{sec:axes}. The two are not merely uncorrelated:
 in aggregate they oppose one another (mean cosine $-0.54$ over four policies), so a policy encodes

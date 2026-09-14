@@ -214,7 +214,7 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
     SD=json.load(open(f"{V5}/side_deviation.json")); CA=json.load(open(f"{V5}/case10_axes.json"))
     DT=json.load(open(f"{V5}/domain_transfer.json")) if os.path.exists(f"{V5}/domain_transfer.json") else None
     T=[r"\begin{table}[t]",r"\centering",
-       r"\caption{\textbf{$\CFR$ and the two rules across driving sides.} $\CFR$ on Boston frames, on Singapore scenes, and per scene on the ten cases (median). Right: share of scenes where each rule holds, forward\,/\,reversed, and the share with minimum time-to-proximity below 1.5\,s. Large-sample columns: the \NumComN{} NAVSIM Singapore scenes all six policies share; the Boston column: the nuScenes frames of \cref{tab:report}.}",
+       r"\caption{\textbf{$\CFR$ and the two rules across driving sides.} $\CFR$: the check-up value on the nuScenes frames of \cref{tab:report}, Boston and Singapore separately, and the median over the ten cases taken per scene. TTC and the rule columns come instead from the \NumComN{} NAVSIM Singapore scenes all six policies share; rules are given forward\,/\,reversed.}",
        r"\label{tab:axes}",r"\scriptsize",r"\setlength{\tabcolsep}{2.5pt}",
        r"\begin{tabular}{@{}lcccccc@{}}",r"\toprule",
        r" & \multicolumn{3}{c}{$\CFR$} & TTC & \multicolumn{2}{c}{rule holds \%} \\",r"\cmidrule(lr){2-4}\cmidrule(lr){5-5}\cmidrule(l){6-7}",
@@ -303,4 +303,24 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
         NUM3["NumCfrErrHuge"]=f"{DT['sweep6']['160']['err']:.3f}"
         NUM3["NumCfrErrBig"]=f"{DT['sweep6']['80']['err']:.3f}"      # 与前文同一个六家池子
         NUM3["NumLhdCfrErrBig"]=f"{DT['lhd6']['err']:.3f}"
+    # 黄昏对照（同一批 NAVSIM 右舵场景、同进程四条件）：检出率来自 dusk_check.json，CFR 来自 dusk_cfr.json
+    if os.path.exists(f"{V5}/dusk_cfr.json") and os.path.exists(f"{V5}/dusk_check.json"):
+        _DC=json.load(open(f"{V5}/dusk_cfr.json")); _DK=json.load(open(f"{V5}/dusk_check.json"))
+        _base=[o for o in _DK.values() if o["orig"]>=0.5]      # 判据与 dusk_check.py 一致：目标框 IoU>=0.5
+        _keep=lambda k: 100*sum(1 for o in _base if o.get(k,0)>=0.5)/len(_base)
+        NUM3["NumDuskDetN"]=str(len(_base))
+        NUM3["NumDuskDetNight"]=f"{_keep('night'):.0f}"
+        NUM3["NumDuskDetDusk"]=f"{_keep('dusk'):.0f}"
+        NUM3["NumDuskDetRm"]=f"{_keep('removed'):.0f}"
+        NUM3["NumDuskLo"]=f"{min(v['cfr_dusk'] for v in _DC.values()):.2f}"
+        NUM3["NumDuskHi"]=f"{max(v['cfr_dusk'] for v in _DC.values()):.2f}"
+        NUM3["NumDuskNightLo"]=f"{min(v['cfr_night'] for v in _DC.values()):.2f}"
+        NUM3["NumDuskNightHi"]=f"{max(v['cfr_night'] for v in _DC.values()):.2f}"
+        NUM3["NumDuskN"]=str(max(v["n"] for v in _DC.values()))
     with open(f"{_OUT}/tables/numbers.tex","a") as fh: fh.write("\n".join(f"\\newcommand{{\\{k}}}{{{v}}}" for k,v in NUM3.items())+"\n")
+
+# 重新生成会覆盖掉 VS Code 认根文件用的魔法注释，这里统一补回
+import glob as _glob
+for _f in _glob.glob(f"{_OUT}/tables/*.tex"):
+    _s=open(_f).read()
+    if not _s.startswith("% !TEX root"): open(_f,"w").write("% !TEX root = ../main.tex\n"+_s)
