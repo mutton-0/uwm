@@ -68,8 +68,8 @@ def _sp(m):
     return bold("$"+_f.format(100*n_['dv_rel'])+"\\%$",n_["p"]<0.01)
 def _ds(m):
     n_=NS[m]; return bold("$"+("{:+.2f}" if abs(n_['dS'])>=0.01 else "{:+.3f}").format(n_['dS'])+"$",n_["dS_p"]<0.01)
-R.append(_row(r"speed $\downarrow$",[_sp(m) for m in M]+["--"]))
-R.append(_row(r"clearance $\Delta_N S$ (m) $\uparrow$",[_ds(m) for m in M]+["--"]))
+R.append(_row(r"speed of $N$ $\downarrow$",[_sp(m) for m in M]+["--"]))
+R.append(_row(r"clearance of $N$, $\Delta_N S$ (m) $\uparrow$",[_ds(m) for m in M]+["--"]))
 R.append(r"\midrule")
 R.append(r"\multicolumn{8}{@{}l}{\emph{Standard scores} (rank)} \\")
 R.append(_row(r"L2 (m), vis.\,/\,rm. $\downarrow$",[f"{_NUo[m]['clean']['L2_avg']:.2f}\\,/\\,{_NUo[m]['rm']['L2_avg']:.2f}" for m in M]+["--"]))
