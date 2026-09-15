@@ -121,7 +121,7 @@ else:
     box(L,bB,R,bT); bg.text(L+fx(0.05),bT-fy(0.115),"(b) diagnosis",fontsize=7.0,weight="bold",color="#2b2b28")
     PB=bB+fy(0.28); PT=bT-fy(0.27)
     panel_extract(fig.add_axes([L+fx(0.30),PB,fx(0.86),PT-PB]),title="three queries, one scene",compact=True)
-    panel_readings(fig.add_axes([L+fx(1.72),PB,fx(1.50),PT-PB]),title="the two readings",compact=True)
+    panel_readings(fig.add_axes([L+fx(1.72),PB,fx(1.50),PT-PB]),title="the two readings",compact=True,schematic=True)
     arrow(((L+R)/2,bB-fy(0.022)),((L+R)/2,bB-ARRf+fy(0.022)),lw=1.6,ms=6)
     bg.text((L+R)/2+fx(0.08),bB-ARRf/2,"read $F$, $I$ $\\to$ five exams",fontsize=5.0,va="center",color="#2f5d94")
     # (c) 五个检查横排：与 (a)(b) 同款容器框，高度足额，底边不再截断

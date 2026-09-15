@@ -35,7 +35,7 @@ _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "CFR":max(M,key=lambda m:A[m]["point"]["CFR"])}
 _bc8=min(M,key=lambda m:coll(m,"8")[0])
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{The check-up report.} Reference thresholds in brackets (\cref{tab:exams}); $\downarrow$/$\uparrow$ = outside it, bold = best in column. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s input speed, $X^{O}$\,/\,$X^{R}$.}",
+ r"\caption{\textbf{Diagnostic profiles.} Reference thresholds in brackets (\cref{tab:exams}); $\downarrow$/$\uparrow$ = outside it, bold = best in column. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s input speed, $X^{O}$\,/\,$X^{R}$.}",
  r"\label{tab:report}",r"\scriptsize",r"\setlength{\tabcolsep}{2.0pt}",
  r"\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
  r"Policy & exposure & HS & scaling & SP & CFR & coll.\ 8\,m/s \\",

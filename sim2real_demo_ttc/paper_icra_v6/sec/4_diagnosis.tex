@@ -1,10 +1,9 @@
 % !TEX root = ../main.tex
-\section{The Report: Five Exams on Six Policies}
+\subsection{Diagnostic Profiles}
 \label{sec:diagnosis}
 
 \input{tables/tab_report}
 
-\subsection{The report}
 \Cref{tab:report} and \cref{fig:reach}b give the six profiles, read under our open-loop protocol on the 236 near-pedestrian nuScenes frames: the behaviour behind the ranks of \cref{sec:bench}.
 
 \paragraph{Exposure}
@@ -38,7 +37,7 @@ speed, the visible and removed rates differ by at most \NumCollGap{} points for 
 policies almost never reach the pedestrian. DiffusionDrive is safe because it stays short, AutoVLA and Alpamayo-1.5 cover a human-like distance
 without yielding, and SimLingo covers the most ground with the lowest specificity.
 
-\subsection{Why the risk goes unmanaged}
+\paragraph{Why the risk goes unmanaged}
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/reach.pdf}
@@ -59,3 +58,10 @@ although the pedestrian does leave a steerable trace in the features. Second, th
 the pedestrian: plans end 5--9\,m ahead while the median corridor pedestrian stands 20\,m away, and
 raising the input speed makes collisions rise identically with and without the pedestrian in view
 (\cref{fig:reach}a). The limit is geometric before it is perceptual.
+
+\paragraph{Reading the profiles}
+Read one exam at a time, the profiles answer separate questions that a single score merges. Whether a
+policy is safe because it yields or because it stays short is answered by exposure together with
+hazard sensitivity: DiffusionDrive keeps its distance by planning short trajectories, which holds only
+as long as the trajectories stay short, whereas AutoVLA and Alpamayo-1.5 cover a human-like distance
+without the response to match. Whether a plan that moves is a plan that yields is answered by the decomposition of \cref{sec:axes}.

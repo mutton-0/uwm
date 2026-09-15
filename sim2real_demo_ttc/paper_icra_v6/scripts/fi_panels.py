@@ -53,8 +53,24 @@ def panel_extract(a,tok="34b62d7333845af3",mm="ddv2",title="(a) three queries, o
         a.legend(handles=h,frameon=False,fontsize=4.3*fs,loc="lower left",bbox_to_anchor=(-0.05,-0.02),
                  handlelength=1.0,handletextpad=0.3,labelspacing=0.14,borderpad=0.05)
 
-def panel_readings(b,title="(b) the two readings",fs=1.0,compact=False):
+def panel_readings(b,title="(b) the two readings",fs=1.0,compact=False,schematic=False):
     EPS=4e-3; FI=[]
+    if schematic:   # 框架图：只画判据几何，不放实测点（实测见 fig_cases e）
+        b.fill_between([EPS,0.5],[0.5,0.5],[40,40],color="#e8f0e8",lw=0,zorder=0)
+        b.fill_between([0.5,40],[0.5,40],[40,40],color="#e8f0e8",lw=0,zorder=0)
+        b.plot([EPS,40],[EPS,40],color="#6b6a62",ls=(0,(3,2)),lw=0.7,zorder=2)
+        b.axhline(0.5,color="#9a998f",ls=(0,(1.6,1.6)),lw=0.7,zorder=2)
+        b.set_xscale("log"); b.set_yscale("log"); b.set_xlim(EPS*0.9,55); b.set_ylim(EPS*0.9,30)
+        b.set_xlabel("$I$ from re-lighting (m)",fontsize=5.4*fs,labelpad=0.5)
+        b.set_ylabel("$F$ from the pedestrian (m)",fontsize=5.4*fs,labelpad=1)
+        b.set_xticks([0.01,0.1,1,10]); b.set_yticks([0.01,0.1,1,10]); b.tick_params(labelsize=5.0*fs,length=1.8)
+        if title: b.set_title(title,fontsize=6.0*fs,loc="left",pad=2)
+        b.annotate("$F=I$",(0.02,0.02),textcoords="offset points",xytext=(-1,3.5),ha="right",va="bottom",fontsize=4.8*fs,color="#6b6a62",rotation=45)
+        b.text(0.06,0.93,"avoidance:\n$F\\geq0.5$ m, $F>I$",transform=b.transAxes,fontsize=4.8*fs,color="#3f6b45",va="top",linespacing=1.2)
+        b.text(0.97,0.12,"jitter: $F\\leq I$",transform=b.transAxes,fontsize=4.8*fs,color="#6b6a62",va="bottom",ha="right")
+        b.text(0.97,0.55,"one $(F,I)$\nper scene",transform=b.transAxes,fontsize=4.4*fs,color="#6b6a62",va="bottom",ha="right",linespacing=1.2)
+        for s_ in ("top","right"): b.spines[s_].set_visible(False)
+        return
     for m,d in AX.items():
         for t,v in d.items():
             if all(k in v for k in ("clean","rm","night")):

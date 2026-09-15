@@ -1,5 +1,5 @@
 % !TEX root = ../main.tex
-\section{The Check-Up}
+\section{The Check-Up: Interventions, Axes and Exams}
 \label{sec:checkup}
 
 \input{tables/tab_exams}
@@ -47,7 +47,7 @@ representation space, as unit directions $\hat{\mathbf e}_F$ and $\hat{\mathbf e
 \paragraph{Realising $\mathcal{E}_R$}
 The target is localised by projecting its annotated 3D box into the camera rather than by taking the
 dataset's 2D boxes, whose association to the tracked object is unreliable for the short-range,
-partially occluded pedestrians of these scenes. It is segmented with SAM~\cite{kirillov2023sam} (box
+partially occluded pedestrians of these scenes. It is segmented with SAM~\cite{kirillov2023sam} (\cref{fig:method}a) (box
 and torso prompts, clipped to the box, dilated by $9$\,px) and inpainted with
 LaMa~\cite{suvorov2022lama}; for the LiDAR policy the points inside the box are deleted. Vision--language--action (VLA) policies read several cameras and only the front one is edited, so we retain only frames in which the target
 appears in no other view.
@@ -63,8 +63,7 @@ photometric transform
 with $\mathrm{sat}_s$ the saturation scaling, $\boldsymbol\tau$ a per-channel tint and the noise seed
 fixed per frame. This is a photometric night-style perturbation (gamma, gain, saturation, noise), not a captured
 night scene; we refer to it as the \emph{night-style perturbation}. Two levels are used: $\mathcal{E}_D$, the milder \emph{dusk} $(\gamma,g,s,\sigma)=(1.45,0.70,0.80,2/255)$ with a
-warm tint, chosen to keep the pedestrian visible, and $\mathcal{E}_N$, \emph{night} $(2.2,0.45,0.45,7/255)$ with a
-blue tint (\cref{sec:lighting}).
+warm tint, chosen to keep the pedestrian visible, and $\mathcal{E}_N$, \emph{night} $(2.2,0.45,0.45,7/255)$ with a blue tint (\cref{fig:method}a, \cref{sec:lighting}).
 
 \paragraph{Validity of the interventions}
 An independent detector (Faster R-CNN~\cite{ren2015faster}, COCO, score $\ge0.5$) is run on the
@@ -145,19 +144,3 @@ each other,
 A policy for which lighting is irrelevant has $\CFR\gg1$ and $\mathrm{align}\approx0$; positive
 alignment means the re-lighting pushes the plan the way deleting the pedestrian does; \eqref{eq:align}
 reads this in plan space, its representation-space counterpart is reported in \cref{sec:lighting}. The thresholds of \cref{tab:exams} ($\HS\ge0.15$, $\mathrm{Sc}>0$, $\SP\ge0.8$, exposure within $[0.8,1.2]$, $\CFR>1$) are reference thresholds we set, not population norms.
-
-\subsection{Policies and corpora}
-We examine LTF and DiffusionDrive (front camera and ego status), DiffusionDriveV2 (camera and LiDAR),
-SimLingo (InternVL2-1B), AutoVLA (Qwen2.5-VL-3B; three cameras $\times$ four frames) and Alpamayo-1.5
-(four cameras; a diffusion head over the vision--language model (VLM) cache), all with released weights. The three BEV planners are trained on NAVSIM (nuPlan) data, as is AutoVLA's released checkpoint; SimLingo is trained in CARLA and Alpamayo-1.5 on NVIDIA's PhysicalAI-AV recordings. None is fine-tuned here, so every policy is read on a corpus and sensor rig it was not trained on. For the BEV planners the nuScenes front image is centre-cropped to the 4:1 aspect of NAVSIM's stitched front view with the sky removed and resized to the network's input size, the logged speed and acceleration fill the status vector, and DiffusionDriveV2 receives the LiDAR sweep; the VLA policies receive the nuScenes cameras mapped approximately onto the views they expect. DiffusionDrive's diffusion seed is fixed so that paired queries share their noise.
-
-The primary corpus is nuScenes~\cite{caesar2020nuscenes} keyframes: corridor pedestrians (lateral
-clearance to the ego corridor $\le1$\,m) at $5$--$12$\,m, their off-road counterparts, and $30$
-approach sequences at $5.8$--$14.6$\,m with logged pedestrian futures. The near-pedestrian units come
-from $236$ front-only frames, $88$ in Boston (left-hand drive) and $148$ in Singapore (right-hand
-drive); Alpamayo-1.5 covers $170$ of the $236$, needing $1.6$\,s of history and $6.4$\,s of future
-within the scene. \Cref{sec:axes} repeats $\mathcal{E}_R$, $\mathcal{E}_D$ and $\mathcal{E}_N$ on a second,
-right-hand-drive corpus---the NAVSIM test split~\cite{dauner2024navsim}, $254$ Singapore scenes with a
-pedestrian near the ego corridor, of which \NumSGscenes{} carry a complete logged pedestrian
-future---used only for the transfer and decomposition results; \cref{tab:report} is measured on the
-nuScenes frames alone.
