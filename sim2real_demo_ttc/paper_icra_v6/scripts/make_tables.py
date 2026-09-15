@@ -55,7 +55,7 @@ lab={"P1":"Lighting outweighs the pedestrian (CFR $<1$) for every policy",
      "P3":"Exposure ordering transfers ($\\rho\\ge0.6$; SimLingo top, DD bottom)",
      "P4":"Specificity ordering transfers ($\\rho\\ge0.6$; SimLingo lowest $\\SP$)",
      "P5":f"Point values stay within the left-hand CI ($\\ge$70\\% of {len(PR['P5']['cells'])} cells)",
-     "P6":"Policies whose night- and removal-induced plan changes are more orthogonal shift less between sides",
+     "P6":"Direction of plan change (auxiliary, retired): more orthogonal night/removal changes shift less between sides",
      "P7":"SimLingo collides most; visible vs.\\ removed within 3\\,pts"}
 def det(k):
     d=PR[k]
