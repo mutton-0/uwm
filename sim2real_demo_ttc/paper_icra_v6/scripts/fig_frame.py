@@ -42,9 +42,9 @@ def draw_img(fig,rect,i,fs=1.0):
     ax=fig.add_axes(rect); ax.imshow(IMGS[i][CROP]); ax.set_xticks([]); ax.set_yticks([])
     for s_ in ax.spines.values(): s_.set_visible(False)
     if i==0: ax.add_patch(plt.Rectangle((reg[0]-X0-5,reg[1]-Y0-5),reg[2]-reg[0]+10,reg[3]-reg[1]+10,
-                                        fill=False,ec="#5b9bd5",lw=0.9))
-    ax.text(5,13,LAB[i][0],color="white",fontsize=4.6*fs,va="top",bbox=dict(fc=CC[i],alpha=0.88,lw=0,pad=1.0))
-    ax.text(5,CH-6,LAB[i][1],color="white",fontsize=4.0*fs,va="bottom",bbox=dict(fc="black",alpha=0.52,lw=0,pad=0.8))
+                                        fill=False,ec="#e34948",lw=0.9))
+    ax.text(4,9,LAB[i][0],color="white",fontsize=3.6*fs,va="top",bbox=dict(fc=CC[i],alpha=0.88,lw=0,pad=0.8))
+    ax.text(4,CH-5,LAB[i][1],color="white",fontsize=3.4*fs,va="bottom",bbox=dict(fc="black",alpha=0.52,lw=0,pad=0.7))
 
 if MODE=="wide":                            # 跨栏扁横版：四段左右排
     FW=7.16; IW_in=0.66; IH_in=IW_in/AR
@@ -93,7 +93,7 @@ if MODE=="wide":
         box(x0,BOT,x0+w,TOP); bg.text(x0+XPAD,TOP-fy(0.105),lab,fontsize=6.8,weight="bold",color="#2b2b28"); return x0+w
     def right(x,txt):
         arrow((x+fx(0.02),MID),(x+ARW-fx(0.02),MID),lw=1.5,ms=6)
-        bg.text(x+ARW/2,MID+fy(0.045),txt,fontsize=4.0,ha="center",va="bottom",color="#2f5d94",linespacing=1.1); return x+ARW
+        bg.text(x+ARW/2,MID+fy(0.045),txt,fontsize=3.7,ha="center",va="bottom",color="#2f5d94",linespacing=1.1); return x+ARW
     # (a) 配对数据：2×2
     x=fx(0.03); WA=2*XPAD+2*IW+fx(0.035); x1=stage(x,WA,"(a) paired data")
     for i in range(NIMG):
