@@ -36,8 +36,7 @@ Three predictions fail.
 \item Point values drift: only 60\% of the model--exam cells stay inside their Boston interval.
 \item In Singapore, DiffusionDrive and DiffusionDriveV2 show a small but non-zero hazard sensitivity
       ($\HS=0.09$ and $0.08$).
-\item The ``purity'' hypothesis is reversed. We had predicted that policies whose lighting effect is
-      more orthogonal to their pedestrian response would shift less between sides, but the observed rank correlation is $-0.90$. Alignment is itself unstable between the two sides: it changes for every policy but AutoVLA (\cref{tab:light}).
+\item P6, an auxiliary prediction outside the five exams, is reversed. We had predicted that policies whose night-induced plan change is more orthogonal to their pedestrian-induced one would shift less between sides, but the observed rank correlation is $-0.90$.
 \end{itemize}
 
 \paragraph{Reading}
@@ -119,18 +118,15 @@ converts directly into the number of frames a verdict needs.
 \end{itemize}
 
 \paragraph{Poorly fitting exams}
-Hazard sensitivity and the direction of the lighting effect behave differently. Their fits are poor
-($R^2$ as low as 0.26 and $-0.09$) wherever few units need a reaction. Deciding that $\HS\neq0$ needs
-57--1{,}326 frames, except for SimLingo, whose estimate sits on the threshold, and the ordering reaches \NumRankHSninety\% stability only at 90 frames. The
-ordering by alignment is unstable even at 130 (\NumRankAlignOneThirty\%).
+Hazard sensitivity behaves differently. Its fits are poor ($R^2$ as low as 0.26) wherever few units need a reaction. Deciding that $\HS\neq0$ needs
+57--1{,}326 frames, except for SimLingo, whose estimate sits on the threshold, and the ordering reaches \NumRankHSninety\% stability only at 90 frames.
 
 In wall-clock terms, a 20\,s scene in this corpus yields about \NumFrPerScene{} usable
 near-pedestrian frames, so the lighting verdict costs roughly \NumScCFR{} scenes and the exposure
 verdict \NumScExp. Deciding that hazard sensitivity differs from zero costs \NumScHS---about
 \NumMinHS{} minutes of logged driving that actually contains a pedestrian near the corridor.
 
-The division is therefore clear. A few dozen frames diagnose exposure, specificity and lighting. Whether a policy manages hazard, and in which direction lighting pushes it,
-needs hundreds of frames that contain a genuine need to react.
+The division is therefore clear. A few dozen frames diagnose exposure, specificity and lighting. Whether a policy manages hazard needs hundreds of frames that contain a genuine need to react.
 
 \paragraph{What a small sample in the new domain buys}
 We draw $k$ scenes at random from the NAVSIM pool of \cref{sec:axes}, re-measure $F$ and $I$ on them and compare against the

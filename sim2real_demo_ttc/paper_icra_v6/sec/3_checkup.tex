@@ -41,8 +41,7 @@ F=\bar D(X^{O},X^{R}),\qquad I=\bar D(X^{O},X^{N}).
 We call $F$ the \emph{faithfulness} displacement---the plan change attributable to the pedestrian
 itself---and $I$ the \emph{interference} displacement---the change the same policy produces under an edit that carries no driving-relevant information, and therefore its own jitter floor. $I$ is taken at the night level. The dusk reading $\bar D(X^{O},X^{D})$ enters \cref{sec:lighting}. A policy that
 uses the pedestrian and ignores the lighting has $F\gg I$. The reverse ordering means the plan is
-driven by something the road does not care about. \Cref{sec:lighting} reads the same two contrasts in
-representation space, as unit directions $\hat{\mathbf e}_F$ and $\hat{\mathbf e}_I$.
+driven by something the road does not care about.
 
 \paragraph{Realising $\mathcal{E}_R$}
 The target is localised by projecting its annotated 3D box into the camera rather than by taking the
@@ -139,8 +138,4 @@ each other,
 \CFR=\frac{\mathbb{E}\,\bar D(X^{O},X^{R})}{\mathbb{E}\,\bar D(X^{O},X^{N})}=\frac{\mathbb{E}F}{\mathbb{E}I},
 \label{eq:cfr}
 \end{equation}
-\begin{equation}
-\mathrm{align}=\mathrm{med}\,\cos\!\big(X^{N}\!-X^{O},\,X^{R}\!-X^{O}\big).
-\label{eq:align}
-\end{equation}
-A policy for which lighting is irrelevant has $\CFR\gg1$ and $\mathrm{align}\approx0$. Positive alignment means the re-lighting pushes the plan the way deleting the pedestrian does. Equation~\eqref{eq:align} reads this in plan space, and its representation-space counterpart is reported in \cref{sec:lighting}. The thresholds of \cref{tab:exams} ($\HS\ge0.15$, $\mathrm{Sc}>0$, $\SP\ge0.8$, exposure within $[0.8,1.2]$, $\CFR>1$) are reference thresholds we set, not population norms.
+A policy for which lighting is irrelevant has $\CFR\gg1$. The thresholds of \cref{tab:exams} ($\HS\ge0.15$, $\mathrm{Sc}>0$, $\SP\ge0.8$, exposure within $[0.8,1.2]$, $\CFR>1$) are reference thresholds we set, not population norms.

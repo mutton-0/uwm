@@ -55,7 +55,7 @@ lab={"P1":"Lighting outweighs the pedestrian (CFR $<1$) for every policy",
      "P3":"Exposure ordering transfers ($\\rho\\ge0.6$; SimLingo top, DD bottom)",
      "P4":"Specificity ordering transfers ($\\rho\\ge0.6$; SimLingo lowest $\\SP$)",
      "P5":f"Point values stay within the left-hand CI ($\\ge$70\\% of {len(PR['P5']['cells'])} cells)",
-     "P6":"Policies with lower $|\\mathrm{align}|$ shift less between sides",
+     "P6":"Policies whose night- and removal-induced plan changes are more orthogonal shift less between sides",
      "P7":"SimLingo collides most; visible vs.\\ removed within 3\\,pts"}
 def det(k):
     d=PR[k]
@@ -79,10 +79,10 @@ open(f"{_OUT}/tables/tab_prereg.tex","w").write("\n".join(T)+"\n")
 NS=json.load(open(f"{V5}/night_speed.json"))
 def bold(txt,cond): return f"\\textbf{{\\boldmath {txt}}}" if cond else txt
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{The night-style perturbation and the plan.} $\CFR$ \eqref{eq:cfr}, same frames, 95\% CI. Speed: change of planned mean speed, $X^{O}\to X^{N}$. $\Delta_N S=S(X^{N})-S(X^{O})$, $S$ of \eqref{eq:SA}, negative = closer. Align \eqref{eq:align}, Boston$\to$Singapore. Bold: $p<0.01$.}",
+ r"\caption{\textbf{The night-style perturbation and the plan.} $\CFR$ \eqref{eq:cfr}, same frames, 95\% CI. Speed: change of planned mean speed, $X^{O}\to X^{N}$. $\Delta_N S=S(X^{N})-S(X^{O})$, $S$ of \eqref{eq:SA}, negative = closer. Bold: $p<0.01$.}",
    r"\label{tab:light}",r"\footnotesize",r"\setlength{\tabcolsep}{3pt}",
-   r"\begin{tabular}{@{}lcccc@{}}",r"\toprule",
-   r"Policy & $\CFR$ [95\% CI] & speed & $\Delta_N S$ (m) & align \\",r"\midrule"]
+   r"\begin{tabular}{@{}lccc@{}}",r"\toprule",
+   r"Policy & $\CFR$ [95\% CI] & speed & $\Delta_N S$ (m) \\",r"\midrule"]
 for m in M:
     c=CF[m]["corr"]; n=NS[m]
     pm=lambda x,f: "$"+f.format(x)+"$"   # 不再把小值压成 "0"：真值很小就多给一位小数，见下
@@ -90,8 +90,7 @@ for m in M:
     _f="{:+.0f}" if abs(100*n['dv_rel'])>=1 else "{:+.1f}"
     sp=bold(pm(100*n['dv_rel'],_f)[:-1]+"\\%$",n["p"]<0.01)
     ds=bold(pm(n['dS'],"{:+.2f}" if abs(n['dS'])>=0.01 else "{:+.3f}"),n["dS_p"]<0.01)
-    T.append(f"{SH[m]} & {c['CFR']:.2f} {{\\scriptsize[{c['CFR_ci'][0]:.2f},{c['CFR_ci'][1]:.2f}]}} & {sp} & {ds} & "
-             f"${L[m]['point']['align']:+.2f}\\to{R[m]['point']['align']:+.2f}$ \\\\")
+    T.append(f"{SH[m]} & {c['CFR']:.2f} {{\\scriptsize[{c['CFR_ci'][0]:.2f},{c['CFR_ci'][1]:.2f}]}} & {sp} & {ds} \\\\")
 T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
 open(f"{_OUT}/tables/tab_light.tex","w").write("\n".join(T)+"\n")
 # ---------- 数字宏 ----------

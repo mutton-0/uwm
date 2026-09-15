@@ -5,7 +5,7 @@
 \input{tables/tab_light}
 
 Lighting should not change what a driver does, so this exam asks how far a policy is moved by an
-irrelevant change. It is the most robust result in the check-up, the verdict that transfers between driving sides for every policy (\cref{sec:sample}), and the one whose direction is least stable.
+irrelevant change. It is the most robust result in the check-up, and the verdict that transfers between driving sides for every policy (\cref{sec:sample}).
 
 \paragraph{Magnitude}
 Removing a pedestrian from the corridor moves every policy's plan only \NumCFRlo--\NumCFRhi{} times as
@@ -27,9 +27,4 @@ pedestrian. The approach is longitudinal: the further the plan's endpoint moves 
 gets (rank correlation $-0.73$ to $-0.96$), while the endpoint shifts toward the pedestrian's side no
 more often than chance. DiffusionDriveV2, the only policy that also reads LiDAR, slows
 ($\NumNightDDv\%$) and keeps more distance. AutoVLA and Alpamayo-1.5 are unaffected.
-
-\paragraph{Direction is not a stable trait}
-Read in representation space as unit directions $\hat{\mathbf e}_F$ and $\hat{\mathbf e}_I$ (the activation-side counterparts of \eqref{eq:FI}), the two are not merely uncorrelated: in aggregate they oppose one another (mean cosine $-0.54$ over
-four policies), so, on the pooled data, a policy encodes ``it got dark'' in a direction close to the
-one for ``the hazard is gone''. We report this as an observation rather than as evidence for a stable
-property: the opposition does not hold per policy. Whether these diagnostic profiles and policy orderings persist across substantial domain shifts is formally tested in \cref{sec:sample}.
+Whether these diagnostic profiles and policy orderings persist across substantial domain shifts is formally tested in \cref{sec:sample}.
