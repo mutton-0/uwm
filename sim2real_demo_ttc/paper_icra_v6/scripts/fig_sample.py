@@ -25,7 +25,7 @@ for k,c in EXC.items():
 a.set_xscale("log"); a.set_yscale("log"); a.set_xticks([1,3,10]); a.set_xticklabels(["1","3","10"]); a.minorticks_off()
 a.tick_params(labelsize=6.2,length=1.5,pad=1); a.set_xlabel("minutes of driving",fontsize=6.7,labelpad=0.3)
 a.set_ylabel("SD",fontsize=6.7,labelpad=1)
-a.set_title("(a) spread of the estimate",fontsize=7.5,loc="left",pad=1.5)
+a.set_title("(a) spread of the estimate",fontsize=7.5,loc="left",pad=5)
 h=[plt.Line2D([],[],color=c,lw=1.1,ls=LS[k],label=LAB[k]) for k,c in EXC.items()]
 fig.legend(handles=h,frameon=False,fontsize=6.0,ncol=4,loc="lower center",bbox_to_anchor=(0.5,-0.16),handlelength=1.0,columnspacing=1.0,handletextpad=0.4)
 b=ax[1]; V=[("CFR","CFR < 1","#8fd3f4"),("exposure","exposure ≠ human","#a3adb8"),("HS","HS ≠ 0","#0b0b14")]
