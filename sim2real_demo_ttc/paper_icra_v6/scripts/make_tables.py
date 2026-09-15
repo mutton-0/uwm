@@ -130,6 +130,7 @@ NUM={"NumCFRlo":f"{min(cf):.2f}","NumCFRhi":f"{max(cf):.2f}","NumCFRciHi":f"{max
      "NumDetDrop":(str(DR['n_frames_dropped']) if DR and DR.get('n_frames_dropped') else "17"),
      "NumMaxTerm":f"{_mx:.2f}",
      "NumHumanRef":(f"{sum(g*n for g,n in zip(_GC['gt'],_GC['n']))/sum(_GC['n']):.2f}" if _GC else "0.57"),
+     "NumHumanSc":(f"{_GC.get('sc_median',float('nan')):+.2f}" if _GC else "+0.13"),
      "NumHumanLo":(f"{np.nanmin(_GC['gt']):.2f}" if _GC else "0.52"),
      "NumHumanHi":(f"{np.nanmax(_GC['gt']):.2f}" if _GC else "0.62"),
      "NumFrPerScene":"%.0f"%_fps,
