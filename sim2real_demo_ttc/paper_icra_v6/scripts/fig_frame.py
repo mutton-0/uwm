@@ -105,7 +105,7 @@ if MODE=="wide":
     ax2=fig.add_axes([x+fx(1.06),PB+fy(0.02),fx(0.88),PT-PB-fy(0.02)]); frame_readings(ax2,fs=0.85); ax2.set_title("the two readings",fontsize=5.2,loc="left",pad=1.5)
     x=right(x1,"read\n$F$, $I$")
     # (c) 五项检查：两列
-    WC=fx(0.90); x1=stage(x,WC,"(c) the five exams")
+    WC=fx(1.04); x1=stage(x,WC,"(c) the five exams")
     cw=(WC-2*XPAD-fx(0.03))/2; ch=(CT-BOT-2*PAD-2*fy(0.03))/3
     for k,lab in enumerate(EX):
         c_,r_=divmod(k,3); x0=x+XPAD+c_*(cw+fx(0.03)); y1=CT-PAD-r_*(ch+fy(0.03))
@@ -113,7 +113,7 @@ if MODE=="wide":
     x=right(x1,"test on the\nother side")
     # (d) 预后 + 体检单
     WD=1-fx(0.03)-x; x1=stage(x,WD,"(d) prognosis")
-    GW=fx(0.92); cw=(GW-fx(0.03))/2; ch=(CT-BOT-2*PAD-fy(0.03))/2
+    GW=fx(0.84); cw=(GW-fx(0.03))/2; ch=(CT-BOT-2*PAD-fy(0.03))/2
     for k,lab in enumerate(PR):
         r_,c_=divmod(k,2); x0=x+XPAD+c_*(cw+fx(0.03)); y1=CT-PAD-r_*(ch+fy(0.03))
         chip(x0,y1-ch,x0+cw,y1,lab,4.3)
