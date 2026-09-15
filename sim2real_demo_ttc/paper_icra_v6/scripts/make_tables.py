@@ -25,6 +25,8 @@ NORM={"exposure":(0.8,1.2),"HS":(0.15,1.01),"HS_slope":(0.0,1.01),"SP":(0.8,1.01
 def flag(v,k):
     lo,hi=NORM[k]
     return r"$\downarrow$" if v<lo else (r"$\uparrow$" if v>hi else "")
+NS=json.load(open(f"{V5}/night_speed.json"))
+def bold(txt,cond): return f"\\textbf{{\\boldmath {txt}}}" if cond else txt
 def cell(v,k,best,fmt="%.2f",d=None):
     t=(fmt%v)+flag(v,k)
     if d is not None and k in d.get("ci",{}):
@@ -38,22 +40,29 @@ _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "CFR":max(M,key=lambda m:A[m]["point"]["CFR"])}
 _bc8=min(M,key=lambda m:coll(m,"8")[0])
 T=[r"\begin{table*}[t]",r"\centering",
-  r"\caption{\textbf{Diagnostic profiles} on the 236 nuScenes frames. Brackets: 95\% CI. Arrows: outside the reference threshold of \cref{tab:exams}; bold: best per column. Collision: contact rate at 8\,m/s with the pedestrian visible\,/\,removed. Human: the logged trajectory scored the same way against each policy's blind plan (no counterpart for specificity and lighting).}",
- r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{5pt}",
- r"\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
- r"Policy & Exposure & Hazard sens. & Scaling & Specificity & Lighting & Collision \\",
- r" & Exp $\approx1$ & $\HS$ $\uparrow$ & Sc $\uparrow$ & $\SP$ $\uparrow$ & $\CFR$ $\uparrow$ & $O$\,/\,$R$ $\downarrow$ \\",r"\midrule"]
+   r"\caption{\textbf{Diagnostic profiles} on the 236 nuScenes frames. Brackets: 95\% CI. Arrows in cells: outside the reference threshold of \cref{tab:exams}; bold: best per column, or $p<0.01$ for the re-lighting columns. Collision: contact rate at 8\,m/s with the pedestrian visible\,/\,removed. Under re-lighting: change of planned mean speed and of clearance to the pedestrian (negative = closer), and $\CFR$ at dusk\,/\,night on the \NumDuskN{} NAVSIM scenes. Human: the logged trajectory scored the same way against each policy's blind plan.}",
+ r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{4pt}",
+ r"\resizebox{\textwidth}{!}{\begin{tabular}{@{}lccccc c ccc@{}}",r"\toprule",
+ r" & \multicolumn{5}{c}{Five exams} & Collision & \multicolumn{3}{c}{Under re-lighting} \\",
+ r"\cmidrule(lr){2-6}\cmidrule(lr){7-7}\cmidrule(l){8-10}",
+ r"Policy & Exposure & Hazard sens. & Scaling & Specificity & Lighting & $O$\,/\,$R$, 8\,m/s & speed & clearance & dusk\,/\,night \\",
+ r" & Exp $\approx1$ & $\HS$ $\uparrow$ & Sc $\uparrow$ & $\SP$ $\uparrow$ & $\CFR$ $\uparrow$ & $\downarrow$ & $\downarrow$ & $\Delta_N S$ (m) $\uparrow$ & $\CFR$ $\uparrow$ \\",r"\midrule"]
 for m in M:
     p=A[m]["point"]; c8=coll(m,"8")
     cc=f"{c8[0]:.1f}\\,/\\,{c8[1]:.1f}"
     if m==_bc8: cc=r"\textbf{"+cc+"}"
-    d_=A[m]
+    d_=A[m]; n_=NS[m]
+    _f="{:+.0f}" if abs(100*n_['dv_rel'])>=1 else "{:+.1f}"
+    sp_=bold("$"+_f.format(100*n_['dv_rel'])+"\\%$",n_["p"]<0.01)
+    ds_=bold("$"+("{:+.2f}" if abs(n_['dS'])>=0.01 else "{:+.3f}").format(n_['dS'])+"$",n_["dS_p"]<0.01)
+    _dk=json.load(open(f"{V5}/dusk_cfr.json"))[m] if os.path.exists(f"{V5}/dusk_cfr.json") else None
+    dk_=f"{_dk['cfr_dusk']:.2f}\\,/\\,{_dk['cfr_night']:.2f}" if _dk else "--"
     T.append(f"{SH[m]} & {cell(p['exposure'],'exposure',m==_bst['exposure'],d=d_)} & "
              f"{cell(p['HS'],'HS',m==_bst['HS'],d=d_)} & {cell(p['HS_slope'],'HS_slope',m==_bst['HS_slope'],'%+.2f',d=d_)} & "
-             f"{cell(p['SP'],'SP',m==_bst['SP'],d=d_)} & {cell(p['CFR'],'CFR',m==_bst['CFR'],d=d_)} & {cc} \\\\")
+             f"{cell(p['SP'],'SP',m==_bst['SP'],d=d_)} & {cell(p['CFR'],'CFR',m==_bst['CFR'],d=d_)} & {cc} & {sp_} & {ds_} & {dk_} \\\\")
 _gcx=json.load(open(f"{V5}/gt_ceiling.json")); _hs_h=sum(g*n for g,n in zip(_gcx["gt"],_gcx["n"]))/sum(_gcx["n"])
-T+=[r"\midrule",f"Human (logged) & 1.00 & {_hs_h:.2f} & {_gcx.get('sc_median',float('nan')):+.2f} & -- & -- & -- \\\\"]
-T+=[r"\bottomrule",r"\end{tabular}",r"\end{table*}"]
+T+=[r"\midrule",f"Human (logged) & 1.00 & {_hs_h:.2f} & {_gcx.get('sc_median',float('nan')):+.2f} & -- & -- & -- & -- & -- & -- \\\\"]
+T+=[r"\bottomrule",r"\end{tabular}}",r"\end{table*}"]
 open(f"{_OUT}/tables/tab_report.tex","w").write("\n".join(T)+"\n")
 # ---------- Table III：跨舵位预注册 ----------
 lab={"P1":"Lighting outweighs the pedestrian (CFR $<1$) for every policy",
@@ -80,8 +89,6 @@ for k in ["P1","P2","P3","P4","P5","P7"]:               # 登记顺序；P6（�
 T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
 open(f"{_OUT}/tables/tab_prereg.tex","w").write("\n".join(T)+"\n")
 # ---------- Table IV：光照（精简：不列 p，显著者加粗） ----------
-NS=json.load(open(f"{V5}/night_speed.json"))
-def bold(txt,cond): return f"\\textbf{{\\boldmath {txt}}}" if cond else txt
 T=[r"\begin{table}[t]",r"\centering",
   r"\caption{\textbf{The night-style perturbation} on the nuScenes frames. Speed: change of planned mean speed under re-lighting. $\Delta_N S$: change of clearance to the pedestrian, negative = closer. Last column: $\CFR$ at dusk and at night on the \NumDuskN{} NAVSIM scenes. Brackets: 95\% CI; bold: $p<0.01$.}",
    r"\label{tab:light}",r"\scriptsize",r"\setlength{\tabcolsep}{1.6pt}",
@@ -118,10 +125,10 @@ for _m in M:
     _mx=max(_mx,abs(np.mean([np.tanh(z["P"]["S"]-z["Q"]["S"]) for z in _U])))
 _GC=json.load(open(f"{V5}/gt_ceiling.json")) if os.path.exists(f"{V5}/gt_ceiling.json") else None
 
-cf=[CF[m]["corr"]["CFR"] for m in M]; hs=[A[m]["point"]["HS"] for m in M]; ex=[A[m]["point"]["exposure"] for m in M]
+cf=[A[m]["point"]["CFR"] for m in M]; hs=[A[m]["point"]["HS"] for m in M]; ex=[A[m]["point"]["exposure"] for m in M]
 ns=SS["dims"]; nc=[PD["table"][m]["no_at_fault_collisions"] for m in M]
 g1=max(abs(coll(m,"actual")[0]-coll(m,"actual")[1]) for m in M); g8=max(abs(coll(m,"8")[0]-coll(m,"8")[1]) for m in M)
-NUM={"NumCFRlo":f"{min(cf):.2f}","NumCFRhi":f"{max(cf):.2f}","NumCFRciHi":f"{max(CF[m]['corr']['CFR_ci'][1] for m in M):.2f}",
+NUM={"NumCFRlo":f"{min(cf):.2f}","NumCFRhi":f"{max(cf):.2f}","NumCFRciHi":f"{max(A[m]['ci']['CFR'][1] for m in M):.2f}",
      "NumHSlo":f"{min(hs):.2f}","NumHShi":f"{max(hs):.2f}","NumExpLo":f"{min(ex):.2f}","NumExpHi":f"{max(ex):.2f}",
      "NumDetRm":f"{100*np.mean([o['rm']['target_iou']<0.5 for o in DV]):.1f}","NumDetNight":f"{100*np.mean([o['night']['target_iou']>=0.5 for o in DV]):.1f}",
      "NumDetStill":f"{100*np.mean([o['rm']['target_iou']>=0.5 for o in DV]):.1f}","NumDetN":str(len(DV)),
