@@ -35,7 +35,8 @@ LAB=[("logged $O$","detector: pedestrian found"),
      ("removed $R$","detector: not found"),
      ("re-lit $D$","detector: still found"),
      ("re-lit $N$","detector: still found")]   # A_0095 黄昏档 IoU 0.88，与 dusk_check 同判据
-EX=["exposure","hazard\nsensitivity","scaling","specificity","lighting\n$\\mathrm{CFR}$"]
+EX=["exposure","hazard\nsensitivity","scaling","specificity","lighting"]
+PR=["orderings\ntransfer","verdicts\ntransfer","point values\ndo not","priced\nin frames"]
 
 def draw_img(fig,rect,i,fs=1.0):
     ax=fig.add_axes(rect); ax.imshow(IMGS[i][CROP]); ax.set_xticks([]); ax.set_yticks([])
@@ -53,7 +54,7 @@ else:                                       # 单栏竖版：三段上下叠，�
     FW=3.45; IW_in=(FW-2*0.05-(NIMG-1)*0.04-2*0.03)/NIMG; IH_in=IW_in/AR
     GAP_in=0.04; PAD_in=0.05; TIT_in=0.145
     H_A=TIT_in+PAD_in+IH_in+PAD_in
-    H_B=TIT_in+1.30
+    H_B=TIT_in+1.30+0.30+PAD_in
     H_C=TIT_in+0.34+2*PAD_in
     ARR=0.17
     FH=H_A+ARR+H_B+ARR+H_C+0.05
@@ -117,18 +118,22 @@ else:
     arrow(((L+R)/2,aB-fy(0.022)),((L+R)/2,aB-ARRf+fy(0.022)),lw=1.6,ms=6)
     bg.text((L+R)/2+fx(0.08),aB-ARRf/2,"query $\\pi$ on $O,R,D,N$",fontsize=5.0,va="center",color="#2f5d94")
     # (b) 两个面板
-    bT=aB-ARRf; bB=bT-TIT-1.30/FH
+    bT=aB-ARRf; bB=bT-TIT-(1.30+0.30+PAD_in)/FH
     box(L,bB,R,bT); bg.text(L+fx(0.05),bT-fy(0.115),"(b) diagnosis",fontsize=7.0,weight="bold",color="#2b2b28")
-    PB=bB+fy(0.28); PT=bT-fy(0.27)
+    PB=bB+fy(0.28)+fy(0.30+PAD_in); PT=bT-fy(0.27)
+    CW_=(R-L-2*fx(0.05)-4*fx(0.035))/5                       # 五项 exam 横排在两个面板下面
+    for k,lab in enumerate(EX):
+        x0=L+fx(0.05)+k*(CW_+fx(0.035)); chip(x0,bB+PAD,x0+CW_,bB+PAD+fy(0.30),lab,4.7)
+    bg.text(L+fx(0.05),bB+PAD+fy(0.30)+fy(0.005),"five exams, each with a reference threshold",fontsize=4.6,va="bottom",color="#52514e")
     ax1=fig.add_axes([L+fx(0.10),PB,fx(1.25),PT-PB]); frame_extract(ax1); ax1.set_title("three queries, one scene",fontsize=6.0,loc="left",pad=2)
     ax2=fig.add_axes([L+fx(1.80),PB,fx(1.42),PT-PB]); frame_readings(ax2); ax2.set_title("the two readings",fontsize=6.0,loc="left",pad=2)
     arrow(((L+R)/2,bB-fy(0.022)),((L+R)/2,bB-ARRf+fy(0.022)),lw=1.6,ms=6)
-    bg.text((L+R)/2+fx(0.08),bB-ARRf/2,"read $F$, $I$ $\\to$ five exams",fontsize=5.0,va="center",color="#2f5d94")
+    bg.text((L+R)/2+fx(0.08),bB-ARRf/2,"diagnose on one side, test on the other",fontsize=5.0,va="center",color="#2f5d94")
     # (c) 五个检查横排：与 (a)(b) 同款容器框，高度足额，底边不再截断
     cT=bB-ARRf; cB=cT-TIT-0.34/FH-2*PAD
     box(L,cB,R,cT); bg.text(L+fx(0.05),cT-fy(0.115),"(c) prognosis",fontsize=7.0,weight="bold",color="#2b2b28")
-    CW_=(R-L-2*fx(0.05)-4*fx(0.035))/5
-    for k,lab in enumerate(EX):
+    CW_=(R-L-2*fx(0.05)-3*fx(0.035))/4
+    for k,lab in enumerate(PR):
         x0=L+fx(0.05)+k*(CW_+fx(0.035)); chip(x0,cB+PAD,x0+CW_,cT-TIT-fy(0.01),lab,4.7)
     OUT="frame1c"
 fig.savefig(f"{V5}/figures/{OUT}.pdf")

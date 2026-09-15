@@ -35,19 +35,19 @@ _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "CFR":max(M,key=lambda m:A[m]["point"]["CFR"])}
 _bc8=min(M,key=lambda m:coll(m,"8")[0])
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{Diagnostic profiles.} Reference thresholds in brackets; $\downarrow$/$\uparrow$ outside them, bold best per column. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$.}",
- r"\label{tab:report}",r"\scriptsize",r"\setlength{\tabcolsep}{2.0pt}",
- r"\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
- r"Policy & exposure & HS & scaling & SP & CFR & coll.\ 8\,m/s \\",
- r" & [0.8,\,1.2] & [$\ge$0.15] & [$>$0] & [$\ge$0.8] & [$>$1] & vis.\,/\,rm. \\",r"\midrule"]
+ r"\caption{\textbf{Diagnostic profiles.} $\downarrow$/$\uparrow$: outside the reference threshold of \cref{tab:exams}; bold: best per column. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$.}",
+ r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{3pt}",
+ r"\resizebox{\columnwidth}{!}{\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
+ r"Policy & Exposure & Hazard sens. & Scaling & Specificity & Lighting & Collision \\",
+ r" & Exp & $\HS$ & Sc & $\SP$ & $\CFR$ & $O$/$R$, 8\,m/s \\",r"\midrule"]
 for m in M:
     p=A[m]["point"]; c8=coll(m,"8")
     cc=f"{c8[0]:.1f}\\,/\\,{c8[1]:.1f}"
     if m==_bc8: cc=r"\textbf{"+cc+"}"
-    T.append(f"{NAME[m]} & {cell(p['exposure'],'exposure',m==_bst['exposure'])} & "
+    T.append(f"{SH[m]} & {cell(p['exposure'],'exposure',m==_bst['exposure'])} & "
              f"{cell(p['HS'],'HS',m==_bst['HS'])} & {cell(p['HS_slope'],'HS_slope',m==_bst['HS_slope'],'%+.2f')} & "
              f"{cell(p['SP'],'SP',m==_bst['SP'])} & {cell(p['CFR'],'CFR',m==_bst['CFR'])} & {cc} \\\\")
-T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
+T+=[r"\bottomrule",r"\end{tabular}}",r"\end{table}"]
 open(f"{_OUT}/tables/tab_report.tex","w").write("\n".join(T)+"\n")
 # ---------- Table III：跨舵位预注册 ----------
 lab={"P1":"Lighting outweighs the pedestrian (CFR $<1$) for every policy",

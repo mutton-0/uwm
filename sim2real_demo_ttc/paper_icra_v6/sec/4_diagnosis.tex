@@ -1,5 +1,5 @@
 % !TEX root = ../main.tex
-\subsection{Diagnostic Profiles}
+\subsection{The Five Exams}
 \label{sec:diagnosis}
 
 \input{tables/tab_report}
@@ -14,21 +14,27 @@ human's own.
 
 \paragraph{Hazard sensitivity}
 On these frames, no policy's plan responds to the pedestrian: on units that need a reaction, seeing it buys only
-\NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale. The benefit does not grow with the hazard: its rank
+\NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale. The benefit is also unreliable in direction:
+counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
+pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
+SimLingo 18 vs.\ 30, the rest at most 5 either way; all McNemar $p\ge0.11$) --- what reads as a safety margin in \cref{tab:report} does not carry over to the individual case.
+
+\paragraph{Scaling}
+The benefit does not grow with the hazard: its rank
 correlation with $a_{\mathrm{req}}$ is negative for \NumScalNeg{} policies, down to \NumScalLo{} for
 \NumScalWorst; DiffusionDriveV2 is the only exception (\NumScalHi), and its benefit stays below
 $0.15$. Replacing the hazard axis by the time-based $\mathrm{TTC}_0$, whose sign is reversed by
 construction, leaves the picture unchanged (\NumScalTtcLo{} to \NumScalTtcHi, against \NumScalLo{} to
-\NumScalHi). The benefit is also unreliable in direction:
-counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
-pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
-SimLingo 18 vs.\ 30, the rest at most 5 either way; all McNemar $p\ge0.11$) --- what reads as a safety margin in \cref{tab:report} does not carry over to the individual case.
+\NumScalHi).
 
 \paragraph{Specificity}
 A policy whose plan moves when nothing requires it is not cautious but unsteady, and steadiness is
 what turns out to travel across a domain shift (\cref{sec:sample}). SimLingo's
 plan moves most when nothing requires it ($\SP=\NumSpSL$); the other five stay steadier, at
 \NumSpOtherLo--\NumSpOtherHi.
+
+\paragraph{Lighting}
+Removing the pedestrian moves every plan less than the night-style perturbation does ($\CFR<1$ for all six, \cref{tab:report}); \cref{sec:lighting} reads this exam in depth.
 
 \paragraph{Collisions}
 Collisions with the pedestrian's logged future follow how far a policy plans to drive, not what it perceives. At the logged

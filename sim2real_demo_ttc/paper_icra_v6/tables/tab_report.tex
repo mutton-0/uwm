@@ -1,21 +1,21 @@
 % !TEX root = ../main.tex
 \begin{table}[t]
 \centering
-\caption{\textbf{Diagnostic profiles.} Reference thresholds in brackets; $\downarrow$/$\uparrow$ outside them, bold best per column. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$.}
+\caption{\textbf{Diagnostic profiles.} $\downarrow$/$\uparrow$: outside the reference threshold of \cref{tab:exams}; bold: best per column. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$.}
 \label{tab:report}
-\scriptsize
-\setlength{\tabcolsep}{2.0pt}
-\begin{tabular}{@{}lccccc c@{}}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{\begin{tabular}{@{}lccccc c@{}}
 \toprule
-Policy & exposure & HS & scaling & SP & CFR & coll.\ 8\,m/s \\
- & [0.8,\,1.2] & [$\ge$0.15] & [$>$0] & [$\ge$0.8] & [$>$1] & vis.\,/\,rm. \\
+Policy & Exposure & Hazard sens. & Scaling & Specificity & Lighting & Collision \\
+ & Exp & $\HS$ & Sc & $\SP$ & $\CFR$ & $O$/$R$, 8\,m/s \\
 \midrule
-DiffusionDrive & 0.50$\downarrow$ & 0.06$\downarrow$ & -0.28$\downarrow$ & 0.76$\downarrow$ & 0.23$\downarrow$ & 7.6\,/\,9.2 \\
+DD & 0.50$\downarrow$ & 0.06$\downarrow$ & -0.28$\downarrow$ & 0.76$\downarrow$ & 0.23$\downarrow$ & 7.6\,/\,9.2 \\
 LTF & 0.79$\downarrow$ & 0.03$\downarrow$ & -0.13$\downarrow$ & 0.78$\downarrow$ & 0.23$\downarrow$ & 9.9\,/\,10.7 \\
-DiffusionDriveV2 & 0.88 & \textbf{0.10$\downarrow$} & \textbf{+0.23} & 0.65$\downarrow$ & \textbf{0.47$\downarrow$} & \textbf{3.1\,/\,6.1} \\
+DDv2 & 0.88 & \textbf{0.10$\downarrow$} & \textbf{+0.23} & 0.65$\downarrow$ & \textbf{0.47$\downarrow$} & \textbf{3.1\,/\,6.1} \\
 SimLingo & 2.19$\uparrow$ & 0.00$\downarrow$ & -0.22$\downarrow$ & 0.44$\downarrow$ & 0.23$\downarrow$ & 40.5\,/\,36.6 \\
 AutoVLA & \textbf{1.01} & 0.02$\downarrow$ & -0.18$\downarrow$ & 0.76$\downarrow$ & 0.44$\downarrow$ & 32.1\,/\,29.8 \\
 Alpamayo 1.5 & 1.13 & 0.01$\downarrow$ & -0.23$\downarrow$ & \textbf{0.84} & 0.25$\downarrow$ & 11.2\,/\,11.2 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
