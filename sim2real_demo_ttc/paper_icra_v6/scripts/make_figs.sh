@@ -12,4 +12,9 @@ for f in fig_frame.py:wide fig_frame.py:col fig_fi_dash.py: fig_teaser.py: fig_r
   echo "== $s $a"; $PY "$V5/scripts/$s" $a
 done
 cp -f $V5/figures/*.pdf $V5/figures/*.png "$DST"/figures/ 2>/dev/null || true
+# matplotlib 默认出 Type 3 字体，PaperCept / PDF eXpress 会报；用 ghostscript 把文字转成轮廓（图形不变）
+for f in cases sample_size; do
+  gs -q -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pdfwrite -dNoOutputFonts -dCompatibilityLevel=1.5 \
+     -o "$DST/figures/$f.outl.pdf" "$DST/figures/$f.pdf" && mv -f "$DST/figures/$f.outl.pdf" "$DST/figures/$f.pdf"
+done
 bash /home/boyuewang/120/uwm/sim2real_demo_ttc/paper_icra_v6/scripts/build_paper.sh "$DST"

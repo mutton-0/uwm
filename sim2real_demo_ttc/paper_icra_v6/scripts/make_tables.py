@@ -27,11 +27,12 @@ def flag(v,k):
     return r"$\downarrow$" if v<lo else (r"$\uparrow$" if v>hi else "")
 NS=json.load(open(f"{V5}/night_speed.json"))
 def bold(txt,cond): return f"\\textbf{{\\boldmath {txt}}}" if cond else txt
+def _neg(s): return s.replace("-0.00","0.00").replace("-","$-$")   # 负零去号，连字符换数学负号
 def cell(v,k,best,fmt="%.2f",d=None):
-    t=(fmt%v)+flag(v,k)
+    t=_neg(fmt%v)+flag(v,k)
     if d is not None and k in d.get("ci",{}):
         lo,hi=d["ci"][k]; f2="%+.2f" if fmt.startswith("%+") else "%.2f"
-        t+=" {\\scriptsize["+(f2%lo)+", "+(f2%hi)+"]}"
+        t+=" {\\scriptsize["+_neg(f2%lo)+", "+_neg(f2%hi)+"]}"
     return (r"\textbf{"+t+"}") if best else t
 _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "HS":max(M,key=lambda m:A[m]["point"]["HS"]),
@@ -51,7 +52,7 @@ _bL=min(M,key=lambda m: _TR["LHD"][m]["moving"]["viol"]); _bR=min(M,key=lambda m
 _bf=lambda t,on: (r"\textbf{"+t+"}") if on else t
 def _row(label,cells): return label+" & "+" & ".join(cells)+r" \\"
 def _cir(k,f="%.2f"):   # 置信区间独立成一小行，灰色 scriptsize
-    return r"\multicolumn{1}{r}{\textcolor{gray}{\scriptsize 95\% CI}} & "+" & ".join(r"\textcolor{gray}{\scriptsize["+(f%A[m]["ci"][k][0])+", "+(f%A[m]["ci"][k][1])+"]}" for m in M)+r" & \\[-1pt]"
+    return r"\multicolumn{1}{r}{\textcolor{gray}{\scriptsize 95\% CI}} & "+" & ".join(r"\textcolor{gray}{\scriptsize["+_neg(f%A[m]["ci"][k][0])+", "+_neg(f%A[m]["ci"][k][1])+"]}" for m in M)+r" & \\[-1pt]"
 R=[]
 R.append(_row(r"Exposure (ratio to human) $\approx1$",[cell(A[m]["point"]["exposure"],"exposure",m==_bst["exposure"]) for m in M]+["1.00"])); R.append(_cir("exposure"))
 R.append(_row(r"Hazard sens.\ $\HS\in[-1,1]$ $\uparrow$",[cell(A[m]["point"]["HS"],"HS",m==_bst["HS"]) for m in M]+[f"{_hs_h:.2f}"])); R.append(_cir("HS"))
