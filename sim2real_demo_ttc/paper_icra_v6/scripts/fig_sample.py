@@ -14,7 +14,7 @@ M=["dd","ltf","ddv2","simlingo","autovla","alpamayo15"]
 EXC={"exposure":"#a3adb8","CFR":"#8fd3f4","SP":"#2a6fb0","HS":"#0b0b14"}
 LS={"exposure":"-","CFR":"-","SP":"-","HS":"-"}
 LAB={"exposure":"exposure","CFR":"lighting CFR","SP":"specificity","HS":"hazard sensitivity"}
-fig,ax=plt.subplots(2,1,figsize=(3.45,2.2),gridspec_kw={"hspace":0.95})
+fig,ax=plt.subplots(1,2,figsize=(3.45,1.4),gridspec_kw={"wspace":0.32,"width_ratios":[1.0,1.0]})
 a=ax[0]
 for k,c in EXC.items():
     D=S["dims"][k]
@@ -23,11 +23,11 @@ for k,c in EXC.items():
         a.plot(ns*MIN,np.array(f["sd"]),lw=0,marker="o",ms=1.3,color=c,alpha=0.55)
         a.plot(nn*MIN,f["a"]*np.sqrt(1/nn-1/N),color=c,lw=0.8,ls=LS[k],alpha=0.9)
 a.set_xscale("log"); a.set_yscale("log"); a.set_xticks([1,3,10]); a.set_xticklabels(["1","3","10"]); a.minorticks_off()
-a.tick_params(labelsize=6.2,length=1.5,pad=1); a.set_xlabel("minutes of near-pedestrian driving",fontsize=6.7,labelpad=0.3)
+a.tick_params(labelsize=6.2,length=1.5,pad=1); a.set_xlabel("minutes of driving",fontsize=6.7,labelpad=0.3)
 a.set_ylabel("SD",fontsize=6.7,labelpad=1)
 a.set_title("(a) spread of the estimate",fontsize=7.5,loc="left",pad=1.5)
 h=[plt.Line2D([],[],color=c,lw=1.1,ls=LS[k],label=LAB[k]) for k,c in EXC.items()]
-a.legend(handles=h,frameon=False,fontsize=6.0,ncol=2,loc="lower left",bbox_to_anchor=(0.0,0.0),handlelength=0.8,columnspacing=0.6,labelspacing=0.1,borderpad=0.05)
+fig.legend(handles=h,frameon=False,fontsize=6.0,ncol=4,loc="lower center",bbox_to_anchor=(0.5,-0.16),handlelength=1.0,columnspacing=1.0,handletextpad=0.4)
 b=ax[1]; V=[("CFR","CFR < 1","#8fd3f4"),("exposure","exposure ≠ human","#a3adb8"),("HS","HS ≠ 0","#0b0b14")]
 XMAX=3000*1/12.0
 for j_,(k,nm,c) in enumerate(V):
