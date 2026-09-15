@@ -124,3 +124,57 @@ def panel_readings(b,title="(b) the two readings",fs=1.0,compact=False,schematic
     b.text(0.98,0.16,"one $F$ per policy;\nthe arrow changes only $I$" if HAS4 else "one $F$ and one $I$\nper policy",
            transform=b.transAxes,fontsize=4.4*fs,color="#6b6a62",va="top",ha="right",linespacing=1.25)
     for s_ in ("top","right"): b.spines[s_].set_visible(False)
+
+
+# ---------------- 框架图专用：示意风格（无刻度、无数字，只表达 F、I 的含义与判据几何） ----------------
+def frame_extract(a,fs=1.0):
+    """示意：三条理想化的规划（同一场景问三次），F、I 分别是 O–R、O–N 的距离，不用真实数据。"""
+    t=np.linspace(0,1,60)
+    O=np.stack([ 1.6*t**2.2, 15*t],1)                     # 看见行人：向右让开
+    R=np.stack([ 0.0*t,       16*t],1)                     # 抹掉行人：直行，穿过行人路径
+    N=np.stack([-1.3*t**1.5,  15.5*t],1)                   # 夜化：无缘由地偏了一点
+    ped=np.array([[-2.6,11.5],[0.6,13.4]])                 # 行人从左侧走向走廊
+    a.axvspan(-1,1,color="#eef1f6",lw=0,zorder=0)
+    a.plot(ped[:,0],ped[:,1],color="#b3412c",ls=(0,(1.3,1.3)),lw=1.0,zorder=5)
+    a.plot(ped[0,0],ped[0,1],marker="*",ms=7*fs,color="#b3412c",mec="white",mew=0.4,zorder=6)
+    for X,c,lw,ls,z in ((N,"#8d8b84",1.1,(0,(2.6,1.6)),3),(R,"#e34948",1.1,(0,(2.6,1.6)),3),(O,"#2a78d6",1.6,"-",4)):
+        a.plot(X[:,0],X[:,1],color=c,lw=lw,ls=ls,zorder=z)
+    a.plot(0,0,marker="^",ms=6*fs,color="#0b0b0b",zorder=6)
+    for X,c,lab,i,off in ((R,"#e34948","$F$",-1,(0.0,-1.3)),(N,"#8d8b84","$I$",30,(-1.1,0.9))):   # F 在末端，I 在半程：都是同时刻两条规划的距离
+        p0=tuple(O[i]); p1=tuple(X[i])
+        a.annotate("",p1,p0,arrowprops=dict(arrowstyle="<->",lw=0.9,color=c,shrinkA=0,shrinkB=0),zorder=7)
+        a.annotate(lab,((p0[0]+p1[0])/2+off[0],(p0[1]+p1[1])/2+off[1]),ha="center",va="center",fontsize=6.6*fs,color=c,weight="bold",zorder=8)
+    a.set_xlim(-4.5,4.5); a.set_ylim(-1.2,18.5); a.set_xticks([]); a.set_yticks([])
+    for s_ in ("top","right","left","bottom"): a.spines[s_].set_visible(False)
+    h=[plt.Line2D([],[],color="#2a78d6",lw=1.6,label="plan on $O$"),
+       plt.Line2D([],[],color="#e34948",lw=1.1,ls=(0,(2.6,1.6)),label="plan on $R$"),
+       plt.Line2D([],[],color="#8d8b84",lw=1.1,ls=(0,(2.6,1.6)),label="plan on $N$"),
+       plt.Line2D([],[],color="#b3412c",lw=1.0,ls=(0,(1.3,1.3)),marker="*",ms=5,label="pedestrian")]
+    a.legend(handles=h,frameon=False,fontsize=4.6*fs,loc="lower right",bbox_to_anchor=(1.04,-0.02),
+             handlelength=1.0,handletextpad=0.3,labelspacing=0.14,borderpad=0.05)
+
+def frame_readings(b,fs=1.0):
+    """F–I 平面示意：箭头坐标轴、F=I 对角线、避让区/抖动区，六家各一个点（对数坐标下的均值位置，无刻度）。"""
+    EPS=4e-3
+    b.fill_between([EPS,0.5],[0.5,0.5],[40,40],color="#e8f0e8",lw=0,zorder=0)
+    b.fill_between([0.5,40],[0.5,40],[40,40],color="#e8f0e8",lw=0,zorder=0)
+    b.plot([EPS,40],[EPS,40],color="#6b6a62",ls=(0,(3,2)),lw=0.8,zorder=2)
+    b.axhline(0.5,color="#9a998f",ls=(0,(1.6,1.6)),lw=0.7,zorder=2)
+    for m,d in AX.items():
+        F=[];IN=[]
+        for t,v in d.items():
+            if not all(k in v for k in ("clean","rm","night")): continue
+            F.append(disp(v["clean"],v["rm"])); IN.append(disp(v["clean"],v["night"]))
+        b.plot(np.mean(IN),np.mean(F),marker="o",ms=4.6*fs,color=COL[m],mec="white",mew=0.6,zorder=5)
+    b.set_xscale("log"); b.set_yscale("log"); b.set_xlim(EPS*0.9,55); b.set_ylim(EPS*0.9,30)
+    b.set_xticks([]); b.set_yticks([]); b.minorticks_off()
+    for s_ in ("top","right","left","bottom"): b.spines[s_].set_visible(False)
+    # 箭头坐标轴
+    b.annotate("",(55,EPS*0.9),(EPS*0.9,EPS*0.9),arrowprops=dict(arrowstyle="-|>",lw=0.7,color="#52514e",shrinkA=0,shrinkB=0),zorder=3)
+    b.annotate("",(EPS*0.9,30),(EPS*0.9,EPS*0.9),arrowprops=dict(arrowstyle="-|>",lw=0.7,color="#52514e",shrinkA=0,shrinkB=0),zorder=3)
+    b.text(0.5,-0.06,"$I$: displacement from re-lighting",transform=b.transAxes,ha="center",va="top",fontsize=5.4*fs,color="#52514e")
+    b.text(-0.06,0.5,"$F$: displacement from the pedestrian",transform=b.transAxes,ha="right",va="center",rotation=90,fontsize=5.4*fs,color="#52514e")
+    b.annotate("$F=I$",(0.02,0.02),textcoords="offset points",xytext=(-1,4),ha="right",va="bottom",fontsize=5.0*fs,color="#6b6a62",rotation=45)
+    b.text(0.05,0.94,"avoidance\n$F\\geq0.5$ m, $F>I$",transform=b.transAxes,fontsize=5.0*fs,color="#3f6b45",va="top",linespacing=1.2)
+    b.text(0.97,0.10,"jitter: $F\\leq I$",transform=b.transAxes,fontsize=5.0*fs,color="#6b6a62",va="bottom",ha="right")
+    b.text(0.97,0.50,"one point\nper policy",transform=b.transAxes,fontsize=4.6*fs,color="#6b6a62",va="bottom",ha="right",linespacing=1.2)

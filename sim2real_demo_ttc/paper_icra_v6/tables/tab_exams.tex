@@ -1,12 +1,12 @@
 % !TEX root = ../main.tex
 % 手写：检查项一览。
-\begin{table}[t]
+\begin{table*}[t]
 \centering
 \caption{\textbf{The check-up.} Each exam, the question it asks, the counterfactual that answers it, the paired plans or axes of \cref{sec:checkup} it is built on, and the reference threshold we set.}
 \label{tab:exams}
 \footnotesize
-\setlength{\tabcolsep}{2.4pt}
-\begin{tabular}{@{}L{1.45cm}L{1.55cm}L{2.35cm}L{1.25cm}L{1.15cm}@{}}
+\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{0.92}\setlength{\abovecaptionskip}{2pt}\setlength{\belowcaptionskip}{-4pt}
+\begin{tabular}{@{}L{2.6cm}L{3.4cm}L{5.6cm}L{2.2cm}L{2.6cm}@{}}
 \toprule
 Exam & Question & Measurement & Built on & Ref.\ \\
 \midrule
@@ -17,4 +17,4 @@ Specificity $\SP$ & Does it over-react & plan change when no reaction is needed 
 Lighting $\CFR$, align & Does it react to noise & perturbation vs.\ removal, same frame & $F/I$ & $\CFR\gg1$, align $\approx0$ \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}

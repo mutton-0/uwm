@@ -15,7 +15,7 @@ MODE=sys.argv[1] if len(sys.argv)>1 else "wide"
 R5="/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090"; V5=f"{R5}/paper_icra_v5"
 sys.path.insert(0,"/home/boyuewang/120/uwm/sim2real_demo_ttc/scripts"); sys.path.insert(0,f"{V5}/scripts")
 from appearance_transform import transform
-from fi_panels import panel_extract,panel_readings
+from fi_panels import panel_extract,panel_readings,frame_extract,frame_readings
 plt.rcParams.update({"font.family":"DejaVu Sans","font.size":6.4,"axes.linewidth":0.6,"axes.edgecolor":"#52514e",
                      "xtick.color":"#52514e","ytick.color":"#52514e"})
 UID="A_0095"
@@ -120,8 +120,8 @@ else:
     bT=aB-ARRf; bB=bT-TIT-1.30/FH
     box(L,bB,R,bT); bg.text(L+fx(0.05),bT-fy(0.115),"(b) diagnosis",fontsize=7.0,weight="bold",color="#2b2b28")
     PB=bB+fy(0.28); PT=bT-fy(0.27)
-    panel_extract(fig.add_axes([L+fx(0.30),PB,fx(0.86),PT-PB]),title="three queries, one scene",compact=True)
-    panel_readings(fig.add_axes([L+fx(1.72),PB,fx(1.50),PT-PB]),title="the two readings",compact=True,schematic=True)
+    ax1=fig.add_axes([L+fx(0.10),PB,fx(1.25),PT-PB]); frame_extract(ax1); ax1.set_title("three queries, one scene",fontsize=6.0,loc="left",pad=2)
+    ax2=fig.add_axes([L+fx(1.80),PB,fx(1.42),PT-PB]); frame_readings(ax2); ax2.set_title("the two readings",fontsize=6.0,loc="left",pad=2)
     arrow(((L+R)/2,bB-fy(0.022)),((L+R)/2,bB-ARRf+fy(0.022)),lw=1.6,ms=6)
     bg.text((L+R)/2+fx(0.08),bB-ARRf/2,"read $F$, $I$ $\\to$ five exams",fontsize=5.0,va="center",color="#2f5d94")
     # (c) 五个检查横排：与 (a)(b) 同款容器框，高度足额，底边不再截断
