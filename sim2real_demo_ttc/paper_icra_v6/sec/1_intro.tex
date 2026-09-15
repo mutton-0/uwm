@@ -1,6 +1,16 @@
 % !TEX root = ../main.tex
 \section{Introduction}
 \label{sec:intro}
+\begin{figure*}[b]
+\centering
+\includegraphics[width=\textwidth]{figures/frame.pdf}
+
+\caption{\textbf{The Check-Up framework.} Pixel-level paired data (a) yield the two causal axes (b) and the five exams built on them (c). Diagnosed on one driving side and tested on the other, they give a priced prognosis, the check-up report (d).}
+%120
+% 该体检过程中，首先进行像素级配对数据的构建，然后提炼因果轴，最终对策略在目标域的表现进行预诊断。
+
+\label{fig:method}
+\end{figure*}
 A leaderboard rank does not tell you how a driving policy will behave in a new domain. End-to-end and vision-language-action (VLA) driving policies are compared by benchmark scores, and a deployment decision is, implicitly, a bet that the rank those scores produce will still hold once the policy is driving at the new site, not just on someone else's roads. 
 On scenes where a pedestrian is near the ego corridor, that bet fails for the six released policies we test: their rank on nuScenes'~\cite{caesar2020nuscenes} open-loop metrics or on NAVSIM's~\cite{caesar2021nuplan,dauner2024navsim} leaderboard score does not carry over to the deployment site ($\rho=-0.54$ to $+0.49$, \cref{sec:sample}), a gap that open-loop scores are known to open~\cite{zhao2026bridgesim,li2024egostatus,codevilla2019exploring}. The reason is not noise but mechanism. A score is an outcome measure, and an outcome can be right for the wrong reason: a policy that never approaches a pedestrian because it plans short trajectories scores as well as one that sees the pedestrian and yields, and the two behave very differently the first time the scene changes. Telling them apart means asking why the score came out as it did, usually from little data, because a closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to save.
 
@@ -119,16 +129,6 @@ exam that transfers reproduces the new side's ordering by how often a policy kee
 % basis for selecting a policy for a given deployment.
 %！！！！！这段增加引用文献
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/frame.pdf}
-
-\caption{\textbf{The Check-Up framework.} Pixel-level paired data (a) yield the two causal axes (b) and the five exams built on them (c). Diagnosed on one driving side and tested on the other, they give a priced prognosis, the check-up report (d).}
-%120
-% 该体检过程中，首先进行像素级配对数据的构建，然后提炼因果轴，最终对策略在目标域的表现进行预诊断。
-
-\label{fig:method}
-\end{figure*}
 
 
 % \paragraph*{Contributions}
