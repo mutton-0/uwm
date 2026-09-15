@@ -140,29 +140,20 @@ axes from them, and issuing a prognosis for the policy's behaviour in the target
 %本文的贡献在于，在物理智能领域，设计了一个通用的模型体检的流程，具体包括（a）像素级配对数据的构建，（b）因果轴的提炼以及（c）prognosis:策略在这些轴上的评估的检测手段。
 
 %120 :!!!!!!内部要改具体内容
-The contribution of this paper is a small-sample check-up for end-to-end and VLA driving policies, built on verified, pixel-level counterfactual edits of real frames. It comprises 
+The contribution is the Check-Up, a counterfactual diagnosis of end-to-end and VLA driving
+policies under domain shift, in three parts.
 \begin{enumerate}\itemsep2pt
-
-%       1.	A small-sample check-up for end-to-end and VLA driving policies, built on verified, pixel-level counterfactual edits of real frames. Its central result is methodological: 
-
-% 2.	An account of what a small check-up can and cannot establish in a new domain: a sample-size law for every exam, and a pre-registered transfer test from left- to right-hand drive. Orderings and verdicts transfer; point values do not. The exam that predicts behaviour on the new side is how steadily a policy drives, not how strongly it reacts, and it does so better than that side's own leaderboard score.
-% 3.	A diagnosis of six released policies, with an explanation from inside the three BEV planners of why the pedestrian risk goes unmanaged: the pedestrian leaves a trace in the features but is not decoded, the planning grid cannot locate it, and the plan rarely reaches it.
-
-
-\item the construction of \emph{pixel-level paired data}:
- built a small-sample check-up for driving policies on verified, pixel-level counterfactual edits of real frames rather than the promptable text prompts language-model interpretability usually relies on --- to our knowledge among the first uses of concept-vector-style methods on a multi-modal, largely non-promptable input. Its central result is methodological: raw response magnitude is a poor safety signal, and decomposing it into magnitude, jitter and separation turns a two-sided quantity into a one-sided certificate. We use it to diagnose six policies, with an
-explanation from inside the networks.
-
-
-\item diagnose with the distillation of the \emph{causal axes}: 
-we treat the raw response to removing a pedestrian as a poor safety signal, because a plan that moves is as likely to move towards the pedestrian as away from it. Decomposing the response into its magnitude, the faithfulness displacement $F$, and the policy's own jitter under an irrelevant edit, the interference displacement $I$~\eqref{eq:FI}. And the separation it buys, $\Delta S$. A response counts as avoidance only if it moves, moves more than the jitter, and buys distance; on the cells in which the pedestrian does lie on the planned path, \NumCfRealPct\% of responses pass. Two observations on the BEV planners explain why: their own semantic heads do not decode the pedestrian, and the plan rarely reaches it.
-
-
-
-\item the \emph{prognosis}: 
-An account of what a small check-up can and cannot establish in a new domain: a sample-size law for every exam, and a pre-registered transfer test from left- to right-hand drive. Orderings and verdicts transfer; point values do not. The exam that predicts behaviour on the new side is how steadily a policy drives, not how strongly it reacts, and it does so better than that side's own leaderboard score.
-
-
+\item \emph{Pixel-level paired data.} Every logged frame is queried with and without the target
+      pedestrian and under a night-style perturbation at two levels, each edit verified by an
+      independent detector; six released policies are read on two driving sides.
+\item \emph{Two causal axes.} A response is read as the faithfulness displacement $F$ and the
+      interference displacement $I$~\eqref{eq:FI}, and counts as avoidance only if it moves, exceeds
+      the jitter, and buys distance. Where the pedestrian lies on the planned path, \NumCfRealPct\%
+      of responses qualify, and the lighting edit moves every plan further than the pedestrian does.
+\item \emph{A priced prognosis.} Diagnosed on one driving side and tested on the other, orderings
+      and verdicts transfer: the exam that transfers predicts the new side's near-miss rate at
+      $\rho={\NumSpBeh}$, against $-0.54$--$+0.49$ for the standard scores, and each verdict is priced
+      in frames---lighting within \NumNstarCFRhi, exposure within \NumNstarExpHi.
 \end{enumerate}
 
 
