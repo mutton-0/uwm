@@ -29,8 +29,7 @@ In these scenes the no-collision gate carries \NumNCshareClose\% of the spread, 
 scenes it carries \NumNCshare\% and the two map-compliance gates carry \NumMapShare\% (drivable area
 \NumDacShare\%, driving direction \NumDdcShare\%): the leaderboard ranks these policies by map
 compliance, and none of the exams above is visible in it. Of our exams, specificity predicts the
-near-pedestrian ordering ($\rho=+0.66$), while hazard sensitivity does not ($+0.14$), because no
-policy has any.
+near-pedestrian ordering ($\rho=+0.66$), while hazard sensitivity does not ($+0.14$), because it is near zero for every policy on these frames.
 
 \paragraph{Pedestrian TTC across driving sides}
 Following the plan against the pedestrian's logged future, we count the moving-ego scenes in which the
@@ -53,5 +52,4 @@ something else, and they do not predict these orderings.
 
 \paragraph{Reading}
 Where a standard metric measures what an exam measures, they agree (pedestrian collisions: $\rho=+0.94$;
-TTC and exposure). None shows whether the pedestrian changed the plan, and the full-set score hides the
-near-pedestrian scenes.
+TTC and exposure). None shows whether the pedestrian changed the plan, and the full-set score hides the near-pedestrian scenes. A rank does not carry the near-pedestrian ordering to a new site; the exposure and specificity exams, read from the same frames, do.

@@ -10,7 +10,7 @@
 (b)~Driving needed to settle each verdict, one dot per policy; values beyond the axis are off scale.}
 \label{fig:sample}
 \end{figure}
-
+Two questions decide whether a few hundred edited frames can stand in for a rank: how many frames each verdict needs, and which verdicts carry over to the other driving side.
 \subsection{Fitting}
 For every exam and policy we subsample $n$ of the \NumPool{} frames that all six policies share, 400
 times, and fit the spread of the estimate with $\sigma(n)=a\sqrt{1/n-1/N}$ (\cref{fig:sample}).
@@ -94,11 +94,9 @@ $\NumCfrErrHuge$. Values measured elsewhere are worth about forty scenes measure
 Of the exams in the report, the one that predicts the new domain's behaviour is not the one that
 measures how \emph{much} a policy reacts, but the one that measures how \emph{steadily} it drives.
 Correlating each Boston exam against the Singapore rate of sub-1.5\,s time-to-proximity over the six
-policies, specificity gives $\rho={\NumSpBeh}$---the only value significant at the two-sided 5\% level
-for $n{=}6$---against ${\NumExpBeh}$ for exposure and ${\NumCfrBeh}$ for $\CFR$. Specificity asks how far a plan moves when an
+policies, specificity gives $\rho={\NumSpBeh}$, against ${\NumExpBeh}$ for exposure and ${\NumCfrBeh}$ for $\CFR$. This exam was not pre-registered; we report it as exploratory. Cross-policy correlations rest on six policies; we read them as orderings, not as tests. Specificity asks how far a plan moves when an
 \emph{irrelevant} part of the scene is edited; a policy that answers ``not at all'' drives steadily,
 and steadiness is what survives the change of side. (Exposure travels too: on the larger
-original-image set of \cref{sec:bench} it reaches $0.94$ against the same target. Specificity is the
-stronger predictor and the only one that clears significance here.) The decomposition above says why:
+original-image set of \cref{sec:bench} it reaches $0.94$ against the same target.) The decomposition above says why:
 displacement that is not aimed away from the pedestrian is not protection, and a policy producing a
 lot of it comes close to the pedestrian on both sides.

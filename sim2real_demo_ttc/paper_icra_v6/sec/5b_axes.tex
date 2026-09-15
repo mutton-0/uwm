@@ -38,15 +38,13 @@ cells in which the pedestrian-blind plan does come within 1\,m of the pedestrian
 Across \NumCfModels{} policies that is \NumCfNeed{} of \NumCfCells{} cells (\NumCfNeedLo--\NumCfNeedHi\%
 per policy), and \NumCfReal{} of them---\NumCfRealPct\%---are genuine avoidance. On those cells the
 median clearance changes by \NumCfDsLo--\NumCfDsHi\,m and the median planned distance by
-\NumCfArcLo--\NumCfArcHi\,m: facing a pedestrian it would otherwise reach, no policy diverts and none
-slows. Third, the displacement that does occur is not aimed: of the
+\NumCfArcLo--\NumCfArcHi\,m: facing a pedestrian it would otherwise reach, no policy's plan diverts or slows under our open-loop protocol. Third, the displacement that does occur is not aimed: of the
 \NumMoveN{} cells in which the plan moved, \NumMoveFar{} increased the clearance and \NumMoveNear{}
 decreased it. Per policy the split differs sharply: DiffusionDrive reacts in few
 scenes but in the right direction (median $\Delta S=\NumDDmed$\,m), while SimLingo moves in more
 scenes than the other five combined and moves \emph{towards} the pedestrian more often than away
-(\NumSLnear{} against \NumSLfar, median $\NumSLmed$\,m); it also has the highest rate of sub-1.5\,s
-time-to-proximity (\cref{tab:bench}). Finally, what a policy yields does not grow with the hazard: the
+(\NumSLnear{} against \NumSLfar, median $\NumSLmed$\,m); it also has the highest rate of sub-1.5\,s time-to-proximity (\cref{tab:bench}). SimLingo is trained in simulation and run here on real images, so part of what we measure is a sim-to-real gap, which is exactly what a check-up at a new site should surface. Finally, what a policy yields does not grow with the hazard: the
 rank correlation between $\Delta S$ and the deceleration the scene demands is
 \NumRhoLo--\NumRhoHi{}.
 
-An exam that rewarded responsiveness alone would therefore rank first the policy with the most sub-1.5\,s encounters.
+An exam that rewarded responsiveness alone would therefore rank first the policy with the most sub-1.5\,s encounters. A score merges these three readings into one number; the edited frames keep them apart.
