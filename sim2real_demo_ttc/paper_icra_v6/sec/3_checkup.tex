@@ -28,11 +28,10 @@ pedestrian's \emph{logged} future $P_t$. The horizon $2.5$\,s is the one all six
 
 The displacement between two plans is
 \begin{equation}
-\bar D(X,Y)=\tfrac{1}{|\mathcal{T}|}\textstyle\sum_{t\in\mathcal{T}}\|X_t-Y_t\|,\qquad
-\mathcal{T}=\{0,0.1,\dots,2.5\},
+\bar D(X,Y)=\tfrac{1}{|\mathcal{T}|}\textstyle\sum_{t\in\mathcal{T}}\|X_t-Y_t\|,
 \label{eq:disp}
 \end{equation}
-and the two quantities the rest of the paper is written in are
+with $\mathcal{T}=\{0,0.1,\dots,2.5\}$, and the two quantities the rest of the paper is written in are
 \begin{equation}
 F=\bar D(X^{O},X^{R}),\qquad I=\bar D(X^{O},X^{N}).
 \label{eq:FI}
@@ -72,10 +71,8 @@ residual artefact at $5$--$17\%$ of the removal effect.
 With $c_t(X)=\|X_t-P_t\|-r_e-r_p$ the clearance net of the ego half-width $r_e=1.0$\,m and the
 pedestrian radius $r_p=0.4$\,m, a plan is summarised by four functionals,
 \begin{align}
-S(X)&=\mathrm{mean}_t\min(c_t,\bar c), &
-A(X)&=\mathbb{1}[\min_t c_t>0],\label{eq:SA}\\
-C(X)&=\mathrm{clip}(\min_t c_t/d_0,0,1), &
-T(X)&=\tfrac{1}{2.5}\inf\{t\!:c_t<d_0\},\label{eq:CT}
+S(X)&=\langle\min(c_t,\bar c)\rangle_t,\; A(X)=\mathbb{1}[\min_t c_t>0],\label{eq:SA}\\
+C(X)&=\mathrm{clip}_{[0,1]}(\min_t c_t/d_0),\; T(X)=\inf\{t\!:c_t<d_0\}/2.5,\label{eq:CT}
 \end{align}
 with $T=1$ if the set is empty. The constants are physical, not tuned: $r_e$ is the half-width of the
 nuScenes ego box ($4.08\times1.85$\,m), $r_p$ the disc a standing adult occupies, $d_0=1$\,m the outer

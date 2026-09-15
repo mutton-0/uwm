@@ -1,7 +1,8 @@
 % ICRA submission (IEEEtran conference template) — v5: small-sample check-up of driving policies
 % 所有数字由 scripts/ 下脚本从 JSON 直读（tables/*.tex、tables/numbers.tex 由 make_tables.py 写出）。
-\documentclass[conference]{IEEEtran}
+\documentclass[letterpaper, 10pt, conference]{ieeeconf}
 \IEEEoverridecommandlockouts
+\overrideIEEEmargins
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
@@ -21,10 +22,17 @@
 \setlength{\abovecaptionskip}{2pt}\setlength{\belowcaptionskip}{0pt}
 \setlength{\textfloatsep}{8pt plus 2pt minus 2pt}\setlength{\floatsep}{6pt plus 2pt minus 2pt}
 \begin{document}
-\title{Beyond the Leaderboard: Counterfactual Diagnosis of End-to-End and VLA Driving Policies Under Domain Shift}
-\author{\IEEEauthorblockN{Ruolin Yang, Zilin Huang, Buoyue Wang, Zhengyang Wan, Yuhao Luo, Zihao Sheng, Sikai Chen*}
-\IEEEauthorblockA{Paper ID ---}}
+\title{\LARGE \bf Beyond the Leaderboard: Counterfactual Diagnosis of End-to-End and VLA Driving Policies Under Domain Shift}
+% 作者块：ICRA 2027 为双盲评审（CFP: "double anonymous review process"），投稿版把 \anontrue 打开即可匿名
+\newif\ifanon \anonfalse
+\ifanon
+\author{Anonymous authors\\ Paper ID ---}
+\else
+\author{Ruolin Yang, Zilin Huang, Buoyue Wang, Zhengyang Wan, Yuhao Luo, Zihao Sheng, Sikai Chen*}
+\fi
 \maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
 \input{sec/0_abstract}
 \input{sec/1_intro}
 \input{sec/2_related}

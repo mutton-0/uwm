@@ -16,7 +16,7 @@ R5="/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090"; V5=f"{R5}/paper_icr
 sys.path.insert(0,"/home/boyuewang/120/uwm/sim2real_demo_ttc/scripts"); sys.path.insert(0,f"{V5}/scripts")
 from appearance_transform import transform
 from fi_panels import panel_extract,panel_readings,frame_extract,frame_readings
-plt.rcParams.update({"font.family":"DejaVu Sans","font.size":6.4,"axes.linewidth":0.6,"axes.edgecolor":"#52514e",
+plt.rcParams.update({"font.family":"Nimbus Roman","mathtext.fontset":"stix","font.size":6.4,"axes.linewidth":0.6,"axes.edgecolor":"#52514e",
                      "xtick.color":"#52514e","ytick.color":"#52514e"})
 UID="A_0095"
 MAN=json.load(open(f"{R5}/risk_card_manifest.json")); IDX={x["uid"]:x for k in ("A","B") for x in MAN[k]}

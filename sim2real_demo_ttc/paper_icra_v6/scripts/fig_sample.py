@@ -5,7 +5,7 @@
 import json,numpy as np,matplotlib
 matplotlib.use("Agg"); import matplotlib.pyplot as plt
 V5="/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090/paper_icra_v5"
-plt.rcParams.update({"font.family":"DejaVu Sans","font.size":8.3,"axes.spines.top":False,"axes.spines.right":False,
+plt.rcParams.update({"font.family":"Nimbus Roman","mathtext.fontset":"stix","font.size":8.3,"axes.spines.top":False,"axes.spines.right":False,
                      "axes.linewidth":0.6,"axes.edgecolor":"#52514e","xtick.color":"#52514e","ytick.color":"#52514e"})
 S=json.load(open(f"{V5}/sample_size_v2.json")); N=S["N"]
 MIN=1/12.0   # 每帧 5 s（本语料 4 帧 / 20 s 场景）；横轴一律换算成分钟

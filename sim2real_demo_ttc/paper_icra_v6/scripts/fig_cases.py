@@ -12,7 +12,7 @@ R5="/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090"; V5=f"{R5}/paper_icr
 M=["dd","ltf","ddv2","simlingo","autovla","alpamayo15"]
 SH={"dd":"DD","ltf":"LTF","ddv2":"DDv2","simlingo":"SimLingo","autovla":"AutoVLA","alpamayo15":"Alpamayo"}
 COL={"dd":"#b8c2cc","ltf":"#8fa3b8","ddv2":"#5b9bd5","simlingo":"#2e75b6","autovla":"#1f3f6e","alpamayo15":"#0b0b14"}
-plt.rcParams.update({"font.family":"DejaVu Sans","font.size":7,"axes.linewidth":0.6,"axes.edgecolor":"#52514e",
+plt.rcParams.update({"font.family":"Nimbus Roman","mathtext.fontset":"stix","font.size":7,"axes.linewidth":0.6,"axes.edgecolor":"#52514e",
                      "xtick.color":"#52514e","ytick.color":"#52514e"})
 def _pick(m):
     a=f"{R5}/nvtraj_{m}_sg-one-north_closevru_nav.json"; b=f"{R5}/nvtraj_{m}_sg-one-north_closevru.json"
