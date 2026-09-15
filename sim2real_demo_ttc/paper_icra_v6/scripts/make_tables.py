@@ -77,10 +77,10 @@ open(f"{_OUT}/tables/tab_prereg.tex","w").write("\n".join(T)+"\n")
 NS=json.load(open(f"{V5}/night_speed.json"))
 def bold(txt,cond): return f"\\textbf{{\\boldmath {txt}}}" if cond else txt
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{The night-style perturbation and the plan.} $\CFR=\mathbb{E}F/\mathbb{E}I$ \eqref{eq:cfr} on the same frames, 95\% CI: $F$ (pedestrian) should be large, $I$ (re-lighting) small, so $\CFR$ higher is better. Speed: change of planned mean speed, $X^{O}\to X^{N}$. $\Delta_N S=S(X^{N})-S(X^{O})$, $S$ of \eqref{eq:SA}, negative = closer. Bold: $p<0.01$.}",
-   r"\label{tab:light}",r"\footnotesize",r"\setlength{\tabcolsep}{3pt}",
-   r"\begin{tabular}{@{}lccc@{}}",r"\toprule",
-   r"Policy & $\CFR$ [95\% CI] $\uparrow$ & speed $\downarrow$ & $\Delta_N S$ (m) $\uparrow$ \\",r"\midrule"]
+ r"\caption{\textbf{The night-style perturbation and the plan.} $\CFR=\mathbb{E}F/\mathbb{E}I$ \eqref{eq:cfr} on the same frames, 95\% CI: $F$ (pedestrian) should be large, $I$ (re-lighting) small, so $\CFR$ higher is better. Speed: change of planned mean speed, $X^{O}\to X^{N}$. $\Delta_N S=S(X^{N})-S(X^{O})$, $S$ of \eqref{eq:SA}, negative = closer. Last column: $\CFR$ at the dusk and night levels on the \NumDuskN{} NAVSIM scenes. Bold: $p<0.01$.}",
+   r"\label{tab:light}",r"\scriptsize",r"\setlength{\tabcolsep}{1.6pt}",
+   r"\begin{tabular}{@{}lcccc@{}}",r"\toprule",
+   r"Policy & $\CFR$ [95\% CI] $\uparrow$ & speed $\downarrow$ & $\Delta_N S$ (m) $\uparrow$ & dusk\,/\,night $\CFR$ $\uparrow$ \\",r"\midrule"]
 for m in M:
     c=CF[m]["corr"]; n=NS[m]
     pm=lambda x,f: "$"+f.format(x)+"$"   # 不再把小值压成 "0"：真值很小就多给一位小数，见下
@@ -88,7 +88,9 @@ for m in M:
     _f="{:+.0f}" if abs(100*n['dv_rel'])>=1 else "{:+.1f}"
     sp=bold(pm(100*n['dv_rel'],_f)[:-1]+"\\%$",n["p"]<0.01)
     ds=bold(pm(n['dS'],"{:+.2f}" if abs(n['dS'])>=0.01 else "{:+.3f}"),n["dS_p"]<0.01)
-    T.append(f"{SH[m]} & {c['CFR']:.2f} {{\\scriptsize[{c['CFR_ci'][0]:.2f},{c['CFR_ci'][1]:.2f}]}} & {sp} & {ds} \\\\")
+    _dk=json.load(open(f"{V5}/dusk_cfr.json"))[m] if os.path.exists(f"{V5}/dusk_cfr.json") else None
+    dk=f"{_dk['cfr_dusk']:.2f}\\,/\\,{_dk['cfr_night']:.2f}" if _dk else "--"
+    T.append(f"{SH[m]} & {c['CFR']:.2f} {{\\scriptsize[{c['CFR_ci'][0]:.2f},{c['CFR_ci'][1]:.2f}]}} & {sp} & {ds} & {dk} \\\\")
 T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
 open(f"{_OUT}/tables/tab_light.tex","w").write("\n".join(T)+"\n")
 # ---------- 数字宏 ----------
