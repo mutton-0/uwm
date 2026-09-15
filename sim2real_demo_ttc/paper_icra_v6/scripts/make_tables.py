@@ -54,11 +54,11 @@ def _cir(k,f="%.2f"):   # 置信区间独立成一小行，灰色 scriptsize
     return r"\multicolumn{1}{r}{\textcolor{gray}{\scriptsize 95\% CI}} & "+" & ".join(r"\textcolor{gray}{\scriptsize["+(f%A[m]["ci"][k][0])+", "+(f%A[m]["ci"][k][1])+"]}" for m in M)+r" & \\[-1pt]"
 R=[]
 R.append(r"\multicolumn{8}{@{}l}{\emph{Exams} (236 nuScenes frames)} \\")
-R.append(_row(r"Exposure $\approx1$",[cell(A[m]["point"]["exposure"],"exposure",m==_bst["exposure"]) for m in M]+["1.00"])); R.append(_cir("exposure"))
-R.append(_row(r"Hazard sens.\ $\HS$ $\uparrow$",[cell(A[m]["point"]["HS"],"HS",m==_bst["HS"]) for m in M]+[f"{_hs_h:.2f}"])); R.append(_cir("HS"))
-R.append(_row(r"Scaling $\uparrow$",[cell(A[m]["point"]["HS_slope"],"HS_slope",m==_bst["HS_slope"],"%+.2f") for m in M]+[f"{_gcx.get('sc_median',float('nan')):+.2f}"])); R.append(_cir("HS_slope","%+.2f"))
-R.append(_row(r"Specificity $\SP$ $\uparrow$",[cell(A[m]["point"]["SP"],"SP",m==_bst["SP"]) for m in M]+["--"])); R.append(_cir("SP"))
-R.append(_row(r"Lighting $\CFR$ $\uparrow$",[cell(A[m]["point"]["CFR"],"CFR",m==_bst["CFR"]) for m in M]+["--"])); R.append(_cir("CFR"))
+R.append(_row(r"Exposure (ratio to human) $\approx1$",[cell(A[m]["point"]["exposure"],"exposure",m==_bst["exposure"]) for m in M]+["1.00"])); R.append(_cir("exposure"))
+R.append(_row(r"Hazard sens.\ $\HS\in[-1,1]$ $\uparrow$",[cell(A[m]["point"]["HS"],"HS",m==_bst["HS"]) for m in M]+[f"{_hs_h:.2f}"])); R.append(_cir("HS"))
+R.append(_row(r"Scaling (rank corr.) $\uparrow$",[cell(A[m]["point"]["HS_slope"],"HS_slope",m==_bst["HS_slope"],"%+.2f") for m in M]+[f"{_gcx.get('sc_median',float('nan')):+.2f}"])); R.append(_cir("HS_slope","%+.2f"))
+R.append(_row(r"Specificity $\SP\in(0,1]$ $\uparrow$",[cell(A[m]["point"]["SP"],"SP",m==_bst["SP"]) for m in M]+["--"])); R.append(_cir("SP"))
+R.append(_row(r"Lighting $\CFR$ (ratio) $\uparrow$",[cell(A[m]["point"]["CFR"],"CFR",m==_bst["CFR"]) for m in M]+["--"])); R.append(_cir("CFR"))
 R.append(r"\midrule")
 R.append(_row(r"\emph{Collision} at 8\,m/s, vis.\,/\,rm.\ (\%) $\downarrow$",[_bf(f"{coll(m,'8')[0]:.1f}\\,/\\,{coll(m,'8')[1]:.1f}",m==_bc8) for m in M]+["--"]))
 R.append(r"\midrule")
@@ -68,7 +68,7 @@ def _sp(m):
     return bold("$"+_f.format(100*n_['dv_rel'])+"\\%$",n_["p"]<0.01)
 def _ds(m):
     n_=NS[m]; return bold("$"+("{:+.2f}" if abs(n_['dS'])>=0.01 else "{:+.3f}").format(n_['dS'])+"$",n_["dS_p"]<0.01)
-R.append(_row(r"speed of $N$ $\downarrow$",[_sp(m) for m in M]+["--"]))
+R.append(_row(r"speed of $N$ (\%) $\downarrow$",[_sp(m) for m in M]+["--"]))
 R.append(_row(r"clearance of $N$, $\Delta_N S$ (m) $\uparrow$",[_ds(m) for m in M]+["--"]))
 R.append(r"\midrule")
 R.append(r"\multicolumn{8}{@{}l}{\emph{Standard scores} (rank)} \\")
