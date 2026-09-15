@@ -30,10 +30,9 @@ cx=(reg[0]+reg[2])//2; cy=(reg[1]+reg[3])//2               # 以检测框为中�
 CH=int((reg[3]-reg[1])*1.55); CW=int(CH*1.55)
 X0=max(0,min(a0.shape[1]-CW,cx-CW//2)); Y0=max(0,min(a0.shape[0]-CH,cy-CH//2))
 CROP=(slice(Y0,Y0+CH),slice(X0,X0+CW)); AR=CW/CH
-IMGS=(a0,r0,d0,n0); CC=["#1f4e79","#2e75b6","#5b9bd5","#17233b"]; NIMG=len(IMGS)
+IMGS=(a0,r0,n0); CC=["#1f4e79","#2e75b6","#17233b"]; NIMG=len(IMGS)
 LAB=[("logged $O$","detector: pedestrian found"),
      ("removed $R$","detector: not found"),
-     ("re-lit $D$","detector: still found"),
      ("re-lit $N$","detector: still found")]   # A_0095 黄昏档 IoU 0.88，与 dusk_check 同判据
 EX=["exposure","hazard\nsensitivity","scaling","specificity","lighting"]
 PR=["orderings\ntransfer","verdicts\ntransfer","point values\ndo not","priced\nin frames"]
@@ -47,9 +46,9 @@ def draw_img(fig,rect,i,fs=1.0):
     ax.text(4,CH-5,LAB[i][1],color="white",fontsize=3.4*fs,va="bottom",bbox=dict(fc="black",alpha=0.52,lw=0,pad=0.7))
 
 if MODE=="wide":                            # 跨栏扁横版：四段左右排
-    FW=7.16; IW_in=0.66; IH_in=IW_in/AR
+    FW=7.16; IW_in=0.60; IH_in=IW_in/AR
     GAP_in=0.035; PAD_in=0.045; TIT_in=0.15
-    FH=TIT_in+PAD_in+2*IH_in+GAP_in+PAD_in+0.02+0.22
+    FH=TIT_in+PAD_in+NIMG*IH_in+(NIMG-1)*GAP_in+PAD_in+0.02
 else:                                       # 单栏竖版：四段上下叠 + 体检单
     FW=3.45; IW_in=(FW-2*0.05-(NIMG-1)*0.04-2*0.03)/NIMG; IH_in=IW_in/AR
     GAP_in=0.04; PAD_in=0.05; TIT_in=0.145
@@ -106,14 +105,13 @@ if MODE=="wide":
         arrow((x+fx(0.02),MID),(x+ARW-fx(0.02),MID),lw=1.5,ms=6)
         bg.text(x+ARW/2,MID+fy(0.045),txt,fontsize=3.7,ha="center",va="bottom",color="#2f5d94",linespacing=1.1); return x+ARW
     # (a) 配对数据：2×2
-    x=fx(0.03); WA=2*XPAD+2*IW+fx(0.035); x1=stage(x,WA,"(a) paired data")
-    for i in range(NIMG):
-        r_,c_=divmod(i,2); draw_img(fig,[x+XPAD+c_*(IW+fx(0.035)),BOT+PAD+(1-r_)*(IH+GAP),IW,IH],i,fs=0.8)
-    x=right(x1,"query $\\pi$ on\n$O,R,D,N$")
+    x=fx(0.03); WA=fx(0.98); x1=stage(x,WA,"(a) paired data")
+    for i in range(NIMG): draw_img(fig,[x+(WA-IW)/2,CT-PAD-(i+1)*IH-i*GAP,IW,IH],i,fs=0.8)
+    x=right(x1,"query $\\pi$ on\n$O,R,N$")
     # (b) 两条轴
-    WB=fx(2.2); x1=stage(x,WB,"(b) the two axes"); PB=BOT+fy(0.20); PT=CT-fy(0.13)
-    ax1=fig.add_axes([x+fx(0.06),PB,fx(0.86),PT-PB]); frame_extract(ax1,fs=0.85); ax1.set_title("three queries, one scene",fontsize=5.2,loc="left",pad=1.5)
-    ax2=fig.add_axes([x+fx(1.18),PB+fy(0.02),fx(0.96),PT-PB-fy(0.02)]); frame_readings(ax2,fs=0.85); ax2.set_title("the two readings",fontsize=5.2,loc="left",pad=1.5)
+    WB=fx(2.5); x1=stage(x,WB,"(b) the two axes"); PB=BOT+fy(0.20); PT=CT-fy(0.13)
+    ax1=fig.add_axes([x+fx(0.07),PB,fx(0.95),PT-PB]); frame_extract(ax1,fs=0.85); ax1.set_title("three queries, one scene",fontsize=5.2,loc="left",pad=1.5)
+    ax2=fig.add_axes([x+fx(1.32),PB+fy(0.02),fx(1.1),PT-PB-fy(0.02)]); frame_readings(ax2,fs=0.85); ax2.set_title("the two readings",fontsize=5.2,loc="left",pad=1.5)
     x=right(x1,"read\n$F$, $I$")
     # (c) 五项检查：竖排一列
     WC=fx(0.92); x1=stage(x,WC,"(c) the exams")
@@ -142,7 +140,7 @@ else:
     # (a) 配对数据
     aT=1-fy(0.01); aB=stage(aT,H_A,"(a) paired data")
     for i in range(NIMG): draw_img(fig,[L+fx(0.05)+i*(IW+fx(0.04)),aB+PAD,IW,IH],i,fs=0.88)
-    bT=down(aB,"query $\\pi$ on $O,R,D,N$")
+    bT=down(aB,"query $\\pi$ on $O,R,N$")
     # (b) 两条轴
     bB=stage(bT,H_B,"(b) the two axes")
     PB=bB+fy(0.24); PT=bT-fy(0.26)

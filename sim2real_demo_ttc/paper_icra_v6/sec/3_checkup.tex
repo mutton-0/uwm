@@ -18,12 +18,12 @@ Three interventions act on the input, leaving the policy untouched:
 \begin{equation}
 \begin{aligned}
 &\mathcal{E}_O=\mathrm{id},\qquad \mathcal{E}_R:\ \text{delete the pedestrian},\\
-&\mathcal{E}_D,\ \mathcal{E}_N:\ \text{re-light at dusk and at night},
+&\mathcal{E}_N:\ \text{re-light at night},
 \end{aligned}
 \label{eq:interventions}
 \end{equation}
 and yield the paired plans $X^{O}=\pi(\mathcal{E}_O u)$, $X^{R}=\pi(\mathcal{E}_R u)$,
-$X^{D}=\pi(\mathcal{E}_D u)$, $X^{N}=\pi(\mathcal{E}_N u)$. The letters $O,R,D,N$ name the four conditions only: an intervention carries one as a subscript, a plan as a superscript. All quantities below are functionals of
+$X^{N}=\pi(\mathcal{E}_N u)$. The letters $O,R,N$ name the three conditions only: an intervention carries one as a subscript, a plan as a superscript. All quantities below are functionals of
 these plans and of the
 pedestrian's \emph{logged} future $P_t$. The horizon $2.5$\,s is the one all six policies share.
 
@@ -39,7 +39,7 @@ F=\bar D(X^{O},X^{R}),\qquad I=\bar D(X^{O},X^{N}).
 \label{eq:FI}
 \end{equation}
 We call $F$ the \emph{faithfulness} displacement---the plan change attributable to the pedestrian
-itself---and $I$ the \emph{interference} displacement---the change the same policy produces under an edit that carries no driving-relevant information, and therefore its own jitter floor. $I$ is taken at the night level. The dusk reading $\bar D(X^{O},X^{D})$ enters \cref{sec:lighting}. A policy that
+itself---and $I$ the \emph{interference} displacement---the change the same policy produces under an edit that carries no driving-relevant information, and therefore its own jitter floor. A policy that
 uses the pedestrian and ignores the lighting has $F\gg I$. The reverse ordering means the plan is
 driven by something the road does not care about.
 
@@ -51,18 +51,17 @@ and torso prompts, clipped to the box, dilated by $9$\,px) and inpainted with
 LaMa~\cite{suvorov2022lama}. For the LiDAR policy the points inside the box are deleted. Vision--language--action (VLA) policies read several cameras and only the front one is edited, so we retain only frames in which the target
 appears in no other view.
 
-\paragraph{Realising $\mathcal{E}_D$ and $\mathcal{E}_N$}
+\paragraph{Realising $\mathcal{E}_N$}
 Each image $\mathbf{f}\in[0,1]^{h\times w\times3}$ the policy consumes is mapped by a closed-form
 photometric transform
 \begin{equation}
-\mathcal{E}_{D,N}(\mathbf{f})=\mathrm{clip}\!\left[\,g\,\big(\mathrm{sat}_{s}\mathbf{f}\big)^{\gamma}\odot\boldsymbol\tau+\sigma\boldsymbol\epsilon\,\right],
+\mathcal{E}_{N}(\mathbf{f})=\mathrm{clip}\!\left[\,g\,\big(\mathrm{sat}_{s}\mathbf{f}\big)^{\gamma}\odot\boldsymbol\tau+\sigma\boldsymbol\epsilon\,\right],
 \quad \boldsymbol\epsilon\sim\mathcal{N}(0,1),
 \label{eq:relight}
 \end{equation}
 with $\mathrm{sat}_s$ the saturation scaling, $\boldsymbol\tau$ a per-channel tint and the noise seed
 fixed per frame. This is a photometric night-style perturbation (gamma, gain, saturation, noise), not a captured
-night scene, and we refer to it as the \emph{night-style perturbation}. Two levels are used: $\mathcal{E}_D$, the milder \emph{dusk} $(\gamma,g,s,\sigma)=(1.45,0.70,0.80,2/255)$ with a
-warm tint, chosen to keep the pedestrian visible, and $\mathcal{E}_N$, \emph{night} $(2.2,0.45,0.45,7/255)$ with a blue tint (\cref{fig:method}a, \cref{sec:lighting}).
+night scene, and we refer to it as the \emph{night-style perturbation}, with $(\gamma,g,s,\sigma)=(2.2,0.45,0.45,7/255)$ and a blue tint (\cref{fig:method}a).
 
 \paragraph{Validity of the interventions}
 An independent detector (Faster R-CNN~\cite{ren2015faster}, COCO, score $\ge0.5$) is run on the

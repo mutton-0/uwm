@@ -70,7 +70,6 @@ def _ds(m):
     n_=NS[m]; return bold("$"+("{:+.2f}" if abs(n_['dS'])>=0.01 else "{:+.3f}").format(n_['dS'])+"$",n_["dS_p"]<0.01)
 R.append(_row(r"speed $\downarrow$",[_sp(m) for m in M]+["--"]))
 R.append(_row(r"clearance $\Delta_N S$ (m) $\uparrow$",[_ds(m) for m in M]+["--"]))
-R.append(_row(r"$\CFR$ dusk\,/\,night $\uparrow$",[f"{_DK[m]['cfr_dusk']:.2f}\\,/\\,{_DK[m]['cfr_night']:.2f}" if m in _DK else "--" for m in M]+["--"]))
 R.append(r"\midrule")
 R.append(r"\multicolumn{8}{@{}l}{\emph{Standard scores} (rank)} \\")
 R.append(_row(r"L2 (m), vis.\,/\,rm. $\downarrow$",[f"{_NUo[m]['clean']['L2_avg']:.2f}\\,/\\,{_NUo[m]['rm']['L2_avg']:.2f}" for m in M]+["--"]))
@@ -79,7 +78,7 @@ R.append(_row(r"EPDMS, near-ped. $\uparrow$",[_bf("%.3f (%d)"%(_CV[m]["epdms"],_
 R.append(_row(r"TTC$<$1.5\,s (\%), LHD $\downarrow$",[_bf("%.1f (%d)"%(_TR["LHD"][m]["moving"]["viol"],_TR["ranks"]["LHD TTC"][m]),m==_bL) for m in M]+["--"]))
 R.append(_row(r"TTC$<$1.5\,s (\%), RHD $\downarrow$",[_bf("%.1f (%d)"%(_TR["RHD"][m]["moving"]["viol"],_TR["ranks"]["RHD TTC"][m]),m==_bR) for m in M]+["--"]))
 T=[r"\begin{table*}[t]",r"\centering",
- r"\caption{\textbf{The full report for the six policies.} Rows are readings, columns policies. Brackets: 95\% CI. Arrows in cells: outside the reference threshold of \cref{tab:exams}; bold: best per row, or $p<0.01$ for the re-lighting rows. Under re-lighting: change of planned mean speed and of clearance to the pedestrian (negative = closer) on the nuScenes frames, and $\CFR$ at dusk\,/\,night on the \NumDuskN{} NAVSIM scenes. Human: the logged trajectory scored the same way against each policy's blind plan. Standard scores: nuScenes L2 on the same frames, NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} near-pedestrian ones, and the share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side.}",
+ r"\caption{\textbf{The full report for the six policies.} Rows are readings, columns policies. Brackets: 95\% CI. Arrows in cells: outside the reference threshold of \cref{tab:exams}; bold: best per row, or $p<0.01$ for the re-lighting rows. Under re-lighting: change of planned mean speed and of clearance to the pedestrian (negative = closer) on the nuScenes frames. Human: the logged trajectory scored the same way against each policy's blind plan. Standard scores: nuScenes L2 on the same frames, NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} near-pedestrian ones, and the share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side.}",
  r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{4pt}",
  r"\begin{tabular}{@{}lccccccc@{}}",r"\toprule",
  r"Reading\,$\backslash$\,Policy & "+" & ".join(SH[m] for m in M)+r" & Human \\",r"\midrule"]+R+[r"\bottomrule",r"\end{tabular}",r"\end{table*}"]

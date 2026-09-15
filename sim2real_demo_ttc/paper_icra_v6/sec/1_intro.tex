@@ -49,7 +49,7 @@ missing.
 \end{figure*}
 To address this, we propose the \emph{Check-Up}, a counterfactual diagnosis in three stages
 (\cref{fig:method}). (a)~We construct pixel-level paired data: every logged frame is queried with and
-without the target pedestrian and under a night-style photometric perturbation at two levels, and an
+without the target pedestrian and under a night-style photometric perturbation, and an
 independent detector verifies every edit. (b)~From each pair we distil two axes of causal
 attribution---the \emph{faithfulness} displacement $F$, the plan change caused by the pedestrian
 itself, and the \emph{interference} displacement $I$, the change the same policy produces under an
@@ -140,7 +140,7 @@ The contribution is the Check-Up, a counterfactual diagnosis of end-to-end and V
 policies under domain shift, in three parts.
 \begin{enumerate}\itemsep2pt
 \item \emph{Pixel-level paired data.} Every logged frame is queried with and without the target
-      pedestrian and under a night-style perturbation at two levels, each edit verified by an
+      pedestrian and under a night-style perturbation, each edit verified by an
       independent detector. Six released policies are read on two driving sides.
 \item \emph{Two causal axes.} A response is read as the faithfulness displacement $F$ and the
       interference displacement $I$~\eqref{eq:FI}, and counts as avoidance only if it moves, exceeds

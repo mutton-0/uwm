@@ -1,7 +1,7 @@
 % !TEX root = ../main.tex
 \begin{table*}[t]
 \centering
-\caption{\textbf{The full report for the six policies.} Rows are readings, columns policies. Brackets: 95\% CI. Arrows in cells: outside the reference threshold of \cref{tab:exams}; bold: best per row, or $p<0.01$ for the re-lighting rows. Under re-lighting: change of planned mean speed and of clearance to the pedestrian (negative = closer) on the nuScenes frames, and $\CFR$ at dusk\,/\,night on the \NumDuskN{} NAVSIM scenes. Human: the logged trajectory scored the same way against each policy's blind plan. Standard scores: nuScenes L2 on the same frames, NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} near-pedestrian ones, and the share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side.}
+\caption{\textbf{The full report for the six policies.} Rows are readings, columns policies. Brackets: 95\% CI. Arrows in cells: outside the reference threshold of \cref{tab:exams}; bold: best per row, or $p<0.01$ for the re-lighting rows. Under re-lighting: change of planned mean speed and of clearance to the pedestrian (negative = closer) on the nuScenes frames. Human: the logged trajectory scored the same way against each policy's blind plan. Standard scores: nuScenes L2 on the same frames, NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} near-pedestrian ones, and the share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side.}
 \label{tab:report}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -26,7 +26,6 @@ Lighting $\CFR$ $\uparrow$ & 0.23$\downarrow$ & 0.23$\downarrow$ & \textbf{0.47$
 \multicolumn{8}{@{}l}{\emph{Under re-lighting}} \\
 speed $\downarrow$ & \textbf{\boldmath $+37\%$} & \textbf{\boldmath $+12\%$} & \textbf{\boldmath $-8\%$} & \textbf{\boldmath $+16\%$} & $-0.3\%$ & $-2\%$ & -- \\
 clearance $\Delta_N S$ (m) $\uparrow$ & \textbf{\boldmath $-0.37$} & \textbf{\boldmath $-0.24$} & \textbf{\boldmath $+0.15$} & \textbf{\boldmath $-0.47$} & $+0.005$ & $+0.03$ & -- \\
-$\CFR$ dusk\,/\,night $\uparrow$ & 0.52\,/\,0.35 & 0.34\,/\,0.15 & 0.61\,/\,0.38 & 0.87\,/\,0.20 & 0.45\,/\,0.26 & 0.54\,/\,0.19 & -- \\
 \midrule
 \multicolumn{8}{@{}l}{\emph{Standard scores} (rank)} \\
 L2 (m), vis.\,/\,rm. $\downarrow$ & 0.98\,/\,0.99 & 0.88\,/\,0.91 & 1.35\,/\,1.31 & 3.28\,/\,3.35 & 0.68\,/\,0.66 & 0.77\,/\,0.72 & -- \\

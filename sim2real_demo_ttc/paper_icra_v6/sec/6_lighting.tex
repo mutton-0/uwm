@@ -11,13 +11,6 @@ Removing a pedestrian from the corridor moves every policy's plan only \NumCFRlo
 far as the night-style perturbation does, with every 95\% interval below one (\cref{tab:report}). On detector-verified edits $\CFR=0.30$--$0.64$, and only Alpamayo-1.5's interval (45 frames) reaches
 above one.
 
-\paragraph{Two lighting levels}
-The perturbation is applied at two strengths, $\mathcal{E}_D$ (dusk) and $\mathcal{E}_N$ (night), the milder dusk level chosen to keep the pedestrian visible. Of the \NumDuskDetN{} targets the detector finds in the original, it still finds
-\NumDuskDetDusk\% at dusk and \NumDuskDetNight\% at the night level (removal: \NumDuskDetRm\%). On
-the same \NumDuskN{} scenes the ratio is $\NumDuskLo$--$\NumDuskHi$ at dusk and
-$\NumDuskNightLo$--$\NumDuskNightHi$ at the night level: below one for every policy at both levels,
-with the pedestrian in plain view.
-
 \paragraph{Direction: faster, and therefore closer}
 A policy that slows under the perturbation is doing something defensible, one that speeds up is not. Three policies
 plan to go faster under the night-style perturbation: DiffusionDrive by \NumNightDD\%, SimLingo by
