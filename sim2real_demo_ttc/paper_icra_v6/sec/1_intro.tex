@@ -2,7 +2,7 @@
 \section{Introduction}
 \label{sec:intro}
 A leaderboard rank does not tell you how a driving policy will behave in a new domain. End-to-end and vision-language-action (VLA) driving policies are compared by benchmark scores, and a deployment decision is, implicitly, a bet that the rank those scores produce will still hold once the policy is driving at the new site, not just on someone else's roads. 
-On scenes where a pedestrian is near the ego corridor, that bet fails for the six released policies we test: their rank on nuScenes'~\cite{caesar2020nuscenes} open-loop metrics or on NAVSIM's~\cite{caesar2021nuplan,dauner2024navsim} leaderboard score does not carry over to the deployment site ($\rho=-0.54$ to $+0.49$; \cref{sec:bench}), a gap that open-loop scores are known to open~\cite{zhao2026bridgesim,li2024egostatus,codevilla2019exploring}. The reason is not noise but mechanism. A score is an outcome measure, and an outcome can be right for the wrong reason: a policy that never approaches a pedestrian because it plans short trajectories scores as well as one that sees the pedestrian and yields, and the two behave very differently the first time the scene changes. Telling them apart means asking why the score came out as it did, usually from little data, because a closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to save.
+On scenes where a pedestrian is near the ego corridor, that bet fails for the six released policies we test: their rank on nuScenes'~\cite{caesar2020nuscenes} open-loop metrics or on NAVSIM's~\cite{caesar2021nuplan,dauner2024navsim} leaderboard score does not carry over to the deployment site ($\rho=-0.54$ to $+0.49$; \cref{sec:sample}), a gap that open-loop scores are known to open~\cite{zhao2026bridgesim,li2024egostatus,codevilla2019exploring}. The reason is not noise but mechanism. A score is an outcome measure, and an outcome can be right for the wrong reason: a policy that never approaches a pedestrian because it plans short trajectories scores as well as one that sees the pedestrian and yields, and the two behave very differently the first time the scene changes. Telling them apart means asking why the score came out as it did, usually from little data, because a closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to save.
 
 % However,现在很难有一个全面深入的评估方法，能够系统地衡量策略或预测模型在目标域的表现，导致很多组织和研究者在跨域部署模型时需要在重新在实际部署场景进行大量测试和后训练【引用一些说NAVISIM/nusense排名颠倒的典型文献，比如https://arxiv.org/abs/2604.10856】\cite{hendrycks2019benchmarking,xie2023robobev}，这为跨域部署模型的选型增加了难度。
 
@@ -201,6 +201,6 @@ policies under domain shift, in three parts.
 % (\cref{tab:prereg}), so we report rankings and verdicts rather than calibrated numbers. Re-measured on
 % the new side, the exam that predicts behaviour there is not the one measuring how strongly a policy
 % reacts but how steadily it drives ($\rho={\NumSpBeh}$ for specificity), beating the leaderboard score
-% computed on that side's own scenes (\cref{sec:bench}). The bet named above is therefore answerable:
+% computed on that side's own scenes (\cref{sec:sample}). The bet named above is therefore answerable:
 % not by trusting a leaderboard rank, but by running a check-up whose predictive exams generalise and
 % are known in advance.
