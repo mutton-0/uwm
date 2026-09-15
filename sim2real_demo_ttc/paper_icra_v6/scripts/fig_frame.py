@@ -30,11 +30,11 @@ cx=(reg[0]+reg[2])//2; cy=(reg[1]+reg[3])//2               # 以检测框为中�
 CH=int((reg[3]-reg[1])*1.55); CW=int(CH*1.55)
 X0=max(0,min(a0.shape[1]-CW,cx-CW//2)); Y0=max(0,min(a0.shape[0]-CH,cy-CH//2))
 CROP=(slice(Y0,Y0+CH),slice(X0,X0+CW)); AR=CW/CH
-IMGS=(a0,r0,n0,d0); CC=["#2a5db0","#c0392b","#8a8a84","#b9814a"]; NIMG=len(IMGS)
+IMGS=(a0,r0,d0,n0); CC=["#2a5db0","#c0392b","#b9814a","#8a8a84"]; NIMG=len(IMGS)
 LAB=[("logged $O$","detector: pedestrian found"),
      ("removed $R$","detector: not found"),
-     ("re-lit $N$, night","detector: still found"),
-     ("re-lit $N$, dusk","detector: still found")]   # A_0095 黄昏档 IoU 0.88，与 dusk_check 同判据
+     ("re-lit $N$, dusk","detector: still found"),
+     ("re-lit $N$, night","detector: still found")]   # A_0095 黄昏档 IoU 0.88，与 dusk_check 同判据
 EX=["exposure","hazard\nsensitivity","scaling","specificity","lighting\n$\\mathrm{CFR}$"]
 
 def draw_img(fig,rect,i,fs=1.0):
@@ -54,9 +54,9 @@ else:                                       # 单栏竖版：三段上下叠，�
     GAP_in=0.04; PAD_in=0.05; TIT_in=0.145
     H_A=TIT_in+PAD_in+IH_in+PAD_in
     H_B=TIT_in+1.30
-    H_C=TIT_in+0.31
-    ARR=0.15
-    FH=H_A+ARR+H_B+ARR+H_C+0.03
+    H_C=TIT_in+0.34+2*PAD_in
+    ARR=0.17
+    FH=H_A+ARR+H_B+ARR+H_C+0.05
 fig=plt.figure(figsize=(FW,FH))
 def fx(v): return v/FW
 def fy(v): return v/FH
@@ -115,6 +115,7 @@ else:
     box(L,aB,R,aT); bg.text(L+fx(0.05),aT-fy(0.115),"(a) scenario edit",fontsize=7.0,weight="bold",color="#2b2b28")
     for i in range(NIMG): draw_img(fig,[L+fx(0.05)+i*(IW+fx(0.04)),aB+PAD,IW,IH],i,fs=0.88)
     arrow(((L+R)/2,aB-fy(0.022)),((L+R)/2,aB-ARRf+fy(0.022)),lw=1.6,ms=6)
+    bg.text((L+R)/2+fx(0.08),aB-ARRf/2,"query $\\pi$ on $O,R,N$",fontsize=5.0,va="center",color="#2f5d94")
     # (b) 两个面板
     bT=aB-ARRf; bB=bT-TIT-1.30/FH
     box(L,bB,R,bT); bg.text(L+fx(0.05),bT-fy(0.115),"(b) diagnosis",fontsize=7.0,weight="bold",color="#2b2b28")
@@ -122,12 +123,13 @@ else:
     panel_extract(fig.add_axes([L+fx(0.30),PB,fx(0.86),PT-PB]),title="three queries, one scene",compact=True)
     panel_readings(fig.add_axes([L+fx(1.72),PB,fx(1.50),PT-PB]),title="the two readings",compact=True)
     arrow(((L+R)/2,bB-fy(0.022)),((L+R)/2,bB-ARRf+fy(0.022)),lw=1.6,ms=6)
-    # (c) 五个检查横排
-    cT=bB-ARRf; cB=cT-TIT-0.34/FH
-    bg.text(L+fx(0.05),cT-fy(0.105),"(c) prognosis",fontsize=7.0,weight="bold",color="#2b2b28")
-    CW_=(R-L-4*fx(0.035))/5
+    bg.text((L+R)/2+fx(0.08),bB-ARRf/2,"read $F$, $I$ $\\to$ five exams",fontsize=5.0,va="center",color="#2f5d94")
+    # (c) 五个检查横排：与 (a)(b) 同款容器框，高度足额，底边不再截断
+    cT=bB-ARRf; cB=cT-TIT-0.34/FH-2*PAD
+    box(L,cB,R,cT); bg.text(L+fx(0.05),cT-fy(0.115),"(c) prognosis",fontsize=7.0,weight="bold",color="#2b2b28")
+    CW_=(R-L-2*fx(0.05)-4*fx(0.035))/5
     for k,lab in enumerate(EX):
-        x0=L+k*(CW_+fx(0.035)); chip(x0,cB,x0+CW_,cT-TIT-fy(0.01),lab,4.7)
+        x0=L+fx(0.05)+k*(CW_+fx(0.035)); chip(x0,cB+PAD,x0+CW_,cT-TIT-fy(0.01),lab,4.7)
     OUT="frame1c"
 fig.savefig(f"{V5}/figures/{OUT}.pdf")
 fig.savefig(f"{V5}/figures/{OUT}.png",dpi=300)   # 版式已填满画布，不用 tight，免得裁出不一致的边

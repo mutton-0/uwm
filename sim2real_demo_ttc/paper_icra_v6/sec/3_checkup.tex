@@ -61,9 +61,9 @@ photometric transform
 \end{equation}
 with $\mathrm{sat}_s$ the saturation scaling, $\boldsymbol\tau$ a per-channel tint and the noise seed
 fixed per frame. This is a photometric night-style perturbation (gamma, gain, saturation, noise), not a captured
-night scene; we refer to it as the \emph{night-style perturbation}. Two levels are used: \emph{night} $(\gamma,g,s,\sigma)=(2.2,0.45,0.45,7/255)$ with a
-blue tint, and the milder \emph{dusk} $(1.45,0.70,0.80,2/255)$ with a warm tint, the latter chosen to
-keep the pedestrian visible (\cref{sec:lighting}).
+night scene; we refer to it as the \emph{night-style perturbation}. Two levels are used: the milder \emph{dusk} $(\gamma,g,s,\sigma)=(1.45,0.70,0.80,2/255)$ with a
+warm tint, chosen to keep the pedestrian visible, and \emph{night} $(2.2,0.45,0.45,7/255)$ with a
+blue tint (\cref{sec:lighting}).
 
 \paragraph{Validity of the interventions}
 An independent detector (Faster R-CNN~\cite{ren2015faster}, COCO, score $\ge0.5$) is run on the

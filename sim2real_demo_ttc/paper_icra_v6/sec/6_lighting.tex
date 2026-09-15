@@ -15,10 +15,12 @@ detector-verified edits $\CFR=0.30$--$0.64$, and only Alpamayo-1.5's interval (4
 above one.
 
 \paragraph{Two lighting levels}
-The perturbation is applied at two strengths, the milder one chosen to keep the pedestrian visible. At the night level the
-detector still finds \NumDuskDetNight\% of the \NumDuskDetN{} targets it finds in the original, at dusk
-\NumDuskDetDusk\% (removal: \NumDuskDetRm\%). On the same \NumDuskN{} scenes the ratio is
-$\NumDuskNightLo$--$\NumDuskNightHi$ at the night level and $\NumDuskLo$--$\NumDuskHi$ at dusk: below one for every policy at both levels, with the pedestrian in plain view.
+The perturbation is applied at two strengths, the milder dusk level chosen to keep the pedestrian
+visible. Of the \NumDuskDetN{} targets the detector finds in the original, it still finds
+\NumDuskDetDusk\% at dusk and \NumDuskDetNight\% at the night level (removal: \NumDuskDetRm\%). On
+the same \NumDuskN{} scenes the ratio is $\NumDuskLo$--$\NumDuskHi$ at dusk and
+$\NumDuskNightLo$--$\NumDuskNightHi$ at the night level: below one for every policy at both levels,
+with the pedestrian in plain view.
 
 \paragraph{Direction: faster, and therefore closer}
 A policy that slows under the perturbation is doing something defensible; one that speeds up is not. Three policies

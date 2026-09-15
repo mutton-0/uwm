@@ -91,8 +91,8 @@ def panel_readings(b,title="(b) the two readings",fs=1.0,compact=False):
                fontsize=4.8*fs,color="#6b6a62",rotation=45)
     b.text(0.055,0.93,"$F\\geq0.5$ m and $F>I$",transform=b.transAxes,fontsize=4.8*fs,color="#3f6b45",va="top")
     if HAS4:
-        b.plot([],[],marker="o",ms=3.6*fs,color="#52514e",ls="none",label="$I$ from night")
         b.plot([],[],marker="s",ms=3.2*fs,mfc="white",mec="#52514e",mew=0.8,ls="none",label="$I$ from dusk")
+        b.plot([],[],marker="o",ms=3.6*fs,color="#52514e",ls="none",label="$I$ from night")
         b.legend(frameon=False,fontsize=4.6*fs,loc="upper left",bbox_to_anchor=(0.02,0.84),handletextpad=0.25,
                  labelspacing=0.16,borderpad=0.05)
     b.text(0.98,0.16,"one $F$ per policy;\nthe arrow changes only $I$" if HAS4 else "one $F$ and one $I$\nper policy",
