@@ -77,7 +77,7 @@ R.append(_row(r"EPDMS, near-ped. $\uparrow$",[_bf("%.3f (%d)"%(_CV[m]["epdms"],_
 R.append(_row(r"TTC$<$1.5\,s (\%), LHD $\downarrow$",[_bf("%.1f (%d)"%(_TR["LHD"][m]["moving"]["viol"],_TR["ranks"]["LHD TTC"][m]),m==_bL) for m in M]+["--"]))
 R.append(_row(r"TTC$<$1.5\,s (\%), RHD $\downarrow$",[_bf("%.1f (%d)"%(_TR["RHD"][m]["moving"]["viol"],_TR["ranks"]["RHD TTC"][m]),m==_bR) for m in M]+["--"]))
 T=[r"\begin{table*}[t]",r"\centering",
- r"\caption{\textbf{The full report for the six policies.} Rows are readings, columns policies. Brackets: 95\% CI. Arrows in cells: outside the reference threshold of \cref{sec:checkup}; bold: best per row, or $p<0.01$ for the two rows of $N$. Speed and clearance of $N$: change under the night-style perturbation, on the same frames (negative clearance = closer). Human: the logged trajectory scored the same way against each policy's blind plan. Standard scores: nuScenes L2 on the same frames, NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} near-pedestrian ones, and the share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side.}",
+  r"\caption{\textbf{The full report for the six policies.} Rows are readings, columns policies. Brackets: 95\% CI. Arrows: outside the reference threshold of \cref{sec:checkup}. Bold: best per row ($p<0.01$ for the two rows of $N$). Human: the logged trajectory scored against each policy's blind plan. EPDMS on all 783 and on the \NumNclose{} near-pedestrian NAVSIM scenes.}",
  r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{4pt}",
  r"\begin{tabular}{@{}lccccccc@{}}",r"\toprule",
  r"Reading\,$\backslash$\,Policy & "+" & ".join(SH[m] for m in M)+r" & Human \\",r"\midrule"]+R+[r"\bottomrule",r"\end{tabular}",r"\end{table*}"]
@@ -98,7 +98,7 @@ def det(k):
     if k=="P5": return f"{100*d['rate']:.0f}\\%"
     if k=="P7": return f"gap {100*d['max_gap']:.1f}\\,pts"
 T=[r"\begin{table}[t]",r"\centering",
-   r"\caption{\textbf{Pre-registered transfer test.} Predictions fixed on 88 Boston frames, tested on 148 Singapore frames; five policies, the replaced sixth changes no verdict (\cref{sec:sample}).}",
+   r"\caption{\textbf{Pre-registered transfer test.} Predictions fixed on 88 Boston frames, tested on 148 Singapore frames, five policies (the replaced sixth changes no verdict).}",
    r"\label{tab:prereg}",r"\footnotesize",r"\setlength{\tabcolsep}{2.5pt}",
    r"\begin{tabular}{@{}lp{4.35cm}cl@{}}",r"\toprule",r"No. & Prediction & Holds & Evidence \\",r"\midrule"]
 for k in ["P1","P2","P3","P4","P5","P7"]:               # 登记顺序；P6（方向类，已弃用）不再报告，P7 显示为 P6
