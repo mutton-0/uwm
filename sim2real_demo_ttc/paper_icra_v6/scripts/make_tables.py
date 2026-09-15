@@ -320,9 +320,9 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
             NUM3["NumDDmed"]=f"{AV['dd']['med']:+.2f}"
         NUM3["NumPFbigRev"]=f"{min(v['PFrev'] for v in tc.values()):.0f}--{max(v['PFrev'] for v in tc.values()):.0f}"
         NUM3["NumPIbigRev"]=f"{min(v['PIrev'] for v in tc.values()):.0f}--{max(v['PIrev'] for v in tc.values()):.0f}"
-        NUM3["NumExpBeh"]=f"{-DT['lhd_to_behaviour']['exposure']:+.2f}".replace("+","{+}").replace("-","{-}")
-        NUM3["NumSpBeh"]=f"{-DT['lhd_to_behaviour']['SP']:+.2f}".replace("+","{+}").replace("-","{-}")
-        NUM3["NumCfrBeh"]=f"{-DT['lhd_to_behaviour']['CFR']:+.2f}".replace("+","{+}").replace("-","{-}")
+        NUM3["NumExpBeh"]=f"{-DT['lhd_to_behaviour']['exposure']:.2f}".replace("-","{-}")
+        NUM3["NumSpBeh"]=f"{-DT['lhd_to_behaviour']['SP']:.2f}".replace("-","{-}")
+        NUM3["NumCfrBeh"]=f"{-DT['lhd_to_behaviour']['CFR']:.2f}".replace("-","{-}")
         W={5:"Five",10:"Ten",20:"Twenty",40:"Forty"}
         for k in [5,10,20,40]:
             NUM3[f"NumBehRho{W[k]}"]=f"{DT['behaviour'][str(k)]['rho']:+.2f}".replace("+","{+}")
