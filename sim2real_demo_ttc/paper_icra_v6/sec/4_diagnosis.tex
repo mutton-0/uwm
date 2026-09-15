@@ -4,7 +4,7 @@
 
 \input{tables/tab_report}
 
-\Cref{tab:report} and \cref{fig:reach}b give the six profiles, read under our open-loop protocol on the 236 near-pedestrian nuScenes frames: the behaviour behind the ranks of \cref{sec:sample}.
+\Cref{tab:report} gives the six profiles, read under our open-loop protocol on the 236 near-pedestrian nuScenes frames: the behaviour behind the ranks of \cref{sec:sample}.
 
 \paragraph{Exposure}
 The six policies do not even agree on how far to plan, and this alone will turn out to explain more of
@@ -13,8 +13,7 @@ at half the human's distance to SimLingo at more than twice it, with AutoVLA and
 human's own.
 
 \paragraph{Hazard sensitivity}
-On these frames, no policy's plan responds to the pedestrian: on units that need a reaction, seeing it buys only
-\NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale. The benefit is also unreliable in direction:
+On these frames, no policy's plan responds to the pedestrian: on units that need a reaction, seeing it buys only \NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale, where the logged human trajectory, scored the same way against each policy's blind plan, reaches $0.52$--$0.62$ across hazard levels. The benefit is also unreliable in direction:
 counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
 pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
 SimLingo 18 vs.\ 30, the rest at most 5 either way, all McNemar $p\ge0.11$) --- what reads as a safety margin in \cref{tab:report} does not carry over to the individual case.
@@ -44,15 +43,6 @@ policies almost never reach the pedestrian. DiffusionDrive is safe because it st
 without yielding, and SimLingo covers the most ground with the lowest specificity.
 
 \paragraph{Why the risk goes unmanaged}
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/reach.pdf}
-\caption{\textbf{Collision and hazard sensitivity.} (a)~Contact with the pedestrian's logged future
-at the logged and counterfactual input speeds. Solid: visible, dashed: removed. (b)~$\HS$ against
-$a_{\mathrm{req}}$ (mean, 95\% CI, bins with $\ge8$ units). Dashed: the logged human trajectory scored
-against each policy's blind plan, averaged. Band: range over policies.}
-\label{fig:reach}
-\end{figure}
 
 The check-up only diagnoses. Two mechanistic observations on the three BEV planners explain the
 diagnosis without altering it. First, the planners' own BEV semantic heads do not decode the
@@ -60,8 +50,7 @@ pedestrian: on 520 NAVSIM near-pedestrian scenes the pedestrian channel is no br
 pedestrian than at a mirrored empty location, and never wins the argmax inside a pedestrian's box,
 although the pedestrian does leave a steerable trace in the features. Second, the plan does not reach
 the pedestrian: plans end 5--9\,m ahead while the median corridor pedestrian stands 20\,m away, and
-raising the input speed makes collisions rise identically with and without the pedestrian in view
-(\cref{fig:reach}a). The limit is geometric before it is perceptual.
+raising the input speed makes collisions rise identically with and without the pedestrian in view (\cref{tab:report}, visible against removed at 8\,m/s). The limit is geometric before it is perceptual.
 
 \paragraph{Reading the profiles}
 Read one exam at a time, the profiles answer separate questions that a single score merges. Whether a
