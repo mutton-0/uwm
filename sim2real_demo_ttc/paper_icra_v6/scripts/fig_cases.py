@@ -39,7 +39,7 @@ fig=plt.figure(figsize=(3.45,2.95))
 gs=fig.add_gridspec(2,2,height_ratios=[0.72,1.0],hspace=0.42,wspace=0.48)
 for k,(c,lab) in enumerate(((ca,"(a) genuine avoidance"),(cb,"(b) moved towards"))):
     a=fig.add_subplot(gs[0,k]); fp.panel_extract(a,tok=c[1],mm=c[0],title=f"{lab}: {SH[c[0]]}",fs=1.05,legend=(k==0),ymax=11.5)
-    a.text(0.02,0.72,f"$\\Delta S$ = {c[4]:+.2f} m",transform=a.transAxes,ha="left",fontsize=5.6,color="#2e75b6" if c[4]>0 else "#17233b")
+    a.text(0.02,0.72,f"$\\Delta S$ = {c[4]:.2f} m",transform=a.transAxes,ha="left",fontsize=5.6,color="#2e75b6" if c[4]>0 else "#17233b")
 MARK=[("a",ca),("b",cb)]
 # ---- 右半：逐场景 F 与 ΔS
 P=json.load(open(f"{V5}/f_decomp_per_scene.json")); EPS=3e-3

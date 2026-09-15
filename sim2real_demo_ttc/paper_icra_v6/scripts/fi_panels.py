@@ -37,7 +37,7 @@ def panel_extract(a,tok="34b62d7333845af3",mm="ddv2",title="(a) three queries, o
         g=float(np.min(np.linalg.norm(P[k]-ped,axis=1))-1.4)
         dx,dy=(9,int(dy*0.72)) if compact else (11,dy)      # 面板矮的时候标注要收，不然顶到标题
         tl="contact" if g<0 else "clear"
-        a.annotate(f"{g:+.2f} m {tl}",(-P[k][-1,1],P[k][-1,0]),textcoords="offset points",xytext=(dx,dy),
+        a.annotate(f"{g:.2f} m {tl}",(-P[k][-1,1],P[k][-1,0]),textcoords="offset points",xytext=(dx,dy),
                    ha="left",va="center",fontsize=4.6*fs,color=c,
                    arrowprops=dict(arrowstyle="-",lw=0.4,color=c,shrinkA=0.5,shrinkB=1.5))
     a.text(0.02,0.95,f"$F$ = {disp(v['clean'],v['rm']):.2f} m",transform=a.transAxes,ha="left",fontsize=5.4*fs,color="#17233b")
