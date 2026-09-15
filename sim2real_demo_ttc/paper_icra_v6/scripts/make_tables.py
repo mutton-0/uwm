@@ -40,7 +40,7 @@ _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "CFR":max(M,key=lambda m:A[m]["point"]["CFR"])}
 _bc8=min(M,key=lambda m:coll(m,"8")[0])
 T=[r"\begin{table*}[t]",r"\centering",
-   r"\caption{\textbf{Diagnostic profiles} on the 236 nuScenes frames. Brackets: 95\% CI. Arrows in cells: outside the reference threshold of \cref{tab:exams}; bold: best per column, or $p<0.01$ for the re-lighting columns. Collision: contact rate at 8\,m/s with the pedestrian visible\,/\,removed. Under re-lighting: change of planned mean speed and of clearance to the pedestrian (negative = closer), and $\CFR$ at dusk\,/\,night on the \NumDuskN{} NAVSIM scenes. Human: the logged trajectory scored the same way against each policy's blind plan.}",
+    r"\caption{\textbf{The full report for the six policies.} Top: the five exams, collision and re-lighting on the 236 nuScenes frames. Brackets: 95\% CI. Arrows in cells: outside the reference threshold of \cref{tab:exams}; bold: best per column, or $p<0.01$ for the re-lighting columns. Collision: contact rate at 8\,m/s with the pedestrian visible\,/\,removed. Under re-lighting: change of planned mean speed and of clearance to the pedestrian (negative = closer), and $\CFR$ at dusk\,/\,night on the \NumDuskN{} NAVSIM scenes. Human: the logged trajectory scored the same way against each policy's blind plan. Bottom: the standard scores, L2 on the same frames with the pedestrian visible\,/\,removed, EPDMS on all 783 NAVSIM Singapore scenes and on the \NumNclose{} near-pedestrian ones, and the TTC violation share per driving side.}",
  r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{4pt}",
  r"\resizebox{\textwidth}{!}{\begin{tabular}{@{}lccccc c ccc@{}}",r"\toprule",
  r" & \multicolumn{5}{c}{Five exams} & Collision & \multicolumn{3}{c}{Under re-lighting} \\",
@@ -62,6 +62,24 @@ for m in M:
              f"{cell(p['SP'],'SP',m==_bst['SP'],d=d_)} & {cell(p['CFR'],'CFR',m==_bst['CFR'],d=d_)} & {cc} & {sp_} & {ds_} & {dk_} \\\\")
 _gcx=json.load(open(f"{V5}/gt_ceiling.json")); _hs_h=sum(g*n for g,n in zip(_gcx["gt"],_gcx["n"]))/sum(_gcx["n"])
 T+=[r"\midrule",f"Human (logged) & 1.00 & {_hs_h:.2f} & {_gcx.get('sc_median',float('nan')):+.2f} & -- & -- & -- & -- & -- & -- \\\\"]
+# ---- 第二带：标准分数（同六家），并入同一张表
+if os.path.exists(f"{V5}/bench_compare.json") and os.path.exists(f"{V5}/ttc_rank.json"):
+    _BC=json.load(open(f"{V5}/bench_compare.json")); _TR=json.load(open(f"{V5}/ttc_rank.json"))
+    _NUo=_BC["nusc"]; _CV=_BC["navsim_close"]; _AL=_BC["navsim_all"]
+    _rk=lambda d: {m:i+1 for i,m in enumerate(sorted(M,key=lambda x:-d[x]["epdms"]))}
+    _RKA=_rk(_AL); _RKC=_rk(_CV)
+    _bA=max(M,key=lambda m: _AL[m]["epdms"]); _bC=max(M,key=lambda m: _CV[m]["epdms"])
+    _bL=min(M,key=lambda m: _TR["LHD"][m]["moving"]["viol"]); _bR=min(M,key=lambda m: _TR["RHD"][m]["moving"]["viol"])
+    _bf=lambda t,on: (r"\textbf{"+t+"}") if on else t
+    T+=[r"\midrule",
+        r" & \multicolumn{9}{c}{Standard scores: nuScenes open-loop L2 (m) $\downarrow$, NAVSIM EPDMS $\uparrow$ (rank), share of scenes with pedestrian TTC $<1.5$\,s (\%) $\downarrow$ (rank)} \\",
+        r"\cmidrule(l){2-10}",
+        r"Policy & L2 orig.\,/\,rm. & EPDMS all & EPDMS near-ped. & TTC LHD & TTC RHD & & & & \\",r"\midrule"]
+    for m in M:
+        n=_NUo[m]; L_=_TR["LHD"][m]["moving"]; R_=_TR["RHD"][m]["moving"]
+        cA="%.3f (%d)"%(_AL[m]["epdms"],_RKA[m]); cC="%.3f (%d)"%(_CV[m]["epdms"],_RKC[m])
+        cL="%.1f (%d)"%(L_["viol"],_TR["ranks"]["LHD TTC"][m]); cR="%.1f (%d)"%(R_["viol"],_TR["ranks"]["RHD TTC"][m])
+        T.append(f"{SH[m]} & {n['clean']['L2_avg']:.2f}\\,/\\,{n['rm']['L2_avg']:.2f} & {_bf(cA,m==_bA)} & {_bf(cC,m==_bC)} & {_bf(cL,m==_bL)} & {_bf(cR,m==_bR)} & & & & \\\\")
 T+=[r"\bottomrule",r"\end{tabular}}",r"\end{table*}"]
 open(f"{_OUT}/tables/tab_report.tex","w").write("\n".join(T)+"\n")
 # ---------- Table III：跨舵位预注册 ----------
