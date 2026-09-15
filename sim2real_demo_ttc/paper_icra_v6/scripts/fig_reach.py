@@ -17,11 +17,12 @@ def mean_ci(v):
 fig,ax=plt.subplots(1,2,figsize=(3.45,1.75),gridspec_kw={"wspace":0.34})
 # (b)
 rows=json.load(open(f"{V5}/diag_units.json")); b=ax[0]
+rows=[z for z in rows if str(z.get("sv")) in ("actual","4","8")]   # 档位与表 II 对齐：六家同一单位池
 B=[z for z in rows if z["set"]=="B"]
 vact=float(np.median([z["v"] for z in B if z["sv"]=="actual"]))
 for m in M:
     pts=[]
-    for sv in ("actual","2","4","6","8"):
+    for sv in ("actual","4","8"):
         U=[z for z in B if z["m"]==m and z["sv"]==sv]
         if len(U)<20: continue
         pts.append((np.median([z["v"] for z in U]) if sv=="actual" else float(sv),100*np.mean([z["P"]["A"]==0 for z in U]),100*np.mean([z["Q"]["A"]==0 for z in U])))

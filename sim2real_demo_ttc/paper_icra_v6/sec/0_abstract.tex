@@ -1,25 +1,29 @@
 % !TEX root = ../main.tex
 \begin{abstract}
-A policy's rank on nuScenes' open-loop metrics or NAVSIM's leaderboard score predicts its rank at a
-new deployment site only about as well as a coin flip ($\rho=-0.54$--$+0.49$ on near-pedestrian
-scenes): a benchmark score reports an outcome, not the behaviour behind it.
+End-to-end and vision-language-action (VLA) driving policies are compared by leaderboard rank, but a deployment decision needs to know how a policy will behave at a new site, and why. 
 
 %120
 Attempting to predict a policy's performance at a new deployment site from an existing leaderboard
-therefore works poorly, because a rank reflects only the outcome, not the behaviour behind it.
+therefore works poorly, because a rank reflects only the outcome, not the behaviour behind it. 
+On six released policies, rank on nuScenes open-loop metrics or on NAVSIM's leaderboard does not carry over to scenes with a pedestrian near the ego corridor at a new site (ρ from −0.54 to +0.49).
 
-We therefore need a method that reveals a policy's true response, and the part of that response which
-is common across situations.
+% We therefore need a method that reveals a policy's true response, and the part of that response which
+% is common across situations.
 
-We propose a \emph{model check-up}: it diagnoses a policy's true response
-through pixel-level counterfactual edits, distils causal feature axes that are invariant across
-domains, and thereby predicts how different models will be graded at the deployment site, lowering
-the testing cost and risk of real deployment. 
+We propose a counterfactual check-up: a few hundred real frames, each edited two ways (pedestrian removed; night-style re-rendering), every edit verified by an independent detector, and the change in the planned trajectory read as a diagnosis rather than a score. By distilling causal feature axes from these edits, five exams separate what a score merges: how far the policy plans to drive, whether seeing the pedestrian buys safety, whether that response scales with danger, whether the plan moves when nothing requires it, and how much an irrelevant lighting change moves it. 
 
-By constructing a left-hand-drive to right-hand-drive
-transfer experiment on scenes in which pedestrians appear, we show that the check-up's assessment on
-the right-hand-drive deployment side agrees with true performance at $\rho={\NumSpBeh}$, which
-validates the effectiveness of the check-up.
+% We propose a \emph{model check-up}: it diagnoses a policy's true response
+% through pixel-level counterfactual edits, distils causal feature axes that are invariant across
+% domains, and thereby predicts how different models will be graded at the deployment site, lowering
+% the testing cost and risk of real deployment. 
+
+Across 246 near-pedestrian scenes and six policies, only 2.4\% of responses are genuine avoidance, while a near-zero response reliably certifies that the pedestrian was ignored (93–99\% of scenes). In a pre-registered test from left- to right-hand drive, orderings and verdicts transfer but point values do not, and the exam that best predicts the new side's near-miss rate is how steadily a policy drives (ρ = −0.94), not how strongly it reacts. Most verdicts settle within a few dozen frames, while hazard sensitivity needs hundreds. Code and edited frames will be released.
+
+
+% End-to-end and vision-language-action (VLA) driving policies are compared by leaderboard rank,（和题目对齐） but a deployment decision needs to know how a policy will behave at a new site, and why. On six released policies, rank on nuScenes open-loop metrics or on NAVSIM's leaderboard does not carry over to scenes with a pedestrian near the ego corridor at a new site (ρ from −0.54 to +0.49). 
+% We propose a counterfactual check-up: a few hundred real frames, each edited two ways (pedestrian removed; night-style re-rendering), every edit verified by an independent detector, and the change in the planned trajectory read as a diagnosis rather than a score. Five exams separate what a score merges: how far the policy plans to drive, whether seeing the pedestrian buys safety, whether that response scales with danger, whether the plan moves when nothing requires it, and how much an irrelevant lighting change moves it. 
+% Across 246 near-pedestrian scenes and six policies, only 2.4\% of responses are genuine avoidance, while a near-zero response reliably certifies that the pedestrian was ignored (93–99\% of scenes). In a pre-registered test from left- to right-hand drive, orderings and verdicts transfer but point values do not, and the exam that best predicts the new side's near-miss rate is how steadily a policy drives (ρ = −0.94), not how strongly it reacts. Most verdicts settle within a few dozen frames, while hazard sensitivity needs hundreds. Code and edited frames will be released.
+
 
 \end{abstract}
 %120

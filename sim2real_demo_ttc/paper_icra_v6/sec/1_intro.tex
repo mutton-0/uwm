@@ -1,11 +1,14 @@
 % !TEX root = ../main.tex
 \section{Introduction}
 \label{sec:intro}
+A leaderboard rank does not tell you how a driving policy will behave in a new domain. End-to-end and vision-language-action (VLA) driving policies are compared by benchmark scores, and a deployment decision is, implicitly, a bet that the rank those scores produce will still hold once the policy is driving at the new site, not just on someone else's roads. On scenes where a pedestrian is near the ego corridor, that bet fails for the six released policies we test: their rank on nuScenes' open-loop metrics or on NAVSIM's leaderboard score does not carry over to the deployment site (ρ = −0.54 to +0.49; Section V). The reason is not noise but mechanism. A score is an outcome measure, and an outcome can be right for the wrong reason: a policy that never approaches a pedestrian because it plans short trajectories scores as well as one that sees the pedestrian and yields, and the two behave very differently the first time the scene changes. Telling them apart means asking why the score came out as it did, usually from little data, because a closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to save.
+
+This paper shows that a few hundred edited frames do tell you, and reports what transfers to a new domain and what does not. We propose a check-up: a short list of exams, each with a control and a reference range, whose results are read as a diagnosis rather than a ranking (Table I). Every exam is a counterfactual edit of real frames. We remove the pedestrian from the ego corridor, or re-render the frame with a night-style photometric perturbation, and read the change in the planned trajectory; an independent detector verifies every edit. The central exam is a hazard-sensitivity curve, measuring how much farther the whole planned trajectory stays from the pedestrian's logged future because the policy can see the pedestrian, against a model-independent hazard level. A specificity term applies a minimal-change principle: when no reaction is needed, the plan should not move.
+
 
 A deployment decision is, implicitly, a bet that a benchmark rank still holds at the new site. The
 bet fails for a reason that is mechanical rather than statistical: a score is an outcome measure, and
-an outcome can be right for the wrong reason. A
-policy that never approaches a pedestrian because it plans short trajectories scores as well as one
+an outcome can be right for the wrong reason. A policy that never approaches a pedestrian because it plans short trajectories scores as well as one
 that sees the pedestrian and yields, and the two behave very differently the first time the scene
 changes. Telling them apart means asking \emph{why} the score came out as it did, usually from little
 data: a closed-loop simulator for the target domain, or a fleet
@@ -61,13 +64,15 @@ large-model-based methods, reading the final outcome alone no longer reflects a 
 full~\cite{li2024egostatus,codevilla2019exploring,geirhos2020shortcut}.
 \emph{!!!!!!!!!! ADD MORE PAPER TO REFER}
 %！！！！！「加一些参考文献」%
+
 The consequence is that a policy ranked first on a leaderboard often falls sharply once the domain changes, or the ranking
 ceases to be informative at all~\cite{hendrycks2019benchmarking,xie2023robobev}, so that it cannot
 serve as a sound basis for the selection decision that takes a policy from simulation into a real
 deployment domain.
 %120
 
-To address this issue, we propose a \emph{check-up}:
+To address this issue, we propose a \emph{check-up}:{要总结个名字 还是就叫checkup就行？}
+
 %120
 We construct pixel-level paired data and reduce each pair to two axes of causal attribution: the
 \emph{faithfulness} displacement $F$, the plan change caused by the pedestrian itself, and the
@@ -87,11 +92,11 @@ basis for selecting a policy for a given deployment.
 \centering
 \includegraphics[width=\columnwidth]{figures/frame1c.pdf}
 
-\caption{\textbf{check-up frame.} }
+\caption{\textbf{check-up frame.The check-up proceeds in three stages: constructing pixel-level paired data, distilling the causal
+axes from them, and issuing a prognosis for the policy's behaviour in the target domain.} }
 %120
 % 该体检过程中，首先进行像素级配对数据的构建，然后提炼因果轴，最终对策略在目标域的表现进行预诊断。
-The check-up proceeds in three stages: constructing pixel-level paired data, distilling the causal
-axes from them, and issuing a prognosis for the policy's behaviour in the target domain.
+
 \label{fig:method}
 \end{figure}
 
@@ -101,27 +106,28 @@ axes from them, and issuing a prognosis for the policy's behaviour in the target
 %本文的贡献在于，在物理智能领域，设计了一个通用的模型体检的流程，具体包括（a）像素级配对数据的构建，（b）因果轴的提炼以及（c）prognosis:策略在这些轴上的评估的检测手段。
 
 %120 :!!!!!!内部要改具体内容
-The contribution of this paper is a general check-up procedure for physical AI, comprising 
+The contribution of this paper is a small-sample check-up for end-to-end and VLA driving policies, built on verified, pixel-level counterfactual edits of real frames. It comprises 
 \begin{enumerate}\itemsep2pt
-\item the construction of \emph{pixel-level paired data}: built a small-sample check-up for driving policies on verified, pixel-level counterfactual
-      edits of real frames rather than the promptable text prompts language-model interpretability
-      usually relies on --- to our knowledge among the first uses of concept-vector-style methods on
-      a multi-modal, largely non-promptable input. Its central result is methodological: raw response
-      magnitude is a poor safety signal, and decomposing it into magnitude, jitter and separation turns
-      a two-sided quantity into a one-sided certificate. We use it to diagnose six policies, with an
-      explanation from inside the networks.
+
+%       1.	A small-sample check-up for end-to-end and VLA driving policies, built on verified, pixel-level counterfactual edits of real frames. Its central result is methodological: 
+
+% 2.	An account of what a small check-up can and cannot establish in a new domain: a sample-size law for every exam, and a pre-registered transfer test from left- to right-hand drive. Orderings and verdicts transfer; point values do not. The exam that predicts behaviour on the new side is how steadily a policy drives, not how strongly it reacts, and it does so better than that side's own leaderboard score.
+% 3.	A diagnosis of six released policies, with an explanation from inside the three BEV planners of why the pedestrian risk goes unmanaged: the pedestrian leaves a trace in the features but is not decoded, the planning grid cannot locate it, and the plan rarely reaches it.
 
 
-\item using the distillation of the \emph{causal axes} to diagnose: in a new domain, for the linear representation hypothesis: the faithfulness direction $\hat v_F$ (response to the pedestrian) and the interference direction $\hat v_I$ (response to a
-      change with no driving-relevant information) are geometrically opposed in aggregate (mean cosine $-0.54$ across
-      four policies), and this opposition is mirrored behaviourally, not just in the representation.
-      The relationship is a property of the pooled data, not a stable per-policy trait
-      (\cref{sec:lighting}), and we report it as such.
+\item the construction of \emph{pixel-level paired data}:
+ built a small-sample check-up for driving policies on verified, pixel-level counterfactual edits of real frames rather than the promptable text prompts language-model interpretability usually relies on --- to our knowledge among the first uses of concept-vector-style methods on a multi-modal, largely non-promptable input. Its central result is methodological: raw response magnitude is a poor safety signal, and decomposing it into magnitude, jitter and separation turns a two-sided quantity into a one-sided certificate. We use it to diagnose six policies, with an
+explanation from inside the networks.
 
 
-\item the \emph{prognosis}: an account of what small data can and cannot establish: sample-size laws for every exam and a
-      pre-registered left- to right-hand-drive transfer test. The exam that transfers predicts
-      behaviour on the new side better than that side's own leaderboard score does.
+\item diagnose with the distillation of the \emph{causal axes}: 
+we treat the raw response to removing a pedestrian as a poor safety signal, because a plan that moves is as likely to move towards the pedestrian as away from it. Decomposing the response into magnitude, which is represented as the faithfulness direction $\hat v_F$; and the policy's own jitter under an irrelevant edit, which is the interference direction $\hat v_I$. And the separation it buys turns a two-sided quantity into a one-sided certificate: a near-zero response shows the pedestrian did not enter the decision; a large one shows nothing. A diagnosis with an explanation from inside the three BEV planners of why the pedestrian risk goes unmanaged: the pedestrian leaves a trace in the features but is not decoded, the planning grid cannot locate it, and the plan rarely reaches it.
+
+
+
+\item the \emph{prognosis}: 
+An account of what a small check-up can and cannot establish in a new domain: a sample-size law for every exam, and a pre-registered transfer test from left- to right-hand drive. Orderings and verdicts transfer; point values do not. The exam that predicts behaviour on the new side is how steadily a policy drives, not how strongly it reacts, and it does so better than that side's own leaderboard score.
+
 
 \end{enumerate}
 

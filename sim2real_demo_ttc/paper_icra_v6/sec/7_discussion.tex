@@ -34,13 +34,15 @@ suffice for planned distance, over-reaction and lighting; hundreds of pairs with
 react are needed for hazard sensitivity.
 
 \section{Conclusion}
-A benchmark score reports an outcome, not a cause. We read the behaviour that a deployment decision
-needs from a few hundred logged frames, using counterfactual exams that an independent detector
-verifies. Three results are worth carrying forward. A near-zero counterfactual response is a reliable
-certificate that the pedestrian did not enter the decision, while a large response certifies nothing:
-of the plans that moved, as many moved towards the pedestrian as away from it. What transfers between
-driving sides is how steadily a policy drives rather than how strongly it reacts, and that exam is
-the only one---among ours and the standard scores alike---that predicts behaviour on the new side at
-significance. And each verdict can be priced in advance: some are settled in a dozen frames, others
-need hundreds, which is what a small check-up must know about itself before it is used to decide
-anything.
+A benchmark score reports an outcome, not the behaviour behind it, so a rank cannot be trusted to
+hold at a new site. We proposed a check-up that reads that behaviour from a few hundred logged frames
+through verified, pixel-level counterfactual edits, reducing each scene to two axes of causal
+attribution---the faithfulness displacement $F$ and the interference displacement $I$---on which five
+exams are built. Three results carry the paper. First, on the cells in which a pedestrian does lie on
+the planned path, only \NumCfRealPct\% of responses are genuine avoidance, and no policy either
+diverts or slows; a photometric night-style perturbation moves every plan further than the pedestrian
+does. Second, diagnosed on one driving side and tested on the other, the exam that transfers predicts
+the new side's near-miss rate at $\rho={\NumSpBeh}$, where the standard scores reach only
+$-0.54$--$+0.49$; what carries over is the ordering and the verdict. Third, each verdict can be priced
+in advance---the lighting verdict within \NumNstarCFRhi{} frames, exposure within \NumNstarExpHi---so
+that a deployment decision costs tens of target-domain frames rather than a fleet test.

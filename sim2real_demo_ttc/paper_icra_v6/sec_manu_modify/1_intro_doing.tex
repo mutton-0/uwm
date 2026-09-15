@@ -26,18 +26,18 @@ lengthens the development cycle.
 % 在论文「dont blind your vla」中，制作了think-site表征语言图像分割程度；然而，这个套件的迁移只适用于v-l多模态模型，无法横展到一些仅解码器的扩散策略评估，并且仍建立在已有被选中模型的基础上研究如何提升模型能力，也无法系统回答模型选型时该如何决策。
 % 在RepE论文中，作者给出了RepE的方法来定位和修复域间gap，但该方法旨在暴漏大语言模型在语义刺激下的反馈，又难以横展到读入图片的物理AI策略的评估。
 % 「再举一些LLM测迁移如function vector」的例子，说明当前在大语言模型的迁移评估上已有一定的研究，但这些方法仍难以直接应用于物理AI策略的跨域评估。物理AI策略的跨域评估仍然缺乏系统性的方法。
+
 A considerable body of cross-domain work has been proposed---domain adaptation, domain generalisation
 and the like---but it concentrates on identifying the problem and on solving it through training, and
 lacks any systematic assessment of how a policy behaves in the target domain. It therefore does not
 substantively address the selection problem that arises at deployment.
 
-In \emph{Don't Blind Your VLA}~\cite{TODO-blindvla}, a think-site representation is built to measure
-the degree of language--image segmentation; the transfer of that suite, however, applies only to
-vision--language multi-modal models and does not extend to the evaluation of decoder-only diffusion
-policies, and it is still built upon an already-chosen model, studying how that model's capability may
-be improved rather than answering systematically how a model should be selected.
+The VL-Think Suite of~\cite{kachaev2025don} probes the degree of language--image segmentation to
+quantify the multi-modal understanding gap at deployment. However, it is confined to vision--language
+models, does not extend to vision-only policies, and asks how a given model may be improved rather
+than which model to deploy.
 
-In the RepE paper~\cite{zou2023repe} the authors give a method for locating and repairing the gap
+In the paper~\cite{zou2023repe} the authors give a method called RepE for locating and repairing the gap
 between domains, but it is aimed at exposing a large language model's response to semantic stimuli,
 and is likewise hard to extend to the evaluation of physical-AI policies that read images.
 

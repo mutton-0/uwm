@@ -25,14 +25,16 @@ x=IDX[UID]; reg=DV[UID]["region"]
 a0=np.asarray(Image.open(x["img"]).convert("RGB"))
 r0=np.asarray(Image.open(f"/data/dataset/risk_card/{x['rm_name']}").convert("RGB"))
 n0=transform(a0,kind="night",scope="global",seed=zlib.crc32(UID.encode())%(2**31))
+d0=transform(a0,kind="dusk", scope="global",seed=zlib.crc32(UID.encode())%(2**31))   # 同帧同 seed 的黄昏档
 cx=(reg[0]+reg[2])//2; cy=(reg[1]+reg[3])//2               # 以检测框为中心裁到 1.55:1，去掉上下无关留白
 CH=int((reg[3]-reg[1])*1.55); CW=int(CH*1.55)
 X0=max(0,min(a0.shape[1]-CW,cx-CW//2)); Y0=max(0,min(a0.shape[0]-CH,cy-CH//2))
 CROP=(slice(Y0,Y0+CH),slice(X0,X0+CW)); AR=CW/CH
-IMGS=(a0,r0,n0); CC=["#2a5db0","#c0392b","#8a8a84"]
-LAB=[("logged frame $O$","detector: pedestrian found"),
-     ("pedestrian removed $R$","detector: not found"),
-     ("re-lit $N$","detector: still found")]
+IMGS=(a0,r0,n0,d0); CC=["#2a5db0","#c0392b","#8a8a84","#b9814a"]; NIMG=len(IMGS)
+LAB=[("logged $O$","detector: pedestrian found"),
+     ("removed $R$","detector: not found"),
+     ("re-lit $N$, night","detector: still found"),
+     ("re-lit $N$, dusk","detector: still found")]   # A_0095 黄昏档 IoU 0.88，与 dusk_check 同判据
 EX=["exposure","hazard\nsensitivity","scaling","specificity","lighting\n$\\mathrm{CFR}$"]
 
 def draw_img(fig,rect,i,fs=1.0):
@@ -46,9 +48,9 @@ def draw_img(fig,rect,i,fs=1.0):
 if MODE=="wide":
     FW=7.16; IW_in=0.93; IH_in=IW_in/AR
     GAP_in=0.04; PAD_in=0.05; TIT_in=0.16
-    FH=TIT_in+PAD_in+3*IH_in+2*GAP_in+PAD_in+0.03
+    FH=TIT_in+PAD_in+NIMG*IH_in+(NIMG-1)*GAP_in+PAD_in+0.03
 else:                                       # 单栏竖版：三段上下叠，字号与跨栏版一致
-    FW=3.45; IW_in=(FW-2*0.05-2*0.04-2*0.03)/3; IH_in=IW_in/AR
+    FW=3.45; IW_in=(FW-2*0.05-(NIMG-1)*0.04-2*0.03)/NIMG; IH_in=IW_in/AR
     GAP_in=0.04; PAD_in=0.05; TIT_in=0.145
     H_A=TIT_in+PAD_in+IH_in+PAD_in
     H_B=TIT_in+1.30
@@ -83,11 +85,11 @@ def clipboard(NX,NY,NW,NH,fs):                 # 问诊节点：一张体检单
 
 if MODE=="wide":
     IW=fx(IW_in); IH=fy(IH_in); GAP=fy(GAP_in); PAD=fy(PAD_in)
-    TOP=1-fy(TIT_in); ITOP=TOP-PAD; BOT=ITOP-3*IH-2*GAP-PAD
+    TOP=1-fy(TIT_in); ITOP=TOP-PAD; BOT=ITOP-NIMG*IH-(NIMG-1)*GAP-PAD
     MID=(TOP+BOT)/2; TY=TOP+fy(0.035)
     AX0=fx(0.03); AX1=AX0+IW+2*fx(0.035)
     box(AX0,BOT,AX1,TOP); bg.text(AX0+fx(0.01),TY,"(a) scenario edit",fontsize=7.4,weight="bold",color="#2b2b28")
-    for i in range(3): draw_img(fig,[AX0+fx(0.035),ITOP-(i+1)*IH-i*GAP,IW,IH],i)
+    for i in range(NIMG): draw_img(fig,[AX0+fx(0.035),ITOP-(i+1)*IH-i*GAP,IW,IH],i)
     arrow((AX1+fx(0.04),MID),(AX1+fx(0.18),MID))
     BX0=AX1+fx(0.22); BX1=BX0+fx(3.42)
     box(BX0,BOT,BX1,TOP); bg.text(BX0+fx(0.04),TY,"(b) diagnosis",fontsize=7.4,weight="bold",color="#2b2b28")
@@ -111,7 +113,7 @@ else:
     # (a) 三张图横排
     aT=1-fy(0.01); aB=aT-TIT-PAD-IH-PAD
     box(L,aB,R,aT); bg.text(L+fx(0.05),aT-fy(0.115),"(a) scenario edit",fontsize=7.0,weight="bold",color="#2b2b28")
-    for i in range(3): draw_img(fig,[L+fx(0.05)+i*(IW+fx(0.04)),aB+PAD,IW,IH],i,fs=0.92)
+    for i in range(NIMG): draw_img(fig,[L+fx(0.05)+i*(IW+fx(0.04)),aB+PAD,IW,IH],i,fs=0.88)
     arrow(((L+R)/2,aB-fy(0.022)),((L+R)/2,aB-ARRf+fy(0.022)),lw=1.6,ms=6)
     # (b) 两个面板
     bT=aB-ARRf; bB=bT-TIT-1.30/FH
