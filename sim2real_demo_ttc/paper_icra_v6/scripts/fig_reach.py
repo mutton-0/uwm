@@ -7,7 +7,7 @@ matplotlib.use("Agg"); import matplotlib.pyplot as plt
 R5="/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090"; V5=f"{R5}/paper_icra_v5"
 plt.rcParams.update({"font.family":"DejaVu Sans","font.size":8.3,"axes.spines.top":False,"axes.spines.right":False,"axes.linewidth":0.6,
                      "axes.edgecolor":"#52514e","xtick.color":"#52514e","ytick.color":"#52514e"})
-COL={"dd":"#1f77d0","ltf":"#4b5fcf","ddv2":"#7047c0","simlingo":"#7a2f9e","autovla":"#4b1f66","alpamayo15":"#0b0b14"}
+COL={"dd":"#b8c2cc","ltf":"#8fa3b8","ddv2":"#5b9bd5","simlingo":"#2e75b6","autovla":"#1f3f6e","alpamayo15":"#0b0b14"}
 NAME={"dd":"DiffusionDrive","ltf":"LTF","ddv2":"DiffusionDriveV2","simlingo":"SimLingo","autovla":"AutoVLA","alpamayo15":"Alpamayo 1.5"}
 M=list(COL); rng=np.random.default_rng(0)
 def med_ci(v):

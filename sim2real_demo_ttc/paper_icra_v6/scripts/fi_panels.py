@@ -6,7 +6,7 @@ import json,os,numpy as np,matplotlib.pyplot as plt
 V5="/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090/paper_icra_v5"
 M=["dd","ltf","ddv2","simlingo","autovla","alpamayo15"]
 SH={"dd":"DD","ltf":"LTF","ddv2":"DDv2","simlingo":"SimLingo","autovla":"AutoVLA","alpamayo15":"Alpamayo"}
-COL={"dd":"#1f77d0","ltf":"#4b5fcf","ddv2":"#7047c0","simlingo":"#7a2f9e","autovla":"#4b1f66","alpamayo15":"#0b0b14"}
+COL={"dd":"#b8c2cc","ltf":"#8fa3b8","ddv2":"#5b9bd5","simlingo":"#2e75b6","autovla":"#1f3f6e","alpamayo15":"#0b0b14"}
 LOFF={"autovla":(4.5,3.6),"ltf":(4.5,-3.0)}      # AutoVLA 与 LTF 读数贴得近，标签错开
 TT=np.round(np.arange(0,2.51,0.1),2); T8=np.r_[0,np.arange(1,9)*0.5]
 HAS4=all(os.path.exists(f"{V5}/rhd_axes4_{m}.json") for m in M)
