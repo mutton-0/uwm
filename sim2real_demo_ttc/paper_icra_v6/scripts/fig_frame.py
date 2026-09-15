@@ -9,7 +9,7 @@
 版式一律按英寸推导，内容正好填满画布，四周不留空。"""
 import json,sys,zlib,numpy as np,matplotlib
 matplotlib.use("Agg"); import matplotlib.pyplot as plt
-from matplotlib.patches import FancyBboxPatch,FancyArrowPatch
+from matplotlib.patches import FancyBboxPatch,FancyArrowPatch,Wedge
 from PIL import Image
 MODE=sys.argv[1] if len(sys.argv)>1 else "wide"
 R5="/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090"; V5=f"{R5}/paper_icra_v5"
@@ -50,14 +50,15 @@ if MODE=="wide":
     FW=7.16; IW_in=0.93; IH_in=IW_in/AR
     GAP_in=0.04; PAD_in=0.05; TIT_in=0.16
     FH=TIT_in+PAD_in+NIMG*IH_in+(NIMG-1)*GAP_in+PAD_in+0.03
-else:                                       # 单栏竖版：三段上下叠，字号与跨栏版一致
+else:                                       # 单栏竖版：四段上下叠 + 体检单
     FW=3.45; IW_in=(FW-2*0.05-(NIMG-1)*0.04-2*0.03)/NIMG; IH_in=IW_in/AR
     GAP_in=0.04; PAD_in=0.05; TIT_in=0.145
     H_A=TIT_in+PAD_in+IH_in+PAD_in
-    H_B=TIT_in+1.30+0.30+PAD_in
-    H_C=TIT_in+0.34+2*PAD_in
-    ARR=0.17
-    FH=H_A+ARR+H_B+ARR+H_C+0.05
+    H_B=TIT_in+1.12
+    H_C=TIT_in+0.30+2*PAD_in
+    H_D=TIT_in+0.72+2*PAD_in
+    ARR=0.14
+    FH=H_A+ARR+H_B+ARR+H_C+ARR+H_D+0.04
 fig=plt.figure(figsize=(FW,FH))
 def fx(v): return v/FW
 def fy(v): return v/FH
@@ -111,30 +112,47 @@ if MODE=="wide":
 else:
     IW=fx(IW_in); IH=fy(IH_in); PAD=fy(PAD_in); TIT=fy(TIT_in); ARRf=fy(ARR)
     L,R=fx(0.03),1-fx(0.03)
-    # (a) 三张图横排
-    aT=1-fy(0.01); aB=aT-TIT-PAD-IH-PAD
-    box(L,aB,R,aT); bg.text(L+fx(0.05),aT-fy(0.115),"(a) scenario edit",fontsize=7.0,weight="bold",color="#2b2b28")
+    def stage(top,h,lab):
+        bot=top-fy(h); box(L,bot,R,top); bg.text(L+fx(0.05),top-fy(0.115),lab,fontsize=7.0,weight="bold",color="#2b2b28"); return bot
+    def down(y,txt):
+        arrow(((L+R)/2,y-fy(0.018)),((L+R)/2,y-ARRf+fy(0.018)),lw=1.6,ms=6)
+        bg.text((L+R)/2+fx(0.08),y-ARRf/2,txt,fontsize=5.0,va="center",color="#2f5d94"); return y-ARRf
+    # (a) 配对数据
+    aT=1-fy(0.01); aB=stage(aT,H_A,"(a) paired data")
     for i in range(NIMG): draw_img(fig,[L+fx(0.05)+i*(IW+fx(0.04)),aB+PAD,IW,IH],i,fs=0.88)
-    arrow(((L+R)/2,aB-fy(0.022)),((L+R)/2,aB-ARRf+fy(0.022)),lw=1.6,ms=6)
-    bg.text((L+R)/2+fx(0.08),aB-ARRf/2,"query $\\pi$ on $O,R,D,N$",fontsize=5.0,va="center",color="#2f5d94")
-    # (b) 两个面板
-    bT=aB-ARRf; bB=bT-TIT-(1.30+0.30+PAD_in)/FH
-    box(L,bB,R,bT); bg.text(L+fx(0.05),bT-fy(0.115),"(b) diagnosis",fontsize=7.0,weight="bold",color="#2b2b28")
-    PB=bB+fy(0.28)+fy(0.30+PAD_in); PT=bT-fy(0.27)
-    CW_=(R-L-2*fx(0.05)-4*fx(0.035))/5                       # 五项 exam 横排在两个面板下面
-    for k,lab in enumerate(EX):
-        x0=L+fx(0.05)+k*(CW_+fx(0.035)); chip(x0,bB+PAD,x0+CW_,bB+PAD+fy(0.30),lab,4.7)
-    bg.text(L+fx(0.05),bB+PAD+fy(0.30)+fy(0.005),"five exams, each with a reference threshold",fontsize=4.6,va="bottom",color="#52514e")
+    bT=down(aB,"query $\\pi$ on $O,R,D,N$")
+    # (b) 两条轴
+    bB=stage(bT,H_B,"(b) the two axes")
+    PB=bB+fy(0.24); PT=bT-fy(0.26)
     ax1=fig.add_axes([L+fx(0.10),PB,fx(1.25),PT-PB]); frame_extract(ax1); ax1.set_title("three queries, one scene",fontsize=6.0,loc="left",pad=2)
     ax2=fig.add_axes([L+fx(1.80),PB,fx(1.42),PT-PB]); frame_readings(ax2); ax2.set_title("the two readings",fontsize=6.0,loc="left",pad=2)
-    arrow(((L+R)/2,bB-fy(0.022)),((L+R)/2,bB-ARRf+fy(0.022)),lw=1.6,ms=6)
-    bg.text((L+R)/2+fx(0.08),bB-ARRf/2,"diagnose on one side, test on the other",fontsize=5.0,va="center",color="#2f5d94")
-    # (c) 五个检查横排：与 (a)(b) 同款容器框，高度足额，底边不再截断
-    cT=bB-ARRf; cB=cT-TIT-0.34/FH-2*PAD
-    box(L,cB,R,cT); bg.text(L+fx(0.05),cT-fy(0.115),"(c) prognosis",fontsize=7.0,weight="bold",color="#2b2b28")
-    CW_=(R-L-2*fx(0.05)-3*fx(0.035))/4
+    cT=down(bB,"read $F$, $I$ per unit")
+    # (c) 五项检查
+    cB=stage(cT,H_C,"(c) the five exams")
+    CW_=(R-L-2*fx(0.05)-4*fx(0.035))/5
+    for k,lab in enumerate(EX):
+        x0=L+fx(0.05)+k*(CW_+fx(0.035)); chip(x0,cB+PAD,x0+CW_,cB+PAD+fy(0.30),lab,4.7)
+    dT=down(cB,"diagnose on one side, test on the other")
+    # (d) 预后 + 体检单
+    dB=stage(dT,H_D,"(d) prognosis")
+    GW=(R-L)*0.60; CW2=(GW-fx(0.05)-fx(0.035))/2; CH2=fy(0.33)
     for k,lab in enumerate(PR):
-        x0=L+fx(0.05)+k*(CW_+fx(0.035)); chip(x0,cB+PAD,x0+CW_,cT-TIT-fy(0.01),lab,4.7)
+        r_,c_=divmod(k,2); x0=L+fx(0.05)+c_*(CW2+fx(0.035)); y1=dT-TIT-fy(0.02)-r_*(CH2+fy(0.045))
+        chip(x0,y1-CH2,x0+CW2,y1,lab,4.7)
+    # 箭头指向体检单
+    mid=(dT-TIT+dB)/2
+    arrow((L+fx(0.05)+GW-fx(0.02),mid),(L+fx(0.05)+GW+fx(0.16),mid),lw=1.4,ms=6)
+    NX=L+fx(0.05)+GW+fx(0.62); NY=mid; NW=fx(0.46); NH=fy(0.56)
+    clipboard(NX,NY,NW,NH,4.8)
+    # 医生小人：头 + 肩 + 胸前十字 + 听诊器
+    DX=NX+NW/2+fx(0.30); DY=mid+fy(0.02)
+    bg.add_patch(plt.Circle((DX,DY+fy(0.19)),fx(0.075),fc="#f1d7c2",ec="#4a4a46",lw=0.8,zorder=5))
+    bg.add_patch(plt.Circle((DX,DY+fy(0.19)),fx(0.075),fc="none",ec="#4a4a46",lw=0.8,zorder=6))
+    bg.add_patch(Wedge((DX,DY-fy(0.07)),fx(0.15),0,180,fc="white",ec="#4a4a46",lw=0.8,zorder=5))
+    bg.plot([DX-fx(0.03),DX+fx(0.03)],[DY+fy(0.02)]*2,color="#c0392b",lw=1.2,zorder=6); bg.plot([DX]*2,[DY-fy(0.005),DY+fy(0.045)],color="#c0392b",lw=1.2,zorder=6)
+    th=np.linspace(np.pi*0.15,np.pi*0.95,30)
+    bg.plot(DX+fx(0.09)*np.cos(th)-fx(0.02),DY-fy(0.02)+fy(0.09)*np.sin(th)-fy(0.06),color="#2f5d94",lw=1.0,zorder=6)
+    bg.add_patch(plt.Circle((DX-fx(0.02)+fx(0.09)*np.cos(th[0]),DY-fy(0.08)+fy(0.09)*np.sin(th[0])),fx(0.018),fc="#2f5d94",ec="none",zorder=7))
     OUT="frame1c"
 fig.savefig(f"{V5}/figures/{OUT}.pdf")
 fig.savefig(f"{V5}/figures/{OUT}.png",dpi=300)   # 版式已填满画布，不用 tight，免得裁出不一致的边
