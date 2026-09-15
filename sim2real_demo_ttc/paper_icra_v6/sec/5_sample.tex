@@ -61,9 +61,7 @@ of moving-ego scenes with minimum time-to-proximity $\ge1.5$\,s, the complement 
 pre-registered test above changes only the side. Each predictor is a six-policy ordering obtained
 without that data, and we read the rank correlations as orderings, not as tests. The standard scores
 agree with the target at $|\rho|\le\NumStdRhoMax$ (NAVSIM leaderboard \NumRhoLbKeep, nuScenes L2
-\NumRhoLtwoKeep, open-loop pedestrian collision \NumRhoPedcolKeep). Measuring pedestrian TTC directly
-on the left-hand-drive side predicts it at \NumOtherSideLo--\NumOtherSideHi, better than any exam,
-and the exams are not a substitute for that measurement. Of the five, read on the 88 Boston frames as
+\NumRhoLtwoKeep, open-loop pedestrian collision \NumRhoPedcolKeep). The same TTC readout taken on the NAVSIM left-hand-drive scenes predicts the Singapore TTC, clearance and collision orderings at \NumOtherSideLo--\NumOtherSideHi, better than any exam, and the exams are not a substitute for that measurement. Of the five, read on the 88 Boston frames as
 a pre-deployment diagnosis would be, specificity matches the target best, $\rho=\NumSpBeh$
 (\NumSpLhdList), against $\NumExpBeh$ for exposure and $\NumCfrBeh$ for $\CFR$, where specificity and
 $\CFR$ are higher-is-better and exposure's negative value says that policies that plan further keep
@@ -77,13 +75,9 @@ protocol. SimLingo plans furthest, moves its plan when a pedestrian requires no 
 ($\SP=\NumSpSL$), moves towards the pedestrian more often than away, and collides most on both sides.
 Trained in simulation, it needs target-domain post-training before deployment, and the check-up prices
 the re-check at a few dozen frames for exposure and specificity. AutoVLA and Alpamayo-1.5 keep a
-human-like exposure and a steady plan but show no hazard response. They can be deployed at the
-human's speed profile, and what post-training must add is the response to the pedestrian, which only
-hundreds of frames with a genuine need to react can verify. DiffusionDrive and LTF are safe because
+human-like exposure and a steady plan but show no hazard response. Before deployment, post-training must add the response to the pedestrian, and only hundreds of frames with a genuine need to react can verify that it did. DiffusionDrive and LTF are safe because
 they plan short, which holds only while exposure stays low, so any post-training that lengthens their
-plans must be re-examined for hazard sensitivity. DiffusionDriveV2 is the only policy whose response
-grows with the hazard and that slows under the night-style perturbation, at the cost of the lowest
-specificity among the BEV planners.
+plans must be re-examined for hazard sensitivity. DiffusionDriveV2 is the only policy with a positive scaling estimate (\NumScalHi, interval crossing zero) and the only one that slows under the night-style perturbation, at the cost of the lowest specificity among the BEV planners.
 
 \paragraph{What a verdict costs}
 For every exam and policy we subsample $n$ of the \NumPool{} frames that all six policies share, 400

@@ -146,7 +146,7 @@ _GC=json.load(open(f"{V5}/gt_ceiling.json")) if os.path.exists(f"{V5}/gt_ceiling
 
 cf=[A[m]["point"]["CFR"] for m in M]; hs=[A[m]["point"]["HS"] for m in M]; ex=[A[m]["point"]["exposure"] for m in M]
 ns=SS["dims"]; nc=[PD["table"][m]["no_at_fault_collisions"] for m in M]
-g1=max(abs(coll(m,"actual")[0]-coll(m,"actual")[1]) for m in M); g8=max(abs(coll(m,"8")[0]-coll(m,"8")[1]) for m in M)
+g1=max(abs(round(coll(m,"actual")[0],1)-round(coll(m,"actual")[1],1)) for m in M); g8=max(abs(round(coll(m,"8")[0],1)-round(coll(m,"8")[1],1)) for m in M)   # 与表内四舍五入后的值一致
 NUM={"NumCFRlo":f"{min(cf):.2f}","NumCFRhi":f"{max(cf):.2f}","NumCFRciHi":f"{max(A[m]['ci']['CFR'][1] for m in M):.2f}",
      "NumHSlo":f"{min(hs):.2f}","NumHShi":f"{max(hs):.2f}","NumExpLo":f"{min(ex):.2f}","NumExpHi":f"{max(ex):.2f}",
      "NumDetRm":f"{100*np.mean([o['rm']['target_iou']<0.5 for o in DV]):.1f}","NumDetNight":f"{100*np.mean([o['night']['target_iou']>=0.5 for o in DV]):.1f}",

@@ -41,5 +41,3 @@ speed, the visible and removed rates differ by at most \NumCollGap{} points for 
 policies almost never reach the pedestrian. DiffusionDrive is safe because it stays short, AutoVLA and Alpamayo-1.5 cover a human-like distance
 without yielding, and SimLingo covers the most ground with the lowest specificity.
 
-\paragraph{Why the risk goes unmanaged}
-One observation on the three BEV planners explains much of the diagnosis: their plans end 5--9\,m ahead while the median corridor pedestrian in the NAVSIM scenes stands 20\,m away, so the visible and removed contact rates differ by at most \NumCollGap{} points at the logged speed and \NumCollGapEight{} at 8\,m/s (\cref{tab:report}). The limit is geometric before it is perceptual.
