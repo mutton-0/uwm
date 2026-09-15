@@ -53,15 +53,14 @@ def _row(label,cells): return label+" & "+" & ".join(cells)+r" \\"
 def _cir(k,f="%.2f"):   # 置信区间独立成一小行，灰色 scriptsize
     return r"\multicolumn{1}{r}{\textcolor{gray}{\scriptsize 95\% CI}} & "+" & ".join(r"\textcolor{gray}{\scriptsize["+(f%A[m]["ci"][k][0])+", "+(f%A[m]["ci"][k][1])+"]}" for m in M)+r" & \\[-1pt]"
 R=[]
-R.append(r"\multicolumn{8}{@{}l}{\emph{Five exams} (236 nuScenes frames)} \\")
-R.append(_row(r"Exposure, Exp $\approx1$",[cell(A[m]["point"]["exposure"],"exposure",m==_bst["exposure"]) for m in M]+["1.00"])); R.append(_cir("exposure"))
-R.append(_row(r"Hazard sensitivity, $\HS$ $\uparrow$",[cell(A[m]["point"]["HS"],"HS",m==_bst["HS"]) for m in M]+[f"{_hs_h:.2f}"])); R.append(_cir("HS"))
-R.append(_row(r"Scaling, Sc $\uparrow$",[cell(A[m]["point"]["HS_slope"],"HS_slope",m==_bst["HS_slope"],"%+.2f") for m in M]+[f"{_gcx.get('sc_median',float('nan')):+.2f}"])); R.append(_cir("HS_slope","%+.2f"))
-R.append(_row(r"Specificity, $\SP$ $\uparrow$",[cell(A[m]["point"]["SP"],"SP",m==_bst["SP"]) for m in M]+["--"])); R.append(_cir("SP"))
-R.append(_row(r"Lighting, $\CFR$ $\uparrow$",[cell(A[m]["point"]["CFR"],"CFR",m==_bst["CFR"]) for m in M]+["--"])); R.append(_cir("CFR"))
+R.append(r"\multicolumn{8}{@{}l}{\emph{Exams} (236 nuScenes frames)} \\")
+R.append(_row(r"Exposure $\approx1$",[cell(A[m]["point"]["exposure"],"exposure",m==_bst["exposure"]) for m in M]+["1.00"])); R.append(_cir("exposure"))
+R.append(_row(r"Hazard sens.\ $\HS$ $\uparrow$",[cell(A[m]["point"]["HS"],"HS",m==_bst["HS"]) for m in M]+[f"{_hs_h:.2f}"])); R.append(_cir("HS"))
+R.append(_row(r"Scaling $\uparrow$",[cell(A[m]["point"]["HS_slope"],"HS_slope",m==_bst["HS_slope"],"%+.2f") for m in M]+[f"{_gcx.get('sc_median',float('nan')):+.2f}"])); R.append(_cir("HS_slope","%+.2f"))
+R.append(_row(r"Specificity $\SP$ $\uparrow$",[cell(A[m]["point"]["SP"],"SP",m==_bst["SP"]) for m in M]+["--"])); R.append(_cir("SP"))
+R.append(_row(r"Lighting $\CFR$ $\uparrow$",[cell(A[m]["point"]["CFR"],"CFR",m==_bst["CFR"]) for m in M]+["--"])); R.append(_cir("CFR"))
 R.append(r"\midrule")
-R.append(r"\multicolumn{8}{@{}l}{\emph{Collision} (contact rate at 8\,m/s, \%)} \\")
-R.append(_row(r"pedestrian visible\,/\,removed $\downarrow$",[_bf(f"{coll(m,'8')[0]:.1f}\\,/\\,{coll(m,'8')[1]:.1f}",m==_bc8) for m in M]+["--"]))
+R.append(_row(r"\emph{Collision} at 8\,m/s, vis.\,/\,rm.\ (\%) $\downarrow$",[_bf(f"{coll(m,'8')[0]:.1f}\\,/\\,{coll(m,'8')[1]:.1f}",m==_bc8) for m in M]+["--"]))
 R.append(r"\midrule")
 R.append(r"\multicolumn{8}{@{}l}{\emph{Under re-lighting}} \\")
 def _sp(m):
@@ -69,21 +68,21 @@ def _sp(m):
     return bold("$"+_f.format(100*n_['dv_rel'])+"\\%$",n_["p"]<0.01)
 def _ds(m):
     n_=NS[m]; return bold("$"+("{:+.2f}" if abs(n_['dS'])>=0.01 else "{:+.3f}").format(n_['dS'])+"$",n_["dS_p"]<0.01)
-R.append(_row(r"planned mean speed $\downarrow$",[_sp(m) for m in M]+["--"]))
+R.append(_row(r"speed $\downarrow$",[_sp(m) for m in M]+["--"]))
 R.append(_row(r"clearance $\Delta_N S$ (m) $\uparrow$",[_ds(m) for m in M]+["--"]))
-R.append(_row(r"$\CFR$ dusk\,/\,night, NAVSIM $\uparrow$",[f"{_DK[m]['cfr_dusk']:.2f}\\,/\\,{_DK[m]['cfr_night']:.2f}" if m in _DK else "--" for m in M]+["--"]))
+R.append(_row(r"$\CFR$ dusk\,/\,night $\uparrow$",[f"{_DK[m]['cfr_dusk']:.2f}\\,/\\,{_DK[m]['cfr_night']:.2f}" if m in _DK else "--" for m in M]+["--"]))
 R.append(r"\midrule")
-R.append(r"\multicolumn{8}{@{}l}{\emph{Standard scores} (rank in parentheses)} \\")
-R.append(_row(r"nuScenes L2 (m), vis.\,/\,rm. $\downarrow$",[f"{_NUo[m]['clean']['L2_avg']:.2f}\\,/\\,{_NUo[m]['rm']['L2_avg']:.2f}" for m in M]+["--"]))
-R.append(_row(r"NAVSIM EPDMS, all 783 scenes $\uparrow$",[_bf("%.3f (%d)"%(_AL[m]["epdms"],_RKA[m]),m==_bA) for m in M]+["--"]))
-R.append(_row(r"NAVSIM EPDMS, \NumNclose{} near-ped. $\uparrow$",[_bf("%.3f (%d)"%(_CV[m]["epdms"],_RKC[m]),m==_bC) for m in M]+["--"]))
-R.append(_row(r"TTC $<1.5$\,s (\%), LHD $\downarrow$",[_bf("%.1f (%d)"%(_TR["LHD"][m]["moving"]["viol"],_TR["ranks"]["LHD TTC"][m]),m==_bL) for m in M]+["--"]))
-R.append(_row(r"TTC $<1.5$\,s (\%), RHD $\downarrow$",[_bf("%.1f (%d)"%(_TR["RHD"][m]["moving"]["viol"],_TR["ranks"]["RHD TTC"][m]),m==_bR) for m in M]+["--"]))
+R.append(r"\multicolumn{8}{@{}l}{\emph{Standard scores} (rank)} \\")
+R.append(_row(r"L2 (m), vis.\,/\,rm. $\downarrow$",[f"{_NUo[m]['clean']['L2_avg']:.2f}\\,/\\,{_NUo[m]['rm']['L2_avg']:.2f}" for m in M]+["--"]))
+R.append(_row(r"EPDMS, all scenes $\uparrow$",[_bf("%.3f (%d)"%(_AL[m]["epdms"],_RKA[m]),m==_bA) for m in M]+["--"]))
+R.append(_row(r"EPDMS, near-ped. $\uparrow$",[_bf("%.3f (%d)"%(_CV[m]["epdms"],_RKC[m]),m==_bC) for m in M]+["--"]))
+R.append(_row(r"TTC$<$1.5\,s (\%), LHD $\downarrow$",[_bf("%.1f (%d)"%(_TR["LHD"][m]["moving"]["viol"],_TR["ranks"]["LHD TTC"][m]),m==_bL) for m in M]+["--"]))
+R.append(_row(r"TTC$<$1.5\,s (\%), RHD $\downarrow$",[_bf("%.1f (%d)"%(_TR["RHD"][m]["moving"]["viol"],_TR["ranks"]["RHD TTC"][m]),m==_bR) for m in M]+["--"]))
 T=[r"\begin{table*}[t]",r"\centering",
- r"\caption{\textbf{The full report for the six policies.} Rows are readings, columns policies. Brackets: 95\% CI. Arrows in cells: outside the reference threshold of \cref{tab:exams}; bold: best per row, or $p<0.01$ for the re-lighting rows. Under re-lighting: change of planned mean speed and of clearance to the pedestrian (negative = closer) on the nuScenes frames, and $\CFR$ at dusk\,/\,night on the \NumDuskN{} NAVSIM scenes. Human: the logged trajectory scored the same way against each policy's blind plan. Standard scores: L2 on the same frames, EPDMS on NAVSIM Singapore, and the share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side.}",
+ r"\caption{\textbf{The full report for the six policies.} Rows are readings, columns policies. Brackets: 95\% CI. Arrows in cells: outside the reference threshold of \cref{tab:exams}; bold: best per row, or $p<0.01$ for the re-lighting rows. Under re-lighting: change of planned mean speed and of clearance to the pedestrian (negative = closer) on the nuScenes frames, and $\CFR$ at dusk\,/\,night on the \NumDuskN{} NAVSIM scenes. Human: the logged trajectory scored the same way against each policy's blind plan. Standard scores: nuScenes L2 on the same frames, NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} near-pedestrian ones, and the share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side.}",
  r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{4pt}",
  r"\begin{tabular}{@{}lccccccc@{}}",r"\toprule",
- r"Reading & "+" & ".join(SH[m] for m in M)+r" & Human \\",r"\midrule"]+R+[r"\bottomrule",r"\end{tabular}",r"\end{table*}"]
+ r"Reading\,$\backslash$\,Policy & "+" & ".join(SH[m] for m in M)+r" & Human \\",r"\midrule"]+R+[r"\bottomrule",r"\end{tabular}",r"\end{table*}"]
 open(f"{_OUT}/tables/tab_report.tex","w").write("\n".join(T)+"\n")
 # ---------- Table III：跨舵位预注册 ----------
 lab={"P1":"Lighting outweighs the pedestrian (CFR $<1$) for every policy",

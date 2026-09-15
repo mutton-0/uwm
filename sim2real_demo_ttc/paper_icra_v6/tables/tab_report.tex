@@ -1,40 +1,39 @@
 % !TEX root = ../main.tex
 \begin{table*}[t]
 \centering
-\caption{\textbf{The full report for the six policies.} Rows are readings, columns policies. Brackets: 95\% CI. Arrows in cells: outside the reference threshold of \cref{tab:exams}; bold: best per row, or $p<0.01$ for the re-lighting rows. Under re-lighting: change of planned mean speed and of clearance to the pedestrian (negative = closer) on the nuScenes frames, and $\CFR$ at dusk\,/\,night on the \NumDuskN{} NAVSIM scenes. Human: the logged trajectory scored the same way against each policy's blind plan. Standard scores: L2 on the same frames, EPDMS on NAVSIM Singapore, and the share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side.}
+\caption{\textbf{The full report for the six policies.} Rows are readings, columns policies. Brackets: 95\% CI. Arrows in cells: outside the reference threshold of \cref{tab:exams}; bold: best per row, or $p<0.01$ for the re-lighting rows. Under re-lighting: change of planned mean speed and of clearance to the pedestrian (negative = closer) on the nuScenes frames, and $\CFR$ at dusk\,/\,night on the \NumDuskN{} NAVSIM scenes. Human: the logged trajectory scored the same way against each policy's blind plan. Standard scores: nuScenes L2 on the same frames, NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} near-pedestrian ones, and the share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side.}
 \label{tab:report}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lccccccc@{}}
 \toprule
-Reading & DD & LTF & DDv2 & SimLingo & AutoVLA & Alpamayo 1.5 & Human \\
+Reading\,$\backslash$\,Policy & DD & LTF & DDv2 & SimLingo & AutoVLA & Alpamayo 1.5 & Human \\
 \midrule
-\multicolumn{8}{@{}l}{\emph{Five exams} (236 nuScenes frames)} \\
-Exposure, Exp $\approx1$ & 0.50$\downarrow$ & 0.79$\downarrow$ & 0.88 & 2.19$\uparrow$ & \textbf{1.01} & 1.13 & 1.00 \\
+\multicolumn{8}{@{}l}{\emph{Exams} (236 nuScenes frames)} \\
+Exposure $\approx1$ & 0.50$\downarrow$ & 0.79$\downarrow$ & 0.88 & 2.19$\uparrow$ & \textbf{1.01} & 1.13 & 1.00 \\
 \multicolumn{1}{r}{\textcolor{gray}{\scriptsize 95\% CI}} & \textcolor{gray}{\scriptsize[0.46, 0.55]} & \textcolor{gray}{\scriptsize[0.75, 0.84]} & \textcolor{gray}{\scriptsize[0.77, 0.95]} & \textcolor{gray}{\scriptsize[1.98, 2.65]} & \textcolor{gray}{\scriptsize[0.97, 1.11]} & \textcolor{gray}{\scriptsize[1.06, 1.21]} & \\[-1pt]
-Hazard sensitivity, $\HS$ $\uparrow$ & 0.06$\downarrow$ & 0.03$\downarrow$ & \textbf{0.10$\downarrow$} & 0.00$\downarrow$ & 0.02$\downarrow$ & 0.01$\downarrow$ & 0.57 \\
+Hazard sens.\ $\HS$ $\uparrow$ & 0.06$\downarrow$ & 0.03$\downarrow$ & \textbf{0.10$\downarrow$} & 0.00$\downarrow$ & 0.02$\downarrow$ & 0.01$\downarrow$ & 0.57 \\
 \multicolumn{1}{r}{\textcolor{gray}{\scriptsize 95\% CI}} & \textcolor{gray}{\scriptsize[-0.01, 0.14]} & \textcolor{gray}{\scriptsize[0.00, 0.06]} & \textcolor{gray}{\scriptsize[0.05, 0.16]} & \textcolor{gray}{\scriptsize[-0.03, 0.03]} & \textcolor{gray}{\scriptsize[-0.00, 0.05]} & \textcolor{gray}{\scriptsize[-0.01, 0.02]} & \\[-1pt]
-Scaling, Sc $\uparrow$ & -0.28$\downarrow$ & -0.13$\downarrow$ & \textbf{+0.23} & -0.22$\downarrow$ & -0.18$\downarrow$ & -0.23$\downarrow$ & +0.13 \\
+Scaling $\uparrow$ & -0.28$\downarrow$ & -0.13$\downarrow$ & \textbf{+0.23} & -0.22$\downarrow$ & -0.18$\downarrow$ & -0.23$\downarrow$ & +0.13 \\
 \multicolumn{1}{r}{\textcolor{gray}{\scriptsize 95\% CI}} & \textcolor{gray}{\scriptsize[-0.50, -0.05]} & \textcolor{gray}{\scriptsize[-0.34, +0.07]} & \textcolor{gray}{\scriptsize[-0.02, +0.50]} & \textcolor{gray}{\scriptsize[-0.38, -0.08]} & \textcolor{gray}{\scriptsize[-0.34, +0.01]} & \textcolor{gray}{\scriptsize[-0.49, +0.03]} & \\[-1pt]
-Specificity, $\SP$ $\uparrow$ & 0.76$\downarrow$ & 0.78$\downarrow$ & 0.65$\downarrow$ & 0.44$\downarrow$ & 0.76$\downarrow$ & \textbf{0.84} & -- \\
+Specificity $\SP$ $\uparrow$ & 0.76$\downarrow$ & 0.78$\downarrow$ & 0.65$\downarrow$ & 0.44$\downarrow$ & 0.76$\downarrow$ & \textbf{0.84} & -- \\
 \multicolumn{1}{r}{\textcolor{gray}{\scriptsize 95\% CI}} & \textcolor{gray}{\scriptsize[0.73, 0.80]} & \textcolor{gray}{\scriptsize[0.75, 0.81]} & \textcolor{gray}{\scriptsize[0.61, 0.70]} & \textcolor{gray}{\scriptsize[0.38, 0.50]} & \textcolor{gray}{\scriptsize[0.72, 0.79]} & \textcolor{gray}{\scriptsize[0.81, 0.87]} & \\[-1pt]
-Lighting, $\CFR$ $\uparrow$ & 0.23$\downarrow$ & 0.23$\downarrow$ & \textbf{0.47$\downarrow$} & 0.23$\downarrow$ & 0.44$\downarrow$ & 0.25$\downarrow$ & -- \\
+Lighting $\CFR$ $\uparrow$ & 0.23$\downarrow$ & 0.23$\downarrow$ & \textbf{0.47$\downarrow$} & 0.23$\downarrow$ & 0.44$\downarrow$ & 0.25$\downarrow$ & -- \\
 \multicolumn{1}{r}{\textcolor{gray}{\scriptsize 95\% CI}} & \textcolor{gray}{\scriptsize[0.17, 0.30]} & \textcolor{gray}{\scriptsize[0.19, 0.28]} & \textcolor{gray}{\scriptsize[0.37, 0.58]} & \textcolor{gray}{\scriptsize[0.18, 0.29]} & \textcolor{gray}{\scriptsize[0.33, 0.55]} & \textcolor{gray}{\scriptsize[0.16, 0.35]} & \\[-1pt]
 \midrule
-\multicolumn{8}{@{}l}{\emph{Collision} (contact rate at 8\,m/s, \%)} \\
-pedestrian visible\,/\,removed $\downarrow$ & 7.6\,/\,9.2 & 9.9\,/\,10.7 & \textbf{3.1\,/\,6.1} & 40.5\,/\,36.6 & 32.1\,/\,29.8 & 11.2\,/\,11.2 & -- \\
+\emph{Collision} at 8\,m/s, vis.\,/\,rm.\ (\%) $\downarrow$ & 7.6\,/\,9.2 & 9.9\,/\,10.7 & \textbf{3.1\,/\,6.1} & 40.5\,/\,36.6 & 32.1\,/\,29.8 & 11.2\,/\,11.2 & -- \\
 \midrule
 \multicolumn{8}{@{}l}{\emph{Under re-lighting}} \\
-planned mean speed $\downarrow$ & \textbf{\boldmath $+37\%$} & \textbf{\boldmath $+12\%$} & \textbf{\boldmath $-8\%$} & \textbf{\boldmath $+16\%$} & $-0.3\%$ & $-2\%$ & -- \\
+speed $\downarrow$ & \textbf{\boldmath $+37\%$} & \textbf{\boldmath $+12\%$} & \textbf{\boldmath $-8\%$} & \textbf{\boldmath $+16\%$} & $-0.3\%$ & $-2\%$ & -- \\
 clearance $\Delta_N S$ (m) $\uparrow$ & \textbf{\boldmath $-0.37$} & \textbf{\boldmath $-0.24$} & \textbf{\boldmath $+0.15$} & \textbf{\boldmath $-0.47$} & $+0.005$ & $+0.03$ & -- \\
-$\CFR$ dusk\,/\,night, NAVSIM $\uparrow$ & 0.52\,/\,0.35 & 0.34\,/\,0.15 & 0.61\,/\,0.38 & 0.87\,/\,0.20 & 0.45\,/\,0.26 & 0.54\,/\,0.19 & -- \\
+$\CFR$ dusk\,/\,night $\uparrow$ & 0.52\,/\,0.35 & 0.34\,/\,0.15 & 0.61\,/\,0.38 & 0.87\,/\,0.20 & 0.45\,/\,0.26 & 0.54\,/\,0.19 & -- \\
 \midrule
-\multicolumn{8}{@{}l}{\emph{Standard scores} (rank in parentheses)} \\
-nuScenes L2 (m), vis.\,/\,rm. $\downarrow$ & 0.98\,/\,0.99 & 0.88\,/\,0.91 & 1.35\,/\,1.31 & 3.28\,/\,3.35 & 0.68\,/\,0.66 & 0.77\,/\,0.72 & -- \\
-NAVSIM EPDMS, all 783 scenes $\uparrow$ & 0.535 (4) & 0.509 (5) & 0.652 (3) & 0.359 (6) & \textbf{0.683 (1)} & 0.663 (2) & -- \\
-NAVSIM EPDMS, \NumNclose{} near-ped. $\uparrow$ & 0.744 (2) & 0.735 (3) & 0.367 (6) & 0.583 (4) & 0.413 (5) & \textbf{0.760 (1)} & -- \\
-TTC $<1.5$\,s (\%), LHD $\downarrow$ & \textbf{3.2 (1)} & 5.4 (2) & 18.3 (3) & 61.3 (6) & 19.4 (4) & 25.4 (5) & -- \\
-TTC $<1.5$\,s (\%), RHD $\downarrow$ & \textbf{14.1 (1)} & 16.5 (2) & 22.4 (5) & 56.5 (6) & 21.2 (4) & 20.0 (3) & -- \\
+\multicolumn{8}{@{}l}{\emph{Standard scores} (rank)} \\
+L2 (m), vis.\,/\,rm. $\downarrow$ & 0.98\,/\,0.99 & 0.88\,/\,0.91 & 1.35\,/\,1.31 & 3.28\,/\,3.35 & 0.68\,/\,0.66 & 0.77\,/\,0.72 & -- \\
+EPDMS, all scenes $\uparrow$ & 0.535 (4) & 0.509 (5) & 0.652 (3) & 0.359 (6) & \textbf{0.683 (1)} & 0.663 (2) & -- \\
+EPDMS, near-ped. $\uparrow$ & 0.744 (2) & 0.735 (3) & 0.367 (6) & 0.583 (4) & 0.413 (5) & \textbf{0.760 (1)} & -- \\
+TTC$<$1.5\,s (\%), LHD $\downarrow$ & \textbf{3.2 (1)} & 5.4 (2) & 18.3 (3) & 61.3 (6) & 19.4 (4) & 25.4 (5) & -- \\
+TTC$<$1.5\,s (\%), RHD $\downarrow$ & \textbf{14.1 (1)} & 16.5 (2) & 22.4 (5) & 56.5 (6) & 21.2 (4) & 20.0 (3) & -- \\
 \bottomrule
 \end{tabular}
 \end{table*}
