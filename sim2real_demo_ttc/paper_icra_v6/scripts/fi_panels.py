@@ -35,7 +35,7 @@ def panel_extract(a,tok="34b62d7333845af3",mm="ddv2",title="(a) three queries, o
     a.plot(0,0,marker="^",ms=4.5*fs,color="#0b0b0b",zorder=6)
     for k,c,dy,tl in (("rm","#5b9bd5",15,"contact"),("clean","#1f4e79",-13,"clear")):   # 全程最小间隙，扣掉 1.0 自车半宽 + 0.4 行人半径
         g=float(np.min(np.linalg.norm(P[k]-ped,axis=1))-1.4)
-        dx,dy=(9,int(dy*0.72)) if compact else (11,dy)      # 面板矮的时候标注要收，不然顶到标题
+        dx,dy=(14,0)   # 统一：水平指向右侧
         tl="contact" if g<0 else "clear"
         a.annotate(f"{g:.2f} m {tl}",(-P[k][-1,1],P[k][-1,0]),textcoords="offset points",xytext=(dx,dy),
                    ha="left",va="center",fontsize=4.6*fs,color=c,

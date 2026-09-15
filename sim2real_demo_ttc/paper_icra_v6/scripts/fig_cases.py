@@ -72,12 +72,12 @@ d.fill_between([EPS,0.5],[0.5,0.5],[40,40],color="#e9f0f8",lw=0,zorder=0)      #
 d.fill_between([0.5,40],[0.5,40],[40,40],color="#e9f0f8",lw=0,zorder=0)
 d.plot([EPS,40],[EPS,40],color="#6b6a62",ls=(0,(3,2)),lw=0.7,zorder=2)
 d.axhline(0.5,color="#9a998f",ls=(0,(1.6,1.6)),lw=0.7,zorder=2)
-d.scatter(I,F,s=2.4,c=CI,alpha=0.30,lw=0,zorder=3)      # (d) 只按策略着色；ΔS 的拆分放在 (c)
-LOFF={"autovla":(4.5,3.6),"ltf":(4.5,-3.0),"dd":(-4.5,0),"simlingo":(-2,5)}
+d.scatter(I,F,s=2.4,c=CI,alpha=0.14,lw=0,zorder=3)      # (d) 只按策略着色；ΔS 的拆分放在 (c)
+LOFF={"dd":(4.5,-3.5),"ddv2":(4.5,3.5),"autovla":(4.5,0),"ltf":(4.5,-3.5),"simlingo":(4.5,0),"alpamayo15":(4.5,0)}
 for m in MM:
     fm=np.mean([x["F"] for x in P[m]]); im=np.mean([x["I"] for x in P[m]])
     d.plot(im,fm,marker="o",ms=4.0,color=COL[m],mec="white",mew=0.5,zorder=6)
-    d.annotate(SH[m],(im,fm),textcoords="offset points",xytext=LOFF.get(m,(4.5,0)),ha="right" if m=="dd" else ("center" if m=="simlingo" else "left"),va="center",fontsize=6.4,color=COL[m])
+    d.annotate(SH[m],(im,fm),textcoords="offset points",xytext=LOFF.get(m,(4.5,0)),ha="left",va="center",fontsize=6.4,color=COL[m])
 d.set_xscale("log"); d.set_yscale("log"); d.set_xlim(EPS*0.9,55); d.set_ylim(EPS*0.9,30)
 d.set_xlabel("$I$ (m)",fontsize=7.4,labelpad=0.5)
 d.set_ylabel("$F$ (m)",fontsize=7.4,labelpad=1)
