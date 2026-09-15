@@ -11,7 +11,7 @@ from matplotlib.patches import Patch
 R5="/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090"; V5=f"{R5}/paper_icra_v5"
 M=["dd","ltf","ddv2","simlingo","autovla","alpamayo15"]
 SH={"dd":"DD","ltf":"LTF","ddv2":"DDv2","simlingo":"SimLingo","autovla":"AutoVLA","alpamayo15":"Alpamayo"}
-COL={"dd":"#2a78d6","ltf":"#eb6834","ddv2":"#1baf7a","simlingo":"#eda100","autovla":"#e87ba4","alpamayo15":"#6a3d9a"}
+COL={"dd":"#1f4e79","ltf":"#5b9bd5","ddv2":"#2e75b6","simlingo":"#17233b","autovla":"#9dc3e6","alpamayo15":"#7f8fa6"}
 plt.rcParams.update({"font.family":"DejaVu Sans","font.size":7,"axes.linewidth":0.6,"axes.edgecolor":"#52514e",
                      "xtick.color":"#52514e","ytick.color":"#52514e"})
 def _pick(m):
@@ -39,7 +39,7 @@ fig=plt.figure(figsize=(3.45,3.3))
 gs=fig.add_gridspec(2,2,height_ratios=[0.72,1.0],hspace=0.42,wspace=0.48)
 for k,(c,lab) in enumerate(((ca,"(a) genuine avoidance"),(cb,"(b) moved towards"))):
     a=fig.add_subplot(gs[0,k]); fp.panel_extract(a,tok=c[1],mm=c[0],title=f"{lab}: {SH[c[0]]}",fs=1.05,legend=(k==0),ymax=11.5)
-    a.text(0.02,0.72,f"$\\Delta S$ = {c[4]:+.2f} m",transform=a.transAxes,ha="left",fontsize=5.6,color="#2f7d4f" if c[4]>0 else "#b3412c")
+    a.text(0.02,0.72,f"$\\Delta S$ = {c[4]:+.2f} m",transform=a.transAxes,ha="left",fontsize=5.6,color="#2e75b6" if c[4]>0 else "#17233b")
 MARK=[("a",ca),("b",cb)]
 # ---- 右半：逐场景 F 与 ΔS
 P=json.load(open(f"{V5}/f_decomp_per_scene.json")); EPS=3e-3
@@ -57,7 +57,7 @@ cnt={m:(int(np.sum(regm[m]&(np.array([x["dS"] for x in P[m]])>=0.5))),
 ys=np.arange(len(MM))[::-1]
 for y,m in zip(ys,MM):
     g,n,b=cnt[m]; left=0
-    for v,col in ((g,"#2f7d4f"),(n,"#b8b7b0"),(b,"#b3412c")):
+    for v,col in ((g,"#2e75b6"),(n,"#c9d3de"),(b,"#17233b")):
         c.barh(y,v,left=left,height=0.62,color=col,lw=0); left+=v
     c.text(left+0.6,y,f"{g}/{g+n+b}",va="center",ha="left",fontsize=5.0,color="#52514e")
 c.set_yticks(ys); c.set_yticklabels([SH[m] for m in MM],fontsize=5.2)
@@ -68,8 +68,8 @@ c.set_title("(c) how many bought clearance",fontsize=6.2,loc="left",pad=2)
 for s_ in ("top","right"): c.spines[s_].set_visible(False)
 d=fig.add_subplot(gs[1,1])
 I=np.maximum(I,EPS)
-d.fill_between([EPS,0.5],[0.5,0.5],[40,40],color="#e8f0e8",lw=0,zorder=0)      # F>=0.5 且 F>I
-d.fill_between([0.5,40],[0.5,40],[40,40],color="#e8f0e8",lw=0,zorder=0)
+d.fill_between([EPS,0.5],[0.5,0.5],[40,40],color="#e9f0f8",lw=0,zorder=0)      # F>=0.5 且 F>I
+d.fill_between([0.5,40],[0.5,40],[40,40],color="#e9f0f8",lw=0,zorder=0)
 d.plot([EPS,40],[EPS,40],color="#6b6a62",ls=(0,(3,2)),lw=0.7,zorder=2)
 d.axhline(0.5,color="#9a998f",ls=(0,(1.6,1.6)),lw=0.7,zorder=2)
 d.scatter(I,F,s=2.4,c=CI,alpha=0.30,lw=0,zorder=3)      # (d) 只按策略着色；ΔS 的拆分放在 (c)
@@ -83,10 +83,10 @@ d.set_xlabel("$I$ (m)",fontsize=5.8,labelpad=0.5)
 d.set_ylabel("$F$ (m)",fontsize=5.8,labelpad=1)
 d.tick_params(labelsize=5.2,length=2); d.set_title("(d) all cells on the two axes",fontsize=6.2,loc="left",pad=2)
 d.annotate("$F=I$",(0.02,0.02),textcoords="offset points",xytext=(-1,3.5),ha="right",va="bottom",fontsize=4.8,color="#6b6a62",rotation=45)
-d.text(0.03,0.95,"avoidance region",transform=d.transAxes,fontsize=5.0,color="#3f6b45",va="top")
-hh=[plt.Line2D([],[],marker="s",ms=4,color="#2f7d4f",ls="none",label="bought clearance, $\\Delta S\\geq0.5$ m"),
-    plt.Line2D([],[],marker="s",ms=4,color="#b8b7b0",ls="none",label="in region, $|\\Delta S|<0.5$ m"),
-    plt.Line2D([],[],marker="s",ms=4,color="#b3412c",ls="none",label="moved towards, $\\Delta S\\leq-0.5$ m"),
+d.text(0.03,0.95,"avoidance region",transform=d.transAxes,fontsize=5.0,color="#1f4e79",va="top")
+hh=[plt.Line2D([],[],marker="s",ms=4,color="#2e75b6",ls="none",label="bought clearance, $\\Delta S\\geq0.5$ m"),
+    plt.Line2D([],[],marker="s",ms=4,color="#c9d3de",ls="none",label="in region, $|\\Delta S|<0.5$ m"),
+    plt.Line2D([],[],marker="s",ms=4,color="#17233b",ls="none",label="moved towards, $\\Delta S\\leq-0.5$ m"),
     plt.Line2D([],[],marker="o",ms=3.6,color="#52514e",mec="white",ls="none",label="policy mean")]
 fig.legend(handles=hh,frameon=False,fontsize=4.8,loc="upper center",bbox_to_anchor=(0.5,0.02),ncol=2,handletextpad=0.3,labelspacing=0.2,columnspacing=1.2)
 for s_ in ("top","right"): d.spines[s_].set_visible(False)

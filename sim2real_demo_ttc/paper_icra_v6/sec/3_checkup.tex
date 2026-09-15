@@ -11,7 +11,7 @@ pair $u=(f,v)$: a logged frame $f$ and an input ego speed $v$. We take $v$ from 
 frame and, wherever the pedestrian's logged future is available, additionally
 $v\in\{4,8\}\,\mathrm{m/s}$, which places the pedestrian on the planned path in scenes where the logged
 ego was stationary. The same grid is used on both corpora so that all six policies are read on one
-unit pool; the readouts are insensitive to it (widening the grid to $\{2,4,6,8\}$ leaves the
+unit pool. The readouts are insensitive to it (widening the grid to $\{2,4,6,8\}$ leaves the
 specificity and scaling orderings identical, $\rho=1.00$).
 
 Three interventions act on the input, leaving the policy untouched:
@@ -39,8 +39,8 @@ F=\bar D(X^{O},X^{R}),\qquad I=\bar D(X^{O},X^{N}).
 \label{eq:FI}
 \end{equation}
 We call $F$ the \emph{faithfulness} displacement---the plan change attributable to the pedestrian
-itself---and $I$ the \emph{interference} displacement---the change the same policy produces under an edit that carries no driving-relevant information, and therefore its own jitter floor. $I$ is taken at the night level; the dusk reading $\bar D(X^{O},X^{D})$ enters \cref{sec:lighting}. A policy that
-uses the pedestrian and ignores the lighting has $F\gg I$; the reverse ordering means the plan is
+itself---and $I$ the \emph{interference} displacement---the change the same policy produces under an edit that carries no driving-relevant information, and therefore its own jitter floor. $I$ is taken at the night level. The dusk reading $\bar D(X^{O},X^{D})$ enters \cref{sec:lighting}. A policy that
+uses the pedestrian and ignores the lighting has $F\gg I$. The reverse ordering means the plan is
 driven by something the road does not care about. \Cref{sec:lighting} reads the same two contrasts in
 representation space, as unit directions $\hat{\mathbf e}_F$ and $\hat{\mathbf e}_I$.
 
@@ -49,7 +49,7 @@ The target is localised by projecting its annotated 3D box into the camera rathe
 dataset's 2D boxes, whose association to the tracked object is unreliable for the short-range,
 partially occluded pedestrians of these scenes. It is segmented with SAM~\cite{kirillov2023sam} (\cref{fig:method}a) (box
 and torso prompts, clipped to the box, dilated by $9$\,px) and inpainted with
-LaMa~\cite{suvorov2022lama}; for the LiDAR policy the points inside the box are deleted. Vision--language--action (VLA) policies read several cameras and only the front one is edited, so we retain only frames in which the target
+LaMa~\cite{suvorov2022lama}. For the LiDAR policy the points inside the box are deleted. Vision--language--action (VLA) policies read several cameras and only the front one is edited, so we retain only frames in which the target
 appears in no other view.
 
 \paragraph{Realising $\mathcal{E}_D$ and $\mathcal{E}_N$}
@@ -62,7 +62,7 @@ photometric transform
 \end{equation}
 with $\mathrm{sat}_s$ the saturation scaling, $\boldsymbol\tau$ a per-channel tint and the noise seed
 fixed per frame. This is a photometric night-style perturbation (gamma, gain, saturation, noise), not a captured
-night scene; we refer to it as the \emph{night-style perturbation}. Two levels are used: $\mathcal{E}_D$, the milder \emph{dusk} $(\gamma,g,s,\sigma)=(1.45,0.70,0.80,2/255)$ with a
+night scene, and we refer to it as the \emph{night-style perturbation}. Two levels are used: $\mathcal{E}_D$, the milder \emph{dusk} $(\gamma,g,s,\sigma)=(1.45,0.70,0.80,2/255)$ with a
 warm tint, chosen to keep the pedestrian visible, and $\mathcal{E}_N$, \emph{night} $(2.2,0.45,0.45,7/255)$ with a blue tint (\cref{fig:method}a, \cref{sec:lighting}).
 
 \paragraph{Validity of the interventions}
@@ -107,7 +107,7 @@ those units, writing $\Delta(\cdot)=(\cdot)(X^{O})-(\cdot)(X^{R})$,
 \label{eq:hs}
 \end{equation}
 Each term lies in $[-1,1]$ by construction and $\tanh$ squashes the single unbounded one at the $d_0$
-scale. The composite is ours; its ingredients are not. Its four terms are the surrogate-safety
+scale. The composite is ours, its ingredients are not. Its four terms are the surrogate-safety
 measures of \eqref{eq:SA}--\eqref{eq:CT}, and averaging normalised sub-scores into one index is how
 the benchmark we compare against forms its extended predictive driver model score (EPDMS)~\cite{dauner2024navsim}, keeping the two commensurable.
 What the check-up adds is that every sub-score is a \emph{paired difference} across
@@ -143,6 +143,4 @@ each other,
 \mathrm{align}=\mathrm{med}\,\cos\!\big(X^{N}\!-X^{O},\,X^{R}\!-X^{O}\big).
 \label{eq:align}
 \end{equation}
-A policy for which lighting is irrelevant has $\CFR\gg1$ and $\mathrm{align}\approx0$; positive
-alignment means the re-lighting pushes the plan the way deleting the pedestrian does; \eqref{eq:align}
-reads this in plan space, its representation-space counterpart is reported in \cref{sec:lighting}. The thresholds of \cref{tab:exams} ($\HS\ge0.15$, $\mathrm{Sc}>0$, $\SP\ge0.8$, exposure within $[0.8,1.2]$, $\CFR>1$) are reference thresholds we set, not population norms.
+A policy for which lighting is irrelevant has $\CFR\gg1$ and $\mathrm{align}\approx0$. Positive alignment means the re-lighting pushes the plan the way deleting the pedestrian does. Equation~\eqref{eq:align} reads this in plan space, and its representation-space counterpart is reported in \cref{sec:lighting}. The thresholds of \cref{tab:exams} ($\HS\ge0.15$, $\mathrm{Sc}>0$, $\SP\ge0.8$, exposure within $[0.8,1.2]$, $\CFR>1$) are reference thresholds we set, not population norms.

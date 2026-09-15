@@ -8,7 +8,7 @@ DiffusionDrive~\cite{liao2025diffusiondrive}, DiffusionDriveV2~\cite{diffusiondr
 vision--language--action models (SimLingo~\cite{renz2025simlingo}, AutoVLA~\cite{zhou2025autovla},
 Alpamayo-1.5~\cite{nvidia2025alpamayo,nvidia2026alpamayo15}). NAVSIM~\cite{dauner2024navsim,cao2025pseudosim} scores their
 plans by multiplying hard gates with a weighted average of soft terms. Open-loop scores are known to
-reward proxies~\cite{li2024egostatus,jaeger2023hidden}, and closed-loop benchmarks~\cite{jia2024bench2drive} score a policy in simulation; we read released policies on real frames. We show that the six-policy spread is carried by a single gate.
+reward proxies~\cite{li2024egostatus,jaeger2023hidden}, and closed-loop benchmarks~\cite{jia2024bench2drive} score a policy in simulation, whereas we read released policies on real frames. We show that the six-policy spread is carried by a single gate.
 
 \paragraph{Behavioural testing}
 Checklists of targeted behavioural tests~\cite{ribeiro2020checklist} and corruption
@@ -23,5 +23,5 @@ apply this idea to trained policies: a cause (a pedestrian) and a nuisance (ligh
 on directly.
 
 \paragraph{Counterfactual editing and internal representations}
-Counterfactual explanations edit the scene~\cite{jacob2022steex,zemni2023octet}, and CausalAgents~\cite{roelofs2022causalagents} deletes non-causal agents to test motion forecasters; our removal edit applies the same idea at pixel level to a driving policy's input, and we verify every edit with a detector. Steering directions~\cite{zou2023repe} can show that a network encodes what it does not
-act on~\cite{azaria2023internal}; we use them to explain a diagnosis, not as the diagnosis.
+Counterfactual explanations edit the scene~\cite{jacob2022steex,zemni2023octet}, and CausalAgents~\cite{roelofs2022causalagents} deletes non-causal agents to test motion forecasters. Our removal edit applies the same idea at pixel level to a driving policy's input, and we verify every edit with a detector. Steering directions~\cite{zou2023repe} can show that a network encodes what it does not
+act on~\cite{azaria2023internal}. We use them to explain a diagnosis, not as the diagnosis.

@@ -7,7 +7,7 @@ matplotlib.use("Agg"); import matplotlib.pyplot as plt
 R5="/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090"; V5=f"{R5}/paper_icra_v5"
 plt.rcParams.update({"font.family":"DejaVu Sans","font.size":8.3,"axes.spines.top":False,"axes.spines.right":False,"axes.linewidth":0.6,
                      "axes.edgecolor":"#52514e","xtick.color":"#52514e","ytick.color":"#52514e"})
-COL={"dd":"#2a78d6","ltf":"#eb6834","ddv2":"#1baf7a","simlingo":"#eda100","autovla":"#e87ba4","alpamayo15":"#6a3d9a"}
+COL={"dd":"#1f4e79","ltf":"#5b9bd5","ddv2":"#2e75b6","simlingo":"#17233b","autovla":"#9dc3e6","alpamayo15":"#7f8fa6"}
 NAME={"dd":"DiffusionDrive","ltf":"LTF","ddv2":"DiffusionDriveV2","simlingo":"SimLingo","autovla":"AutoVLA","alpamayo15":"Alpamayo 1.5"}
 M=list(COL); rng=np.random.default_rng(0)
 def med_ci(v):
@@ -49,7 +49,7 @@ GC=json.load(open(f"{V5}/gt_ceiling.json"))
 c.plot(range(len(BINS)),GC["gt"],color="#52514e",ls=(0,(3,2)),lw=1.0)
 c.fill_between(range(len(BINS)),GC["gt_lo"],GC["gt_hi"],color="#9a998f",alpha=0.20,lw=0)
 c.text(0.30,0.86,"logged human vs.\neach blind plan",transform=c.transAxes,fontsize=6.3,color="#52514e")
-c.axhline(0,color="#c3c2b7",lw=0.6)
+c.axhline(0,color="#c9d3de",lw=0.6)
 c.set_xticks(range(len(BINS))); c.set_xticklabels(XL,fontsize=6.3); c.set_ylim(-0.25,0.95)
 c.set_xlabel(r"hazard $a_{\rm req}$ (m/s$^2$)",fontsize=7.2,labelpad=0.5)
 c.set_ylabel("hazard sensitivity HS",fontsize=7.2,labelpad=1); c.tick_params(labelsize=6.7,length=2)

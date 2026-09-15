@@ -17,12 +17,12 @@ On these frames, no policy's plan responds to the pedestrian: on units that need
 \NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale. The benefit is also unreliable in direction:
 counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
 pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
-SimLingo 18 vs.\ 30, the rest at most 5 either way; all McNemar $p\ge0.11$) --- what reads as a safety margin in \cref{tab:report} does not carry over to the individual case.
+SimLingo 18 vs.\ 30, the rest at most 5 either way, all McNemar $p\ge0.11$) --- what reads as a safety margin in \cref{tab:report} does not carry over to the individual case.
 
 \paragraph{Scaling}
 The benefit does not grow with the hazard: its rank
 correlation with $a_{\mathrm{req}}$ is negative for \NumScalNeg{} policies, down to \NumScalLo{} for
-\NumScalWorst; DiffusionDriveV2 is the only exception (\NumScalHi), and its benefit stays below
+\NumScalWorst. DiffusionDriveV2 is the only exception (\NumScalHi), and its benefit stays below
 $0.15$. Replacing the hazard axis by the time-based $\mathrm{TTC}_0$, whose sign is reversed by
 construction, leaves the picture unchanged (\NumScalTtcLo{} to \NumScalTtcHi, against \NumScalLo{} to
 \NumScalHi).
@@ -30,11 +30,11 @@ construction, leaves the picture unchanged (\NumScalTtcLo{} to \NumScalTtcHi, ag
 \paragraph{Specificity}
 A policy whose plan moves when nothing requires it is not cautious but unsteady, and steadiness is
 what turns out to travel across a domain shift (\cref{sec:sample}). SimLingo's
-plan moves most when nothing requires it ($\SP=\NumSpSL$); the other five stay steadier, at
+plan moves most when nothing requires it ($\SP=\NumSpSL$), while the other five stay steadier, at
 \NumSpOtherLo--\NumSpOtherHi.
 
 \paragraph{Lighting}
-Removing the pedestrian moves every plan less than the night-style perturbation does ($\CFR<1$ for all six, \cref{tab:report}); \cref{sec:lighting} reads this exam in depth.
+Removing the pedestrian moves every plan less than the night-style perturbation does ($\CFR<1$ for all six, \cref{tab:report}). \Cref{sec:lighting} reads this exam in depth.
 
 \paragraph{Collisions}
 Collisions with the pedestrian's logged future follow how far a policy plans to drive, not what it perceives. At the logged
@@ -48,13 +48,13 @@ without yielding, and SimLingo covers the most ground with the lowest specificit
 \centering
 \includegraphics[width=\columnwidth]{figures/reach.pdf}
 \caption{\textbf{Collision and hazard sensitivity.} (a)~Contact with the pedestrian's logged future
-at the logged and counterfactual input speeds; solid: visible, dashed: removed. (b)~$\HS$ against
+at the logged and counterfactual input speeds. Solid: visible, dashed: removed. (b)~$\HS$ against
 $a_{\mathrm{req}}$ (mean, 95\% CI, bins with $\ge8$ units). Dashed: the logged human trajectory scored
-against each policy's blind plan, averaged; band: range over policies.}
+against each policy's blind plan, averaged. Band: range over policies.}
 \label{fig:reach}
 \end{figure}
 
-The check-up only diagnoses; two mechanistic observations on the three BEV planners explain the
+The check-up only diagnoses. Two mechanistic observations on the three BEV planners explain the
 diagnosis without altering it. First, the planners' own BEV semantic heads do not decode the
 pedestrian: on 520 NAVSIM near-pedestrian scenes the pedestrian channel is no brighter at the
 pedestrian than at a mirrored empty location, and never wins the argmax inside a pedestrian's box,

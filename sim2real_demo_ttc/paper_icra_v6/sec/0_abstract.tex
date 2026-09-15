@@ -10,7 +10,7 @@ On six released policies, rank on nuScenes open-loop metrics or on NAVSIM's lead
 % We therefore need a method that reveals a policy's true response, and the part of that response which
 % is common across situations.
 
-We propose a counterfactual check-up: a few hundred real frames, each edited three ways (pedestrian removed; dusk- and night-style re-rendering), every edit verified by an independent detector, and the change in the planned trajectory read as a diagnosis rather than a score. By distilling causal feature axes from these edits, five exams separate what a score merges: how far the policy plans to drive, whether seeing the pedestrian buys safety, whether that response scales with danger, whether the plan moves when nothing requires it, and how much an irrelevant lighting change moves it. 
+We propose a counterfactual check-up: a few hundred real frames, each edited three ways (pedestrian removed, or re-rendered at dusk or at night), every edit verified by an independent detector, and the change in the planned trajectory read as a diagnosis rather than a score. By distilling causal feature axes from these edits, five exams separate what a score merges: how far the policy plans to drive, whether seeing the pedestrian buys safety, whether that response scales with danger, whether the plan moves when nothing requires it, and how much an irrelevant lighting change moves it. 
 
 % We propose a \emph{model check-up}: it diagnoses a policy's true response
 % through pixel-level counterfactual edits, distils causal feature axes that are invariant across

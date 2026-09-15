@@ -7,7 +7,7 @@
 \includegraphics[width=\columnwidth]{figures/sample_size.pdf}
 \caption{\textbf{What a verdict costs.} One frame is 5\,s of near-pedestrian driving. (a)~Spread of
 each estimate against sample size with its fitted law, one line per policy. (b)~Driving needed per
-verdict, one dot per policy; off-scale values at the axis end.}
+verdict, one dot per policy, off-scale values at the axis end.}
 \label{fig:sample}
 \end{figure}
 
@@ -19,7 +19,7 @@ right-hand-drive statistic, we fixed seven predictions and their decision rules.
 frames, and we tested them on the near-pedestrian units of the 148 Singapore frames
 (\cref{tab:prereg}). The registration covered the six policies public at that time. NVIDIA
 subsequently released Alpamayo~1.5, which accepts navigation instructions, and we use it in place of
-Alpamayo-R1 throughout this paper; because both driving sides of Alpamayo~1.5 were measured together,
+Alpamayo-R1 throughout this paper. Because both driving sides of Alpamayo~1.5 were measured together,
 its numbers do not satisfy the registration discipline, so the table is evaluated on the five policies
 that do. Retaining the replaced policy changes none of the seven verdicts.
 
@@ -37,8 +37,7 @@ Three predictions fail.
 \item In Singapore, DiffusionDrive and DiffusionDriveV2 show a small but non-zero hazard sensitivity
       ($\HS=0.09$ and $0.08$).
 \item The ``purity'' hypothesis is reversed. We had predicted that policies whose lighting effect is
-      more orthogonal to their pedestrian response would shift less between sides; the observed rank
-      correlation is $-0.90$. Alignment is itself unstable between the two sides: it changes for every policy but AutoVLA (\cref{tab:light}).
+      more orthogonal to their pedestrian response would shift less between sides, but the observed rank correlation is $-0.90$. Alignment is itself unstable between the two sides: it changes for every policy but AutoVLA (\cref{tab:light}).
 \end{itemize}
 
 \paragraph{Reading}
@@ -56,7 +55,7 @@ other does not, and which of them predicts behaviour at a site it has not seen.
 On our 236 near-pedestrian frames, removing the pedestrian from the image changes none of the standard
 open-loop numbers: the L2 error by at most \NumMaxdLtwo\,m, the frontal collision rate by at most
 \NumMaxdCol{} points and the pedestrian collision rate by at most \NumMaxdPed{} (\cref{tab:bench}
-shows the L2 pairs; the two collision rates behave the same way and are omitted). The metric cannot tell whether a policy saw the pedestrian. Its ordering follows how
+shows the L2 pairs, the two collision rates behave the same way and are omitted). The metric cannot tell whether a policy saw the pedestrian. Its ordering follows how
 far a policy's planned distance departs from the human's (rank correlation \NumRhoLtwoExp{} with
 $|\text{exposure}-1|$): L2 rewards driving at the human's speed. We exclude rear-end contacts from the
 collision count. The logged traffic does not react, so a policy that plans to drive slower than the
@@ -85,26 +84,21 @@ NAVSIM's own TTC term, which counts all objects over 4\,s, agrees only weakly ($
 \paragraph{Which exam travels}
 This is the question a deployment decision has to answer. The target is the ordering of the six
 policies on the Singapore near-pedestrian scenes (original images), by TTC violations, clearance to
-the pedestrian, pedestrian collisions and EPDMS; each predictor is an ordering obtained without that
-data. The standard evaluations do not predict it: nuScenes L2 and collision rates, and the NAVSIM
+the pedestrian, pedestrian collisions and EPDMS. Each predictor is an ordering obtained without that data. The standard evaluations do not predict it: nuScenes L2 and collision rates, and the NAVSIM
 leaderboard score, correlate with it at $-0.54$ to $+0.49$. The same pedestrian-centred readouts taken
-on Boston or on the US cities do ($0.83$--$1.00$), and so does the exposure exam ($0.94$);
-near-pedestrian EPDMS is predicted best by near-pedestrian EPDMS elsewhere ($0.89$) and by specificity
+on Boston or on the US cities do ($0.83$--$1.00$), and so does the exposure exam ($0.94$). Near-pedestrian EPDMS is predicted best by near-pedestrian EPDMS elsewhere ($0.89$) and by specificity
 ($0.77$). Hazard sensitivity and lighting invariance measure something else and do not predict these
 orderings. Of the five exams, the one whose ordering best matches the new side's rate of sub-1.5\,s
 time-to-proximity is not the one that measures how \emph{much} a policy reacts but the one that
 measures how \emph{steadily} it drives: over the six policies and the \NumSGscenes-scene pool of
 \cref{sec:axes}, specificity gives $\rho={\NumSpBeh}$, against ${\NumExpBeh}$ for exposure and
-${\NumCfrBeh}$ for $\CFR$. This exam was not pre-registered; we report it as exploratory.
-Cross-policy correlations rest on six policies; we read them as orderings, not as tests. Specificity
-asks how far a plan moves when an \emph{irrelevant} part of the scene is edited; a policy that answers
+${\NumCfrBeh}$ for $\CFR$. This exam was not pre-registered, and we report it as exploratory. Cross-policy correlations rest on six policies, and we read them as orderings, not as tests. Specificity
+asks how far a plan moves when an \emph{irrelevant} part of the scene is edited. A policy that answers
 ``not at all'' drives steadily, and steadiness is what survives the change of side. The decomposition
 of \cref{sec:axes} says why: displacement that is not aimed away from the pedestrian is not
 protection, and a policy producing a lot of it comes close to the pedestrian on both sides. Where a
-standard metric measures what an exam measures, they agree (pedestrian collisions: $\rho=+0.94$; TTC
-and exposure). None shows whether the pedestrian changed the plan, and the full-set score hides the
-near-pedestrian scenes. A rank does not carry the near-pedestrian ordering to a new site; the exposure
-and specificity exams, read from the same frames, do.
+standard metric measures what an exam measures, they agree (pedestrian collisions at $\rho=+0.94$, TTC and exposure). None shows whether the pedestrian changed the plan, and the full-set score hides the
+near-pedestrian scenes. A rank does not carry the near-pedestrian ordering to a new site. The exposure and specificity exams, read from the same frames, do.
 
 \paragraph{What a verdict costs}
 For every exam and policy we subsample $n$ of the \NumPool{} frames that all six policies share, 400
@@ -118,7 +112,7 @@ converts directly into the number of frames a verdict needs.
       \NumNstarCFRhi{} frames.
 \item \emph{Exposure differs from the human's} is settled within \NumNstarExpHi{} frames for the four
       policies whose exposure is far from one. For AutoVLA and Alpamayo-1.5 it would take hundreds to
-      thousands of frames; this is itself a finding, since they plan a human-like distance.
+      thousands of frames, which is itself a finding, since they plan a human-like distance.
 \item \emph{Orderings} of the six policies stabilise quickly: exposure with 10 frames
       (\NumRankExpTen\% of subsamples reach $\rho\ge0.6$ with the full ordering) and specificity with
       40 (\NumRankSPforty\%).
@@ -132,7 +126,7 @@ ordering by alignment is unstable even at 130 (\NumRankAlignOneThirty\%).
 
 In wall-clock terms, a 20\,s scene in this corpus yields about \NumFrPerScene{} usable
 near-pedestrian frames, so the lighting verdict costs roughly \NumScCFR{} scenes and the exposure
-verdict \NumScExp; deciding that hazard sensitivity differs from zero costs \NumScHS---about
+verdict \NumScExp. Deciding that hazard sensitivity differs from zero costs \NumScHS---about
 \NumMinHS{} minutes of logged driving that actually contains a pedestrian near the corridor.
 
 The division is therefore clear. A few dozen frames diagnose exposure, specificity and lighting. Whether a policy manages hazard, and in which direction lighting pushes it,
@@ -145,7 +139,7 @@ how often the policies come close---the share of scenes whose minimum time-to-pr
 $1.5$\,s---is recovered almost immediately: $\rho={\NumBehRhoTen}$ at $k=10$ and $\rho={\NumBehRhoTwenty}$
 at $k=20$ ($\rho\ge0.6$ in \NumBehHitTwenty\% of draws), rising to $\rho={\NumBehRhoForty}$ at $k=40$.
 The level is not: the same $k=20$ sample misstates the violation rate by \NumBehErrTwenty{} points and
-$\CFR$ by $\NumCfrErrTwenty$; the rule hit-rates sit in between, at \NumPFErrTwenty{} points. Importing
+$\CFR$ by $\NumCfrErrTwenty$, and the rule hit-rates sit in between, at \NumPFErrTwenty{} points. Importing
 the Boston $\CFR$ values instead misstates the Singapore ones by $\NumLhdCfrErr$, already worse than
 re-measuring $k=40$ fresh scenes ($\NumCfrErrForty$), while 80 scenes reach $\NumCfrErrBig$ and 160
 $\NumCfrErrHuge$. Values measured elsewhere are worth about forty scenes measured here.
