@@ -1,18 +1,10 @@
 % !TEX root = ../main.tex
 \section{Introduction}
 \label{sec:intro}
-A leaderboard rank does not tell you how a driving policy will behave in a new domain. End-to-end and vision-language-action (VLA) driving policies are compared by benchmark scores, and a deployment decision is, implicitly, a bet that the rank those scores produce will still hold once the policy is driving at the new site, not just on someone else's roads. On scenes where a pedestrian is near the ego corridor, that bet fails for the six released policies we test: their rank on nuScenes' open-loop metrics or on NAVSIM's leaderboard score does not carry over to the deployment site (ρ = −0.54 to +0.49; Section \cref{sec:bench}). The reason is not noise but mechanism. A score is an outcome measure, and an outcome can be right for the wrong reason: a policy that never approaches a pedestrian because it plans short trajectories scores as well as one that sees the pedestrian and yields, and the two behave very differently the first time the scene changes. Telling them apart means asking why the score came out as it did, usually from little data, because a closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to save.
+A leaderboard rank does not tell you how a driving policy will behave in a new domain. End-to-end and vision-language-action (VLA) driving policies are compared by benchmark scores, and a deployment decision is, implicitly, a bet that the rank those scores produce will still hold once the policy is driving at the new site, not just on someone else's roads. On scenes where a pedestrian is near the ego corridor, that bet fails for the six released policies we test: their rank on nuScenes' open-loop metrics or on NAVSIM's leaderboard score does not carry over to the deployment site ($\rho=-0.54$ to $+0.49$; \cref{sec:bench}). The reason is not noise but mechanism. A score is an outcome measure, and an outcome can be right for the wrong reason: a policy that never approaches a pedestrian because it plans short trajectories scores as well as one that sees the pedestrian and yields, and the two behave very differently the first time the scene changes. Telling them apart means asking why the score came out as it did, usually from little data, because a closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to save.
 
-This paper shows that a few hundred edited frames do tell you, and reports what transfers to a new domain and what does not. We propose a check-up: a short list of exams, each with a control and a reference range, whose results are read as a diagnosis rather than a ranking (Table I). Every exam is a counterfactual edit of real frames. We remove the pedestrian from the ego corridor, or re-render the frame with a night-style photometric perturbation, and read the change in the planned trajectory; an independent detector verifies every edit. The central exam is a hazard-sensitivity curve, measuring how much farther the whole planned trajectory stays from the pedestrian's logged future because the policy can see the pedestrian, against a model-independent hazard level. A specificity term applies a minimal-change principle: when no reaction is needed, the plan should not move.
+This paper shows that a few hundred edited frames do tell you, and reports what transfers to a new domain and what does not. We propose a check-up: a short list of exams, each with a control and a reference range, whose results are read as a diagnosis rather than a ranking (\cref{tab:exams}). Every exam is a counterfactual edit of real frames. We remove the pedestrian from the ego corridor, or re-render the frame with a night-style photometric perturbation at two levels (dusk, night), and read the change in the planned trajectory; an independent detector verifies every edit. The central exam is a hazard-sensitivity curve, measuring how much farther the whole planned trajectory stays from the pedestrian's logged future because the policy can see the pedestrian, against a model-independent hazard level. A specificity term applies a minimal-change principle: when no reaction is needed, the plan should not move.
 
-
-A deployment decision is, implicitly, a bet that a benchmark rank still holds at the new site. The
-bet fails for a reason that is mechanical rather than statistical: a score is an outcome measure, and
-an outcome can be right for the wrong reason. A policy that never approaches a pedestrian because it plans short trajectories scores as well as one
-that sees the pedestrian and yields, and the two behave very differently the first time the scene
-changes. Telling them apart means asking \emph{why} the score came out as it did, usually from little
-data: a closed-loop simulator for the target domain, or a fleet
-test, is exactly what the decision is meant to save.
 
 %120
 % 这被定义成从benchmark往部署域迁移的问题，目前各家的做法是进行大规模的真实部署场景的测试，然后再依据反馈进行模型调整和后训练，如此往复，造成大量的测试资源花销，同时也延长了模型迭代的周期。
@@ -34,12 +26,13 @@ and the like---but it concentrates on identifying the problem and on solving it 
 lacks any systematic assessment of how a policy behaves in the target domain. It therefore does not
 substantively address the selection problem that arises at deployment.
 
-The VL-Think Suite of~\cite{kachaev2025don} probes the degree of language--image segmentation to
-quantify the multi-modal understanding gap at deployment. However, it is confined to vision--language
-models, does not extend to vision-only policies, and asks how a given model may be improved rather
-than which model to deploy.
+In \emph{Don't Blind Your VLA}~\cite{TODO-blindvla}, a think-site representation is built to measure
+the degree of language--image segmentation; the transfer of that suite, however, applies only to
+vision--language multi-modal models and does not extend to the evaluation of decoder-only diffusion
+policies, and it is still built upon an already-chosen model, studying how that model's capability may
+be improved rather than answering systematically how a model should be selected.
 
-In the paper~\cite{zou2023repe} the authors give a method called RepE for locating and repairing the gap
+In the RepE paper~\cite{zou2023repe} the authors give a method for locating and repairing the gap
 between domains, but it is aimed at exposing a large language model's response to semantic stimuli,
 and is likewise hard to extend to the evaluation of physical-AI policies that read images.
 
@@ -61,7 +54,7 @@ of assessing how a policy performs under different conditions. The scores these 
 however, are for the most part conventional traffic metrics. With the recent proliferation of
 large-model-based methods, reading the final outcome alone no longer reflects a policy's capability in
 full~\cite{li2024egostatus,codevilla2019exploring,geirhos2020shortcut}.
-\emph{!!!!!!!!!! ADD MORE PAPER TO REFER}
+% !!!!!!!!!! ADD MORE PAPER TO REFER
 %！！！！！「加一些参考文献」%
 
 The consequence is that a policy ranked first on a leaderboard often falls sharply once the domain changes, or the ranking
@@ -70,7 +63,8 @@ serve as a sound basis for the selection decision that takes a policy from simul
 deployment domain.
 %120
 
-To address this issue, we propose a \emph{check-up}:{要总结个名字 还是就叫checkup就行？}
+To address this issue, we propose a \emph{check-up}.
+%120 要总结个名字 还是就叫checkup就行？——决定：就叫 Check-Up，当专名用
 
 %120
 We construct pixel-level paired data and reduce each pair to two axes of causal attribution: the
@@ -91,8 +85,8 @@ basis for selecting a policy for a given deployment.
 \centering
 \includegraphics[width=\columnwidth]{figures/frame1c.pdf}
 
-\caption{\textbf{check-up frame.The check-up proceeds in three stages: constructing pixel-level paired data, distilling the causal
-axes from them, and issuing a prognosis for the policy's behaviour in the target domain.} }
+\caption{\textbf{The Check-Up framework.} The check-up proceeds in three stages: constructing pixel-level paired data, distilling the causal
+axes from them, and issuing a prognosis for the policy's behaviour in the target domain.}
 %120
 % 该体检过程中，首先进行像素级配对数据的构建，然后提炼因果轴，最终对策略在目标域的表现进行预诊断。
 
@@ -120,7 +114,7 @@ explanation from inside the networks.
 
 
 \item diagnose with the distillation of the \emph{causal axes}: 
-we treat the raw response to removing a pedestrian as a poor safety signal, because a plan that moves is as likely to move towards the pedestrian as away from it. Decomposing the response into magnitude, which is represented as the faithfulness direction $\hat v_F$; and the policy's own jitter under an irrelevant edit, which is the interference direction $\hat v_I$. And the separation it buys turns a two-sided quantity into a one-sided certificate: a near-zero response shows the pedestrian did not enter the decision; a large one shows nothing. A diagnosis with an explanation from inside the three BEV planners of why the pedestrian risk goes unmanaged: the pedestrian leaves a trace in the features but is not decoded, the planning grid cannot locate it, and the plan rarely reaches it.
+we treat the raw response to removing a pedestrian as a poor safety signal, because a plan that moves is as likely to move towards the pedestrian as away from it. Decomposing the response into its magnitude, the faithfulness displacement $F$, and the policy's own jitter under an irrelevant edit, the interference displacement $I$~\eqref{eq:FI}. And the separation it buys turns a two-sided quantity into a one-sided certificate: a near-zero response shows the pedestrian did not enter the decision; a large one shows nothing. A diagnosis with an explanation from inside the three BEV planners of why the pedestrian risk goes unmanaged: the pedestrian leaves a trace in the features but is not decoded, the planning grid cannot locate it, and the plan rarely reaches it.
 
 
 
