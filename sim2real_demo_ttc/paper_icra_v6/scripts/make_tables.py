@@ -385,3 +385,13 @@ import glob as _glob
 for _f in _glob.glob(f"{_OUT}/tables/*.tex"):
     _s=open(_f).read()
     if not _s.startswith("% !TEX root"): open(_f,"w").write("% !TEX root = ../main.tex\n"+_s)
+
+# ---------- 后处理：正值不带 "+"（作者约定），负号保留 ----------
+import re as _re
+for _fn in ("numbers.tex","tab_report.tex","tab_prereg.tex","tab_light.tex","tab_bench.tex"):
+    _p=f"{_OUT}/tables/{_fn}"
+    if not os.path.exists(_p): continue
+    _s=open(_p).read()
+    _s=_s.replace("{+}","")
+    _s=_re.sub(r"(?<![\\\w])\+(?=\d)","",_s)
+    open(_p,"w").write(_s)
