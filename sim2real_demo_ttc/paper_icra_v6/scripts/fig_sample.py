@@ -11,8 +11,8 @@ S=json.load(open(f"{V5}/sample_size_v2.json")); N=S["N"]
 MIN=1/12.0   # 每帧 5 s（本语料 4 帧 / 20 s 场景）；横轴一律换算成分钟
 ns=np.array(S["ns"],float); nn=np.linspace(ns[0],N-1,200)
 M=["dd","ltf","ddv2","simlingo","autovla","alpamayo15"]
-EXC={"exposure":"#a3adb8","CFR":"#5b9bd5","SP":"#1f4e79","HS":"#0b0b14"}
-LS={"exposure":"-","CFR":"-","SP":(0,(3,1.6)),"HS":"-"}
+EXC={"exposure":"#a3adb8","CFR":"#8fd3f4","SP":"#2a6fb0","HS":"#0b0b14"}
+LS={"exposure":"-","CFR":"-","SP":"-","HS":"-"}
 LAB={"exposure":"exposure","CFR":"lighting CFR","SP":"specificity","HS":"hazard sensitivity"}
 fig,ax=plt.subplots(2,1,figsize=(3.45,2.2),gridspec_kw={"hspace":0.95})
 a=ax[0]
@@ -28,7 +28,7 @@ a.set_ylabel("SD",fontsize=6.7,labelpad=1)
 a.set_title("(a) spread of the estimate",fontsize=7.5,loc="left",pad=1.5)
 h=[plt.Line2D([],[],color=c,lw=1.1,ls=LS[k],label=LAB[k]) for k,c in EXC.items()]
 a.legend(handles=h,frameon=False,fontsize=6.0,ncol=2,loc="lower left",bbox_to_anchor=(0.0,0.0),handlelength=0.8,columnspacing=0.6,labelspacing=0.1,borderpad=0.05)
-b=ax[1]; V=[("CFR","CFR < 1","#5b9bd5"),("exposure","exposure ≠ human","#a3adb8"),("HS","HS ≠ 0","#0b0b14")]
+b=ax[1]; V=[("CFR","CFR < 1","#8fd3f4"),("exposure","exposure ≠ human","#a3adb8"),("HS","HS ≠ 0","#0b0b14")]
 XMAX=3000*1/12.0
 for j_,(k,nm,c) in enumerate(V):
     y=(len(V)-1-j_)*1.35
