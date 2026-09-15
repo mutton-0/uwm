@@ -17,7 +17,7 @@ does. Five policies fail it, and the one that passes, DiffusionDriveV2, does so 
 
 \paragraph{Limitations}
 The exams are open-loop. The approach sequences are replayed from logs and re-anchored to the logged
-pose. The night is a synthetic rendering that also halves the number of other pedestrians the detector
+pose. The night-style perturbation is photometric, not a captured night scene, and it also halves the number of other pedestrians the detector
 finds. The counterfactual pairs are constructed by editing, not captured, and so carry noise: 8.5\% of
 removals leave a detectable residue, the inpainting artefact is 5--17\% of the effect, and the VLA
 models can be edited only through their front camera. Alpamayo-1.5 covers 170 of the 236 frames. SimLingo plans 2.5\,s; for NAVSIM's 4\,s we extrapolate at constant velocity (holding position instead gives EPDMS 0.47, still the lowest).
@@ -28,7 +28,7 @@ The check-up is designed as the first half of a benchmark-to-deployment pairing,
 type among several a deployment decision must cover: extending its exams to lead-vehicle braking and
 turning or intersection conflicts is the natural next scenario. Within the pedestrian scenario, the
 next step is to \emph{collect} paired data rather than construct it: the same scene with and without a
-pedestrian, by day and by night. We then plan to validate the diagnoses against the same policies' behaviour on a real
+pedestrian, in daylight and at night. We then plan to validate the diagnoses against the same policies' behaviour on a real
 vehicle. The sample-size laws above tell us how large that collection must be. A few dozen pairs
 suffice for planned distance, over-reaction and lighting; hundreds of pairs with a genuine need to
 react are needed for hazard sensitivity.
