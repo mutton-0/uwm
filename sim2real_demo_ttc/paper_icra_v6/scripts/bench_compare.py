@@ -25,7 +25,8 @@ def navsim(tag,moving=None):
     R={m:{r["token"]:r for r in D[m]["rows"]} for m in M}
     toks=sorted(set.intersection(*[set(v) for v in R.values()]))
     if tag=="_closevru":   # 与体检 F/I 池对齐：只用 rhd_axes4 的 254 个近行人场景（closevru 多出的 6 个剔除）
-        _POOL=set(json.load(open(f"{V5}/rhd_axes4_dd.json")).keys()); toks=[t for t in toks if t in _POOL]
+        _PF=json.load(open(f"{V5}/nv_ped_future.json")); _POOL={t for t in json.load(open(f"{V5}/rhd_axes4_dd.json")) if t in _PF and not any(z is None for z in _PF[t]["fut"][:5])}
+        toks=[t for t in toks if t in _POOL]   # 246 个：近行人 + 完整行人未来，与 IV-B 同一池
     if moving is not None: toks=[t for t in toks if t in VRU and ((VRU[t]["v0"]>=1.0)==moving)]
     out={}
     for m in M:

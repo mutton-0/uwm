@@ -18,11 +18,13 @@ def min_ttc(X,F):
     return float(min(5.0,np.min(c[ok]/close[ok]))) if ok.any() else 5.0
 # ---- NAVSIM ----
 PF=json.load(open(f"{V5}/nv_ped_future.json"))
+_POOL=set(json.load(open(f"{V5}/rhd_axes4_dd.json")).keys())
 def nv_units(m,fname):
     T=json.load(open(fname)); out=[]
     for tok,w in T.items():
         p=PF.get(tok)
         if p is None or any(z is None for z in p["fut"][:5]): continue
+        if "closevru" in fname and tok not in _POOL: continue   # 右舵只用体检 F/I 池的 246 个场景
         w=np.asarray(w,float)[:,:2]; X=lin(np.r_[0,np.arange(1,len(w)+1)*0.5],np.vstack([[0,0],w]))
         F=lin(np.r_[0,0.5,1.0,1.5,2.0,2.5],np.vstack([p["p0"],np.asarray(p["fut"][:5])]))
         out.append(dict(tok=tok,v0=p["v0"],ttc=min_ttc(X,F),src="navsim"))
