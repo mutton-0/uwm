@@ -1,7 +1,7 @@
 % !TEX root = ../main.tex
 \section{Introduction}
 \label{sec:intro}
-A leaderboard rank does not tell you how a driving policy will behave in a new domain. End-to-end and vision-language-action (VLA) driving policies are compared by benchmark scores, and a deployment decision is, implicitly, a bet that the rank those scores produce will still hold once the policy is driving at the new site, not just on someone else's roads. On scenes where a pedestrian is near the ego corridor, that bet fails for the six released policies we test: their rank on nuScenes' open-loop metrics or on NAVSIM's leaderboard score does not carry over to the deployment site (ρ = −0.54 to +0.49; Section V). The reason is not noise but mechanism. A score is an outcome measure, and an outcome can be right for the wrong reason: a policy that never approaches a pedestrian because it plans short trajectories scores as well as one that sees the pedestrian and yields, and the two behave very differently the first time the scene changes. Telling them apart means asking why the score came out as it did, usually from little data, because a closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to save.
+A leaderboard rank does not tell you how a driving policy will behave in a new domain. End-to-end and vision-language-action (VLA) driving policies are compared by benchmark scores, and a deployment decision is, implicitly, a bet that the rank those scores produce will still hold once the policy is driving at the new site, not just on someone else's roads. On scenes where a pedestrian is near the ego corridor, that bet fails for the six released policies we test: their rank on nuScenes' open-loop metrics or on NAVSIM's leaderboard score does not carry over to the deployment site (ρ = −0.54 to +0.49; Section \cref{sec:bench}). The reason is not noise but mechanism. A score is an outcome measure, and an outcome can be right for the wrong reason: a policy that never approaches a pedestrian because it plans short trajectories scores as well as one that sees the pedestrian and yields, and the two behave very differently the first time the scene changes. Telling them apart means asking why the score came out as it did, usually from little data, because a closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to save.
 
 This paper shows that a few hundred edited frames do tell you, and reports what transfers to a new domain and what does not. We propose a check-up: a short list of exams, each with a control and a reference range, whose results are read as a diagnosis rather than a ranking (Table I). Every exam is a counterfactual edit of real frames. We remove the pedestrian from the ego corridor, or re-render the frame with a night-style photometric perturbation, and read the change in the planned trajectory; an independent detector verifies every edit. The central exam is a hazard-sensitivity curve, measuring how much farther the whole planned trajectory stays from the pedestrian's logged future because the policy can see the pedestrian, against a model-independent hazard level. A specificity term applies a minimal-change principle: when no reaction is needed, the plan should not move.
 
@@ -34,13 +34,12 @@ and the like---but it concentrates on identifying the problem and on solving it 
 lacks any systematic assessment of how a policy behaves in the target domain. It therefore does not
 substantively address the selection problem that arises at deployment.
 
-In \emph{Don't Blind Your VLA}~\cite{TODO-blindvla}, a think-site representation is built to measure
-the degree of language--image segmentation; the transfer of that suite, however, applies only to
-vision--language multi-modal models and does not extend to the evaluation of decoder-only diffusion
-policies, and it is still built upon an already-chosen model, studying how that model's capability may
-be improved rather than answering systematically how a model should be selected.
+The VL-Think Suite of~\cite{kachaev2025don} probes the degree of language--image segmentation to
+quantify the multi-modal understanding gap at deployment. However, it is confined to vision--language
+models, does not extend to vision-only policies, and asks how a given model may be improved rather
+than which model to deploy.
 
-In the RepE paper~\cite{zou2023repe} the authors give a method for locating and repairing the gap
+In the paper~\cite{zou2023repe} the authors give a method called RepE for locating and repairing the gap
 between domains, but it is aimed at exposing a large language model's response to semantic stimuli,
 and is likewise hard to extend to the evaluation of physical-AI policies that read images.
 

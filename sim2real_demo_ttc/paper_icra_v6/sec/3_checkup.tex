@@ -16,13 +16,15 @@ specificity and scaling orderings identical, $\rho=1.00$).
 
 Three interventions act on the input, leaving the policy untouched:
 \begin{equation}
-\mathcal{E}_O=\mathrm{id},\quad
-\mathcal{E}_R:\ \text{delete the pedestrian},\quad
-\mathcal{E}_N:\ \text{re-light},
+\begin{aligned}
+&\mathcal{E}_O=\mathrm{id},\qquad \mathcal{E}_R:\ \text{delete the pedestrian},\\
+&\mathcal{E}_D,\ \mathcal{E}_N:\ \text{re-light at dusk and at night},
+\end{aligned}
 \label{eq:interventions}
 \end{equation}
 and yield the paired plans $X^{O}=\pi(\mathcal{E}_O u)$, $X^{R}=\pi(\mathcal{E}_R u)$,
-$X^{N}=\pi(\mathcal{E}_N u)$. All quantities below are functionals of this triple and of the
+$X^{D}=\pi(\mathcal{E}_D u)$, $X^{N}=\pi(\mathcal{E}_N u)$. All quantities below are functionals of
+these plans and of the
 pedestrian's \emph{logged} future $F_t$. The horizon $2.5$\,s is the one all six policies share.
 
 The displacement between two plans is
@@ -37,8 +39,7 @@ F=\bar D(X^{O},X^{R}),\qquad I=\bar D(X^{O},X^{N}).
 \label{eq:FI}
 \end{equation}
 We call $F$ the \emph{faithfulness} displacement---the plan change attributable to the pedestrian
-itself---and $I$ the \emph{interference} displacement---the change the same policy produces under an
-edit that carries no driving-relevant information, and therefore its own jitter floor. A policy that
+itself---and $I$ the \emph{interference} displacement---the change the same policy produces under an edit that carries no driving-relevant information, and therefore its own jitter floor. $I$ is taken at the night level; the dusk reading $\bar D(X^{O},X^{D})$ enters \cref{sec:lighting}. A policy that
 uses the pedestrian and ignores the lighting has $F\gg I$; the reverse ordering means the plan is
 driven by something the road does not care about. \Cref{sec:lighting} reads the same two contrasts in
 representation space, as unit directions $\hat v_F$ and $\hat v_I$.
@@ -51,18 +52,18 @@ and torso prompts, clipped to the box, dilated by $9$\,px) and inpainted with
 LaMa~\cite{suvorov2022lama}; for the LiDAR policy the points inside the box are deleted. Vision--language--action (VLA) policies read several cameras and only the front one is edited, so we retain only frames in which the target
 appears in no other view.
 
-\paragraph{Realising $\mathcal{E}_N$}
+\paragraph{Realising $\mathcal{E}_D$ and $\mathcal{E}_N$}
 Each image $\mathbf{I}\in[0,1]^{H\times W\times3}$ the policy consumes is mapped by a closed-form
 photometric transform
 \begin{equation}
-\mathcal{E}_N(\mathbf{I})=\mathrm{clip}\!\left[\,g\,\big(\mathrm{sat}_{s}\mathbf{I}\big)^{\gamma}\odot\boldsymbol\tau+\sigma\boldsymbol\epsilon\,\right],
+\mathcal{E}_{D,N}(\mathbf{I})=\mathrm{clip}\!\left[\,g\,\big(\mathrm{sat}_{s}\mathbf{I}\big)^{\gamma}\odot\boldsymbol\tau+\sigma\boldsymbol\epsilon\,\right],
 \quad \boldsymbol\epsilon\sim\mathcal{N}(0,1),
 \label{eq:relight}
 \end{equation}
 with $\mathrm{sat}_s$ the saturation scaling, $\boldsymbol\tau$ a per-channel tint and the noise seed
 fixed per frame. This is a photometric night-style perturbation (gamma, gain, saturation, noise), not a captured
-night scene; we refer to it as the \emph{night-style perturbation}. Two levels are used: the milder \emph{dusk} $(\gamma,g,s,\sigma)=(1.45,0.70,0.80,2/255)$ with a
-warm tint, chosen to keep the pedestrian visible, and \emph{night} $(2.2,0.45,0.45,7/255)$ with a
+night scene; we refer to it as the \emph{night-style perturbation}. Two levels are used: $\mathcal{E}_D$, the milder \emph{dusk} $(\gamma,g,s,\sigma)=(1.45,0.70,0.80,2/255)$ with a
+warm tint, chosen to keep the pedestrian visible, and $\mathcal{E}_N$, \emph{night} $(2.2,0.45,0.45,7/255)$ with a
 blue tint (\cref{sec:lighting}).
 
 \paragraph{Validity of the interventions}
@@ -156,7 +157,7 @@ clearance to the ego corridor $\le1$\,m) at $5$--$12$\,m, their off-road counter
 approach sequences at $5.8$--$14.6$\,m with logged pedestrian futures. The near-pedestrian units come
 from $236$ front-only frames, $88$ in Boston (left-hand drive) and $148$ in Singapore (right-hand
 drive); Alpamayo-1.5 covers $170$ of the $236$, needing $1.6$\,s of history and $6.4$\,s of future
-within the scene. \Cref{sec:axes} repeats $\mathcal{E}_R$ and $\mathcal{E}_N$ on a second,
+within the scene. \Cref{sec:axes} repeats $\mathcal{E}_R$, $\mathcal{E}_D$ and $\mathcal{E}_N$ on a second,
 right-hand-drive corpus---the NAVSIM test split~\cite{dauner2024navsim}, $254$ Singapore scenes with a
 pedestrian near the ego corridor, of which \NumSGscenes{} carry a complete logged pedestrian
 future---used only for the transfer and decomposition results; \cref{tab:report} is measured on the

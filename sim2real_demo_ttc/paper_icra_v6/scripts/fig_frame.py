@@ -33,8 +33,8 @@ CROP=(slice(Y0,Y0+CH),slice(X0,X0+CW)); AR=CW/CH
 IMGS=(a0,r0,d0,n0); CC=["#2a5db0","#c0392b","#b9814a","#8a8a84"]; NIMG=len(IMGS)
 LAB=[("logged $O$","detector: pedestrian found"),
      ("removed $R$","detector: not found"),
-     ("re-lit $N$, dusk","detector: still found"),
-     ("re-lit $N$, night","detector: still found")]   # A_0095 黄昏档 IoU 0.88，与 dusk_check 同判据
+     ("re-lit $D$","detector: still found"),
+     ("re-lit $N$","detector: still found")]   # A_0095 黄昏档 IoU 0.88，与 dusk_check 同判据
 EX=["exposure","hazard\nsensitivity","scaling","specificity","lighting\n$\\mathrm{CFR}$"]
 
 def draw_img(fig,rect,i,fs=1.0):
@@ -115,7 +115,7 @@ else:
     box(L,aB,R,aT); bg.text(L+fx(0.05),aT-fy(0.115),"(a) scenario edit",fontsize=7.0,weight="bold",color="#2b2b28")
     for i in range(NIMG): draw_img(fig,[L+fx(0.05)+i*(IW+fx(0.04)),aB+PAD,IW,IH],i,fs=0.88)
     arrow(((L+R)/2,aB-fy(0.022)),((L+R)/2,aB-ARRf+fy(0.022)),lw=1.6,ms=6)
-    bg.text((L+R)/2+fx(0.08),aB-ARRf/2,"query $\\pi$ on $O,R,N$",fontsize=5.0,va="center",color="#2f5d94")
+    bg.text((L+R)/2+fx(0.08),aB-ARRf/2,"query $\\pi$ on $O,R,D,N$",fontsize=5.0,va="center",color="#2f5d94")
     # (b) 两个面板
     bT=aB-ARRf; bB=bT-TIT-1.30/FH
     box(L,bB,R,bT); bg.text(L+fx(0.05),bT-fy(0.115),"(b) diagnosis",fontsize=7.0,weight="bold",color="#2b2b28")
