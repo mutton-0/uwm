@@ -69,8 +69,8 @@ def det(k):
 T=[r"\begin{table}[t]",r"\centering",
    r"\caption{\textbf{Pre-registered transfer test.} Predictions fixed on 88 Boston frames, tested on 148 Singapore frames; five policies, the replaced sixth changes no verdict (\cref{sec:sample}).}",
    r"\label{tab:prereg}",r"\footnotesize",r"\setlength{\tabcolsep}{2.5pt}",
-   r"\begin{tabular}{@{}lp{4.45cm}cl@{}}",r"\toprule",r" & Prediction & Holds & Evidence \\",r"\midrule"]
-for k in ["P1","P3","P4","P7","P2","P5","P6"]:
+   r"\begin{tabular}{@{}lp{4.35cm}cl@{}}",r"\toprule",r"No. & Prediction & Holds & Evidence \\",r"\midrule"]
+for k in ["P1","P2","P3","P4","P5","P6","P7"]:          # 按登记顺序 P1–P7
     yn="yes" if PR[k]["pass_"] else r"\textbf{no}"
     T.append(f"{k} & {lab[k]} & {yn} & {det(k)} \\\\")
 T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
