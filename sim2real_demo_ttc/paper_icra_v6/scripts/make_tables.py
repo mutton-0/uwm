@@ -35,7 +35,7 @@ _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "CFR":max(M,key=lambda m:A[m]["point"]["CFR"])}
 _bc8=min(M,key=lambda m:coll(m,"8")[0])
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{Diagnostic profiles.} Reference thresholds in brackets (\cref{tab:exams}); $\downarrow$/$\uparrow$ = outside it, bold = best in column. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s input speed, $X^{O}$\,/\,$X^{R}$.}",
+ r"\caption{\textbf{Diagnostic profiles.} Reference thresholds in brackets; $\downarrow$/$\uparrow$ outside them, bold best per column. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$.}",
  r"\label{tab:report}",r"\scriptsize",r"\setlength{\tabcolsep}{2.0pt}",
  r"\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
  r"Policy & exposure & HS & scaling & SP & CFR & coll.\ 8\,m/s \\",
@@ -67,7 +67,7 @@ def det(k):
     if k=="P6": return f"$\\rho={d['rho']:+.2f}$ (opposite)"
     if k=="P7": return f"gap {100*d['max_gap']:.1f}\\,pts"
 T=[r"\begin{table}[t]",r"\centering",
-   r"\caption{\textbf{Pre-registered transfer test.} Predictions fixed on 88 Boston frames before any Singapore statistic was computed, then tested on 148 Singapore frames. Five policies; keeping the replaced sixth changes no verdict (\cref{sec:sample}).}",
+   r"\caption{\textbf{Pre-registered transfer test.} Predictions fixed on 88 Boston frames, tested on 148 Singapore frames; five policies, the replaced sixth changes no verdict (\cref{sec:sample}).}",
    r"\label{tab:prereg}",r"\footnotesize",r"\setlength{\tabcolsep}{2.5pt}",
    r"\begin{tabular}{@{}lp{4.45cm}cl@{}}",r"\toprule",r" & Prediction & Holds & Evidence \\",r"\midrule"]
 for k in ["P1","P3","P4","P7","P2","P5","P6"]:
@@ -79,7 +79,7 @@ open(f"{_OUT}/tables/tab_prereg.tex","w").write("\n".join(T)+"\n")
 NS=json.load(open(f"{V5}/night_speed.json"))
 def bold(txt,cond): return f"\\textbf{{\\boldmath {txt}}}" if cond else txt
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{What the night-style perturbation does to the plan.} $\CFR=\mathbb{E}F/\mathbb{E}I$ \eqref{eq:cfr} on the same frames (95\% CI). Speed: relative change of planned mean speed from $X^{O}$ to $X^{N}$. $\Delta_N S=S(X^{N})-S(X^{O})$ with $S$ of \eqref{eq:SA} (negative = closer). Align: \eqref{eq:align}, Boston$\to$Singapore. Bold: $p<0.01$.}",
+ r"\caption{\textbf{The night-style perturbation and the plan.} $\CFR$ \eqref{eq:cfr}, same frames, 95\% CI. Speed: change of planned mean speed, $X^{O}\to X^{N}$. $\Delta_N S=S(X^{N})-S(X^{O})$, $S$ of \eqref{eq:SA}, negative = closer. Align \eqref{eq:align}, Boston$\to$Singapore. Bold: $p<0.01$.}",
    r"\label{tab:light}",r"\footnotesize",r"\setlength{\tabcolsep}{3pt}",
    r"\begin{tabular}{@{}lcccc@{}}",r"\toprule",
    r"Policy & $\CFR$ [95\% CI] & speed & $\Delta_N S$ (m) & align \\",r"\midrule"]
@@ -152,7 +152,7 @@ if os.path.exists(f"{V5}/bench_compare.json") and os.path.exists(f"{V5}/ttc_rank
     BC=json.load(open(f"{V5}/bench_compare.json")); TR=json.load(open(f"{V5}/ttc_rank.json"))
     NUo=BC["nusc"]; CV=BC["navsim_close"]; AL=BC["navsim_all"]
     T=[r"\begin{table}[t]",r"\centering",
-       r"\caption{\textbf{The same six policies under the standard scores.} Left: nuScenes open-loop L2 on the 236 near-pedestrian frames, original\,/\,pedestrian removed. Middle: NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} with a pedestrian near the corridor. Right: share of moving-ego scenes with minimum pedestrian TTC $<1.5$\,s, by driving side, with the rank in parentheses. Bold: best in column.}",
+       r"\caption{\textbf{The six policies under the standard scores.} Left: nuScenes open-loop L2 on the 236 near-pedestrian frames, original\,/\,removed. Middle: NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} near-pedestrian ones. Right: share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side, rank in parentheses. Bold: best per column.}",
        r"\label{tab:bench}",r"\scriptsize",r"\setlength{\tabcolsep}{2.0pt}",
        r"\begin{tabular}{@{}lc cc cc@{}}",r"\toprule",
        r" & L2 (m) & \multicolumn{2}{c}{EPDMS} & \multicolumn{2}{c}{TTC$<$1.5\,s} \\",
