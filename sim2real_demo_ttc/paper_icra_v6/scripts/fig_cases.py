@@ -36,7 +36,7 @@ bad=[c for c in cells if c[2]>=0.5 and c[4]<=-0.5 and c[1] not in EXCL and c[2]<
 ca=max(good,key=lambda c:c[4]); cb=min(bad,key=lambda c:c[6])   # (b) 取原规划离行人最近的那格
 print("(a) genuine:",ca); print("(b) towards:",cb)
 fig=plt.figure(figsize=(3.45,3.25))
-gs=fig.add_gridspec(2,2,height_ratios=[1.0,1.0],hspace=0.62,wspace=0.42)
+gs=fig.add_gridspec(2,2,height_ratios=[1.0,1.0],hspace=0.62,wspace=0.48)
 for k,(c,lab) in enumerate(((ca,"(a) genuine avoidance"),(cb,"(b) moved towards"))):
     a=fig.add_subplot(gs[0,k]); fp.panel_extract(a,tok=c[1],mm=c[0],title=f"{lab}: {SH[c[0]]}",fs=1.05,legend=(k==0))
     a.text(0.02,0.755,f"$\\Delta S$ = {c[4]:+.2f} m",transform=a.transAxes,ha="left",fontsize=5.6,color="#2f7d4f" if c[4]>0 else "#b3412c")
@@ -48,7 +48,25 @@ F=np.concatenate([[max(x["F"],EPS) for x in P[m]] for m in MM])
 I=np.concatenate([[x["I"] for x in P[m]] for m in MM])
 DS=np.concatenate([[x["dS"] for x in P[m]] for m in MM])
 CI=np.concatenate([[COL[m]]*len(P[m]) for m in MM])
-d=fig.add_subplot(gs[1,:])
+# ---- (c) 避让区内每家：买到间距 / 之间 / 更靠近 的格数
+c=fig.add_subplot(gs[1,0])
+regm={m:np.array([(x["F"]>=0.5) and (x["F"]>x["I"]) for x in P[m]]) for m in MM}
+cnt={m:(int(np.sum(regm[m]&(np.array([x["dS"] for x in P[m]])>=0.5))),
+        int(np.sum(regm[m]&(np.abs(np.array([x["dS"] for x in P[m]]))<0.5))),
+        int(np.sum(regm[m]&(np.array([x["dS"] for x in P[m]])<=-0.5)))) for m in MM}
+ys=np.arange(len(MM))[::-1]
+for y,m in zip(ys,MM):
+    g,n,b=cnt[m]; left=0
+    for v,col in ((g,"#2f7d4f"),(n,"#b8b7b0"),(b,"#b3412c")):
+        c.barh(y,v,left=left,height=0.62,color=col,lw=0); left+=v
+    c.text(left+0.6,y,f"{g}/{g+n+b}",va="center",ha="left",fontsize=5.0,color="#52514e")
+c.set_yticks(ys); c.set_yticklabels([SH[m] for m in MM],fontsize=5.2)
+c.tick_params(axis="y",length=0,pad=1.5); c.tick_params(axis="x",labelsize=5.2,length=2)
+c.set_xlabel("cells in the avoidance region",fontsize=5.8,labelpad=0.5)
+c.set_xlim(0,max(sum(v) for v in cnt.values())*1.32)
+c.set_title("(c) how many bought clearance",fontsize=6.2,loc="left",pad=2)
+for s_ in ("top","right"): c.spines[s_].set_visible(False)
+d=fig.add_subplot(gs[1,1])
 I=np.maximum(I,EPS)
 d.fill_between([EPS,0.5],[0.5,0.5],[40,40],color="#e8f0e8",lw=0,zorder=0)      # F>=0.5 且 F>I
 d.fill_between([0.5,40],[0.5,40],[40,40],color="#e8f0e8",lw=0,zorder=0)
@@ -59,24 +77,24 @@ d.scatter(I[rest],F[rest],s=2.4,c=CI[rest],alpha=0.22,lw=0,zorder=3)
 d.scatter(I[mid],F[mid],s=5,c="#9a998f",alpha=0.8,lw=0,zorder=4)
 d.scatter(I[bad],F[bad],s=6,c="#b3412c",alpha=0.9,lw=0,zorder=5)
 d.scatter(I[real],F[real],s=6,c="#2f7d4f",alpha=0.9,lw=0,zorder=5)
-LOFF={"autovla":(4.5,3.6),"ltf":(4.5,-3.0),"dd":(-4.5,0)}
+LOFF={"autovla":(4.5,3.6),"ltf":(4.5,-3.0),"dd":(-4.5,0),"simlingo":(-2,5)}
 for m in MM:
     fm=np.mean([x["F"] for x in P[m]]); im=np.mean([x["I"] for x in P[m]])
     d.plot(im,fm,marker="o",ms=4.0,color=COL[m],mec="white",mew=0.5,zorder=6)
-    d.annotate(SH[m],(im,fm),textcoords="offset points",xytext=LOFF.get(m,(4.5,0)),ha="right" if m=="dd" else "left",va="center",fontsize=4.8,color=COL[m])
+    d.annotate(SH[m],(im,fm),textcoords="offset points",xytext=LOFF.get(m,(4.5,0)),ha="right" if m=="dd" else ("center" if m=="simlingo" else "left"),va="center",fontsize=4.8,color=COL[m])
 for lab,c in MARK:
     d.plot(max(c[3],EPS),c[2],marker="o",ms=7,mfc="none",mec="#0b0b0b",mew=0.7,zorder=7)
     d.annotate(lab,(max(c[3],EPS),c[2]),textcoords="offset points",xytext=(-7,3),fontsize=6.0,weight="bold",color="#0b0b0b",zorder=8)
 d.set_xscale("log"); d.set_yscale("log"); d.set_xlim(EPS*0.9,55); d.set_ylim(EPS*0.9,30)
-d.set_xlabel("$I$: from re-lighting (m)",fontsize=5.8,labelpad=0.5)
-d.set_ylabel("$F$: from the pedestrian (m)",fontsize=5.8,labelpad=1)
-d.tick_params(labelsize=5.2,length=2); d.set_title("(c) all cells on the two axes",fontsize=6.2,loc="left",pad=2)
+d.set_xlabel("$I$ (m)",fontsize=5.8,labelpad=0.5)
+d.set_ylabel("$F$ (m)",fontsize=5.8,labelpad=1)
+d.tick_params(labelsize=5.2,length=2); d.set_title("(d) all cells on the two axes",fontsize=6.2,loc="left",pad=2)
 d.annotate("$F=I$",(0.02,0.02),textcoords="offset points",xytext=(-1,3.5),ha="right",va="bottom",fontsize=4.8,color="#6b6a62",rotation=45)
-d.text(0.03,0.95,"avoidance region: $F\\geq0.5$ m, $F>I$",transform=d.transAxes,fontsize=5.0,color="#3f6b45",va="top")
-d.scatter([],[],s=8,c="#2f7d4f",label="bought clearance, $\\Delta S\\geq0.5$ m")
-d.scatter([],[],s=8,c="#b3412c",label="moved towards, $\\Delta S\\leq-0.5$ m")
-d.scatter([],[],s=8,c="#9a998f",label="in region, $|\\Delta S|<0.5$ m")
-d.plot([],[],marker="o",ms=3.6,color="#52514e",mec="white",ls="none",label="policy mean")
-d.legend(frameon=False,fontsize=4.8,loc="upper center",bbox_to_anchor=(0.5,-0.30),ncol=2,handletextpad=0.3,labelspacing=0.2,columnspacing=1.2,borderpad=0.1)
+d.text(0.03,0.95,"avoidance region",transform=d.transAxes,fontsize=5.0,color="#3f6b45",va="top")
+hh=[plt.Line2D([],[],marker="s",ms=4,color="#2f7d4f",ls="none",label="bought clearance, $\\Delta S\\geq0.5$ m"),
+    plt.Line2D([],[],marker="s",ms=4,color="#b8b7b0",ls="none",label="in region, $|\\Delta S|<0.5$ m"),
+    plt.Line2D([],[],marker="s",ms=4,color="#b3412c",ls="none",label="moved towards, $\\Delta S\\leq-0.5$ m"),
+    plt.Line2D([],[],marker="o",ms=3.6,color="#52514e",mec="white",ls="none",label="policy mean (d)")]
+fig.legend(handles=hh,frameon=False,fontsize=4.8,loc="upper center",bbox_to_anchor=(0.5,0.035),ncol=2,handletextpad=0.3,labelspacing=0.2,columnspacing=1.2)
 for s_ in ("top","right"): d.spines[s_].set_visible(False)
 fig.savefig(f"{V5}/figures/cases.pdf",bbox_inches="tight"); fig.savefig(f"{V5}/figures/cases.png",dpi=220,bbox_inches="tight"); print("ok")
