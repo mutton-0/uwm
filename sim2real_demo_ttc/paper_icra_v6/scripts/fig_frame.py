@@ -116,7 +116,7 @@ if MODE=="wide":
     ax2=fig.add_axes([x+fx(1.18),PB+fy(0.02),fx(0.96),PT-PB-fy(0.02)]); frame_readings(ax2,fs=0.85); ax2.set_title("the two readings",fontsize=5.2,loc="left",pad=1.5)
     x=right(x1,"read\n$F$, $I$")
     # (c) 五项检查：竖排一列
-    WC=fx(0.92); x1=stage(x,WC,"(c) the five exams")
+    WC=fx(0.92); x1=stage(x,WC,"(c) the exams")
     cw=WC-2*XPAD; n5=len(EX); ch=(CT-BOT-2*PAD-(n5-1)*fy(0.025))/n5
     for k,lab in enumerate(EX):
         y1=CT-PAD-k*(ch+fy(0.025)); chip(x+XPAD,y1-ch,x+XPAD+cw,y1,lab.replace("\n"," "),4.3)
@@ -150,7 +150,7 @@ else:
     ax2=fig.add_axes([L+fx(1.80),PB,fx(1.42),PT-PB]); frame_readings(ax2); ax2.set_title("the two readings",fontsize=6.0,loc="left",pad=2)
     cT=down(bB,"read $F$, $I$ per unit")
     # (c) 五项检查
-    cB=stage(cT,H_C,"(c) the five exams")
+    cB=stage(cT,H_C,"(c) the exams")
     CW_=(R-L-2*fx(0.05)-4*fx(0.035))/5
     for k,lab in enumerate(EX):
         x0=L+fx(0.05)+k*(CW_+fx(0.035)); chip(x0,cB+PAD,x0+CW_,cB+PAD+fy(0.30),lab,4.7)
