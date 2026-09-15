@@ -18,6 +18,4 @@ cause (a pedestrian) and a nuisance (lighting) directly and read signed plan cha
 
 \paragraph{Counterfactual editing}
 Counterfactual explanations edit the scene~\cite{jacob2022steex}, and
-CausalAgents~\cite{roelofs2022causalagents} deletes non-causal agents to test motion forecasters. Our
-removal edit applies the same idea at pixel level to a driving policy's input, and every edit is
-verified by a detector.
+CausalAgents~\cite{roelofs2022causalagents} deletes non-causal agents to test motion forecasters. Closed-loop simulators insert or re-render agents in reconstructed scenes~\cite{ljungbergh2024neuroncap,yang2023unisim,zhou2024hugsim}. Our removal edit applies the same idea at pixel level to real frames, every edit is verified by a detector, and six released policies are compared on the same edits.
