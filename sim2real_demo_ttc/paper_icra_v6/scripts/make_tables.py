@@ -62,7 +62,6 @@ R.append(_row(r"Lighting $\CFR$ (ratio) $\uparrow$",[cell(A[m]["point"]["CFR"],"
 R.append(r"\midrule")
 R.append(_row(r"\emph{Collision} at 8\,m/s, vis.\,/\,rm.\ (\%) $\downarrow$",[_bf(f"{coll(m,'8')[0]:.1f}\\,/\\,{coll(m,'8')[1]:.1f}",m==_bc8) for m in M]+["--"]))
 R.append(r"\midrule")
-R.append(r"\multicolumn{8}{@{}l}{\emph{Under re-lighting}} \\")
 def _sp(m):
     n_=NS[m]; _f="{:+.0f}" if abs(100*n_['dv_rel'])>=1 else "{:+.1f}"
     return bold("$"+_f.format(100*n_['dv_rel'])+"\\%$",n_["p"]<0.01)
