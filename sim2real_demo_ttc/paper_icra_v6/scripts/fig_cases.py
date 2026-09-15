@@ -1,4 +1,6 @@
-"""Fig. 4：四个右舵案例，逐例检验左舵诊断给出的预测。
+"""Fig. 2：两个例子格 + 全体格的 F–I 盘。
+(a) 真避让格，(b) 朝行人移动格，(c) 所有策略×场景格在 F–I 平面上，(a)(b) 标在其中。
+旧版（四个右舵案例 + BEV 语义头）：
 每格：自车在原点，走廊 ±1 m，目标行人/骑车人的真实未来（红色虚线 + 星号为起点），六家 4 s 规划。
 选例：两例诊断命中（仓位档位、危险排序），两例含未命中（耐心那条），不挑好看的。
 数据：case10.json（读数）+ nv_ped_future.json（行人真实未来）+ nvtraj_<m>_*_nav.json（规划）。"""
@@ -17,47 +19,28 @@ def _pick(m):
     return json.load(open(a if os.path.exists(a) else b))
 TR={m:_pick(m) for m in M}
 PF=json.load(open(f"{V5}/nv_ped_future.json")); C={r["token"]:r for r in json.load(open(f"{V5}/case10.json"))}
-# DDv2 自己的 BEV 语义头（几何按 navsim 源码，与 bev_plot 一致）：铺在轨迹底下，看它有没有把行人解码出来
-SEMC=ListedColormap(["#ffffff","#e6e6e6","#f2ead6","#b5b5b5","#c2a389","#a8c8e8","#e34948"])
-SEMN=["background","road","walkway","centerline","static","vehicle","pedestrian"]
-_B=np.load(f"{V5}/bev_ddv2.npz"); _BI={t:i for i,t in enumerate(_B["tokens"])}
-CASES=[("b6cce8f28e405742","(a) group"),
-       ("93a208914ea85781","(b) cyclist"),
-       ("3346273c90155b64","(c) waiting"),
-       ("e44df9ed23f45266","(d) crosswalk")]
-fig=plt.figure(figsize=(3.45,3.15))
-gs=fig.add_gridspec(2,4,height_ratios=[1.05,1.0],hspace=0.78,wspace=0.12)
-ax=[fig.add_subplot(gs[0,i]) for i in range(4)]
-for k,(tok,title) in enumerate(CASES):
-    a=ax[k]; p=PF[tok]; r=C[tok]
-    i_=_BI.get(tok)
-    if i_ is not None:
-        a.imshow(_B["sem"][i_][:,::-1],cmap=SEMC,vmin=0,vmax=6,extent=[-32,32,0,32],origin="lower",
-                 interpolation="nearest",alpha=0.55,zorder=0)
-    a.axvspan(-1,1,color="#eef1f6",lw=0,alpha=0.35,zorder=1)
-    fut=np.array([p["p0"]]+[z for z in p["fut"] if z is not None],float)
-    a.plot(-fut[:,1],fut[:,0],color="#e34948",ls=(0,(1.6,1.2)),lw=1.2,marker=".",ms=2.6,zorder=5)
-    a.plot(-p["p0"][1],p["p0"][0],marker="*",ms=8,color="#e34948",mec="white",mew=0.5,zorder=6)
-    for m in M:
-        w=np.asarray(TR[m][tok],float)[:,:2]; w=np.vstack([[0,0],w])
-        a.plot(-w[:,1],w[:,0],color=COL[m],lw=1.0,zorder=3)
-    a.plot(0,0,marker="^",ms=5,color="#0b0b0b",zorder=6)
-    if r["waiting"]:
-        go=[(SH[m],r["models"][m]["plan_arc"]) for m in M if r["models"][m]["plan_arc"]>2]
-        txt="departs: "+(", ".join(f"{n} {v:.1f} m" for n,v in go) if go else "none")
-        if len(go)>2: txt=txt.replace(", "+f"{go[2][0]}"," \n"+f"{go[2][0]}",1)
-        txt=txt.replace("departs: ","").replace(", ","\n")
-        a.text(0.04,0.97,txt,transform=a.transAxes,fontsize=4.4,va="top",color="#b3412c",linespacing=1.2)
-    a.set_xlim(-5.5,5.5); a.set_ylim(-2,26)
-    a.set_xticks([-4,0,4]); a.set_xticklabels(["-4","0","4"],fontsize=5.0)
-    a.set_yticks([0,10,20] if k==0 else []); a.tick_params(labelsize=5.2,length=1.6,pad=1)
-    a.set_title(title,fontsize=6.0,loc="left",pad=1.5)
-    if k==0: a.set_ylabel("ahead (m)",fontsize=5.6,labelpad=0.5)
-    if k==0: a.set_xlabel("lateral (m)",fontsize=5.6,labelpad=0.5)
-    for s_ in ("top","right"): a.spines[s_].set_visible(False)
-h=[plt.Line2D([],[],color=COL[m],lw=1.4,label=SH[m]) for m in M]+[plt.Line2D([],[],color="#e34948",ls=(0,(1.6,1.2)),lw=1.2,marker="*",ms=6,label="VRU logged future")]
-h+=[Patch(facecolor=SEMC(i),edgecolor="none",label=SEMN[i]) for i in (1,2,5,6)]
-fig.legend(handles=h,frameon=False,fontsize=4.4,ncol=6,loc="upper center",bbox_to_anchor=(0.5,0.505),handlelength=0.9,columnspacing=0.55,labelspacing=0.12)
+import sys; sys.path.insert(0,os.path.dirname(os.path.abspath(__file__))); import fi_panels as fp
+TT=fp.TT
+def S_of(X,ped): return float(np.mean(np.minimum(np.linalg.norm(X-ped,axis=1)-1.4,10.0)))
+cells=[]
+for m in M:
+    for t,v in fp.AX[m].items():
+        if not all(k in v for k in ("clean","rm","night")) or t not in fp.PF: continue
+        ped=fp.ped_xy(t); Fv=fp.disp(v["clean"],v["rm"]); Iv=fp.disp(v["clean"],v["night"])
+        dS=S_of(fp.lin(v["clean"]),ped)-S_of(fp.lin(v["rm"]),ped)
+        cR=float(np.min(np.linalg.norm(fp.lin(v["rm"])-ped,axis=1))-1.4); cO=float(np.min(np.linalg.norm(fp.lin(v["clean"])-ped,axis=1))-1.4)
+        cells.append((m,t,Fv,Iv,dS,cR,cO))
+EXCL={"34b62d7333845af3"}                                    # Fig.1(b) 已用的例子，不重复
+good=[c for c in cells if c[2]>=0.5 and c[2]>c[3] and c[4]>=0.5 and c[1] not in EXCL and c[2]<3 and c[5]<1.0]   # need 格：盲规划进 1 m
+bad=[c for c in cells if c[2]>=0.5 and c[4]<=-0.5 and c[1] not in EXCL and c[2]<3]
+ca=max(good,key=lambda c:c[4]); cb=min(bad,key=lambda c:c[6])   # (b) 取原规划离行人最近的那格
+print("(a) genuine:",ca); print("(b) towards:",cb)
+fig=plt.figure(figsize=(3.45,3.25))
+gs=fig.add_gridspec(2,2,height_ratios=[1.0,1.0],hspace=0.62,wspace=0.42)
+for k,(c,lab) in enumerate(((ca,"(a) genuine avoidance"),(cb,"(b) moved towards"))):
+    a=fig.add_subplot(gs[0,k]); fp.panel_extract(a,tok=c[1],mm=c[0],title=f"{lab}: {SH[c[0]]}",fs=1.05,legend=(k==0))
+    a.text(0.02,0.755,f"$\\Delta S$ = {c[4]:+.2f} m",transform=a.transAxes,ha="left",fontsize=5.6,color="#2f7d4f" if c[4]>0 else "#b3412c")
+MARK=[("a",ca),("b",cb)]
 # ---- 右半：逐场景 F 与 ΔS
 P=json.load(open(f"{V5}/f_decomp_per_scene.json")); EPS=3e-3
 MM=["dd","ltf","ddv2","simlingo","autovla","alpamayo15"]
@@ -80,15 +63,18 @@ for m in MM:
     fm=np.mean([x["F"] for x in P[m]]); im=np.mean([x["I"] for x in P[m]])
     d.plot(im,fm,marker="o",ms=4.0,color=COL[m],mec="white",mew=0.5,zorder=6)
     d.annotate(SH[m],(im,fm),textcoords="offset points",xytext=LOFF.get(m,(4.5,0)),ha="left",va="center",fontsize=4.8,color=COL[m])
+for lab,c in MARK:
+    d.plot(max(c[3],EPS),c[2],marker="o",ms=7,mfc="none",mec="#0b0b0b",mew=0.7,zorder=7)
+    d.annotate(lab,(max(c[3],EPS),c[2]),textcoords="offset points",xytext=(-7,3),fontsize=6.0,weight="bold",color="#0b0b0b",zorder=8)
 d.set_xscale("log"); d.set_yscale("log"); d.set_xlim(EPS*0.9,55); d.set_ylim(EPS*0.9,30)
-d.set_xlabel("$I$: displacement from re-lighting (m)",fontsize=5.8,labelpad=0.5)
-d.set_ylabel("$F$: displacement from the pedestrian (m)",fontsize=5.8,labelpad=1)
-d.tick_params(labelsize=5.2,length=2); d.set_title("(e) the two readings, and what the displacement buys",fontsize=6.2,loc="left",pad=2)
+d.set_xlabel("$I$: from re-lighting (m)",fontsize=5.8,labelpad=0.5)
+d.set_ylabel("$F$: from the pedestrian (m)",fontsize=5.8,labelpad=1)
+d.tick_params(labelsize=5.2,length=2); d.set_title("(c) all cells on the two axes",fontsize=6.2,loc="left",pad=2)
 d.annotate("$F=I$",(0.02,0.02),textcoords="offset points",xytext=(-1,3.5),ha="right",va="bottom",fontsize=4.8,color="#6b6a62",rotation=45)
-d.text(0.03,0.95,"$F\\geq0.5$ m and $F>I$",transform=d.transAxes,fontsize=5.0,color="#3f6b45",va="top")
+d.text(0.60,0.95,"$F\\geq0.5$ m, $F>I$",transform=d.transAxes,fontsize=5.0,color="#3f6b45",va="top")
 d.scatter([],[],s=9,facecolor="none",edgecolor="#2f7d4f",lw=0.6,label="genuine avoidance ($\\Delta S\\geq0.5$ m)")
 d.scatter([],[],s=9,facecolor="none",edgecolor="#b3412c",lw=0.6,label="moved towards ($\\Delta S\\leq-0.5$ m)")
 d.plot([],[],marker="o",ms=3.6,color="#52514e",mec="white",ls="none",label="policy mean")
-d.legend(frameon=False,fontsize=4.8,loc="lower right",bbox_to_anchor=(1.01,0.30),handletextpad=0.3,labelspacing=0.18,borderpad=0.1)
+d.legend(frameon=False,fontsize=4.8,loc="upper left",bbox_to_anchor=(-0.01,1.0),handletextpad=0.3,labelspacing=0.18,borderpad=0.1)
 for s_ in ("top","right"): d.spines[s_].set_visible(False)
 fig.savefig(f"{V5}/figures/cases.pdf",bbox_inches="tight"); fig.savefig(f"{V5}/figures/cases.png",dpi=220,bbox_inches="tight"); print("ok")

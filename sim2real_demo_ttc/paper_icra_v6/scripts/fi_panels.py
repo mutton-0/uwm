@@ -36,6 +36,7 @@ def panel_extract(a,tok="34b62d7333845af3",mm="ddv2",title="(a) three queries, o
     for k,c,dy,tl in (("rm","#e34948",15,"contact"),("clean","#2a78d6",-13,"clear")):   # 全程最小间隙，扣掉 1.0 自车半宽 + 0.4 行人半径
         g=float(np.min(np.linalg.norm(P[k]-ped,axis=1))-1.4)
         dx,dy=(9,int(dy*0.72)) if compact else (11,dy)      # 面板矮的时候标注要收，不然顶到标题
+        tl="contact" if g<0 else "clear"
         a.annotate(f"{g:+.2f} m {tl}",(-P[k][-1,1],P[k][-1,0]),textcoords="offset points",xytext=(dx,dy),
                    ha="left",va="center",fontsize=4.6*fs,color=c,
                    arrowprops=dict(arrowstyle="-",lw=0.4,color=c,shrinkA=0.5,shrinkB=1.5))
@@ -68,7 +69,16 @@ def panel_readings(b,title="(b) the two readings",fs=1.0,compact=False,schematic
         b.annotate("$F=I$",(0.02,0.02),textcoords="offset points",xytext=(-1,3.5),ha="right",va="bottom",fontsize=4.8*fs,color="#6b6a62",rotation=45)
         b.text(0.06,0.93,"avoidance:\n$F\\geq0.5$ m, $F>I$",transform=b.transAxes,fontsize=4.8*fs,color="#3f6b45",va="top",linespacing=1.2)
         b.text(0.97,0.12,"jitter: $F\\leq I$",transform=b.transAxes,fontsize=4.8*fs,color="#6b6a62",va="bottom",ha="right")
-        b.text(0.97,0.55,"one $(F,I)$\nper scene",transform=b.transAxes,fontsize=4.4*fs,color="#6b6a62",va="bottom",ha="right",linespacing=1.2)
+        for m,d in AX.items():        # 每家一个点：F、I 的场景均值（夜间 I），不画逐场景云
+            F=[];IN=[]
+            for t,v in d.items():
+                if not all(k in v for k in ("clean","rm","night")): continue
+                F.append(disp(v["clean"],v["rm"])); IN.append(disp(v["clean"],v["night"]))
+            fm,inm=np.mean(F),np.mean(IN)
+            b.plot(inm,fm,marker="o",ms=4.6*fs,mfc="white",mec=COL[m],mew=1.1,zorder=5)
+            off={"dd":(-5,0,"right"),"autovla":(4.5,-3.8,"left"),"ltf":(4.5,-3.0,"left")}.get(m,(4.5,0,"left"))
+            b.annotate(SH[m],(inm,fm),textcoords="offset points",xytext=off[:2],ha=off[2],va="center",fontsize=4.8*fs,color=COL[m])
+        b.text(0.97,0.55,"one point\nper policy",transform=b.transAxes,fontsize=4.4*fs,color="#6b6a62",va="bottom",ha="right",linespacing=1.2)
         for s_ in ("top","right"): b.spines[s_].set_visible(False)
         return
     for m,d in AX.items():

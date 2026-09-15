@@ -10,23 +10,27 @@ perturbation.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/cases.pdf}
-\caption{\textbf{Four right-hand-drive cases, and displacement against the separation it buys.}
-(a--d)~Ego at the origin, the vulnerable road user's (VRU) logged future dashed from the star, and DiffusionDriveV2's own BEV
-semantic head as the background; every policy receives the frame's logged navigation, so the turns are
-commanded. (a)~Clearances
-$0.3$--$0.9$\,m. (b)~SimLingo passes at $3.2$\,m, the other five at $6.7$--$10$\,m. (c,~d)~The departing policies and their planned distances are named in the panel. (e)~Every policy--scene cell of the \NumSGscenes{} Singapore scenes on the two axes of \eqref{eq:FI}, with the policy means; rings mark cells whose displacement bought ($\Delta S\ge0.5$\,m) or cost ($\Delta S\le-0.5$\,m) clearance; shaded: the avoidance region $F\ge0.5$\,m, $F>I$.}
+\caption{\textbf{The two axes, on two cells and on all of them.}
+(a)~A cell counted as genuine avoidance: DiffusionDrive's plan with the pedestrian in view ($X^{O}$,
+solid) stays short of the pedestrian's logged future (dashed from the star), while the
+pedestrian-blind plan ($X^{R}$, dashed) reaches it; the re-lit plan ($X^{N}$) gives $I$.
+(b)~A cell in which the plan moved towards the pedestrian: DiffusionDriveV2 plans further with the
+pedestrian in view than without it. (c)~Every policy--scene cell of the \NumSGscenes{} Singapore
+scenes on the two axes of \eqref{eq:FI}, with the policy means and the cells of (a) and (b); rings
+mark cells whose displacement bought ($\Delta S\ge0.5$\,m) or cost ($\Delta S\le-0.5$\,m) clearance;
+shaded: $F\ge0.5$\,m, $F>I$.}
 \label{fig:cases}
 \end{figure}
 
 \paragraph{When the plan does move, which way does it move?}
-$F$ measures how far a plan moves, not where it moves to. We therefore decompose it (\cref{fig:cases}e), reading $F$ against $I$ of
+$F$ measures how far a plan moves, not where it moves to. We therefore decompose it (\cref{fig:cases}c), reading $F$ against $I$ of
 \eqref{eq:FI}---the same policy's jitter floor under an unrelated edit---and against $\Delta S$, the
 change in clearance to the pedestrian's logged future. A response counts as avoidance only if all three hold: the plan moved
 ($F\ge0.5$\,m), it moved more than the policy's own jitter ($F>I$), and the movement bought distance
 ($\Delta S\ge0.5$\,m).
 
 Three readings follow. First, the pedestrian outweighs the irrelevant edit in only
-\NumFgtIlo--\NumFgtIhi\% of scenes, so most of what $F$ registers sits inside the policy's own variability---below the $F=I$ line of \cref{fig:cases}e. Second, avoidance is rare where it is called for. The logged ego is
+\NumFgtIlo--\NumFgtIhi\% of scenes, so most of what $F$ registers sits inside the policy's own variability---below the $F=I$ line of \cref{fig:cases}c. Second, avoidance is rare where it is called for. The logged ego is
 stationary through most of this corpus, so a plan that does not move is usually the correct one; we
 therefore replay every scene at input speeds of 4 and 8\,m/s, as in \cref{sec:checkup}, and read only the
 cells in which the pedestrian-blind plan does come within 1\,m of the pedestrian's logged future.
