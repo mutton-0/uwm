@@ -72,11 +72,7 @@ d.fill_between([EPS,0.5],[0.5,0.5],[40,40],color="#e8f0e8",lw=0,zorder=0)      #
 d.fill_between([0.5,40],[0.5,40],[40,40],color="#e8f0e8",lw=0,zorder=0)
 d.plot([EPS,40],[EPS,40],color="#6b6a62",ls=(0,(3,2)),lw=0.7,zorder=2)
 d.axhline(0.5,color="#9a998f",ls=(0,(1.6,1.6)),lw=0.7,zorder=2)
-reg=(F>=0.5)&(F>I); real=reg&(DS>=0.5); bad=reg&(DS<=-0.5); mid=reg&~(real|bad); rest=~reg   # 区内按 ΔS 着色，区外淡色散点
-d.scatter(I[rest],F[rest],s=2.4,c=CI[rest],alpha=0.22,lw=0,zorder=3)
-d.scatter(I[mid],F[mid],s=5,c="#9a998f",alpha=0.8,lw=0,zorder=4)
-d.scatter(I[bad],F[bad],s=6,c="#b3412c",alpha=0.9,lw=0,zorder=5)
-d.scatter(I[real],F[real],s=6,c="#2f7d4f",alpha=0.9,lw=0,zorder=5)
+d.scatter(I,F,s=2.4,c=CI,alpha=0.30,lw=0,zorder=3)      # (d) 只按策略着色；ΔS 的拆分放在 (c)
 LOFF={"autovla":(4.5,3.6),"ltf":(4.5,-3.0),"dd":(-4.5,0),"simlingo":(-2,5)}
 for m in MM:
     fm=np.mean([x["F"] for x in P[m]]); im=np.mean([x["I"] for x in P[m]])
@@ -94,7 +90,7 @@ d.text(0.03,0.95,"avoidance region",transform=d.transAxes,fontsize=5.0,color="#3
 hh=[plt.Line2D([],[],marker="s",ms=4,color="#2f7d4f",ls="none",label="bought clearance, $\\Delta S\\geq0.5$ m"),
     plt.Line2D([],[],marker="s",ms=4,color="#b8b7b0",ls="none",label="in region, $|\\Delta S|<0.5$ m"),
     plt.Line2D([],[],marker="s",ms=4,color="#b3412c",ls="none",label="moved towards, $\\Delta S\\leq-0.5$ m"),
-    plt.Line2D([],[],marker="o",ms=3.6,color="#52514e",mec="white",ls="none",label="policy mean (d)")]
+    plt.Line2D([],[],marker="o",ms=3.6,color="#52514e",mec="white",ls="none",label="policy mean")]
 fig.legend(handles=hh,frameon=False,fontsize=4.8,loc="upper center",bbox_to_anchor=(0.5,0.035),ncol=2,handletextpad=0.3,labelspacing=0.2,columnspacing=1.2)
 for s_ in ("top","right"): d.spines[s_].set_visible(False)
 fig.savefig(f"{V5}/figures/cases.pdf",bbox_inches="tight"); fig.savefig(f"{V5}/figures/cases.png",dpi=220,bbox_inches="tight"); print("ok")
