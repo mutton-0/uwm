@@ -9,7 +9,5 @@ SimLingo (InternVL2-1B), AutoVLA (Qwen2.5-VL-3B, three cameras $\times$ four fra
 
 The primary corpus is nuScenes~\cite{caesar2020nuscenes} keyframes: corridor pedestrians (lateral
 clearance to the ego corridor $\le1$\,m) at $5$--$12$\,m, their off-road counterparts, and $30$
-approach sequences at $5.8$--$14.6$\,m with logged pedestrian futures. The near-pedestrian units come
-from $236$ front-only frames, $88$ in Boston (left-hand drive) and $148$ in Singapore (right-hand
-drive). Alpamayo-1.5 covers $170$ of the $236$, needing $1.6$\,s of history and $6.4$\,s of future
+approach sequences at $5.8$--$14.6$\,m with logged pedestrian futures. The near-pedestrian units come from $88$ Boston (left-hand-drive) and $148$ Singapore (right-hand-drive) front-only frames. Alpamayo-1.5 covers $170$ of them, needing $1.6$\,s of history and $6.4$\,s of future
 within the scene. \Cref{sec:axes} repeats $\mathcal{E}_R$ and $\mathcal{E}_N$ on a second, right-hand-drive corpus, the \NumSGscenes{} NAVSIM test-split~\cite{dauner2024navsim} Singapore scenes with a pedestrian near the ego corridor and a complete logged pedestrian future, used for the transfer and decomposition results and for the NAVSIM columns of \cref{tab:report}. \Cref{tab:report} is measured on the nuScenes frames alone.
