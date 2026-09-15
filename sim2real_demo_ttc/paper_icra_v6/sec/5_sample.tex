@@ -86,11 +86,7 @@ the pedestrian, pedestrian collisions and EPDMS. Each predictor is an ordering o
 leaderboard score, correlate with it at $-0.54$ to $+0.49$. The same pedestrian-centred readouts taken
 on Boston or on the US cities do ($0.83$--$1.00$), and so does the exposure exam ($0.94$). Near-pedestrian EPDMS is predicted best by near-pedestrian EPDMS elsewhere ($0.89$) and by specificity
 ($0.77$). Hazard sensitivity and lighting invariance measure something else and do not predict these
-orderings. Of the five exams, the one whose ordering best matches the new side's rate of sub-1.5\,s
-time-to-proximity is not the one that measures how \emph{much} a policy reacts but the one that
-measures how \emph{steadily} it drives: over the six policies and the \NumSGscenes-scene pool of
-\cref{sec:axes}, specificity gives $\rho={\NumSpBeh}$, against ${\NumExpBeh}$ for exposure and
-${\NumCfrBeh}$ for $\CFR$. This exam was not pre-registered, and we report it as exploratory. Cross-policy correlations rest on six policies, and we read them as orderings, not as tests. Specificity
+orderings. Of the five exams, the one whose ordering best matches how often a policy keeps clear of the pedestrian on the new side (share of scenes with minimum time-to-proximity $\ge1.5$\,s, the complement of the TTC column of \cref{tab:bench}) is not the one that measures how \emph{much} a policy reacts but the one that measures how \emph{steadily} it drives: over the six policies and the \NumSGscenes-scene pool of \cref{sec:axes}, specificity gives $\rho={\NumSpBeh}$, against ${\NumExpBeh}$ for exposure and ${\NumCfrBeh}$ for $\CFR$ (higher is better for all three exams, so a positive $\rho$ means the exam's ordering carries over). This exam was not pre-registered, and we report it as exploratory. Cross-policy correlations rest on six policies, and we read them as orderings, not as tests. Specificity
 asks how far a plan moves when an \emph{irrelevant} part of the scene is edited. A policy that answers
 ``not at all'' drives steadily, and steadiness is what survives the change of side. The decomposition
 of \cref{sec:axes} says why: displacement that is not aimed away from the pedestrian is not
