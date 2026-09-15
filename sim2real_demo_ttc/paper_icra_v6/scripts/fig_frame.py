@@ -103,15 +103,15 @@ if MODE=="wide":
         box(x0,BOT,x0+w,TOP); bg.text(x0+XPAD,TOP-fy(0.105),lab,fontsize=6.8,weight="bold",color="#2b2b28"); return x0+w
     def right(x,txt):
         arrow((x+fx(0.02),MID),(x+ARW-fx(0.02),MID),lw=1.5,ms=6)
-        bg.text(x+ARW/2,MID+fy(0.045),txt,fontsize=3.7,ha="center",va="bottom",color="#2f5d94",linespacing=1.1); return x+ARW
+        bg.text(x+ARW/2,MID+fy(0.045),txt,fontsize=4.4,ha="center",va="bottom",color="#2f5d94",linespacing=1.1); return x+ARW
     # (a) 配对数据：2×2
     x=fx(0.03); WA=fx(0.98); x1=stage(x,WA,"(a) paired data")
-    for i in range(NIMG): draw_img(fig,[x+(WA-IW)/2,CT-PAD-(i+1)*IH-i*GAP,IW,IH],i,fs=0.8)
+    for i in range(NIMG): draw_img(fig,[x+(WA-IW)/2,CT-PAD-(i+1)*IH-i*GAP,IW,IH],i,fs=1.05)
     x=right(x1,"query $\\pi$ on\n$O,R,N$")
     # (b) 两条轴
     WB=fx(2.5); x1=stage(x,WB,"(b) the two axes"); PB=BOT+fy(0.20); PT=CT-fy(0.13)
-    ax1=fig.add_axes([x+fx(0.07),PB,fx(0.95),PT-PB]); frame_extract(ax1,fs=0.85); ax1.set_title("three queries, one scene",fontsize=5.2,loc="left",pad=1.5)
-    ax2=fig.add_axes([x+fx(1.32),PB+fy(0.02),fx(1.1),PT-PB-fy(0.02)]); frame_readings(ax2,fs=0.85); ax2.set_title("the two readings",fontsize=5.2,loc="left",pad=1.5)
+    ax1=fig.add_axes([x+fx(0.07),PB,fx(0.95),PT-PB]); frame_extract(ax1,fs=1.05); ax1.set_title("three queries, one scene",fontsize=6.2,loc="left",pad=1.5)
+    ax2=fig.add_axes([x+fx(1.32),PB+fy(0.02),fx(1.1),PT-PB-fy(0.02)]); frame_readings(ax2,fs=1.05); ax2.set_title("the two readings",fontsize=6.2,loc="left",pad=1.5)
     x=right(x1,"read\n$F$, $I$")
     # (c) 五项检查：竖排一列
     WC=fx(0.92); x1=stage(x,WC,"(c) the exams")
