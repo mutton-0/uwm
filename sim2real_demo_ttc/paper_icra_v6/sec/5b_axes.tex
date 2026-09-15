@@ -20,8 +20,8 @@ $F$ measures how far a plan moves, not where it moves to. We therefore decompose
 \eqref{eq:FI}---the same policy's interference under an unrelated edit---and against $\Delta S$, the
 change in clearance to the pedestrian's logged future. A response counts as avoidance only if the plan moved ($F\ge0.5$\,m) and the movement bought distance ($\Delta S\ge0.5$\,m), and, where a re-lit plan exists, only if it moved more than the policy's own interference ($F>I$).
 
-Three readings follow. First, the pedestrian outweighs the irrelevant edit in only
-\NumFgtIlo--\NumFgtIhi\% of scenes, so most of what $F$ registers sits inside the policy's own variability---below the $F=I$ line of \cref{fig:cases}d. Second, avoidance is rare where it is called for. At the logged speed, where all three conditions apply, 35 of the $1{,}476$ policy--scene cells qualify (\cref{fig:cases}c). The logged ego is
+Four readings follow. First, the pedestrian outweighs the irrelevant edit in only
+\NumFgtIlo--\NumFgtIhi\% of scenes, so most of what $F$ registers sits below the interference of an irrelevant edit, the $F=I$ line of \cref{fig:cases}d. Second, avoidance is rare where it is called for. At the logged speed, where all three conditions apply, 35 of the $1{,}476$ policy--scene cells qualify (\cref{fig:cases}c). The logged ego is
 stationary through most of this corpus, so a plan that does not move is usually the correct one. We therefore replay every scene at input speeds of 4 and 8\,m/s, as in \cref{sec:checkup}, and read only the cells in which the pedestrian-blind plan does come within 1\,m of the pedestrian's logged future, the same criterion as $C(X^{R})<1$ in \cref{sec:checkup}. No re-lit plan exists at these speeds, so the $F>I$ condition is not applied there.
 Across \NumCfModels{} policies that is \NumCfNeed{} of \NumCfCells{} cells (\NumCfNeedLo--\NumCfNeedHi\%
 per policy), and \NumCfReal{} of them---\NumCfRealPct\%---are genuine avoidance. On those cells the
