@@ -111,27 +111,25 @@ if MODE=="wide":
         r_,c_=divmod(i,2); draw_img(fig,[x+XPAD+c_*(IW+fx(0.035)),BOT+PAD+(1-r_)*(IH+GAP),IW,IH],i,fs=0.8)
     x=right(x1,"query $\\pi$ on\n$O,R,D,N$")
     # (b) 两条轴
-    WB=fx(1.92); x1=stage(x,WB,"(b) the two axes"); PB=BOT+fy(0.20); PT=CT-fy(0.13)
-    ax1=fig.add_axes([x+fx(0.05),PB,fx(0.74),PT-PB]); frame_extract(ax1,fs=0.85); ax1.set_title("three queries, one scene",fontsize=5.2,loc="left",pad=1.5)
-    ax2=fig.add_axes([x+fx(1.02),PB+fy(0.02),fx(0.84),PT-PB-fy(0.02)]); frame_readings(ax2,fs=0.85); ax2.set_title("the two readings",fontsize=5.2,loc="left",pad=1.5)
+    WB=fx(2.2); x1=stage(x,WB,"(b) the two axes"); PB=BOT+fy(0.20); PT=CT-fy(0.13)
+    ax1=fig.add_axes([x+fx(0.06),PB,fx(0.86),PT-PB]); frame_extract(ax1,fs=0.85); ax1.set_title("three queries, one scene",fontsize=5.2,loc="left",pad=1.5)
+    ax2=fig.add_axes([x+fx(1.18),PB+fy(0.02),fx(0.96),PT-PB-fy(0.02)]); frame_readings(ax2,fs=0.85); ax2.set_title("the two readings",fontsize=5.2,loc="left",pad=1.5)
     x=right(x1,"read\n$F$, $I$")
-    # (c) 五项检查：两列
-    WC=fx(1.0); x1=stage(x,WC,"(c) the five exams")
-    cw=(WC-2*XPAD-fx(0.03))/2; ch=(CT-BOT-2*PAD-2*fy(0.03))/3
+    # (c) 五项检查：竖排一列
+    WC=fx(0.92); x1=stage(x,WC,"(c) the five exams")
+    cw=WC-2*XPAD; n5=len(EX); ch=(CT-BOT-2*PAD-(n5-1)*fy(0.025))/n5
     for k,lab in enumerate(EX):
-        c_,r_=divmod(k,3); x0=x+XPAD+c_*(cw+fx(0.03)); y1=CT-PAD-r_*(ch+fy(0.03))
-        chip(x0,y1-ch,x0+cw,y1,lab,4.3)
+        y1=CT-PAD-k*(ch+fy(0.025)); chip(x+XPAD,y1-ch,x+XPAD+cw,y1,lab.replace("\n"," "),4.3)
     x=right(x1,"test on the\nother side")
-    # (d) 预后 + 体检单
+    # (d) 预后：四项竖排一列 + 右侧体检单（上）与车（下）
     WD=1-fx(0.03)-x; x1=stage(x,WD,"(d) prognosis")
-    GW=fx(0.88); cw=(GW-fx(0.03))/2; ch=(CT-BOT-2*PAD-fy(0.03))/2
+    LW=fx(0.86); n4=len(PR); ch=(CT-BOT-2*PAD-(n4-1)*fy(0.025))/n4
     for k,lab in enumerate(PR):
-        r_,c_=divmod(k,2); x0=x+XPAD+c_*(cw+fx(0.03)); y1=CT-PAD-r_*(ch+fy(0.03))
-        chip(x0,y1-ch,x0+cw,y1,lab,4.3)
-    arrow((x+XPAD+GW+fx(0.02),MID),(x+XPAD+GW+fx(0.12),MID),lw=1.3,ms=5)
-    NX=x+XPAD+GW+fx(0.33); NY=MID+fy(0.03); NW=fx(0.34); NH=fy(0.52)
-    clipboard(NX,NY,NW,NH,4.3)
-    car(NX+NW/2+fx(0.29),MID+fy(0.0),0.36,fs=4.3)
+        y1=CT-PAD-k*(ch+fy(0.025)); chip(x+XPAD,y1-ch,x+XPAD+LW,y1,lab.replace("\n"," "),4.3)
+    arrow((x+XPAD+LW+fx(0.02),MID),(x+XPAD+LW+fx(0.12),MID),lw=1.3,ms=5)
+    NX=x+XPAD+LW+fx(0.36); NW=fx(0.30); NH=fy(0.40)
+    clipboard(NX,CT-PAD-NH/2-fy(0.02),NW,NH,4.0)
+    car(NX,BOT+PAD+fy(0.17),0.34,fs=4.0)
     OUT="frame"
 else:
     IW=fx(IW_in); IH=fy(IH_in); PAD=fy(PAD_in); TIT=fy(TIT_in); ARRf=fy(ARR)
