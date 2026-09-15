@@ -20,7 +20,7 @@ def ped_xy(t):
     p=PF[t]; P=np.asarray([p["p0"]]+[z for z in p["fut"] if z is not None],float); tp=np.linspace(0,2.5,len(P))
     return np.stack([np.interp(TT,tp,P[:,0]),np.interp(TT,tp,P[:,1])],1)
 
-def panel_extract(a,tok="34b62d7333845af3",mm="ddv2",title="(a) three queries, one scene",fs=1.0,legend=True,compact=False):
+def panel_extract(a,tok="34b62d7333845af3",mm="ddv2",title="(a) three queries, one scene",fs=1.0,legend=True,compact=False,ymax=None):
     """选例条件：盲规划会进 1.4 m 禁入范围而原规划没进，且 F>I —— 真避让，方向可解释。"""
     v=AX[mm][tok]; P={k:lin(v[k]) for k in ("clean","rm","night")}; ped=ped_xy(tok)
     a.axvspan(-1,1,color="#eef1f6",lw=0,zorder=0)
@@ -40,9 +40,9 @@ def panel_extract(a,tok="34b62d7333845af3",mm="ddv2",title="(a) three queries, o
         a.annotate(f"{g:+.2f} m {tl}",(-P[k][-1,1],P[k][-1,0]),textcoords="offset points",xytext=(dx,dy),
                    ha="left",va="center",fontsize=4.6*fs,color=c,
                    arrowprops=dict(arrowstyle="-",lw=0.4,color=c,shrinkA=0.5,shrinkB=1.5))
-    a.text(0.02,0.955,f"$F$ = {disp(v['clean'],v['rm']):.2f} m",transform=a.transAxes,ha="left",fontsize=5.4*fs,color="#b3412c")
-    a.text(0.02,0.855,f"$I$ = {disp(v['clean'],v['night']):.2f} m",transform=a.transAxes,ha="left",fontsize=5.4*fs,color="#5e5c56")
-    a.set_xlim(-6.0,5.6); a.set_ylim(-1.5,19.5 if compact else 17.5); a.set_xticks([-3,0,3]); a.set_yticks([0,5,10,15])
+    a.text(0.02,0.95,f"$F$ = {disp(v['clean'],v['rm']):.2f} m",transform=a.transAxes,ha="left",fontsize=5.4*fs,color="#b3412c")
+    a.text(0.02,0.84,f"$I$ = {disp(v['clean'],v['night']):.2f} m",transform=a.transAxes,ha="left",fontsize=5.4*fs,color="#5e5c56")
+    a.set_xlim(-6.0,5.6); a.set_ylim(-1.5,ymax if ymax else (19.5 if compact else 17.5)); a.set_xticks([-3,0,3]); a.set_yticks([0,5,10,15] if not ymax or ymax>15 else [0,5,10])
     a.tick_params(labelsize=5.0*fs,length=1.6,pad=1)
     a.set_xlabel("lateral (m)",fontsize=5.4*fs,labelpad=0.5); a.set_ylabel("ahead (m)",fontsize=5.4*fs,labelpad=0.5)
     if title: a.set_title(title,fontsize=6.0*fs,loc="left",pad=2)

@@ -35,11 +35,11 @@ good=[c for c in cells if c[2]>=0.5 and c[2]>c[3] and c[4]>=0.5 and c[1] not in 
 bad=[c for c in cells if c[2]>=0.5 and c[4]<=-0.5 and c[1] not in EXCL and c[2]<3]
 ca=max(good,key=lambda c:c[4]); cb=min(bad,key=lambda c:c[6])   # (b) 取原规划离行人最近的那格
 print("(a) genuine:",ca); print("(b) towards:",cb)
-fig=plt.figure(figsize=(3.45,3.25))
-gs=fig.add_gridspec(2,2,height_ratios=[1.0,1.0],hspace=0.62,wspace=0.48)
+fig=plt.figure(figsize=(3.45,3.3))
+gs=fig.add_gridspec(2,2,height_ratios=[0.72,1.0],hspace=0.42,wspace=0.48)
 for k,(c,lab) in enumerate(((ca,"(a) genuine avoidance"),(cb,"(b) moved towards"))):
-    a=fig.add_subplot(gs[0,k]); fp.panel_extract(a,tok=c[1],mm=c[0],title=f"{lab}: {SH[c[0]]}",fs=1.05,legend=(k==0))
-    a.text(0.02,0.755,f"$\\Delta S$ = {c[4]:+.2f} m",transform=a.transAxes,ha="left",fontsize=5.6,color="#2f7d4f" if c[4]>0 else "#b3412c")
+    a=fig.add_subplot(gs[0,k]); fp.panel_extract(a,tok=c[1],mm=c[0],title=f"{lab}: {SH[c[0]]}",fs=1.05,legend=(k==0),ymax=11.5)
+    a.text(0.02,0.72,f"$\\Delta S$ = {c[4]:+.2f} m",transform=a.transAxes,ha="left",fontsize=5.6,color="#2f7d4f" if c[4]>0 else "#b3412c")
 MARK=[("a",ca),("b",cb)]
 # ---- 右半：逐场景 F 与 ΔS
 P=json.load(open(f"{V5}/f_decomp_per_scene.json")); EPS=3e-3
@@ -88,6 +88,6 @@ hh=[plt.Line2D([],[],marker="s",ms=4,color="#2f7d4f",ls="none",label="bought cle
     plt.Line2D([],[],marker="s",ms=4,color="#b8b7b0",ls="none",label="in region, $|\\Delta S|<0.5$ m"),
     plt.Line2D([],[],marker="s",ms=4,color="#b3412c",ls="none",label="moved towards, $\\Delta S\\leq-0.5$ m"),
     plt.Line2D([],[],marker="o",ms=3.6,color="#52514e",mec="white",ls="none",label="policy mean")]
-fig.legend(handles=hh,frameon=False,fontsize=4.8,loc="upper center",bbox_to_anchor=(0.5,0.035),ncol=2,handletextpad=0.3,labelspacing=0.2,columnspacing=1.2)
+fig.legend(handles=hh,frameon=False,fontsize=4.8,loc="upper center",bbox_to_anchor=(0.5,0.02),ncol=2,handletextpad=0.3,labelspacing=0.2,columnspacing=1.2)
 for s_ in ("top","right"): d.spines[s_].set_visible(False)
-fig.savefig(f"{V5}/figures/cases.pdf",bbox_inches="tight"); fig.savefig(f"{V5}/figures/cases.png",dpi=220,bbox_inches="tight"); print("ok")
+fig.savefig(f"{V5}/figures/cases.pdf",bbox_inches="tight",pad_inches=0.015); fig.savefig(f"{V5}/figures/cases.png",dpi=220,bbox_inches="tight",pad_inches=0.015); print("ok")

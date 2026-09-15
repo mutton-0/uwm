@@ -57,4 +57,4 @@ c.set_title("(b) hazard sensitivity",fontsize=7.7,loc="left",pad=2)
 for s_ in ("top","right"): c.spines[s_].set_visible(False)
 hh=[plt.Line2D([],[],color=COL[m],lw=1.2,label=NAME[m].replace("DiffusionDriveV2","DDv2").replace("DiffusionDrive","DD").replace("Alpamayo 1.5","Alpamayo")) for m in M]
 fig.legend(handles=hh,frameon=False,fontsize=6.3,ncol=6,loc="lower center",bbox_to_anchor=(0.5,-0.22),handlelength=1.1,columnspacing=0.7)
-fig.savefig(f"{V5}/figures/reach.pdf",bbox_inches="tight"); fig.savefig(f"{V5}/figures/reach.png",dpi=220,bbox_inches="tight"); print("ok")
+fig.savefig(f"{V5}/figures/reach.pdf",bbox_inches="tight",pad_inches=0.015); fig.savefig(f"{V5}/figures/reach.png",dpi=220,bbox_inches="tight",pad_inches=0.015); print("ok")

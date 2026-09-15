@@ -44,4 +44,4 @@ b.set_xticks([1,10,100]); b.set_xticklabels(["1","10","100"]); b.minorticks_off(
 b.tick_params(labelsize=6.2,length=1.5,pad=1); b.set_xlabel("minutes",fontsize=6.7,labelpad=0.3)
 b.set_title("(b) driving a verdict needs",fontsize=7.5,loc="left",pad=5)
 b.spines["left"].set_visible(False); b.tick_params(axis="y",length=0)
-fig.savefig(f"{V5}/figures/sample_size.pdf",bbox_inches="tight"); fig.savefig(f"{V5}/figures/sample_size.png",dpi=230,bbox_inches="tight"); print("ok")
+fig.savefig(f"{V5}/figures/sample_size.pdf",bbox_inches="tight",pad_inches=0.015); fig.savefig(f"{V5}/figures/sample_size.png",dpi=230,bbox_inches="tight",pad_inches=0.015); print("ok")
