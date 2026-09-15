@@ -85,10 +85,21 @@ def clipboard(NX,NY,NW,NH,fs):                 # 问诊节点：一张体检单
                 zorder=5,solid_capstyle="round",solid_joinstyle="round")
     bg.text(NX,NY-NH/2-fy(0.03),"check-up report",fontsize=fs,ha="center",va="top",color="#52514e")
 
+def car(cx,cy,w,fs=1.0):                       # 部署到新站点的车：侧视，宽 w（figure 单位 in），高约 0.45 w
+    h=w*0.42; bw=w; bh=h*0.5
+    bg.add_patch(FancyBboxPatch((cx-fx(bw/2),cy-fy(h*0.05)),fx(bw),fy(bh),boxstyle="round,pad=0,rounding_size=0.006",
+                                fc="#2f5d94",ec="#17233b",lw=0.7,zorder=5))
+    bg.add_patch(FancyBboxPatch((cx-fx(bw*0.28),cy+fy(bh*0.75)),fx(bw*0.5),fy(h*0.42),boxstyle="round,pad=0,rounding_size=0.006",
+                                fc="#5b9bd5",ec="#17233b",lw=0.7,zorder=4))
+    for dx in (-0.30,0.30):
+        bg.add_patch(Ellipse((cx+fx(bw*dx),cy-fy(h*0.05)),2*fx(w*0.09),2*fy(w*0.09),fc="#17233b",ec="white",lw=0.6,zorder=6))
+    bg.add_patch(Ellipse((cx+fx(bw*0.47),cy+fy(bh*0.35)),2*fx(w*0.035),2*fy(w*0.035),fc="#fff3b0",ec="none",zorder=6))
+    bg.text(cx,cy-fy(h*0.05)-fy(w*0.09)-fy(0.03),"new site",fontsize=fs,ha="center",va="top",color="#52514e")
+
 if MODE=="wide":
     IW=fx(IW_in); IH=fy(IH_in); GAP=fy(GAP_in); PAD=fy(PAD_in); TIT=fy(TIT_in)
     TOP=1-fy(0.01); BOT=fy(0.01); CT=TOP-TIT; MID=(CT+BOT)/2
-    ARW=fx(0.30); XPAD=fx(0.04)
+    ARW=fx(0.26); XPAD=fx(0.04)
     def stage(x0,w,lab):
         box(x0,BOT,x0+w,TOP); bg.text(x0+XPAD,TOP-fy(0.105),lab,fontsize=6.8,weight="bold",color="#2b2b28"); return x0+w
     def right(x,txt):
@@ -100,12 +111,12 @@ if MODE=="wide":
         r_,c_=divmod(i,2); draw_img(fig,[x+XPAD+c_*(IW+fx(0.035)),BOT+PAD+(1-r_)*(IH+GAP),IW,IH],i,fs=0.8)
     x=right(x1,"query $\\pi$ on\n$O,R,D,N$")
     # (b) 两条轴
-    WB=fx(2.0); x1=stage(x,WB,"(b) the two axes"); PB=BOT+fy(0.20); PT=CT-fy(0.13)
+    WB=fx(1.92); x1=stage(x,WB,"(b) the two axes"); PB=BOT+fy(0.20); PT=CT-fy(0.13)
     ax1=fig.add_axes([x+fx(0.05),PB,fx(0.74),PT-PB]); frame_extract(ax1,fs=0.85); ax1.set_title("three queries, one scene",fontsize=5.2,loc="left",pad=1.5)
-    ax2=fig.add_axes([x+fx(1.06),PB+fy(0.02),fx(0.88),PT-PB-fy(0.02)]); frame_readings(ax2,fs=0.85); ax2.set_title("the two readings",fontsize=5.2,loc="left",pad=1.5)
+    ax2=fig.add_axes([x+fx(1.02),PB+fy(0.02),fx(0.84),PT-PB-fy(0.02)]); frame_readings(ax2,fs=0.85); ax2.set_title("the two readings",fontsize=5.2,loc="left",pad=1.5)
     x=right(x1,"read\n$F$, $I$")
     # (c) 五项检查：两列
-    WC=fx(1.04); x1=stage(x,WC,"(c) the five exams")
+    WC=fx(1.0); x1=stage(x,WC,"(c) the five exams")
     cw=(WC-2*XPAD-fx(0.03))/2; ch=(CT-BOT-2*PAD-2*fy(0.03))/3
     for k,lab in enumerate(EX):
         c_,r_=divmod(k,3); x0=x+XPAD+c_*(cw+fx(0.03)); y1=CT-PAD-r_*(ch+fy(0.03))
@@ -113,20 +124,14 @@ if MODE=="wide":
     x=right(x1,"test on the\nother side")
     # (d) 预后 + 体检单
     WD=1-fx(0.03)-x; x1=stage(x,WD,"(d) prognosis")
-    GW=fx(0.84); cw=(GW-fx(0.03))/2; ch=(CT-BOT-2*PAD-fy(0.03))/2
+    GW=fx(0.88); cw=(GW-fx(0.03))/2; ch=(CT-BOT-2*PAD-fy(0.03))/2
     for k,lab in enumerate(PR):
         r_,c_=divmod(k,2); x0=x+XPAD+c_*(cw+fx(0.03)); y1=CT-PAD-r_*(ch+fy(0.03))
         chip(x0,y1-ch,x0+cw,y1,lab,4.3)
     arrow((x+XPAD+GW+fx(0.02),MID),(x+XPAD+GW+fx(0.12),MID),lw=1.3,ms=5)
     NX=x+XPAD+GW+fx(0.33); NY=MID+fy(0.03); NW=fx(0.34); NH=fy(0.52)
     clipboard(NX,NY,NW,NH,4.3)
-    DX=NX+NW/2+fx(0.22); DY=MID+fy(0.02)
-    bg.add_patch(Ellipse((DX,DY+fy(0.17)),2*fx(0.065),2*fy(0.065),fc="#ffffff",ec="#4a4a46",lw=0.8,zorder=5))
-    bg.add_patch(Wedge((DX,DY-fy(0.06)),fx(0.13),0,180,fc="white",ec="#4a4a46",lw=0.8,zorder=5))
-    bg.plot([DX-fx(0.026),DX+fx(0.026)],[DY+fy(0.02)]*2,color="#2e75b6",lw=1.1,zorder=6); bg.plot([DX]*2,[DY-fy(0.003),DY+fy(0.043)],color="#2e75b6",lw=1.1,zorder=6)
-    th=np.linspace(np.pi*0.15,np.pi*0.95,30)
-    bg.plot(DX-fx(0.018)+fx(0.08)*np.cos(th),DY-fy(0.075)+fy(0.08)*np.sin(th),color="#2f5d94",lw=0.9,zorder=6)
-    bg.add_patch(Ellipse((DX-fx(0.018)+fx(0.08)*np.cos(th[0]),DY-fy(0.075)+fy(0.08)*np.sin(th[0])),2*fx(0.016),2*fy(0.016),fc="#2f5d94",ec="none",zorder=7))
+    car(NX+NW/2+fx(0.29),MID+fy(0.0),0.36,fs=4.3)
     OUT="frame"
 else:
     IW=fx(IW_in); IH=fy(IH_in); PAD=fy(PAD_in); TIT=fy(TIT_in); ARRf=fy(ARR)
@@ -154,7 +159,7 @@ else:
     dT=down(cB,"diagnose on one side, test on the other")
     # (d) 预后 + 体检单
     dB=stage(dT,H_D,"(d) prognosis")
-    GW=(R-L)*0.60; CW2=(GW-fx(0.05)-fx(0.035))/2; CH2=fy(0.33)
+    GW=(R-L)*0.50; CW2=(GW-fx(0.05)-fx(0.035))/2; CH2=fy(0.33)
     for k,lab in enumerate(PR):
         r_,c_=divmod(k,2); x0=L+fx(0.05)+c_*(CW2+fx(0.035)); y1=dT-TIT-fy(0.02)-r_*(CH2+fy(0.045))
         chip(x0,y1-CH2,x0+CW2,y1,lab,4.7)
@@ -163,15 +168,7 @@ else:
     arrow((L+fx(0.05)+GW-fx(0.02),mid),(L+fx(0.05)+GW+fx(0.16),mid),lw=1.4,ms=6)
     NX=L+fx(0.05)+GW+fx(0.62); NY=mid; NW=fx(0.46); NH=fy(0.56)
     clipboard(NX,NY,NW,NH,4.8)
-    # 医生小人：头 + 肩 + 胸前十字 + 听诊器
-    DX=NX+NW/2+fx(0.30); DY=mid+fy(0.02)
-    bg.add_patch(Ellipse((DX,DY+fy(0.19)),2*fx(0.075),2*fy(0.075),fc="#ffffff",ec="#4a4a46",lw=0.8,zorder=5))
-    bg.add_patch(Ellipse((DX,DY+fy(0.19)),2*fx(0.075),2*fy(0.075),fc="none",ec="#4a4a46",lw=0.8,zorder=6))
-    bg.add_patch(Wedge((DX,DY-fy(0.07)),fx(0.15),0,180,fc="white",ec="#4a4a46",lw=0.8,zorder=5))
-    bg.plot([DX-fx(0.03),DX+fx(0.03)],[DY+fy(0.02)]*2,color="#2e75b6",lw=1.2,zorder=6); bg.plot([DX]*2,[DY-fy(0.005),DY+fy(0.045)],color="#2e75b6",lw=1.2,zorder=6)
-    th=np.linspace(np.pi*0.15,np.pi*0.95,30)
-    bg.plot(DX+fx(0.09)*np.cos(th)-fx(0.02),DY-fy(0.02)+fy(0.09)*np.sin(th)-fy(0.06),color="#2f5d94",lw=1.0,zorder=6)
-    bg.add_patch(Ellipse((DX-fx(0.02)+fx(0.09)*np.cos(th[0]),DY-fy(0.08)+fy(0.09)*np.sin(th[0])),2*fx(0.018),2*fy(0.018),fc="#2f5d94",ec="none",zorder=7))
+    car(NX+NW/2+fx(0.34),mid,0.42,fs=4.8)
     OUT="frame1c"
 fig.savefig(f"{V5}/figures/{OUT}.pdf")
 fig.savefig(f"{V5}/figures/{OUT}.png",dpi=300)   # 版式已填满画布，不用 tight，免得裁出不一致的边
