@@ -21,6 +21,7 @@ SCR={m:json.load(open(pick(f"{R5}/nvscore_{m}_sg-one-north_closevru_nav.json",f"
 SCL={m:json.load(open(pick(f"{R5}/nvscore_{m}_any_lhdclose_nav.json",f"{R5}/nvscore_{m}_any_lhdclose.json")))["rows"] for m in M}
 SCA={m:json.load(open(pick(f"{R5}/nvscore_{m}_sg-one-north_nav.json",f"{R5}/nvscore_{m}_sg-one-north_fix.json" if m=="simlingo" else f"{R5}/nvscore_{m}_sg-one-north.json")))["rows"] for m in M}
 PF=json.load(open(f"{V5}/nv_ped_future.json"))
+_POOL=set(json.load(open(f"{V5}/rhd_axes4_dd.json")).keys())
 def lin(TT,T,P): P=np.asarray(P,float); return np.stack([np.interp(TT,T,P[:,0]),np.interp(TT,T,P[:,1])],1)
 def readout(X_pts,Xt,F_pts,Ft,H):
     TT=np.round(np.arange(0,H+1e-6,0.1),2); X=lin(TT,Xt,X_pts); F=lin(TT,Ft,F_pts); c=np.linalg.norm(X-F,axis=1)-1.4
@@ -36,6 +37,7 @@ def nv_metrics(TR):
         for t,w in TR[m].items():
             p=PF.get(t)
             if p is None or p["v0"]<1.0 or any(z is None for z in p["fut"]): continue
+            if tok not in _POOL: continue   # 与体检 F/I 池对齐（246 场景）
             w=np.asarray(w,float)[:,:2]
             r.append(readout(np.vstack([[0,0],w]),np.r_[0,np.arange(1,len(w)+1)*0.5],np.vstack([p["p0"],np.asarray(p["fut"])]),np.r_[0,np.arange(1,9)*0.5],4.0))
         r=np.array(r); out[m]=dict(n=len(r),ttc_viol=float(100*np.mean(r[:,0]<1.5)),clear_med=float(np.median(r[:,1])),coll=float(100*np.mean(r[:,1]<0)))

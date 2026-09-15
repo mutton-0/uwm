@@ -13,8 +13,7 @@ perturbation.
 \caption{\textbf{The two axes.} (a)~Genuine avoidance: with the pedestrian in view ($X^{O}$, solid)
 DiffusionDrive stays short of its logged future (dashed from the star), while blind to it ($X^{R}$, dashed) it reaches it. $X^{N}$ gives $I$. (b)~Moved towards: DiffusionDriveV2 plans further with the
 pedestrian than without. (c)~Cells in the avoidance region ($F\ge0.5$\,m, $F>I$) per policy, by
-$\Delta S$: green $\ge0.5$\,m, red $\le-0.5$\,m, grey between. Label: green over all. (d)~All
-\NumSGscenes{} Singapore cells on the axes of \eqref{eq:FI}, by policy, with means.}
+$\Delta S$: green $\ge0.5$\,m, red $\le-0.5$\,m, grey between. Label: green over all. (d)~All $1{,}476$ cells (\NumSGscenes{} scenes $\times$ six policies) on the axes of \eqref{eq:FI}, by policy, with means.}
 \label{fig:cases}
 \end{figure}
 
@@ -25,13 +24,13 @@ change in clearance to the pedestrian's logged future. A response counts as avoi
 ($\Delta S\ge0.5$\,m).
 
 Three readings follow. First, the pedestrian outweighs the irrelevant edit in only
-\NumFgtIlo--\NumFgtIhi\% of scenes, so most of what $F$ registers sits inside the policy's own variability---below the $F=I$ line of \cref{fig:cases}d. Second, avoidance is rare where it is called for. The logged ego is
+\NumFgtIlo--\NumFgtIhi\% of scenes, so most of what $F$ registers sits inside the policy's own variability---below the $F=I$ line of \cref{fig:cases}d. Second, avoidance is rare where it is called for. At the logged speed, 35 of the $1{,}476$ policy--scene cells meet all three conditions (\cref{fig:cases}c). The logged ego is
 stationary through most of this corpus, so a plan that does not move is usually the correct one. We therefore replay every scene at input speeds of 4 and 8\,m/s, as in \cref{sec:checkup}, and read only the
 cells in which the pedestrian-blind plan does come within 1\,m of the pedestrian's logged future.
 Across \NumCfModels{} policies that is \NumCfNeed{} of \NumCfCells{} cells (\NumCfNeedLo--\NumCfNeedHi\%
 per policy), and \NumCfReal{} of them---\NumCfRealPct\%---are genuine avoidance. On those cells the
 median clearance changes by \NumCfDsLo--\NumCfDsHi\,m and the median planned distance by
-\NumCfArcLo--\NumCfArcHi\,m: facing a pedestrian it would otherwise reach, no policy's plan diverts or slows under our open-loop protocol. Third, the displacement that does occur is not aimed: of the
+\NumCfArcLo--\NumCfArcHi\,m: facing a pedestrian it would otherwise reach, the median plan neither diverts nor slows under our open-loop protocol. Third, the displacement that does occur is not aimed: of the
 \NumMoveN{} cells in which the plan moved, \NumMoveFar{} increased the clearance and \NumMoveNear{}
 decreased it. Per policy the split differs sharply (\cref{fig:cases}c): DiffusionDrive reacts in few
 scenes but in the right direction (median $\Delta S=\NumDDmed$\,m), while SimLingo moves in more

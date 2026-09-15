@@ -16,7 +16,7 @@ human's own.
 On these frames, no policy's plan responds to the pedestrian: on units that need a reaction, seeing it buys only \NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale, against \NumHumanRef{} when the logged human trajectory $H$ takes the place of $X^{O}$ in \eqref{eq:hs} (\cref{tab:report}). The benefit is also unreliable in direction:
 counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
 pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
-SimLingo 18 vs.\ 30, the rest at most 5 either way, all McNemar $p\ge0.11$) --- what reads as a safety margin in \cref{tab:report} does not carry over to the individual case.
+SimLingo 21 vs.\ 30, the rest at most 5 either way, all exact-binomial $p\ge0.26$) --- what reads as a safety margin in \cref{tab:report} does not carry over to the individual case.
 
 \paragraph{Scaling}
 The benefit does not grow with the hazard: its rank

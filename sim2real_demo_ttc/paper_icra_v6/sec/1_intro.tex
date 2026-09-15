@@ -2,15 +2,11 @@
 \section{Introduction}
 \label{sec:intro}
 A leaderboard rank does not tell you how a driving policy will behave in a new domain. End-to-end and vision-language-action (VLA) driving policies are compared by benchmark scores, and a deployment decision is, implicitly, a bet that the rank those scores produce will still hold once the policy is driving at the new site, not just on someone else's roads. 
-On scenes where a pedestrian is near the ego corridor, that bet fails for the six released policies we test: their rank on nuScenes'~\cite{caesar2020nuscenes} open-loop metrics or on NAVSIM's~\cite{dauner2024navsim} leaderboard score does not carry over to the deployment site (rank correlation $\rho$ from $-0.54$ to $0.49$, \cref{sec:sample}), a gap that open-loop scores are known to open~\cite{zhao2026bridgesim,li2024egostatus,codevilla2019exploring}. The reason is not noise but mechanism. A score is an outcome measure, and an outcome can be right for the wrong reason: a policy that never approaches a pedestrian because it plans short trajectories scores as well as one that sees the pedestrian and yields, and the two behave very differently the first time the scene changes. Telling them apart means asking why the score came out as it did, usually from little data, because a closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to save.
+On scenes where a pedestrian is near the ego corridor, that bet fails for the six released policies we test: their rank on nuScenes'~\cite{caesar2020nuscenes} open-loop metrics or on NAVSIM's~\cite{dauner2024navsim} leaderboard score does not carry over to the deployment site (rank correlation $|\rho|\le\NumStdRhoMax$ against near-pedestrian behaviour there, \cref{sec:sample}), a gap that open-loop scores are known to open~\cite{zhao2026bridgesim,li2024egostatus,codevilla2019exploring}. The reason is not noise but mechanism. A score is an outcome measure, and an outcome can be right for the wrong reason: a policy that never approaches a pedestrian because it plans short trajectories scores as well as one that sees the pedestrian and yields, and the two behave very differently the first time the scene changes. Telling them apart means asking why the score came out as it did, usually from little data, because a closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to save.
 
 % However,现在很难有一个全面深入的评估方法，能够系统地衡量策略或预测模型在目标域的表现，导致很多组织和研究者在跨域部署模型时需要在重新在实际部署场景进行大量测试和后训练【引用一些说NAVISIM/nusense排名颠倒的典型文献，比如https://arxiv.org/abs/2604.10856】\cite{hendrycks2019benchmarking,xie2023robobev}，这为跨域部署模型的选型增加了难度。
 
-No evaluation yet measures how a policy will perform in the target domain, so organisations fall back
-on testing and post-training in the deployment setting itself, rider-only fleets accumulating tens of
-millions of miles before a safety claim~\cite{kusano2025waymo56m} or a robot policy improved on its own
-deployments~\cite{pi2025pistar06}, a loop whose cost in real-world miles is
-prohibitive~\cite{kalra2016driving}.
+Deployment safety cases still rest on target-domain miles~\cite{kusano2025waymo56m}, and post-training on a policy's own deployments~\cite{pi2025pistar06} presumes the same access. For a selection decision, that cost is prohibitive~\cite{kalra2016driving}.
 
 %120
 % 目前提出了很多跨域的研究「如域自适应、域泛化等」，但多集中在点出问题，和模型的训练解决，而缺乏对策略在目标域表现的系统性评估。并不能实质解决部署时候的选型难题。
@@ -23,13 +19,9 @@ it leaves the selection problem at deployment open.
 
 Closer to our setting, \cite{kachaev2025don} improves a VLA's out-of-distribution generalisation by
 aligning its visual representations, but it presumes an already-chosen vision--language model and
-offers no procedure for selecting among policies, vision-only ones included. Representation
-engineering~\cite{zou2023repe} locates and steers concepts in a language model's activations, yet it
-is built around semantic prompts and does not carry over to policies whose input is images. Function
+offers no procedure for selecting among policies, vision-only ones included. Representation engineering~\cite{zou2023repe} locates and steers concepts in a language model's activations, but it is built around text prompts. Function
 vectors~\cite{todd2024functionvectorslargelanguage} show that a task can be read out of, and
-transferred through, a language model's hidden states. The same instruments have no counterpart for
-the cross-domain evaluation of physical-AI policies. A systematic method for that evaluation is still
-missing.
+transferred through, a language model's hidden states. We know of no counterpart of these instruments for the cross-domain evaluation of driving policies.
 
 
 \begin{figure*}[!t]
@@ -42,16 +34,14 @@ missing.
 
 \label{fig:method}
 \end{figure*}
-To address this, we propose the \emph{Check-Up}, a counterfactual diagnosis in three stages
-(\cref{fig:method}). (a)~We construct pixel-level paired data: every logged frame is queried with and
+To address this, we propose the \emph{Check-Up}, a counterfactual diagnosis in four stages (\cref{fig:method}). (a)~We construct pixel-level paired data: every logged frame is queried with and
 without the target pedestrian and under a night-style photometric perturbation, and an
 independent detector verifies every edit. (b)~From each pair we distil two axes of causal
 attribution---the \emph{faithfulness} displacement $F$, the plan change caused by the pedestrian
 itself, and the \emph{interference} displacement $I$, the change the same policy produces under an
 edit that carries no driving-relevant information~\eqref{eq:FI}. (c)~Five exams, each with a control and a reference threshold, are built on these paired plans and axes (\cref{fig:method}c): how far the policy plans
 to drive, whether seeing the pedestrian buys safety, whether that benefit scales with the hazard,
-whether the plan moves when nothing requires it, and how much the irrelevant edit moves it. (d)~Read on one driving side and tested on the other, the exams yield a prognosis for the target domain: the
-exam that transfers reproduces the new side's ordering by how often a policy keeps clear of the pedestrian ($\rho={\NumSpBeh}$), where the standard scores reach only from $-0.54$ to $0.49$, and each verdict can be priced in frames before it is used.
+whether the plan moves when nothing requires it, and how much the irrelevant edit moves it. (d)~Read on one driving side and tested on the other, the exams yield a prognosis for the target domain: the exam that transfers reproduces the new side's keep-clear ordering ($\rho=\NumSpBeh$), where the standard scores reach at most \NumStdRhoMax, and each verdict can be priced in frames before it is used.
 
 
 %120
@@ -142,7 +132,7 @@ policies under domain shift, in three parts.
       the jitter, and buys distance. Where the pedestrian lies on the planned path, \NumCfRealPct\%
       of responses qualify, and the lighting edit moves every plan further than the pedestrian does.
 \item \emph{A priced prognosis.} Diagnosed on one driving side and tested on the other, orderings
-      and verdicts transfer: the exam that transfers reproduces the new side's clearance ordering ($\rho={\NumSpBeh}$), against $-0.54$ to $0.49$ for the standard scores, and each verdict is priced
+      and verdicts transfer: the exam that transfers reproduces the new side's keep-clear ordering ($\rho=\NumSpBeh$), against at most \NumStdRhoMax{} for the standard scores, and each verdict is priced
       in frames---lighting within \NumNstarCFRhi, exposure within \NumNstarExpHi.
 \end{enumerate}
 

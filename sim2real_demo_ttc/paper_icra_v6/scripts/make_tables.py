@@ -87,6 +87,7 @@ lab={"P1":"Lighting outweighs the pedestrian (CFR $<1$) for every policy",
      "P3":"Exposure ordering transfers ($\\rho\\ge0.6$; SimLingo top, DD bottom)",
      "P4":"Specificity ordering transfers ($\\rho\\ge0.6$; SimLingo lowest $\\SP$)",
      "P5":f"Point values stay within the left-hand CI ($\\ge$70\\% of {len(PR['P5']['cells'])} cells)",
+     "P6":"Night- and removal-induced plan changes more orthogonal, less shift between sides (auxiliary)",
      "P7":"SimLingo collides most, visible vs.\\ removed within 3\\,pts"}
 def det(k):
     d=PR[k]
@@ -95,14 +96,15 @@ def det(k):
         bad=[SH[m] for m,v in d['detail'].items() if v[1]>=0.15]; return ", ".join(bad)+" above" if bad else "all below"
     if k in ("P3","P4"): return f"$\\rho={d['rho']:.2f}$"
     if k=="P5": return f"{100*d['rate']:.0f}\\%"
+    if k=="P6": return f"$\\rho={d['rho']:+.2f}$ (opposite)"
     if k=="P7": return f"gap {100*d['max_gap']:.1f}\\,pts"
 T=[r"\begin{table}[t]",r"\centering",
    r"\caption{\textbf{Pre-registered transfer test.} Predictions fixed on 88 Boston frames, tested on 148 Singapore frames, five policies (the replaced sixth changes no verdict).}",
    r"\label{tab:prereg}",r"\footnotesize",r"\setlength{\tabcolsep}{2.5pt}",
    r"\begin{tabular}{@{}lp{4.35cm}cl@{}}",r"\toprule",r"No. & Prediction & Holds & Evidence \\",r"\midrule"]
-for k in ["P1","P2","P3","P4","P5","P7"]:               # 登记顺序；P6（方向类，已弃用）不再报告，P7 显示为 P6
+for k in ["P1","P2","P3","P4","P5","P6","P7"]:          # 登记顺序，七条全报
     yn="yes" if PR[k]["pass_"] else r"\textbf{no}"
-    T.append(f"{'P6' if k=='P7' else k} & {lab[k]} & {yn} & {det(k)} \\\\")
+    T.append(f"{k} & {lab[k]} & {yn} & {det(k)} \\\\")
 T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
 open(f"{_OUT}/tables/tab_prereg.tex","w").write("\n".join(T)+"\n")
 # ---------- Table IV：光照（精简：不列 p，显著者加粗） ----------
@@ -170,7 +172,7 @@ NUM={"NumCFRlo":f"{min(cf):.2f}","NumCFRhi":f"{max(cf):.2f}","NumCFRciHi":f"{max
      "NumNstarCFRhi":f"{max(ns['CFR']['n_star'].values()):.0f}","NumNstarExpHi":f"{max(v for m,v in ns['exposure']['n_star'].items() if m in ('dd','ltf','ddv2','simlingo')):.0f}",
      "NumRankSPforty":f"{100*ns['SP']['rank_p']['40']:.0f}","NumRankExpTen":f"{100*ns['exposure']['rank_p']['10']:.0f}",
      "NumRankHSninety":f"{100*ns['HS']['rank_p']['90']:.0f}","NumRankAlignOneThirty":f"{100*ns['align']['rank_p']['130']:.0f}",
-     "NumPass":str(sum(PR[k]['pass_'] for k in ['P1','P2','P3','P4','P5','P7'])),
+     "NumPass":str(sum(PR[k]['pass_'] for k in ['P1','P2','P3','P4','P5','P6','P7'])),
      "NumNightDD":f"{100*NS['dd']['dv_rel']:.0f}","NumNightLTF":f"{100*NS['ltf']['dv_rel']:.0f}","NumNightSL":f"{100*NS['simlingo']['dv_rel']:.0f}",
      "NumNightDDv":f"{100*NS['ddv2']['dv_rel']:.0f}"}
 open(f"{_OUT}/tables/numbers.tex","w").write("\n".join(f"\\newcommand{{\\{k}}}{{{v}}}" for k,v in NUM.items())+"\n")
@@ -353,6 +355,15 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
         _CN=json.load(open(f"{V5}/cf_need.json")); _a=_CN["_all"]
         _mm=[k for k in _CN if k!="_all"]
         NUM3["NumCfScenes"]=str(_a["n_scene"]); NUM3["NumCfModels"]=str(len(_a["models"]))
+        _RC=json.load(open(f"{V5}/rank_consistency.json"))["spearman"]; _T="TTC 违规率"
+        _std={k:abs(v[_T]) for k,v in _RC.items() if k.startswith("B ") or k.startswith("C ")}
+        NUM3["NumStdRhoMax"]=f"{max(_std.values()):.2f}"
+        NUM3["NumRhoLtwoKeep"]=f"{abs(_RC['B nuScenes 开环·L2'][_T]):.2f}"; NUM3["NumRhoLbKeep"]=f"{abs(_RC['C NAVSIM 榜单 EPDMS（783）'][_T]):.2f}"
+        NUM3["NumRhoPedcolKeep"]=f"{abs(_RC['B nuScenes 开环·撞行人'][_T]):.2f}"
+        _os=[abs(_RC["A2 NAVSIM 左舵·TTC 违规率"][k]) for k in ("TTC 违规率","离行人最小间隙","撞行人率")]
+        NUM3["NumOtherSideLo"]=f"{min(_os):.2f}"; NUM3["NumOtherSideHi"]=f"{max(_os):.2f}"
+        _PLp=json.load(open(f"{V5}/profile_LHD.json"))
+        NUM3["NumSpLhdList"]=", ".join(f"{SH[m]} {_PLp[m]['point']['SP']:.2f}" for m in M)
         NUM3["NumCfCells"]=str(_a["n_scene"]*_a["n_speed"]*len(_a["models"]))
         NUM3["NumCfNeed"]=str(_a["n_need"]); NUM3["NumCfReal"]=str(_a["n_real"])
         NUM3["NumCfRealPct"]=f"{_a['real_pct']:.1f}"
