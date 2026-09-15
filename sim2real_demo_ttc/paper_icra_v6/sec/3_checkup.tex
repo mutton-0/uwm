@@ -47,7 +47,7 @@ The target is localised by projecting its annotated 3D box into the camera rathe
 dataset's 2D boxes, whose association to the tracked object is unreliable for the short-range,
 partially occluded pedestrians of these scenes. It is segmented with SAM~\cite{kirillov2023sam} (\cref{fig:method}a) (box
 and torso prompts, clipped to the box, dilated by $9$\,px) and inpainted with
-LaMa~\cite{suvorov2022lama}. For the LiDAR policy the points inside the box are deleted. Vision--language--action (VLA) policies read several cameras and only the front one is edited, so we retain only frames in which the target
+LaMa~\cite{suvorov2022lama}. For the LiDAR policy the points inside the box are deleted. VLA policies read several cameras and only the front one is edited, so we retain only frames in which the target
 appears in no other view.
 
 \paragraph{Realising $\mathcal{E}_N$}
@@ -59,8 +59,7 @@ photometric transform
 \label{eq:relight}
 \end{equation}
 with $\mathrm{sat}_s$ the saturation scaling, $\boldsymbol\tau$ a per-channel tint and the noise seed
-fixed per frame. This is a photometric night-style perturbation (gamma, gain, saturation, noise), not a captured
-night scene, and we refer to it as the \emph{night-style perturbation}, with $(\gamma,g,s,\sigma)=(2.2,0.45,0.45,7/255)$ and a blue tint (\cref{fig:method}a).
+fixed per frame. This is a photometric perturbation (gamma, gain, saturation, noise), not a captured night scene. We call it the \emph{night-style perturbation} and use $(\gamma,g,s,\sigma)=(2.2,0.45,0.45,7/255)$ with a blue tint (\cref{fig:method}a).
 
 \paragraph{Validity of the interventions}
 An independent detector (Faster R-CNN~\cite{ren2015faster}, COCO, score $\ge0.5$) recovers the target
@@ -129,4 +128,4 @@ each other,
 \CFR=\frac{\mathbb{E}\,\bar D(X^{O},X^{R})}{\mathbb{E}\,\bar D(X^{O},X^{N})}=\frac{\mathbb{E}F}{\mathbb{E}I},
 \label{eq:cfr}
 \end{equation}
-A policy for which lighting is irrelevant has $\CFR\gg1$. The reference thresholds ($\HS\ge0.15$, $\mathrm{Sc}>0$, $\SP\ge0.8$, exposure within $[0.8,1.2]$, $\CFR>1$) are reference thresholds we set, not population norms.
+A policy for which lighting is irrelevant has $\CFR\gg1$. The thresholds ($\HS\ge0.15$, $\mathrm{Sc}>0$, $\SP\ge0.8$, exposure within $[0.8,1.2]$, $\CFR>1$) are reference values we set, not population norms.

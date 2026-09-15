@@ -7,7 +7,7 @@
 \Cref{tab:report} gives the six profiles, read under our open-loop protocol on the 236 near-pedestrian nuScenes frames: the behaviour behind the ranks of \cref{sec:sample}.
 
 \paragraph{Exposure}
-The six policies do not even agree on how far to plan, and this alone will turn out to explain more of
+The six policies differ first in how far they plan, and this alone will turn out to explain more of
 the collision picture below than perception does: exposure spans a factor of four, from DiffusionDrive
 at half the human's distance to SimLingo at more than twice it, with AutoVLA and Alpamayo-1.5 near the
 human's own.
@@ -48,8 +48,3 @@ decode the pedestrian: on 520 NAVSIM near-pedestrian scenes the pedestrian chann
 argmax inside a pedestrian's box. And their plans end 5--9\,m ahead while the median corridor
 pedestrian stands 20\,m away, so collisions rise with input speed identically with and without the
 pedestrian in view (\cref{tab:report}). The limit is geometric before it is perceptual.
-
-\paragraph{Reading the profiles}
-Read one exam at a time, the profiles separate what a score merges: DiffusionDrive is safe because it
-plans short, AutoVLA and Alpamayo-1.5 cover a human-like distance without the response to match, and
-whether a plan that moves is a plan that yields is answered by \cref{sec:axes}.
