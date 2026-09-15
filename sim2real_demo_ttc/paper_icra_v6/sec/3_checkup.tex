@@ -2,7 +2,6 @@
 \section{The Check-Up: Interventions, Axes and Exams}
 \label{sec:checkup}
 
-\input{tables/tab_exams}
 
 \subsection{Units, interventions and plans}
 Write a policy as a map $\pi$ from a sensory-and-state input to a planned trajectory
@@ -64,14 +63,11 @@ fixed per frame. This is a photometric night-style perturbation (gamma, gain, sa
 night scene, and we refer to it as the \emph{night-style perturbation}, with $(\gamma,g,s,\sigma)=(2.2,0.45,0.45,7/255)$ and a blue tint (\cref{fig:method}a).
 
 \paragraph{Validity of the interventions}
-An independent detector (Faster R-CNN~\cite{ren2015faster}, COCO, score $\ge0.5$) is run on the
-\NumDetN{} front-only frames. It recovers the target in \NumDetOrig\% of the original images, in
-\NumDetStill\% under $\mathcal{E}_R$ and in \NumDetNight\% under $\mathcal{E}_N$ (IoU $\ge0.5$):
-$\mathcal{E}_R$ suppresses the pedestrian for an observer outside the policy, while $\mathcal{E}_N$
-leaves it visible and therefore changes the lighting rather than the scene. Two controls bound the
-residual artefact: pasting inpainting patches on empty road puts it at $5$--$17\%$ of the removal
-effect at pedestrian scale, and removing \emph{off-road} pedestrians, which should not matter
-causally, gives a same-type null.
+An independent detector (Faster R-CNN~\cite{ren2015faster}, COCO, score $\ge0.5$) recovers the target
+in \NumDetOrig\% of the original images, in \NumDetStill\% under $\mathcal{E}_R$ and in
+\NumDetNight\% under $\mathcal{E}_N$ (IoU $\ge0.5$): removal suppresses the pedestrian for an observer
+outside the policy, re-lighting leaves it visible. Pasting inpainting patches on empty road bounds the
+residual artefact at $5$--$17\%$ of the removal effect.
 
 \subsection{Readouts}
 With $c_t(X)=\|X_t-P_t\|-r_e-r_p$ the clearance net of the ego half-width $r_e=1.0$\,m and the
@@ -85,11 +81,7 @@ T(X)&=\tfrac{1}{2.5}\inf\{t\!:c_t<d_0\},\label{eq:CT}
 with $T=1$ if the set is empty. The constants are physical, not tuned: $r_e$ is the half-width of the
 nuScenes ego box ($4.08\times1.85$\,m), $r_p$ the disc a standing adult occupies, $d_0=1$\,m the outer
 edge of personal space~\cite{hall1966hidden}, and $\bar c=10$\,m caps the contribution of scenes in
-which the pedestrian is far away. Equations~\eqref{eq:SA}--\eqref{eq:CT} instantiate the standard
-surrogate-safety measures---contact, minimum clearance and an encroachment-time
-variant~\cite{gettman2003surrogate,hayward1972near}---read as distance to a person over the whole
-trajectory, as is conventional for navigation near people~\cite{kruse2013human}. Speed is deliberately
-not a readout: the same deceleration is safe or unsafe depending on where the person is.
+which the pedestrian is far away. Equations~\eqref{eq:SA}--\eqref{eq:CT} are the standard surrogate-safety measures~\cite{gettman2003surrogate}, read as distance to a person over the whole trajectory. Speed is deliberately not a readout: the same deceleration is safe or unsafe depending on where the person is.
 
 \subsection{Exams}
 Let $L(X)=\sum_t\|X_{t+\delta}-X_t\|$ denote arc length and $H$ the logged human trajectory.
@@ -110,13 +102,13 @@ measures of \eqref{eq:SA}--\eqref{eq:CT}, and averaging normalised sub-scores in
 the benchmark we compare against forms its extended predictive driver model score (EPDMS)~\cite{dauner2024navsim}, keeping the two commensurable.
 What the check-up adds is that every sub-score is a \emph{paired difference} across
 $\mathcal{E}_R$---the ablation form used to attribute behaviour to an input in interpretability
-work~\cite{zou2023repe,hase2023localization}. $\HS$ is read against the model-independent hazard
+work~\cite{zou2023repe}. $\HS$ is read against the model-independent hazard
 \begin{equation}
 a_{\mathrm{req}}=\frac{v^{2}}{2\max(d-2,\,0.5)},\qquad \mathrm{TTC}_0=\frac{d-2}{v},
 \label{eq:hazard}
 \end{equation}
 the deceleration required to stop short of a pedestrian at distance $d$ and the corresponding
-time to collision (TTC)~\cite{gettman2003surrogate,hayward1972near}. Units with $v<1$\,m/s are excluded: a
+time to collision (TTC)~\cite{gettman2003surrogate}. Units with $v<1$\,m/s are excluded: a
 stationary ego can move neither toward nor away from anyone.
 
 \paragraph{Scaling}
@@ -137,4 +129,4 @@ each other,
 \CFR=\frac{\mathbb{E}\,\bar D(X^{O},X^{R})}{\mathbb{E}\,\bar D(X^{O},X^{N})}=\frac{\mathbb{E}F}{\mathbb{E}I},
 \label{eq:cfr}
 \end{equation}
-A policy for which lighting is irrelevant has $\CFR\gg1$. The thresholds of \cref{tab:exams} ($\HS\ge0.15$, $\mathrm{Sc}>0$, $\SP\ge0.8$, exposure within $[0.8,1.2]$, $\CFR>1$) are reference thresholds we set, not population norms.
+A policy for which lighting is irrelevant has $\CFR\gg1$. The reference thresholds ($\HS\ge0.15$, $\mathrm{Sc}>0$, $\SP\ge0.8$, exposure within $[0.8,1.2]$, $\CFR>1$) are reference thresholds we set, not population norms.

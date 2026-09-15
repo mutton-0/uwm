@@ -43,18 +43,13 @@ policies almost never reach the pedestrian. DiffusionDrive is safe because it st
 without yielding, and SimLingo covers the most ground with the lowest specificity.
 
 \paragraph{Why the risk goes unmanaged}
-
-The check-up only diagnoses. Two mechanistic observations on the three BEV planners explain the
-diagnosis without altering it. First, the planners' own BEV semantic heads do not decode the
-pedestrian: on 520 NAVSIM near-pedestrian scenes the pedestrian channel is no brighter at the
-pedestrian than at a mirrored empty location, and never wins the argmax inside a pedestrian's box,
-although the pedestrian does leave a steerable trace in the features. Second, the plan does not reach
-the pedestrian: plans end 5--9\,m ahead while the median corridor pedestrian stands 20\,m away, and
-raising the input speed makes collisions rise identically with and without the pedestrian in view (\cref{tab:report}, visible against removed at 8\,m/s). The limit is geometric before it is perceptual.
+Two observations on the three BEV planners explain the diagnosis. Their BEV semantic heads do not
+decode the pedestrian: on 520 NAVSIM near-pedestrian scenes the pedestrian channel never wins the
+argmax inside a pedestrian's box. And their plans end 5--9\,m ahead while the median corridor
+pedestrian stands 20\,m away, so collisions rise with input speed identically with and without the
+pedestrian in view (\cref{tab:report}). The limit is geometric before it is perceptual.
 
 \paragraph{Reading the profiles}
-Read one exam at a time, the profiles answer separate questions that a single score merges. Whether a
-policy is safe because it yields or because it stays short is answered by exposure together with
-hazard sensitivity: DiffusionDrive keeps its distance by planning short trajectories, which holds only
-as long as the trajectories stay short, whereas AutoVLA and Alpamayo-1.5 cover a human-like distance
-without the response to match. Whether a plan that moves is a plan that yields is answered by the decomposition of \cref{sec:axes}.
+Read one exam at a time, the profiles separate what a score merges: DiffusionDrive is safe because it
+plans short, AutoVLA and Alpamayo-1.5 cover a human-like distance without the response to match, and
+whether a plan that moves is a plan that yields is answered by \cref{sec:axes}.

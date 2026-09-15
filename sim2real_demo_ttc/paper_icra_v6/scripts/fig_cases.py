@@ -35,7 +35,7 @@ good=[c for c in cells if c[2]>=0.5 and c[2]>c[3] and c[4]>=0.5 and c[1] not in 
 bad=[c for c in cells if c[2]>=0.5 and c[4]<=-0.5 and c[1] not in EXCL and c[2]<3]
 ca=max(good,key=lambda c:c[4]); cb=min(bad,key=lambda c:c[6])   # (b) 取原规划离行人最近的那格
 print("(a) genuine:",ca); print("(b) towards:",cb)
-fig=plt.figure(figsize=(3.45,3.3))
+fig=plt.figure(figsize=(3.45,2.95))
 gs=fig.add_gridspec(2,2,height_ratios=[0.72,1.0],hspace=0.42,wspace=0.48)
 for k,(c,lab) in enumerate(((ca,"(a) genuine avoidance"),(cb,"(b) moved towards"))):
     a=fig.add_subplot(gs[0,k]); fp.panel_extract(a,tok=c[1],mm=c[0],title=f"{lab}: {SH[c[0]]}",fs=1.05,legend=(k==0),ymax=11.5)

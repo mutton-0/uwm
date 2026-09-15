@@ -12,11 +12,8 @@ far as the night-style perturbation does, with every 95\% interval below one (\c
 above one.
 
 \paragraph{Direction: faster, and therefore closer}
-A policy that slows under the perturbation is doing something defensible, one that speeds up is not. Three policies
-plan to go faster under the night-style perturbation: DiffusionDrive by \NumNightDD\%, SimLingo by
-\NumNightSL\% and LTF by \NumNightLTF\%, and their whole plans pass $0.24$--$0.47$\,m closer to the
-pedestrian. The approach is longitudinal: the further the plan's endpoint moves forward, the closer it
-gets (rank correlation $-0.73$ to $-0.96$), while the endpoint shifts toward the pedestrian's side no
-more often than chance. DiffusionDriveV2, the only policy that also reads LiDAR, slows
-($\NumNightDDv\%$) and keeps more distance. AutoVLA and Alpamayo-1.5 are unaffected.
-Whether these diagnostic profiles and policy orderings persist across substantial domain shifts is formally tested in \cref{sec:sample}.
+Three policies plan faster under the night-style perturbation, DiffusionDrive by \NumNightDD\%,
+SimLingo by \NumNightSL\% and LTF by \NumNightLTF\%, and their plans pass $0.24$--$0.47$\,m closer to
+the pedestrian, while DiffusionDriveV2, the only policy that also reads LiDAR, slows
+($\NumNightDDv\%$) and keeps more distance. Whether these profiles and orderings persist across a
+substantial domain shift is tested in \cref{sec:sample}.
