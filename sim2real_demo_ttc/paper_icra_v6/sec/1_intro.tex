@@ -1,84 +1,126 @@
 % !TEX root = ../main.tex
 \section{Introduction}
 \label{sec:intro}
-A leaderboard rank does not tell you how a driving policy will behave in a new domain. End-to-end and vision-language-action (VLA) driving policies are compared by benchmark scores, and a deployment decision is, implicitly, a bet that the rank those scores produce will still hold once the policy is driving at the new site, not just on someone else's roads. On scenes where a pedestrian is near the ego corridor, that bet fails for the six released policies we test: their rank on nuScenes' open-loop metrics or on NAVSIM's leaderboard score does not carry over to the deployment site ($\rho=-0.54$ to $+0.49$; \cref{sec:bench}). The reason is not noise but mechanism. A score is an outcome measure, and an outcome can be right for the wrong reason: a policy that never approaches a pedestrian because it plans short trajectories scores as well as one that sees the pedestrian and yields, and the two behave very differently the first time the scene changes. Telling them apart means asking why the score came out as it did, usually from little data, because a closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to save.
+A leaderboard rank does not tell you how a driving policy will behave in a new domain. End-to-end and vision-language-action (VLA) driving policies are compared by benchmark scores, and a deployment decision is, implicitly, a bet that the rank those scores produce will still hold once the policy is driving at the new site, not just on someone else's roads. 
+On scenes where a pedestrian is near the ego corridor, that bet fails for the six released policies we test: their rank on nuScenes'~\cite{caesar2020nuscenes} open-loop metrics or on NAVSIM's~\cite{caesar2021nuplan,dauner2024navsim} leaderboard score does not carry over to the deployment site ($\rho=-0.54$ to $+0.49$; \cref{sec:bench}), a gap that open-loop scores are known to open~\cite{zhao2026bridgesim,li2024egostatus,codevilla2019exploring}. The reason is not noise but mechanism. A score is an outcome measure, and an outcome can be right for the wrong reason: a policy that never approaches a pedestrian because it plans short trajectories scores as well as one that sees the pedestrian and yields, and the two behave very differently the first time the scene changes. Telling them apart means asking why the score came out as it did, usually from little data, because a closed-loop simulator for the target domain or a fleet test is exactly what the decision is meant to save.
 
-This paper shows that a few hundred edited frames do tell you, and reports what transfers to a new domain and what does not. We propose a check-up: a short list of exams, each with a control and a reference range, whose results are read as a diagnosis rather than a ranking (\cref{tab:exams}). Every exam is a counterfactual edit of real frames. We remove the pedestrian from the ego corridor, or re-render the frame with a night-style photometric perturbation at two levels (dusk, night), and read the change in the planned trajectory; an independent detector verifies every edit. The central exam is a hazard-sensitivity curve, measuring how much farther the whole planned trajectory stays from the pedestrian's logged future because the policy can see the pedestrian, against a model-independent hazard level. A specificity term applies a minimal-change principle: when no reaction is needed, the plan should not move.
+% However,现在很难有一个全面深入的评估方法，能够系统地衡量策略或预测模型在目标域的表现，导致很多组织和研究者在跨域部署模型时需要在重新在实际部署场景进行大量测试和后训练【引用一些说NAVISIM/nusense排名颠倒的典型文献，比如https://arxiv.org/abs/2604.10856】\cite{hendrycks2019benchmarking,xie2023robobev}，这为跨域部署模型的选型增加了难度。
 
-
-%120
-% 这被定义成从benchmark往部署域迁移的问题，目前各家的做法是进行大规模的真实部署场景的测试，然后再依据反馈进行模型调整和后训练，如此往复，造成大量的测试资源花销，同时也延长了模型迭代的周期。
-We frame this as a transfer problem from the benchmark to the deployment domain. Current practice
-closes the gap empirically: a candidate policy is exercised at scale in the target domain, adjusted
-and post-trained on the resulting feedback, and exercised again, the loop repeating until its
-behaviour is judged acceptable. Every turn of that loop consumes substantial testing resources and
-lengthens the development cycle.
-
-
+However, no comprehensive evaluation method yet measures systematically how a policy will perform in
+the target domain, so organisations deploying a model across domains fall back on extensive testing
+and post-training in the deployment setting itself---rider-only fleets accumulating tens of millions
+of miles before a safety claim can be made~\cite{kusano2025waymo56m}, a generalist robot policy
+improved through reinforcement learning on its own deployments and on-robot data
+collection~\cite{pi2025pistar06}, and closed-loop simulation with data synthesis feeding end-to-end
+retraining at a carmaker~\cite{zhou2026xiaomiworldmodel}---a loop whose cost, measured in real-world
+miles, is prohibitive~\cite{kalra2016driving}. This makes selecting a model for cross-domain
+deployment harder still.
 
 %120
 % 目前提出了很多跨域的研究「如域自适应、域泛化等」，但多集中在点出问题，和模型的训练解决，而缺乏对策略在目标域表现的系统性评估。并不能实质解决部署时候的选型难题。
 % 在论文「dont blind your vla」中，制作了think-site表征语言图像分割程度；然而，这个套件的迁移只适用于v-l多模态模型，无法横展到一些仅解码器的扩散策略评估，并且仍建立在已有被选中模型的基础上研究如何提升模型能力，也无法系统回答模型选型时该如何决策。
 % 在RepE论文中，作者给出了RepE的方法来定位和修复域间gap，但该方法旨在暴漏大语言模型在语义刺激下的反馈，又难以横展到读入图片的物理AI策略的评估。
 % 「再举一些LLM测迁移如function vector」的例子，说明当前在大语言模型的迁移评估上已有一定的研究，但这些方法仍难以直接应用于物理AI策略的跨域评估。物理AI策略的跨域评估仍然缺乏系统性的方法。
-A considerable body of cross-domain work has been proposed---domain adaptation, domain generalisation
-and the like---but it concentrates on identifying the problem and on solving it through training, and
+A considerable body of cross-domain work has been proposed---domain
+adaptation~\cite{ganin2015dann}, domain generalisation~\cite{gulrajani2021lost,arjovsky2019irm} and
+the like---but it concentrates on identifying the problem and on solving it through training, and
 lacks any systematic assessment of how a policy behaves in the target domain. It therefore does not
 substantively address the selection problem that arises at deployment.
 
-In paper~\cite{kachaev2025don}, a think-site representation is built to measure
-the degree of language--image segmentation; the transfer of that suite, however, applies only to
-vision--language multi-modal models and does not extend to the evaluation of decoder-only diffusion
-policies, and it is still built upon an already-chosen model, studying how that model's capability may
-be improved rather than answering systematically how a model should be selected.
-
-In the RepE paper~\cite{zou2023repe} the authors give a method for locating and repairing the gap
-between domains, but it is aimed at exposing a large language model's response to semantic stimuli,
-and is likewise hard to extend to the evaluation of physical-AI policies that read images.
-
-Further work on measuring transfer in large language models, such as function
-vectors~\cite{todd2024functionvectorslargelanguage}, shows that transfer evaluation is already established there; these
-methods, however, remain difficult to apply directly to the cross-domain evaluation of physical-AI
-policies. A systematic method for the cross-domain evaluation of physical-AI policies is still
+Closer to our setting, \cite{kachaev2025don} improves a VLA's out-of-distribution generalisation by
+aligning its visual representations, but it presumes an already-chosen vision--language model and
+offers no procedure for selecting among policies, vision-only ones included. Representation
+engineering~\cite{zou2023repe} locates and steers concepts in a language model's activations, yet it
+is built around semantic prompts and does not carry over to policies whose input is images. Function
+vectors~\cite{todd2024functionvectorslargelanguage} show that a task can be read out of, and
+transferred through, a language model's hidden states; the same instruments have no counterpart for
+the cross-domain evaluation of physical-AI policies. A systematic method for that evaluation is still
 missing.
+
+
+To address this, we propose the \emph{Check-Up}, a counterfactual diagnosis in three stages
+(\cref{fig:method}). (a)~We construct pixel-level paired data: every logged frame is queried with and
+without the target pedestrian and under a night-style photometric perturbation at two levels, and an
+independent detector verifies every edit. (b)~From each pair we distil two axes of causal
+attribution---the \emph{faithfulness} displacement $F$, the plan change caused by the pedestrian
+itself, and the \emph{interference} displacement $I$, the change the same policy produces under an
+edit that carries no driving-relevant information~\eqref{eq:FI}. Five exams, each with a control and
+a normal range, are built on these paired plans and axes (\cref{tab:exams}): how far the policy plans
+to drive, whether seeing the pedestrian buys safety, whether that benefit scales with the hazard,
+whether the plan moves when nothing requires it, and how much the irrelevant edit moves it. (c)~Read
+on one driving side and tested on the other, the exams yield a prognosis for the target domain: the
+exam that transfers predicts the new side's near-miss rate at $\rho={\NumSpBeh}$, where the standard
+scores reach only $-0.54$--$+0.49$, and each verdict can be priced in frames before it is used.
+
+
 %120
+% 这被定义成从benchmark往部署域迁移的问题，目前各家的做法是进行大规模的真实部署场景的测试，然后再依据反馈进行模型调整和后训练，如此往复，造成大量的测试资源花销，同时也延长了模型迭代的周期。
+% We frame this as a transfer problem from the benchmark to the deployment domain. Current practice
+% closes the gap empirically: a candidate policy is exercised at scale in the target domain, adjusted
+% and post-trained on the resulting feedback, and exercised again, the loop repeating until its
+% behaviour is judged acceptable. Every turn of that loop consumes substantial testing resources and
+% lengthens the development cycle.
+
+
+
+% A considerable body of cross-domain work has been proposed---domain adaptation, domain generalisation
+% and the like---but it concentrates on identifying the problem and on solving it through training, and
+% lacks any systematic assessment of how a policy behaves in the target domain. It therefore does not
+% substantively address the selection problem that arises at deployment.
+
+% In paper~\cite{kachaev2025don}, a think-site representation is built to measure
+% the degree of language--image segmentation; the transfer of that suite, however, applies only to
+% vision--language multi-modal models and does not extend to the evaluation of decoder-only diffusion
+% policies, and it is still built upon an already-chosen model, studying how that model's capability may
+% be improved rather than answering systematically how a model should be selected.
+
+% In the RepE paper~\cite{zou2023repe} the authors give a method for locating and repairing the gap
+% between domains, but it is aimed at exposing a large language model's response to semantic stimuli,
+% and is likewise hard to extend to the evaluation of physical-AI policies that read images.
+
+% Further work on measuring transfer in large language models, such as function
+% vectors~\cite{todd2024functionvectorslargelanguage}, shows that transfer evaluation is already established there; these
+% methods, however, remain difficult to apply directly to the cross-domain evaluation of physical-AI
+% policies. A systematic method for the cross-domain evaluation of physical-AI policies is still
+% missing.
+% %120
 
 %120
 %物理AI领域该类型参考空白的结果就是，当前的自动驾驶中，很多learderboard 和开源测试集涌现，以缩小模型训练与现实部署环境之间的差距。伴随出现各种评级和榜单。如nuScenes的榜单和NAVSIM的排行榜，为研究者提供了评估策略在不同环境下表现的工具。但这些排行榜给出的表现分数多是传统的交通指标，然而当前在各大模型类方法涌现的今日，单纯的看最后结果已经无法全面反映策略的能力，往往出现榜单最优的模型在域间迁移后排名大幅下降甚至榜单失效，难以真正作为从仿真到真实部署域选型决策的依据。「加一些参考文献」
-The consequence of this gap in the physical-AI literature is that the decision is left to the
-leaderboards. In autonomous driving a growing number of leaderboards and open test sets have
-appeared~\cite{caesar2020nuscenes,caesar2021nuplan,dauner2024navsim}, meant to narrow the gap between
-the conditions a model is trained on and those it is deployed in, and with them a variety of ratings
-and rankings. nuScenes' leaderboard and NAVSIM's leaderboard, for instance, give researchers a means
-of assessing how a policy performs under different conditions. The scores these leaderboards report,
-however, are for the most part conventional traffic metrics. With the recent proliferation of
-large-model-based methods, reading the final outcome alone no longer reflects a policy's capability in
-full~\cite{li2024egostatus,codevilla2019exploring,geirhos2020shortcut}.
-% !!!!!!!!!! ADD MORE PAPER TO REFER
-%！！！！！「加一些参考文献」%
+% The consequence of this gap in the physical-AI literature is that the decision is left to the
+% leaderboards. In autonomous driving a growing number of leaderboards and open test sets have
+% appeared~\cite{caesar2020nuscenes,caesar2021nuplan,dauner2024navsim}, meant to narrow the gap between
+% the conditions a model is trained on and those it is deployed in, and with them a variety of ratings
+% and rankings. nuScenes' leaderboard and NAVSIM's leaderboard, for instance, give researchers a means
+% of assessing how a policy performs under different conditions. The scores these leaderboards report,
+% however, are for the most part conventional traffic metrics. With the recent proliferation of
+% large-model-based methods, reading the final outcome alone no longer reflects a policy's capability in
+% full~\cite{li2024egostatus,codevilla2019exploring,geirhos2020shortcut}.
+% % !!!!!!!!!! ADD MORE PAPER TO REFER
+% %！！！！！「加一些参考文献」%
 
-The consequence is that a policy ranked first on a leaderboard often falls sharply once the domain changes, or the ranking
-ceases to be informative at all~\cite{hendrycks2019benchmarking,xie2023robobev}, so that it cannot
-serve as a sound basis for the selection decision that takes a policy from simulation into a real
-deployment domain.
+% The consequence is that a policy ranked first on a leaderboard often falls sharply once the domain changes, or the ranking
+% ceases to be informative at all~\cite{hendrycks2019benchmarking,xie2023robobev}, so that it cannot
+% serve as a sound basis for the selection decision that takes a policy from simulation into a real
+% deployment domain.
 %120
 
-To address this issue, we propose a \emph{check-up}.
+% To address this issue, we propose a \emph{check-up}.
 %120 要总结个名字 还是就叫checkup就行？——决定：就叫 Check-Up，当专名用
 
 %120
-We construct pixel-level paired data and reduce each pair to two axes of causal attribution: the
-\emph{faithfulness} displacement $F$, the plan change caused by the pedestrian itself, and the
-\emph{interference} displacement $I$, the change the same policy produces under an edit that carries
-no driving-relevant information~\eqref{eq:FI}. Reading a policy on these axes yields a prognosis for
-its behaviour in the target domain: diagnosed on one driving side and tested on the other, the exam
-that transfers predicts the new side's near-miss rate at $\rho={\NumSpBeh}$, whereas nuScenes'
-open-loop metrics and NAVSIM's leaderboard score reach only $-0.54$--$+0.49$ against the same target;
-what carries over is the ordering and the verdict. Fitting how each estimate's spread shrinks with
-sample size further shows the lighting verdict settled within \NumNstarCFRhi{} frames and exposure
-within \NumNstarExpHi, so a deployment decision can be priced in tens of target-domain frames rather
-than in a closed-loop simulator or a fleet test. The framework therefore offers a more dependable
-basis for selecting a policy for a given deployment.
+% We construct pixel-level paired data and reduce each pair to two axes of causal attribution: the
+% \emph{faithfulness} displacement $F$, the plan change caused by the pedestrian itself, and the
+% \emph{interference} displacement $I$, the change the same policy produces under an edit that carries
+% no driving-relevant information~\eqref{eq:FI}. Reading a policy on these axes yields a prognosis for
+% its behaviour in the target domain: diagnosed on one driving side and tested on the other, the exam
+% that transfers predicts the new side's near-miss rate at $\rho={\NumSpBeh}$, whereas nuScenes'
+% open-loop metrics and NAVSIM's leaderboard score reach only $-0.54$--$+0.49$ against the same target;
+% what carries over is the ordering and the verdict. Fitting how each estimate's spread shrinks with
+% sample size further shows the lighting verdict settled within \NumNstarCFRhi{} frames and exposure
+% within \NumNstarExpHi, so a deployment decision can be priced in tens of target-domain frames rather
+% than in a closed-loop simulator or a fleet test. The framework therefore offers a more dependable
+% basis for selecting a policy for a given deployment.
 %！！！！！这段增加引用文献
 
 \begin{figure}[t]
@@ -114,7 +156,7 @@ explanation from inside the networks.
 
 
 \item diagnose with the distillation of the \emph{causal axes}: 
-we treat the raw response to removing a pedestrian as a poor safety signal, because a plan that moves is as likely to move towards the pedestrian as away from it. Decomposing the response into its magnitude, the faithfulness displacement $F$, and the policy's own jitter under an irrelevant edit, the interference displacement $I$~\eqref{eq:FI}. And the separation it buys turns a two-sided quantity into a one-sided certificate: a near-zero response shows the pedestrian did not enter the decision; a large one shows nothing. A diagnosis with an explanation from inside the three BEV planners of why the pedestrian risk goes unmanaged: the pedestrian leaves a trace in the features but is not decoded, the planning grid cannot locate it, and the plan rarely reaches it.
+we treat the raw response to removing a pedestrian as a poor safety signal, because a plan that moves is as likely to move towards the pedestrian as away from it. Decomposing the response into its magnitude, the faithfulness displacement $F$, and the policy's own jitter under an irrelevant edit, the interference displacement $I$~\eqref{eq:FI}. And the separation it buys, $\Delta S$. A response counts as avoidance only if it moves, moves more than the jitter, and buys distance; on the cells in which the pedestrian does lie on the planned path, \NumCfRealPct\% of responses pass. Two observations on the BEV planners explain why: their own semantic heads do not decode the pedestrian, and the plan rarely reaches it.
 
 
 
