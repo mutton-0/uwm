@@ -14,7 +14,7 @@ at half the human's distance to SimLingo at more than twice it, with AutoVLA and
 human's own.
 
 \paragraph{Hazard sensitivity}
-No policy manages the pedestrian risk. On units that need a reaction, seeing the pedestrian buys
+The hazard response is small for all six policies. On units that need a reaction, seeing the pedestrian buys
 \NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale. The benefit does not grow with the hazard: its rank
 correlation with $a_{\mathrm{req}}$ is negative for \NumScalNeg{} policies, down to \NumScalLo{} for
 \NumScalWorst; DiffusionDriveV2 is the only exception (\NumScalHi), and its benefit stays below
@@ -27,8 +27,8 @@ SimLingo 18 vs.\ 30, the rest at most 5 either way; all McNemar $p\ge0.11$) --- 
 margin in \cref{tab:report} is, case by case, close to a coin flip.
 
 \paragraph{Specificity}
-A policy that moves when nothing requires it is not merely cautious, it is unpredictable, and
-unpredictability is what turns out to travel across a domain shift (\cref{sec:sample}). SimLingo's
+A policy whose plan moves when nothing requires it is not cautious but unsteady, and steadiness is
+what turns out to travel across a domain shift (\cref{sec:sample}). SimLingo's
 plan moves most when nothing requires it ($\SP=\NumSpSL$); the other five stay steadier, at
 \NumSpOtherLo--\NumSpOtherHi.
 
@@ -37,7 +37,7 @@ Collisions with the pedestrian's logged future follow how far a policy plans to 
 speed, the visible and removed rates differ by at most \NumCollGap{} points for every policy, and at
 8\,m/s by at most \NumCollGapEight. SimLingo, which plans the longest trajectories, collides most. The low-exposure
 policies almost never reach the pedestrian. DiffusionDrive is safe because it stays short, AutoVLA and Alpamayo-1.5 cover a human-like distance
-without yielding, and SimLingo covers the most ground with the least stable plan.
+without yielding, and SimLingo covers the most ground with the lowest specificity.
 
 \subsection{Why the risk goes unmanaged}
 \begin{figure}[t]

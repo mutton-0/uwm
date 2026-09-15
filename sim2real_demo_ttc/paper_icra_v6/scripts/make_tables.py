@@ -61,7 +61,7 @@ def det(k):
     d=PR[k]
     if k=="P1": return f"max upper CI {max(v[1] for v in d['detail'].values()):.2f}"
     if k=="P2": 
-        bad=[SH[m] for m,v in d['detail'].items() if v[1]>=0.15]; return "fails for "+", ".join(bad) if bad else "all below"
+        bad=[SH[m] for m,v in d['detail'].items() if v[1]>=0.15]; return ", ".join(bad)+" above" if bad else "all below"
     if k in ("P3","P4"): return f"$\\rho={d['rho']:.2f}$"
     if k=="P5": return f"{100*d['rate']:.0f}\\%"
     if k=="P6": return f"$\\rho={d['rho']:+.2f}$ (opposite)"

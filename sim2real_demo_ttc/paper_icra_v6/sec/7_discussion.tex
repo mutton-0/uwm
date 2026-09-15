@@ -9,11 +9,11 @@ hazard sensitivity: DiffusionDrive keeps its distance by planning short trajecto
 as long as the trajectories stay short, whereas AutoVLA and Alpamayo-1.5 cover a human-like distance
 without the response to match. Whether a plan that moves is a plan that yields is answered by the
 decomposition of \cref{sec:axes}: among the cells in which the pedestrian-blind plan does reach the
-pedestrian, only \NumCfRealPct\% meet all three conditions, and displacement alone would have ranked the
-least safe policy first.
+pedestrian, only \NumCfRealPct\% meet all three conditions, and displacement alone would have ranked first
+the policy with the most sub-1.5\,s encounters.
 The exam that no current benchmark reports is scaling: whether the response grows when the hazard
-does. Five policies fail it, and the one that passes, DiffusionDriveV2, does so at a sensitivity below
-0.15.
+does. Five policies show a negative scaling coefficient; the one positive value, DiffusionDriveV2's, sits
+below 0.15.
 
 \paragraph{Limitations}
 The exams are open-loop. The approach sequences are replayed from logs and re-anchored to the logged
