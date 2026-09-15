@@ -31,8 +31,8 @@ more often than chance. DiffusionDriveV2, the only policy that also reads LiDAR,
 ($\NumNightDDv\%$) and keeps more distance; AutoVLA and Alpamayo-1.5 are unaffected.
 
 \paragraph{Direction is not a stable trait}
-Read in representation space as unit directions $\hat v_F$ and $\hat v_I$ (the activation-side
-counterparts of \eqref{eq:FI}), the two contrasts oppose one another in aggregate (mean cosine
-$-0.54$ over the four policies with accessible activations), yet their alignment changes with the
-driving side and its ordering is unstable even at 130 frames (\cref{sec:sample}). The magnitude of
-the lighting effect is a trait a small check-up can measure; its direction is not.
+The two are not merely uncorrelated: in aggregate they oppose one another (mean cosine $-0.54$ over
+four policies), so, on the pooled data, a policy encodes ``it got dark'' in a direction close to the
+one for ``the hazard is gone''. We report this as an observation rather than as evidence for a stable
+property: the opposition does not hold per policy, alignment changes with the driving side for all but
+AutoVLA (\cref{tab:light}), and the prediction built on it (P6, \cref{tab:prereg}) went the other way.
