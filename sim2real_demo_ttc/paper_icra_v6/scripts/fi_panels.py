@@ -172,8 +172,8 @@ def frame_readings(b,fs=1.0):
     # 箭头坐标轴
     b.annotate("",(55,EPS*0.9),(EPS*0.9,EPS*0.9),arrowprops=dict(arrowstyle="-|>",lw=0.7,color="#52514e",shrinkA=0,shrinkB=0),zorder=3)
     b.annotate("",(EPS*0.9,30),(EPS*0.9,EPS*0.9),arrowprops=dict(arrowstyle="-|>",lw=0.7,color="#52514e",shrinkA=0,shrinkB=0),zorder=3)
-    b.text(0.5,-0.06,"$I$: displacement from re-lighting",transform=b.transAxes,ha="center",va="top",fontsize=5.4*fs,color="#52514e")
-    b.text(-0.06,0.5,"$F$: displacement from the pedestrian",transform=b.transAxes,ha="right",va="center",rotation=90,fontsize=5.4*fs,color="#52514e")
+    b.text(0.5,-0.05,"$I$ (re-lighting)",transform=b.transAxes,ha="center",va="top",fontsize=5.8*fs,color="#52514e")
+    b.text(-0.04,0.5,"$F$ (pedestrian)",transform=b.transAxes,ha="right",va="center",rotation=90,fontsize=5.8*fs,color="#52514e")
     b.annotate("$F=I$",(0.02,0.02),textcoords="offset points",xytext=(-1,4),ha="right",va="bottom",fontsize=5.0*fs,color="#6b6a62",rotation=45)
     b.text(0.05,0.94,"avoidance\n$F\\geq0.5$ m, $F>I$",transform=b.transAxes,fontsize=5.0*fs,color="#3f6b45",va="top",linespacing=1.2)
     b.text(0.97,0.10,"jitter: $F\\leq I$",transform=b.transAxes,fontsize=5.0*fs,color="#6b6a62",va="bottom",ha="right")
