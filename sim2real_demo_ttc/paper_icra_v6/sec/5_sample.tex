@@ -46,9 +46,7 @@ calibrated value.
 Running the standard scores on the same six policies (\cref{tab:report}) shows what a rank cannot see.
 Removing the pedestrian changes none of the nuScenes open-loop numbers, the L2 error by at most \NumMaxdLtwo\,m and the frontal and pedestrian collision rates by at most \NumMaxdCol{} and \NumMaxdPed{} points, so the metric cannot tell
 whether a policy saw the pedestrian, and its ordering follows how far a policy's planned distance
-departs from the human's (\NumRhoLtwoExp{} with $|\text{exposure}-1|$). On NAVSIM the leaderboard
-ordering over all 783 Singapore scenes is unrelated to the ordering on the \NumNclose{} near-pedestrian
-scenes ($\rho=\NumRhoAllClose$). Its first, AutoVLA, falls to fifth and its third, DiffusionDriveV2, to
+departs from the human's (\NumRhoLtwoExp{} with $|\text{exposure}-1|$). On NAVSIM the EPDMS column follows the official protocol on the official test split, so its ordering over all 783 Singapore scenes is the leaderboard's, and that ordering is unrelated to the one on the \NumNclose{} near-pedestrian scenes ($\rho=\NumRhoAllClose$). Its first, AutoVLA, falls to fifth and its third, DiffusionDriveV2, to
 last, because the full-set score is carried by the map-compliance gates (\NumMapShare\% of the spread)
 and none of the exams above is visible in it. Pedestrian TTC, by contrast, orders the policies the
 same way on both driving sides ($\rho=\NumRhoTTC$) and coincides with exposure (\NumRhoTTCExpL{},
