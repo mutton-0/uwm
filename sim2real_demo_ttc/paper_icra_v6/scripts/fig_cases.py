@@ -12,7 +12,7 @@ R5="/home/boyuewang/120/uwm/sim2real_demo_ttc/results_5090"; V5=f"{R5}/paper_icr
 M=["dd","ltf","ddv2","simlingo","autovla","alpamayo15"]
 SH={"dd":"DD","ltf":"LTF","ddv2":"DDv2","simlingo":"SimLingo","autovla":"AutoVLA","alpamayo15":"Alpamayo"}
 COL={"dd":"#b8c2cc","ltf":"#8fa3b8","ddv2":"#5b9bd5","simlingo":"#2e75b6","autovla":"#1f3f6e","alpamayo15":"#0b0b14"}
-plt.rcParams.update({"font.family":"Nimbus Roman","mathtext.fontset":"stix","font.size":7,"axes.linewidth":0.6,"axes.edgecolor":"#52514e",
+plt.rcParams.update({"font.family":"Nimbus Roman","mathtext.fontset":"stix","font.size":8,"axes.linewidth":0.6,"axes.edgecolor":"#52514e",
                      "xtick.color":"#52514e","ytick.color":"#52514e"})
 def _pick(m):
     a=f"{R5}/nvtraj_{m}_sg-one-north_closevru_nav.json"; b=f"{R5}/nvtraj_{m}_sg-one-north_closevru.json"
@@ -39,7 +39,7 @@ fig=plt.figure(figsize=(3.45,2.95))
 gs=fig.add_gridspec(2,2,height_ratios=[0.72,1.0],hspace=0.42,wspace=0.48)
 for k,(c,lab) in enumerate(((ca,"(a) genuine avoidance"),(cb,"(b) moved towards"))):
     a=fig.add_subplot(gs[0,k]); fp.panel_extract(a,tok=c[1],mm=c[0],title=f"{lab}: {SH[c[0]]}",fs=1.05,legend=(k==0),ymax=11.5)
-    a.text(0.02,0.72,f"$\\Delta S$ = {c[4]:.2f} m",transform=a.transAxes,ha="left",fontsize=5.6,color="#2e75b6" if c[4]>0 else "#17233b")
+    a.text(0.02,0.72,f"$\\Delta S$ = {c[4]:.2f} m",transform=a.transAxes,ha="left",fontsize=6.6,color="#2e75b6" if c[4]>0 else "#17233b")
 MARK=[("a",ca),("b",cb)]
 # ---- 右半：逐场景 F 与 ΔS
 P=json.load(open(f"{V5}/f_decomp_per_scene.json")); EPS=3e-3
@@ -59,12 +59,12 @@ for y,m in zip(ys,MM):
     g,n,b=cnt[m]; left=0
     for v,col in ((g,"#2e75b6"),(n,"#c9d3de"),(b,"#17233b")):
         c.barh(y,v,left=left,height=0.62,color=col,lw=0); left+=v
-    c.text(left+0.6,y,f"{g}/{g+n+b}",va="center",ha="left",fontsize=5.0,color="#52514e")
-c.set_yticks(ys); c.set_yticklabels([SH[m] for m in MM],fontsize=5.2)
-c.tick_params(axis="y",length=0,pad=1.5); c.tick_params(axis="x",labelsize=5.2,length=2)
-c.set_xlabel("cells in the avoidance region",fontsize=5.8,labelpad=0.5)
+    c.text(left+0.6,y,f"{g}/{g+n+b}",va="center",ha="left",fontsize=6.0,color="#52514e")
+c.set_yticks(ys); c.set_yticklabels([SH[m] for m in MM],fontsize=6.2)
+c.tick_params(axis="y",length=0,pad=1.5); c.tick_params(axis="x",labelsize=6.2,length=2)
+c.set_xlabel("cells in the avoidance region",fontsize=6.8,labelpad=0.5)
 c.set_xlim(0,max(sum(v) for v in cnt.values())*1.32)
-c.set_title("(c) how many bought clearance",fontsize=6.2,loc="left",pad=2)
+c.set_title("(c) how many bought clearance",fontsize=7.2,loc="left",pad=2)
 for s_ in ("top","right"): c.spines[s_].set_visible(False)
 d=fig.add_subplot(gs[1,1])
 I=np.maximum(I,EPS)
@@ -77,17 +77,17 @@ LOFF={"autovla":(4.5,3.6),"ltf":(4.5,-3.0),"dd":(-4.5,0),"simlingo":(-2,5)}
 for m in MM:
     fm=np.mean([x["F"] for x in P[m]]); im=np.mean([x["I"] for x in P[m]])
     d.plot(im,fm,marker="o",ms=4.0,color=COL[m],mec="white",mew=0.5,zorder=6)
-    d.annotate(SH[m],(im,fm),textcoords="offset points",xytext=LOFF.get(m,(4.5,0)),ha="right" if m=="dd" else ("center" if m=="simlingo" else "left"),va="center",fontsize=4.8,color=COL[m])
+    d.annotate(SH[m],(im,fm),textcoords="offset points",xytext=LOFF.get(m,(4.5,0)),ha="right" if m=="dd" else ("center" if m=="simlingo" else "left"),va="center",fontsize=5.8,color=COL[m])
 d.set_xscale("log"); d.set_yscale("log"); d.set_xlim(EPS*0.9,55); d.set_ylim(EPS*0.9,30)
-d.set_xlabel("$I$ (m)",fontsize=5.8,labelpad=0.5)
-d.set_ylabel("$F$ (m)",fontsize=5.8,labelpad=1)
-d.tick_params(labelsize=5.2,length=2); d.set_title("(d) all cells on the two axes",fontsize=6.2,loc="left",pad=2)
-d.annotate("$F=I$",(0.02,0.02),textcoords="offset points",xytext=(-1,3.5),ha="right",va="bottom",fontsize=4.8,color="#6b6a62",rotation=45)
-d.text(0.03,0.95,"avoidance region",transform=d.transAxes,fontsize=5.0,color="#1f4e79",va="top")
+d.set_xlabel("$I$ (m)",fontsize=6.8,labelpad=0.5)
+d.set_ylabel("$F$ (m)",fontsize=6.8,labelpad=1)
+d.tick_params(labelsize=6.2,length=2); d.set_title("(d) all cells on the two axes",fontsize=7.2,loc="left",pad=2)
+d.annotate("$F=I$",(0.02,0.02),textcoords="offset points",xytext=(-1,3.5),ha="right",va="bottom",fontsize=5.8,color="#6b6a62",rotation=45)
+d.text(0.03,0.95,"avoidance region",transform=d.transAxes,fontsize=6.0,color="#1f4e79",va="top")
 hh=[plt.Line2D([],[],marker="s",ms=4,color="#2e75b6",ls="none",label="bought clearance, $\\Delta S\\geq0.5$ m"),
     plt.Line2D([],[],marker="s",ms=4,color="#c9d3de",ls="none",label="in region, $|\\Delta S|<0.5$ m"),
     plt.Line2D([],[],marker="s",ms=4,color="#17233b",ls="none",label="moved towards, $\\Delta S\\leq-0.5$ m"),
     plt.Line2D([],[],marker="o",ms=3.6,color="#52514e",mec="white",ls="none",label="policy mean")]
-fig.legend(handles=hh,frameon=False,fontsize=4.8,loc="upper center",bbox_to_anchor=(0.5,0.02),ncol=2,handletextpad=0.3,labelspacing=0.2,columnspacing=1.2)
+fig.legend(handles=hh,frameon=False,fontsize=5.8,loc="upper center",bbox_to_anchor=(0.5,0.02),ncol=2,handletextpad=0.3,labelspacing=0.2,columnspacing=1.2)
 for s_ in ("top","right"): d.spines[s_].set_visible(False)
 fig.savefig(f"{V5}/figures/cases.pdf",bbox_inches="tight",pad_inches=0.015); fig.savefig(f"{V5}/figures/cases.png",dpi=220,bbox_inches="tight",pad_inches=0.015); print("ok")

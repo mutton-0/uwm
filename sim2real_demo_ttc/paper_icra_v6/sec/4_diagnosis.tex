@@ -13,7 +13,7 @@ at half the human's distance to SimLingo at more than twice it, with AutoVLA and
 human's own.
 
 \paragraph{Hazard sensitivity}
-On these frames the plans respond little to the pedestrian: on units that need a reaction, seeing it buys only \NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale, against \NumHumanRef{} when the logged human trajectory $H$ takes the place of $X^{O}$ in \eqref{eq:hs} (\cref{tab:report}). The benefit is also unreliable in direction:
+On these frames the plans respond little to the pedestrian: on units that need a reaction, seeing it buys only \NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale, against \NumHumanRef{} when the logged human trajectory $H$ takes the place of $X^{O}$ in \eqref{eq:hs} (\cref{tab:report}), a reference rather than a ceiling, since $H$ and $X^{R}$ differ for reasons beyond the pedestrian. The benefit is also unreliable in direction:
 counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
 pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
 SimLingo 21 vs.\ 30, the rest at most 5 either way, all exact-binomial $p\ge0.26$) --- what reads as a safety margin in \cref{tab:report} does not carry over to the individual case.
@@ -27,8 +27,7 @@ construction, leaves the picture unchanged (\NumScalTtcLo{} to \NumScalTtcHi, ag
 \NumScalHi). The human reference is $\NumHumanSc$: a driver who already yields at every hazard level has little room left to scale, so this exam is informative where $\HS$ is small, which is where all six policies sit.
 
 \paragraph{Specificity}
-A policy whose plan moves when nothing requires it is not cautious but unsteady, and steadiness is
-what turns out to travel across a domain shift (\cref{sec:sample}). SimLingo's
+A policy whose plan moves when nothing requires it is not cautious but unsteady, and steadiness is what the exploratory analysis of \cref{sec:sample} finds to travel across driving sides. SimLingo's
 plan moves most when nothing requires it ($\SP=\NumSpSL$), while the other five stay steadier, at
 \NumSpOtherLo--\NumSpOtherHi.
 
@@ -43,8 +42,4 @@ policies almost never reach the pedestrian. DiffusionDrive is safe because it st
 without yielding, and SimLingo covers the most ground with the lowest specificity.
 
 \paragraph{Why the risk goes unmanaged}
-Two observations on the three BEV planners explain the diagnosis. Their BEV semantic heads do not
-decode the pedestrian: on 520 NAVSIM near-pedestrian scenes the pedestrian channel never wins the
-argmax inside a pedestrian's box. And their plans end 5--9\,m ahead while the median corridor
-pedestrian stands 20\,m away, so collisions rise with input speed identically with and without the
-pedestrian in view (\cref{tab:report}). The limit is geometric before it is perceptual.
+One observation on the three BEV planners explains much of the diagnosis: their plans end 5--9\,m ahead while the median corridor pedestrian in the NAVSIM scenes stands 20\,m away, so the visible and removed contact rates differ by at most \NumCollGap{} points at the logged speed and \NumCollGapEight{} at 8\,m/s (\cref{tab:report}). The limit is geometric before it is perceptual.

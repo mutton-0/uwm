@@ -35,7 +35,7 @@ Three predictions fail.
 \begin{itemize}
 \item Point values drift: only 60\% of the model--exam cells stay inside their Boston interval.
 \item In Singapore, DiffusionDrive and DiffusionDriveV2 show a small but non-zero hazard sensitivity ($\HS=0.09$ and $0.08$).
-\item P6, on the alignment between the night-induced and the removal-induced plan changes, predicted that policies with more orthogonal changes would shift less between sides. It failed ($\rho=-0.90$, opposite to the prediction). The analysis it concerned is omitted from this version for space, and we report only its verdict here.
+\item P6, on the alignment between the night-induced and the removal-induced plan changes, predicted that policies with more orthogonal changes would shift less between sides. It failed ($\rho=-0.90$, opposite to the prediction). We no longer use this quantity and report its verdict for completeness.
 \end{itemize}
 
 \paragraph{Reading}
@@ -54,35 +54,43 @@ and none of the exams above is visible in it. Pedestrian TTC, by contrast, order
 same way on both driving sides ($\rho=\NumRhoTTC$) and coincides with exposure (\NumRhoTTCExpL{},
 \NumRhoTTCExpR).
 
-\paragraph{Which exam travels}
-This is the question a deployment decision has to answer. The target is how often each policy keeps
-clear of the pedestrian on the Singapore scenes, the share of moving-ego scenes with minimum
-time-to-proximity $\ge1.5$\,s, the complement of the TTC column of \cref{tab:report}. Each predictor
-is a six-policy ordering obtained without that data, and we read the rank correlations as orderings,
-not as tests. The standard scores agree with the target at $|\rho|\le\NumStdRhoMax$ (NAVSIM
-leaderboard \NumRhoLbKeep, nuScenes L2 \NumRhoLtwoKeep, open-loop pedestrian collision
-\NumRhoPedcolKeep), whereas the same pedestrian-centred readouts taken on the left-hand-drive side
-reach \NumOtherSideLo--\NumOtherSideHi. Of the five exams, read on the 88 Boston frames as a
-pre-deployment diagnosis would be, the one whose ordering best matches the target is not the one
-that measures how \emph{much} a policy reacts but the one that measures how \emph{steadily} it
-drives: specificity gives $\rho=\NumSpBeh$ (\NumSpLhdList), against $\NumExpBeh$ for exposure and
-$\NumCfrBeh$ for $\CFR$. Specificity and $\CFR$ are higher-is-better, so a positive $\rho$ means the
-ordering carries over. Exposure's negative value says that policies that plan further keep clear
-less often. This exam was not pre-registered, and we report it as exploratory. Specificity asks how
-far a plan moves when an \emph{irrelevant} part of the scene is edited. A policy that answers ``not
-at all'' drives steadily, and steadiness is what survives the change of side. The decomposition of
-\cref{sec:axes} says why: displacement that is not aimed away from the pedestrian is not protection,
-and a policy producing a lot of it comes close to the pedestrian on both sides. A rank does not carry
-the near-pedestrian ordering to a new site. The exposure and specificity exams, read from the same
-frames, do.
+\paragraph{Which exam travels (exploratory)}
+The target is how often each policy keeps clear of the pedestrian on the Singapore scenes, the share
+of moving-ego scenes with minimum time-to-proximity $\ge1.5$\,s, the complement of the TTC column of
+\cref{tab:report}. This target changes dataset and city as well as driving side, whereas the
+pre-registered test above changes only the side. Each predictor is a six-policy ordering obtained
+without that data, and we read the rank correlations as orderings, not as tests. The standard scores
+agree with the target at $|\rho|\le\NumStdRhoMax$ (NAVSIM leaderboard \NumRhoLbKeep, nuScenes L2
+\NumRhoLtwoKeep, open-loop pedestrian collision \NumRhoPedcolKeep). Measuring pedestrian TTC directly
+on the left-hand-drive side predicts it at \NumOtherSideLo--\NumOtherSideHi, better than any exam,
+and the exams are not a substitute for that measurement. Of the five, read on the 88 Boston frames as
+a pre-deployment diagnosis would be, specificity matches the target best, $\rho=\NumSpBeh$
+(\NumSpLhdList), against $\NumExpBeh$ for exposure and $\NumCfrBeh$ for $\CFR$, where specificity and
+$\CFR$ are higher-is-better and exposure's negative value says that policies that plan further keep
+clear less often. What the exams add is the reason a policy orders where it does: displacement that
+is not aimed away from the pedestrian is not protection, and a policy producing a lot of it comes
+close to the pedestrian on both sides.
+
+\paragraph{The selection report}
+Read together, the profiles of \cref{tab:report} give each policy a prognosis under our open-loop
+protocol. SimLingo plans furthest, moves its plan when a pedestrian requires no reaction
+($\SP=\NumSpSL$), moves towards the pedestrian more often than away, and collides most on both sides.
+Trained in simulation, it needs target-domain post-training before deployment, and the check-up prices
+the re-check at a few dozen frames for exposure and specificity. AutoVLA and Alpamayo-1.5 keep a
+human-like exposure and a steady plan but show no hazard response. They can be deployed at the
+human's speed profile, and what post-training must add is the response to the pedestrian, which only
+hundreds of frames with a genuine need to react can verify. DiffusionDrive and LTF are safe because
+they plan short, which holds only while exposure stays low, so any post-training that lengthens their
+plans must be re-examined for hazard sensitivity. DiffusionDriveV2 is the only policy whose response
+grows with the hazard and that slows under the night-style perturbation, at the cost of the lowest
+specificity among the BEV planners.
 
 \paragraph{What a verdict costs}
 For every exam and policy we subsample $n$ of the \NumPool{} frames that all six policies share, 400
 times, and fit the spread of the estimate with $\mathrm{sd}(n)=a\sqrt{1/n-1/M}$, $M=\NumPool$ (\cref{fig:sample}).
 
 \paragraph{Well-fitting exams}
-Exposure, the lighting ratio and specificity obey this law ($R^2=0.97$--$1.00$). The fitted $a$
-converts directly into the number of frames a verdict needs.
+The law is the finite-population sampling form, so the fit is not a test. What it yields is the spread constant $a$, which converts into the number of frames a verdict needs. For exposure, the lighting ratio and specificity the fit is tight ($R^2\ge0.97$) and the verdicts settle inside the pool.
 \begin{itemize}
 \item \emph{Lighting outweighs the pedestrian} ($\CFR<1$) is settled for every policy within
       \NumNstarCFRhi{} frames.
@@ -95,7 +103,6 @@ converts directly into the number of frames a verdict needs.
 \end{itemize}
 
 \paragraph{Poorly fitting exams}
-Hazard sensitivity behaves differently. Its fits are poor ($R^2$ as low as 0.26) wherever few units need a reaction. Deciding that $\HS\neq0$ needs
-57--1{,}326 frames, except for SimLingo, whose estimate sits on the threshold, and the ordering reaches \NumRankHSninety\% stability only at 90 frames.
+Hazard sensitivity behaves differently. Its fits are poor ($R^2$ as low as 0.26) wherever few units need a reaction. Deciding that $\HS\neq0$ needs 57--1{,}326 frames, an extrapolation beyond the \NumPool-frame pool for four policies, except for SimLingo, whose estimate sits on the threshold, and the ordering reaches \NumRankHSninety\% stability only at 90 frames.
 
 The division is therefore clear. A few dozen frames, \NumScCFR{} to \NumScExp{} logged scenes, diagnose exposure, specificity and lighting. Whether a policy manages hazard needs hundreds of frames that contain a genuine need to react.

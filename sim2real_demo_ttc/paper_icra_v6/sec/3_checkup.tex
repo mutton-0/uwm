@@ -37,7 +37,7 @@ F=\bar D(X^{O},X^{R}),\qquad I=\bar D(X^{O},X^{N}).
 \label{eq:FI}
 \end{equation}
 We call $F$ the \emph{faithfulness} displacement---the plan change attributable to the pedestrian
-itself---and $I$ the \emph{interference} displacement---the change the same policy produces under an edit that carries no driving-relevant information, and therefore its own jitter floor. A policy that
+itself---and $I$ the \emph{interference} displacement---the change the same policy produces under a large edit that should not change the correct plan, which bounds from above how far the plan moves for reasons unrelated to the pedestrian. A policy that
 uses the pedestrian and ignores the lighting has $F\gg I$. The reverse ordering means the plan is
 driven by something the road does not care about.
 
@@ -111,12 +111,12 @@ stationary ego can move neither toward nor away from anyone.
 $\mathrm{Sc}=\rho\big(\HS,\,a_{\mathrm{req}}\big)$ over needed units, with $\rho$ Spearman's rank
 correlation.
 \paragraph{Specificity}
-On units needing no reaction, the minimal-change principle gives
+On units where the pedestrian requires no reaction ($C(X^{R})\ge1$) the correct plan does not change when it is removed, and a plan that changes anyway over-reacts:
 \begin{equation}
 \SP=\exp\!\big(-\bar D(X^{O},X^{R})/0.5\,\mathrm{m}\big)\in(0,1],
 \label{eq:sp}
 \end{equation}
-so $\SP\to1$ iff an irrelevant edit leaves the plan where it was.
+so $\SP\to1$ iff removing a pedestrian that required no reaction leaves the plan where it was. $\SP$ is read together with $\HS$: a policy blind to pedestrians scores $\SP=1$ and $\HS=0$.
 
 \paragraph{Lighting}
 The \emph{causal faithfulness ratio} ($\CFR$) weighs the two displacements of \eqref{eq:FI} against

@@ -41,7 +41,7 @@ attribution---the \emph{faithfulness} displacement $F$, the plan change caused b
 itself, and the \emph{interference} displacement $I$, the change the same policy produces under an
 edit that carries no driving-relevant information~\eqref{eq:FI}. (c)~Five exams, each with a control and a reference threshold, are built on these paired plans and axes (\cref{fig:method}c): how far the policy plans
 to drive, whether seeing the pedestrian buys safety, whether that benefit scales with the hazard,
-whether the plan moves when nothing requires it, and how much the irrelevant edit moves it. (d)~Read on one driving side and tested on the other, the exams yield a prognosis for the target domain: the exam that transfers reproduces the new side's keep-clear ordering ($\rho=\NumSpBeh$), where the standard scores reach at most \NumStdRhoMax, and each verdict can be priced in frames before it is used.
+whether the plan moves when nothing requires it, and how much the irrelevant edit moves it. (d)~Read on one driving side and tested on the other, the exams yield a prognosis for the target domain: which verdicts and orderings carry over, what each verdict costs in frames, and a per-policy selection report.
 
 
 %120
@@ -131,9 +131,7 @@ policies under domain shift, in three parts.
       interference displacement $I$~\eqref{eq:FI}, and counts as avoidance only if it moves, exceeds
       the jitter, and buys distance. Where the pedestrian lies on the planned path, \NumCfRealPct\%
       of responses qualify, and the lighting edit moves every plan further than the pedestrian does.
-\item \emph{A priced prognosis.} Diagnosed on one driving side and tested on the other, orderings
-      and verdicts transfer: the exam that transfers reproduces the new side's keep-clear ordering ($\rho=\NumSpBeh$), against at most \NumStdRhoMax{} for the standard scores, and each verdict is priced
-      in frames---lighting within \NumNstarCFRhi, exposure within \NumNstarExpHi.
+\item \emph{A priced prognosis.} Diagnosed on one driving side and tested on the other, orderings and verdicts transfer and point values do not. Each verdict is priced in frames, lighting within \NumNstarCFRhi, exposure within \NumNstarExpHi, and the profiles read as a selection report that says what each policy needs before deployment (\cref{sec:sample}).
 \end{enumerate}
 
 
