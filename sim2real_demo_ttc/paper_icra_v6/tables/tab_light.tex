@@ -1,13 +1,13 @@
 % !TEX root = ../main.tex
 \begin{table}[t]
 \centering
-\caption{\textbf{What the night rendering does to the plan.} $\CFR$: plan change from removing the pedestrian over that from the night rendering, same frames (95\% CI; ideal $\gg1$). Speed: change of planned mean speed under the night rendering. $\Delta S$: change of whole-plan separation from the pedestrian (negative = closer). Align: direction of the night-induced change relative to the removal-induced one. Bold: $p<0.01$.}
+\caption{\textbf{What the night-style perturbation does to the plan.} $\CFR=\mathbb{E}F/\mathbb{E}I$ \eqref{eq:cfr} on the same frames (95\% CI). Speed: relative change of planned mean speed from $X^{O}$ to $X^{N}$. $\Delta_N S=S(X^{N})-S(X^{O})$ with $S$ of \eqref{eq:SA} (negative = closer). Align: \eqref{eq:align}, Boston$\to$Singapore. Bold: $p<0.01$.}
 \label{tab:light}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
-Policy & CFR [95\% CI] & speed & $\Delta S$ (m) & align \\
+Policy & $\CFR$ [95\% CI] & speed & $\Delta_N S$ (m) & align \\
 \midrule
 DD & 0.30 {\scriptsize[0.20,0.43]} & \textbf{\boldmath $+37\%$} & \textbf{\boldmath $-0.37$} & $+0.55\to+0.09$ \\
 LTF & 0.36 {\scriptsize[0.24,0.49]} & \textbf{\boldmath $+12\%$} & \textbf{\boldmath $-0.24$} & $-0.09\to-0.42$ \\

@@ -35,7 +35,7 @@ _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "CFR":max(M,key=lambda m:A[m]["point"]["CFR"])}
 _bc8=min(M,key=lambda m:coll(m,"8")[0])
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{The check-up report.} Normal range in brackets (\cref{tab:exams}); $\downarrow$/$\uparrow$ = outside it, bold = best in column. Collision: contact with the pedestrian's logged future at 8\,m/s input speed, visible\,/\,removed.}",
+ r"\caption{\textbf{The check-up report.} Reference thresholds in brackets (\cref{tab:exams}); $\downarrow$/$\uparrow$ = outside it, bold = best in column. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s input speed, $X^{O}$\,/\,$X^{R}$.}",
  r"\label{tab:report}",r"\scriptsize",r"\setlength{\tabcolsep}{2.0pt}",
  r"\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
  r"Policy & exposure & HS & scaling & SP & CFR & coll.\ 8\,m/s \\",
@@ -53,9 +53,9 @@ open(f"{_OUT}/tables/tab_report.tex","w").write("\n".join(T)+"\n")
 lab={"P1":"Lighting outweighs the pedestrian (CFR $<1$) for every policy",
      "P2":"Hazard sensitivity stays below 0.15 (upper CI)",
      "P3":"Exposure ordering transfers ($\\rho\\ge0.6$; SimLingo top, DD bottom)",
-     "P4":"Over-reaction ordering transfers ($\\rho\\ge0.6$; SimLingo lowest SP)",
+     "P4":"Specificity ordering transfers ($\\rho\\ge0.6$; SimLingo lowest $\\SP$)",
      "P5":f"Point values stay within the left-hand CI ($\\ge$70\\% of {len(PR['P5']['cells'])} cells)",
-     "P6":"Purer policies (lower $|$align$|$) shift less",
+     "P6":"Policies with lower $|\\mathrm{align}|$ shift less between sides",
      "P7":"SimLingo collides most; visible vs.\\ removed within 3\\,pts"}
 def det(k):
     d=PR[k]
@@ -79,10 +79,10 @@ open(f"{_OUT}/tables/tab_prereg.tex","w").write("\n".join(T)+"\n")
 NS=json.load(open(f"{V5}/night_speed.json"))
 def bold(txt,cond): return f"\\textbf{{\\boldmath {txt}}}" if cond else txt
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{What the night rendering does to the plan.} $\CFR$: plan change from removing the pedestrian over that from the night rendering, same frames (95\% CI; ideal $\gg1$). Speed: change of planned mean speed under the night rendering. $\Delta S$: change of whole-plan separation from the pedestrian (negative = closer). Align: direction of the night-induced change relative to the removal-induced one. Bold: $p<0.01$.}",
+ r"\caption{\textbf{What the night-style perturbation does to the plan.} $\CFR=\mathbb{E}F/\mathbb{E}I$ \eqref{eq:cfr} on the same frames (95\% CI). Speed: relative change of planned mean speed from $X^{O}$ to $X^{N}$. $\Delta_N S=S(X^{N})-S(X^{O})$ with $S$ of \eqref{eq:SA} (negative = closer). Align: \eqref{eq:align}, Boston$\to$Singapore. Bold: $p<0.01$.}",
    r"\label{tab:light}",r"\footnotesize",r"\setlength{\tabcolsep}{3pt}",
    r"\begin{tabular}{@{}lcccc@{}}",r"\toprule",
-   r"Policy & CFR [95\% CI] & speed & $\Delta S$ (m) & align \\",r"\midrule"]
+   r"Policy & $\CFR$ [95\% CI] & speed & $\Delta_N S$ (m) & align \\",r"\midrule"]
 for m in M:
     c=CF[m]["corr"]; n=NS[m]
     pm=lambda x,f: "$"+f.format(x)+"$"   # 不再把小值压成 "0"：真值很小就多给一位小数，见下
@@ -265,7 +265,7 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
             # 表 IX：F 轴分解
             T2=[r"\begin{table}[t]",r"\centering",
                r"\caption{\textbf{A plan that moves is not a plan that yields.} For each policy and each of the 246 Singapore near-pedestrian scenes we measure $F$ (displacement caused by removing the pedestrian), "
-               r"$I$ (displacement caused by the night rendering, the policy's own jitter under an irrelevant edit) and $\Delta S$, the resulting change in clearance to the pedestrian's logged future ($\Delta S>0$: seeing the pedestrian keeps the plan farther away). "
+               r"$I$ (displacement caused by the night-style perturbation, the policy's own jitter under an irrelevant edit) and $\Delta S$, the resulting change in clearance to the pedestrian's logged future ($\Delta S>0$: seeing the pedestrian keeps the plan farther away). "
                r"$\eta=\Delta S/F$ is the share of the displacement that becomes separation, taken over the scenes in which the plan actually moved. Genuine avoidance requires all three: $F\ge0.5$\,m, $F>I$, and $\Delta S\ge0.5$\,m.}",
                r"\label{tab:decomp}",r"\scriptsize",r"\setlength{\tabcolsep}{3pt}",
                r"\begin{tabular}{@{}lccccc@{}}",r"\toprule",

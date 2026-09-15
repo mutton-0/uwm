@@ -7,13 +7,7 @@ Read one exam at a time, the report answers separate questions that a single sco
 policy is safe because it yields or because it stays short is answered by exposure together with
 hazard sensitivity: DiffusionDrive keeps its distance by planning short trajectories, which holds only
 as long as the trajectories stay short, whereas AutoVLA and Alpamayo-1.5 cover a human-like distance
-without the response to match. Whether a plan that moves is a plan that yields is answered by the
-decomposition of \cref{sec:axes}: among the cells in which the pedestrian-blind plan does reach the
-pedestrian, only \NumCfRealPct\% meet all three conditions, and displacement alone would have ranked first
-the policy with the most sub-1.5\,s encounters.
-The exam that no current benchmark reports is scaling: whether the response grows when the hazard
-does. Five policies show a negative scaling coefficient; the one positive value, DiffusionDriveV2's, sits
-below 0.15.
+without the response to match. Whether a plan that moves is a plan that yields is answered by the decomposition of \cref{sec:axes}.
 
 \paragraph{Limitations}
 The exams are open-loop. The approach sequences are replayed from logs and re-anchored to the logged
@@ -23,15 +17,17 @@ removals leave a detectable residue, the inpainting artefact is 5--17\% of the e
 models can be edited only through their front camera. Alpamayo-1.5 covers 170 of the 236 frames. SimLingo plans 2.5\,s; for NAVSIM's 4\,s we extrapolate at constant velocity (holding position instead gives EPDMS 0.47, still the lowest).
 Cross-policy correlations rest on six policies.
 
-\paragraph{Future work}
-The check-up is designed as the first half of a benchmark-to-deployment pairing, and as one hazard
-type among several a deployment decision must cover: extending its exams to lead-vehicle braking and
-turning or intersection conflicts is the natural next scenario. Within the pedestrian scenario, the
-next step is to \emph{collect} paired data rather than construct it: the same scene with and without a
-pedestrian, in daylight and at night. We then plan to validate the diagnoses against the same policies' behaviour on a real
-vehicle. The sample-size laws above tell us how large that collection must be. A few dozen pairs
-suffice for planned distance, over-reaction and lighting; hundreds of pairs with a genuine need to
-react are needed for hazard sensitivity.
+\paragraph{Next steps}
+The check-up is the first half of a benchmark-to-deployment loop, and the sample-size laws above size
+the second half. First, the paired data will be captured rather than constructed: the same scene with
+and without a pedestrian, recorded on our vehicle and re-rendered with 3D Gaussian splatting, so that
+a real-vehicle pair replaces the inpainted one. Second, the day--night pairs will move from a
+photometric transform to captured or physically rendered lighting, so that the lighting exam reads
+real shadows and exposure rather than a gain-and-gamma proxy. Third, the check-up will run inside a
+data flywheel: the VLA policies are post-trained on target-domain data and re-examined, so that the
+diagnosis measures what post-training recovers rather than a policy failing outright at the new site.
+The exams already price the collection: a few dozen pairs for exposure, specificity and lighting,
+hundreds with a genuine need to react for hazard sensitivity.
 
 \section{Conclusion}
 A benchmark score reports an outcome, not the behaviour behind it, so a rank cannot be trusted to

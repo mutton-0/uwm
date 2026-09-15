@@ -13,7 +13,7 @@
 Two questions decide whether a few hundred edited frames can stand in for a rank: how many frames each verdict needs, and which verdicts carry over to the other driving side.
 \subsection{Fitting}
 For every exam and policy we subsample $n$ of the \NumPool{} frames that all six policies share, 400
-times, and fit the spread of the estimate with $\sigma(n)=a\sqrt{1/n-1/N}$ (\cref{fig:sample}).
+times, and fit the spread of the estimate with $\mathrm{sd}(n)=a\sqrt{1/n-1/M}$, $M=\NumPool$ (\cref{fig:sample}).
 
 \paragraph{Well-fitting exams}
 Exposure, the lighting ratio and specificity obey this law ($R^2=0.97$--$1.00$). The fitted $a$
@@ -40,8 +40,7 @@ near-pedestrian frames, so the lighting verdict costs roughly \NumScCFR{} scenes
 verdict \NumScExp; deciding that hazard sensitivity differs from zero costs \NumScHS---about
 \NumMinHS{} minutes of logged driving that actually contains a pedestrian near the corridor.
 
-The division is therefore clear. A few dozen frames diagnose planned distance, over-reaction and
-sensitivity to lighting. Whether a policy manages hazard, and in which direction lighting pushes it,
+The division is therefore clear. A few dozen frames diagnose exposure, specificity and lighting. Whether a policy manages hazard, and in which direction lighting pushes it,
 needs hundreds of frames that contain a genuine need to react.
 
 \subsection{A pre-registered transfer test}
@@ -58,8 +57,7 @@ that do. Retaining the replaced policy changes none of the seven verdicts.
 
 \paragraph{What transferred}
 \NumPass{} of the seven predictions hold, and they are the orderings and verdicts. The night-style perturbation
-outweighs the pedestrian in every policy. Exposure keeps its order ($\rho=0.90$), and so does
-over-reaction, with SimLingo the most unstable. SimLingo collides most, with the visible and removed
+outweighs the pedestrian in every policy. Exposure keeps its order ($\rho=0.90$), and so does specificity, with SimLingo the lowest. SimLingo collides most, with the visible and removed
 rates within 3 points of each other.
 
 \paragraph{What did not}
@@ -70,7 +68,7 @@ Three predictions fail.
       ($\HS=0.09$ and $0.08$).
 \item The ``purity'' hypothesis is reversed. We had predicted that policies whose lighting effect is
       more orthogonal to their pedestrian response would shift less between sides; the observed rank
-      correlation is $-0.90$. Alignment is itself unstable between the two sides (\cref{sec:lighting}).
+      correlation is $-0.90$. Alignment is itself unstable between the two sides: it changes for every policy but AutoVLA (\cref{tab:light}).
 \end{itemize}
 
 \paragraph{Reading}
