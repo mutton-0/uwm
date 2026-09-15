@@ -25,8 +25,11 @@ NORM={"exposure":(0.8,1.2),"HS":(0.15,1.01),"HS_slope":(0.0,1.01),"SP":(0.8,1.01
 def flag(v,k):
     lo,hi=NORM[k]
     return r"$\downarrow$" if v<lo else (r"$\uparrow$" if v>hi else "")
-def cell(v,k,best,fmt="%.2f"):
+def cell(v,k,best,fmt="%.2f",d=None):
     t=(fmt%v)+flag(v,k)
+    if d is not None and k in d.get("ci",{}):
+        lo,hi=d["ci"][k]; f2="%+.2f" if fmt.startswith("%+") else "%.2f"
+        t+=" {\\scriptsize["+(f2%lo)+", "+(f2%hi)+"]}"
     return (r"\textbf{"+t+"}") if best else t
 _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "HS":max(M,key=lambda m:A[m]["point"]["HS"]),
@@ -34,22 +37,23 @@ _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "SP":max(M,key=lambda m:A[m]["point"]["SP"]),
       "CFR":max(M,key=lambda m:A[m]["point"]["CFR"])}
 _bc8=min(M,key=lambda m:coll(m,"8")[0])
-T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{Diagnostic profiles.} Arrows: outside the reference threshold of \cref{tab:exams}, pointing to the side the value falls on; bold: best per column. Higher is better for hazard sensitivity, scaling, specificity and lighting, lower for collision; exposure is read against the human's distance. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$. Human: the logged trajectory $H$ in place of $X^{O}$, scored against each policy's blind plan; $\HS$ averaged over the six pairings, scaling their median. Specificity and lighting need a counterfactual query and have no human counterpart.}",
- r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{3pt}",
- r"\resizebox{\columnwidth}{!}{\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
+T=[r"\begin{table*}[t]",r"\centering",
+ r"\caption{\textbf{Diagnostic profiles.} Brackets: 95\% bootstrap CI. Arrows: outside the reference threshold of \cref{tab:exams}, pointing to the side the value falls on; bold: best per column. Higher is better for hazard sensitivity, scaling, specificity and lighting, lower for collision; exposure is read against the human's distance. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$. Human: the logged trajectory $H$ in place of $X^{O}$, scored against each policy's blind plan; $\HS$ averaged over the six pairings, scaling their median. Specificity and lighting need a counterfactual query and have no human counterpart.}",
+ r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{5pt}",
+ r"\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
  r"Policy & Exposure & Hazard sens. & Scaling & Specificity & Lighting & Collision \\",
  r" & Exp & $\HS$ & Sc & $\SP$ & $\CFR$ & $O$/$R$, 8\,m/s \\",r"\midrule"]
 for m in M:
     p=A[m]["point"]; c8=coll(m,"8")
     cc=f"{c8[0]:.1f}\\,/\\,{c8[1]:.1f}"
     if m==_bc8: cc=r"\textbf{"+cc+"}"
-    T.append(f"{SH[m]} & {cell(p['exposure'],'exposure',m==_bst['exposure'])} & "
-             f"{cell(p['HS'],'HS',m==_bst['HS'])} & {cell(p['HS_slope'],'HS_slope',m==_bst['HS_slope'],'%+.2f')} & "
-             f"{cell(p['SP'],'SP',m==_bst['SP'])} & {cell(p['CFR'],'CFR',m==_bst['CFR'])} & {cc} \\\\")
+    d_=A[m]
+    T.append(f"{SH[m]} & {cell(p['exposure'],'exposure',m==_bst['exposure'],d=d_)} & "
+             f"{cell(p['HS'],'HS',m==_bst['HS'],d=d_)} & {cell(p['HS_slope'],'HS_slope',m==_bst['HS_slope'],'%+.2f',d=d_)} & "
+             f"{cell(p['SP'],'SP',m==_bst['SP'],d=d_)} & {cell(p['CFR'],'CFR',m==_bst['CFR'],d=d_)} & {cc} \\\\")
 _gcx=json.load(open(f"{V5}/gt_ceiling.json")); _hs_h=sum(g*n for g,n in zip(_gcx["gt"],_gcx["n"]))/sum(_gcx["n"])
 T+=[r"\midrule",f"Human (logged) & 1.00 & {_hs_h:.2f} & {_gcx.get('sc_median',float('nan')):+.2f} & -- & -- & -- \\\\"]
-T+=[r"\bottomrule",r"\end{tabular}}",r"\end{table}"]
+T+=[r"\bottomrule",r"\end{tabular}",r"\end{table*}"]
 open(f"{_OUT}/tables/tab_report.tex","w").write("\n".join(T)+"\n")
 # ---------- Table III：跨舵位预注册 ----------
 lab={"P1":"Lighting outweighs the pedestrian (CFR $<1$) for every policy",
