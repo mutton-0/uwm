@@ -38,11 +38,11 @@ _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "CFR":max(M,key=lambda m:A[m]["point"]["CFR"])}
 _bc8=min(M,key=lambda m:coll(m,"8")[0])
 T=[r"\begin{table*}[t]",r"\centering",
- r"\caption{\textbf{Diagnostic profiles.} Brackets: 95\% bootstrap CI. Arrows: outside the reference threshold of \cref{tab:exams}, pointing to the side the value falls on; bold: best per column. Higher is better for hazard sensitivity, scaling, specificity and lighting, lower for collision; exposure is read against the human's distance. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$. Human: the logged trajectory $H$ in place of $X^{O}$, scored against each policy's blind plan; $\HS$ averaged over the six pairings, scaling their median. Specificity and lighting need a counterfactual query and have no human counterpart.}",
+  r"\caption{\textbf{Diagnostic profiles} on the 236 nuScenes frames. Brackets: 95\% CI. Arrows: outside the reference threshold of \cref{tab:exams}; bold: best per column. Collision: contact rate at 8\,m/s with the pedestrian visible\,/\,removed. Human: the logged trajectory scored the same way against each policy's blind plan (no counterpart for specificity and lighting).}",
  r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{5pt}",
  r"\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
  r"Policy & Exposure & Hazard sens. & Scaling & Specificity & Lighting & Collision \\",
- r" & Exp & $\HS$ & Sc & $\SP$ & $\CFR$ & $O$/$R$, 8\,m/s \\",r"\midrule"]
+ r" & Exp $\approx1$ & $\HS$ $\uparrow$ & Sc $\uparrow$ & $\SP$ $\uparrow$ & $\CFR$ $\uparrow$ & $O$\,/\,$R$ $\downarrow$ \\",r"\midrule"]
 for m in M:
     p=A[m]["point"]; c8=coll(m,"8")
     cc=f"{c8[0]:.1f}\\,/\\,{c8[1]:.1f}"
@@ -83,7 +83,7 @@ open(f"{_OUT}/tables/tab_prereg.tex","w").write("\n".join(T)+"\n")
 NS=json.load(open(f"{V5}/night_speed.json"))
 def bold(txt,cond): return f"\\textbf{{\\boldmath {txt}}}" if cond else txt
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{The night-style perturbation and the plan.} $\CFR=\mathbb{E}F/\mathbb{E}I$ \eqref{eq:cfr} on the same frames, 95\% CI: $F$ (pedestrian) should be large, $I$ (re-lighting) small, so $\CFR$ higher is better. Speed: change of planned mean speed, $X^{O}\to X^{N}$. $\Delta_N S=S(X^{N})-S(X^{O})$, $S$ of \eqref{eq:SA}, negative = closer. Last column: $\CFR$ at the dusk and night levels on the \NumDuskN{} NAVSIM scenes. Bold: $p<0.01$.}",
+  r"\caption{\textbf{The night-style perturbation} on the nuScenes frames. Speed: change of planned mean speed under re-lighting. $\Delta_N S$: change of clearance to the pedestrian, negative = closer. Last column: $\CFR$ at dusk and at night on the \NumDuskN{} NAVSIM scenes. Brackets: 95\% CI; bold: $p<0.01$.}",
    r"\label{tab:light}",r"\scriptsize",r"\setlength{\tabcolsep}{1.6pt}",
    r"\begin{tabular}{@{}lcccc@{}}",r"\toprule",
    r"Policy & $\CFR$ [95\% CI] $\uparrow$ & speed $\downarrow$ & $\Delta_N S$ (m) $\uparrow$ & dusk\,/\,night $\CFR$ $\uparrow$ \\",r"\midrule"]
@@ -158,7 +158,7 @@ if os.path.exists(f"{V5}/bench_compare.json") and os.path.exists(f"{V5}/ttc_rank
     BC=json.load(open(f"{V5}/bench_compare.json")); TR=json.load(open(f"{V5}/ttc_rank.json"))
     NUo=BC["nusc"]; CV=BC["navsim_close"]; AL=BC["navsim_all"]
     T=[r"\begin{table}[t]",r"\centering",
-       r"\caption{\textbf{The six policies under the standard scores.} Left: nuScenes open-loop L2 on the 236 near-pedestrian frames, original\,/\,removed. Middle: NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} near-pedestrian ones. Right: share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side, rank in parentheses. $\uparrow$/$\downarrow$: higher/lower is better. Bold: best per column.}",
+       r"\caption{\textbf{The six policies under the standard scores.} Left: nuScenes open-loop L2 on the 236 near-pedestrian frames, original\,/\,removed. Middle: NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} near-pedestrian ones. Right: share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side, rank in parentheses. Bold: best per column.}",
        r"\label{tab:bench}",r"\scriptsize",r"\setlength{\tabcolsep}{2.0pt}",
        r"\begin{tabular}{@{}lc cc cc@{}}",r"\toprule",
        r" & L2 (m) $\downarrow$ & \multicolumn{2}{c}{EPDMS $\uparrow$} & \multicolumn{2}{c}{TTC$<$1.5\,s (\%) $\downarrow$} \\",

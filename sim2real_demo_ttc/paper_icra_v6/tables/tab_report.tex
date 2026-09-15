@@ -1,14 +1,14 @@
 % !TEX root = ../main.tex
 \begin{table*}[t]
 \centering
-\caption{\textbf{Diagnostic profiles.} Brackets: 95\% bootstrap CI. Arrows: outside the reference threshold of \cref{tab:exams}, pointing to the side the value falls on; bold: best per column. Higher is better for hazard sensitivity, scaling, specificity and lighting, lower for collision; exposure is read against the human's distance. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$. Human: the logged trajectory $H$ in place of $X^{O}$, scored against each policy's blind plan; $\HS$ averaged over the six pairings, scaling their median. Specificity and lighting need a counterfactual query and have no human counterpart.}
+\caption{\textbf{Diagnostic profiles} on the 236 nuScenes frames. Brackets: 95\% CI. Arrows: outside the reference threshold of \cref{tab:exams}; bold: best per column. Collision: contact rate at 8\,m/s with the pedestrian visible\,/\,removed. Human: the logged trajectory scored the same way against each policy's blind plan (no counterpart for specificity and lighting).}
 \label{tab:report}
 \footnotesize
 \setlength{\tabcolsep}{5pt}
 \begin{tabular}{@{}lccccc c@{}}
 \toprule
 Policy & Exposure & Hazard sens. & Scaling & Specificity & Lighting & Collision \\
- & Exp & $\HS$ & Sc & $\SP$ & $\CFR$ & $O$/$R$, 8\,m/s \\
+ & Exp $\approx1$ & $\HS$ $\uparrow$ & Sc $\uparrow$ & $\SP$ $\uparrow$ & $\CFR$ $\uparrow$ & $O$\,/\,$R$ $\downarrow$ \\
 \midrule
 DD & 0.50$\downarrow$ {\scriptsize[0.46, 0.55]} & 0.06$\downarrow$ {\scriptsize[-0.01, 0.14]} & -0.28$\downarrow$ {\scriptsize[-0.50, -0.05]} & 0.76$\downarrow$ {\scriptsize[0.73, 0.80]} & 0.23$\downarrow$ {\scriptsize[0.17, 0.30]} & 7.6\,/\,9.2 \\
 LTF & 0.79$\downarrow$ {\scriptsize[0.75, 0.84]} & 0.03$\downarrow$ {\scriptsize[0.00, 0.06]} & -0.13$\downarrow$ {\scriptsize[-0.34, +0.07]} & 0.78$\downarrow$ {\scriptsize[0.75, 0.81]} & 0.23$\downarrow$ {\scriptsize[0.19, 0.28]} & 9.9\,/\,10.7 \\
