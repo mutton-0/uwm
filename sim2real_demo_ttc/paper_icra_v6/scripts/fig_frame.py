@@ -117,13 +117,13 @@ if MODE=="wide":
     WC=fx(0.92); x1=stage(x,WC,"(c) the exams")
     cw=WC-2*XPAD; n5=len(EX); ch=(CT-BOT-2*PAD-(n5-1)*fy(0.025))/n5
     for k,lab in enumerate(EX):
-        y1=CT-PAD-k*(ch+fy(0.025)); chip(x+XPAD,y1-ch,x+XPAD+cw,y1,lab.replace("\n"," "),4.3)
+        y1=CT-PAD-k*(ch+fy(0.025)); chip(x+XPAD,y1-ch,x+XPAD+cw,y1,lab.replace("\n"," "),5.6)
     x=right(x1,"test on the\nother side")
     # (d) 预后：四项竖排一列 + 右侧体检单（上）与车（下）
     WD=1-fx(0.03)-x; x1=stage(x,WD,"(d) prognosis")
     LW=fx(0.86); n4=len(PR); ch=(CT-BOT-2*PAD-(n4-1)*fy(0.025))/n4
     for k,lab in enumerate(PR):
-        y1=CT-PAD-k*(ch+fy(0.025)); chip(x+XPAD,y1-ch,x+XPAD+LW,y1,lab.replace("\n"," "),4.3)
+        y1=CT-PAD-k*(ch+fy(0.025)); chip(x+XPAD,y1-ch,x+XPAD+LW,y1,lab.replace("\n"," "),5.6)
     arrow((x+XPAD+LW+fx(0.02),MID),(x+XPAD+LW+fx(0.12),MID),lw=1.3,ms=5)
     NX=x+XPAD+LW+fx(0.36); NW=fx(0.30); NH=fy(0.40)
     clipboard(NX,CT-PAD-NH/2-fy(0.02),NW,NH,4.0)
