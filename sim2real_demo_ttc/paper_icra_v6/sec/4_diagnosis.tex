@@ -13,7 +13,7 @@ at half the human's distance to SimLingo at more than twice it, with AutoVLA and
 human's own.
 
 \paragraph{Hazard sensitivity}
-On these frames, no policy's plan responds to the pedestrian: on units that need a reaction, seeing it buys only \NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale, where the logged human trajectory, scored the same way against each policy's blind plan, reaches $0.52$--$0.62$ across hazard levels. The benefit is also unreliable in direction:
+On these frames, no policy's plan responds to the pedestrian: on units that need a reaction, seeing it buys only \NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale, against \NumHumanRef{} for the logged human trajectory scored the same way (\cref{tab:report}). The benefit is also unreliable in direction:
 counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
 pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
 SimLingo 18 vs.\ 30, the rest at most 5 either way, all McNemar $p\ge0.11$) --- what reads as a safety margin in \cref{tab:report} does not carry over to the individual case.

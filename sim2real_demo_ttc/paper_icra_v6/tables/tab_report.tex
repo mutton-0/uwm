@@ -1,7 +1,7 @@
 % !TEX root = ../main.tex
 \begin{table}[t]
 \centering
-\caption{\textbf{Diagnostic profiles.} Arrows: outside the reference threshold of \cref{tab:exams}, pointing to the side the value falls on; bold: best per column. Higher is better for hazard sensitivity, scaling, specificity and lighting, lower for collision; exposure is read against the human's distance. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$.}
+\caption{\textbf{Diagnostic profiles.} Arrows: outside the reference threshold of \cref{tab:exams}, pointing to the side the value falls on; bold: best per column. Higher is better for hazard sensitivity, scaling, specificity and lighting, lower for collision; exposure is read against the human's distance. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$. Human: the logged trajectory scored the same way against each policy's blind plan, averaged over policies.}
 \label{tab:report}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -16,6 +16,8 @@ DDv2 & 0.88 & \textbf{0.10$\downarrow$} & \textbf{+0.23} & 0.65$\downarrow$ & \t
 SimLingo & 2.19$\uparrow$ & 0.00$\downarrow$ & -0.22$\downarrow$ & 0.44$\downarrow$ & 0.23$\downarrow$ & 40.5\,/\,36.6 \\
 AutoVLA & \textbf{1.01} & 0.02$\downarrow$ & -0.18$\downarrow$ & 0.76$\downarrow$ & 0.44$\downarrow$ & 32.1\,/\,29.8 \\
 Alpamayo 1.5 & 1.13 & 0.01$\downarrow$ & -0.23$\downarrow$ & \textbf{0.84} & 0.25$\downarrow$ & 11.2\,/\,11.2 \\
+\midrule
+Human (logged) & 1.00 & 0.57 & -- & -- & -- & -- \\
 \bottomrule
 \end{tabular}}
 \end{table}

@@ -35,7 +35,7 @@ _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "CFR":max(M,key=lambda m:A[m]["point"]["CFR"])}
 _bc8=min(M,key=lambda m:coll(m,"8")[0])
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{Diagnostic profiles.} Arrows: outside the reference threshold of \cref{tab:exams}, pointing to the side the value falls on; bold: best per column. Higher is better for hazard sensitivity, scaling, specificity and lighting, lower for collision; exposure is read against the human's distance. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$.}",
+ r"\caption{\textbf{Diagnostic profiles.} Arrows: outside the reference threshold of \cref{tab:exams}, pointing to the side the value falls on; bold: best per column. Higher is better for hazard sensitivity, scaling, specificity and lighting, lower for collision; exposure is read against the human's distance. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$. Human: the logged trajectory scored the same way against each policy's blind plan, averaged over policies.}",
  r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{3pt}",
  r"\resizebox{\columnwidth}{!}{\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
  r"Policy & Exposure & Hazard sens. & Scaling & Specificity & Lighting & Collision \\",
@@ -47,6 +47,8 @@ for m in M:
     T.append(f"{SH[m]} & {cell(p['exposure'],'exposure',m==_bst['exposure'])} & "
              f"{cell(p['HS'],'HS',m==_bst['HS'])} & {cell(p['HS_slope'],'HS_slope',m==_bst['HS_slope'],'%+.2f')} & "
              f"{cell(p['SP'],'SP',m==_bst['SP'])} & {cell(p['CFR'],'CFR',m==_bst['CFR'])} & {cc} \\\\")
+_gcx=json.load(open(f"{V5}/gt_ceiling.json")); _hs_h=sum(g*n for g,n in zip(_gcx["gt"],_gcx["n"]))/sum(_gcx["n"])
+T+=[r"\midrule",f"Human (logged) & 1.00 & {_hs_h:.2f} & -- & -- & -- & -- \\\\"]
 T+=[r"\bottomrule",r"\end{tabular}}",r"\end{table}"]
 open(f"{_OUT}/tables/tab_report.tex","w").write("\n".join(T)+"\n")
 # ---------- Table III：跨舵位预注册 ----------
@@ -127,7 +129,7 @@ NUM={"NumCFRlo":f"{min(cf):.2f}","NumCFRhi":f"{max(cf):.2f}","NumCFRciHi":f"{max
      "NumRobustRho":(f"$\\rho\\ge{min(r['rho'] for r in DR['rows']):.2f}$" if DR else "--"),
      "NumDetDrop":(str(DR['n_frames_dropped']) if DR and DR.get('n_frames_dropped') else "17"),
      "NumMaxTerm":f"{_mx:.2f}",
-     "NumHumanRef":(f"{np.nanmean(_GC['gt']):.2f}" if _GC else "0.57"),
+     "NumHumanRef":(f"{sum(g*n for g,n in zip(_GC['gt'],_GC['n']))/sum(_GC['n']):.2f}" if _GC else "0.57"),
      "NumHumanLo":(f"{np.nanmin(_GC['gt']):.2f}" if _GC else "0.52"),
      "NumHumanHi":(f"{np.nanmax(_GC['gt']):.2f}" if _GC else "0.62"),
      "NumFrPerScene":"%.0f"%_fps,
