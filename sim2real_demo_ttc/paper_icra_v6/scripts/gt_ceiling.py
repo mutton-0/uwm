@@ -65,4 +65,20 @@ for b in range(len(BINS)):
     vals=[float(np.mean(per[m][b])) for m in MS if len(per[m][b])>=8]
     res["gt_lo"].append(min(vals) if vals else float("nan")); res["gt_hi"].append(max(vals) if vals else float("nan"))
 print("\n逐模型差的范围:", [f"{a:.2f}-{b:.2f}" if a==a else "—" for a,b in zip(res["gt_lo"],res["gt_hi"])])
+# 人类 scaling：对每家的盲规划配对，ρ(HS_h, a_req)；报逐家值与中位
+from scipy.stats import spearmanr
+_hs={m:[] for m in MS}; _ar={m:[] for m in MS}
+for z in rows:
+    if not sel(z): continue
+    u=z["uid"]; x=IDX.get(u); h=HP.get(u)
+    if x is None or h is None or len(h)<5 or not x.get("ped_future_ego"): continue
+    p0=np.mean(np.asarray(x["corners_ego"])[:,:2],0)
+    F=lin(np.r_[0,np.arange(1,6)*0.5],np.vstack([p0,np.asarray(x["ped_future_ego"])[:5,:2]]))
+    H=lin(np.r_[0,np.arange(1,6)*0.5],np.vstack([[0,0],np.asarray(h)[:5]]))
+    A,C,T,S=readouts(H,F); q=z["Q"]
+    if z["m"] in _hs: _hs[z["m"]].append(0.25*((A-q["A"])+(C-q["C"])+(T-q["T"])+np.tanh(S-q["S"]))); _ar[z["m"]].append(z["a_req"])
+res["sc_per_policy"]={m:float(spearmanr(_hs[m],_ar[m])[0]) for m in MS if len(_hs[m])>=8}
+res["sc_median"]=float(np.median(list(res["sc_per_policy"].values())))
+res["hs_weighted"]=float(sum(g*n for g,n in zip(res["gt"],res["n"]))/sum(res["n"]))
+print("人类 scaling 逐家:",{k:round(v,2) for k,v in res["sc_per_policy"].items()},"中位 %+.2f"%res["sc_median"])
 json.dump(res,open(f"{V5}/gt_ceiling.json","w"),indent=1)

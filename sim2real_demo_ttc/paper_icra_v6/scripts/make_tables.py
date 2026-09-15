@@ -35,7 +35,7 @@ _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "CFR":max(M,key=lambda m:A[m]["point"]["CFR"])}
 _bc8=min(M,key=lambda m:coll(m,"8")[0])
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{Diagnostic profiles.} Arrows: outside the reference threshold of \cref{tab:exams}, pointing to the side the value falls on; bold: best per column. Higher is better for hazard sensitivity, scaling, specificity and lighting, lower for collision; exposure is read against the human's distance. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$. Human: the logged trajectory scored the same way against each policy's blind plan, averaged over policies.}",
+ r"\caption{\textbf{Diagnostic profiles.} Arrows: outside the reference threshold of \cref{tab:exams}, pointing to the side the value falls on; bold: best per column. Higher is better for hazard sensitivity, scaling, specificity and lighting, lower for collision; exposure is read against the human's distance. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$. Human: the logged trajectory $H$ in place of $X^{O}$, scored against each policy's blind plan; $\HS$ averaged over the six pairings, scaling their median. Specificity and lighting need a counterfactual query and have no human counterpart.}",
  r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{3pt}",
  r"\resizebox{\columnwidth}{!}{\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
  r"Policy & Exposure & Hazard sens. & Scaling & Specificity & Lighting & Collision \\",
@@ -48,7 +48,7 @@ for m in M:
              f"{cell(p['HS'],'HS',m==_bst['HS'])} & {cell(p['HS_slope'],'HS_slope',m==_bst['HS_slope'],'%+.2f')} & "
              f"{cell(p['SP'],'SP',m==_bst['SP'])} & {cell(p['CFR'],'CFR',m==_bst['CFR'])} & {cc} \\\\")
 _gcx=json.load(open(f"{V5}/gt_ceiling.json")); _hs_h=sum(g*n for g,n in zip(_gcx["gt"],_gcx["n"]))/sum(_gcx["n"])
-T+=[r"\midrule",f"Human (logged) & 1.00 & {_hs_h:.2f} & -- & -- & -- & -- \\\\"]
+T+=[r"\midrule",f"Human (logged) & 1.00 & {_hs_h:.2f} & {_gcx.get('sc_median',float('nan')):+.2f} & -- & -- & -- \\\\"]
 T+=[r"\bottomrule",r"\end{tabular}}",r"\end{table}"]
 open(f"{_OUT}/tables/tab_report.tex","w").write("\n".join(T)+"\n")
 # ---------- Table III：跨舵位预注册 ----------
