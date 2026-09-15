@@ -78,9 +78,6 @@ for m in MM:
     fm=np.mean([x["F"] for x in P[m]]); im=np.mean([x["I"] for x in P[m]])
     d.plot(im,fm,marker="o",ms=4.0,color=COL[m],mec="white",mew=0.5,zorder=6)
     d.annotate(SH[m],(im,fm),textcoords="offset points",xytext=LOFF.get(m,(4.5,0)),ha="right" if m=="dd" else ("center" if m=="simlingo" else "left"),va="center",fontsize=4.8,color=COL[m])
-for lab,c in MARK:
-    d.plot(max(c[3],EPS),c[2],marker="o",ms=7,mfc="none",mec="#0b0b0b",mew=0.7,zorder=7)
-    d.annotate(lab,(max(c[3],EPS),c[2]),textcoords="offset points",xytext=(-7,3),fontsize=6.0,weight="bold",color="#0b0b0b",zorder=8)
 d.set_xscale("log"); d.set_yscale("log"); d.set_xlim(EPS*0.9,55); d.set_ylim(EPS*0.9,30)
 d.set_xlabel("$I$ (m)",fontsize=5.8,labelpad=0.5)
 d.set_ylabel("$F$ (m)",fontsize=5.8,labelpad=1)
