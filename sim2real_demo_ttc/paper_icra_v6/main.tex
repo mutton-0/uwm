@@ -28,7 +28,9 @@
 \ifanon
 \author{Anonymous authors\\ Paper ID ---}
 \else
-\author{Ruolin Yang, Zilin Huang, Buoyue Wang, Zhengyang Wan, Yuhao Luo, Zihao Sheng, Sikai Chen*}
+\author{Ruolin Yang, Zilin Huang, Buoyue Wang, Zhengyang Wan, Yuhao Luo, Zihao Sheng, Sikai Chen*%
+\thanks{This research was supported by the U.S. Department of Transportation (No.\ 69A3552348305) and by grants from NVIDIA utilizing NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition GPUs.}%
+}
 \fi
 \maketitle
 \thispagestyle{empty}
@@ -43,6 +45,10 @@
 \input{sec/6_lighting}
 \input{sec/5_sample}
 \input{sec/7_discussion}
+\ifanon\else
+\section*{Acknowledgment}
+This research was supported by the U.S. Department of Transportation (No.\ 69A3552348305) and by grants from NVIDIA utilizing NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition GPUs.
+\fi
 \bibliographystyle{IEEEtran}
 \bibliography{main}
 \end{document}
