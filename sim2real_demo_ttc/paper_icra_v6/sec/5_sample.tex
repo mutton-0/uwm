@@ -1,5 +1,5 @@
 % !TEX root = ../main.tex
-\section{How Much Data Does a Check-Up Need?}
+\section{Prognosis: What Transfers, and at What Cost}
 \label{sec:sample}
 
 \begin{figure}[t]
@@ -76,3 +76,29 @@ Three predictions fail.
 \paragraph{Reading}
 A small check-up can therefore report an ordering and a verdict for use in a new domain, but not a
 calibrated value.
+
+\subsection{Transfer of the method}
+\paragraph{What a small sample in the new domain buys}
+We draw $k$ scenes at random from the NAVSIM pool of \cref{sec:axes}, re-measure $F$ and $I$ on them and compare against the
+large-sample values, 200 draws per $k$. Ordering and level behave very differently. The ordering of
+how dangerously the policies behave---the share of scenes whose minimum time-to-proximity falls below
+$1.5$\,s---is recovered almost immediately: $\rho={\NumBehRhoTen}$ at $k=10$ and $\rho={\NumBehRhoTwenty}$
+at $k=20$ ($\rho\ge0.6$ in \NumBehHitTwenty\% of draws), rising to $\rho={\NumBehRhoForty}$ at $k=40$.
+The level is not: the same $k=20$ sample misstates the violation rate by \NumBehErrTwenty{} points and
+$\CFR$ by $\NumCfrErrTwenty$; the rule hit-rates sit in between, at \NumPFErrTwenty{} points. Importing
+the Boston $\CFR$ values instead misstates the Singapore ones by $\NumLhdCfrErr$, already worse than
+re-measuring $k=40$ fresh scenes ($\NumCfrErrForty$), while 80 scenes reach $\NumCfrErrBig$ and 160
+$\NumCfrErrHuge$. Values measured elsewhere are worth about forty scenes measured here.
+
+\paragraph{Which exam travels}
+Of the exams in the report, the one that predicts the new domain's behaviour is not the one that
+measures how \emph{much} a policy reacts, but the one that measures how \emph{steadily} it drives.
+Correlating each Boston exam against the Singapore rate of sub-1.5\,s time-to-proximity over the six
+policies, specificity gives $\rho={\NumSpBeh}$---the only value significant at the two-sided 5\% level
+for $n{=}6$---against ${\NumExpBeh}$ for exposure and ${\NumCfrBeh}$ for $\CFR$. Specificity asks how far a plan moves when an
+\emph{irrelevant} part of the scene is edited; a policy that answers ``not at all'' drives steadily,
+and steadiness is what survives the change of side. (Exposure travels too: on the larger
+original-image set of \cref{sec:bench} it reaches $0.94$ against the same target. Specificity is the
+stronger predictor and the only one that clears significance here.) The decomposition above says why:
+displacement that is not aimed away from the pedestrian is not protection, and a policy producing a
+lot of it is dangerous on both sides.

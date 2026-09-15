@@ -1,13 +1,11 @@
 % !TEX root = ../main.tex
-\section{Re-measuring $F$ and $I$ in the New Domain}
+\section{Diagnosis: Reading the Two Axes}
 \label{sec:axes}
 
-\Cref{sec:sample} moved a \emph{diagnosis} from one driving side to the other. The more useful
-question for deployment is whether the \emph{method} moves: can a handful of counterfactual cases in
-the new domain characterise how the policies behave there? We repeat both interventions on the
-\NumSGscenes{} NAVSIM Singapore near-pedestrian scenes and read, per scene, the two behavioural
-displacements that correspond to $\hat v_F$ and $\hat v_I$ at the output: $F$, the plan displacement
-caused by removing the target pedestrian, and $I$, that caused by the night-style perturbation.
+The diagnosis reads a policy on the two axes of \eqref{eq:FI}. We apply both interventions to the
+\NumSGscenes{} NAVSIM Singapore near-pedestrian scenes and read, per scene, $F$, the plan
+displacement caused by removing the target pedestrian, and $I$, that caused by the night-style
+perturbation.
 
 \begin{figure}[t]
 \centering
@@ -52,28 +50,3 @@ rank correlation between $\Delta S$ and the deceleration the scene demands is
 \NumRhoLo--\NumRhoHi{}.
 
 An exam that rewarded responsiveness alone would therefore rank the least safe policy first.
-
-\paragraph{What a small sample in the new domain buys}
-We draw $k$ scenes at random from the pool, re-measure $F$ and $I$ on them and compare against the
-large-sample values, 200 draws per $k$. Ordering and level behave very differently. The ordering of
-how dangerously the policies behave---the share of scenes whose minimum time-to-proximity falls below
-$1.5$\,s---is recovered almost immediately: $\rho={\NumBehRhoTen}$ at $k=10$ and $\rho={\NumBehRhoTwenty}$
-at $k=20$ ($\rho\ge0.6$ in \NumBehHitTwenty\% of draws), rising to $\rho={\NumBehRhoForty}$ at $k=40$.
-The level is not: the same $k=20$ sample misstates the violation rate by \NumBehErrTwenty{} points and
-$\CFR$ by $\NumCfrErrTwenty$; the rule hit-rates sit in between, at \NumPFErrTwenty{} points. Importing
-the Boston $\CFR$ values instead misstates the Singapore ones by $\NumLhdCfrErr$, already worse than
-re-measuring $k=40$ fresh scenes ($\NumCfrErrForty$), while 80 scenes reach $\NumCfrErrBig$ and 160
-$\NumCfrErrHuge$. Values measured elsewhere are worth about forty scenes measured here.
-
-\paragraph{Which exam travels}
-Of the exams in the report, the one that predicts the new domain's behaviour is not the one that
-measures how \emph{much} a policy reacts, but the one that measures how \emph{steadily} it drives.
-Correlating each Boston exam against the Singapore rate of sub-1.5\,s time-to-proximity over the six
-policies, specificity gives $\rho={\NumSpBeh}$---the only value significant at the two-sided 5\% level
-for $n{=}6$---against ${\NumExpBeh}$ for exposure and ${\NumCfrBeh}$ for $\CFR$. Specificity asks how far a plan moves when an
-\emph{irrelevant} part of the scene is edited; a policy that answers ``not at all'' drives steadily,
-and steadiness is what survives the change of side. (Exposure travels too: on the larger
-original-image set of \cref{sec:bench} it reaches $0.94$ against the same target. Specificity is the
-stronger predictor and the only one that clears significance here.) The decomposition above says why:
-displacement that is not aimed away from the pedestrian is not protection, and a policy producing a
-lot of it is dangerous on both sides.
