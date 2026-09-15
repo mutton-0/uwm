@@ -53,7 +53,6 @@ def _row(label,cells): return label+" & "+" & ".join(cells)+r" \\"
 def _cir(k,f="%.2f"):   # 置信区间独立成一小行，灰色 scriptsize
     return r"\multicolumn{1}{r}{\textcolor{gray}{\scriptsize 95\% CI}} & "+" & ".join(r"\textcolor{gray}{\scriptsize["+(f%A[m]["ci"][k][0])+", "+(f%A[m]["ci"][k][1])+"]}" for m in M)+r" & \\[-1pt]"
 R=[]
-R.append(r"\multicolumn{8}{@{}l}{\emph{Exams} (236 nuScenes frames)} \\")
 R.append(_row(r"Exposure (ratio to human) $\approx1$",[cell(A[m]["point"]["exposure"],"exposure",m==_bst["exposure"]) for m in M]+["1.00"])); R.append(_cir("exposure"))
 R.append(_row(r"Hazard sens.\ $\HS\in[-1,1]$ $\uparrow$",[cell(A[m]["point"]["HS"],"HS",m==_bst["HS"]) for m in M]+[f"{_hs_h:.2f}"])); R.append(_cir("HS"))
 R.append(_row(r"Scaling (rank corr.) $\uparrow$",[cell(A[m]["point"]["HS_slope"],"HS_slope",m==_bst["HS_slope"],"%+.2f") for m in M]+[f"{_gcx.get('sc_median',float('nan')):+.2f}"])); R.append(_cir("HS_slope","%+.2f"))
