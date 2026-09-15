@@ -59,11 +59,7 @@ The target is how often each policy keeps clear of the pedestrian on the Singapo
 of moving-ego scenes with minimum time-to-proximity $\ge1.5$\,s, the complement of the TTC column of
 \cref{tab:report}. This target changes dataset and city as well as driving side, whereas the
 pre-registered test above changes only the side. Each predictor is a six-policy ordering obtained
-without that data, and we read the rank correlations as orderings, not as tests. The standard scores
-agree with the target at $|\rho|\le\NumStdRhoMax$ (NAVSIM leaderboard \NumRhoLbKeep, nuScenes L2
-\NumRhoLtwoKeep, open-loop pedestrian collision \NumRhoPedcolKeep). The same TTC readout taken on the NAVSIM left-hand-drive scenes predicts the Singapore TTC, clearance and collision orderings at \NumOtherSideLo--\NumOtherSideHi, better than any exam, and the exams are not a substitute for that measurement. Of the five, read on the 88 Boston frames as
-a pre-deployment diagnosis would be, specificity matches the target best, $\rho=\NumSpBeh$
-(\NumSpLhdList), against $\NumExpBeh$ for exposure and $\NumCfrBeh$ for $\CFR$, where specificity and
+without that data, and we read the rank correlations as orderings, not as tests. The leaderboard score and the open-loop error agree with the target at $|\rho|\le\NumStdRhoMax$ (NAVSIM leaderboard \NumRhoLbKeep, nuScenes L2 \NumRhoLtwoKeep). Pedestrian-centred readouts that need no counterfactual edit do better: the open-loop pedestrian-collision rate on the same frames at \NumRhoPedcolKeep{} and the TTC column of \cref{tab:report} taken on the left-hand-drive side at \NumOtherSideTTC. The exams are not a substitute for such measurements. Of the five, read on the 88 Boston frames as a pre-deployment diagnosis would be, specificity matches the target best, $\rho=\NumSpBehTab$ (\NumSpLhdList), against $\NumExpBehTab$ for exposure and $\NumCfrBehTab$ for $\CFR$, where specificity and
 $\CFR$ are higher-is-better and exposure's negative value says that policies that plan further keep
 clear less often. What the exams add is the reason a policy orders where it does: displacement that
 is not aimed away from the pedestrian is not protection, and a policy producing a lot of it comes

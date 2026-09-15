@@ -355,14 +355,19 @@ if os.path.exists(f"{V5}/side_deviation.json") and os.path.exists(f"{V5}/case10_
         _CN=json.load(open(f"{V5}/cf_need.json")); _a=_CN["_all"]
         _mm=[k for k in _CN if k!="_all"]
         NUM3["NumCfScenes"]=str(_a["n_scene"]); NUM3["NumCfModels"]=str(len(_a["models"]))
-        _RC=json.load(open(f"{V5}/rank_consistency.json"))["spearman"]; _T="TTC 违规率"
-        _std={k:abs(v[_T]) for k,v in _RC.items() if k.startswith("B ") or k.startswith("C ")}
-        NUM3["NumStdRhoMax"]=f"{max(_std.values()):.2f}"
-        NUM3["NumRhoLtwoKeep"]=f"{abs(_RC['B nuScenes 开环·L2'][_T]):.2f}"; NUM3["NumRhoLbKeep"]=f"{abs(_RC['C NAVSIM 榜单 EPDMS（783）'][_T]):.2f}"
-        NUM3["NumRhoPedcolKeep"]=f"{abs(_RC['B nuScenes 开环·撞行人'][_T]):.2f}"
-        _os=[abs(_RC["A2 NAVSIM 左舵·TTC 违规率"][k]) for k in ("TTC 违规率","离行人最小间隙","撞行人率")]
-        NUM3["NumOtherSideLo"]=f"{min(_os):.2f}"; NUM3["NumOtherSideHi"]=f"{max(_os):.2f}"
-        _PLp=json.load(open(f"{V5}/profile_LHD.json"))
+        from scipy.stats import spearmanr as _spr
+        _TRk=json.load(open(f"{V5}/ttc_rank.json")); _keep=[100-_TRk["RHD"][m]["moving"]["viol"] for m in M]   # 目标 = 表 I 右舵 TTC 列的补集
+        _PLp=json.load(open(f"{V5}/profile_LHD.json")); _NUo=json.load(open(f"{V5}/nusc_openloop.json")); _BCo=json.load(open(f"{V5}/bench_compare.json"))
+        _r=lambda x: float(_spr(x,_keep)[0])
+        NUM3["NumSpBehTab"]=f"{_r([_PLp[m]['point']['SP'] for m in M]):.2f}"
+        NUM3["NumExpBehTab"]=f"{_r([_PLp[m]['point']['exposure'] for m in M]):+.2f}".replace("-","{-}")
+        NUM3["NumCfrBehTab"]=f"{_r([_PLp[m]['point']['CFR'] for m in M]):+.2f}".replace("-","{-}")
+        NUM3["NumRhoLtwoKeep"]=f"{abs(_r([_NUo[m]['clean']['L2_avg'] for m in M])):.2f}"
+        NUM3["NumRhoLbKeep"]=f"{abs(_r([_BCo['navsim_all'][m]['epdms'] for m in M])):.2f}"
+        NUM3["NumRhoPedcolKeep"]=f"{abs(_r([_NUo[m]['clean']['col_ped'] for m in M])):.2f}"
+        NUM3["NumRhoFrontKeep"]=f"{abs(_r([_NUo[m]['clean']['col_front'] for m in M])):.2f}"
+        NUM3["NumStdRhoMax"]=f"{max(abs(_r([_NUo[m]['clean']['L2_avg'] for m in M])),abs(_r([_BCo['navsim_all'][m]['epdms'] for m in M])),abs(_r([_NUo[m]['clean']['col_front'] for m in M]))):.2f}"
+        NUM3["NumOtherSideTTC"]=f"{_r([100-_TRk['LHD'][m]['moving']['viol'] for m in M]):.2f}"
         NUM3["NumSpLhdList"]=", ".join(f"{SH[m]} {_PLp[m]['point']['SP']:.2f}" for m in M)
         NUM3["NumCfCells"]=str(_a["n_scene"]*_a["n_speed"]*len(_a["models"]))
         NUM3["NumCfNeed"]=str(_a["n_need"]); NUM3["NumCfReal"]=str(_a["n_real"])
