@@ -35,7 +35,7 @@ _bst={"exposure":min(M,key=lambda m:abs(A[m]["point"]["exposure"]-1)),
       "CFR":max(M,key=lambda m:A[m]["point"]["CFR"])}
 _bc8=min(M,key=lambda m:coll(m,"8")[0])
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{Diagnostic profiles.} $\downarrow$/$\uparrow$: outside the reference threshold of \cref{tab:exams}; bold: best per column. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$.}",
+ r"\caption{\textbf{Diagnostic profiles.} Arrows: outside the reference threshold of \cref{tab:exams}, pointing to the side the value falls on; bold: best per column. Higher is better for hazard sensitivity, scaling, specificity and lighting, lower for collision; exposure is read against the human's distance. Collision: $1-A(X)$ \eqref{eq:SA} at 8\,m/s, $X^{O}$\,/\,$X^{R}$.}",
  r"\label{tab:report}",r"\footnotesize",r"\setlength{\tabcolsep}{3pt}",
  r"\resizebox{\columnwidth}{!}{\begin{tabular}{@{}lccccc c@{}}",r"\toprule",
  r"Policy & Exposure & Hazard sens. & Scaling & Specificity & Lighting & Collision \\",
@@ -55,8 +55,7 @@ lab={"P1":"Lighting outweighs the pedestrian (CFR $<1$) for every policy",
      "P3":"Exposure ordering transfers ($\\rho\\ge0.6$; SimLingo top, DD bottom)",
      "P4":"Specificity ordering transfers ($\\rho\\ge0.6$; SimLingo lowest $\\SP$)",
      "P5":f"Point values stay within the left-hand CI ($\\ge$70\\% of {len(PR['P5']['cells'])} cells)",
-     "P6":"Direction of plan change (auxiliary, retired): more orthogonal night/removal changes shift less between sides",
-     "P7":"SimLingo collides most; visible vs.\\ removed within 3\\,pts"}
+     "P7":"SimLingo collides most, visible vs.\\ removed within 3\\,pts"}
 def det(k):
     d=PR[k]
     if k=="P1": return f"max upper CI {max(v[1] for v in d['detail'].values()):.2f}"
@@ -64,25 +63,24 @@ def det(k):
         bad=[SH[m] for m,v in d['detail'].items() if v[1]>=0.15]; return ", ".join(bad)+" above" if bad else "all below"
     if k in ("P3","P4"): return f"$\\rho={d['rho']:.2f}$"
     if k=="P5": return f"{100*d['rate']:.0f}\\%"
-    if k=="P6": return f"$\\rho={d['rho']:+.2f}$ (opposite)"
     if k=="P7": return f"gap {100*d['max_gap']:.1f}\\,pts"
 T=[r"\begin{table}[t]",r"\centering",
    r"\caption{\textbf{Pre-registered transfer test.} Predictions fixed on 88 Boston frames, tested on 148 Singapore frames; five policies, the replaced sixth changes no verdict (\cref{sec:sample}).}",
    r"\label{tab:prereg}",r"\footnotesize",r"\setlength{\tabcolsep}{2.5pt}",
    r"\begin{tabular}{@{}lp{4.35cm}cl@{}}",r"\toprule",r"No. & Prediction & Holds & Evidence \\",r"\midrule"]
-for k in ["P1","P2","P3","P4","P5","P6","P7"]:          # 按登记顺序 P1–P7
+for k in ["P1","P2","P3","P4","P5","P7"]:               # 登记顺序；P6（方向类，已弃用）不再报告，P7 显示为 P6
     yn="yes" if PR[k]["pass_"] else r"\textbf{no}"
-    T.append(f"{k} & {lab[k]} & {yn} & {det(k)} \\\\")
+    T.append(f"{'P6' if k=='P7' else k} & {lab[k]} & {yn} & {det(k)} \\\\")
 T+=[r"\bottomrule",r"\end{tabular}",r"\end{table}"]
 open(f"{_OUT}/tables/tab_prereg.tex","w").write("\n".join(T)+"\n")
 # ---------- Table IV：光照（精简：不列 p，显著者加粗） ----------
 NS=json.load(open(f"{V5}/night_speed.json"))
 def bold(txt,cond): return f"\\textbf{{\\boldmath {txt}}}" if cond else txt
 T=[r"\begin{table}[t]",r"\centering",
- r"\caption{\textbf{The night-style perturbation and the plan.} $\CFR$ \eqref{eq:cfr}, same frames, 95\% CI. Speed: change of planned mean speed, $X^{O}\to X^{N}$. $\Delta_N S=S(X^{N})-S(X^{O})$, $S$ of \eqref{eq:SA}, negative = closer. Bold: $p<0.01$.}",
+ r"\caption{\textbf{The night-style perturbation and the plan.} $\CFR=\mathbb{E}F/\mathbb{E}I$ \eqref{eq:cfr} on the same frames, 95\% CI: $F$ (pedestrian) should be large, $I$ (re-lighting) small, so $\CFR$ higher is better. Speed: change of planned mean speed, $X^{O}\to X^{N}$. $\Delta_N S=S(X^{N})-S(X^{O})$, $S$ of \eqref{eq:SA}, negative = closer. Bold: $p<0.01$.}",
    r"\label{tab:light}",r"\footnotesize",r"\setlength{\tabcolsep}{3pt}",
    r"\begin{tabular}{@{}lccc@{}}",r"\toprule",
-   r"Policy & $\CFR$ [95\% CI] & speed & $\Delta_N S$ (m) \\",r"\midrule"]
+   r"Policy & $\CFR$ [95\% CI] $\uparrow$ & speed $\downarrow$ & $\Delta_N S$ (m) $\uparrow$ \\",r"\midrule"]
 for m in M:
     c=CF[m]["corr"]; n=NS[m]
     pm=lambda x,f: "$"+f.format(x)+"$"   # 不再把小值压成 "0"：真值很小就多给一位小数，见下
@@ -139,7 +137,7 @@ NUM={"NumCFRlo":f"{min(cf):.2f}","NumCFRhi":f"{max(cf):.2f}","NumCFRciHi":f"{max
      "NumNstarCFRhi":f"{max(ns['CFR']['n_star'].values()):.0f}","NumNstarExpHi":f"{max(v for m,v in ns['exposure']['n_star'].items() if m in ('dd','ltf','ddv2','simlingo')):.0f}",
      "NumRankSPforty":f"{100*ns['SP']['rank_p']['40']:.0f}","NumRankExpTen":f"{100*ns['exposure']['rank_p']['10']:.0f}",
      "NumRankHSninety":f"{100*ns['HS']['rank_p']['90']:.0f}","NumRankAlignOneThirty":f"{100*ns['align']['rank_p']['130']:.0f}",
-     "NumPass":str(sum(PR[k]['pass_'] for k in ['P1','P2','P3','P4','P5','P6','P7'])),
+     "NumPass":str(sum(PR[k]['pass_'] for k in ['P1','P2','P3','P4','P5','P7'])),
      "NumNightDD":f"{100*NS['dd']['dv_rel']:.0f}","NumNightLTF":f"{100*NS['ltf']['dv_rel']:.0f}","NumNightSL":f"{100*NS['simlingo']['dv_rel']:.0f}",
      "NumNightDDv":f"{100*NS['ddv2']['dv_rel']:.0f}"}
 open(f"{_OUT}/tables/numbers.tex","w").write("\n".join(f"\\newcommand{{\\{k}}}{{{v}}}" for k,v in NUM.items())+"\n")
@@ -151,10 +149,10 @@ if os.path.exists(f"{V5}/bench_compare.json") and os.path.exists(f"{V5}/ttc_rank
     BC=json.load(open(f"{V5}/bench_compare.json")); TR=json.load(open(f"{V5}/ttc_rank.json"))
     NUo=BC["nusc"]; CV=BC["navsim_close"]; AL=BC["navsim_all"]
     T=[r"\begin{table}[t]",r"\centering",
-       r"\caption{\textbf{The six policies under the standard scores.} Left: nuScenes open-loop L2 on the 236 near-pedestrian frames, original\,/\,removed. Middle: NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} near-pedestrian ones. Right: share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side, rank in parentheses. Bold: best per column.}",
+       r"\caption{\textbf{The six policies under the standard scores.} Left: nuScenes open-loop L2 on the 236 near-pedestrian frames, original\,/\,removed. Middle: NAVSIM EPDMS on all 783 Singapore scenes and on the \NumNclose{} near-pedestrian ones. Right: share of moving-ego scenes with pedestrian TTC $<1.5$\,s per driving side, rank in parentheses. $\uparrow$/$\downarrow$: higher/lower is better. Bold: best per column.}",
        r"\label{tab:bench}",r"\scriptsize",r"\setlength{\tabcolsep}{2.0pt}",
        r"\begin{tabular}{@{}lc cc cc@{}}",r"\toprule",
-       r" & L2 (m) & \multicolumn{2}{c}{EPDMS} & \multicolumn{2}{c}{TTC$<$1.5\,s} \\",
+       r" & L2 (m) $\downarrow$ & \multicolumn{2}{c}{EPDMS $\uparrow$} & \multicolumn{2}{c}{TTC$<$1.5\,s (\%) $\downarrow$} \\",
        r"\cmidrule(lr){2-2}\cmidrule(lr){3-4}\cmidrule(l){5-6}",
        r"Policy & orig.\,/\,rm. & all & near & LHD & RHD \\",r"\midrule"]
     # EPDMS 两列各自排名（高分为 1），让"榜单第一跌到第五"在表里直接看得见

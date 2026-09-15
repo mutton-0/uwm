@@ -15,28 +15,27 @@ Two questions decide whether a few hundred edited frames can stand in for a rank
 
 \paragraph{A pre-registered transfer test}
 Does a diagnosis made on one driving side describe the same policy on the other? Before computing any
-right-hand-drive statistic, we fixed seven predictions, P1--P7 in \cref{tab:prereg}, and their decision rules. They were derived from the profile of the 88 Boston
+right-hand-drive statistic, we fixed six predictions, P1--P6 in \cref{tab:prereg}, and their decision rules. They were derived from the profile of the 88 Boston
 frames, and we tested them on the near-pedestrian units of the 148 Singapore frames
 (\cref{tab:prereg}). The registration covered the six policies public at that time. NVIDIA
 subsequently released Alpamayo~1.5, which accepts navigation instructions, and we use it in place of
 Alpamayo-R1 throughout this paper. Because both driving sides of Alpamayo~1.5 were measured together,
 its numbers do not satisfy the registration discipline, so the table is evaluated on the five policies
-that do. Retaining the replaced policy changes none of the seven verdicts.
+that do. Retaining the replaced policy changes none of the six verdicts.
 
 \input{tables/tab_prereg}
 
 \paragraph{What transferred}
-\NumPass{} of the seven predictions hold, and they are the orderings and verdicts. The night-style perturbation
+\NumPass{} of the six predictions hold, and they are the orderings and verdicts. The night-style perturbation
 outweighs the pedestrian in every policy. Exposure keeps its order ($\rho=0.90$), and so does specificity, with SimLingo the lowest. SimLingo collides most, with the visible and removed
 rates within 3 points of each other.
 
 \paragraph{What did not}
-Three predictions fail.
+Two predictions fail.
 \begin{itemize}
 \item Point values drift: only 60\% of the model--exam cells stay inside their Boston interval.
 \item In Singapore, DiffusionDrive and DiffusionDriveV2 show a small but non-zero hazard sensitivity
       ($\HS=0.09$ and $0.08$).
-\item P6 concerned the direction of the plan change, a quantity the check-up no longer uses ($F$ and $I$ are magnitudes, and the exam asks only that $F\gg I$). It predicted that policies whose night-induced plan change is more orthogonal to their pedestrian-induced one would shift less between sides. The observed rank correlation is $-0.90$, and we report it only because it was registered.
 \end{itemize}
 
 \paragraph{Reading}
