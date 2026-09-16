@@ -1,0 +1,15 @@
+\subsection{The Lighting Exam in Depth}
+\label{sec:lighting}
+
+Lighting should not change what a driver does, so this exam asks how far a policy is moved by an
+irrelevant change. It is the verdict that transfers between driving sides for every policy (\cref{sec:sample}).
+
+\paragraph{Magnitude}
+Removing a pedestrian from the corridor moves every policy's plan only \NumCFRlo--\NumCFRhi{} times as
+far as the night-style perturbation does, with every 95\% interval below one (\cref{tab:report}). On detector-verified edits $\CFR=0.30$--$0.64$.
+
+\paragraph{Direction: faster, and therefore closer}
+Three policies plan faster under the night-style perturbation, DiffusionDrive by \NumNightDD\%,
+SimLingo by \NumNightSL\% and LTF by \NumNightLTF\%, and their plans pass $0.24$--$0.47$\,m closer to
+the pedestrian, while DiffusionDriveV2, the only policy that also reads LiDAR, slows
+($\NumNightDDv\%$) and keeps more distance. Whether these profiles and orderings persist across driving sides is tested in \cref{sec:sample}.

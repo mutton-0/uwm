@@ -1,0 +1,126 @@
+\section{The Check-Up: Interventions, Axes and Exams}
+\label{sec:checkup}
+
+\subsection{Units, interventions and plans}
+Write a policy as a map $\pi$ from a sensory-and-state input to a planned trajectory
+$X=(X_t)_{t\in[0,2.5]}$, $X_t\in\mathbb{R}^2$ in the ego frame, sampled at $0.1$\,s. A \emph{unit} is a
+pair $u=(f,v)$: a logged frame $f$ and an input ego speed $v$. We take $v$ from the log for every
+frame and, wherever the pedestrian's logged future is available, additionally
+$v\in\{4,8\}\,\mathrm{m/s}$, which places the pedestrian on the planned path in scenes where the logged
+ego was stationary. The same grid is used on both corpora so that all six policies are read on one
+unit pool. The readouts are insensitive to it (widening the grid to $\{2,4,6,8\}$ leaves the
+specificity and scaling orderings identical, $\rho=1.00$).
+
+Three interventions act on the input, leaving the policy untouched:
+\begin{equation}
+\begin{aligned}
+&\mathcal{E}_O=\mathrm{id},\qquad \mathcal{E}_R:\ \text{delete the pedestrian},\\
+&\mathcal{E}_N:\ \text{re-light at night},
+\end{aligned}
+\label{eq:interventions}
+\end{equation}
+and yield the paired plans $X^{O}=\pi(\mathcal{E}_O u)$, $X^{R}=\pi(\mathcal{E}_R u)$,
+$X^{N}=\pi(\mathcal{E}_N u)$. The letters $O,R,N$ name the three conditions only: an intervention carries one as a subscript, a plan as a superscript. All quantities below are functionals of
+these plans and of the
+pedestrian's \emph{logged} future $P_t$. The horizon $2.5$\,s is the one all six policies share.
+
+The displacement between two plans is
+\begin{equation}
+\bar D(X,Y)=\tfrac{1}{|\mathcal{T}|}\textstyle\sum_{t\in\mathcal{T}}\|X_t-Y_t\|,
+\label{eq:disp}
+\end{equation}
+with $\mathcal{T}=\{0,0.1,\dots,2.5\}$, and the two quantities the rest of the paper is written in are
+\begin{equation}
+F=\bar D(X^{O},X^{R}),\qquad I=\bar D(X^{O},X^{N}).
+\label{eq:FI}
+\end{equation}
+We call $F$ the \emph{faithfulness} displacement---the plan change attributable to the pedestrian
+itself---and $I$ the \emph{interference} displacement---the change the same policy produces under a large edit that should not change the correct plan, which bounds from above how far the plan moves for reasons unrelated to the pedestrian. A policy that
+uses the pedestrian and ignores the lighting has $F\gg I$. The reverse ordering means the plan is
+driven by something the road does not care about.
+
+\paragraph{Realising $\mathcal{E}_R$}
+The target is localised by projecting its annotated 3D box into the camera rather than by taking the
+dataset's 2D boxes, whose association to the tracked object is unreliable for the short-range,
+partially occluded pedestrians of these scenes. It is segmented with SAM~\cite{kirillov2023sam} (\cref{fig:method}a) (box
+and torso prompts, clipped to the box, dilated by $9$\,px) and inpainted with
+LaMa~\cite{suvorov2022lama}. For the LiDAR policy the points inside the box are deleted. VLA policies read several cameras and only the front one is edited, so we retain only frames in which the target
+appears in no other view.
+
+\paragraph{Realising $\mathcal{E}_N$}
+Each image $\mathbf{f}\in[0,1]^{h\times w\times3}$ the policy consumes is mapped by a closed-form
+photometric transform
+\begin{equation}
+\mathcal{E}_{N}(\mathbf{f})=\mathrm{clip}\!\left[\,g\,\big(\mathrm{sat}_{s}\mathbf{f}\big)^{\gamma}\odot\boldsymbol\tau+\sigma\boldsymbol\epsilon\,\right],
+\quad \boldsymbol\epsilon\sim\mathcal{N}(0,1),
+\label{eq:relight}
+\end{equation}
+with $\mathrm{sat}_s$ the saturation scaling, $\boldsymbol\tau$ a per-channel tint and the noise seed
+fixed per frame. This is a photometric perturbation (gamma, gain, saturation, noise), not a captured night scene. We call it the \emph{night-style perturbation} and use $(\gamma,g,s,\sigma)=(2.2,0.45,0.45,7/255)$ with a blue tint (\cref{fig:method}a).
+
+\paragraph{Validity of the interventions}
+An independent detector (Faster R-CNN~\cite{ren2015faster}, COCO, score $\ge0.5$) recovers the target
+in \NumDetOrig\% of the original images, in \NumDetStill\% under $\mathcal{E}_R$ and in
+\NumDetNight\% under $\mathcal{E}_N$ (IoU $\ge0.5$): removal suppresses the pedestrian for an observer
+outside the policy, re-lighting leaves it visible. Pasting inpainting patches on empty road bounds the
+residual artefact at $5$--$17\%$ of the removal effect.
+
+\subsection{Readouts}
+With $c_t(X)=\|X_t-P_t\|-r_e-r_p$ the clearance net of the ego half-width $r_e=1.0$\,m and the
+pedestrian radius $r_p=0.4$\,m, a plan is summarised by four functionals,
+\begin{align}
+S(X)&=\langle\min(c_t,\bar c)\rangle_t,\; A(X)=\mathbb{1}[\min_t c_t>0],\label{eq:SA}\\
+C(X)&=\mathrm{clip}_{[0,1]}(\min_t c_t/d_0),\; T(X)=\inf\{t\!:c_t<d_0\}/2.5,\label{eq:CT}
+\end{align}
+with $T=1$ if the set is empty. The constants are physical, not tuned: $r_e$ is the half-width of the
+nuScenes ego box ($4.08\times1.85$\,m), $r_p$ the disc a standing adult occupies, $d_0=1$\,m the outer
+edge of personal space~\cite{hall1966hidden}, and $\bar c=10$\,m caps the contribution of scenes in
+which the pedestrian is far away. Equations~\eqref{eq:SA}--\eqref{eq:CT} are the standard surrogate-safety measures~\cite{gettman2003surrogate}, read as distance to a person over the whole trajectory. Speed is deliberately not a readout: the same deceleration is safe or unsafe depending on where the person is.
+
+\subsection{Exams}
+Let $L(X)=\sum_t\|X_{t+\delta}-X_t\|$ denote arc length and $H$ the logged human trajectory.
+
+\paragraph{Exposure}
+$\mathrm{Exp}=\mathrm{med}\,L(X^{O})/L(H)$ over frames with $L(H)\ge0.5$\,m.
+
+\paragraph{Hazard sensitivity}
+A unit \emph{needs} a reaction when the pedestrian-blind plan enters personal space, $C(X^{R})<1$. On
+those units, writing $\Delta(\cdot)=(\cdot)(X^{O})-(\cdot)(X^{R})$,
+\begin{equation}
+\HS=\tfrac14\big[\Delta A+\Delta C+\Delta T+\tanh(\Delta S/d_0)\big]\in[-1,1].
+\label{eq:hs}
+\end{equation}
+Each term lies in $[-1,1]$ by construction and $\tanh$ squashes the single unbounded one at the $d_0$
+scale. The composite is ours, its ingredients are not. Its four terms are the surrogate-safety
+measures of \eqref{eq:SA}--\eqref{eq:CT}, and averaging normalised sub-scores into one index is how
+the benchmark we compare against forms its extended predictive driver model score (EPDMS)~\cite{dauner2024navsim}, keeping the two commensurable.
+What the check-up adds is that every sub-score is a \emph{paired difference} across
+$\mathcal{E}_R$---the ablation form used to attribute behaviour to an input in interpretability
+work~\cite{zou2023repe}. $\HS$ is read against the model-independent hazard
+\begin{equation}
+a_{\mathrm{req}}=\frac{v^{2}}{2\max(d-2,\,0.5)},\qquad \mathrm{TTC}_0=\frac{d-2}{v},
+\label{eq:hazard}
+\end{equation}
+the deceleration required to stop short of a pedestrian at distance $d$ and the corresponding
+time to collision (TTC)~\cite{gettman2003surrogate}. Units with $v<1$\,m/s are excluded: a
+stationary ego can move neither toward nor away from anyone.
+
+\paragraph{Scaling}
+$\mathrm{Sc}=\rho\big(\HS,\,a_{\mathrm{req}}\big)$ over needed units, with $\rho$ Spearman's rank
+correlation.
+\paragraph{Specificity}
+On units where the pedestrian requires no reaction ($C(X^{R})\ge1$) the correct plan does not change when it is removed, and a plan that changes anyway over-reacts:
+\begin{equation}
+\SP=\exp\!\big(-\bar D(X^{O},X^{R})/0.5\,\mathrm{m}\big)\in(0,1],
+\label{eq:sp}
+\end{equation}
+so $\SP\to1$ iff removing a pedestrian that required no reaction leaves the plan where it was. $\SP$ is read together with $\HS$: a policy blind to pedestrians scores $\SP=1$ and $\HS=0$.
+
+\paragraph{Lighting}
+The \emph{causal faithfulness ratio} ($\CFR$) weighs the two displacements of \eqref{eq:FI} against
+each other,
+\begin{equation}
+\CFR=\frac{\mathbb{E}\,\bar D(X^{O},X^{R})}{\mathbb{E}\,\bar D(X^{O},X^{N})}=\frac{\mathbb{E}F}{\mathbb{E}I},
+\label{eq:cfr}
+\end{equation}
+A policy for which lighting is irrelevant has $\CFR\gg1$. The thresholds ($\HS\ge0.15$, $\mathrm{Sc}>0$, $\SP\ge0.8$, exposure within $[0.8,1.2]$, $\CFR>1$) are reference values we set, not population norms.

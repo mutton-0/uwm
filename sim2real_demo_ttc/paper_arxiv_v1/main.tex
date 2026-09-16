@@ -1,0 +1,51 @@
+\documentclass[letterpaper, 10pt, conference]{ieeeconf}
+\IEEEoverridecommandlockouts
+\overrideIEEEmargins
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalize]{cleveref}
+\newcommand{\CFR}{\mathrm{CFR}}
+\newcommand{\HS}{\mathrm{HS}}
+\newcommand{\SP}{\mathrm{SP}}
+\input{tables/numbers}
+\setlength{\abovecaptionskip}{2pt}\setlength{\belowcaptionskip}{0pt}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\begin{document}
+\title{\LARGE \bf Beyond the Leaderboard: Counterfactual Diagnosis of End-to-End and VLA Driving Policies Under Domain Shift}
+\newif\ifanon \anonfalse
+\ifanon
+\author{Anonymous authors\\ Paper ID ---}
+\else
+\author{Ruolin Yang, Zilin Huang, Buoyue Wang, Zhengyang Wan, Yuhao Luo, Zihao Sheng, Sikai Chen*
+\thanks{This research was supported by the U.S. Department of Transportation (No.\ 69A3552348305) and by grants from NVIDIA utilizing NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition GPUs.}
+}
+\fi
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+\input{sec/0_abstract}
+\input{sec/1_intro}
+\input{sec/2_related}
+\input{sec/3_checkup}
+\input{sec/4_experiments}
+\input{sec/5b_axes}
+\input{sec/4_diagnosis}
+\input{sec/6_lighting}
+\input{sec/5_sample}
+\input{sec/7_discussion}
+\ifanon\else
+\section*{Acknowledgment}
+This research was supported by the U.S. Department of Transportation (No.\ 69A3552348305) and by grants from NVIDIA utilizing NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition GPUs.
+\fi
+\bibliographystyle{IEEEtran}
+\bibliography{main}
+\end{document}

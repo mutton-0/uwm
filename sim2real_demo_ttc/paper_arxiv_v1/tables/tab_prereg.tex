@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Pre-registered transfer test.} Predictions fixed on 88 Boston frames, tested on 148 Singapore frames, five policies (the replaced sixth changes no verdict).}
+\label{tab:prereg}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lp{4.35cm}cl@{}}
+\toprule
+No. & Prediction & Holds & Evidence \\
+\midrule
+P1 & Lighting outweighs the pedestrian (CFR $<1$) for every policy & yes & max upper CI 0.70 \\
+P2 & Hazard sensitivity stays below 0.15 (upper CI) & \textbf{no} & DD, DDv2 above \\
+P3 & Exposure ordering transfers ($\rho\ge0.6$; SimLingo top, DD bottom) & yes & $\rho=0.90$ \\
+P4 & Specificity ordering transfers ($\rho\ge0.6$; SimLingo lowest $\SP$) & yes & $\rho=0.60$ \\
+P5 & Point values stay within the left-hand CI ($\ge$70\% of 15 cells) & \textbf{no} & 60\% \\
+P6 & Night- and removal-induced plan changes more orthogonal, less shift between sides (auxiliary) & \textbf{no} & $\rho=-0.90$ (opposite) \\
+P7 & SimLingo collides most, visible vs.\ removed within 3\,pts & yes & gap 2.7\,pts \\
+\bottomrule
+\end{tabular}
+\end{table}

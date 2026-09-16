@@ -1,0 +1,20 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Driving policies and their benchmarks}
+We examine bird's-eye-view (BEV) planners of the TransFuser lineage~\cite{chitta2023transfuser} (LTF,
+DiffusionDrive~\cite{liao2025diffusiondrive}, DiffusionDriveV2~\cite{diffusiondrivev2}) and
+vision--language--action models (SimLingo~\cite{renz2025simlingo}, AutoVLA~\cite{zhou2025autovla},
+Alpamayo-1.5~\cite{nvidia2025alpamayo,nvidia2026alpamayo15}). NAVSIM~\cite{dauner2024navsim} scores
+plans by multiplying hard gates with a weighted average of soft terms, open-loop scores are known to reward proxies~\cite{li2024egostatus}, end-to-end policies to exploit biases in their inputs~\cite{jaeger2023hidden}, and closed-loop benchmarks~\cite{jia2024bench2drive} score a policy in simulation. NAVSIM's pseudo-simulation~\cite{cao2025pseudosim} moves the score toward closed loop. We ask a different question, whether the pedestrian entered the plan, and read released policies on real frames.
+
+\paragraph{Behavioural tests and causal confusion}
+Checklists~\cite{ribeiro2020checklist} and corruption benchmarks~\cite{hendrycks2019benchmarking}
+probe models beyond aggregate accuracy, but a metric drop does not say whether a policy became more
+cautious or less. Imitation learners respond to correlates of the expert's action rather than to its
+causes~\cite{dehaan2019causal,codevilla2019exploring,geirhos2020shortcut}. Our exams intervene on a
+cause (a pedestrian) and a nuisance (lighting) directly and read signed plan changes.
+
+\paragraph{Counterfactual editing}
+Counterfactual explanations edit the scene~\cite{jacob2022steex}, and
+CausalAgents~\cite{roelofs2022causalagents} deletes non-causal agents to test motion forecasters. Closed-loop simulators insert or re-render agents in reconstructed scenes~\cite{ljungbergh2024neuroncap,yang2023unisim,zhou2024hugsim}. Our removal edit applies the same idea at pixel level to real frames, every edit is verified by a detector, and six released policies are compared on the same edits.

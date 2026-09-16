@@ -1,0 +1,42 @@
+\subsection{The Five Exams}
+\label{sec:diagnosis}
+
+\input{tables/tab_report}
+
+\Cref{tab:report} gives the six profiles, read under our open-loop protocol on the nuScenes frames: the behaviour behind the ranks of \cref{sec:sample}.
+
+\paragraph{Exposure}
+The six policies differ first in how far they plan, and this alone will turn out to explain more of
+the collision picture below than perception does: exposure spans a factor of four, from DiffusionDrive
+at half the human's distance to SimLingo at more than twice it, with AutoVLA and Alpamayo-1.5 near the
+human's own.
+
+\paragraph{Hazard sensitivity}
+On these frames the plans respond little to the pedestrian: on units that need a reaction, seeing it buys only \NumHSlo--\NumHShi{} of safety on a $[-1,1]$ scale, against \NumHumanRef{} when the logged human trajectory $H$ takes the place of $X^{O}$ in \eqref{eq:hs} (\cref{tab:report}), a reference rather than a ceiling, since $H$ and $X^{R}$ differ for reasons beyond the pedestrian. The benefit is also unreliable in direction:
+counting only cases where seeing the pedestrian changes the outcome, it turns a collision into a clean
+pass about as often as it turns a pass into a collision, for every policy (DiffusionDrive 9 vs.\ 5,
+SimLingo 21 vs.\ 30, the rest at most 5 either way, all exact-binomial $p\ge0.26$) --- what reads as a safety margin in \cref{tab:report} does not carry over to the individual case.
+
+\paragraph{Scaling}
+The benefit does not grow with the hazard: its rank
+correlation with $a_{\mathrm{req}}$ is negative for \NumScalNeg{} policies, down to \NumScalLo{} for
+\NumScalWorst. DiffusionDriveV2 is the only exception (\NumScalHi), and its benefit stays below
+$0.15$. Replacing the hazard axis by the time-based $\mathrm{TTC}_0$, whose sign is reversed by
+construction, leaves the picture unchanged (\NumScalTtcLo{} to \NumScalTtcHi, against \NumScalLo{} to
+\NumScalHi). The human reference is $\NumHumanSc$: a driver who already yields at every hazard level has little room left to scale, so this exam is informative where $\HS$ is small, which is where all six policies sit.
+
+\paragraph{Specificity}
+A policy whose plan moves when nothing requires it is not cautious but unsteady, and steadiness is what the exploratory analysis of \cref{sec:sample} finds to travel across driving sides. SimLingo's
+plan moves most when nothing requires it ($\SP=\NumSpSL$), while the other five stay steadier, at
+\NumSpOtherLo--\NumSpOtherHi.
+
+\paragraph{Lighting}
+Removing the pedestrian moves every plan less than the night-style perturbation does ($\CFR<1$ for all six, \cref{tab:report}). \Cref{sec:lighting} reads this exam in depth.
+
+\paragraph{Collisions}
+Collisions with the pedestrian's logged future follow how far a policy plans to drive, not what it perceives. At the logged
+speed, the visible and removed rates differ by at most \NumCollGap{} points for every policy, and at
+8\,m/s by at most \NumCollGapEight. SimLingo, which plans the longest trajectories, collides most. The low-exposure
+policies almost never reach the pedestrian. DiffusionDrive is safe because it stays short, AutoVLA and Alpamayo-1.5 cover a human-like distance
+without yielding, and SimLingo covers the most ground with the lowest specificity.
+
