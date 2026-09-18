@@ -65,11 +65,11 @@ close to the pedestrian on both sides.
 Read together, the profiles of \cref{tab:report} give each policy a prognosis under our open-loop
 protocol. SimLingo plans furthest, moves its plan when a pedestrian requires no reaction
 ($\SP=\NumSpSL$), moves towards the pedestrian more often than away, and collides most on both sides.
-Trained in simulation, it needs target-domain post-training before deployment, and the check-up prices
+Trained in simulation, it would need target-domain post-training before deployment, and the check-up prices
 the re-check at a few dozen frames for exposure and specificity. AutoVLA and Alpamayo-1.5 keep a
-human-like exposure and a steady plan but show no hazard response. Before deployment, post-training must add the response to the pedestrian, and only hundreds of frames with a genuine need to react can verify that it did. DiffusionDrive and LTF are safe because
+human-like exposure and a steady plan but show no hazard response. Before deployment, post-training should add the response to the pedestrian, and only hundreds of frames with a genuine need to react can verify that it did. DiffusionDrive and LTF are safe because
 they plan short, which holds only while exposure stays low, so any post-training that lengthens their
-plans must be re-examined for hazard sensitivity. DiffusionDriveV2 is the only policy with a positive scaling estimate (\NumScalHi, interval crossing zero) and the only one that slows under the night-style perturbation, at the cost of the lowest specificity among the BEV planners.
+plans should be re-examined for hazard sensitivity. DiffusionDriveV2 is the only policy with a positive scaling estimate (\NumScalHi, interval crossing zero) and the only one that slows under the night-style perturbation, at the cost of the lowest specificity among the BEV planners.
 
 \paragraph{What a verdict costs}
 For every exam and policy we subsample $n$ of the \NumPool{} frames that all six policies share, 400
