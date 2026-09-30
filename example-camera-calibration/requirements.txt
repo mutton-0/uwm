@@ -1,0 +1,4 @@
+opencv-python==4.9.0.80
+pyrealsense2==2.55.1
+numpy==1.26.4
+pyyaml==6.0.1

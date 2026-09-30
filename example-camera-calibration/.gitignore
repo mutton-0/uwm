@@ -1,0 +1,7 @@
+data/*
+!data/.gitkeep
+outputs/*
+!outputs/.gitkeep
+configs/extrinsics.yaml
+__pycache__/
+*.pyc
