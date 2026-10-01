@@ -2,15 +2,28 @@
 
 这个分支是给 sky-lab 同学看的规范展示分支。
 
-## 先看哪个
+## 阅读顺序
 
-| 你是 | 看这个 |
-|---|---|
-| 所有人 | [docs/MERGE_WORKFLOW.md](docs/MERGE_WORKFLOW.md):代码怎么合进 main(每月对 main 提 PR、登记 Sheet、manager 和 Owner 都批准),PR 页面点哪里(带图) |
-| 要整理自己仓库的人 | [docs/REPO_CHECKLIST.md](docs/REPO_CHECKLIST.md):一张表列出仓库里该有什么、README 该写什么、开源前要做什么 |
-| 想知道每条规矩为什么这么定 | [docs/REPO_GUIDELINES.md](docs/REPO_GUIDELINES.md):仓库规范全文 |
-| Owner / 管理员 | MERGE_WORKFLOW.md 第十二节:approvers Team、成员权限、组织规则怎么设 |
-| 用 AI 检查或整理仓库 | [skills/sky-lab-repo-audit/README.md](skills/sky-lab-repo-audit/README.md):使用说明(什么时候用、怎么装、跟 AI 怎么说、改完怎么看)。同目录的 `SKILL.md` 是写给 AI 的,`repo_check.py` 是只读检查脚本 |
+每个同学都既是自己仓库的 member,也可能是某个仓库的 manager,所以下面这些都要看。按顺序读,第一次大约 50 分钟:
+
+| 顺序 | 读什么 | 看完知道什么 | 大约 |
+|---|---|---|---|
+| 1 | [docs/REPO_GUIDELINES.md](docs/REPO_GUIDELINES.md) 全文 | 一个仓库要做成什么样,每条规矩为什么这么定 | 15 分钟 |
+| 2 | [example-camera-calibration/](example-camera-calibration/) 的 README、AGENTS.md、.gitignore | 按规范做出来的仓库长什么样,自己的仓库照着抄 | 5 分钟 |
+| 3 | [docs/MERGE_WORKFLOW.md](docs/MERGE_WORKFLOW.md) 第零到第五节 | 第一次要配什么、谁负责什么、分支怎么用、每月的时间线、怎么开发和提 PR(带图) | 15 分钟 |
+| 4 | MERGE_WORKFLOW.md 第六到第十一节 | 当 manager 时怎么审、组会上怎么过、怎么合并打 tag、紧急修复、用 AI 检查、常见问题 | 10 分钟 |
+| 5 | [skills/sky-lab-repo-audit/README.md](skills/sky-lab-repo-audit/README.md) | 怎么用检查脚本和 AI 检查自己的仓库,报告存在哪 | 5 分钟 |
+| 6 | [docs/REPO_CHECKLIST.md](docs/REPO_CHECKLIST.md) | 扫一眼有哪几类就行,整理仓库时再逐条对照 | 2 分钟 |
+| 选读 | [`demo/sim2real-ttc-clean`](https://github.com/mutton-0/uwm/tree/demo/sim2real-ttc-clean/sim2real_demo_ttc) 分支的 README 和 AGENTS.md | 一个体量大、结论天天变的研究项目怎么按规范整理 | 5 分钟 |
+
+MERGE_WORKFLOW.md 第十二节是 Owner 的组织设置,同学可以跳过。
+
+**读完先做三件事:**
+1. 按 MERGE_WORKFLOW.md 第零节配好自己电脑上的 git(一次就行)
+2. 对自己的仓库跑一次检查:`python3 skills/sky-lab-repo-audit/repo_check.py <你的仓库目录>`
+3. 对照输出和 REPO_CHECKLIST 整理仓库,error 清零后按合入流程提 PR
+
+**Owner** 看:REPO_GUIDELINES.md 全文、MERGE_WORKFLOW.md 第一到第三节(角色和流程)、第七节(组会上怎么审)、第十二节(要做的组织设置)。
 
 ## 其他文件
 
