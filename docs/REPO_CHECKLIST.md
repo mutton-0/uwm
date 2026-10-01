@@ -81,7 +81,7 @@ python3 skills/sky-lab-repo-audit/repo_check.py <项目目录> --public   # 准�
 
 | # | 检查项 | 具体要求 | 什么时候要 |
 |---|---|---|---|
-| 28 | 月度登记 | 每个提到 main 的 PR 都由提交人登记到 Google Sheet;本仓库当月没有 PR 的,manager 填一行写原因 | 每个仓库 |
+| 28 | 月度登记 | 每个提到 main 的 PR 都由提交人登记到 Google Sheet(Sky-Lab_code_review_monthly_updates),Github Link 填 PR 链接;本仓库当月没有 PR 的,manager 填一行写原因 | 每个仓库 |
 | 29 | CODEOWNERS | .github/CODEOWNERS 写了 manager 和副 manager | 每个仓库 |
 | 30 | base tag | 当月 PR 合完后打了 base-YYYY-MM | 每个仓库 |
 | 31 | 分支清理 | 已合并的分支删掉 | 建议 |

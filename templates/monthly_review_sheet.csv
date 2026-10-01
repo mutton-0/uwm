@@ -1,5 +1,5 @@
-月份,仓库,提交人,做了什么,PR 链接,自查表(已完成/未完成),Manager 审核(通过/打回),Owner 审核(通过/打回/下月再合),合入后 tag,备注
-2026-11,camera-calibration,@zhengyang,run_calib 支持 ChArUco 标定板,https://github.com/sky-lab-uw/camera-calibration/pull/12,已完成,通过,通过,base-2026-11,
-2026-11,camera-calibration,@mut0,README 补外参来源和标定日期,https://github.com/sky-lab-uw/camera-calibration/pull/13,已完成,通过,通过,base-2026-11,
-2026-11,arm-setup,@boyue,新增夹爪控制脚本,https://github.com/sky-lab-uw/arm-setup/pull/5,已完成,打回,,,"线材长度没写,周三前补上后重新审"
-2026-11,vla-finetune,(manager 填),本月无合入,,,,,,"GPU 排队,训练没跑完,预计 12 月合入"
+Lab Meeting (first bi-weekly meeting of each month),Due (previous Friday before the meeting),Date,Main Lead,Code Collaborators,Project,Github Link,SHA/commit ID,Other Links if any,Update Summary,Additional Note,Test Status from Author,Test Status from 3rd person,Test Status from Yue Leng,Comment
+11/2/26,10/30/26,10/28/2026,zhengyang,,camera-calibration,https://github.com/sky-lab-uw/camera-calibration/pull/12,base-2026-11,,run_calib 支持 ChArUco 标定板,,pass(repo_check 0 error),pass (boyue),pass,
+,,10/29/2026,mut0,,camera-calibration,https://github.com/sky-lab-uw/camera-calibration/pull/13,base-2026-11,,README 补外参来源和标定日期,,pass(repo_check 0 error),pass (boyue),pass,
+,,10/29/2026,boyue,zhengyang,arm-setup,https://github.com/sky-lab-uw/arm-setup/pull/5,,,新增夹爪控制脚本,,pass(repo_check 0 error),打回 (副 manager),,"README 没写线材长度,补上后重新审"
+,,10/30/2026,(vla-finetune 的 manager),,vla-finetune,,,,无code更新,"GPU 排队,训练没跑完,预计 12 月合入",,,,

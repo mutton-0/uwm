@@ -170,7 +170,7 @@ README 里写的和代码里实际跑的,时间久了容易对不上——尤其
 
 - 每个仓库有一个 manager(最好再有一个副 manager),README 顶部的"维护人"和仓库的 `.github/CODEOWNERS` 里写的就是他们。
 - main 每月合入一次:组会前那周的周五之前,成员对 main 提 PR;manager 在周末先审,周一组会上 Owner 再审,两人都批准后由 manager 合入。具体操作见 [MERGE_WORKFLOW.md](MERGE_WORKFLOW.md)。
-- Google Sheet 继续用,但只当索引:每个 PR 一行,由提交人自己登记,写 PR 链接和一句话说明;manager 和 Owner 在同一行填审核结果。具体改了什么写在 PR 和 README 里,不在 Sheet 里重复写。表头见 [templates/monthly_review_sheet.csv](../templates/monthly_review_sheet.csv)。
+- 组里的 Google Sheet `Sky-Lab_code_review_monthly_updates` 继续用,表头不变:每个 PR 一行,由提交人自己登记,Github Link 一列填 PR 链接;manager 的审核结果填 Test Status from 3rd person,Owner(Yue Leng)的填 Test Status from Yue Leng。每月新建一行,不要改之前的记录。具体改了什么写在 PR 和 README 里,不在 Sheet 里重复写。各列怎么填见 [MERGE_WORKFLOW.md](MERGE_WORKFLOW.md) 第五节第 5 步。
 - 仓库当月没有 PR,manager 也要在 Sheet 里填一行写清原因。每个月都有记录,才看得出哪个仓库落灰了。
 - README 顶部的"状态"字段(active / 交接中 / archived)和"已知问题"段落,每次月度合入时顺手更新。
 - commit 不要攒着,平时小步提交。真要交接的时候发现一堆没写清楚、自己都忘了为什么这么改的代码,比随手花十分钟补一条 commit message 贵得多。

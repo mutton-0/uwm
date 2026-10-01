@@ -23,7 +23,7 @@ git config --global pull.rebase false           # git pull 遇到分叉时用 me
 
 | 角色 | 是谁 | GitHub 上的权限 | 做什么 |
 |---|---|---|---|
-| Owner | 导师 / 总负责人 | 组织 Owner,并且在 `approvers` Team 里 | 组会上审批每一个合进 main 的 PR |
+| Owner | Yue Leng | 组织 Owner,并且在 `approvers` Team 里 | 组会上审批每一个合进 main 的 PR |
 | Manager | 每个仓库一个人,一般是建这个仓库的人。写在 README 顶部的"维护人"和仓库的 CODEOWNERS 里 | 建库的人自动是该仓库的 Admin | 建仓库、加成员;组会前审本仓库的每个 PR;组会后合并、打 tag |
 | Member | 被 manager 加进仓库的同学 | 该仓库 Write(单独添加) | 在自己的分支开发,对 main 提 PR,自己登记 Sheet |
 
@@ -151,7 +151,25 @@ gh pr create --base main --title "run_calib 支持 ChArUco 标定板"
 
 ### 5. 登记到 Google Sheet
 
-PR 开好后,在本月的 Sheet 里**自己加一行**,填前几栏:月份、仓库、提交人、做了什么、PR 链接、自查表是否完成。审核结果和 tag 由 manager 和 Owner 填。表头见 [templates/monthly_review_sheet.csv](../templates/monthly_review_sheet.csv)。
+PR 开好后,在组里的 Google Sheet `Sky-Lab_code_review_monthly_updates` 里**自己新加一行**。每月新建一行,不要改之前的记录。表头沿用原来的,不变,各列这么填:
+
+| 列 | 谁填 | 填什么 |
+|---|---|---|
+| Lab Meeting / Due | 每月第一个人 | 组会日期 / 截止日(组会前的周五),同一个月后面的行空着 |
+| Date | 提交人 | 填表日期 |
+| Main Lead / Code Collaborators | 提交人 | 自己 / 合作者 |
+| Project | 提交人 | 仓库名 |
+| **Github Link** | 提交人 | **填 PR 链接**(PR 页面能直接点到仓库) |
+| SHA/commit ID | manager | 合入后填 tag 名,比如 `base-2026-11` |
+| Other Links if any | 提交人 | 论文、视频、数据的网盘链接 |
+| Update Summary | 提交人 | 这个 PR 做了什么,一句话 |
+| Additional Note | 提交人 | 遗留问题;紧急修复写"紧急修复" |
+| Test Status from Author | 提交人 | 自测结果,跑过 `repo_check.py` 并且 error 清零才算 pass |
+| **Test Status from 3rd person** | **manager** | manager 审核结果:pass / 打回,后面写上审核人 |
+| **Test Status from Yue Leng** | **Owner** | Owner 在组会上的审核结果:pass / 打回 / 下月再合 |
+| Comment | 审核的人 | 审核意见 |
+
+表头和示例行见 [templates/monthly_review_sheet.csv](../templates/monthly_review_sheet.csv)。
 
 **没登记的 PR,组会上不审。**
 
@@ -163,7 +181,7 @@ PR 开好后,在本月的 Sheet 里**自己加一行**,填前几栏:月份、仓
 
 ### 7. 没赶上,或者这个月不打算合
 
-PR 可以先开着,在 Sheet 里写"下月再合"。下个月接着用同一个 PR。
+PR 可以先开着,在 Sheet 这一行的 Additional Note 写"下月再合"。下个月新加一行,接着用同一个 PR。
 
 ### 8. 合入之后
 
@@ -194,9 +212,9 @@ PR 可以先开着,在 Sheet 里写"下月再合"。下个月接着用同一个 
 - 对照 [REPO_CHECKLIST.md](REPO_CHECKLIST.md),尤其是 README 和代码是否一致、有没有提交大文件和密钥、结果能不能复现
 - PR 页面有没有显示冲突(This branch has conflicts)。有的话让作者在组会前处理
 
-审完在 Sheet 的"Manager 审核"一栏填:通过 / 打回。
+审完在 Sheet 的 **Test Status from 3rd person** 一列填:pass / 打回,后面写上自己的名字,比如 `pass (boyue)`。
 
-本仓库这个月没人提 PR 的,manager 在 Sheet 里填一行,写"本月无合入"和原因或进度。每个仓库每个月都有记录,才看得出哪个仓库落灰了。
+本仓库这个月没人提 PR 的,manager 在 Sheet 里填一行:Update Summary 写"无code更新",Additional Note 写原因或进度。每个仓库每个月都有记录,才看得出哪个仓库落灰了。
 
 ## 七、组会上:Owner 审核
 
@@ -204,7 +222,7 @@ PR 可以先开着,在 Sheet 里写"下月再合"。下个月接着用同一个 
 - 没问题:**Approve**
 - 要改:**Request changes**,写清楚改什么。作者改完后 manager 和 Owner 重新审,Owner 可以会后在线上批,不用等下个月
 
-审完在 Sheet 的"Owner 审核"一栏填:通过 / 打回 / 下月再合。
+审完在 Sheet 的 **Test Status from Yue Leng** 一列填:pass / 打回 / 下月再合,意见写在 Comment。
 
 ## 八、合并和收尾(manager)
 
@@ -222,13 +240,13 @@ manager 和 Owner 都 Approve 之后,**由 manager 按 Sheet 的顺序逐个合�
    git tag -a base-2026-11 -m "camera-calibration 2026-11 组会后的 base"
    git push origin base-2026-11
    ```
-2. 在 Sheet 里补上 tag 名。
+2. 在 Sheet 当月各行的 SHA/commit ID 一列填上 tag 名。
 3. 群里通知:"camera-calibration 11 月已合入,还在开发的分支 `git fetch` 后把 origin/main 合进去"。
 4. 合并后 PR 页面上有 **Delete branch** 按钮,已合并的分支可以删掉。tag 还在,随时能回到当时的版本。
 
 ## 九、紧急修复
 
-README 写错导致别人跑不起来、明显的 bug,这类等不了一个月的:manager 从 main 拉 `hotfix/具体描述`,改完直接对 main 开 PR,找副 manager 和 Owner 线上审批,在 Sheet 里加一行备注"紧急修复"。
+README 写错导致别人跑不起来、明显的 bug,这类等不了一个月的:manager 从 main 拉 `hotfix/具体描述`,改完直接对 main 开 PR,找副 manager 和 Owner 线上审批,在 Sheet 里加一行,Additional Note 写"紧急修复"。
 
 ## 十、用 AI 帮忙检查和整理
 

@@ -27,7 +27,7 @@ MERGE_WORKFLOW.md 第十二节是 Owner 的组织设置,同学可以跳过。
 
 ## 其他文件
 
-- [templates/monthly_review_sheet.csv](templates/monthly_review_sheet.csv):每月 Google Sheet 的表头和示例行,Google Sheet 里"文件 → 导入"就能用。
+- [templates/monthly_review_sheet.csv](templates/monthly_review_sheet.csv):组里 Google Sheet `Sky-Lab_code_review_monthly_updates` 的表头(和现在用的表逐字一致)加几行按新流程填的示例。
 - [templates/repo_checklist.csv](templates/repo_checklist.csv):REPO_CHECKLIST 的表格版,可以导入 Google Sheet 逐项打勾。
 - [templates/AGENTS.md](templates/AGENTS.md)、[templates/CLAUDE.md](templates/CLAUDE.md):给 AI 看的项目须知模板。CLAUDE.md 只有一行 `@AGENTS.md`,让 Claude Code 和其他工具读同一份内容。
 - [templates/.gitignore](templates/.gitignore):组里项目通用的 `.gitignore`,manager 建仓库时直接复制到仓库根目录。上半部分默认生效,只有部分项目用得到的规则在最下面,默认注释掉。这个分支根目录的 [.gitignore](.gitignore) 就是它的一份副本。
