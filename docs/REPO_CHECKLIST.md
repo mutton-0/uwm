@@ -9,6 +9,15 @@
 
 "什么时候要"一栏的意思:**每个仓库** = 所有仓库都必须;**实车项目 / 有多终端时 / 报了结果时** = 符合条件就必须;**开源前** = 转 public 之前必须;**建议** = 不强制,做了更好。
 
+能机械判断的项(文件是否存在、README 章节、.gitignore、大文件、密钥、绝对路径、软链接、CODEOWNERS 等)可以用脚本自动查,结果里带的编号就是这张表的编号:
+
+```bash
+python3 skills/sky-lab-repo-audit/repo_check.py <项目目录>            # 平时
+python3 skills/sky-lab-repo-audit/repo_check.py <项目目录> --public   # 准备开源时
+```
+
+用 AI 检查和整理时,让它按 [skills/sky-lab-repo-audit/SKILL.md](../skills/sky-lab-repo-audit/SKILL.md) 做。脚本查不了的项(能否跑通、结果复现、实车硬件等)脚本输出的最后会单独列出来。
+
 这张表也可以导入 Google Sheet 逐项打勾:[templates/repo_checklist.csv](../templates/repo_checklist.csv)(Google Sheet → 文件 → 导入 → 上传)。
 
 ## 最重要的一条:复刻自测
@@ -26,7 +35,7 @@
 | 4 | LICENSE | 默认 MIT;基于 Apache-2.0 项目改的用 Apache-2.0 | 每个仓库 |
 | 5 | 目录分层 | 代码、脚本、配置分开放(src/、scripts/、configs/),根目录不堆 .py | 每个仓库 |
 | 6 | 自检脚本 | scripts/smoke_test.sh,一条命令检查环境、路径、能否跑一次最小推理 | 建议;开源前必须 |
-| 7 | CLAUDE.md | 写给 AI 的项目须知:关键目录、不能动的文件、已知的坑 | 建议 |
+| 7 | AGENTS.md | 写给 AI 的项目须知(用哪个环境、怎么自检、不能动的文件、已知的坑),旁边放一个只有一行 @AGENTS.md 的 CLAUDE.md。模板见 templates/AGENTS.md | 建议 |
 
 ## README 内容
 

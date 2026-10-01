@@ -1,7 +1,124 @@
+# sky-lab 仓库通用 .gitignore
+# 用法:建仓库后、第一次提交之前,把这个文件复制到仓库根目录:
+#   cp templates/.gitignore <你的仓库>/
+# 上半部分默认生效,几乎所有项目都适用;最下面"按项目打开"的部分默认注释掉,用到的删掉行首的 # 即可。
+# 注意:.gitignore 只对还没被 git 跟踪的文件生效。已经提交过的文件要先移出跟踪(本地文件不会被删):
+#   git rm -r --cached <路径>
+
+# ========== 默认生效 ==========
+
+# ---------- 数据:不进仓库,README 里写清去哪下载 ----------
+# 需要放进仓库的小样例,用 ! 单独放行,比如 !data/sample/
 data/*
 !data/.gitkeep
-outputs/*
-!outputs/.gitkeep
-configs/extrinsics.yaml
+!data/README.md
+
+# ---------- 模型权重 ----------
+checkpoints/
+ckpt/
+weights/
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.onnx
+*.engine
+*.h5
+
+# ---------- 实验输出和日志 ----------
+outputs/
+multirun/
+logs/
+runs/
+wandb/
+lightning_logs/
+mlruns/
+*.log
+
+# ---------- 传感器数据、视频、压缩包:放 NAS / 网盘,README 里放链接 ----------
+*.bag
+*.db3
+*.mcap
+*.pcd
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+
+# ---------- 密钥:绝对不能提交 ----------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ---------- Python ----------
 __pycache__/
-*.pyc
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ---------- 虚拟环境 ----------
+.venv/
+venv/
+.conda/
+
+# ---------- C++ 编译产物 ----------
+*.o
+CMakeFiles/
+CMakeCache.txt
+
+# ---------- 编辑器和系统文件 ----------
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+
+# ========== 按项目打开(默认注释掉) ==========
+
+# ---------- ROS 工作空间:catkin / colcon 的编译目录 ----------
+# 这几个目录名可能跟项目里正常的目录重名,确认是 ROS 工作空间再打开
+# devel/
+# install/
+# log/
+
+# ---------- 叫 env/ 的虚拟环境 ----------
+# 强化学习等项目里常有叫 env 的代码目录,确认 env/ 是虚拟环境再打开
+# env/
+
+# ---------- 动态库 ----------
+# 有的项目需要随仓库带预编译的 .so,确认不需要再打开
+# *.so
+
+# ---------- 大的数组缓存 ----------
+# 确定是可以重新生成的缓存再打开;小的结果文件可以留在仓库里
+# *.npy
+# *.npz
+
+# ---------- 图片 ----------
+# 数据集图片多的项目可以打开,再用 ! 放行 README 和论文要用的图,比如 !docs/img/
+# *.png
+# *.jpg
+# *.jpeg
+
+# ---------- 本机配置 ----------
+# 每个人本机不一样的配置文件(路径、账号),仓库里放一份 .example 让别人照着改
+# secrets.yaml
+# config.local.*
+
+# ========== 本项目 ==========
+# 标定结果每台车、每次安装都不一样,由 run_calib.py 生成,不进仓库
+configs/extrinsics.yaml

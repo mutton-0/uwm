@@ -131,6 +131,11 @@ git push
 
 ### 4. 对 main 提 PR
 
+提之前先跑一次规范检查,把 error 修掉(见第十节):
+```bash
+python3 <sky-lab-repo-audit 目录>/repo_check.py .
+```
+
 截止时间是**组会前那一周的周五**。push 完回到仓库首页,点黄色提示条上的按钮:
 
 ![Compare & pull request](img/03-compare-banner.svg)
@@ -171,6 +176,7 @@ PR 可以先开着,在 Sheet 里写"下月再合"。下个月接着用同一个 
 ![审核 PR](img/05-review-approve.svg)
 
 审的时候主要看:
+- 先在 PR 分支上跑一次 `repo_check.py`,error 没清零的直接打回
 - 对照 [REPO_CHECKLIST.md](REPO_CHECKLIST.md),尤其是 README 和代码是否一致、有没有提交大文件和密钥、结果能不能复现
 - PR 页面有没有显示冲突(This branch has conflicts)。有的话让作者在组会前处理
 
@@ -210,7 +216,24 @@ manager 和 Owner 都 Approve 之后,**由 manager 按 Sheet 的顺序逐个合�
 
 README 写错导致别人跑不起来、明显的 bug,这类等不了一个月的:manager 从 main 拉 `hotfix/具体描述`,改完直接对 main 开 PR,找副 manager 和 Owner 线上审批,在 Sheet 里加一行备注"紧急修复"。
 
-## 十、常见问题
+## 十、用 AI 帮忙检查和整理
+
+组里的检查 skill 在 [skills/sky-lab-repo-audit/](../skills/sky-lab-repo-audit/),包括:
+- `repo_check.py`:只读的检查脚本,人和 AI 都能直接跑
+- `SKILL.md`:给 AI 的步骤说明,写了哪些问题可以直接改、哪些必须先问人、哪些绝对不能做(不 push、不改 main、不重写历史、不删本地数据)
+
+**Claude Code**:装一次,所有仓库都能用:
+```bash
+mkdir -p ~/.claude/skills
+cp -r skills/sky-lab-repo-audit ~/.claude/skills/
+```
+之后在任意仓库里说"按 sky-lab 规范检查一下这个仓库",它会自动用这个 skill。
+
+**其他 AI 工具**(Codex、Cursor 等):把 SKILL.md 的路径或链接给它,让它"按这个文件检查当前仓库,先只检查不修改"。
+
+每个仓库的 `AGENTS.md` 里写上 skill 的位置,AI 打开仓库就能找到。
+
+## 十一、常见问题
 
 | 现象 | 原因 / 怎么办 |
 |---|---|
@@ -223,7 +246,7 @@ README 写错导致别人跑不起来、明显的 bug,这类等不了一个月�
 | PR 提示有冲突(This branch has conflicts) | 在自己分支上 `git merge origin/main`,本地解决冲突后 push |
 | 推自己的分支报 403 | 你没有被加进这个仓库,或者只有 Read。找这个仓库的 manager |
 
-## 十一、管理员一次性设置(Owner 看)
+## 十二、管理员一次性设置(Owner 看)
 
 成员不用看这一节。这些设置做一次,以后不管谁新建仓库都自动生效。
 

@@ -5,7 +5,7 @@
 4,文件和目录,LICENSE,默认 MIT;基于 Apache-2.0 项目改的用 Apache-2.0,每个仓库,,
 5,文件和目录,目录分层,"代码、脚本、配置分开放(src/、scripts/、configs/),根目录不堆 .py",每个仓库,,
 6,文件和目录,自检脚本,"scripts/smoke_test.sh,一条命令检查环境、路径、能否跑一次最小推理",建议;开源前必须,,
-7,文件和目录,CLAUDE.md,写给 AI 的项目须知:关键目录、不能动的文件、已知的坑,建议,,
+7,文件和目录,AGENTS.md,"写给 AI 的项目须知(用哪个环境、怎么自检、不能动的文件、已知的坑),旁边放一个只有一行 @AGENTS.md 的 CLAUDE.md。模板见 templates/AGENTS.md",建议,,
 8,README 内容,一句话说明,做什么、给谁用、上下游依赖哪个仓库,每个仓库,,
 9,README 内容,维护人和状态,顶部写 manager 和状态(active / 交接中 / archived),每个仓库,,
 10,README 内容,软件环境,Python / CUDA / ROS 等写具体版本号,每个仓库,,
