@@ -6,6 +6,19 @@
 
 > 文中的图是示意图。按钮文字和位置跟 GitHub 页面一致,其他细节做了简化。
 
+## 零、第一次用之前(每台电脑配一次)
+
+```bash
+git config --global user.name  "你的名字"
+git config --global user.email "你 GitHub 账号绑定的邮箱"
+git config --global push.autoSetupRemote true   # 新分支第一次 git push 时自动在远端建同名分支
+git config --global pull.rebase false           # git pull 遇到分叉时用 merge,跟本手册的做法一致
+```
+
+`push.autoSetupRemote` 需要 git 2.37 以上(`git --version` 查看)。配好之后,本手册里的 `git push` / `git pull` 都不用带参数。
+
+习惯写全也可以:`git push origin dev/ruolin`、`git pull origin dev/ruolin`。只要注意一点:`git pull origin <分支>` 会把那个分支合进你**当前所在**的分支,执行前先用 `git branch` 确认自己在哪个分支上。
+
 ## 一、谁负责什么
 
 | 角色 | 是谁 | GitHub 上的权限 | 做什么 |
@@ -51,7 +64,11 @@
    - 成员给 **Write**
    - 副 manager 给 **Maintain**
    - Owner 不用加,组织 Owner 对所有仓库自动有权限
-3. **整理代码,加上 CODEOWNERS,推到初始化分支。** 先对照 [REPO_CHECKLIST.md](REPO_CHECKLIST.md) 把"每个仓库"那几项过一遍。然后:
+3. **整理代码,配好 `.gitignore`,加上 CODEOWNERS,推到初始化分支。**
+   - 先对照 [REPO_CHECKLIST.md](REPO_CHECKLIST.md) 把"每个仓库"那几项过一遍。
+   - **`.gitignore` 一定要在第一次提交之前配好。** 从 [templates/gitignore.sample](../templates/gitignore.sample) 复制一份改名为 `.gitignore`,按项目删改。数据、权重、rosbag、视频、日志、`.env` 一旦进了 git 历史就很难删干净,后面再补 `.gitignore` 也不会把已经提交的东西撤掉。
+
+   然后:
    ```bash
    git clone git@github.com:sky-lab-uw/camera-calibration.git
    cd camera-calibration
@@ -61,7 +78,7 @@
    git status                       # 先看一眼要提交哪些文件
    git add README.md requirements.txt configs/ scripts/ src/ .gitignore LICENSE .github/CODEOWNERS
    git commit -m "init: camera-calibration 2026-10 base"
-   git push -u origin init/2026-10
+   git push                         # 没配第零节的话写 git push -u origin init/2026-10
    ```
 4. **开 PR:`init/2026-10` → `main`**(怎么开见第五节第 4 步),登记到 Sheet。这个 PR 合入之前仓库里还没有 CODEOWNERS,所以只需要 Owner 批准。Owner 审的时候顺便确认 CODEOWNERS 里写的人对不对。
 5. **合入后打第一个 base tag:**
@@ -92,7 +109,7 @@ git checkout -b feature/charuco-support origin/main
 git status
 git add scripts/run_calib.py README.md        # 只加你改过的文件,别用 git add .
 git commit -m "run_calib 支持 ChArUco 标定板"
-git push -u origin feature/charuco-support    # 第一次推加 -u,之后直接 git push
+git push                                      # 没配第零节的话,第一次写 git push -u origin feature/charuco-support
 ```
 
 在网页上直接改文件的话,点 **Commit changes** 后会弹出这个框:
@@ -110,6 +127,7 @@ git fetch origin
 git merge origin/main          # 有冲突就按提示改完,再 git add、git commit
 git push
 ```
+`git fetch` + `git merge origin/main` 也可以写成一条:`git pull origin main`(前提是你现在在自己的分支上)。
 
 ### 4. 对 main 提 PR
 

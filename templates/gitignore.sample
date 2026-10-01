@@ -1,0 +1,90 @@
+# sky-lab 仓库 .gitignore 样本
+# 用法:复制到仓库根目录,改名为 .gitignore,再按项目删改。
+#   cp templates/gitignore.sample <你的仓库>/.gitignore
+# 注意:.gitignore 只对"还没被 git 跟踪"的文件生效。已经提交过的文件要先移出跟踪:
+#   git rm -r --cached <路径>   (只是不再跟踪,本地文件不会被删)
+
+# ---------- 数据、权重、实验产物:不进仓库,README 里写清去哪下载 ----------
+data/*
+!data/.gitkeep
+!data/README.md
+checkpoints/
+ckpt/
+weights/
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.onnx
+*.engine
+*.h5
+
+outputs/
+multirun/
+results/*/cache/
+logs/
+runs/
+wandb/
+lightning_logs/
+mlruns/
+*.log
+
+# ---------- 传感器数据、视频:放 NAS / 网盘,README 里放链接 ----------
+*.bag
+*.db3
+*.mcap
+*.pcd
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# ---------- 密钥和本机配置:绝对不能提交 ----------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.yaml
+config.local.*
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ---------- 环境 ----------
+.venv/
+venv/
+env/
+.conda/
+
+# ---------- ROS / C++ 编译产物 ----------
+devel/
+install/
+log/
+*.o
+*.so
+CMakeFiles/
+CMakeCache.txt
+
+# ---------- 编辑器和系统文件 ----------
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ---------- 按项目情况决定 ----------
+# 小的示例数据、标定结果、论文图如果需要进仓库,用 ! 单独放行,比如:
+# !data/sample/
+# !configs/extrinsics.yaml
+# 大的 .npy / .npz 缓存一般不进仓库,确定是缓存的话打开下面这行:
+# *.npz
