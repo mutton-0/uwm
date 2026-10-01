@@ -82,16 +82,19 @@ git restore --source origin/sim2real/demo-v3-repe-mainline --worktree -- \
 
 ## 本机专属路径(换机器前必看)
 
-代码里还有 174 个文件写死了绝对路径。这个分支**没有改**这些路径:一是改完没法验证还能不能跑,二是原分支还在用。按根目录归类:
+代码和配置里还有 174 个文件写死了绝对路径。这个分支**没有改**这些路径:一是改完没法验证还能不能跑,二是原分支还在用。按根目录归类:
 
-| 路径前缀 | 引用次数 | 是什么 |
+| 路径前缀 | 引用次数 / 文件数 | 是什么 |
 |---|---|---|
-| `/data/ruolin/...` | 约 240 | exx 上的 SimLingo 仓库、环境、部分权重 |
-| `/data/dataset/...` | 约 92 | nuScenes / NAVSIM 数据集 |
-| `/home/boyuewang/...` | 约 6 | 个人机器上的临时路径 |
-| `/data/Zhengyang/...` | 约 22 | Alpamayo / AutoVLA 的环境 |
-| `/mnt/skylabNAS/...` | 约 8 | 组内 NAS |
-| `/home/uw/...` | 约 4 | 实车 uw-nuvo |
+| `/data/ruolin/...` | 295 / 163 | exx 上的 SimLingo 仓库、环境、部分权重 |
+| `/data/dataset/...` | 124 / 83 | nuScenes / NAVSIM 数据集 |
+| `/data/Zhengyang/...` | 24 / 14 | Alpamayo / AutoVLA 的环境 |
+| `/mnt/skylabNAS/...` | 12 / 6 | 组内 NAS |
+| `/home/uw/...` | 6 / 1 | 实车 uw-nuvo |
+| `/home/boyuewang/...` | 6 / 4 | 个人机器上的临时路径 |
+| `/home/mut0/...` | 4 / 4 | 主分析环境 simscale 的解释器 |
+
+数字来自 sky-lab 的检查脚本 `repo_check.py`(扫 .py / .sh / .yaml 等代码和配置文件),重新统计:`python3 <sky-lab-repo-audit 目录>/repo_check.py .`
 
 换机器时,先在代码里搜这几个前缀,改成自己机器上的路径。长期的做法是把这些根目录收进一个配置文件(比如 `configs/paths.yaml`)或者环境变量,脚本统一从那里读。这一项记在下面的已知问题里。
 
@@ -115,8 +118,11 @@ git restore --source origin/sim2real/demo-v3-repe-mainline --worktree -- \
 | 移走 5 个 `paper_*/` 目录(论文 tex、PDF、pptx,约 15 MB) | 论文不放在代码仓库里 |
 | 移走 `results/voided_*/` | `PRINCIPLES.md` 里已经写明作废 |
 | 移走 `probe_v0/data`、`probe_v0/tb` 两个软链接 | 指向没进 git 的 `results_5090/`,别人 clone 下来是断的 |
-| `.gitignore` 追加规则 | 防止上面这些文件以后又被提交回来 |
+| `.gitignore` 追加规则,并补上 sky-lab 通用规则 | 防止上面这些文件以后又被提交回来;权重、rosbag、视频、`.env` 原来没有覆盖 |
+| 新增 `AGENTS.md` 和 `CLAUDE.md` | 给 AI 看的项目须知:用哪个解释器、Tier-S 怎么跑、PRINCIPLES 里改代码时必须遵守的口径、哪些事不能做 |
 
-整理后:1507 个文件、约 254 MB → 440 个文件、约 4.8 MB(含这份 README)。
+整理后:1507 个文件、约 254 MB → 442 个文件、约 4.8 MB。
+
+用 sky-lab 检查脚本 `repo_check.py` 对比:整理前 4 个 error、4 个 warn;整理后 1 个 error(仓库没有 CODEOWNERS,需要先定 manager)、1 个 warn(仓库根目录的 requirements.txt 来自上游 navsim,36 个依赖没钉版本)。
 
 **没有动的**:代码(`scripts/`、`configs/`、`deploy/`、`remote_pkg/`、`results/` 里的适配器 `.py`)、所有说明文档、`mining/` 和 `variants/` 里的小文件(场景列表、划分)。代码里的绝对路径也没改,见上面。

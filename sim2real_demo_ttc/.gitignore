@@ -69,3 +69,83 @@ probe_v0/tb
 paper_*/
 # 已作废的结果
 results/voided_*/
+
+# ---------- 以下来自 sky-lab 通用 .gitignore(templates/.gitignore 的默认生效部分) ----------
+# ---------- 数据:不进仓库,README 里写清去哪下载 ----------
+# 需要放进仓库的小样例,用 ! 单独放行,比如 !data/sample/
+data/*
+!data/.gitkeep
+!data/README.md
+
+# ---------- 模型权重 ----------
+checkpoints/
+ckpt/
+weights/
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.onnx
+*.engine
+*.h5
+
+# ---------- 实验输出和日志 ----------
+outputs/
+multirun/
+logs/
+runs/
+wandb/
+lightning_logs/
+mlruns/
+*.log
+
+# ---------- 传感器数据、视频、压缩包:放 NAS / 网盘,README 里放链接 ----------
+*.bag
+*.db3
+*.mcap
+*.pcd
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+
+# ---------- 密钥:绝对不能提交 ----------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ---------- 虚拟环境 ----------
+.venv/
+venv/
+.conda/
+
+# ---------- C++ 编译产物 ----------
+*.o
+CMakeFiles/
+CMakeCache.txt
+
+# ---------- 编辑器和系统文件 ----------
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
