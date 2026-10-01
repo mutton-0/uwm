@@ -86,8 +86,8 @@ MANUAL_ITEMS = [
     (24, "实车项目:代码里的外参、分辨率、采样率和 README 描述是否一致"),
 ]
 MANUAL_ITEMS_PUBLIC = [
-    (34, "拷贝或改写的第三方代码是否保留了原 LICENSE 和出处"),
-    (35, "权重和数据是否放到了公开位置,写清下载方式和许可"),
+    (35, "拷贝或改写的第三方代码是否保留了原 LICENSE 和出处"),
+    (36, "权重和数据是否放到了公开位置,写清下载方式和许可"),
 ]
 
 
@@ -359,7 +359,7 @@ class Checker:
             self.add("SECRETS", "error", 27, "代码里疑似有密钥 / token", details=secret_hits[:10],
                      fix="马上告诉用户,不要在回复里原样贴出密钥。密钥要作废重新生成;代码改成从 .env 或环境变量读")
         if personal_hits:
-            self.add("PERSONAL_INFO", "warn", 27, f"有 {len(personal_hits)} 处个人 / 网络信息(邮箱、内网 IP、Tailscale 主机名)",
+            self.add("PERSONAL_INFO", "warn", 28, f"有 {len(personal_hits)} 处个人 / 网络信息(邮箱、内网 IP、Tailscale 主机名)",
                      details=personal_hits[:10],
                      fix="告诉用户位置和类型,回复里不要贴出原值。删除还是改成占位符由用户决定;已进 git 历史的,转 public 前要清理")
         if abs_refs:
@@ -408,7 +408,7 @@ class Checker:
                 co = self.git_root / rel
                 break
         if co is None:
-            self.add("CODEOWNERS", "error", 29, "仓库没有 .github/CODEOWNERS(main 需要 manager 审批)",
+            self.add("CODEOWNERS", "error", 30, "仓库没有 .github/CODEOWNERS(main 需要 manager 审批)",
                      fix="写一行:*  @manager用户名 @副manager用户名。用户名问用户,不要猜")
             return
         owners = set()
@@ -417,17 +417,17 @@ class Checker:
             if s and s[0] == "*":
                 owners.update(t for t in s[1:] if t.startswith("@"))
         if not owners:
-            self.add("CODEOWNERS", "error", 29, "CODEOWNERS 里没有覆盖全部文件的 * 规则")
+            self.add("CODEOWNERS", "error", 30, "CODEOWNERS 里没有覆盖全部文件的 * 规则")
         elif any(re.search(r"[^\x00-\x7f]|用户名|username", o) for o in owners):
-            self.add("CODEOWNERS", "warn", 29, "CODEOWNERS 里还是占位符", details=sorted(owners),
+            self.add("CODEOWNERS", "warn", 30, "CODEOWNERS 里还是占位符", details=sorted(owners),
                      fix="换成真实的 GitHub 用户名,问用户")
         elif len(owners) < 2:
-            self.add("CODEOWNERS", "warn", 29, "CODEOWNERS 只有一个人,manager 自己提的 PR 没人能批",
+            self.add("CODEOWNERS", "warn", 30, "CODEOWNERS 只有一个人,manager 自己提的 PR 没人能批",
                      details=sorted(owners), fix="加一个副 manager,问用户是谁")
 
     def check_tags(self):
         if self.git_root and not (run(["git", "tag", "-l", "base-*"], self.proj) or "").strip():
-            self.add("BASE_TAG", "info", 30, "还没有 base-YYYY-MM tag(第一次月度合入后由 manager 打)")
+            self.add("BASE_TAG", "info", 31, "还没有 base-YYYY-MM tag(第一次月度合入后由 manager 打)")
 
     def check_public(self):
         if not self.public:
@@ -435,9 +435,9 @@ class Checker:
         if self.readme:
             cjk = len(re.findall(r"[一-鿿]", self.readme))
             if cjk / max(len(self.readme), 1) > 0.15 and not self._find_up(["README_EN.md", "README.en.md", "README-en.md"]):
-                self.add("PUBLIC_EN_README", "warn", 33, "README 主要是中文,开源前需要英文或中英双语版本")
-        for cid, names, num, title in (("PUBLIC_CONTRIBUTING", ["CONTRIBUTING.md", ".github/CONTRIBUTING.md"], 36, "没有 CONTRIBUTING.md"),
-                                       ("PUBLIC_CITATION", ["CITATION.cff"], 37, "没有 CITATION.cff(论文引用方式)")):
+                self.add("PUBLIC_EN_README", "warn", 34, "README 主要是中文,开源前需要英文或中英双语版本")
+        for cid, names, num, title in (("PUBLIC_CONTRIBUTING", ["CONTRIBUTING.md", ".github/CONTRIBUTING.md"], 37, "没有 CONTRIBUTING.md"),
+                                       ("PUBLIC_CITATION", ["CITATION.cff"], 38, "没有 CITATION.cff(论文引用方式)")):
             if not self._find_up(names):
                 self.add(cid, "warn", num, title)
         if self.git_root:
@@ -455,7 +455,7 @@ class Checker:
                         big.append((int(size), names.get(sha, sha)))
                 if big:
                     big.sort(reverse=True)
-                    self.add("HISTORY_LARGE", "error", 38,
+                    self.add("HISTORY_LARGE", "error", 39,
                              f"git 历史里有 {len(big)} 个超过 {LARGE_FILE_MB} MB 的文件(当前分支已删掉的也算),转 public 前要清理",
                              details=[f"{s / 1048576:.1f} MB  {p}" for s, p in big[:10]],
                              fix="重写历史(git filter-repo)会影响所有人的 clone,只能由用户决定和执行")

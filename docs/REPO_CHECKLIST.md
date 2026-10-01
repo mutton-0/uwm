@@ -76,24 +76,25 @@ python3 skills/sky-lab-repo-audit/repo_check.py <项目目录> --public   # 准�
 |---|---|---|---|
 | 26 | 大文件 | 数据集、权重、rosbag、日志、视频不在仓库里,也不在历史里 | 每个仓库 |
 | 27 | 敏感信息 | 密钥、token、密码、内网 IP 不在仓库和历史里(可以用 gitleaks 扫) | 每个仓库 |
+| 28 | 访问信息和个人信息 | 车机/服务器的主机名、IP、Tailscale 地址,用的谁的账号,个人邮箱,都不写进仓库;文档里写"连接方式见组内 XX" | 每个仓库 |
 
 ## 维护
 
 | # | 检查项 | 具体要求 | 什么时候要 |
 |---|---|---|---|
-| 28 | 月度登记 | 每个提到 main 的 PR 都由提交人登记到 Google Sheet;本仓库当月没有 PR 的,manager 填一行写原因 | 每个仓库 |
-| 29 | CODEOWNERS | .github/CODEOWNERS 写了 manager 和副 manager | 每个仓库 |
-| 30 | base tag | 当月 PR 合完后打了 base-YYYY-MM | 每个仓库 |
-| 31 | 分支清理 | 已合并的分支删掉 | 建议 |
+| 29 | 月度登记 | 每个提到 main 的 PR 都由提交人登记到 Google Sheet;本仓库当月没有 PR 的,manager 填一行写原因 | 每个仓库 |
+| 30 | CODEOWNERS | .github/CODEOWNERS 写了 manager 和副 manager | 每个仓库 |
+| 31 | base tag | 当月 PR 合完后打了 base-YYYY-MM | 每个仓库 |
+| 32 | 分支清理 | 已合并的分支删掉 | 建议 |
 
 ## 开源前(面向网友复刻)
 
 | # | 检查项 | 具体要求 | 什么时候要 |
 |---|---|---|---|
-| 32 | 复刻自测 | 在新机器或全新环境里,只看 README,从 clone 跑到出结果 | 开源前必须;平时建议 |
-| 33 | 英文 README | 英文或中英双语,外面的人能看懂 | 开源前 |
-| 34 | 第三方代码 | 拷贝或改写的别人代码,保留原 LICENSE 和出处 | 开源前 |
-| 35 | 权重和数据托管 | 放 HuggingFace 或公开网盘,写清下载方式和使用许可 | 开源前 |
-| 36 | CONTRIBUTING.md | 外部的人怎么提 Issue 和 PR | 开源前 |
-| 37 | CITATION.cff | 论文的引用方式 | 开源前建议 |
-| 38 | 历史清理 | 转 public 前把整个 git 历史再扫一遍,有问题用 git filter-repo 清掉 | 开源前 |
+| 33 | 复刻自测 | 在新机器或全新环境里,只看 README,从 clone 跑到出结果 | 开源前必须;平时建议 |
+| 34 | 英文 README | 英文或中英双语,外面的人能看懂 | 开源前 |
+| 35 | 第三方代码 | 拷贝或改写的别人代码,保留原 LICENSE 和出处 | 开源前 |
+| 36 | 权重和数据托管 | 放 HuggingFace 或公开网盘,写清下载方式和使用许可 | 开源前 |
+| 37 | CONTRIBUTING.md | 外部的人怎么提 Issue 和 PR | 开源前 |
+| 38 | CITATION.cff | 论文的引用方式 | 开源前建议 |
+| 39 | 历史清理 | 转 public 前把整个 git 历史再扫一遍,有问题用 git filter-repo 清掉 | 开源前 |

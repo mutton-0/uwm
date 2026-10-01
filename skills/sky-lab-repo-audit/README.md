@@ -32,9 +32,9 @@ python3 <本目录>/repo_check.py <项目目录> --json     # 输出 JSON,给 AI
 **怎么看输出**:
 
 ```
-[✗ error] #29 CODEOWNERS: 仓库没有 .github/CODEOWNERS(main 需要 manager 审批)
+[✗ error] #30 CODEOWNERS: 仓库没有 .github/CODEOWNERS(main 需要 manager 审批)
       → 写一行:*  @manager用户名 @副manager用户名。用户名问用户,不要猜
-[! warn ] #27 PERSONAL_INFO: 有 4 处个人 / 网络信息(邮箱、内网 IP、Tailscale 主机名)
+[! warn ] #28 PERSONAL_INFO: 有 4 处个人 / 网络信息(邮箱、内网 IP、Tailscale 主机名)
       DEPLOY_uw-nuvo.md:8(邮箱)
       DEPLOY_uw-nuvo.md:9(内网 / Tailscale IP)
       → 告诉用户位置和类型,回复里不要贴出原值。删除还是改成占位符由用户决定
@@ -42,7 +42,7 @@ python3 <本目录>/repo_check.py <项目目录> --json     # 输出 JSON,给 AI
 ```
 
 - 方括号里是级别:**error 必须修**,提 PR 前要清零;**warn 很可能有问题**,修不了的在 PR 描述里说明原因;**info 是建议**
-- `#29` 是检查表编号,去 REPO_CHECKLIST 里能找到完整要求
+- `#30` 是检查表编号,去 REPO_CHECKLIST 里能找到完整要求
 - `→` 后面是怎么修
 - 最后一段"需要人或 AI 读代码判断的项",是脚本查不了的(能不能真的跑通、结果能否复现、实车硬件等),要自己对照着过一遍
 - 有 error 时退出码是 1
