@@ -1,0 +1,4 @@
+月份,仓库,Manager,本月合入内容,PR 链接,自查表,Owner 审核结果(通过/打回/下月再合),合入后 tag,遗留问题 / 备注
+2026-11,camera-calibration,@boyue,run_calib 支持 ChArUco 标定板;README 补外参来源,https://github.com/sky-lab-uw/camera-calibration/pull/12,已完成,通过,base-2026-11,
+2026-11,arm-setup,@mut0,新增夹爪控制脚本,https://github.com/sky-lab-uw/arm-setup/pull/5,已完成,打回,,"线材长度没写,周三前补上后重新审"
+2026-11,vla-finetune,@zhengyang,本月无合入,,,,,"GPU 排队,训练没跑完,预计 12 月合入"

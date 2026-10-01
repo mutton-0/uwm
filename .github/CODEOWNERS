@@ -1,5 +1,6 @@
-# 格式:路径 负责人。改到对应路径的 PR 会自动请求负责人 review。
-# 这是演示文件,实际路径/人名按各仓库自己情况改。
-/configs/        @boyue
-/scripts/        @boyue
-*                @boyue
+# 改到对应路径的 PR 会自动请求这里写的人 review。
+# 一般写本仓库的 manager,成员提到 monthly 分支的 PR 就会自动找他审。
+# 合进 main 必须 Owner 批准,这一点由组织规则(Required reviewers: approvers)保证,不靠这个文件。
+# 如果组织规则里用的是 "Require review from Code Owners",这里要改成:*  @sky-lab-uw/approvers
+# 这是演示文件,用户名按各仓库实际情况改。
+*    @boyue

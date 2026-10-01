@@ -4,6 +4,8 @@
 
 不需要写得多花哨,但下面几条是硬性要求,建组织的时候会照这个检查。
 
+配套的两份文档:代码怎么合进 main,见 [MERGE_WORKFLOW.md](MERGE_WORKFLOW.md);提 PR 前逐项自查,用 [REPO_CHECKLIST.md](REPO_CHECKLIST.md)。
+
 ## 一、仓库里必须有什么
 
 ```
@@ -116,9 +118,10 @@ RealSense D435i 与机械臂末端的手眼标定流程。
 ## 三、命名和分支
 
 - repo 名:`方向-内容`,小写加短横线,比如 `camera-calibration`、`vla-finetune`,不要把人名放进 repo 名。
-- `main` 分支:受保护,只能通过 PR 合入,保证随时能跑。
+- `main`:受保护,每月组会上 Owner 审批后合入一次,流程见 [MERGE_WORKFLOW.md](MERGE_WORKFLOW.md)。
+- `monthly/YYYY-MM`:manager 维护的本月整合分支,成员的改动先通过 PR 合到这里。
 - 自己开发用 `dev/你的名字` 或 `feature/具体描述`,比如 `dev/boyue`、`feature/charuco-support`。
-- 阶段性成果打 tag,比如 `v0.1`、投论文对应的版本打 `icra26-submission`,别把版本号写进分支名(`camera/boyue/v1` 这种不要)。
+- tag:每次月度合入后打 `base-YYYY-MM`;阶段性成果打 `v0.1`,投论文对应的版本打 `icra26-submission`。别把版本号写进分支名(`camera/boyue/v1` 这种不要)。
 
 ## 四、绝对不能提交的东西
 
@@ -164,8 +167,11 @@ README 里写的和代码里实际跑的,时间久了容易对不上——尤其
 
 ## 九、维护节奏
 
-- 之前组里用 Google Sheet 单独追踪各个仓库的状态,现在迁进仓库本身:README 顶部的"状态"字段(active / stale / archived)加上"已知问题"段落,就是那张表的替代——信息跟代码放一起不容易丢,查的时候不用再开两个地方对。
-- 一个月过一遍所有仓库的状态,固定在月度组会前那个周末更新,周一开会直接对着看谁的卡住了、谁的环境变了没写。
+- 每个仓库有一个 manager,README 顶部的"维护人"写的就是他。
+- main 每月合入一次:manager 在月度组会前那个周末整理好、提 PR,周一组会上 Owner 审核通过后合入。具体操作见 [MERGE_WORKFLOW.md](MERGE_WORKFLOW.md)。
+- Google Sheet 继续用,但只当索引:每个仓库每月一行,写 manager、PR 链接、审核结果。具体改了什么写在 PR 和 README 里,不在 Sheet 里重复写。表头见 [templates/monthly_review_sheet.csv](../templates/monthly_review_sheet.csv)。
+- 本月没东西合入也要在 Sheet 里填一行,写清原因。每个月都有记录,才看得出哪个仓库落灰了。
+- README 顶部的"状态"字段(active / 交接中 / archived)和"已知问题"段落,每次月度合入时顺手更新。
 - commit 不要攒着,平时小步提交。真要交接的时候发现一堆没写清楚、自己都忘了为什么这么改的代码,比随手花十分钟补一条 commit message 贵得多。
 
 ## 十、AI 协作时代,再加几条
@@ -180,7 +186,7 @@ README 里写的和代码里实际跑的,时间久了容易对不上——尤其
 
 ## 十一、检查清单
 
-发 PR 或者第一次把项目挪进组织仓库前,自己过一遍:
+发 PR 或者第一次把项目挪进组织仓库前,自己过一遍下面这几条。完整的逐项自查表(包括开源前的要求)见 [REPO_CHECKLIST.md](REPO_CHECKLIST.md)。
 
 - [ ] 别人 clone 下来,跟着 README 能装上环境(GPU/驱动/CUDA 版本对得上)
 - [ ] 跟着 README 的命令能跑出结果,不用来问你

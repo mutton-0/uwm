@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="380" viewBox="0 0 900 380" font-family="Segoe UI, Noto Sans CJK SC, PingFang SC, Microsoft YaHei, Helvetica, Arial, sans-serif">
+  <rect width="900" height="380" fill="#ffffff"/>
+
+  <!-- 时间段 -->
+  <g font-size="13" fill="#59636e" text-anchor="middle">
+    <text x="105" y="24">10 月组会后</text>
+    <text x="320" y="24">月中:各自在分支开发</text>
+    <text x="560" y="24">组会前那周的周五前</text>
+    <text x="760" y="24">周末提 PR → 周一组会</text>
+  </g>
+
+  <!-- main -->
+  <line x1="30" y1="90" x2="880" y2="90" stroke="#1f883d" stroke-width="4"/>
+  <text x="300" y="80" font-size="14" font-weight="700" fill="#1f883d">main(受保护,只能通过 PR 合入)</text>
+
+  <!-- monthly -->
+  <path d="M105 90 C 135 90, 135 170, 165 170 L 670 170 C 710 170, 715 90, 755 90" fill="none" stroke="#8250df" stroke-width="4"/>
+  <text x="175" y="160" font-size="14" font-weight="700" fill="#8250df">monthly/2026-11(manager 维护)</text>
+
+  <!-- feature -->
+  <path d="M105 90 C 140 90, 140 240, 180 240 L 430 240 C 480 240, 480 170, 520 170" fill="none" stroke="#0969da" stroke-width="4"/>
+  <text x="190" y="230" font-size="13" font-weight="700" fill="#0969da">feature/charuco-support(成员 A)</text>
+
+  <!-- dev -->
+  <path d="M105 90 C 150 90, 150 310, 200 310 L 500 310 C 550 310, 550 170, 600 170" fill="none" stroke="#bf8700" stroke-width="4"/>
+  <text x="210" y="300" font-size="13" font-weight="700" fill="#bf8700">dev/zhengyang(成员 B)</text>
+
+  <!-- commits -->
+  <g fill="#ffffff" stroke-width="3">
+    <circle cx="250" cy="240" r="7" stroke="#0969da"/>
+    <circle cx="320" cy="240" r="7" stroke="#0969da"/>
+    <circle cx="390" cy="240" r="7" stroke="#0969da"/>
+    <circle cx="280" cy="310" r="7" stroke="#bf8700"/>
+    <circle cx="390" cy="310" r="7" stroke="#bf8700"/>
+    <circle cx="470" cy="310" r="7" stroke="#bf8700"/>
+  </g>
+  <circle cx="520" cy="170" r="8" fill="#8250df"/>
+  <circle cx="600" cy="170" r="8" fill="#8250df"/>
+  <circle cx="105" cy="90" r="9" fill="#1f883d"/>
+  <circle cx="755" cy="90" r="9" fill="#1f883d"/>
+
+  <!-- tags -->
+  <rect x="45" y="40" width="120" height="24" rx="12" fill="#ddf4ff" stroke="#54aeff"/>
+  <text x="105" y="57" font-size="12" text-anchor="middle" fill="#0550ae">tag base-2026-10</text>
+  <rect x="695" y="40" width="120" height="24" rx="12" fill="#ddf4ff" stroke="#54aeff"/>
+  <text x="755" y="57" font-size="12" text-anchor="middle" fill="#0550ae">tag base-2026-11</text>
+
+  <!-- 编号 -->
+  <g font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">
+    <circle cx="476" cy="200" r="11" fill="#d1242f"/><text x="476" y="205">1</text>
+    <circle cx="556" cy="236" r="11" fill="#d1242f"/><text x="556" y="241">1</text>
+    <circle cx="726" cy="128" r="11" fill="#d1242f"/><text x="726" y="133">2</text>
+    <circle cx="832" cy="52" r="11" fill="#d1242f"/><text x="832" y="57">3</text>
+  </g>
+
+  <!-- 说明 -->
+  <g font-size="13" fill="#1f2328">
+    <text x="30" y="350">① 成员的分支通过 PR 合进 monthly 分支,由 manager 审</text>
+    <text x="440" y="350">② monthly 通过 PR 合进 main,Owner 在组会上审</text>
+    <text x="30" y="370">③ 合入后在 main 上打 tag,作为下个月所有人开发的起点</text>
+  </g>
+</svg>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="330" viewBox="0 0 860 330" font-family="Segoe UI, Noto Sans CJK SC, PingFang SC, Microsoft YaHei, Helvetica, Arial, sans-serif">
+  <rect width="860" height="330" fill="#ffffff"/>
+
+  <!-- 仓库头 -->
+  <rect x="0" y="0" width="860" height="48" fill="#f6f8fa"/>
+  <line x1="0" y1="48" x2="860" y2="48" stroke="#d0d7de"/>
+  <text x="20" y="30" font-size="16"><tspan fill="#0969da">sky-lab-uw</tspan><tspan fill="#59636e"> / </tspan><tspan fill="#0969da" font-weight="700">camera-calibration</tspan></text>
+  <rect x="268" y="15" width="58" height="20" rx="10" fill="none" stroke="#d0d7de"/>
+  <text x="297" y="29" font-size="12" fill="#59636e" text-anchor="middle">Private</text>
+
+  <!-- 标签页 -->
+  <g font-size="14" fill="#1f2328">
+    <text x="20" y="76" font-weight="700">Code</text>
+    <text x="90" y="76">Issues</text>
+    <text x="160" y="76">Pull requests</text>
+    <text x="280" y="76">Settings</text>
+  </g>
+  <rect x="16" y="85" width="46" height="3" fill="#fd8c73"/>
+  <line x1="0" y1="88" x2="860" y2="88" stroke="#d0d7de"/>
+
+  <!-- 右侧按钮 -->
+  <rect x="680" y="106" width="92" height="32" rx="6" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="726" y="127" font-size="13" text-anchor="middle" fill="#1f2328">Add file ▾</text>
+  <rect x="780" y="106" width="64" height="32" rx="6" fill="#1f883d"/>
+  <text x="812" y="127" font-size="13" text-anchor="middle" fill="#ffffff">Code ▾</text>
+
+  <!-- 分支按钮 -->
+  <rect x="20" y="106" width="130" height="32" rx="6" fill="#f6f8fa" stroke="#d0d7de"/>
+  <circle cx="38" cy="122" r="4" fill="none" stroke="#59636e" stroke-width="1.5"/>
+  <text x="50" y="127" font-size="14" font-weight="700" fill="#1f2328">main</text>
+  <text x="132" y="127" font-size="12" fill="#59636e">▾</text>
+
+  <!-- 下拉面板 -->
+  <rect x="23" y="149" width="340" height="160" rx="8" fill="#d0d7de" opacity="0.5"/>
+  <rect x="20" y="146" width="340" height="160" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="36" y="170" font-size="14" font-weight="700" fill="#1f2328">Switch branches/tags</text>
+  <rect x="32" y="182" width="316" height="30" rx="6" fill="#ffffff" stroke="#0969da" stroke-width="2"/>
+  <text x="44" y="202" font-size="13" fill="#1f2328">feature/charuco-support</text>
+  <text x="36" y="232" font-size="13" font-weight="700" fill="#1f2328">Branches</text>
+  <text x="110" y="232" font-size="13" fill="#59636e">Tags</text>
+  <rect x="34" y="237" width="62" height="2" fill="#fd8c73"/>
+  <line x1="20" y1="242" x2="360" y2="242" stroke="#d0d7de"/>
+  <rect x="28" y="250" width="324" height="36" rx="6" fill="#ddf4ff"/>
+  <text x="40" y="273" font-size="12" fill="#1f2328">Create branch <tspan font-weight="700">feature/charuco-support</tspan> from main</text>
+
+  <!-- 红框 -->
+  <g fill="none" stroke="#d1242f" stroke-width="3">
+    <rect x="14" y="100" width="142" height="44" rx="8"/>
+    <rect x="27" y="177" width="326" height="40" rx="8"/>
+    <rect x="23" y="245" width="334" height="46" rx="8"/>
+  </g>
+  <g stroke="#d1242f" stroke-width="1.5">
+    <line x1="156" y1="122" x2="385" y2="122"/>
+    <line x1="353" y1="197" x2="385" y2="197"/>
+    <line x1="357" y1="268" x2="385" y2="268"/>
+  </g>
+
+  <!-- 说明 -->
+  <g font-size="14" fill="#d1242f" font-weight="700">
+    <text x="392" y="127">① 点分支下拉,默认显示 main</text>
+    <text x="392" y="194">② 输入新分支名,按规范命名:</text>
+    <text x="392" y="214" font-weight="400">feature/具体描述 或 dev/你的名字</text>
+    <text x="392" y="265">③ 点 Create branch</text>
+    <text x="392" y="285" font-weight="400">新分支从当前 main 拉出,之后在这个分支上改</text>
+  </g>
+</svg>

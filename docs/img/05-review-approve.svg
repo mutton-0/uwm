@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" font-family="Segoe UI, Noto Sans CJK SC, PingFang SC, Microsoft YaHei, Helvetica, Arial, sans-serif">
+  <rect width="900" height="560" fill="#ffffff"/>
+
+  <text x="20" y="36" font-size="20" font-weight="700" fill="#1f2328">[2026-11 月度合入] camera-calibration <tspan fill="#59636e" font-weight="400">#12</tspan></text>
+  <rect x="20" y="50" width="64" height="24" rx="12" fill="#1f883d"/>
+  <text x="52" y="67" font-size="13" text-anchor="middle" fill="#ffffff">Open</text>
+  <text x="96" y="67" font-size="13" fill="#59636e">boyue wants to merge 6 commits into <tspan font-weight="700">main</tspan> from <tspan font-weight="700">monthly/2026-11</tspan></text>
+
+  <!-- 标签页 -->
+  <g font-size="14" fill="#1f2328">
+    <text x="20" y="106">Conversation</text>
+    <text x="140" y="106">Commits 6</text>
+    <text x="240" y="106">Checks</text>
+    <text x="320" y="106" font-weight="700">Files changed 4</text>
+  </g>
+  <rect x="316" y="113" width="122" height="3" fill="#fd8c73"/>
+  <line x1="0" y1="116" x2="900" y2="116" stroke="#d0d7de"/>
+
+  <!-- Review 按钮 -->
+  <rect x="730" y="128" width="150" height="32" rx="6" fill="#1f883d"/>
+  <text x="805" y="149" font-size="13" text-anchor="middle" fill="#ffffff">Review changes ▾</text>
+
+  <!-- 代码改动 -->
+  <rect x="20" y="136" width="440" height="200" rx="6" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="20" y="136" width="440" height="30" rx="6" fill="#f6f8fa"/>
+  <text x="32" y="156" font-size="13" font-weight="700" fill="#1f2328">configs/extrinsics.yaml</text>
+  <g xml:space="preserve" font-size="13" font-family="SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace">
+    <rect x="21" y="174" width="438" height="22" fill="#ffebe9"/>
+    <text x="30" y="190" fill="#1f2328">-  t: [0.12, 0.00, 0.85]</text>
+    <rect x="21" y="196" width="438" height="22" fill="#dafbe1"/>
+    <text x="30" y="212" fill="#1f2328">+  t: [0.15, 0.00, 0.82]</text>
+    <text x="30" y="234" fill="#1f2328">   R: [[0.99, ...], ...]</text>
+    <rect x="21" y="240" width="438" height="22" fill="#dafbe1"/>
+    <text x="30" y="256" fill="#1f2328">+  # 2026-11-03 重新标定</text>
+  </g>
+
+  <!-- 审核面板 -->
+  <rect x="483" y="171" width="400" height="240" rx="8" fill="#d0d7de" opacity="0.5"/>
+  <rect x="480" y="168" width="400" height="240" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="496" y="192" font-size="14" font-weight="700" fill="#1f2328">Finish your review</text>
+  <rect x="496" y="204" width="368" height="56" rx="6" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="506" y="226" font-size="13" fill="#1f2328">外参和 README 描述一致,可以合</text>
+  <g font-size="13">
+    <circle cx="506" cy="284" r="7" fill="#ffffff" stroke="#8c959f" stroke-width="1.5"/>
+    <text x="522" y="289" fill="#1f2328">Comment</text>
+    <text x="640" y="289" fill="#59636e">只评论,不表态</text>
+    <circle cx="506" cy="314" r="7" fill="#ffffff" stroke="#0969da" stroke-width="1.5"/>
+    <circle cx="506" cy="314" r="3.5" fill="#0969da"/>
+    <text x="522" y="319" fill="#1f2328" font-weight="700">Approve</text>
+    <text x="640" y="319" fill="#59636e">通过</text>
+    <circle cx="506" cy="344" r="7" fill="#ffffff" stroke="#8c959f" stroke-width="1.5"/>
+    <text x="522" y="349" fill="#1f2328">Request changes</text>
+    <text x="640" y="349" fill="#59636e">打回,要求修改</text>
+  </g>
+  <rect x="764" y="368" width="104" height="30" rx="6" fill="#1f883d"/>
+  <text x="816" y="388" font-size="12" text-anchor="middle" fill="#ffffff">Submit review</text>
+
+  <!-- 红框 -->
+  <g fill="none" stroke="#d1242f" stroke-width="3">
+    <rect x="312" y="88" width="134" height="32" rx="6"/>
+    <rect x="724" y="122" width="162" height="44" rx="8"/>
+    <rect x="492" y="270" width="380" height="88" rx="8"/>
+    <rect x="758" y="362" width="116" height="42" rx="8"/>
+  </g>
+  <g font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">
+    <circle cx="312" cy="88" r="11" fill="#d1242f"/><text x="312" y="93">1</text>
+    <circle cx="724" cy="122" r="11" fill="#d1242f"/><text x="724" y="127">2</text>
+    <circle cx="492" cy="270" r="11" fill="#d1242f"/><text x="492" y="275">3</text>
+    <circle cx="758" cy="362" r="11" fill="#d1242f"/><text x="758" y="367">4</text>
+  </g>
+
+  <!-- 说明 -->
+  <g font-size="14" fill="#1f2328">
+    <text x="20" y="444"><tspan fill="#d1242f" font-weight="700">①</tspan> 打开 PR,切到 Files changed,逐个文件看改动</text>
+    <text x="20" y="468"><tspan fill="#d1242f" font-weight="700">②</tspan> 点右上角 Review changes</text>
+    <text x="20" y="492"><tspan fill="#d1242f" font-weight="700">③</tspan> 没问题选 Approve;要改选 Request changes,并在框里写清楚改什么</text>
+    <text x="20" y="516"><tspan fill="#d1242f" font-weight="700">④</tspan> 点 Submit review 提交</text>
+    <text x="20" y="544" fill="#59636e">PR 作者不能 Approve 自己的 PR;只有对仓库有 Write 以上权限的人 Approve 才计数</text>
+  </g>
+</svg>

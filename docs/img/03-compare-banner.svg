@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="220" viewBox="0 0 860 220" font-family="Segoe UI, Noto Sans CJK SC, PingFang SC, Microsoft YaHei, Helvetica, Arial, sans-serif">
+  <rect width="860" height="220" fill="#ffffff"/>
+
+  <!-- 仓库头 -->
+  <rect x="0" y="0" width="860" height="48" fill="#f6f8fa"/>
+  <line x1="0" y1="48" x2="860" y2="48" stroke="#d0d7de"/>
+  <text x="20" y="30" font-size="16"><tspan fill="#0969da">sky-lab-uw</tspan><tspan fill="#59636e"> / </tspan><tspan fill="#0969da" font-weight="700">camera-calibration</tspan></text>
+  <g font-size="14" fill="#1f2328">
+    <text x="20" y="76" font-weight="700">Code</text>
+    <text x="90" y="76">Issues</text>
+    <text x="160" y="76">Pull requests</text>
+    <text x="280" y="76">Settings</text>
+  </g>
+  <rect x="16" y="85" width="46" height="3" fill="#fd8c73"/>
+  <line x1="0" y1="88" x2="860" y2="88" stroke="#d0d7de"/>
+
+  <!-- 黄色提示条 -->
+  <rect x="20" y="104" width="820" height="52" rx="6" fill="#fff8c5" stroke="#d4a72c"/>
+  <circle cx="40" cy="130" r="4" fill="none" stroke="#59636e" stroke-width="1.5"/>
+  <text x="52" y="135" font-size="14" fill="#1f2328"><tspan font-weight="700">feature/charuco-support</tspan> had recent pushes 1 minute ago</text>
+  <rect x="640" y="114" width="184" height="32" rx="6" fill="#1f883d"/>
+  <text x="732" y="135" font-size="13" text-anchor="middle" fill="#ffffff">Compare &amp; pull request</text>
+
+  <!-- 红框 -->
+  <rect x="634" y="108" width="196" height="44" rx="8" fill="none" stroke="#d1242f" stroke-width="3"/>
+
+  <!-- 说明 -->
+  <g font-size="14" fill="#d1242f">
+    <text x="20" y="186" font-weight="700">① push 之后回到仓库首页,会出现这条黄色提示,点右边的绿色按钮开 PR</text>
+    <text x="20" y="208">没出现的话:点上面的 Pull requests → New pull request,手动选 base 和 compare</text>
+  </g>
+</svg>
