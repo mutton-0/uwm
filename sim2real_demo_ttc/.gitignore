@@ -44,3 +44,28 @@ results/vspeed_*.npy
 # 遮挡渲染图（可由 pool_to_c_work.py / vla_export_boxes.py 重建）
 work_c_*/
 work_gvs_*/
+
+# ---------- 以下是 demo/sim2real-ttc-clean 整理时新增的 ----------
+# 分析产出和缓存不进仓库。原文件还在 sim2real/demo-v3-repe-mainline 分支,恢复方法见 README"数据和中间结果"一节
+results/**/*.json
+results/**/*.jsonl
+results/**/*.np[yz]
+results/**/*.pt
+results/**/*.png
+results/**/*.pdf
+results/**/*.html
+variants/**/*.json
+variants/**/*.jsonl
+variants/**/*.np[yz]
+variants/**/*.png
+probe_v0/**/*.json
+probe_v0/**/*.png
+probe_v0/**/*.pdf
+# 第二轮结果在另一台机器上产出,从来没进过 git;probe_v0 里原来有两个软链接指向这里
+results_5090/
+probe_v0/data
+probe_v0/tb
+# 论文源文件和 PDF 不放在代码仓库
+paper_*/
+# 已作废的结果
+results/voided_*/
