@@ -6,6 +6,28 @@
 
 配套的两份文档:代码怎么合进 main,见 [MERGE_WORKFLOW.md](MERGE_WORKFLOW.md);提 PR 前逐项自查,用 [REPO_CHECKLIST.md](REPO_CHECKLIST.md)。
 
+## 先说分工:哪些交给 AI
+
+仓库里放了检查 skill 的话(见 [使用说明](../skills/sky-lab-repo-audit/README.md)),在 Claude Code 里输一条命令就行,下面这些不用你逐条对照:
+
+| 输入 | AI 做什么 |
+|---|---|
+| `/sky-lab-repo-audit 整理` | 补目录结构、`.gitignore`、AGENTS.md、smoke test,补 README 缺的章节和命令,在 README 里列出写死的路径 |
+| `/sky-lab-repo-audit` | 查大文件、密钥、个人信息、断掉的软链接,查 README 和代码对不对得上 |
+| `/sky-lab-repo-audit pr` | 提 PR 前把上面两件事一起做完,再写好 PR 描述和 Sheet 那一行 |
+
+用 Codex、Cursor 等其他 AI 工具也一样,直接说"sky-lab 整理""sky-lab pr":仓库里的 AGENTS.md 会让它去读同一份 SKILL.md。
+
+AI 推不出来、**必须你自己提供**的只有这些(对应下面第二、六、七节):
+
+- 维护人和副 manager 是谁,LICENSE 用哪种
+- 实际用的环境和 GPU,数据和权重放在哪
+- 结果怎么复现:命令、随机种子、波动范围和原因
+- 实车项目:传感器摆放、外参来源、线材和供电
+- 已知问题和没做完的事
+
+AI 问到这些时照实回答就行,不知道的写"待确认",不要让 AI 猜。下面各节是完整规则,AI 也是照着它们检查的。
+
 ## 一、仓库里必须有什么
 
 ```

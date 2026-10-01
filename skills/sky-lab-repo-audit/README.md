@@ -10,16 +10,23 @@
 
 检查的标准就是 [REPO_CHECKLIST.md](../../docs/REPO_CHECKLIST.md),输出里的编号对应那张表。
 
-## 什么时候用
+## 最常用:一条命令
 
-| 时候 | 谁 | 怎么用 |
+在仓库里打开 Claude Code,输入:
+
+| 什么时候 | 输入 | AI 会做什么 |
 |---|---|---|
-| 对 main 提 PR 之前 | member | 跑一次脚本,把 error 修掉再提 |
-| 组会前审核 PR | manager | 在 PR 分支上跑一次,error 没清零的打回 |
-| 新建仓库、接手别人的仓库 | manager / 接手的人 | 让 AI 按"修复模式"整理一遍 |
-| 准备开源(转 public)之前 | manager | 加 `--public` 再跑一次 |
+| 想看看仓库有什么问题 | `/sky-lab-repo-audit` | 只检查,出报告,不改文件 |
+| 新建仓库、接手别人的仓库 | `/sky-lab-repo-audit 整理` | 能直接改的改掉(README 章节、`.gitignore`、AGENTS.md、smoke test 等),其余列成问题 |
+| **对 main 提 PR 之前** | `/sky-lab-repo-audit pr` | 整理 + 跑 smoke test + **写好 PR 描述和 Sheet 那一行**,你复制过去就行 |
+| 准备开源 | `/sky-lab-repo-audit 开源` | 开源前的全套检查 |
+| 只查某个子目录 | `/sky-lab-repo-audit 整理 sim2real_demo_ttc` | 后面跟目录名 |
 
-## 方式一:不用 AI,直接跑脚本
+一条命令走完整个流程:AI 把能做的先全部做完,需要你回答的问题(manager 是谁、用哪个环境、硬件信息等)最后一次问完。它不会 push、不会开 PR、不会填 Sheet。
+
+manager 审 PR 时,在 PR 分支上跑一次 `/sky-lab-repo-audit`,error 没清零的打回。
+
+## 不用 AI,直接跑脚本
 
 ```bash
 python3 <本目录>/repo_check.py <项目目录>            # 平时
@@ -47,33 +54,34 @@ python3 <本目录>/repo_check.py <项目目录> --json     # 输出 JSON,给 AI
 - 最后一段"需要人或 AI 读代码判断的项",是脚本查不了的(能不能真的跑通、结果能否复现、实车硬件等),要自己对照着过一遍
 - 有 error 时退出码是 1
 
-## 方式二:Claude Code
+## 安装
 
-**安装一次,之后所有仓库都能用。** 推荐用软链接,规范更新后 `git pull` 一下就同步了:
-
+**推荐:放进仓库,所有人自动都有。** manager 建仓库时做一次,跟代码一起提交:
 ```bash
-# 在 sky-lab 规范仓库的本地副本里(现在是 uwm 的 demo/code-review-guidelines 分支)
-mkdir -p ~/.claude/skills
-ln -s "$(pwd)/skills/sky-lab-repo-audit" ~/.claude/skills/sky-lab-repo-audit
+mkdir -p .claude/skills
+cp -r <sky-lab 规范仓库>/skills/sky-lab-repo-audit .claude/skills/
+git add .claude/skills/sky-lab-repo-audit
 ```
+之后谁 clone 这个仓库,在里面打开 Claude Code 就能直接用 `/sky-lab-repo-audit`,不用自己装。其他 AI 工具也能在固定路径 `.claude/skills/sky-lab-repo-audit/SKILL.md` 找到它。规范更新后,manager 在月度合入时重新复制一次。
 
-不想用软链接,就直接复制 `cp -r skills/sky-lab-repo-audit ~/.claude/skills/`,规范更新后要重新复制一次。
+**或者装在自己电脑上,所有仓库都能用**(仓库里没放的时候):
+```bash
+mkdir -p ~/.claude/skills
+ln -s "<sky-lab 规范仓库>/skills/sky-lab-repo-audit" ~/.claude/skills/sky-lab-repo-audit
+```
+用软链接的话,规范仓库 `git pull` 一下就同步更新。
 
-**怎么说**:在要检查的仓库里打开 Claude Code,直接说下面这些话,它会自动用这个 skill。也可以输入 `/sky-lab-repo-audit` 直接调用。
+## 其他 AI 工具(Codex、Cursor、Copilot 等)
 
-| 你想要 | 这么说 |
-|---|---|
-| 只看问题,不改文件 | "按 sky-lab 规范检查一下这个仓库,只检查不修改" |
-| 让它整理 | "按 sky-lab 规范整理这个仓库,能直接改的改掉,其他的列成问题问我" |
-| 提 PR 前自查 | "我要对 main 提 PR 了,按 sky-lab 规范帮我自查一下这次的改动" |
-| 检查子项目 | "按 sky-lab 规范检查 sim2real_demo_ttc 这个目录" |
-| 开源前 | "准备把这个仓库开源,按 sky-lab 规范做开源前检查" |
+这些工具会自动读仓库根目录的 `AGENTS.md`。仓库的 AGENTS.md 按 [模板](../../templates/AGENTS.md) 写了"sky-lab 规范检查"那一节的话,直接说:
 
-## 方式三:其他 AI 工具(Codex、Cursor、Copilot 等)
+> sky-lab 整理
 
-把 SKILL.md 的位置告诉它:
+(换成"sky-lab 检查""sky-lab pr""sky-lab 开源"就是对应模式。)它会自己去读 `.claude/skills/sky-lab-repo-audit/SKILL.md`,流程和 Claude Code 完全一样。
 
-> 读 `<本目录>/SKILL.md`,按里面的步骤检查当前仓库,先只检查不修改,最后按第四步的格式给我报告。
+仓库里还没有 AGENTS.md 的话,就把这句话发给它:
+
+> 读 `.claude/skills/sky-lab-repo-audit/SKILL.md`,按里面"整理"模式处理当前仓库。
 
 如果这个工具不能执行命令,就自己跑 `repo_check.py --json`,把输出贴给它,再让它按 SKILL.md 的第二、三步处理。
 

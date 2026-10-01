@@ -45,15 +45,22 @@ bash scripts/smoke_test.sh            # 改完代码先跑这个,几十秒
 - 不要改写代码里的绝对路径,除非用户要求。本机专属路径列在 README
 - <项目特有的禁区,比如:不要改 configs/extrinsics.yaml;不要动 /data/<别人> 下的环境>
 
-## 自检
+## sky-lab 规范检查(所有 AI 工具通用)
 
-按 sky-lab 规范检查本仓库:
+用户说下面这些话,或者输入 `/sky-lab-repo-audit <参数>` 时,读 `.claude/skills/sky-lab-repo-audit/SKILL.md`,按里面对应的模式从头做到尾:
 
-```bash
-python3 <sky-lab-repo-audit 所在目录>/repo_check.py .
-```
+| 用户说 | 模式 |
+|---|---|
+| "sky-lab 检查" | 只检查,不改文件 |
+| "sky-lab 整理" | 修复能直接改的问题 |
+| "sky-lab pr" | 提 PR 前自查,并起草 PR 描述和 Sheet 那一行 |
+| "sky-lab 开源" | 开源前检查 |
 
-步骤和"哪些可以直接改、哪些要先问"见同目录的 `SKILL.md`。
+用户说要对 main 提 PR 时,先提醒他跑一次 "sky-lab pr"。
+
+检查脚本(只读):`python3 .claude/skills/sky-lab-repo-audit/repo_check.py .`
+
+这个路径读不到时(比如仓库里还没放 skill),去 sky-lab 规范仓库的 `skills/sky-lab-repo-audit/SKILL.md` 读同一份;还找不到就告诉用户,不要自己凭印象检查。
 
 ## 已知的坑
 

@@ -65,7 +65,8 @@ git config --global pull.rebase false           # git pull 遇到分叉时用 me
    - 副 manager 给 **Maintain**
    - Owner 不用加,组织 Owner 对所有仓库自动有权限
 3. **整理代码,配好 `.gitignore`,加上 CODEOWNERS,推到初始化分支。**
-   - 先对照 [REPO_CHECKLIST.md](REPO_CHECKLIST.md) 把"每个仓库"那几项过一遍。
+   - 把检查 skill 放进仓库:`mkdir -p .claude/skills && cp -r <sky-lab 规范仓库>/skills/sky-lab-repo-audit .claude/skills/`。之后所有人 clone 下来就能用 `/sky-lab-repo-audit`。
+   - 输入 `/sky-lab-repo-audit 整理`,让 AI 按规范把仓库整理一遍,回答它最后列出的问题。
    - **`.gitignore` 一定要在第一次提交之前配好。** 把 [templates/.gitignore](../templates/.gitignore) 复制到仓库根目录(`cp templates/.gitignore <你的仓库>/`),再看一眼最下面"按项目打开"那几项要不要打开。数据、权重、rosbag、视频、日志、`.env` 一旦进了 git 历史就很难删干净,后面再补 `.gitignore` 也不会把已经提交的东西撤掉。
 
    然后:
@@ -131,10 +132,7 @@ git push
 
 ### 4. 对 main 提 PR
 
-提之前先跑一次规范检查,把 error 修掉(见第十节):
-```bash
-python3 <sky-lab-repo-audit 目录>/repo_check.py .
-```
+提之前先在 Claude Code 里输入 `/sky-lab-repo-audit pr`(其他 AI 工具说"sky-lab pr")。它会检查、修掉能直接改的问题、跑 smoke test,并且写好 PR 描述和 Sheet 那一行,你复制过去就行。error 清零了再提。
 
 截止时间是**组会前那一周的周五**。push 完回到仓库首页,点黄色提示条上的按钮:
 
@@ -208,7 +206,7 @@ PR 可以先开着,在 Sheet 这一行的 Additional Note 写"下月再合"。�
 ![审核 PR](img/05-review-approve.svg)
 
 审的时候主要看:
-- 先在 PR 分支上跑一次 `repo_check.py`,error 没清零的直接打回
+- 先切到 PR 分支,输入 `/sky-lab-repo-audit`(只检查),error 没清零的直接打回
 - 对照 [REPO_CHECKLIST.md](REPO_CHECKLIST.md),尤其是 README 和代码是否一致、有没有提交大文件和密钥、结果能不能复现
 - PR 页面有没有显示冲突(This branch has conflicts)。有的话让作者在组会前处理
 
@@ -250,22 +248,18 @@ README 写错导致别人跑不起来、明显的 bug,这类等不了一个月�
 
 ## 十、用 AI 帮忙检查和整理
 
-组里的检查工具在 [skills/sky-lab-repo-audit/](../skills/sky-lab-repo-audit/),**完整用法见那里的 [README](../skills/sky-lab-repo-audit/README.md)**。最常用的三件事:
+仓库里放了检查 skill(第四节第 3 步)之后,在 Claude Code 里输一条命令就行:
 
-```bash
-# 1. 不用 AI,提 PR 前直接跑(只读,不改文件)
-python3 <sky-lab-repo-audit 目录>/repo_check.py .
+| 输入 | 什么时候用 |
+|---|---|
+| `/sky-lab-repo-audit` | 只检查,不改文件。manager 审 PR 时用 |
+| `/sky-lab-repo-audit 整理` | 新建或接手仓库时,让 AI 按规范整理 |
+| `/sky-lab-repo-audit pr` | **对 main 提 PR 之前**:整理 + smoke test + 写好 PR 描述和 Sheet 那一行 |
+| `/sky-lab-repo-audit 开源` | 准备开源时 |
 
-# 2. Claude Code 装一次,所有仓库都能用
-mkdir -p ~/.claude/skills
-ln -s "$(pwd)/skills/sky-lab-repo-audit" ~/.claude/skills/sky-lab-repo-audit
-```
+用 Codex、Cursor 等其他 AI 工具,直接说"sky-lab 检查""sky-lab 整理""sky-lab pr""sky-lab 开源",仓库里的 AGENTS.md 会让它去读同一份 SKILL.md。
 
-3. 在仓库里跟 AI 说:"按 sky-lab 规范检查一下这个仓库,只检查不修改",或者"按 sky-lab 规范整理这个仓库,能直接改的改掉,其他的列成问题问我"。
-
-AI 不会 push、不会开 PR、不会改 main。它改完之后,你要看一遍 `git diff`,再跑一次脚本确认 error 清零,然后自己 commit、按本手册提 PR。
-
-每个仓库最好有一份 `AGENTS.md`(给 AI 看的项目须知),模板在 [templates/AGENTS.md](../templates/AGENTS.md)。
+AI 不会 push、不会开 PR、不会填 Sheet。它改完之后,你看一遍 `git diff`,然后自己 commit、按本手册提 PR。完整说明见 [skills/sky-lab-repo-audit/README.md](../skills/sky-lab-repo-audit/README.md)。
 
 ## 十一、常见问题
 

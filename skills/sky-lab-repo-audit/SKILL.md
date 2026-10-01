@@ -1,6 +1,7 @@
 ---
 name: sky-lab-repo-audit
-description: 按 sky-lab 仓库规范检查、修复、整理一个代码仓库或仓库里的子项目。用户说"检查仓库""按规范整理""自查一下""repo audit""提 PR 前检查""manager 审核前过一遍"时使用;对 main 提 PR 之前、月度审核之前也应该用。
+description: 按 sky-lab 仓库规范检查、修复、整理一个代码仓库或仓库里的子项目。用户说"sky-lab 检查""sky-lab 整理""sky-lab pr""sky-lab 开源""检查仓库""按规范整理""自查一下""repo audit""提 PR 前检查""manager 审核前过一遍"时使用;对 main 提 PR 之前、月度审核之前也应该用。可以带参数:检查(默认)、整理、pr、开源。
+argument-hint: "[检查 | 整理 | pr | 开源] [子目录]"
 ---
 
 # sky-lab 仓库规范检查与整理
@@ -14,16 +15,22 @@ description: 按 sky-lab 仓库规范检查、修复、整理一个代码仓库�
 
 目标只有一个:**一个陌生人只看 README,在一台新机器上能把代码跑起来、把结果复现出来。**
 
-## 先确定模式
+## 模式
 
-开始前先确认用户要哪一种,没说就用"只检查":
+用户通过 `/sky-lab-repo-audit <参数>` 调用,或者说"sky-lab 检查 / 整理 / pr / 开源"(其他 AI 工具通过仓库的 AGENTS.md 找到这里),或者说出意思相近的话。参数:$ARGUMENTS
 
-| 模式 | 做什么 |
-|---|---|
-| 只检查 | 跑脚本 + 读代码,输出报告,**不改仓库里的任何文件**(报告写在仓库外面,见第四步) |
-| 修复 | 在只检查的基础上,按下面"可以直接改"的范围动手,其余列成问题问用户 |
+| 参数 | 模式 | 做什么 |
+|---|---|---|
+| 不带 / `检查` | 只检查 | 跑脚本 + 读代码,出报告,**不改仓库里的任何文件** |
+| `整理` | 修复 | 在只检查的基础上,把"可以直接改"的问题改掉 |
+| `pr` | 提 PR 前自查 | 修复模式 + 跑 smoke test + 起草 PR 描述和 Sheet 那一行(见第五步) |
+| `开源` | 开源前检查 | 只检查,脚本加 `--public` |
 
-修复模式下,先确认当前不在 `main` 上(`git branch --show-current`)。在 main 上就新建一个分支再改,比如 `chore/repo-audit-YYYY-MM`。
+- 上面的 `$ARGUMENTS` 只有通过 Claude Code 的 `/sky-lab-repo-audit` 命令调用时才会被换成参数。其他工具里看到的是字面的 `$ARGUMENTS`,忽略它,直接从用户的原话里判断模式和目录。
+- 参数里带了路径(比如 `/sky-lab-repo-audit 整理 sim2real_demo_ttc`),就检查那个子目录;没带就检查当前仓库根目录。
+- 判断不出模式时用"只检查",不要猜成修复。
+- **一条命令走完整个流程**:能做的先全部做完,需要用户回答的问题攒到最后一次问完,不要做一步问一步。
+- 修复和 pr 模式下,先确认当前不在 `main` 上(`git branch --show-current`)。在 main 上就新建一个分支再改,比如 `chore/repo-audit-YYYY-MM`。
 
 ## 第一步:跑检查脚本
 
@@ -87,7 +94,11 @@ python3 <本目录>/repo_check.py <项目目录> --public    # 准备开源(转 
 
 "核实"到什么程度:
 - 只靠读代码和文档就能确定的(比如 README 里的参数名和 argparse 定义是否一致),直接写结论
-- 需要运行才能确定的:只有不需要 GPU、外部数据、别人的环境,而且几分钟内能跑完的(比如 smoke test、`--help`),才可以运行。其他一律不跑,写"未运行:原因",列成问题
+- 需要运行才能确定的,**只允许运行下面这些**,其他一律不跑,写"未运行:原因",列成问题:
+  - 本 skill 的 `repo_check.py`
+  - 仓库里的 `scripts/smoke_test.sh` / `smoke_test.py`
+  - 项目入口脚本的 `--help`
+  - AGENTS.md"常用命令"里明确标了是自检、几秒到几分钟能跑完的命令
 - 只检查模式下,运行任何会写文件的命令之前先问用户
 
 - **#13 最小例子能跑通**:能运行就实际运行一次。不能运行(没有 GPU、数据不在本机)就说清楚为什么没跑。
@@ -119,6 +130,15 @@ python3 <本目录>/repo_check.py <项目目录> --json > "$DIR/$STAMP.json"   #
 3. 没改的,以及为什么没改(只检查模式下不用逐条重复,写"按要求只检查"即可)
 4. 需要用户回答或决定的问题,逐条列出
 5. 第三步里每一项的结论
+
+## 第五步(只在 pr 模式):起草 PR 描述和 Sheet 那一行
+
+1. 有 `scripts/smoke_test.sh` 就跑一次,结果写进报告。跑不了的写原因
+2. 按仓库的 `.github/pull_request_template.md`(没有就用 sky-lab 的通用模板)起草 PR 描述。"做了什么"根据 `git log main..HEAD` 和 `git diff main...HEAD --stat` 写,检查清单按实际情况勾,没做到的不要勾
+3. 起草 Google Sheet `Sky-Lab_code_review_monthly_updates` 里这次要加的一行,按表头逐列给出:Date、Main Lead、Code Collaborators、Project、Update Summary、Additional Note、Test Status from Author(error 清零才写 pass)。Github Link 留空,等用户开好 PR 再填;manager 和 Owner 的两列留空
+4. PR 描述和 Sheet 那一行都写进报告文件,回复里也贴出来,方便用户直接复制
+
+不要替用户开 PR、不要 push、不要填 Sheet。
 
 ## 绝对不能做的事
 
