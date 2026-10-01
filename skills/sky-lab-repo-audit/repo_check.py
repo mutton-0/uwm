@@ -6,7 +6,8 @@
 
 - 项目目录默认是当前目录。可以是 git 仓库根目录,也可以是仓库里的子项目(比如 uwm/sim2real_demo_ttc)。
 - --json   输出 JSON,给 AI / CI 用
-- --public 额外检查开源前的要求(英文 README、CONTRIBUTING、CITATION、git 历史里的大文件)
+- --public 额外检查开源前的要求(英文 README、CONTRIBUTING、CITATION、git 历史里的大文件),
+            并且个人 / 网络信息(PERSONAL_INFO)从 warn 升级为 error
 
 退出码:有 error 返回 1,否则返回 0。
 每条结果带 REPO_CHECKLIST.md 里的编号。脚本只查能机械判断的项,需要人判断的项列在输出最后。
@@ -359,9 +360,9 @@ class Checker:
             self.add("SECRETS", "error", 27, "代码里疑似有密钥 / token", details=secret_hits[:10],
                      fix="马上告诉用户,不要在回复里原样贴出密钥。密钥要作废重新生成;代码改成从 .env 或环境变量读")
         if personal_hits:
-            self.add("PERSONAL_INFO", "warn", 27, f"有 {len(personal_hits)} 处个人 / 网络信息(邮箱、内网 IP、Tailscale 主机名)",
+            self.add("PERSONAL_INFO", "error" if self.public else "warn", 27, f"有 {len(personal_hits)} 处个人 / 网络信息(邮箱、内网 IP、Tailscale 主机名)",
                      details=personal_hits[:10],
-                     fix="告诉用户位置和类型,回复里不要贴出原值。删除还是改成占位符由用户决定;已进 git 历史的,转 public 前要清理")
+                     fix="告诉用户位置和类型,回复里不要贴出原值。平时只是提醒;开源(--public)前必须删掉,已进 git 历史的也要清理")
         if abs_refs:
             all_files = set().union(*abs_files.values())
             undocumented = [p for p in abs_refs if p not in self.readme]
