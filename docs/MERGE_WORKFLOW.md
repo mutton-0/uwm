@@ -169,6 +169,20 @@ PR 可以先开着,在 Sheet 里写"下月再合"。下个月接着用同一个 
 
 已经合进 main 的分支可以删掉,下一个功能从新的 main 重新拉。还在开发的分支,把新的 main 合进来(同第 3 步)。
 
+### 9. 提错了 commit 怎么办
+
+看这个 commit 推上去没有、推到了哪个分支:
+
+| 情况 | 怎么改 |
+|---|---|
+| **还没 push** | 本地直接改。改最后一个 commit:改好文件、`git add`,再 `git commit --amend`。撤掉最后一个 commit 但保留改动:`git reset --soft HEAD~1` |
+| **已经推到自己的分支**(`dev/名字`、`feature/xxx`) | 优先**追加一个修正 commit**,不用改历史,合入时可以 squash。确实要改历史的:**先在 code review 群里说一声,确认没人在用这个分支、没有正在进行的审核**,再本地改好后 `git push --force-with-lease` |
+| **已经合进 main,或者是别人也在用的分支** | `git revert <commit>`,生成一个反向 commit 把它撤掉,再按正常流程提 PR。main 不能强推,组织规则也会拦住 |
+
+- 强推用 `--force-with-lease`,不要用 `--force`。前者在别人往这个分支推过东西时会拒绝覆盖,后者会不提示地冲掉别人的提交。
+- 已经有人审过的 PR 强推之后,批准会作废,要重新审。
+- **提交了密钥、密码、token**:revert 和强推都不能让它变安全。先把密钥作废、重新生成,马上在群里说,再处理代码;要不要重写 git 历史由 Owner 决定。
+
 ## 六、Manager:组会前审核
 
 组会前的周末,按 Sheet 里本仓库的行逐个打开 PR 审:
@@ -246,6 +260,7 @@ AI 不会 push、不会开 PR、不会改 main。它改完之后,你要看一遍
 | Approve 之后又推了新 commit,批准没了 | 规则设置了"有新推送,旧批准作废",需要重新审 |
 | 没看到黄色的 Compare & pull request 提示 | 点 **Pull requests → New pull request**,手动选 base 和 compare |
 | PR 提示有冲突(This branch has conflicts) | 在自己分支上 `git merge origin/main`,本地解决冲突后 push |
+| 推错了东西、想 force push | 见第五节第 9 步:优先追加修正 commit;要强推的,先在 code review 群里确认,再 `git push --force-with-lease`。main 不能强推 |
 | 推自己的分支报 403 | 你没有被加进这个仓库,或者只有 Read。找这个仓库的 manager |
 
 ## 十二、管理员一次性设置(Owner 看)
