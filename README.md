@@ -15,7 +15,7 @@
 
 - `templates/monthly_review_sheet.csv`:每月 Google Sheet 的表头和示例行,Google Sheet 里"文件 → 导入"就能用。
 - `templates/repo_checklist.csv`:REPO_CHECKLIST 的表格版,可以导入 Google Sheet 逐项打勾。
-- `templates/gitignore.sample`:组里项目通用的 `.gitignore` 样本,manager 建仓库时复制过去改名为 `.gitignore`。
+- `templates/.gitignore`:组里项目通用的 `.gitignore`,manager 建仓库时直接复制到仓库根目录。上半部分默认生效,只有部分项目用得到的规则在最下面,默认注释掉。
 - `.github/pull_request_template.md`、`.github/CODEOWNERS`:PR 模板和自动指定 reviewer 的配置,放在真实路径下,直接抄。
 - `example-camera-calibration/`:一个干净的小项目按规范填出来的例子,照着这个目录结构和 README 写法抄就行。
 - `example-sim2real-ttc/`:一个真实的、体量大、还在快速迭代的研究分支(uwm 的 `sim2real_demo_ttc/`)按同一套规范补的 README。该写的照样写,写不全的地方(比如几十个分析脚本没法逐个列)就说清楚去哪找。

@@ -23,7 +23,7 @@ your-project/
 
 不强制这个目录名一定叫 `src`,你原来的项目结构能看懂就行,但"代码、脚本、配置"这几类东西要能一眼分清楚,不能全堆在根目录一坨 `.py` 文件里。
 
-`.gitignore` 不用自己从头写,从 [templates/gitignore.sample](../templates/gitignore.sample) 复制一份再按项目改。一定要在第一次提交之前配好。
+`.gitignore` 不用自己从头写,把 [templates/.gitignore](../templates/.gitignore) 复制到仓库根目录,再看最下面"按项目打开"的几项要不要打开。一定要在第一次提交之前配好。
 
 ## 二、README 写什么
 

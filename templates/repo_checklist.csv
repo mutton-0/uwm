@@ -1,7 +1,7 @@
 编号,类别,检查项,具体要求,什么时候要,是否满足(是/否/不适用),备注
 1,文件和目录,README.md,按 REPO_GUIDELINES 第二节的模板写,每个仓库,,
 2,文件和目录,环境文件,"requirements.txt / environment.yml / pyproject.toml,版本用 == 钉死",每个仓库,,
-3,文件和目录,.gitignore,"第一次提交前就配好,从 templates/gitignore.sample 复制再按项目改;至少忽略数据、权重、rosbag、视频、日志、.env",每个仓库,,
+3,文件和目录,.gitignore,"第一次提交前就配好,从 templates/.gitignore 复制,再看要不要打开最下面按项目的规则;至少忽略数据、权重、rosbag、视频、日志、.env",每个仓库,,
 4,文件和目录,LICENSE,默认 MIT;基于 Apache-2.0 项目改的用 Apache-2.0,每个仓库,,
 5,文件和目录,目录分层,"代码、脚本、配置分开放(src/、scripts/、configs/),根目录不堆 .py",每个仓库,,
 6,文件和目录,自检脚本,"scripts/smoke_test.sh,一条命令检查环境、路径、能否跑一次最小推理",建议;开源前必须,,

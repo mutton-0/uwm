@@ -66,7 +66,7 @@ git config --global pull.rebase false           # git pull 遇到分叉时用 me
    - Owner 不用加,组织 Owner 对所有仓库自动有权限
 3. **整理代码,配好 `.gitignore`,加上 CODEOWNERS,推到初始化分支。**
    - 先对照 [REPO_CHECKLIST.md](REPO_CHECKLIST.md) 把"每个仓库"那几项过一遍。
-   - **`.gitignore` 一定要在第一次提交之前配好。** 从 [templates/gitignore.sample](../templates/gitignore.sample) 复制一份改名为 `.gitignore`,按项目删改。数据、权重、rosbag、视频、日志、`.env` 一旦进了 git 历史就很难删干净,后面再补 `.gitignore` 也不会把已经提交的东西撤掉。
+   - **`.gitignore` 一定要在第一次提交之前配好。** 把 [templates/.gitignore](../templates/.gitignore) 复制到仓库根目录(`cp templates/.gitignore <你的仓库>/`),再看一眼最下面"按项目打开"那几项要不要打开。数据、权重、rosbag、视频、日志、`.env` 一旦进了 git 历史就很难删干净,后面再补 `.gitignore` 也不会把已经提交的东西撤掉。
 
    然后:
    ```bash
