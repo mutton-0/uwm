@@ -1,6 +1,6 @@
 # demo/code-review-guidelines
 
-这个分支不是 uwm 的项目代码,是给 sky-lab 同学看的规范展示分支。
+这个分支是给 sky-lab 同学看的规范展示分支。
 
 ## 先看哪个
 
