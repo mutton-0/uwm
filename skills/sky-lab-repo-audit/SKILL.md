@@ -20,7 +20,7 @@ description: 按 sky-lab 仓库规范检查、修复、整理一个代码仓库�
 
 | 模式 | 做什么 |
 |---|---|
-| 只检查 | 跑脚本 + 读代码,输出报告,**不改任何文件** |
+| 只检查 | 跑脚本 + 读代码,输出报告,**不改仓库里的任何文件**(报告写在仓库外面,见第四步) |
 | 修复 | 在只检查的基础上,按下面"可以直接改"的范围动手,其余列成问题问用户 |
 
 修复模式下,先确认当前不在 `main` 上(`git branch --show-current`)。在 main 上就新建一个分支再改,比如 `chore/repo-audit-YYYY-MM`。
@@ -98,7 +98,21 @@ python3 <本目录>/repo_check.py <项目目录> --public    # 准备开源(转 
 
 ## 第四步:报告
 
-最后给用户一份报告,包括:
+报告存成文件,放在**仓库外面**,不要写进仓库:
+
+```bash
+DIR=~/sky-lab-audit/<仓库名>            # 检查子项目时用 <仓库名>__<子目录名>,比如 uwm__sim2real_demo_ttc
+STAMP=$(date +%Y-%m-%d_%H%M)
+mkdir -p "$DIR"
+python3 <本目录>/repo_check.py <项目目录> --json > "$DIR/$STAMP.json"   # 脚本原始输出
+# 报告写到 "$DIR/$STAMP.md"
+```
+
+修复模式下,修复前、修复后的脚本输出各存一份(`$STAMP-before.json`、`$STAMP-after.json`)。
+
+回复的最后一行写报告的完整路径,比如 `报告:/home/<用户>/sky-lab-audit/uwm__sim2real_demo_ttc/2026-10-01_1530.md`,方便直接点开。
+
+报告包括:
 
 1. 脚本结果的 error / warn / info 数量。修复模式下给修复前、修复后两次;只检查模式下给一次
 2. 改了哪些文件,每处一句话说为什么(只检查模式写"无")

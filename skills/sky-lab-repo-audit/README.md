@@ -85,6 +85,23 @@ ln -s "$(pwd)/skills/sky-lab-repo-audit" ~/.claude/skills/sky-lab-repo-audit
 
 **不会做**:push、开 PR、改 main、重写 git 历史、删除没被 git 跟踪的本地数据、改别人的环境和权限。
 
+## 报告存在哪
+
+AI 检查完会把报告存成文件,放在**仓库外面**,不会弄脏仓库:
+
+```
+~/sky-lab-audit/<仓库名>/<日期_时间>.md      # 报告:问题、改了什么、要你回答的问题
+~/sky-lab-audit/<仓库名>/<日期_时间>.json    # 脚本原始输出
+```
+
+检查子项目时目录名是 `<仓库名>__<子目录名>`,比如 `uwm__sim2real_demo_ttc`。AI 回复的最后一行会给出报告的完整路径,点开就行。贴进 PR 描述、发给 manager 审核,都用这份。
+
+自己直接跑脚本时,想留一份也可以:
+```bash
+mkdir -p ~/sky-lab-audit/<仓库名>
+python3 <本目录>/repo_check.py . > ~/sky-lab-audit/<仓库名>/$(date +%Y-%m-%d_%H%M).txt
+```
+
 ## AI 改完之后,你要做的
 
 1. 回答它列出来的问题
