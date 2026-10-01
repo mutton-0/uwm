@@ -1,0 +1,5 @@
+# 格式:路径 负责人。改到对应路径的 PR 会自动请求负责人 review。
+# 这是演示文件,实际路径/人名按各仓库自己情况改。
+/configs/        @boyue
+/scripts/        @boyue
+*                @boyue
