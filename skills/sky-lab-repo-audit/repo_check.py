@@ -54,6 +54,14 @@ SECRET_PATTERNS = [
     ("Slack token", re.compile(r"\bxox[baprs]-[A-Za-z0-9-]{10,}\b")),
     ("WandB key", re.compile(r"WANDB_API_KEY\s*[=:]\s*['\"]?[0-9a-f]{40}")),
 ]
+# 个人 / 网络信息:不是密钥,但不该进仓库(尤其开源前)。输出里只给位置和类型,不打印原值
+PERSONAL_PATTERNS = [
+    ("邮箱", re.compile(r"(?<![\w.%+-])(?!git@)[A-Za-z0-9._%+-]+@(?!(?:users\.)?noreply\.|example\.)[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")),
+    ("内网 / Tailscale IP", re.compile(r"(?<![\d.])(?:10\.\d{1,3}|192\.168|172\.(?:1[6-9]|2\d|3[01])|100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7]))\.\d{1,3}\.\d{1,3}(?![\d.])")),
+    ("Tailscale 主机名", re.compile(r"\b[\w-]+\.[\w-]+\.ts\.net\b")),
+]
+# 这些文件里出现邮箱是正常的
+PERSONAL_SKIP = re.compile(r"(^|/)(LICENSE[^/]*|COPYING|AUTHORS[^/]*|CITATION\.cff|CODEOWNERS|\.mailmap)$")
 SECRET_FILENAMES = re.compile(r"(^|/)(\.env(\.[^/]*)?|id_rsa|id_ed25519|[^/]*\.pem|[^/]*\.key)$")
 
 README_SECTIONS = {
@@ -326,7 +334,7 @@ class Checker:
                      fix="马上告诉用户:密钥要作废重新生成;文件 git rm --cached 并加进 .gitignore。git 历史怎么处理由用户决定")
 
     def check_text_content(self):
-        secret_hits, abs_refs, abs_files = [], defaultdict(int), defaultdict(set)
+        secret_hits, personal_hits, abs_refs, abs_files = [], [], defaultdict(int), defaultdict(set)
         for mode, sha, path, size in self.tracked:
             if mode == "120000":
                 continue
@@ -337,6 +345,11 @@ class Checker:
             for name, pat in SECRET_PATTERNS:
                 if pat.search(text):
                     secret_hits.append(f"{path}({name})")
+            if not PERSONAL_SKIP.search(path):
+                for lineno, line in enumerate(text.splitlines(), 1):
+                    for name, pat in PERSONAL_PATTERNS:
+                        if pat.search(line):
+                            personal_hits.append(f"{path}:{lineno}({name})")
             if ext in CODE_EXT:
                 for m in ABS_PATH_RE.finditer(text):
                     prefix = m.group(1)
@@ -345,6 +358,10 @@ class Checker:
         if secret_hits:
             self.add("SECRETS", "error", 27, "代码里疑似有密钥 / token", details=secret_hits[:10],
                      fix="马上告诉用户,不要在回复里原样贴出密钥。密钥要作废重新生成;代码改成从 .env 或环境变量读")
+        if personal_hits:
+            self.add("PERSONAL_INFO", "warn", 27, f"有 {len(personal_hits)} 处个人 / 网络信息(邮箱、内网 IP、Tailscale 主机名)",
+                     details=personal_hits[:10],
+                     fix="告诉用户位置和类型,回复里不要贴出原值。删除还是改成占位符由用户决定;已进 git 历史的,转 public 前要清理")
         if abs_refs:
             all_files = set().union(*abs_files.values())
             undocumented = [p for p in abs_refs if p not in self.readme]
