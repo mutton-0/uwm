@@ -10,7 +10,7 @@
 | 要整理自己仓库的人 | [docs/REPO_CHECKLIST.md](docs/REPO_CHECKLIST.md):一张表列出仓库里该有什么、README 该写什么、开源前要做什么 |
 | 想知道每条规矩为什么这么定 | [docs/REPO_GUIDELINES.md](docs/REPO_GUIDELINES.md):仓库规范全文 |
 | Owner / 管理员 | MERGE_WORKFLOW.md 第十二节:approvers Team、成员权限、组织规则怎么设 |
-| 用 AI 检查或整理仓库 | [skills/sky-lab-repo-audit/SKILL.md](skills/sky-lab-repo-audit/SKILL.md):给 AI 的步骤说明;同目录的 `repo_check.py` 是只读检查脚本,人也能直接跑 |
+| 用 AI 检查或整理仓库 | [skills/sky-lab-repo-audit/README.md](skills/sky-lab-repo-audit/README.md):使用说明(什么时候用、怎么装、跟 AI 怎么说、改完怎么看)。同目录的 `SKILL.md` 是写给 AI 的,`repo_check.py` 是只读检查脚本 |
 
 ## 其他文件
 

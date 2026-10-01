@@ -218,20 +218,22 @@ README 写错导致别人跑不起来、明显的 bug,这类等不了一个月�
 
 ## 十、用 AI 帮忙检查和整理
 
-组里的检查 skill 在 [skills/sky-lab-repo-audit/](../skills/sky-lab-repo-audit/),包括:
-- `repo_check.py`:只读的检查脚本,人和 AI 都能直接跑
-- `SKILL.md`:给 AI 的步骤说明,写了哪些问题可以直接改、哪些必须先问人、哪些绝对不能做(不 push、不改 main、不重写历史、不删本地数据)
+组里的检查工具在 [skills/sky-lab-repo-audit/](../skills/sky-lab-repo-audit/),**完整用法见那里的 [README](../skills/sky-lab-repo-audit/README.md)**。最常用的三件事:
 
-**Claude Code**:装一次,所有仓库都能用:
 ```bash
+# 1. 不用 AI,提 PR 前直接跑(只读,不改文件)
+python3 <sky-lab-repo-audit 目录>/repo_check.py .
+
+# 2. Claude Code 装一次,所有仓库都能用
 mkdir -p ~/.claude/skills
-cp -r skills/sky-lab-repo-audit ~/.claude/skills/
+ln -s "$(pwd)/skills/sky-lab-repo-audit" ~/.claude/skills/sky-lab-repo-audit
 ```
-之后在任意仓库里说"按 sky-lab 规范检查一下这个仓库",它会自动用这个 skill。
 
-**其他 AI 工具**(Codex、Cursor 等):把 SKILL.md 的路径或链接给它,让它"按这个文件检查当前仓库,先只检查不修改"。
+3. 在仓库里跟 AI 说:"按 sky-lab 规范检查一下这个仓库,只检查不修改",或者"按 sky-lab 规范整理这个仓库,能直接改的改掉,其他的列成问题问我"。
 
-每个仓库的 `AGENTS.md` 里写上 skill 的位置,AI 打开仓库就能找到。
+AI 不会 push、不会开 PR、不会改 main。它改完之后,你要看一遍 `git diff`,再跑一次脚本确认 error 清零,然后自己 commit、按本手册提 PR。
+
+每个仓库最好有一份 `AGENTS.md`(给 AI 看的项目须知),模板在 [templates/AGENTS.md](../templates/AGENTS.md)。
 
 ## 十一、常见问题
 
