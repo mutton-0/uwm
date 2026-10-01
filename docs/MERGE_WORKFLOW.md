@@ -1,6 +1,6 @@
 # 代码合入流程(成员手册)
 
-先说结论:**main 每个月只动一次。** 平时大家在自己的分支上开发;每月组会前,各仓库的 manager 把这个月能合的内容整理好提 PR、把链接贴进 Google Sheet;周一组会上 Owner 审核通过,才合进 main。
+**main 每个月只动一次。** 平时大家在自己的分支上开发;每月组会前,各 members 把这个月能合的内容整理好提 PR、把链接贴进 Google Sheet;周一组会上 Owner 审核通过,才合进 main。
 
 仓库里该放什么、README 怎么写,见 [REPO_GUIDELINES.md](REPO_GUIDELINES.md);提 PR 前的逐项自查,见 [REPO_CHECKLIST.md](REPO_CHECKLIST.md)。
 
@@ -10,9 +10,9 @@
 
 | 角色 | 是谁 | GitHub 上的权限 | 做什么 |
 |---|---|---|---|
-| Owner | 导师 / 总负责人 | 组织 Owner,在 `approvers` Team 里 | 组会上审批所有合进 main 的 PR |
-| Manager | 每个仓库一个人,写在 README 顶部"维护人"和 Google Sheet 里 | 该仓库 Maintain | 维护本月整合分支,审成员的 PR,组会前提月度 PR 并登记 |
-| Member | 其他同学 | 所在方向的 Team 给 Write | 在自己的分支开发,向本月整合分支提 PR |
+| Owner | 导师 / 总负责人 | 组织 Owner | 组会上审批所有合进 main 的 PR |
+| Manager | 每个仓库一个人,写在 README 顶部"维护人"和 Google Sheet 里 | 该仓库 Maintain | 维护本月整合分支,审成员的 PR |
+| Member | 其他同学 | 所在方向的 members 给 Write | 在自己的分支开发,向本月整合分支提 PR，review 前提月度 PR 并登记 |
 
 一个人可以是 A 仓库的 manager,同时是 B 仓库的 member。
 
@@ -21,15 +21,14 @@
 ![分支模型](img/00-branch-model.svg)
 
 | 分支 / tag | 谁建 | 用途 | 规则 |
-|---|---|---|---|
-| `main` | 建仓库时自动有 | 经过 Owner 审核的稳定版本 | 受保护:不能直接 push,只能通过 PR 合入,必须 Owner 批准 |
+|---|---|---|---|.| `main` | 建仓库时自动有 | 经过 Owner 审核的稳定版本 | 受保护:不能直接 push,只能通过 PR 合入,必须 Owner 批准 |
 | `base-YYYY-MM`(tag) | manager | 每次月度合入后在 main 上打的标记,是下个月所有人开发的起点 | 打了就不再改 |
 | `monthly/YYYY-MM` | manager | 本月要合进 main 的内容先汇总到这里。月份按"在哪个月的组会上合入"写 | 成员不要直接往里推,走 PR |
 | `feature/具体描述`、`dev/你的名字` | 成员自己 | 日常开发 | 自己随便推。一个功能一个分支更好管 |
 
 ## 三、第一次:建立仓库的 base(每个仓库只做一次)
 
-1. **Owner 建仓库。** 建的时候勾上 **Add README**,这样 main 一开始就存在,后面才能对它开 PR。然后在仓库 **Settings → Collaborators and teams** 里把 manager 设为 **Maintain**,方向 Team 设为 **Write**。管理员的完整设置见第十节。
+1. **Owner/manager 建仓库。** 建的时候勾上 **Add README**,这样 main 一开始就存在,后面才能对它开 PR。在仓库 **Settings → Collaborators and teams** 里把 manager 设为 **Maintain**,members 设为 **Write**。管理员的完整设置见第十节。
 2. **Manager 整理代码。** 对照 [REPO_CHECKLIST.md](REPO_CHECKLIST.md),把"每个仓库"那几项过一遍。
 3. **推到初始化分支**(main 已受保护,不能直接推):
    ```bash
