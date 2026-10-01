@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" font-family="Segoe UI, Noto Sans CJK SC, PingFang SC, Microsoft YaHei, Helvetica, Arial, sans-serif">
   <rect width="900" height="560" fill="#ffffff"/>
 
-  <text x="20" y="36" font-size="20" font-weight="700" fill="#1f2328">[2026-11 月度合入] camera-calibration <tspan fill="#59636e" font-weight="400">#12</tspan></text>
+  <text x="20" y="36" font-size="20" font-weight="700" fill="#1f2328">run_calib 支持 ChArUco 标定板 <tspan fill="#59636e" font-weight="400">#12</tspan></text>
   <rect x="20" y="50" width="64" height="24" rx="12" fill="#1f883d"/>
   <text x="52" y="67" font-size="13" text-anchor="middle" fill="#ffffff">Open</text>
-  <text x="96" y="67" font-size="13" fill="#59636e">boyue wants to merge 6 commits into <tspan font-weight="700">main</tspan> from <tspan font-weight="700">monthly/2026-11</tspan></text>
+  <text x="96" y="67" font-size="13" fill="#59636e">zhengyang wants to merge 3 commits into <tspan font-weight="700">main</tspan> from <tspan font-weight="700">feature/charuco-support</tspan></text>
 
   <!-- 标签页 -->
   <g font-size="14" fill="#1f2328">
     <text x="20" y="106">Conversation</text>
-    <text x="140" y="106">Commits 6</text>
+    <text x="140" y="106">Commits 3</text>
     <text x="240" y="106">Checks</text>
     <text x="320" y="106" font-weight="700">Files changed 4</text>
   </g>
@@ -75,6 +75,6 @@
     <text x="20" y="468"><tspan fill="#d1242f" font-weight="700">②</tspan> 点右上角 Review changes</text>
     <text x="20" y="492"><tspan fill="#d1242f" font-weight="700">③</tspan> 没问题选 Approve;要改选 Request changes,并在框里写清楚改什么</text>
     <text x="20" y="516"><tspan fill="#d1242f" font-weight="700">④</tspan> 点 Submit review 提交</text>
-    <text x="20" y="544" fill="#59636e">PR 作者不能 Approve 自己的 PR;只有对仓库有 Write 以上权限的人 Approve 才计数</text>
+    <text x="20" y="544" fill="#59636e">manager 和 Owner 各自 Approve 一次。作者不能 Approve 自己的 PR;没有 Write 以上权限的人 Approve 不计数</text>
   </g>
 </svg>

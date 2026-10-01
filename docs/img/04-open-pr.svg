@@ -1,17 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="652" viewBox="0 0 900 652" font-family="Segoe UI, Noto Sans CJK SC, PingFang SC, Microsoft YaHei, Helvetica, Arial, sans-serif">
-  <rect width="900" height="652" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="640" viewBox="0 0 900 640" font-family="Segoe UI, Noto Sans CJK SC, PingFang SC, Microsoft YaHei, Helvetica, Arial, sans-serif">
+  <rect width="900" height="640" fill="#ffffff"/>
 
   <text x="20" y="36" font-size="22" font-weight="700" fill="#1f2328">Open a pull request</text>
   <text x="20" y="58" font-size="13" fill="#59636e">Create a new pull request by comparing changes across two branches.</text>
 
   <!-- base / compare -->
   <rect x="20" y="72" width="860" height="48" rx="6" fill="#f6f8fa" stroke="#d0d7de"/>
-  <rect x="36" y="82" width="230" height="28" rx="6" fill="#ffffff" stroke="#d0d7de"/>
-  <text x="48" y="101" font-size="13" fill="#59636e">base: <tspan fill="#1f2328" font-weight="700">monthly/2026-11</tspan> ▾</text>
-  <text x="278" y="101" font-size="15" fill="#59636e">←</text>
-  <rect x="300" y="82" width="290" height="28" rx="6" fill="#ffffff" stroke="#d0d7de"/>
-  <text x="312" y="101" font-size="13" fill="#59636e">compare: <tspan fill="#1f2328" font-weight="700">feature/charuco-support</tspan> ▾</text>
-  <text x="606" y="101" font-size="13" font-weight="700" fill="#1a7f37">✓ Able to merge.</text>
+  <rect x="36" y="82" width="120" height="28" rx="6" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="48" y="101" font-size="13" fill="#59636e">base: <tspan fill="#1f2328" font-weight="700">main</tspan> ▾</text>
+  <text x="168" y="101" font-size="15" fill="#59636e">←</text>
+  <rect x="190" y="82" width="290" height="28" rx="6" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="202" y="101" font-size="13" fill="#59636e">compare: <tspan fill="#1f2328" font-weight="700">feature/charuco-support</tspan> ▾</text>
+  <text x="496" y="101" font-size="13" font-weight="700" fill="#1a7f37">✓ Able to merge.</text>
 
   <!-- 标题 -->
   <rect x="20" y="138" width="600" height="36" rx="6" fill="#ffffff" stroke="#d0d7de"/>
@@ -21,7 +21,7 @@
   <rect x="20" y="186" width="600" height="250" rx="6" fill="#ffffff" stroke="#d0d7de"/>
   <g font-size="13" fill="#1f2328">
     <text x="34" y="212" font-weight="700">## 这个 PR 是</text>
-    <text x="34" y="232">- [x] 成员 → 本月整合分支 monthly/YYYY-MM</text>
+    <text x="34" y="232">- [x] 月度合入(PR 链接已登记到 Google Sheet)</text>
     <text x="34" y="258" font-weight="700">## 做了什么</text>
     <text x="34" y="278">run_calib.py 增加 ChArUco 标定板检测,README 补充用法</text>
     <text x="34" y="304" font-weight="700">## 怎么测的</text>
@@ -43,23 +43,25 @@
     <text x="650" y="154" font-weight="700" fill="#59636e">Reviewers</text>
     <text x="858" y="154" fill="#59636e">⚙</text>
     <circle cx="660" cy="172" r="8" fill="#d0d7de"/>
-    <text x="674" y="177" fill="#1f2328">boyue</text>
-    <line x1="650" y1="192" x2="880" y2="192" stroke="#d0d7de"/>
-    <text x="650" y="214" font-weight="700" fill="#59636e">Assignees</text>
-    <text x="858" y="214" fill="#59636e">⚙</text>
-    <text x="650" y="236" fill="#59636e">No one—assign yourself</text>
-    <line x1="650" y1="252" x2="880" y2="252" stroke="#d0d7de"/>
-    <text x="650" y="274" font-weight="700" fill="#59636e">Labels</text>
-    <text x="858" y="274" fill="#59636e">⚙</text>
-    <text x="650" y="296" fill="#59636e">None yet</text>
+    <text x="674" y="177" fill="#1f2328">boyue <tspan fill="#59636e" font-size="12">(Code owner)</tspan></text>
+    <rect x="652" y="186" width="16" height="16" rx="3" fill="#d0d7de"/>
+    <text x="674" y="199" fill="#1f2328">approvers <tspan fill="#59636e" font-size="12">(Owner)</tspan></text>
+    <line x1="650" y1="216" x2="880" y2="216" stroke="#d0d7de"/>
+    <text x="650" y="238" font-weight="700" fill="#59636e">Assignees</text>
+    <text x="858" y="238" fill="#59636e">⚙</text>
+    <text x="650" y="260" fill="#59636e">No one—assign yourself</text>
+    <line x1="650" y1="276" x2="880" y2="276" stroke="#d0d7de"/>
+    <text x="650" y="298" font-weight="700" fill="#59636e">Labels</text>
+    <text x="858" y="298" fill="#59636e">⚙</text>
+    <text x="650" y="320" fill="#59636e">None yet</text>
   </g>
 
   <!-- 红框 -->
   <g fill="none" stroke="#d1242f" stroke-width="3">
-    <rect x="30" y="76" width="566" height="40" rx="8"/>
+    <rect x="30" y="76" width="456" height="40" rx="8"/>
     <rect x="15" y="133" width="610" height="46" rx="8"/>
     <rect x="15" y="183" width="610" height="258" rx="8"/>
-    <rect x="644" y="138" width="236" height="48" rx="8"/>
+    <rect x="644" y="138" width="236" height="72" rx="8"/>
     <rect x="414" y="445" width="212" height="46" rx="8"/>
   </g>
   <g font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">
@@ -72,11 +74,10 @@
 
   <!-- 说明 -->
   <g font-size="14" fill="#1f2328">
-    <text x="20" y="520"><tspan fill="#d1242f" font-weight="700">①</tspan> base 选"要合进去的分支":成员选本月的 monthly/YYYY-MM;manager 做月度合入时选 main。</text>
-    <text x="40" y="540">compare 选你自己的分支。下面出现 Able to merge 表示没有冲突</text>
-    <text x="20" y="566"><tspan fill="#d1242f" font-weight="700">②</tspan> 标题写清楚做了什么。月度合入的标题用:[2026-11 月度合入] 仓库名</text>
-    <text x="20" y="590"><tspan fill="#d1242f" font-weight="700">③</tspan> 描述里的模板会自动带出来,按实际情况填写、逐条勾选</text>
-    <text x="20" y="614"><tspan fill="#d1242f" font-weight="700">④</tspan> 点 Reviewers 的齿轮选人:成员的 PR 选本仓库 manager;月度合入会自动要求 Owner 审批</text>
-    <text x="20" y="636"><tspan fill="#d1242f" font-weight="700">⑤</tspan> 点 Create pull request</text>
+    <text x="20" y="520"><tspan fill="#d1242f" font-weight="700">①</tspan> base 选 main,compare 选你自己的分支。出现 Able to merge 表示没有冲突</text>
+    <text x="20" y="544"><tspan fill="#d1242f" font-weight="700">②</tspan> 标题写清楚做了什么</text>
+    <text x="20" y="568"><tspan fill="#d1242f" font-weight="700">③</tspan> 描述里的模板会自动带出来,按实际情况填写、逐条勾选</text>
+    <text x="20" y="592"><tspan fill="#d1242f" font-weight="700">④</tspan> Reviewers 会自动出现 manager(Code owner)和 approvers(Owner),不用手动选</text>
+    <text x="20" y="616"><tspan fill="#d1242f" font-weight="700">⑤</tspan> 点 Create pull request,然后把 PR 链接登记到 Google Sheet</text>
   </g>
 </svg>

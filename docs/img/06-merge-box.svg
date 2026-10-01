@@ -2,12 +2,12 @@
   <rect width="900" height="576" fill="#ffffff"/>
 
   <!-- 审批前 -->
-  <text x="20" y="28" font-size="15" font-weight="700" fill="#1f2328">审批前:还没有人 Approve</text>
+  <text x="20" y="28" font-size="15" font-weight="700" fill="#1f2328">审批前:manager 和 Owner 还没有都 Approve</text>
   <rect x="20" y="40" width="860" height="170" rx="8" fill="#ffffff" stroke="#d0d7de"/>
   <circle cx="50" cy="72" r="12" fill="#ffffff" stroke="#d1242f" stroke-width="2"/>
   <text x="50" y="77" font-size="14" font-weight="700" text-anchor="middle" fill="#d1242f">!</text>
   <text x="74" y="70" font-size="15" font-weight="700" fill="#1f2328">Review required</text>
-  <text x="74" y="92" font-size="13" fill="#59636e">At least 1 approving review is required by reviewers with write access.</text>
+  <text x="74" y="92" font-size="13" fill="#59636e">Waiting on code owner review from boyue and a review from approvers.</text>
   <line x1="20" y1="108" x2="880" y2="108" stroke="#d0d7de"/>
   <circle cx="50" cy="132" r="12" fill="#d1242f"/>
   <text x="50" y="137" font-size="14" font-weight="700" text-anchor="middle" fill="#ffffff">✕</text>
@@ -16,12 +16,12 @@
   <text x="169" y="181" font-size="13" text-anchor="middle" fill="#8c959f">Merge pull request ▾</text>
 
   <!-- 审批后 -->
-  <text x="20" y="246" font-size="15" font-weight="700" fill="#1f2328">审批后:Owner 已经 Approve</text>
+  <text x="20" y="246" font-size="15" font-weight="700" fill="#1f2328">审批后:manager 和 Owner 都已 Approve</text>
   <rect x="20" y="258" width="860" height="200" rx="8" fill="#ffffff" stroke="#d0d7de"/>
   <circle cx="50" cy="290" r="12" fill="#1f883d"/>
   <text x="50" y="295" font-size="14" font-weight="700" text-anchor="middle" fill="#ffffff">✓</text>
   <text x="74" y="288" font-size="15" font-weight="700" fill="#1f2328">Changes approved</text>
-  <text x="74" y="310" font-size="13" fill="#59636e">1 approving review by reviewers with write access.</text>
+  <text x="74" y="310" font-size="13" fill="#59636e">2 approving reviews: boyue (code owner), approvers</text>
   <line x1="20" y1="324" x2="880" y2="324" stroke="#d0d7de"/>
   <rect x="74" y="342" width="170" height="34" rx="6" fill="#1f883d"/>
   <text x="159" y="364" font-size="13" text-anchor="middle" fill="#ffffff">Merge pull request</text>
@@ -54,9 +54,9 @@
 
   <!-- 说明 -->
   <g font-size="14" fill="#1f2328">
-    <text x="20" y="490"><tspan fill="#d1242f" font-weight="700">①</tspan> 没有人 Approve 时按钮是灰的,谁都合不进去,manager 也不行</text>
-    <text x="20" y="514"><tspan fill="#d1242f" font-weight="700">②</tspan> 审批通过后,先点 ▾ 展开合并方式</text>
-    <text x="20" y="538"><tspan fill="#d1242f" font-weight="700">③</tspan> 月度合入(monthly → main)选 Create a merge commit;成员 → monthly 可以选 Squash</text>
+    <text x="20" y="490"><tspan fill="#d1242f" font-weight="700">①</tspan> manager 和 Owner 没有都 Approve 时,按钮是灰的,谁都合不进去</text>
+    <text x="20" y="514"><tspan fill="#d1242f" font-weight="700">②</tspan> 两人都批准后,由 manager 合并:先点 ▾ 展开合并方式</text>
+    <text x="20" y="538"><tspan fill="#d1242f" font-weight="700">③</tspan> 默认选 Create a merge commit,保留分支上所有 commit;零碎的小改动可以选 Squash</text>
     <text x="20" y="562"><tspan fill="#d1242f" font-weight="700">④</tspan> 再点左边的绿色按钮,然后点 Confirm merge</text>
   </g>
 </svg>
