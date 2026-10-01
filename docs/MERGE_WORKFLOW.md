@@ -1,6 +1,6 @@
 # 代码合入流程(成员手册)
 
-先说结论:**main 每个月合入一次。** 平时大家在自己的分支上开发;每月组会前,要合的人自己对 main 提 PR、自己登记到 Google Sheet;manager 在组会前的周末先审,周一组会上 Owner 再审;**两个人都 Approve 才能合进 main**。
+**main 每个月合入一次。** 平时大家在自己的分支上开发;每月组会前,要合的人自己对 main 提 PR、自己登记到 Google Sheet;manager 在组会前的周末先审,周一组会上 Owner 再审;**两个人都 Approve 才能合进 main**。
 
 仓库里该放什么、README 怎么写,见 [REPO_GUIDELINES.md](REPO_GUIDELINES.md);提 PR 前的逐项自查,见 [REPO_CHECKLIST.md](REPO_CHECKLIST.md)。
 
@@ -38,7 +38,7 @@
 | 周一组会 | Owner | 按 Sheet 的顺序逐个审 |
 | 组会后 | manager | 按顺序合并,打 base tag,通知大家同步 |
 
-## 四、第一次:建仓库(manager 做,每个仓库只做一次)
+## 四、第一次:建仓库(Owner 或 manager 做,每个仓库只做一次)
 
 1. **新建仓库。** GitHub 右上角 **+ → New repository**:
    - Owner 选 `sky-lab-uw`,名字按 `方向-内容` 命名
